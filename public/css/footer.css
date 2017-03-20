@@ -1,33 +1,33 @@
 @font-face {
     font-family: 'arialbold';
-    src: url('fonts/arial-bold.eot');
-    src: url('fonts/arial-bold.eot?#iefix') format('embedded-opentype'),
-    url('fonts/arial-bold.woff2') format('woff2'),
-    url('fonts/arial-bold.woff') format('woff'),
-    url('fonts/arial-bold.ttf') format('truetype'),
-    url('fonts/arial-bold.svg#arialbold') format('svg');
+    src: url('../../fonts/arial-bold.eot');
+    src: url('../../fonts/arial-bold.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/arial-bold.woff2') format('woff2'),
+    url('../../fonts/arial-bold.woff') format('woff'),
+    url('../../fonts/arial-bold.ttf') format('truetype'),
+    url('../../fonts/arial-bold.svg#arialbold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'arialregular';
-    src: url('fonts/arial-regular.eot');
-    src: url('fonts/arial-regular.eot?#iefix') format('embedded-opentype'),
-    url('fonts/arial-regular.woff2') format('woff2'),
-    url('fonts/arial-regular.woff') format('woff'),
-    url('fonts/arial-regular.ttf') format('truetype'),
-    url('fonts/arial-regular.svg#arialregular') format('svg');
+    src: url('../../fonts/arial-regular.eot');
+    src: url('../../fonts/arial-regular.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/arial-regular.woff2') format('woff2'),
+    url('../../fonts/arial-regular.woff') format('woff'),
+    url('../../fonts/arial-regular.ttf') format('truetype'),
+    url('../../fonts/arial-regular.svg#arialregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'dinregular';
-    src: url('fonts/dinregular.eot');
-    src: url('fonts/dinregular.eot?#iefix') format('embedded-opentype'),
-    url('fonts/dinregular.woff2') format('woff2'),
-    url('fonts/dinregular.woff') format('woff'),
-    url('fonts/dinregular.ttf') format('truetype'),
-    url('fonts/dinregular.svg#webfontregular') format('svg');
+    src: url('../../fonts/dinregular.eot');
+    src: url('../../fonts/dinregular.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/dinregular.woff2') format('woff2'),
+    url('../../fonts/dinregular.woff') format('woff'),
+    url('../../fonts/dinregular.ttf') format('truetype'),
+    url('../../fonts/dinregular.svg#webfontregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
