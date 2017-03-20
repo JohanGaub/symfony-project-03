@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'arialbold';
+    src: url('fonts/arial-bold.eot');
+    src: url('fonts/arial-bold.eot?#iefix') format('embedded-opentype'),
+    url('fonts/arial-bold.woff2') format('woff2'),
+    url('fonts/arial-bold.woff') format('woff'),
+    url('fonts/arial-bold.ttf') format('truetype'),
+    url('fonts/arial-bold.svg#arialbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'arialregular';
+    src: url('fonts/arial-regular.eot');
+    src: url('fonts/arial-regular.eot?#iefix') format('embedded-opentype'),
+    url('fonts/arial-regular.woff2') format('woff2'),
+    url('fonts/arial-regular.woff') format('woff'),
+    url('fonts/arial-regular.ttf') format('truetype'),
+    url('fonts/arial-regular.svg#arialregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'dinregular';
+    src: url('fonts/dinregular.eot');
+    src: url('fonts/dinregular.eot?#iefix') format('embedded-opentype'),
+    url('fonts/dinregular.woff2') format('woff2'),
+    url('fonts/dinregular.woff') format('woff'),
+    url('fonts/dinregular.ttf') format('truetype'),
+    url('fonts/dinregular.svg#webfontregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family: arialregular, sans-serif;
+    font-weight: bold;
+    color: lightgrey;
+    text-decoration: none;
+}
+#footerpart1{
+    background-color: rgb(50, 50, 50);
+    border-top: solid rgb(221, 81, 22) 3px;
+    padding: 5rem 0 5rem 0;
+
+    }
+#myicon{
+    width: auto;
+    margin: auto; /*In order not to overlap the panel-body block*/
+    border: solid yellow 2px;
+    text-align: center; /*Horizontal center the icon block*/
+}
+#myicon li{
+    display: inline;
+    margin-right: 4rem; /*Spaces between li*/
+    text-indent: -1rem; /*Avoid indent li to center them*/
+}
+#myicon a{
+   color: rgb(154, 192, 10);
+    font-size: 3rem;
+}
+#myicon a:hover{
+    color: hsla(73, 90%, 40%, .75);
+    font-size: 3rem;
+}
+.BLOCK01{
+    border: solid red 2px;
+    /*padding: 3rem 0 3rem 0;*/
+}
+.BLOCK02{
+    border: solid green 2px;
+
+}
+.BLOCK03{
+    border: solid blue 2px;
+    /*padding: 3rem 0 3rem 0;*/
+}
+
+#footerpart2 {
+    background-color: rgb(154, 192, 10);
+    padding: 2rem 0 2rem 0;
+    text-align: center;
+}
+#footerpart2 p{
+    color: rgb(50, 50, 50);
+    font-family: dinregular, sans-serif;
+}
+#footerpart2 span{
+    font-family: arialbold, sans-serif;
+    color: rgb(221, 81, 22);
+}
+
+
+
+
+
+
+
+
+
+
+
+/*vert     49/0/100/0    154/192/10    #9AC00A
+                                       orange    7/80/100/1    221/81/22    #DD5116
+Din
+arial bold
+texte normal    = arial*/
