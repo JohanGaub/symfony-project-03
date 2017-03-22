@@ -13,9 +13,7 @@ $page .= '.php';
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
     <?php include('partials/head.php'); ?>
-
 </head>
 <body>
 <header>

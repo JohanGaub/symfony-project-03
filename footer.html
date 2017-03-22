@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css"
           integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" integrity="sha256-nBFRd4iXQgAv308dzcrSrU5vkKAT4SMXdZLJfN7MZeg=" crossorigin="anonymous" />
 
     <title>Footer</title>
 </head>
@@ -20,56 +20,81 @@
 <footer>
     <div class="container-fluid">
         <div class="panel panel-default">
+
             <div id="footerpart1" class="panel-body">
-                <div id="myicon" class="row list-inline">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 BLOCK01"></div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 BLOCK02">
-                        <ul>
-                            <li><a href="https://fr-fr.facebook.com/" target="_blank"><i
-                                    class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                <div id="myicon" class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 BLOCK02">
+
+                        <ul class="centerUL centerLI">
+                            <li><a href="https://fr-fr.facebook.com" target="_blank">
+                                <span class="fa-stack fa-rotate">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a></li>
 
                             <li><a href="https://twitter.com" target="_blank">
-                                <span class="fa-stack">
+                                <span class="fa-stack fa-rotate">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a></li>
 
-                            <li><a href="https://fr.linkedin.com/" target="_blank">
+                            <li><a href="https://fr.linkedin.com" target="_blank">
+                                <span class="fa-stack fa-rotate">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a></li>
 
-                                <i class="fa fa-linkedin-square"
-                                                                                      aria-hidden="true"></i></a>
-                            </li>
+                            <li><a href="https://www.www.inside_cummunit.fr" target="_blank">
+                                <span class="fa-stack fa-rotate">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a></li>
 
-
-
-
-
-                            <li><a href="https://www.www.inside_cummunit.fr" target="_blank"><i class="fa fa-users"
-                                                                                                aria-hidden="true"></i></a>
-                            </li>
                         </ul>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 BLOCK03"></div>
                 </div>
+
+                <div id="myslogan" class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul class="centerUL centerLI">
+                            <li><a href="anchor_communit">OFFRE GLOBALE</a></li>
+                            <li><a href="anchor_communit">MUTUALISATION</a></li>
+                            <li><a href="anchor_communit">ACCOMPAGNEMENT</a></li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
 
             <div id="footerpart2" class="panel-footer">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 BLOCK01"></div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 BLOCK02">
-                        <p>&copy; commun<span>it</span>.fr
-                        <p>
+                    <div id="BLOCK01" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <a href="src/view/partials/story.php" target="_blank">Génèse de la communauté</a>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 BLOCK03"></div>
+                    <div id="BLOCK02" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <ul class="centerUL">
+                            <li><a href="#">Contactez-nous</a></li>
+                            <li><a href="tel:+33671058591">06 71 05 85 91</a></li>
+                            <li><a href="tel:+33428382467">06 71 05 85 91</a></li>
+                        </ul>
+                    </div>
+                    <div id="BLOCK01" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <ul class="centerUL">
+                            <li><a href="#">&copy; commun<span>it</span>.fr</a></li>
+                            <li><a href="src/view/partials/legal.php" target="_blank">Mentions légales</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-
         </div>
+    </div>
 
-    </div>
-    </div>
+
 </footer>
 
 <!--

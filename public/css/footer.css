@@ -34,73 +34,108 @@
 body{
     font-family: arialregular, sans-serif;
     font-weight: bold;
-    color: lightgrey;
-    text-decoration: none;
 }
 #footerpart1{
-    background-color: rgb(50, 50, 50);
+    background-color: floralwhite;
     border-top: solid rgb(221, 81, 22) 3px;
-    padding: 5rem 0 5rem 0;
-
-    }
-#myicon{
-    width: auto;
-    margin: auto; /*In order not to overlap the panel-body block*/
-    border: solid yellow 2px;
-    text-align: center; /*Horizontal center the icon block*/
 }
-#myicon li{
-    display: inline;
-    margin-right: 4rem; /*Spaces between li*/
-    text-indent: -1rem; /*Avoid indent li to center them*/
+#myicon ul{
+    border: solid yellow 2px;
+}
+#myicon li {
+    padding: 0 1rem; /*space between fleas*/
+}
+@media screen and (max-width:768px) {
+    #myicon li {
+        padding: 0 0.5rem; /*space between fleas with mobile*/
+    }
 }
 #myicon a{
-   color: rgb(154, 192, 10);
+    text-decoration: none;
+}
+.fa-rotate {
+    transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
+    color: rgb(154, 192, 10);
     font-size: 3rem;
 }
-#myicon a:hover{
-    color: hsla(73, 90%, 40%, .75);
+.fa-rotate:hover {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+    color: rgb(221, 81, 22);
     font-size: 3rem;
 }
-.BLOCK01{
-    border: solid red 2px;
-    /*padding: 3rem 0 3rem 0;*/
+#myslogan{
+    border: solid darkmagenta 3px;
 }
-.BLOCK02{
-    border: solid green 2px;
-
-}
-.BLOCK03{
-    border: solid blue 2px;
-    /*padding: 3rem 0 3rem 0;*/
-}
-
-#footerpart2 {
-    background-color: rgb(154, 192, 10);
-    padding: 2rem 0 2rem 0;
-    text-align: center;
-}
-#footerpart2 p{
-    color: rgb(50, 50, 50);
+#myslogan li{
+    font-size: 2rem;
+    padding: 0 5rem;
     font-family: dinregular, sans-serif;
 }
-#footerpart2 span{
-    font-family: arialbold, sans-serif;
+#myslogan a{
+    text-decoration: none;
     color: rgb(221, 81, 22);
 }
-
-
-
-
-
-
-
-
-
-
-
-/*vert     49/0/100/0    154/192/10    #9AC00A
-                                       orange    7/80/100/1    221/81/22    #DD5116
-Din
-arial bold
-texte normal    = arial*/
+#myslogan a:hover {
+    color: darkorange;
+}
+.centerUL{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.centerLI li{
+    display: inline;
+}
+#footerpart2{
+    font-family: arialbold, sans-serif;
+    font-size: 1.7rem;
+    background-color: rgb(154, 192, 10);
+    color: floralwhite;
+    text-align: center;
+}
+#footerpart2 ul {
+    list-style: none;
+}
+#footerpart2 a {
+    text-decoration: none;
+    color: rgb(50,50,50);
+}
+#footerpart2 a:hover {
+    color: floralwhite;
+}
+#footerpart2 span{
+    color: rgb(221, 81, 22);
+    line-height: 2.5; /*space between "commun.it.fr" & "mentions légales"*/
+}
+#BLOCK01{
+    border: solid red 2px;
+}
+#BLOCK02{
+    border: solid blue 2px;
+}
+#BLOCK03{
+    border: solid green 2px;
+}
+/*div.triangle{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 167px 375px 0 0;
+    border-color: #dd5116 transparent transparent transparent;
+}*/
+/*#footerpart2 a{
+    display:inline-block;
+    position:relative;
+}
+#footerpart2 a::before{
+    content:'';  Ajout du contenu bidon
+    display:block;
+    position:absolute;  Voilà pourquoi on a positionné en relative le lien
+    top:0;
+    left:-12px;   La position du triangle par rapport au lien
+    border:solid 10px;   Définitions des bordures
+    border-color:transparent transparent transparent #000000;
+}*/
