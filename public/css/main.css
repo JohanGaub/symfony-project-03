@@ -1,0 +1,89 @@
+@font-face{
+    font-family: arial;
+
+
+
+}
+
+.title1{
+    text-align: center;
+    color : #DD5116;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+.join{    /*button "rejoignez nous" */
+    text-transform: uppercase ;
+    font-weight: bold;
+    background-color: #DD5116;
+    color : white;
+    width : 245px;
+    height : 60px;
+    border:none;
+
+    background:linear-gradient(135deg, transparent 6px, #dd5116 0) top left,
+               linear-gradient(315deg, transparent 6px, #dd5116 0) bottom right;
+    background-size: 50% ;
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+}
+
+
+.discover{     /*button "Decouvrez notre offre */
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #9AC00A;
+    color : white;
+    width : 245px;
+    height : 60px;
+    border:none;
+
+    background:linear-gradient(135deg, transparent 6px, #9AC00A 0) top left,
+               linear-gradient(315deg, transparent 6px, #9AC00A 0) bottom right;
+    background-size: 50% ;
+    background-repeat: no-repeat;
+
+
+}
+
+.secondTitle1{                      /*titre comment */
+    text-transform: uppercase ;
+    font-weight: bold;
+    color: #DD5116;
+    font-size: 18px;
+    text-align:center;
+
+}
+
+.p1{
+    font-size : 16px;
+    text-align: center;
+
+}
+
+.plusInfo{
+    font-size : 16px;
+    text-align: center;
+    color : #9AC00A;
+
+}
+
+
+
+
+/*
+
+COMMUN'it
+
+# COULEURS
+  vert 	49/0/100/0	154/192/10	#9AC00A
+                                      orange	7/80/100/1	221/81/22	#DD5116
+ transform : skew(-45deg,0);
+
+
+# TYPOS
+  COMMUN'	= Din
+it	= arial bold
+        texte normal	= arial
+*/
