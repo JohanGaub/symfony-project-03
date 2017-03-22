@@ -1,3 +1,4 @@
 <?php
-include 'partials/home-part3.php';
+include 'partials/indexHome.php';
+include 'partials/indexItneo.php';
 ?>
