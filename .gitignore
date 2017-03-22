@@ -1,1 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
+public/vendor
+public/css/sass
+public/css/.sass-cache

@@ -1,58 +1,78 @@
 .spacer {
-  height: 50px; }
+  height: 50px;
+}
 
 /** Start CSS **/
 .it-logo {
   width: 290px;
   height: 160px;
-  padding: 0.1em 1em; }
-
+  padding: 0.1em 1em;
+}
 .it-h2 {
   font-family: Arial, sans-serif;
   font-size: 3.5em;
   font-weight: 700;
-  color: #DD5116;
+  color: $secondary-color;
   text-transform: uppercase;
-  padding: 0.7em 0.5em; }
+  padding: 0.7em 0.5em;
+}
 
 .it-first-list {
   list-style-type: none;
   margin: 0;
-  padding: 0; }
-  .it-first-list li {
+  padding: 0;
+
+  li {
     display: inline-block;
     width: 100%;
-    font-family: Arial, sans-serif;
+    font-family: $first-font;
     font-size: 2em;
     line-height: 1.1em;
     font-weight: 800;
     text-transform: uppercase;
-    color: #DD5116; }
+    color: $secondary-color;
+  }
+}
 
 .it-btn-group {
-  text-align: center; }
-  .it-btn-group button {
-    font-family: Arial, sans-serif;
+  text-align: center;
+
+  button {
+    font-family: $first-font;
     font-weight: 700;
     text-transform: uppercase;
     padding: 1.5em;
     transform-origin: 0 0;
-    transform: skew(-45deg, 0); }
-  .it-btn-group .btn-itneo {
-    background-color: #E6397E;
-    width: 90%; }
-  .it-btn-group .btn-joinus {
-    background-color: #DD5116;
-    width: 70%; }
+    transform: skew(-45deg, 0);
+  }
+
+  .btn-itneo {
+    background-color: $it-color;
+    width: 90%;
+  }
+
+  .btn-joinus {
+    background-color: $secondary-color;
+    width: 70%;
+  }
+}
 
 /**
  * MORE CSS
  */
 .be-flex {
-  display: flex; }
+  display: flex;
+}
 
 /**
  * SLIDER CSS ELEMENTS
  */
+.it-slider {
 
-/*# sourceMappingURL=main.css.map */
+}
+.it-slider-img {
+
+}
+.it-slider-controls {
+
+}
