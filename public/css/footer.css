@@ -1,7 +1,5 @@
 /*FOOTER*/
 
-
-
 @font-face {
     font-family: 'dinregular';
     src: url('../../fonts/dinregular.eot');
@@ -52,7 +50,9 @@
     /*space between fleas*/;
     white-space: nowrap;
     font-family: dinregular, sans-serif;
-}
+    text-transform: uppercase ;
+    font-weight: bold;
+ }
 
 #myslogan a {
     text-decoration: none;
@@ -76,11 +76,12 @@
 }
 
 #footerpart2 {
-    font-family: arialbold, sans-serif;
+    font-family: arial, sans-serif;
     font-size: 1.7rem;
     background-color: rgb(154, 192, 10);
     color: floralwhite;
     text-align: center;
+    font-weight: bold;
 }
 
 #footerpart2 a {

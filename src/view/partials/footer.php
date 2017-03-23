@@ -1,4 +1,4 @@
-    <div class="container-fluid">
+
         <div class="panel panel-default">
 
             <div id="footerpart1" class="panel-body">
@@ -41,9 +41,9 @@
                 <div id="myslogan" class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="centerUL centerLI">
-                            <li><a href="anchor_communit">OFFRE GLOBALE</a></li>
-                            <li><a href="anchor_communit">MUTUALISATION</a></li>
-                            <li><a href="anchor_communit">ACCOMPAGNEMENT</a></li>
+                            <li><a href="anchor_communit">Offre globale</a></li>
+                            <li><a href="anchor_communit">Mutualisation</a></li>
+                            <li><a href="anchor_communit">Accompagnement</a></li>
                         </ul>
                     </div>
                 </div>
@@ -70,4 +70,4 @@
                 </div>
             </div>
         </div>
-    </div>
+
