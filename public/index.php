@@ -13,23 +13,23 @@ $page .= '.php';
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php include('../src/view/partials/head.php'); ?>
+    <?php include '../src/view/partials/head.php'; ?>
 </head>
 <body>
 <div class="container-fluid">
 <header>
-    <?php include('../src/view/partials/header.php'); ?>
+    <?php include '../src/view/partials/header.php'; ?>
 </header>
 
 <main>
-    <?php include('../src/view/' . $page); ?>
+    <?php include ('page/' . $page); ?>
 </main>
 
 <footer>
-    <?php include('../src/view/partials/footer.php'); ?>
+    <?php include '../src/view/partials/footer.php'; ?>
 </footer>
 </div>
 
-<?php include('../src/view/partials/foot.php'); ?>
+<?php include '../src/view/partials/foot.php'; ?>
 </body>
 </html>

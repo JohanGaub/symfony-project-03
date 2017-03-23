@@ -1,0 +1,118 @@
+/*FOOTER*/
+
+@font-face {
+    font-family: 'arialbold';
+    src: url('../../fonts/arial-bold.eot');
+    src: url('../../fonts/arial-bold.eot?#iefix') format('embedded-opentype'), url('../../fonts/arial-bold.woff2') format('woff2'), url('../../fonts/arial-bold.woff') format('woff'), url('../../fonts/arial-bold.ttf') format('truetype'), url('../../fonts/arial-bold.svg#arialbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'arialregular';
+    src: url('../../fonts/arial-regular.eot');
+    src: url('../../fonts/arial-regular.eot?#iefix') format('embedded-opentype'), url('../../fonts/arial-regular.woff2') format('woff2'), url('../../fonts/arial-regular.woff') format('woff'), url('../../fonts/arial-regular.ttf') format('truetype'), url('../../fonts/arial-regular.svg#arialregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'dinregular';
+    src: url('../../fonts/dinregular.eot');
+    src: url('../../fonts/dinregular.eot?#iefix') format('embedded-opentype'), url('../../fonts/dinregular.woff2') format('woff2'), url('../../fonts/dinregular.woff') format('woff'), url('../../fonts/dinregular.ttf') format('truetype'), url('../../fonts/dinregular.svg#webfontregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: arialregular, sans-serif;
+    font-weight: bold;
+}
+
+#footerpart1 {
+    background-color: floralwhite;
+    border-top: solid rgb(221, 81, 22) 3px;
+}
+
+#myicon li {
+    padding: 0 1rem;
+    /*space between fleas*/;
+}
+
+@media screen and (max-width: 480px) {
+    #myicon li {
+        padding: 0;
+        /*space between fleas with mobile*/;
+    }
+}
+
+#myicon a {
+    text-decoration: none;
+}
+
+.fa-rotate {
+    transition: -webkit-transform .5s ease-in-out;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
+    color: rgb(154, 192, 10);
+    font-size: 3rem;
+}
+
+.fa-rotate:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    color: rgb(221, 81, 22);
+    font-size: 3rem;
+}
+
+#myslogan li {
+    font-size: 2rem;
+    padding: 0 5rem;
+    /*space between fleas*/;
+    white-space: nowrap;
+    font-family: dinregular, sans-serif;
+}
+
+#myslogan a {
+    text-decoration: none;
+    color: rgb(221, 81, 22);
+
+}
+
+#myslogan a:hover {
+    color: darkorange;
+}
+
+.centerUL {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.centerLI li {
+    display: inline-block;
+}
+
+#footerpart2 {
+    font-family: arialbold, sans-serif;
+    font-size: 1.7rem;
+    background-color: rgb(154, 192, 10);
+    color: floralwhite;
+    text-align: center;
+}
+
+#footerpart2 a {
+    text-decoration: none;
+    color: rgb(50, 50, 50);
+}
+
+#footerpart2 a:hover {
+    color: floralwhite;
+}
+
+#footerpart2 span {
+    color: rgb(221, 81, 22);
+    line-height: 2.5;
+    /*space between "commun.it.fr" & "mentions légales"*/;
+}
