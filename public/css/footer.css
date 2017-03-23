@@ -92,7 +92,7 @@ body {
 }
 
 .centerLI li {
-    display: inline;
+    display: inline-block;
 }
 
 #footerpart2 {
