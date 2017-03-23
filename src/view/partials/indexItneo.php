@@ -10,7 +10,7 @@
     <!-- Part down (3parts -> text-info -> slider -> button -->
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <!-- First col (text-info) -->
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
             <ul class="it-first-list text-right">
                 <li>Solution logicielle</li>
                 <li>Innovante</li>
@@ -23,23 +23,19 @@
         </div>
 
         <!-- Second col (slider) -->
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <!-- General slider div -->
-            <div class="it-slider">
-
-                <!-- Slider img div -->
-                <div class="it-slider-img">
-                </div>
-
-                <!-- Slider controls div -->
-                <div class="it-slider-controls">
-                </div>
-
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="it-neo-slider">
+                <!-- General slider div -->
+                <ul class="rslides" id="slider1">
+                    <li><img src="img/1.jpg" alt=""></li>
+                    <li><img src="img/2.jpg" alt=""></li>
+                    <li><img src="img/3.jpg" alt=""></li>
+                </ul>
             </div>
         </div>
 
         <!-- Last part (button) -->
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
             <div class="it-btn-group">
                 <button type="button" class="btn-itneo">Découvrez Itnéo</button>
                 <button type="button" class="btn-joinus">Rejoingez-nous</button>
