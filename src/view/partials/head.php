@@ -31,4 +31,6 @@
 <link rel="stylesheet" href="css/scrolling-nav.css">
 
 <!-- Our CSS Import -->
+<link rel="stylesheet" href="css/itneo-part.css">
+
 <link rel="stylesheet" href="css/main.css">
