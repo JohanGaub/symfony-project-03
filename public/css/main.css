@@ -1,53 +1,155 @@
-/*
-Error: File to import not found or unreadable: part3.
-       Load path: /www/Lyon-0217-communit/public/css/sass
-        on line 3 of css/sass/main.scss
+@font-face {
+  font-family: arial; }
+.title1 {
+  text-align: center;
+  color: #DD5116;
+  text-transform: uppercase;
+  font-weight: bold; }
 
-1: @import "settings";
-2: 
-3: @import "part3";
+.join {
+  /*button "rejoignez nous" */
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #DD5116;
+  color: white;
+  width: 245px;
+  height: 60px;
+  border: none;
+  background: linear-gradient(135deg, transparent 6px, #dd5116 0) top left, linear-gradient(315deg, transparent 6px, #dd5116 0) bottom right;
+  background-size: 50%;
+  background-repeat: no-repeat; }
 
-Backtrace:
-css/sass/main.scss:3
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/import_node.rb:67:in `rescue in import'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/import_node.rb:45:in `import'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/import_node.rb:28:in `imported_file'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/import_node.rb:37:in `css_import?'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:313:in `visit_import'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `visit'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/stack.rb:79:in `block in with_base'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/stack.rb:115:in `with_frame'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/stack.rb:79:in `with_base'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `visit'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `map'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `visit'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:159:in `visit'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:8:in `visit'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/root_node.rb:36:in `css_tree'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:209:in `each'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:473:in `on_file_changed'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:331:in `block in watch'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/vendor/listen/lib/listen/adapter.rb:254:in `report_changes'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/vendor/listen/lib/listen/adapter.rb:323:in `poll_changed_directories'
-/home/user1/.rvm/gems/ruby-2.4.0/gems/sass-3.4.23/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: part3.\A        Load path: /www/Lyon-0217-communit/public/css/sass\A         on line 3 of css/sass/main.scss\A \A 1: @import \"settings\";\A 2: \A 3: @import \"part3\";"; }
+.discover {
+  /*button "Decouvrez notre offre */
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #9AC00A;
+  color: white;
+  width: 245px;
+  height: 60px;
+  border: none;
+  background: linear-gradient(135deg, transparent 6px, #9AC00A 0) top left, linear-gradient(315deg, transparent 6px, #9AC00A 0) bottom right;
+  background-size: 50%;
+  background-repeat: no-repeat; }
+
+.secondTitle1 {
+  /*titre comment */
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #DD5116;
+  font-size: 18px;
+  text-align: center; }
+
+.p1 {
+  font-size: 16px;
+  text-align: center; }
+
+.plusInfo {
+  font-size: 16px;
+  text-align: center;
+  color: #9AC00A; }
+
+/** Start CSS **/
+.it-logo {
+  width: 290px;
+  height: 160px;
+  padding: 0.1em 1em; }
+
+.it-h2 {
+  font-family: Arial, sans-serif;
+  font-size: 3.5em;
+  font-weight: 700;
+  color: #DD5116;
+  text-transform: uppercase;
+  padding: 0.7em 0.5em; }
+
+.it-first-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .it-first-list li {
+    display: inline-block;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 2em;
+    line-height: 1.1em;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #DD5116; }
+
+.it-btn-group {
+  text-align: center; }
+  .it-btn-group .btn-itneo {
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #E6397E;
+    color: white;
+    width: 90%;
+    height: 60px;
+    border: none;
+    background: linear-gradient(135deg, transparent 6px, #E6397E 0) top left, linear-gradient(315deg, transparent 6px, #E6397E 0) bottom right;
+    background-size: 50%;
+    background-repeat: no-repeat; }
+  .it-btn-group .btn-joinus {
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #DD5116;
+    color: white;
+    width: 70%;
+    height: 60px;
+    border: none;
+    background: linear-gradient(135deg, transparent 6px, #DD5116 0) top left, linear-gradient(315deg, transparent 6px, #DD5116 0) bottom right;
+    background-size: 50%;
+    background-repeat: no-repeat; }
+
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0; }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0; }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left; }
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0; }
+
+/**
+ * SLIDER CSS ELEMENTS
+ */
+.it-neo-slider a {
+  display: block;
+  position: absolute;
+  top: 45%;
+  z-index: 10;
+  width: 100%; }
+  .it-neo-slider a span {
+    font-size: 3.5em;
+    color: #ffffff;
+    opacity: 0.7; }
+.it-neo-slider .prev {
+  padding-left: 1em; }
+.it-neo-slider .next {
+  text-align: right;
+  padding-right: 3.1em; }
+
+.be-flex {
+  display: flex; }
+
+/*# sourceMappingURL=main.css.map */

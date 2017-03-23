@@ -12,10 +12,10 @@
 </title>
 
 <!-- Bootstrap Import -->
-<link rel="stylesheet" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 
 <!-- Font Awesome Import -->
-<link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css">
 
 <!-- Our CSS Import -->
 <link rel="stylesheet" href="css/main.css">
