@@ -1,6 +1,5 @@
 /* vert #9AC00A
    orange #DD5116*/
-
 .header {
     padding: 0 !important;
     margin: 0 !important;
@@ -9,28 +8,18 @@ nav.navbar.navbar-default.navbar-fixed-top.top-nav-collapse,
 nav.navbar.navbar-default.navbar-fixed-top{
     background-color: white !important;
 }
-
 div.container-fluid.header{
     height: 11.5em;
-    position: relative;
 }
 div.navbar-header.page-scroll.header {
     height: 100%;
+    position: relative;
 }
-ul.nav.navbar-nav.navbar-right {
+ ul.nav.navbar-nav.navbar-right {
     position: absolute;
-
-    bottom: 50%;
+    top: 30%;
     right: 0;
 }
-
-div.collapse.navbar-collapse.navbar-ex1-collapse {
-
-}
-div.navbar-collapse.navbar-ex1-collapse.collapse.in {
-
-}
-
 button.navbar-toggle span {
     background-color: #DD5116 !important;
 }
@@ -42,17 +31,17 @@ button.navbar-toggle span {
     font-weight: bold;
     font-size: 1.2em;
 }
-
 a.page-scroll.link {
     display: block !important;
     text-align: center;
 }
-
+a.page-scroll.link.logo-itneo {
+    padding:0;
+}
 a.navbar-brand.page-scroll{
     margin:0;
     padding:0;
 }
-
 #logoItneo {
     padding-right:0;
     margin-right: 0;
@@ -61,12 +50,21 @@ a.navbar-brand.page-scroll{
 @media screen and (max-width: 1024px){
 
     #imgLogo {
-        width: 20em;
+        width: 16em;
     }
     div.container-fluid.header{
-        height: 10em;
+        height: 8em;
+    }
+    #logoItneo {
+        width:3em;
+    }
+    .navbar-default .navbar-nav > li > a:focus,
+    .navbar-default .navbar-nav > li > a:hover,
+    .navbar-default .navbar-nav > li > a {
+        font-size: 1.1em;
     }
 }
+
 @media screen and (max-width: 768px){
     #logoItneo {
         display: none;
@@ -79,6 +77,7 @@ a.navbar-brand.page-scroll{
     }
     div.navbar-collapse.navbar-ex1-collapse.collapse.in {
         background-color: white;
+        overflow: hidden;
     }
     .nav >li >a {
         padding-top: 1rem;
