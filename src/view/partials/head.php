@@ -6,6 +6,11 @@
 
 <link rel="stylesheet" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.css">
 
+<link rel="stylesheet" href="css/scrolling-nav.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/header.css">
+
+
 <title>
   <?php
       switch ($page){

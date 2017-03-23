@@ -16,6 +16,7 @@ $page .= '.php';
     <?php include('../src/view/partials/head.php'); ?>
 </head>
 <body>
+<div class="container-fluid">
 <header>
     <?php include('../src/view/partials/header.php'); ?>
 </header>
@@ -27,6 +28,7 @@ $page .= '.php';
 <footer>
     <?php include('../src/view/partials/footer.php'); ?>
 </footer>
+</div>
 
 <?php include('../src/view/partials/foot.php'); ?>
 </body>

@@ -1,0 +1,155 @@
+/* vert #9AC00A
+   orange #DD5116*/
+
+.header {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+nav.navbar.navbar-default.navbar-fixed-top.top-nav-collapse,
+nav.navbar.navbar-default.navbar-fixed-top{
+    background-color: white !important;
+}
+
+div.container-fluid.header{
+    height: 11.5em;
+    position: relative;
+}
+div.navbar-header.page-scroll.header {
+    height: 100%;
+}
+ul.nav.navbar-nav.navbar-right {
+    position: absolute;
+
+    bottom: 50%;
+    right: 0;
+}
+
+div.collapse.navbar-collapse.navbar-ex1-collapse {
+
+}
+div.navbar-collapse.navbar-ex1-collapse.collapse.in {
+
+}
+
+button.navbar-toggle span {
+    background-color: #DD5116 !important;
+}
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a {
+    color: #9AC00A;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+a.page-scroll.link {
+    display: block !important;
+    text-align: center;
+}
+
+a.navbar-brand.page-scroll{
+    margin:0;
+    padding:0;
+}
+
+#logoItneo {
+    padding-right:0;
+    margin-right: 0;
+}
+
+@media screen and (max-width: 1024px){
+
+    #imgLogo {
+        width: 20em;
+    }
+    div.container-fluid.header{
+        height: 10em;
+    }
+}
+@media screen and (max-width: 768px){
+    #logoItneo {
+        display: none;
+    }
+    #imgLogo {
+        width: 14em;
+    }
+    div.container-fluid.header{
+        height: 7em;
+    }
+    div.navbar-collapse.navbar-ex1-collapse.collapse.in {
+        background-color: white;
+    }
+    .nav >li >a {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+    ul.nav.navbar-nav.navbar-right {
+        position: relative;
+    }
+}
+
+
+/*
+button.navbar-toggle {
+    margin-right: 2em;
+    height: 5em;
+    width: 5em;
+}
+
+
+a.navbar-brand:visited,
+a.navbar-brand:focus,
+a.navbar-brand:hover,
+a.navbar-brand:active {
+    text-decoration: none !important;
+    border: none !important;
+}
+*/
+/*
+* {
+    box-sizing: border-box;
+}
+.container-fluid> .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+}
+.navbar-fixed-top .navbar-collapse{
+    max-height: 340px;
+}
+@media screen and (min-width 768px) {
+    .navbar-fixed-top .navbar-collapse{
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .navbar-collapse.collapse {
+        display: block;
+        height: auto !important;
+        padding-bottom: 0;
+        overflow-x: visible !important;
+        overflow-y: visible !important;
+    }
+    .navbar-collapse {
+        width: auto;
+        border-top-width:0;
+        border-top-style: none;
+        box-shadow: none;
+    }
+}
+.navbar-nav > li > a {
+    line-height: 20px;
+}
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+a {
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+*/

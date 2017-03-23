@@ -78,7 +78,7 @@
 }
 
 .ajax-loader {                                       /*gif background  */
-    background-image: url();
+    background-image: url(https://media.giphy.com/media/my3ITDHts2oSY/giphy.gif);
 
 }
 
@@ -86,14 +86,6 @@
 .foot1{
     background : black;
     height:10em;
-}
-
-
-.top{
-    background : black;
-    height:10em;
-    padding-bottom: 0px;
-
 }
 
 .main1{
@@ -113,7 +105,9 @@
     border-bottom-width: 0px;
     border-right: 400px solid #9AC00A;
     margin-top:15px;
-
+    position : absolute;
+    bottom : 0;
+    z-index : 0;
 
 
 
