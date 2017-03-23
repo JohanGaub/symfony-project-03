@@ -13,11 +13,12 @@ $page .= '.php';
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php include('partials/head.php'); ?>
+    <?php include('../src/view/partials/head.php'); ?>
 </head>
 <body>
+<div class="container-fluid">
 <header>
-    <?php include('partials/header.php'); ?>
+    <?php include('../src/view/partials/header.php'); ?>
 </header>
 
 <main>
@@ -25,9 +26,10 @@ $page .= '.php';
 </main>
 
 <footer>
-    <?php include('partials/footer.php'); ?>
+    <?php include('../src/view/partials/footer.php'); ?>
 </footer>
+</div>
 
-<?php include('partials/foot.php'); ?>
+<?php include('../src/view/partials/foot.php'); ?>
 </body>
 </html>
