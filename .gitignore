@@ -2,11 +2,11 @@
 public/vendor
 
 .sass-cache
-/public/css/sass
-/public/css/sass/main.scss
-/public/css/sass/_settings.scss
+/public/css/sass/
 /public/css/sass/_general-tools.scss
 /public/css/sass/_index-home.scss
 /public/css/sass/_index-itneo.scss
 /public/css/sass/_index-itneo-slider.scss
 /public/css/sass/_more.scss
+/public/css/sass/_settings.scss
+/public/css/sass/main.scss

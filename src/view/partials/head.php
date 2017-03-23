@@ -3,10 +3,10 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-
+<!-- animation icon font-awesome
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css"
  integrity="sha256-nBFRd4iXQgAv308dzcrSrU5vkKAT4SMXdZLJfN7MZeg=" crossorigin="anonymous">
-
+-->
 
 <title>
   <?php
@@ -17,7 +17,7 @@
 </title>
 
 <!-- Bootstrap Import -->
-<link rel="stylesheet" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 
 <!-- Font Awesome Import -->
 <link rel="stylesheet" href="vendor/font-awesome-4.7.0/font-awesome.css">
