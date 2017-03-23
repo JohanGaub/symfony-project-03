@@ -1,2 +1,4 @@
-
-<?php include('../src/view/partials/index-home.php'); ?>
+<?php
+include 'partials/indexHome.php';
+include 'partials/indexItneo.php';
+?>

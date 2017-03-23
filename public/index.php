@@ -6,8 +6,8 @@ $page_array = ['index'];
 foreach ($page_array as $element){
     $verif = ($_GET['page'] === $element) ? true : $verif;
 }
-$page = ($verif === true) ? $_GET['page'] : 'index';
-$page .= '.php';
+
+$page = ($verif === true) ? $_GET['page'] . '.php' : 'index.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,14 +15,14 @@ $page .= '.php';
 <head>
     <?php include '../src/view/partials/head.php'; ?>
 </head>
+
 <body>
 <div class="container-fluid">
 <header>
     <?php include '../src/view/partials/header.php'; ?>
 </header>
-
 <main>
-    <?php include ('page/' . $page); ?>
+    <?php include '../src/view/' . $page; ?>
 </main>
 
 <footer>
