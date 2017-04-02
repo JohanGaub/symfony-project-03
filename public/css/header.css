@@ -1,24 +1,57 @@
 /* vert #9AC00A
    orange #DD5116*/
+
 .header {
     padding: 0 !important;
     margin: 0 !important;
 }
+.navbar {
+    height: 11.5em;
+    padding-bottom: 30px;
+    transition: padding, height .3s ease;
+    background-color: white !important;
+    -webkit-transition: padding, height .3s ease;
+    -moz-transition: padding, height .3s ease;
+    -o-transition: padding, height .3s ease;
+    transition: padding, height .3s ease;
+}
+.navbar-default.navbar-brand{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.navbar-brand img {
+    width: 22em;
+    height: auto;
+    -webkit-transition: width .3s ease;
+    -moz-transition: width .3s ease;
+    -o-transition: width .3s ease;
+    transition: width .3s ease;
+}
+.navbar-default.navbar-brand {
+    margin-right: 10px;
+    font-size: 1.3em;
+    -webkit-transition: margin, font-size .3s ease;
+    -moz-transition: margin, font-size .3s ease;
+    -o-transition: margin, font-size .3s ease;
+    transition: margin, font-size .3s ease;
+}
+
 nav.navbar.navbar-default.navbar-fixed-top.top-nav-collapse,
 nav.navbar.navbar-default.navbar-fixed-top{
     background-color: white !important;
 }
-div.container-fluid.header{
-    height: 11.5em;
-}
-div.navbar-header.page-scroll.header {
+
+
+div.navbar-header.header {
     height: 100%;
     position: relative;
 }
- ul.nav.navbar-nav.navbar-right {
+/* setting links in the middle vertical position */
+ul.nav.navbar-nav.navbar-right {
     position: absolute;
-    top: 30%;
+    top: 25%;
     right: 0;
+    padding-right: 2em;
 }
 button.navbar-toggle span {
     background-color: #DD5116 !important;
@@ -29,22 +62,38 @@ button.navbar-toggle span {
     color: #9AC00A;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.3em;
+    padding-right: 1em;
 }
-a.page-scroll.link {
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+    color: #DD5116;
+    text-decoration: underline;
+}
+#itneo-link {
+    padding-left: 0 !important;
+}
+a.link {
     display: block !important;
     text-align: center;
 }
-a.page-scroll.link.logo-itneo {
-    padding:0;
+
+a.link.logo-itneo {
+    padding-top: 0;
+    padding-right: 0 !important;
+    margin-bottom: 1em;
+    position: absolute;
+    top: -5px;
+    right:0 ;
 }
-a.navbar-brand.page-scroll{
+a.navbar-brand {
     margin:0;
     padding:0;
 }
 #logoItneo {
     padding-right:0;
     margin-right: 0;
+
 }
 
 @media screen and (max-width: 1024px){
@@ -52,17 +101,24 @@ a.navbar-brand.page-scroll{
     #imgLogo {
         width: 16em;
     }
-    div.container-fluid.header{
+    .navbar {
         height: 8em;
     }
-    #logoItneo {
-        width:3em;
-    }
+
     .navbar-default .navbar-nav > li > a:focus,
     .navbar-default .navbar-nav > li > a:hover,
     .navbar-default .navbar-nav > li > a {
         font-size: 1.1em;
+        padding-right: 0;
     }
+    #logoItneo {
+        width:3.5em;
+        padding-top:0.5em;
+    }
+    a.link.logo-itneo {
+        top: -3px;
+    }
+
 }
 
 @media screen and (max-width: 768px){
@@ -72,12 +128,16 @@ a.navbar-brand.page-scroll{
     #imgLogo {
         width: 14em;
     }
-    div.container-fluid.header{
+    .navbar {
+        height: 7em;
+    }
+    div.navbar-header.header {
         height: 7em;
     }
     div.navbar-collapse.navbar-ex1-collapse.collapse.in {
         background-color: white;
         overflow: hidden;
+        border-bottom: solid 1px rgb(231, 231, 231);
     }
     .nav >li >a {
         padding-top: 1rem;
@@ -86,7 +146,67 @@ a.navbar-brand.page-scroll{
     }
     ul.nav.navbar-nav.navbar-right {
         position: relative;
+        padding-right: 0;
+    }
+    button.navbar-toggle {
+        position:absolute;
+        top: 20%;
+        right: 2%;
     }
 }
 
-
+/* Navbar scroll settings for large screens */
+@media screen and (min-width: 1024px){
+    .navbar.scroll {
+        height: 8em;
+        padding-bottom: 10px;
+        -webkit-transition: padding, height .3s ease;
+        -moz-transition: padding, height .3s ease;
+        -o-transition: padding, height .3s ease;
+        transition: padding, height .3s ease;
+    }
+    .navbar-brand .scroll {
+        width: 20em;
+        height: auto;
+        -webkit-transition: width .3s ease;
+        -moz-transition: width .3s ease;
+        -o-transition: width .3s ease;
+        transition: width .3s ease;
+    }
+    .navbar-default .navbar-brand.scroll {
+        margin-right: 0;
+        font-size: 1.1em;
+        -webkit-transition: margin, font-size .3s ease;
+        -moz-transition: margin, font-size .3s ease;
+        -o-transition: margin, font-size .3s ease;
+        transition: margin, font-size .3s ease;
+    }
+}
+/* Here has to be settings for the scroll settings for  middle and small screens.
+ For the moment there is just copy of the large screen settings */
+@media screen and (min-width: 1024px){
+    .navbar.scroll {
+        height: 8em;
+        padding-bottom: 10px;
+        -webkit-transition: padding, height .3s ease;
+        -moz-transition: padding, height .3s ease;
+        -o-transition: padding, height .3s ease;
+        transition: padding, height .3s ease;
+    }
+    .navbar-brand .scroll {
+        width: 20em;
+        height: auto;
+        -webkit-transition: width .3s ease;
+        -moz-transition: width .3s ease;
+        -o-transition: width .3s ease;
+        transition: width .3s ease;
+    }
+    .navbar-default .navbar-brand.scroll {
+        margin-right: 0;
+        font-size: 1.1em;
+        -webkit-transition: margin, font-size .3s ease;
+        -moz-transition: margin, font-size .3s ease;
+        -o-transition: margin, font-size .3s ease;
+        transition: margin, font-size .3s ease;
+    }
+}
