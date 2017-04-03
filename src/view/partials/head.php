@@ -4,11 +4,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <title>
-  <?php
-      switch ($page){
-          case 'index': echo 'Accueil'; break;
-      }
-  ?>
+    <?php
+    switch ($page){
+        case 'index':
+            echo 'Accueil';
+            break;
+    }
+    ?>
 </title>
 
 <!-- Bootstrap Import -->
