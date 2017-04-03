@@ -17,7 +17,7 @@ $page = ($verif === true) ? $_GET['page'] . '.php' : 'index.php';
 </head>
 
 <body>
-<div class="container-fluid">
+
 <header>
     <?php include '../src/view/partials/header.php'; ?>
 </header>
@@ -28,7 +28,7 @@ $page = ($verif === true) ? $_GET['page'] . '.php' : 'index.php';
 <footer>
     <?php include '../src/view/partials/footer.php'; ?>
 </footer>
-</div>
+
 
 <?php include '../src/view/partials/foot.php'; ?>
 </body>
