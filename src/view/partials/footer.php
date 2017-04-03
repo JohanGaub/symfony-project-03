@@ -49,7 +49,7 @@
 
 <div class="footerpart2">
 
-        <div class="flexdiv BORDER02">
+        <div class="flexdiv">
             <a href="src/view/partials/story.php" target="_blank">Génèse de la communauté</a>
         </div>
         <div class="flexdiv">

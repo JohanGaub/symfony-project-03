@@ -7,12 +7,10 @@
     font-weight: normal;
     font-style: normal;
 }
-
 #footerpart1 {
     background-color: floralwhite;
     border-top: solid rgb(221, 81, 22) 2px;
 }
-
 #myicon li {
     padding: 0 1rem;
     /*space between fleas*/;
@@ -24,11 +22,9 @@
         /*space between fleas with mobile*/;
     }
 }
-
 #myicon a {
     text-decoration: none;
 }
-
 .fa-rotate {
     transition: -webkit-transform .5s ease-in-out;
     -webkit-transition: -webkit-transform .5s ease-in-out;
@@ -74,12 +70,10 @@
     text-transform: uppercase ;
     font-weight: bold;
  }
-
 #myslogan a {
     text-decoration: none;
     color: rgb(221, 81, 22);
 }
-
 #myslogan a:hover {
     color: darkorange;
 }
@@ -89,7 +83,6 @@
     list-style: none;
     text-align: center;
 }
-
 .centerLI li {
     display: inline-block;
 }
@@ -105,9 +98,15 @@
     white-space: nowrap;
     align-items: center; /*center vertically "A propos" in the middle of the block*/
 }
-#apropos
-{
+#apropos{
     padding-right: 7rem;
+}
+#apropos a{
+    text-decoration: none;
+    color: rgb(154, 192, 10);
+}
+#apropos a:hover {
+    color: lawngreen;
 }
 #triangle{
     width: 0;
