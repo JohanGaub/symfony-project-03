@@ -1,20 +1,25 @@
-/** Start CSS **/
-.it-logo {
-  width: 290px;
-  height: 160px;
-  padding: 0.1em 1em; }
-
-.it-h2 {
-  font-family: Arial, sans-serif;
-  font-size: 3.5em;
-  font-weight: 700;
-  color: #DD5116;
-  text-transform: uppercase;
-  padding: 0.7em 0.5em; }
+#index-itneo {
+  margin: 5% 0; }
+  #index-itneo .itneo-top-case {
+    width: 100%;
+    text-align: center;
+    margin-left: 5%; }
+    #index-itneo .itneo-top-case .it-logo {
+      width: 290px;
+      height: 160px;
+      position: relative;
+      padding: 0.1em 1em;
+      top: -3.9em; }
+    #index-itneo .itneo-top-case .it-h2 {
+      font-family: Arial, sans-serif;
+      font-size: 3.5em;
+      font-weight: 700;
+      color: #DD5116;
+      text-transform: uppercase; }
 
 .it-first-list {
+  margin-top: 8em;
   list-style-type: none;
-  margin: 0;
   padding: 0; }
   .it-first-list li {
     display: inline-block;
@@ -27,18 +32,20 @@
     color: #DD5116; }
 
 .it-btn-group {
-  text-align: center; }
+  text-align: center;
+  margin-top: 35%; }
   .it-btn-group .btn-itneo {
     text-transform: uppercase;
     font-weight: bold;
     background-color: #E6397E;
     color: white;
-    width: 245px;
+    width: 90%;
     height: 60px;
     border: none;
     background: linear-gradient(135deg, transparent 6px, #E6397E 0) top left, linear-gradient(315deg, transparent 6px, #E6397E 0) bottom right;
     background-size: 50%;
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    margin: 1.5em 0; }
   .it-btn-group .btn-joinus {
     text-transform: uppercase;
     font-weight: bold;
@@ -49,7 +56,8 @@
     border: none;
     background: linear-gradient(135deg, transparent 6px, #DD5116 0) top left, linear-gradient(315deg, transparent 6px, #DD5116 0) bottom right;
     background-size: 50%;
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    margin: 1.5em 0; }
 
 .rslides {
   position: relative;
@@ -98,7 +106,67 @@
   text-align: right;
   padding-right: 3.1em; }
 
+.it-link-1 {
+  color: #9AC00A;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  font-size: "1.5em";
+  text-transform: uppercase; }
+
 .be-flex {
   display: flex; }
+
+.be-inline {
+  display: inline-block; }
+
+@media (max-width: 767px) {
+  #index-itneo {
+    margin: 10% 0; }
+
+  .it-btn-group {
+    margin-top: 2.5em !important; }
+
+  .it-first-list {
+    text-align: center;
+    margin: 2em 0 5em 0; }
+
+  .it-h2 {
+    text-align: center; } }
+@media (min-width: 768px) {
+  #index-itneo {
+    margin: 10% 0; }
+
+  .it-btn-group {
+    margin-top: 2.5em; }
+
+  .it-first-list {
+    text-align: center;
+    margin: 2em 0 5em 0; }
+
+  .it-h2 {
+    text-align: center; } }
+@media (min-width: 992px) and (max-width: 1200px) {
+  #index-itneo {
+    margin: 10% 0; }
+
+  .it-btn-group {
+    margin-top: 2.5em; }
+
+  .it-first-list {
+    text-align: center;
+    margin: 2em 0 5em 0; }
+
+  .itneo-top-case {
+    margin-left: 0 !important; }
+
+  .it-h2 {
+    text-align: center; } }
+@media (min-width: 1200px) {
+  .it-h2 {
+    text-align: left; }
+
+  .it-first-list {
+    text-align: right;
+    margin: 2em 0 5em 0; } }
 
 /*# sourceMappingURL=itneo-part.css.map */

@@ -1,0 +1,21 @@
+@mixin itButton($color, $width, $height : 60px){
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: $color;
+  color: white;
+  width: $width; height: $height;
+  border: none;
+  background: linear-gradient(135deg, transparent 6px, $color 0) top left,
+              linear-gradient(315deg, transparent 6px, $color 0) bottom right;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  margin: 1.5em 0;
+}
+
+@mixin itBoldLink($color, $size){
+  color: $color;
+  font-family: $first-font;
+  font-weight: 700;
+  font-size: $size;
+  text-transform: uppercase;
+}
