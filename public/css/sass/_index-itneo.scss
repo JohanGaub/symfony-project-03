@@ -24,12 +24,11 @@
   }
 }
 .it-first-list {
-  margin-top: 8em;
+  /*margin-top: 8em;*/
   list-style-type: none;
   padding: 0;
 
   li {
-    display: inline-block;
     width: 100%;
     font-family: $first-font;
     font-size: 2em;
@@ -37,12 +36,13 @@
     font-weight: 800;
     text-transform: uppercase;
     color: $secondary-color;
+
   }
 }
 
 .it-btn-group {
   text-align: center;
-  margin-top: 35%;
+  margin-top: 30%;
 
   .btn-itneo {
     @include itButton($it-color, 90%);
@@ -50,5 +50,24 @@
   .btn-joinus {
     @include itButton($secondary-color, 70%);
   }
+}
+.BORDER01{
+  border: solid red 3px;
+}
+.BORDER02{
+  border: solid blue 3px;
+  display: flex; /* contexte sur le parent */
+  align-items: center;
+  justify-content: center; /* alignement vertical */
+}
+.BORDER03{
+  border: solid green 3px;
+
+}
+.BORDER04{
+  border: solid black 3px;
+}
+.BORDER05{
+  border: solid yellow 3px;
 }
 
