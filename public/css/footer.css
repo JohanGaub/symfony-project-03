@@ -1,0 +1,145 @@
+/*FOOTER*/
+
+@font-face {
+    font-family: 'dinregular';
+    src: url('../../fonts/dinregular.eot');
+    src: url('../../fonts/dinregular.eot?#iefix') format('embedded-opentype'), url('../../fonts/dinregular.woff2') format('woff2'), url('../../fonts/dinregular.woff') format('woff'), url('../../fonts/dinregular.ttf') format('truetype'), url('../../fonts/dinregular.svg#webfontregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+#footerpart1 {
+    background-color: floralwhite;
+    border-top: solid rgb(221, 81, 22) 2px;
+}
+#myicon li {
+    padding: 0 1rem;
+    /*space between fleas*/;
+}
+
+@media screen and (max-width: 480px) {
+    #myicon li {
+        padding: 0;
+        /*space between fleas with mobile*/;
+    }
+}
+#myicon a {
+    text-decoration: none;
+}
+.fa-rotate {
+    transition: -webkit-transform .5s ease-in-out;
+    -webkit-transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
+    color: rgb(154, 192, 10);
+    font-size: 3rem;
+}
+
+.fa-rotate:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    color: rgb(221, 81, 22);
+    font-size: 3rem;
+}
+#flexslogan{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 2rem;
+    white-space: nowrap;
+    font-family: dinregular, sans-serif;
+    text-transform: uppercase ;
+    font-weight: bold;
+}
+#flexslogan a {
+    color: rgb(221, 81, 22);
+    text-decoration: none;
+}
+#flexslogan a:hover {
+    color: darkorange;
+}
+.flexdiv
+{
+    min-width: 250px;
+    text-align: center; /*center the text in the div with a width of 250px*/
+}
+#myslogan li {
+    font-size: 2rem;
+    padding: 0 5rem;
+    /*space between fleas*/;
+    white-space: nowrap;
+    font-family: dinregular, sans-serif;
+    text-transform: uppercase ;
+    font-weight: bold;
+ }
+#myslogan a {
+    text-decoration: none;
+    color: rgb(221, 81, 22);
+}
+#myslogan a:hover {
+    color: darkorange;
+}
+.centerUL {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+.centerLI li {
+    display: inline-block;
+}
+#flexpropos{
+    font-family: dinregular, sans-serif;
+    text-transform: uppercase ;
+    font-weight: bold;
+    color: rgb(154, 192, 10);
+    font-size: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end; /*put "A propos" and triangle at the right of the page*/
+    white-space: nowrap;
+    align-items: center; /*center vertically "A propos" in the middle of the block*/
+}
+#apropos{
+    padding-right: 7rem;
+}
+#apropos a{
+    text-decoration: none;
+    color: rgb(154, 192, 10);
+}
+#apropos a:hover {
+    color: lawngreen;
+}
+#triangle{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 75px 150px;
+    border-color: transparent transparent #99c10a transparent;
+    right: 0;
+}
+.footerpart2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    white-space: nowrap;
+    font-family: arial, sans-serif;
+    font-size: 1.7rem;
+    background-color: rgb(154, 192, 10);
+    color: floralwhite;
+    text-align: center;
+    font-weight: bold;
+    align-items: center; /*center vertically "Genèse" in the middle of the block*/
+    }
+.footerpart2 a {
+    text-decoration: none;
+    color: rgb(50, 50, 50);
+}
+.footerpart2 a:hover {
+    color: floralwhite;
+}
+.footerpart2 span {
+    color: rgb(221, 81, 22);
+    line-height: 2.5;
+    /*space between "commun.it.fr" & "mentions légales"*/;
+}
+
+
