@@ -42,17 +42,14 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-6 col-lg-12 col-lg-offset-6">
-                    <p class="propos">à propos</p></div>
+                        <p class="propos">à propos</p></div>
                     <div class="triangle-down-right col-md-offset-11 col-lg-offset-11" ></div>
 
-                    </div>
+                </div>
             </div>
-            </div>
-        </div>
-    </div>
-
-
         </div>
     </div>
 </div>
+
+
 
