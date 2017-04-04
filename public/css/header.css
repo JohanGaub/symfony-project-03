@@ -5,10 +5,17 @@
     padding: 0 !important;
     margin: 0 !important;
 }
+
+/* removing dotted lines  when links are visited and another link is hovered in Firefox browser*/
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+
+/* height of the navbar is adjusted to the visible part of the logo image;
+the height is reduced by scrolling;
+the color of the bootstrap default navbar is changed to white*/
 .navbar {
     height: 11.5em;
     padding-bottom: 30px;
-    transition: padding, height .3s ease;
     background-color: white !important;
     -webkit-transition: padding, height .3s ease;
     -moz-transition: padding, height .3s ease;
@@ -19,26 +26,33 @@
     padding: 0 !important;
     margin: 0 !important;
 }
+/* CommmunIt logo image settings */
 .navbar-brand img {
     width: 22em;
     height: auto;
+    padding-left: 0.5em;
     -webkit-transition: width .3s ease;
     -moz-transition: width .3s ease;
     -o-transition: width .3s ease;
     transition: width .3s ease;
 }
+a.navbar-brand {
+    margin:0;
+    padding:0;
+}
+
 .navbar-default.navbar-brand {
     margin-right: 10px;
-    font-size: 1.3em;
-    -webkit-transition: margin, font-size .3s ease;
-    -moz-transition: margin, font-size .3s ease;
-    -o-transition: margin, font-size .3s ease;
-    transition: margin, font-size .3s ease;
+    -webkit-transition: margin .3s ease;
+    -moz-transition: margin .3s ease;
+    -o-transition: margin .3s ease;
+    transition: margin .3s ease;
 }
 
 nav.navbar.navbar-default.navbar-fixed-top.top-nav-collapse,
 nav.navbar.navbar-default.navbar-fixed-top{
     background-color: white !important;
+    width: 100%;
 }
 
 
@@ -65,6 +79,7 @@ button.navbar-toggle span {
     font-size: 1.3em;
     padding-right: 1em;
 }
+
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover {
     color: #DD5116;
@@ -77,7 +92,7 @@ a.link {
     display: block !important;
     text-align: center;
 }
-
+/* having itneo logo and solution asterisk link close to each other*/
 a.link.logo-itneo {
     padding-top: 0;
     padding-right: 0 !important;
@@ -86,10 +101,7 @@ a.link.logo-itneo {
     top: -5px;
     right:0 ;
 }
-a.navbar-brand {
-    margin:0;
-    padding:0;
-}
+
 #logoItneo {
     padding-right:0;
     margin-right: 0;
@@ -98,11 +110,11 @@ a.navbar-brand {
 
 @media screen and (max-width: 1024px){
 
-    #imgLogo {
-        width: 16em;
-    }
     .navbar {
         height: 8em;
+    }
+    .navbar-brand img {
+        width: 16em;
     }
 
     .navbar-default .navbar-nav > li > a:focus,
@@ -118,92 +130,145 @@ a.navbar-brand {
     a.link.logo-itneo {
         top: -3px;
     }
-
+    ul.nav.navbar-nav.navbar-right {
+        top: 15%;
+    }
 }
 
 @media screen and (max-width: 768px){
     #logoItneo {
         display: none;
     }
-    #imgLogo {
-        width: 14em;
-    }
+
     .navbar {
         height: 7em;
     }
+    .navbar.scroll-small {
+        height: 5em;
+        padding-bottom: 0;
+        -webkit-transition: padding, height .3s ease;
+        -moz-transition: padding, height .3s ease;
+        -o-transition: padding, height .3s ease;
+        transition: padding, height .3s ease;
+    }
+    .navbar-brand img {
+        width: 14em;
+        padding-left: 0;
+    }
+    .navbar-brand .scroll-small {
+        width: 12em;
+        height: auto;
+        -webkit-transition: width .3s ease;
+        -moz-transition: width .3s ease;
+        -o-transition: width .3s ease;
+        transition: width .3s ease;
+    }
+    /* height of div.navbar-header.header is equal to .navbar height */
     div.navbar-header.header {
         height: 7em;
+        -webkit-transition: height .3s ease;
+        -moz-transition: height .3s ease;
+        -o-transition: height .3s ease;
+        transition: height .3s ease;
+
+    }
+    div.navbar-header.header.scroll-small {
+        height: 5em;
+        -webkit-transition: height .3s ease;
+        -moz-transition: height .3s ease;
+        -o-transition: height .3s ease;
+        transition: height .3s ease;
+
     }
     div.navbar-collapse.navbar-ex1-collapse.collapse.in {
         background-color: white;
         overflow: hidden;
         border-bottom: solid 1px rgb(231, 231, 231);
+        border-top: none !important;
     }
     .nav >li >a {
         padding-top: 1rem;
         padding-bottom: 1rem;
+        padding-left: 0;
+        padding-right: 0;
         text-align: center;
     }
     ul.nav.navbar-nav.navbar-right {
         position: relative;
         padding-right: 0;
+        width: 100%; /* !!!!!!! this parameter makes scroll bar disappeared when opening hamburger menu, but it push links to the left side of the block  */
+        overflow: hidden;
+        margin: 0 auto;
     }
-    button.navbar-toggle {
+   button.navbar-toggle {
         position:absolute;
-        top: 20%;
+        top: 10%;
         right: 2%;
     }
-}
 
-/* Navbar scroll settings for large screens */
-@media screen and (min-width: 1024px){
-    .navbar.scroll {
-        height: 8em;
-        padding-bottom: 10px;
-        -webkit-transition: padding, height .3s ease;
-        -moz-transition: padding, height .3s ease;
-        -o-transition: padding, height .3s ease;
-        transition: padding, height .3s ease;
-    }
-    .navbar-brand .scroll {
-        width: 20em;
-        height: auto;
-        -webkit-transition: width .3s ease;
-        -moz-transition: width .3s ease;
-        -o-transition: width .3s ease;
-        transition: width .3s ease;
-    }
-    .navbar-default .navbar-brand.scroll {
+
+    .navbar-default .navbar-brand.scroll-small{
         margin-right: 0;
-        font-size: 1.1em;
+        font-size: 1em;
         -webkit-transition: margin, font-size .3s ease;
         -moz-transition: margin, font-size .3s ease;
         -o-transition: margin, font-size .3s ease;
         transition: margin, font-size .3s ease;
     }
+
 }
-/* Here has to be settings for the scroll settings for  middle and small screens.
- For the moment there is just copy of the large screen settings */
+
+/* Navbar scroll settings for large screens */
 @media screen and (min-width: 1024px){
     .navbar.scroll {
-        height: 8em;
+        height: 7em;
         padding-bottom: 10px;
         -webkit-transition: padding, height .3s ease;
         -moz-transition: padding, height .3s ease;
         -o-transition: padding, height .3s ease;
         transition: padding, height .3s ease;
     }
+
     .navbar-brand .scroll {
-        width: 20em;
+        width: 15em;
         height: auto;
-        -webkit-transition: width .3s ease;
-        -moz-transition: width .3s ease;
-        -o-transition: width .3s ease;
-        transition: width .3s ease;
+        padding-left: 3%;
+        -webkit-transition: width, padding .3s ease;
+        -moz-transition: width, padding .3s ease;
+        -o-transition: width, padding .3s ease;
+        transition: width, padding .3s ease;
     }
     .navbar-default .navbar-brand.scroll {
         margin-right: 0;
-        font-size: 1.1em;
+        -webkit-transition: margin .3s ease;
+        -moz-transition: margin .3s ease;
+        -o-transition: margin .3s ease;
+        transition: margin .3s ease;
+    }
+}
+/* Here has to be settings for the scroll settings for  middle and small screens.
+ For the moment there is just copy of the large screen settings */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    .navbar.scroll-midd {
+        height: 5em;
+        padding-bottom: 0;
+        -webkit-transition: padding, height .3s ease;
+        -moz-transition: padding, height .3s ease;
+        -o-transition: padding, height .3s ease;
+        transition: padding, height .3s ease;
+    }
+    .navbar-brand .scroll-midd {
+        width: 13em;
+        height: auto;
+        padding-left: 7%;
+        -webkit-transition: width, padding .3s ease;
+        -moz-transition: width, padding .3s ease;
+        -o-transition: width, padding .3s ease;
+        transition: width, padding .3s ease;
+    }
+    .navbar-default .navbar-brand.scroll-midd {
+        margin-right: 0;
+        font-size: 1em;
         -webkit-transition: margin, font-size .3s ease;
         -moz-transition: margin, font-size .3s ease;
         -o-transition: margin, font-size .3s ease;
