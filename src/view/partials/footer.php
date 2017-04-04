@@ -1,4 +1,4 @@
-    <div class="container-fluid">
+
         <div class="panel panel-default">
 
             <div id="footerpart1" class="panel-body">
@@ -70,4 +70,4 @@
                 </div>
             </div>
         </div>
-    </div>
+
