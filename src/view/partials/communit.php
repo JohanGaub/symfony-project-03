@@ -40,8 +40,11 @@
     </ul>
 </div>
 
-
-
+<div class="row">
+    <div class="col-xs-12  col-sm-6 col-lg-3 col-lg-offset-3 text-center">
+        <button class = "join" type="button">rejoignez-nous</button>
+    </div>
+</div>
 
 <div class="row">
     <p>Vous souhaitez travailler avec une société Française à votre écoute ?</p>
