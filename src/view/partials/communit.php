@@ -31,19 +31,19 @@
 </div>
 
 <div class="row">
-    <ul class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-offset-1">
+    <ul class="col-xs-3 col-sm-3 col-md-3  col-lg-3 col-lg-offset-1">
         <li>100 % de ventes indirectes</li>
         <li>La possibilité de revendre notre solution itnéo en marque blanche et de proposer à
             votre clientèle votre propre solution avec une interface à vos couleurs et avec votre logo</li>
     </ul>
 
 
-    <ul class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-offset-1">
+    <ul class="col-xs-3 col-sm-3 col-md-3  col-lg-3 col-lg-offset-1">
         <li>Un tarif préférentiel sur la solution et services itnéo</li>
         <li>Un support technique gratuit et illimité</li>
     </ul>
 
-    <ul class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <ul class="col-xs-3 col-sm-3 col-md-3 col-md-offset-1 col-lg-3">
         <li>La possibilité de faire des propositions d’évolutions simples et complexes avec
             un cahier des charges et un système de vote</li>
         <li>La possibilité de développements spécifiques avec mutualisation des coûts</li>
@@ -51,15 +51,15 @@
 </div>
 
 <div class="row text-center">
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4  question">
+    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4  question">
         <p>Vous souhaitez travailler avec une société Française à votre écoute ?</p>
     </div>
 
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
+    <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
         <button class = "join2" type="button">rejoignez-nous</button>
 </div>
 
-<div class="row col-xs-3 col-sm-3 col-md-3 col-lg-4  question2">
+<div class="row col-xs-3 col-sm-3 col-md-4 col-lg-4  question2">
     <p>garantir à vos clients des investissements sur le long terme ?</p>
 </div>
 </div>
