@@ -10,7 +10,8 @@
     color : #DD5116;
     text-transform: uppercase;
     font-weight: bold;
-    margin-top : 3em;
+    margin-top : 6em;
+
 }
 
 
@@ -29,7 +30,7 @@
     background-repeat: no-repeat;
     background-repeat: no-repeat;
 
-    margin-top : 6em;
+    margin-top : 4em;
 }
 
 
@@ -47,7 +48,7 @@
     background-size: 50% ;
     background-repeat: no-repeat;
 
-    margin-top : 6em;
+    margin-top : 4em;
 }
 
 .secondTitle1{                      /*titres comment */
@@ -69,16 +70,17 @@
     font-size : 16px;
     text-align: center;
     color : #9AC00A;
-
+    text-transform: uppercase ;
+    font-weight: bold;
 }
 
 .part{ /* row 3 sous parties */
     margin-top : 3em;
 
 }
-/*
-.ajax-loader {                                       gif background
-    background-image: url(https://media.giphy.com/media/my3ITDHts2oSY/giphy.gif);
+/*gif background
+.ajax-loader {
+   background-image: url(https://media.giphy.com/media/my3ITDHts2oSY/giphy.gif);
 
 }
 */
@@ -110,6 +112,50 @@
     z-index: 0;
 
 }
+
+.propos{
+    text-transform: uppercase ;
+    font-weight: bold;
+    color: #9AC00A;
+    font-size: 16px;
+}
+
+@media(min-width:1025px) {
+
+}
+
+
+@media(max-width:480px) {
+.title1{
+    margin-top : 4em;
+    margin-bottom : 10px;
+    font-size: 2em;
+}
+    .join{
+    margin-top : 10px;
+
+    }
+
+    .discover{
+        margin-top : 10px;
+
+    }
+    .part{
+        margin-top:10px;
+    }
+
+}
+
+
+
+@media only screen and (min-device-width : 480px) and (max-device-width : 1024px) {
+
+
+}
+
+
+
+
 
 
 /*
