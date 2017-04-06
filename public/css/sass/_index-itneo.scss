@@ -1,0 +1,58 @@
+#index-itneo {
+  margin: 2% 0;
+
+  .itneo-top-case {
+    width: 100%;
+    text-align: center;
+    margin-left: 5%;
+
+    .it-logo {
+      width: 290px;
+      height: 160px;
+      position: relative;
+      padding: 0.1em 1em;
+      top: -3.9em;
+    }
+
+    .it-h2 {
+      font-family: Arial, sans-serif;
+      font-size: 3.5em;
+      font-weight: 700;
+      color: $secondary-color;
+      text-transform: uppercase;
+    }
+  }
+}
+.it-ul-box-1 {
+  padding: 5% 0;
+
+  .it-first-list {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      width: 100%;
+      font-family: $first-font;
+      font-size: 2em;
+      line-height: 1.1em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: $secondary-color;
+    }
+  }
+}
+.it-btn-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 30%;
+
+  .btn-itneo {
+    @include itButton($it-color, 20em);
+  }
+  .btn-joinus {
+    @include itButton($secondary-color, 16em);
+  }
+}
+
+
