@@ -1,5 +1,3 @@
-
-
 <div class="general_font">
     <h1 class ="titleH1">Votre communauté de la téléphonie IP</h1>
 </div>
@@ -67,9 +65,4 @@
     <p class = "col-xs-3 col-sm-3 col-md-3 col-lg-4 col-lg-offset-4 text-center">proposer une solution de téléphonie sur IP
         innovante sans système de licence à l’utilisateur ?</p>
 </div>
-
-
-
-
-
 
