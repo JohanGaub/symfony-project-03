@@ -7,10 +7,6 @@
 <!-- Import JQuerySlider -->
 <script src="js/responsiveslides.min.js"></script>
 
-<!-- Import js scroll and navbar -->
-<script src="/js/jquery.easing.min.js"></script>
-<script src="/js/scrolling-nav.js"></script>
-
 <!-- Import Our JS -->
 <script src="js/main.js"></script>
 
