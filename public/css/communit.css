@@ -1,12 +1,13 @@
+.block_font{
+    font-size: 1.2rem;
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    text-align: justify;
+}
 .flexcontainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    font-size: 1.5rem;
-    font-family: arial, sans-serif;
-    font-weight: bold;
-    border: solid black 2px;
-    text-align: justify;
 }
 .flexcontainer a {
     color: rgb(221, 81, 22);
@@ -15,78 +16,21 @@
 .flexcontainer a:hover {
     color: darkorange;
 }
-.dessous{
-    max-width: 352px;
+.titleH1{
+    color: rgb(221, 81, 22);
+}
+.frame{
+    height: 230px;
+    width: 320px;
     background:
-            linear-gradient(150deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) top left,
-            linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) top right,
-            linear-gradient(330deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) bottom right,
-            linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) bottom left;
+            linear-gradient(150deg, transparent 50px, rgba(154, 192, 10, 0.25) 0) top left,
+            linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.25) 0) top right,
+            linear-gradient(330deg, transparent 50px, rgba(154, 192, 10, 0.25) 0) bottom right,
+            linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.25) 0) bottom left;
     background-size: 50% 50%;
     background-repeat: no-repeat;
-
-}
-
-.flex{
-    max-width: 350px;
-    background:
-            linear-gradient(150deg, transparent 50px, white 0) top left,
-            linear-gradient(0deg, transparent 0px, white 0) top right,
-            linear-gradient(330deg, transparent 50px, white 0) bottom right,
-            linear-gradient(0deg, transparent 0px, white 0) bottom left;
-    background-size: 50% 50%;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center; /*center vertically "A propos" in the middle of the block*/
-    text-align: justify;
-    padding: 5rem 2rem;
-    margin: 2rem 3rem;
-    box-shadow: 10px 10px 10px 10px rgba(154,192,10,0)
-}
-
-
-
-.essai{
-    -webkit-border-radius: 200px;
-    -webkit-border-top-right-radius: 25px;
-    -webkit-border-bottom-left-radius: 25px;
-    -moz-border-radius: 200px;
-    -moz-border-radius-topright: 25px;
-    -moz-border-radius-bottomleft: 25px;
-    border-radius: 200px;
-    border-top-right-radius: 25px;
-    border-bottom-left-radius: 25px;
-
-    width: 160px;
-    height: 0px;
-    border-bottom: 40px solid red;
-    border-right: 40px solid white;
-}
-
-.essai2{
-    border-radius: 5px 20px 5px;
-    background: #BADA55;
-
-    box-shadow:
-            rgba(0,0,0,0.4)
-            10px 10px;
-
-    -moz-box-shadow: 10px 10px 5px #656565;
-    -webkit-box-shadow: 10px 10px 5px #656565;
-    -o-box-shadow: 10px 10px 5px #656565;
-    box-shadow: 10px 10px 5px #656565;
-
-    -webkit-box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 14px 0px rgba(0,0,0,0.75);
-
-    -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-    box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-
-
-    -webkit-box-shadow: 10px 10px 10px 10px rgba(154,192,10,0);
-    box-shadow: 10px 10px 10px 10px rgba(154,192,10,0);
+    padding: 6rem 2rem;
+    margin: 2rem 2rem;
 }
 
 .join2{

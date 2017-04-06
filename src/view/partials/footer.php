@@ -1,4 +1,4 @@
-<div id="flexpropos">
+<div class="general_font flexpropos">
     <div id="apropos"><a href="src/view/partials/story.php" target="_blank">A propos</a></div>
     <div id="triangle"></div>
 </div>
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div id="flexslogan">
+    <div class="general_font footer_menu">
         <div class="flexdiv"><a href="anchor_communit">Offre globale</a></div>
         <div class="flexdiv"><a href="anchor_communit">Mutualisation</a></div>
         <div class="flexdiv"><a href="anchor_communit">Accompagnement</a></div>
@@ -49,22 +49,22 @@
 
 <div class="footerpart2">
 
-        <div class="flexdiv">
-            <a href="src/view/partials/story.php" target="_blank">Génèse de la communauté</a>
-        </div>
-        <div class="flexdiv">
-            <ul class="centerUL">
-                <li><a href="#">Contactez-nous</a></li>
-                <li><a href="tel:+33671058591">06 71 05 85 91</a></li>
-                <li><a href="tel:+33428382467">04 28 38 24 67</a></li>
-            </ul>
-        </div>
-        <div class="flexdiv">
-            <ul class="centerUL">
-                <li><a href="#">&copy; commun<span>it</span>.fr</a></li>
-                <li><a href="src/view/partials/legal.php" target="_blank">Mentions légales</a></li>
-            </ul>
-        </div>
+    <div class="flexdiv">
+        <a href="src/view/partials/story.php" target="_blank">Génèse de la communauté</a>
+    </div>
+    <div class="flexdiv">
+        <ul class="centerUL">
+            <li><a href="#">Contactez-nous</a></li>
+            <li><a href="tel:+33671058591">06 71 05 85 91</a></li>
+            <li><a href="tel:+33428382467">04 28 38 24 67</a></li>
+        </ul>
+    </div>
+    <div class="flexdiv">
+        <ul class="centerUL">
+            <li><a href="#">&copy; commun<span>it</span>.fr</a></li>
+            <li><a href="src/view/partials/legal.php" target="_blank">Mentions légales</a></li>
+        </ul>
+    </div>
 
 </div>
 
