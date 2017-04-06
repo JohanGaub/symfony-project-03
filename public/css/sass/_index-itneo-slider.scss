@@ -33,26 +33,29 @@
 /**
  * SLIDER CSS ELEMENTS
  */
-.it-neo-slider {
-  a {
-    display: block;
-    position: absolute;
-    top: 45%;
-    z-index: 10;
-    width: 100%;
+.out-slider-block {
+  padding-top: 2em;
+  .it-neo-slider {
+    a {
+      display: block;
+      position: absolute;
+      top: 45%;
+      z-index: 10;
+      width: 100%;
 
-    span {
-      font-size: 3.5em;
-      color: #ffffff;
-      opacity: 0.7;
+      span {
+        font-size: 3.5em;
+        color: #ffffff;
+        opacity: 0.7;
+      }
     }
-  }
-  .prev {
-    padding-left: 1em;
-  }
-  .next {
-    text-align: right;
-    padding-right: 3.1em;
+    .prev {
+      padding-left: 1em;
+    }
+    .next {
+      text-align: right;
+      padding-right: 3.1em;
+    }
   }
 }
 .it-link-1 {

@@ -1,5 +1,5 @@
 #index-itneo {
-  margin: 5% 0;
+  margin: 2% 0;
 
   .itneo-top-case {
     width: 100%;
@@ -23,51 +23,36 @@
     }
   }
 }
-.it-first-list {
-  /*margin-top: 8em;*/
-  list-style-type: none;
-  padding: 0;
+.it-ul-box-1 {
+  padding: 5% 0;
 
-  li {
-    width: 100%;
-    font-family: $first-font;
-    font-size: 2em;
-    line-height: 1.1em;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: $secondary-color;
+  .it-first-list {
+    list-style-type: none;
+    padding: 0;
 
+    li {
+      width: 100%;
+      font-family: $first-font;
+      font-size: 2em;
+      line-height: 1.1em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: $secondary-color;
+    }
   }
 }
-
 .it-btn-group {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   margin-top: 30%;
 
   .btn-itneo {
-    @include itButton($it-color, 90%);
+    @include itButton($it-color, 20em);
   }
   .btn-joinus {
-    @include itButton($secondary-color, 70%);
+    @include itButton($secondary-color, 16em);
   }
 }
-.BORDER01{
-  border: solid red 3px;
-}
-.BORDER02{
-  border: solid blue 3px;
-  display: flex; /* contexte sur le parent */
-  align-items: center;
-  justify-content: center; /* alignement vertical */
-}
-.BORDER03{
-  border: solid green 3px;
 
-}
-.BORDER04{
-  border: solid black 3px;
-}
-.BORDER05{
-  border: solid yellow 3px;
-}
 

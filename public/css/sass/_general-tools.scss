@@ -4,12 +4,14 @@
   background-color: $color;
   color: white;
   width: $width; height: $height;
-  border: none;
+  border: none;transition: all .5s;
   background: linear-gradient(135deg, transparent 6px, $color 0) top left,
-              linear-gradient(315deg, transparent 6px, $color 0) bottom right;
+              linear-gradient(315deg, transparent 6px, $color 0) bottom right,
+              linear-gradient(0deg, transparent 0px, $color 0) top right,
+              linear-gradient(0deg, transparent 0px, $color 0) bottom left;
   background-size: 50%;
   background-repeat: no-repeat;
-  margin: 1.5em 0;
+  margin: 1.5em auto;
 }
 
 @mixin itBoldLink($color, $size){
