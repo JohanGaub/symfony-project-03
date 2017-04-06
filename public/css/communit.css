@@ -3,6 +3,7 @@
     font-family: arial, sans-serif;
     font-weight: bold;
     text-align: justify;
+    color: #1b1b1b;
 }
 .flexcontainer{
     display: flex;
@@ -21,7 +22,7 @@
 }
 .frame{
     height: 230px;
-    width: 320px;
+    width: 375px;
     background:
             linear-gradient(150deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) top left,
             linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) top right,
@@ -29,8 +30,8 @@
             linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) bottom left;
     background-size: 50% 50%;
     background-repeat: no-repeat;
-    padding: 6rem 2rem;
-    margin: 2rem 2rem;
+    padding: 6rem 2.5rem;
+    margin: 6rem 2rem;
 }
 
 .join2{
