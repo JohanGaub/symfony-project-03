@@ -27,35 +27,41 @@
 </section>
 
 <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-    <h3>La COMMUN’it c’est :</h3>
+    <h3 class ="commun">La COMMUN’it c’est :</h3>
 </div>
 
 <div class="row">
-    <ul class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-offset-1 text-justify">
+    <ul class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-offset-1">
         <li>100 % de ventes indirectes</li>
         <li>La possibilité de revendre notre solution itnéo en marque blanche et de proposer à
             votre clientèle votre propre solution avec une interface à vos couleurs et avec votre logo</li>
-        <li>Un tarif préférentiel sur la solution et services itnéo</li>
     </ul>
 
-    <ul class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-offset-4 text-justify">
+
+    <ul class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-lg-offset-1">
+        <li>Un tarif préférentiel sur la solution et services itnéo</li>
         <li>Un support technique gratuit et illimité</li>
+    </ul>
+
+    <ul class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         <li>La possibilité de faire des propositions d’évolutions simples et complexes avec
             un cahier des charges et un système de vote</li>
         <li>La possibilité de développements spécifiques avec mutualisation des coûts</li>
     </ul>
 </div>
 
-<div class="row">
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4 col-lg-offset-1 question">
-    <p>Vous souhaitez travailler avec une société Française à votre écoute ?</p>
+<div class="row text-center">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4  question">
+        <p>Vous souhaitez travailler avec une société Française à votre écoute ?</p>
     </div>
-    <div class="col-xs-12  col-sm-6 col-lg-1">
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
         <button class = "join2" type="button">rejoignez-nous</button>
-    </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4 col-lg-offset-2 question2">
+</div>
+
+<div class="row col-xs-3 col-sm-3 col-md-3 col-lg-4  question2">
     <p>garantir à vos clients des investissements sur le long terme ?</p>
-    </div>
+</div>
 </div>
 
 <div class="row questions">

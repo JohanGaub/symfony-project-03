@@ -23,10 +23,10 @@
     height: 230px;
     width: 320px;
     background:
-            linear-gradient(150deg, transparent 50px, rgba(154, 192, 10, 0.25) 0) top left,
-            linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.25) 0) top right,
-            linear-gradient(330deg, transparent 50px, rgba(154, 192, 10, 0.25) 0) bottom right,
-            linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.25) 0) bottom left;
+            linear-gradient(150deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) top left,
+            linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) top right,
+            linear-gradient(330deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) bottom right,
+            linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) bottom left;
     background-size: 50% 50%;
     background-repeat: no-repeat;
     padding: 6rem 2rem;
@@ -48,21 +48,18 @@
     background-repeat: no-repeat;
     background-repeat: no-repeat;
 
-    margin-top : 1em;
-    margin-right : 3em;
 
-
-
-
+    margin-right : 2em;
 }
 
+
 .question{
-    margin-top : 4em;
+    margin-top : 3em;
     font-size : 16px;
     font-weight : bold;
 }
 .question2{
-    margin-top : 4em;
+    margin-top : 3em;
     font-size : 16px;
     font-weight : bold;
     margin-right : 0px;
@@ -72,4 +69,9 @@
 .questions{
     font-size : 16px;
     font-weight : bold;
+}
+
+.commun{
+    margin-top : 1em;
+
 }
