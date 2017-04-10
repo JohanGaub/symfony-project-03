@@ -27,9 +27,6 @@
 
 <link rel="stylesheet" href="css/footer.css">
 
-<!-- css scroll navbar to verify -->
-<link rel="stylesheet" href="css/scrolling-nav.css">
-
 <!-- Our CSS Import -->
 <link rel="stylesheet" href="css/itneo-part.css">
 

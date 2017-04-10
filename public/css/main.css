@@ -1,11 +1,4 @@
 
-@font-face {
-    font-family: 'dinregular';
-    src: url('../fonts/dinregular.eot');
-    src: url('../fonts/dinregular.eot?#iefix') format('embedded-opentype'), url('../fonts/dinregular.woff2') format('woff2'), url('../fonts/dinregular.woff') format('woff'), url('../fonts/dinregular.ttf') format('truetype'), url('../fonts/dinregular.svg#webfontregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
 
 @font-face{
     font-family: arial;
@@ -17,7 +10,7 @@
     text-transform: uppercase;
     font-weight: bold;
     margin-top : 6em;
-    font-family: 'dinregular';
+    font-family: dinregular,Arial, sans-serif;
 
 
 }
@@ -26,7 +19,7 @@
 .join{    /*button "rejoignez nous" */
     text-transform: uppercase ;
     font-weight: bold;
-    font-family: dinregular;
+    font-family: dinregular,Arial, sans-serif;
     background-color: #DD5116;
     color : white;
     width : 245px;
@@ -46,7 +39,7 @@
 .discover{     /*button "Decouvrez notre offre */
     text-transform: uppercase;
     font-weight: bold;
-    font-family: dinregular;
+    font-family: dinregular,Arial, sans-serif;
     background-color: #9AC00A;
     color : white;
     width : 245px;
@@ -63,7 +56,7 @@
 
 .secondTitle1{                      /*titres comment */
     text-transform: uppercase ;
-    font-family: dinregular;
+    font-family: dinregular,Arial, sans-serif;
     font-weight: bold;
     color: #DD5116;
     font-size: 18px;

@@ -1,22 +1,13 @@
 /* vert #9AC00A
    orange #DD5116*/
-@font-face {
-    font-family: 'dinregular';
-    src: url('../fonts/dinregular.eot');
-    src: url('../fonts/dinregular.eot?#iefix') format('embedded-opentype'), url('../fonts/dinregular.woff2') format('woff2'), url('../fonts/dinregular.woff') format('woff'), url('../fonts/dinregular.ttf') format('truetype'), url('../fonts/dinregular.svg#webfontregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
 .header {
     padding: 0 !important;
     margin: 0 !important;
-    font-family: 'dinregular';
+    font-family: dinregular, Arial, sans-serif; /* font to be set in the main css file*/
 }
-
-/* removing dotted lines  when links are visited and another link is hovered in Firefox browser*/
+/* removes dotted lines in Firefox browser when links are visited and another link is hovered */
 :focus {outline:none;}
 ::-moz-focus-inner {border:0;}
-
 /* height of the navbar is adjusted to the visible part of the logo image;
 the height is reduced by scrolling;
 the color of the bootstrap default navbar is changed to white*/
@@ -24,10 +15,8 @@ the color of the bootstrap default navbar is changed to white*/
     height: 11.5em;
     padding-bottom: 30px;
     background-color: white !important;
-    -webkit-transition: padding, height .3s ease;
-    -moz-transition: padding, height .3s ease;
-    -o-transition: padding, height .3s ease;
     transition: padding, height .3s ease;
+    transition-duration: 0.3s;
 }
 .navbar-default.navbar-brand{
     padding: 0 !important;
@@ -37,42 +26,34 @@ the color of the bootstrap default navbar is changed to white*/
 .navbar-brand img {
     width: 22em;
     height: auto;
-    padding-left: 0.5em;
-    -webkit-transition: width .3s ease;
-    -moz-transition: width .3s ease;
-    -o-transition: width .3s ease;
-    transition: width .3s ease;
+    padding-left: 0.6em;
+    transition: width .1s ease;
+    transition-duration: 0.3s;
 }
 a.navbar-brand {
     margin:0;
     padding:0;
 }
-
 .navbar-default.navbar-brand {
     margin-right: 10px;
-    -webkit-transition: margin .3s ease;
-    -moz-transition: margin .3s ease;
-    -o-transition: margin .3s ease;
     transition: margin .3s ease;
+    transition-duration: 0.3s;
 }
-
 nav.navbar.navbar-default.navbar-fixed-top.top-nav-collapse,
 nav.navbar.navbar-default.navbar-fixed-top{
     background-color: white !important;
     width: 100%;
 }
-
-
+/* setting links in the middle vertical position */
 div.navbar-header.header {
     height: 100%;
     position: relative;
 }
-/* setting links in the middle vertical position */
 ul.nav.navbar-nav.navbar-right {
     position: absolute;
     top: 25%;
     right: 0;
-    padding-right: 2em;
+    padding-right: 3em; /* pushes links to the left */
 }
 button.navbar-toggle span {
     background-color: #DD5116 !important;
@@ -84,108 +65,79 @@ button.navbar-toggle span {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.3em;
-    padding-right: 1em;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
 }
-
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover {
     color: #DD5116;
-    text-decoration: underline;
-}
-#itneo-link {
-    padding-left: 0 !important;
 }
 a.link {
     display: block !important;
     text-align: center;
 }
-/* having itneo logo and solution asterisk link close to each other*/
-a.link.logo-itneo {
-    padding-top: 0;
-    padding-right: 0 !important;
-    margin-bottom: 1em;
-    position: absolute;
-    top: -5px;
-    right:0 ;
-}
-
-#logoItneo {
-    padding-right:0;
-    margin-right: 0;
-
-}
 
 @media screen and (max-width: 1024px){
-
     .navbar {
         height: 8em;
     }
     .navbar-brand img {
         width: 16em;
     }
-
     .navbar-default .navbar-nav > li > a:focus,
     .navbar-default .navbar-nav > li > a:hover,
     .navbar-default .navbar-nav > li > a {
         font-size: 1.1em;
         padding-right: 0;
     }
-    #logoItneo {
-        width:3.5em;
-        padding-top:0.5em;
-    }
-    a.link.logo-itneo {
-        top: -3px;
-    }
     ul.nav.navbar-nav.navbar-right {
         top: 15%;
+        padding-right: 2em;
+    }
+    #itneo-link{
+        padding-left: 0;
     }
 }
 
 @media screen and (max-width: 768px){
-    #logoItneo {
-        display: none;
-    }
-
     .navbar {
-        height: 7em;
-    }
-    .navbar.scroll-small {
-        height: 5em;
-        padding-bottom: 0;
-        -webkit-transition: padding, height .3s ease;
-        -moz-transition: padding, height .3s ease;
-        -o-transition: padding, height .3s ease;
-        transition: padding, height .3s ease;
+        height: 6.5em;
+        transition:  height .3s ease;
+        transition-duration: 0.4s;
     }
     .navbar-brand img {
-        width: 14em;
+        width: 13em;
         padding-left: 0;
-    }
-    .navbar-brand .scroll-small {
-        width: 12em;
-        height: auto;
-        -webkit-transition: width .3s ease;
-        -moz-transition: width .3s ease;
-        -o-transition: width .3s ease;
-        transition: width .3s ease;
     }
     /* height of div.navbar-header.header is equal to .navbar height */
     div.navbar-header.header {
-        height: 7em;
-        -webkit-transition: height .3s ease;
-        -moz-transition: height .3s ease;
-        -o-transition: height .3s ease;
+        height: 6.5em;
         transition: height .3s ease;
-
+        transition-duration: 0.4s;
+    }
+    /* Navbar scroll settings for very small screens*/
+    .navbar.scroll-small {
+        height: 4.8em;
+        padding-bottom: 0;
+        transition: padding, height .3s ease;
+        transition-duration: 0.4s;
+    }
+    .navbar-brand .scroll-small {
+        width: 13em;
+        height: auto;
+        transition: width .3s ease;
+        transition-duration: 0.4s;
     }
     div.navbar-header.header.scroll-small {
-        height: 5em;
-        -webkit-transition: height .3s ease;
-        -moz-transition: height .3s ease;
-        -o-transition: height .3s ease;
+        height: 4.8em;
         transition: height .3s ease;
-
+        transition-duration: 0.4s;
+    }
+    .navbar-default .navbar-brand.scroll-small{
+        margin-right: 0;
+        font-size: 1em;
+        transition: margin, font-size .3s ease;
+        transition-duration: 0.4s;
     }
     div.navbar-collapse.navbar-ex1-collapse.collapse.in {
         background-color: white;
@@ -202,83 +154,57 @@ a.link.logo-itneo {
     }
     ul.nav.navbar-nav.navbar-right {
         position: relative;
-        padding-right: 0;
-        width: 100%; /* !!!!!!! this parameter makes scroll bar disappeared when opening hamburger menu, but it push links to the left side of the block  */
-        overflow: hidden;
+        padding: 1em 0;
+        width: 100%;
         margin: 0 auto;
     }
-   button.navbar-toggle {
+    button.navbar-toggle {
         position:absolute;
         top: 10%;
         right: 2%;
     }
-
-
-    .navbar-default .navbar-brand.scroll-small{
-        margin-right: 0;
-        font-size: 1em;
-        -webkit-transition: margin, font-size .3s ease;
-        -moz-transition: margin, font-size .3s ease;
-        -o-transition: margin, font-size .3s ease;
-        transition: margin, font-size .3s ease;
-    }
-
 }
 
+/* Navbar scroll settings for middle and small screens */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    .navbar.scroll-midd {
+        height: 4.8em;
+        padding-bottom: 0;
+        transition: padding, height .3s ease;
+        transition-duration: 0.4s;
+    }
+    .navbar-brand .scroll-midd {
+        width: 14em;
+        height: auto;
+        padding-left: 0.9em;
+        transition: width, padding .2s ease;
+        transition-duration: 0.4s;
+    }
+    .navbar-default .navbar-brand.scroll-midd {
+        margin-right: 0;
+        font-size: 1em;
+        transition: margin, font-size .3s ease;
+        transition-duration: 0.4s;
+    }
+}
 /* Navbar scroll settings for large screens */
 @media screen and (min-width: 1024px){
     .navbar.scroll {
         height: 7em;
         padding-bottom: 10px;
-        -webkit-transition: padding, height .3s ease;
-        -moz-transition: padding, height .3s ease;
-        -o-transition: padding, height .3s ease;
         transition: padding, height .3s ease;
+        transition-duration: 0.3s;
     }
-
     .navbar-brand .scroll {
         width: 15em;
         height: auto;
-        padding-left: 3%;
-        -webkit-transition: width, padding .3s ease;
-        -moz-transition: width, padding .3s ease;
-        -o-transition: width, padding .3s ease;
-        transition: width, padding .3s ease;
+        padding-left: 0.5em;
+        transition: width, padding .2s ease;
+        transition-duration: 0.3s;
     }
     .navbar-default .navbar-brand.scroll {
         margin-right: 0;
-        -webkit-transition: margin .3s ease;
-        -moz-transition: margin .3s ease;
-        -o-transition: margin .3s ease;
         transition: margin .3s ease;
-    }
-}
-/* Here has to be settings for the scroll settings for  middle and small screens.
- For the moment there is just copy of the large screen settings */
-@media screen and (min-width: 768px) and (max-width: 1024px){
-    .navbar.scroll-midd {
-        height: 5em;
-        padding-bottom: 0;
-        -webkit-transition: padding, height .3s ease;
-        -moz-transition: padding, height .3s ease;
-        -o-transition: padding, height .3s ease;
-        transition: padding, height .3s ease;
-    }
-    .navbar-brand .scroll-midd {
-        width: 13em;
-        height: auto;
-        padding-left: 7%;
-        -webkit-transition: width, padding .3s ease;
-        -moz-transition: width, padding .3s ease;
-        -o-transition: width, padding .3s ease;
-        transition: width, padding .3s ease;
-    }
-    .navbar-default .navbar-brand.scroll-midd {
-        margin-right: 0;
-        font-size: 1em;
-        -webkit-transition: margin, font-size .3s ease;
-        -moz-transition: margin, font-size .3s ease;
-        -o-transition: margin, font-size .3s ease;
-        transition: margin, font-size .3s ease;
+        transition-duration: 0.3s;
     }
 }
