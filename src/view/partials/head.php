@@ -19,5 +19,4 @@
 <!-- Font Awesome Import -->
 <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.css">
 
-
 <link rel="stylesheet" href="css/main.css">
