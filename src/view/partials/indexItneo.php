@@ -37,7 +37,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <div class="it-btn-group">
                 <button type="button" class="btn-itneo">Découvrez Itnéo</button>
-                <button type="button" class="btn-joinus">Rejoingnez-nous</button>
+                <button type="button" class="btn-joinus">Rejoignez-nous !</button>
             </div>
         </div>
     </div>
