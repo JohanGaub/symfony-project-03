@@ -20,14 +20,4 @@
 <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.css">
 
 
-<link rel="stylesheet" href="css/header.css">
-
-<link rel="stylesheet" href="css/footer.css">
-
-<!-- css scroll navbar to verify -->
-<link rel="stylesheet" href="css/scrolling-nav.css">
-
-<!-- Our CSS Import -->
-<link rel="stylesheet" href="css/itneo-part.css">
-
 <link rel="stylesheet" href="css/main.css">
