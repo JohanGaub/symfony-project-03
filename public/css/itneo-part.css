@@ -1,5 +1,10 @@
+
+
 #index-itneo {
-  margin: 2% 0; }
+  margin: 2% 0;
+  font-family: dinregular, Arial, sans-serif;
+}
+
   #index-itneo .itneo-top-case {
     width: 100%;
     text-align: center;
@@ -11,11 +16,14 @@
       padding: 0.1em 1em;
       top: -3.9em; }
     #index-itneo .itneo-top-case .it-h2 {
+
+
       font-family: Arial, sans-serif;
       font-size: 3.5em;
       font-weight: 700;
       color: #DD5116;
       text-transform: uppercase; }
+
 
 .it-ul-box-1 {
   padding: 5% 0; }

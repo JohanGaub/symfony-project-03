@@ -36,6 +36,7 @@
 .join2{
     text-transform: uppercase ;
     font-weight: bold;
+    font-family: dinregular;
     background-color: #DD5116;
     color : white;
     width : 245px;
