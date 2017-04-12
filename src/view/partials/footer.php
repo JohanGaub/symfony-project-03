@@ -1,4 +1,4 @@
-<div class="general_font flexpropos">
+<div class="flexpropos">
     <div id="apropos"><a href="src/view/partials/story.php" target="_blank">A propos</a></div>
     <div id="triangle"></div>
 </div>

@@ -18,7 +18,7 @@
 
 @mixin itBoldLink($color, $size){
   color: $color;
-  font-family: $first-font;
+  font-family: $primary-font;
   font-weight: 700;
   font-size: $size;
   text-transform: uppercase;
