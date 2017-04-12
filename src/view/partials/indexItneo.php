@@ -1,8 +1,7 @@
 <section id="index-itneo" class="row">
     <!-- Part top (logo + h3 text -> descript product) -->
     <div class="col-xs-12 itneo-top-case">
-        <img class="it-logo be-inline" src="../img/itneo_logo_HD.png" alt="">
-        <h2 class="be-inline">Notre solution téléphonie ip<br>basée sur Astérisk</h2>
+        <h2>Notre solution téléphonie ip</h2>
     </div>
     <!-- Part down (3parts -> text-info -> slider -> button -->
     <div class="row">
@@ -19,22 +18,21 @@
             </ul>
         </div>
         <!-- Second col (slider) -->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 out-slider-block">
-            <div class="it-neo-slider">
-                <!-- General slider div -->
-                <ul class="rslides" id="slider1">
-                    <li><img src="img/1.jpg" alt=""></li>
-                    <li><img src="img/2.jpg" alt=""></li>
-                    <li><img src="img/3.jpg" alt=""></li>
-                </ul>
-            </div>
+        <div id="itneo-slider-block" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+
+
+
             <a href="#" class="plus-info">Plus d'info</a>
         </div>
         <!-- Last part (button) -->
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <img class="it-logo be-inline" src="../img/itneo_logo_HD.png" alt="">
             <div class="it-btn-group">
-                <button type="button" class="itneo-button">Découvrez Itnéo</button>
-                <button type="button" class="join-button">Rejoignez-nous !</button>
+                <button type="button" class="itneo-button">Découvrez Itnéo!</button>
+                <!--
+                - TODO => SEND TO FOOTER
+                - <button type="button" class="join-button">Rejoignez-nous !</button>
+                -->
             </div>
         </div>
     </div>

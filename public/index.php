@@ -21,6 +21,7 @@ $page = ($verif === true) ? $_GET['page'] . '.php' : 'index.php';
 <header>
     <?php include '../src/view/partials/header.php'; ?>
 </header>
+
 <main>
     <?php include '../src/view/' . $page; ?>
 </main>
