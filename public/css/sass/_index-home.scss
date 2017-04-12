@@ -1,53 +1,18 @@
-@font-face{
-  font-family: arial;
+.index-home {
+  margin-top : 15rem;
 }
 
-.title1{
-  text-align: center;
-  color: #DD5116;
-  text-transform: uppercase;
-  font-weight: bold;
-}
+@media(max-width:480px) {
+  h1 {
+    margin-top: 4em;
+    margin-bottom: 10px;
+    font-size: 2em;
+  }
+  .join, .discover {
+    margin-top: 10px;
+  }
+  .mrg-top-1 {
+    margin-top: 10px;
+  }
 
-.join{    /*button "rejoignez nous" */
-  text-transform: uppercase ;
-  font-weight: bold;
-  background-color: #DD5116;
-  color: white;
-  width: 245px; height: 60px;
-  border: none;
-  background: linear-gradient(135deg, transparent 6px, #dd5116 0) top left, linear-gradient(315deg, transparent 6px, #dd5116 0) bottom right;
-  background-size: 50% ;
-  background-repeat: no-repeat;
-}
-
-.discover{     /*button "Decouvrez notre offre */
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: #9AC00A;
-  color: white;
-  width: 245px; height : 60px;
-  border: none;
-  background:linear-gradient(135deg, transparent 6px, #9AC00A 0) top left, linear-gradient(315deg, transparent 6px, #9AC00A 0) bottom right;
-  background-size: 50%;
-  background-repeat: no-repeat;
-}
-
-.secondTitle1{                      /*titre comment */
-  text-transform: uppercase;
-  font-weight: bold;
-  color: #DD5116;
-  font-size: 18px;
-  text-align:center;
-}
-
-.p1{
-  font-size: 16px;
-  text-align: center;
-}
-
-.plusInfo{
-  font-size: 16px;
-  text-align: center;
-  color: #9AC00A;
 }

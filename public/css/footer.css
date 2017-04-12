@@ -6,13 +6,7 @@
     font-weight: normal;
     font-style: normal;
 }
-.general_font{
-    font-size: 2rem;
-    font-family: dinregular, sans-serif;
-    text-transform: uppercase ;
-    font-weight: bold;
-    text-align: center;
-}
+
 .flexpropos{
     color: rgb(154, 192, 10);
     display: flex;
