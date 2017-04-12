@@ -1,9 +1,16 @@
-$("#slider1").responsiveSlides({
-    speed: 400,
-    timeout: 8000,
-    nav: true,
-    prevText: "<span class='glyphicon glyphicon-chevron-left'></span>",
-    nextText: "<span class='glyphicon glyphicon-chevron-right'></span>"
+// Swiper Slider
+$(document).ready(function () {
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 20,
+        centeredSlides: true,
+        autoplay: 60000,
+        loop: true,
+        autoplayDisableOnInteraction: false
+    });
 });
 
 $(document).ready(function () {

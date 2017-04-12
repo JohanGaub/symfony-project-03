@@ -8,14 +8,14 @@
         crossorigin="anonymous"></script>
 
 
-
+<!-- Import jQuery -->
 <script src="vendor/jquery-3.2.0/jquery-3.2.0.min.js"></script>
 
 <!-- Import Bootstrap JS -->
 <script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 
-<!-- Import JQuerySlider -->
-<script src="js/responsiveslides.min.js"></script>
+<!-- Import Slider (TODO => Rassembler les JS) -->
+<script src="vendor/swiper-slider/dist/js/swiper.min.js"></script>
 
 <!-- Import Our JS -->
 <script src="js/main.js"></script>

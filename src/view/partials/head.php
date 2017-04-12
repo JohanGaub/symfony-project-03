@@ -19,4 +19,8 @@
 <!-- Font Awesome Import -->
 <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.css">
 
+<!-- Swiper Slider -->
+<link rel="stylesheet" href="vendor/swiper-slider/dist/css/swiper.min.css">
+
+<!-- Our css -->
 <link rel="stylesheet" href="css/main.css">

@@ -48,6 +48,14 @@ p {
 .plus-info {
   @include itBoldLink($primary-color, 1.4rem);
 }
+.plus-info-2 {
+  @include itBoldLink($it-second-color, 1.8rem);
+  transition: all .2s ease-in-out;
+}
+.plus-info-2:hover {
+  color: $it-color;
+  text-decoration: none;
+}
 /* Buttons */
 .join-button {
   @include itButton($secondary-color, 28rem);
