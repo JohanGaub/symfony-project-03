@@ -6,16 +6,11 @@
 }
 
 .box-communit {
-  height: 230px;
+  height: 23rem;
   width: 35rem;
-  background: linear-gradient(150deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) top left,
-          linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) top right,
-          linear-gradient(330deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) bottom right,
-          linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) bottom left;
+  background: $background1;
   background-size: 50% 50%;
   background-repeat: no-repeat;
   padding: 6rem 2.5rem;
   margin: 6rem 2rem;
 }
-
-
