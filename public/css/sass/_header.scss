@@ -1,5 +1,4 @@
-/* vert #9AC00A
-   orange #DD5116*/
+/* HEADER */
 .header {
   padding: 0 !important;
   margin: 0 !important;
@@ -14,6 +13,7 @@ the color of the bootstrap default navbar is changed to white*/
 .navbar {
   height: 11.5em;
   padding-bottom: 30px;
+  width: 100%;
   background-color: white !important;
   transition: padding, height .3s ease;
   transition-duration: 0.3s;
@@ -30,6 +30,7 @@ the color of the bootstrap default navbar is changed to white*/
   transition: width .1s ease;
   transition-duration: 0.3s;
 }
+
 a.navbar-brand {
   margin:0;
   padding:0;

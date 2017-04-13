@@ -1,5 +1,4 @@
-/* vert #9AC00A
-   orange #DD5116*/
+/* HEADER */
 .header {
   padding: 0 !important;
   margin: 0 !important;
@@ -19,6 +18,7 @@ the color of the bootstrap default navbar is changed to white*/
 .navbar {
   height: 11.5em;
   padding-bottom: 30px;
+  width: 100%;
   background-color: white !important;
   transition: padding, height .3s ease;
   transition-duration: 0.3s; }
@@ -212,7 +212,8 @@ a.link {
 /* Style */
 html, body {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  width: 100%; }
 
 h1, h2 {
   color: #DD5116;
@@ -295,6 +296,10 @@ p {
 
 .index-home {
   margin-top: 15rem; }
+
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important; }
 
 @media (max-width: 480px) {
   h1 {
