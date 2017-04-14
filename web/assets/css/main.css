@@ -215,7 +215,7 @@ html, body {
   padding: 0; }
 
 h1, h2 {
-  color: #DD5116;
+  color: #dd5116;
   font-family: dinregular, sans-serif;
   font-size: 3.6rem;
   font-weight: bold;
@@ -223,7 +223,7 @@ h1, h2 {
   text-transform: uppercase; }
 
 h3 {
-  color: #DD5116;
+  color: #dd5116;
   font-size: 1.8rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -244,7 +244,7 @@ p {
 
 /* Links Green */
 .plus-info {
-  color: #9AC00A;
+  color: #9ac00a;
   font-family: dinregular, sans-serif;
   font-weight: 700;
   font-size: 1.4rem;
@@ -266,13 +266,13 @@ p {
 .join-button {
   text-transform: uppercase;
   font-weight: bold;
-  background-color: #DD5116;
+  background-color: #dd5116;
   width: 28rem;
   height: 60px;
   color: white;
   border: none;
   transition: all .5s;
-  background: linear-gradient(135deg, transparent 6px, #DD5116 0) top left, linear-gradient(315deg, transparent 6px, #DD5116 0) bottom right, linear-gradient(0deg, transparent 0px, #DD5116 0) top right, linear-gradient(0deg, transparent 0px, #DD5116 0) bottom left;
+  background: linear-gradient(135deg, transparent 6px, #dd5116 0) top left, linear-gradient(315deg, transparent 6px, #dd5116 0) bottom right, linear-gradient(0deg, transparent 0px, #dd5116 0) top right, linear-gradient(0deg, transparent 0px, #dd5116 0) bottom left;
   background-size: 50%;
   background-repeat: no-repeat;
   margin: 1.5em auto; }
@@ -280,13 +280,13 @@ p {
 .discover-button {
   text-transform: uppercase;
   font-weight: bold;
-  background-color: #9AC00A;
+  background-color: #9ac00a;
   width: 28rem;
   height: 60px;
   color: white;
   border: none;
   transition: all .5s;
-  background: linear-gradient(135deg, transparent 6px, #9AC00A 0) top left, linear-gradient(315deg, transparent 6px, #9AC00A 0) bottom right, linear-gradient(0deg, transparent 0px, #9AC00A 0) top right, linear-gradient(0deg, transparent 0px, #9AC00A 0) bottom left;
+  background: linear-gradient(135deg, transparent 6px, #9ac00a 0) top left, linear-gradient(315deg, transparent 6px, #9ac00a 0) bottom right, linear-gradient(0deg, transparent 0px, #9ac00a 0) top right, linear-gradient(0deg, transparent 0px, #9ac00a 0) bottom left;
   background-size: 50%;
   background-repeat: no-repeat;
   margin: 1.5em auto; }
@@ -335,7 +335,7 @@ p {
       font-family: Arial, sans-serif;
       font-size: 3.5em;
       font-weight: 700;
-      color: #DD5116;
+      color: #dd5116;
       text-transform: uppercase; }
 
 .it-ul-box-1 {
@@ -417,9 +417,9 @@ p {
   justify-content: space-around; }
 
 .box-communit {
-  height: 230px;
+  height: 23rem;
   width: 35rem;
-  background: linear-gradient(150deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) top left, linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) top right, linear-gradient(330deg, transparent 50px, rgba(154, 192, 10, 0.75) 0) bottom right, linear-gradient(0deg, transparent 0px, rgba(154, 192, 10, 0.75) 0) bottom left;
+  background: linear-gradient(150deg, transparent 15px, rgba(221, 81, 22, 0.2) 0) top left, linear-gradient(0deg, transparent 0px, rgba(221, 81, 22, 0.2) 0) top right, linear-gradient(330deg, transparent 15px, rgba(221, 81, 22, 0.2) 0) bottom right, linear-gradient(0deg, transparent 0px, rgba(221, 81, 22, 0.2) 0) bottom left;
   background-size: 50% 50%;
   background-repeat: no-repeat;
   padding: 6rem 2.5rem;
@@ -475,6 +475,6 @@ p {
   display: inline-block; }
 
 .mrg-top-1 {
-  margin-top: 3em; }
+  margin-top: 8rem; }
 
 /*# sourceMappingURL=main.css.map */
