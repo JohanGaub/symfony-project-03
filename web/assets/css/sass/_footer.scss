@@ -1,0 +1,124 @@
+/* FOOTER */
+footer {
+  padding: 0;
+  margin: 0;
+  border:0;
+  width : 100%;
+  background-color: rgba(221, 81, 22, 0.08);
+  border-top: solid 1px $primary-color;
+  ul {
+    list-style-type: none;
+  }
+
+}
+#footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#footer-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+  #footer-left-up {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+    #footer-left-join{
+      padding-left: 5rem;
+     // width: 90%;
+      h3 {
+        text-align: right !important;
+        line-height: 150%;
+      }
+    }
+    #footer-left-join-list {
+
+        a, a:hover {
+          color: $secondary-color;
+          text-decoration: none;
+        }
+        h3 {
+          text-align: left;
+        }
+
+
+    }
+    #footer-left-join-button {
+
+      .join-button {
+
+
+      }
+    }
+  }
+  #footer-left-down{
+    margin: 0 auto;
+    a, a:hover {
+      color: $secondary-color;
+      text-decoration: none;
+    }
+
+  }
+}
+
+#footer-right{
+  position: relative;
+  #footer-right-contact{
+    background-color: white;
+    border: solid 1px $primary-color;
+    width: 60%;
+    z-index: 100;
+    position: absolute;
+    top: 10%;
+    right: 5rem;
+    h3{
+      color: $primary-color;
+    }
+    p {
+      text-align: left;
+    }
+  }
+  #footer-right-triangle-img {
+    position: relative;
+    p {
+      position: absolute;
+      top: 75%;
+      right: 1em;
+      color: $paragraph-color;
+      a {
+        color: $paragraph-color;
+        font-weight: bold;
+      }
+      span {
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+/* social icons*/
+.centerUL {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.centerLI li {
+  display: inline-block;
+}
+.fa-rotate {
+  transition: -webkit-transform .5s ease-in-out;
+  -webkit-transition: -webkit-transform .5s ease-in-out;
+  transition: transform .5s ease-in-out;
+  color: rgb(154, 192, 10);
+  font-size: 2rem;
+}
+.fa-rotate:hover {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+  color: rgb(221, 81, 22);
+  font-size: 2rem;
+}
