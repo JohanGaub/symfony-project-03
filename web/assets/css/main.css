@@ -488,7 +488,6 @@ footer {
   width: 100%;
   height: auto;
   background-color: #fdf0eb;
-  /*rgba(221, 81, 22, 0.08);*/
   border-top: solid 1px #9ac00a; }
   footer ul {
     list-style-type: none; }
@@ -564,7 +563,8 @@ footer {
     #footer-right #footer-right-triangle-img p {
       position: absolute;
       top: 20rem;
-      right: 1em;
+      right: 3.8rem;
+      text-align: right;
       color: #545454; }
       #footer-right #footer-right-triangle-img p a {
         color: #545454;
@@ -608,7 +608,43 @@ footer {
       padding-left: 0; }
   #footer-left #footer-left-join-button {
     display: none; } }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
+  #footer-left #footer-left-up {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left; }
+    #footer-left #footer-left-up #footer-left-join {
+      align-items: baseline; }
+      #footer-left #footer-left-up #footer-left-join #footer-left-join-title {
+        padding-left: 0.3rem; }
+        #footer-left #footer-left-up #footer-left-join #footer-left-join-title h3 {
+          margin-top: 0.5rem; }
+      #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul {
+        margin-bottom: 0; }
+        #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul h3 {
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+          text-align: left; }
+    #footer-left #footer-left-up #hidden-button {
+      display: none; }
+  #footer-left #footer-left-join-button {
+    display: block;
+    padding-left: 1rem; }
+    #footer-left #footer-left-join-button .join-button {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem; }
+
+  #footer-right #footer-right-contact {
+    width: 27.5rem;
+    height: 16rem;
+    top: 1.6rem;
+    right: 3rem; }
+  #footer-right #footer-right-triangle-img img {
+    width: 40rem; }
+  #footer-right #footer-right-triangle-img p {
+    top: 18rem;
+    right: 3rem; } }
+@media screen and (max-width: 920px) {
   #footer {
     flex-direction: column; }
 
@@ -627,15 +663,22 @@ footer {
           #footer-left #footer-left-up #footer-left-join #footer-left-join-title #hidden-button {
             display: none; }
           #footer-left #footer-left-up #footer-left-join #footer-left-join-title h3 {
-            text-align: center !important; }
+            text-align: center !important;
+            margin-top: 2rem; }
         #footer-left #footer-left-up #footer-left-join #footer-left-join-list {
           padding-left: 0; }
           #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul {
             padding-left: 0; }
-          #footer-left #footer-left-up #footer-left-join #footer-left-join-list h3 {
-            text-align: left; }
+            #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul li {
+              display: inline-block; }
+            #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul h3 {
+              text-align: left;
+              margin-top: 2rem;
+              margin-bottom: 1rem;
+              padding-left: 2rem;
+              padding-right: 2rem; }
       #footer-left #footer-left-up #footer-left-join-button {
-        display: block;
+        margin-top: 2rem;
         padding-left: 0; }
         #footer-left #footer-left-up #footer-left-join-button .join-button {
           padding-left: 0; }
@@ -659,8 +702,15 @@ footer {
       top: 0; }
     #footer-right #footer-right-triangle-img p {
       top: 21rem;
-      right: 2rem;
-      z-index: 100; } }
+      right: 3rem; } }
+@media screen and (max-width: 768px) {
+  #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul {
+    list-style-image: url("../img/puce_xxxs.png") !important; }
+    #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul li {
+      display: list-item; }
+    #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul h3 {
+      padding-right: 0;
+      padding-left: 0; } }
 @media screen and (max-width: 440px) {
   #footer-left #footer-left-down {
     padding-bottom: 10rem; }
@@ -674,15 +724,12 @@ footer {
       padding-left: 1rem; }
       #footer-right #footer-right-contact ul p {
         text-align: center; }
-  #footer-right #footer-right-triangle {
-    width: 100%; }
   #footer-right #footer-right-triangle-img img {
     width: 28rem; }
   #footer-right #footer-right-triangle-img p {
     top: 11rem;
     right: 1rem;
     font-size: 1.4rem;
-    text-align: right;
     margin: 0 auto; }
     #footer-right #footer-right-triangle-img p span {
       font-size: 1.7rem; } }
