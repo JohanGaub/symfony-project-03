@@ -311,7 +311,7 @@ p {
   margin: 1.5em auto; }
 
 .index-home {
-  padding-top: 15rem; }
+  margin-top: 15rem; }
 
 .row {
   margin-right: 0 !important;
@@ -478,9 +478,6 @@ p {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E"); }
 
 /* FOOTER */
-html {
-  background-color: #fdf0eb; }
-
 footer {
   padding: 0;
   margin: 0;
@@ -552,7 +549,7 @@ footer {
     height: 17.5rem;
     z-index: 100;
     position: absolute;
-    top: 2rem;
+    bottom: 6rem;
     right: 3.8rem; }
     #footer-right #footer-right-contact h3 {
       color: #9ac00a; }
@@ -562,7 +559,7 @@ footer {
     position: relative; }
     #footer-right #footer-right-triangle-img p {
       position: absolute;
-      top: 20rem;
+      bottom: 0;
       right: 3.8rem;
       text-align: right;
       color: #545454; }
@@ -611,10 +608,10 @@ footer {
 @media screen and (max-width: 1024px) {
   #footer-left #footer-left-up {
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: left; }
+    justify-content: space-between;
+    align-items: center; }
     #footer-left #footer-left-up #footer-left-join {
-      align-items: baseline; }
+      align-items: center; }
       #footer-left #footer-left-up #footer-left-join #footer-left-join-title {
         padding-left: 0.3rem; }
         #footer-left #footer-left-up #footer-left-join #footer-left-join-title h3 {
@@ -637,19 +634,18 @@ footer {
   #footer-right #footer-right-contact {
     width: 27.5rem;
     height: 16rem;
-    top: 1.6rem;
+    bottom: 5.5rem;
     right: 3rem; }
   #footer-right #footer-right-triangle-img img {
     width: 40rem; }
   #footer-right #footer-right-triangle-img p {
-    top: 18rem;
     right: 3rem; } }
 @media screen and (max-width: 920px) {
   #footer {
-    flex-direction: column; }
+    flex-direction: row; }
 
   #footer-left {
-    width: 100%; }
+    width: 50%; }
     #footer-left #footer-left-up {
       flex-direction: column;
       align-items: center; }
@@ -664,19 +660,13 @@ footer {
             display: none; }
           #footer-left #footer-left-up #footer-left-join #footer-left-join-title h3 {
             text-align: center !important;
-            margin-top: 2rem; }
+            margin-top: 1rem; }
         #footer-left #footer-left-up #footer-left-join #footer-left-join-list {
           padding-left: 0; }
           #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul {
             padding-left: 0; }
-            #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul li {
-              display: inline-block; }
             #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul h3 {
-              text-align: left;
-              margin-top: 2rem;
-              margin-bottom: 1rem;
-              padding-left: 2rem;
-              padding-right: 2rem; }
+              text-align: left; }
       #footer-left #footer-left-up #footer-left-join-button {
         margin-top: 2rem;
         padding-left: 0; }
@@ -689,28 +679,45 @@ footer {
   #footer-right #footer-right-contact {
     width: 29rem;
     height: 17rem;
-    top: 1.75rem;
-    right: 3rem; }
-  #footer-right #footer-right-triangle {
-    width: 100%; }
-  #footer-right #footer-right-triangle-img {
+    bottom: 6.6rem; }
+  #footer-right #footer-right-triangle #footer-right-triangle-img {
     position: relative; }
-    #footer-right #footer-right-triangle-img img {
+    #footer-right #footer-right-triangle #footer-right-triangle-img img {
       width: 44rem;
       position: absolute;
       right: 0;
-      top: 0; }
-    #footer-right #footer-right-triangle-img p {
-      top: 21rem;
+      bottom: -30rem; }
+    #footer-right #footer-right-triangle #footer-right-triangle-img p {
+      width: 30rem;
+      top: 24rem;
       right: 3rem; } }
 @media screen and (max-width: 768px) {
-  #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul {
-    list-style-image: url("../img/puce_xxxs.png") !important; }
-    #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul li {
-      display: list-item; }
+  #footer {
+    flex-direction: column; }
+
+  #footer-left {
+    width: 100%; }
+    #footer-left #footer-left-up #footer-left-join #footer-left-join-title {
+      margin-top: 3rem; }
     #footer-left #footer-left-up #footer-left-join #footer-left-join-list ul h3 {
-      padding-right: 0;
-      padding-left: 0; } }
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+      padding-right: 2rem; }
+
+  #footer-right #footer-right-contact {
+    width: 28.3rem;
+    height: 16.5rem;
+    bottom: 6.3rem;
+    right: 2rem; }
+  #footer-right #footer-right-triangle-img {
+    margin-top: 25rem; }
+    #footer-right #footer-right-triangle-img img {
+      width: 41rem !important;
+      bottom: 0 !important; }
+    #footer-right #footer-right-triangle-img p {
+      top: -5.5rem !important;
+      right: 2rem; } }
 @media screen and (max-width: 440px) {
   #footer-left #footer-left-down {
     padding-bottom: 10rem; }
@@ -718,21 +725,23 @@ footer {
   #footer-right #footer-right-contact {
     width: 26rem;
     height: 17rem;
-    top: -7rem;
+    bottom: 6rem;
     right: 1rem; }
     #footer-right #footer-right-contact ul {
       padding-left: 1rem; }
       #footer-right #footer-right-contact ul p {
         text-align: center; }
-  #footer-right #footer-right-triangle-img img {
-    width: 28rem; }
-  #footer-right #footer-right-triangle-img p {
-    top: 11rem;
-    right: 1rem;
-    font-size: 1.4rem;
-    margin: 0 auto; }
-    #footer-right #footer-right-triangle-img p span {
-      font-size: 1.7rem; } }
+  #footer-right #footer-right-triangle-img {
+    margin-top: 15rem; }
+    #footer-right #footer-right-triangle-img img {
+      width: 28rem !important; }
+    #footer-right #footer-right-triangle-img p {
+      top: 11rem;
+      right: 1rem !important;
+      font-size: 1.4rem;
+      margin: 0 auto; }
+      #footer-right #footer-right-triangle-img p span {
+        font-size: 1.7rem; } }
 .be-flex {
   display: flex; }
 
