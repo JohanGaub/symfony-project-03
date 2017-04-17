@@ -1,11 +1,15 @@
-$primary-color: rgb(154, 192, 10);
-$secondary-color: rgb(221, 81, 22);
+$primary-color: rgb(154, 192, 10); /*green*/
+$secondary-color: rgb(221, 81, 22); /*orange*/
 $it-color: #E6397E;
 $it-second-color: rgb(138, 138, 138);
 $paragraph-color: lighten(black, 33%);
 
 $primary-font: dinregular, sans-serif;
 $secondary-font: Arial, sans-serif;
+
+/*page background color*/
+$background-color1: lighten($secondary-color, 48%);
+/*background color for boxes*/
 $background1: linear-gradient(150deg, transparent 15px, rgba(221, 81, 22, 0.2) 0) top left,
 linear-gradient(0deg, transparent 0px, rgba(221, 81, 22, 0.2) 0) top right,
 linear-gradient(330deg, transparent 15px, rgba(221, 81, 22, 0.2) 0) bottom right,
