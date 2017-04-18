@@ -1,17 +1,19 @@
-<div class=communt-it-svg-box>
-    <svg version="1.1" viewBox="0.0 0.0 372.753280839895 318.0262467191601" fill="none" stroke="none"
-         stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg"
-         xmlns:xlink="http://www.w3.org/1999/xlink">
-
-        <path fill="#9ac00a" d="m-0.005249344 318.27985l319.22205 0l53.12442 -53.12442l0 -265.61575l0 0l-319.22205
-            0l-53.12442 53.12442l0 265.61575z" fill-rule="evenodd"></path>
-        <path fill="#FBEEE5" d="m7.17979 311.99738l307.36383 0l51.029877 -51.029907l0 -255.14333l0 0l-307.3638
-            0l-51.029892 51.029892l0 255.14334z" fill-rule="evenodd"></path>
-
-        <foreignobject class="node" x="0" y="25" width="360" height="200">
-            <p class=text>
-
-            </p>
-        </foreignobject>
-    </svg>
-</div>
+{% macro svgBox(textSend) %}
+    <div class="svg-container-1">
+        <svg version="1.1" viewBox="0.0 0.0 372.753280839895 318.0262467191601" fill="none" stroke="none" stroke-linecap="square"
+             stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <clipPath id="p.0">
+                <path d="m0 0l372.7533 0l0 318.02625l-372.7533 0l0 -318.02625z" clip-rule="nonzero"></path>
+            </clipPath>
+            <g clip-path="url(#p.0)">
+                <path fill="#9ac00a" d="m-0.005249344 318.27985l319.22205 0l53.12442 -53.12442l0 -252.61575l0 0l-319.22205 0l-53.12442 31.12442l0 265.61575z" fill-rule="evenodd"></path>
+                <path fill="#FBEEE5" d="m7.17979 311.99738l307.36383 0l51.029877 -51.029907l0 -242.24333l0 0l-307.3638 0l-51.029892 29.029892l0 255.14334z" fill-rule="evenodd"></path>
+            </g>
+            <foreignobject x="40" y="50" width="360" height="200">
+                <p class=text>
+                    {{ textSend }}
+                </p>
+            </foreignobject>
+        </svg>
+    </div>
+{% endmacro %}

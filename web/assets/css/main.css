@@ -2,6 +2,9 @@
 /*orange*/
 /*page background color*/
 /*background color for boxes*/
+.test {
+  color: #ffdb89; }
+
 /* HEADER */
 .header {
   padding: 0 !important;
@@ -433,6 +436,16 @@ p {
   background-repeat: no-repeat;
   padding: 6rem 2.5rem;
   margin: 6rem 2rem; }
+
+.svg-container-1 {
+  width: 36rem;
+  margin: 6rem 2rem; }
+  .svg-container-1 p {
+    font-family: dinregular, sans-serif;
+    text-align: justify;
+    vertical-align: middle;
+    display: inline-block;
+    width: 80%; }
 
 #itneo-slider-block {
   padding: 2rem;

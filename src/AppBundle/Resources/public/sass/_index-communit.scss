@@ -13,11 +13,16 @@
   padding: 6rem 2.5rem;
   margin: 6rem 2rem;
 }
-
-.svg-container {
-  width: 360px;
+// Svg to box xith green border
+.svg-container-1 {
+  width: 36rem;
+  margin: 6rem 2rem;
 
   p {
-    
+    font-family: $primary-font;
+    text-align: justify;
+    vertical-align: middle;
+    display: inline-block;
+    width: 80%;
   }
 }
