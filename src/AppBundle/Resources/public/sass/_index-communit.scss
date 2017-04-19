@@ -1,28 +1,33 @@
-.flex-container-1{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
+#communit {
+  background-color: $background-color1;
 
-.box-communit {
-  height: 23rem;
-  width: 35rem;
-  background: $background1;
-  background-size: 50% 50%;
-  background-repeat: no-repeat;
-  padding: 6rem 2.5rem;
-  margin: 6rem 2rem;
-}
-// Svg to box xith green border
-.svg-container-1 {
-  width: 36rem;
-  margin: 6rem 2rem;
+  .flex-container-1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 
-  p {
-    font-family: $primary-font;
-    text-align: justify;
-    vertical-align: middle;
-    display: inline-block;
-    width: 80%;
+  .box-communit {
+    height: 23rem;
+    width: 35rem;
+    background: $background1;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 6rem 2.5rem;
+    margin: 6rem 2rem;
+  }
+
+  // Svg to box with green border
+  .svg-container-1 {
+    width: 36rem;
+    margin: 6rem 2rem;
+
+    p {
+      color: $primary-color;
+      font-family: $primary-font;
+      text-align: justify;
+      display: inline-block;
+      width: 80%;
+    }
   }
 }
