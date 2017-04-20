@@ -2,7 +2,7 @@
  * # /gulpfile.js
  *  ################# Commands #####################
  *
- *  watch -> (general listener for css & js)
+ *  watch -> (general listener for css & js & img)
  *      build:css ->
  *          clean:webcss    (clean css in web/assets/css)
  *          clean:srccss    (clean css in src/AppBundle/Resources/public/css)
@@ -59,11 +59,17 @@ gulp.task('build:css', function(callback) {
 });
 // -> Js Builder
 gulp.task('build:js', function(callback) {
-    runSequence('clean:webjs', 'uglify:js', callback);
+    runSequence(
+        'clean:webjs',
+        'uglify:js',
+    callback);
 });
-// -> Img Compacter
+// -> Img Builder
 gulp.task('img:compact', function(callback) {
-    runSequence('clean:webimg', 'img:min', callback);
+    runSequence(
+        'clean:webimg',
+        'img:min',
+    callback);
 });
 
 /* ---------- Tasks ---------- */
@@ -118,6 +124,7 @@ gulp.task('uglify:css', function () {
         }))
         .pipe(gulp.dest('web/assets/css'));
 });
+
 // -> Get ugly Js
 gulp.task('uglify:js', function() {
     gulp.src('src/AppBundle/Resources/public/js/*.js')
@@ -127,6 +134,7 @@ gulp.task('uglify:js', function() {
         }))
         .pipe(gulp.dest('web/assets/js'));
 });
+
 // -> Get compact img
 gulp.task('img:compact', function () {
     gulp.src('src/AppBundle/Resources/public/img/*')
