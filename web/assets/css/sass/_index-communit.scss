@@ -1,10 +1,16 @@
+.communit{
+  min-height: 100%;
+  background-color: $background-color1;
+  }
+
+
 
 .flex-container-1{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  border: solid blue 0.2rem;
 }
-
 .box-communit {
   height: 23rem;
   width: 35rem;
@@ -14,3 +20,103 @@
   padding: 6rem 2.5rem;
   margin: 6rem 2rem;
 }
+
+.flex-container-2{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; // it centers blocks horizontally if margin is not set to "auto"
+  border: solid green 0.2rem;
+  a { // itnéo link
+    color: $it-color;
+    &:hover {
+      color: $it-second-color;
+    }
+  }
+  h3{
+    padding: 0 0 1rem;
+    color: $paragraph-color;
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+    li {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: $paragraph-color;
+      text-align: justify;
+      line-height: 2.2rem;
+      padding: 0 1rem 1rem 4.5rem; // 4rem : it makes the suitable indent for the text after each flea
+      // Fleas
+      background-image: url('../img/green-flea3.svg');
+      background-repeat: no-repeat;
+      background-position: 1rem 0.4rem; // 0.5rem = flea position on the extrem left ; 0.4rem = vertical position
+      background-size: 2rem;
+    }
+  }
+}
+
+
+.rectangle{
+  z-index: 3;
+  background-color: $background-color1;
+  min-width: 30rem;
+  width: 60rem;
+  border-style: solid hidden solid solid;
+  border-color: $secondary-color transparent $secondary-color $secondary-color;
+  border-width: 0.4rem 0 0.4rem 0.4rem;
+  padding: 0;
+  margin: 0; // If "auto", it affects flex-container-2 with justify-content : center which become unefficient
+  font-size: 1.6rem;
+}
+.arrow {
+  z-index: 2;
+  display: inline-flex;
+  width: 0;
+  height: 0;
+  border-style: solid hidden solid solid;
+  border-width: $width 0 $width $needle1;
+  border-color: transparent transparent transparent $secondary-color;
+}
+.arrow:after {
+  z-index: 1;
+  content: "";
+  display: inline-flex;
+  width: 0;
+  height: 0;
+  border-style: solid hidden solid solid;
+  border-width: $width 0 $width $needle1;
+  border-color: transparent transparent transparent $background-color1;
+  margin-left: -$needle2;
+  margin-top: -$width;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+
+
+}
+
+
+.block-questions{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.questions{
+  min-width: 30rem;
+  width: 60rem;
+  padding: 0 0 0 5rem;
+  margin: 0;
+  h4{
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: $secondary-color;
+  }
+  p{
+    color: $secondary-color;
+    font-weight: bold;
+  }
+}
+

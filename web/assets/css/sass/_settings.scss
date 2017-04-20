@@ -7,6 +7,11 @@ $paragraph-color: lighten(black, 33%);
 $primary-font: dinregular, sans-serif;
 $secondary-font: Arial, sans-serif;
 
+$width: 18rem;
+$needle1: $width/2;
+$needle2: $needle1+0.4rem;
+
+
 /*page background color*/
 $background-color1: lighten($secondary-color, 48%);
 /*background color for boxes*/
