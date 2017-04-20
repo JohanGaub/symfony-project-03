@@ -3,7 +3,6 @@
 
   .flex-container-1 {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
   }
 
@@ -16,12 +15,10 @@
     padding: 6rem 2.5rem;
     margin: 6rem 2rem;
   }
-
   // Svg to box with green border
   .svg-container-1 {
     width: 36rem;
     margin: 6rem 2rem;
-
     p {
       color: $primary-color;
       font-family: $primary-font;
@@ -30,4 +27,183 @@
       width: 80%;
     }
   }
+  .flex-container-2{
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between; // it centers blocks horizontally if margin is not set to "auto"
+    border: solid purple 0.5rem;
+    width: 100%;
+
+
+    a { // itnéo link
+      color: $it-color;
+      &:hover {
+        color: $it-second-color;
+      }
+    }
+    h3{
+      padding: 0 0 1rem;
+      color: $paragraph-color;
+    }
+    ul {
+      padding: 0;
+      list-style: none;
+      li {
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        color: $paragraph-color;
+        text-align: justify;
+        line-height: 2.2rem;
+        padding: 0 1rem 1rem 2.5rem;
+
+      }
+    }
+  }
+  .block-arrow {
+    display: inline-flex;
+    width: 50%;
+
+    .rectangle {
+      z-index: 3;
+      background-color: $background-color1;
+      min-width: 40rem;
+      border-style: solid hidden solid solid;
+      border-color: $secondary-color transparent $secondary-color $secondary-color;
+      border-width: 0.4rem 0 0.4rem 0.4rem;
+      padding: 0;
+      margin: 0; // If "auto", it affects flex-container-2 with justify-content : center which become unefficient
+      font-size: 1.6rem;
+    }
+
+    .arrow {
+      z-index: 2;
+      display: inline-flex;
+      width: 0;
+      height: 0;
+      border-style: solid hidden solid solid;
+      border-width: $width1 0 $width1 $needle1;
+      border-color: transparent transparent transparent $secondary-color;
+    }
+
+    .arrow:after {
+      z-index: 1;
+      content: "";
+      display: inline-flex;
+      width: 0;
+      height: 0;
+      border-style: solid hidden solid solid;
+      border-width: $width1 0 $width1 $needle1;
+      border-color: transparent transparent transparent $background-color1;
+      margin-left: -$needle2;
+      margin-top: -$width1;
+    }
+
+
+
+
+    .box-with-border, .box {
+      width: 50%;
+      height: 20rem;
+      background: $background-color1;
+      margin: 2.4rem;
+      display:inline-block;
+      position:relative;
+      span {
+        color: blue;
+        position:absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        transform: translateY(-50%);
+        width: 100%;
+        left: 0;
+        text-align:center;
+        font-size: 1.8rem;
+      }
+    }
+
+    .box-with-border {
+      border: 0.4rem solid $secondary-color;
+      background: $background-color1;
+      span {
+        color: blue;
+      }
+    }
+
+
+
+
+  }
+
+
+  .block-questions{
+    border: solid deeppink 3px;
+    display: inline-flex;
+    vertical-align: middle;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 28rem;
+    width: 50%;
+    padding: 0;
+    margin: 0;
+
+    .questions{
+      min-width: 40rem;
+      padding: auto;
+      border: solid black 7px;
+
+      h4{
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        color: $secondary-color;
+        border: solid 7px yellow;
+      }
+
+      p{
+        color: $secondary-color;
+        font-weight: bold;
+        text-align: justify;
+        line-height: 2.2rem;
+        padding: 0 0 1rem 4rem; // 4.5rem : it makes the suitable indent for the text after each flea
+        // Fleas
+        background-image: url('../img/green-flea3.svg');
+        background-repeat: no-repeat;
+        background-position: 1rem 0.4rem; // 1rem = flea position on the extrem left ; 0.4rem = vertical position
+        background-size: 2rem;
+      }
+    }
+  }
+  .questions-button{
+    border: solid blue 3px;
+    width: 28rem;
+    margin: 0 auto;
+    padding-right: 2.5rem;
+  }
+
+
+  @media screen and (max-width: 1230px) {
+
+    @-webkit-keyframes block-arrow{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(90deg);transform:rotate(90deg)}}
+    @keyframes block-arrow{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(90deg);transform:rotate(90deg)}}
+
+    .block-arrow{
+      border: solid yellow 25px;
+      /*transition:    all 1.3s ease-in-out;
+      transform:    rotate(180deg) scale(1.3);*/
+      -webkit-animation: block-arrow 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) backwards;
+      -moz-animation: block-arrow 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) backwards;
+      animation: block-arrow 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) backwards;
+    }
+
+  }
+
+
+
+
 }
+
+
+
+
+
+

@@ -7,13 +7,143 @@ $paragraph-color: lighten(black, 33%);
 $primary-font: dinregular, sans-serif;
 $secondary-font: Arial, sans-serif;
 
-$width: 18rem;
-$needle1: $width/2;
-$needle2: $needle1+0.4rem;
-
-
 /*page background color*/
 $background-color1: lighten($secondary-color, 48%);
+
+
+
+
+
+
+
+
+/************
+ Mixin
+************/
+@mixin arrow_helper($arrowSize, $arrowColor, $margin, $side, $align) {
+  @if $side == "top" {
+    border-bottom-color: $arrowColor;
+    top: -2 * $arrowSize;
+  }
+  @if $side == "bottom" {
+    border-top-color: $arrowColor;
+    bottom: -2 * $arrowSize;
+  }
+  @if $side == "left" {
+    border-right-color: $arrowColor;
+    left: -2 * $arrowSize;
+  }
+  @if $side == "right" {
+    border-left-color: $arrowColor;
+    right: -2 * $arrowSize;
+  }
+  @if $side == "right" or $side == "left" {
+    @if $align == "center" {
+      top: 50%;
+      margin-top: -$arrowSize;
+    }
+    @else if $align == "top" {
+      top: $margin;
+    }
+    @else if $align == "bottom" {
+      bottom: $margin;
+    }
+  }
+  @if $side == "bottom" or $side == "top" {
+    @if $align == "center" {
+      right: 50%;
+      margin-right: -$arrowSize;
+    }
+    @else if $align == "left" {
+      left: $margin;
+    }
+    @else if $align == "right" {
+      right: $margin;
+    }
+  }
+}
+
+@mixin arrow($side: "right", $align: "center", $size: 2rem, $color: $background-color1, $borderColor: "none", $borderSize: 0.3rem) {
+  $selector: "&:after, &:before";
+  @if $borderColor == "none" {
+    $selector: "&:after";
+  }
+  #{$selector} {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    visibility: visible;
+  }
+
+  &:after {
+    border-width: $size;
+    @include arrow_helper($size, $color, $size, $side, $align);
+  }
+
+  @if $borderColor != "none" {
+    &:before {
+      border-width: $borderSize + $size;
+      @include arrow_helper($size + $borderSize, $borderColor, $size - $borderSize, $side, $align);
+    }
+  }
+}
+
+
+
+/************
+ Use
+************/
+.box {
+  &.arrow-top-left {@include arrow('top','left', 1rem, $secondary-color)}
+  &.arrow-top-right {@include arrow('top','right', 1rem, $secondary-color)}
+  &.arrow-top-center {@include arrow('top','center', 1rem, $secondary-color)}
+  &.arrow-bottom-left {@include arrow('bottom','left', 1rem, $secondary-color)}
+  &.arrow-bottom-right {@include arrow('bottom','right', 1rem, $secondary-color)}
+  &.arrow-bottom-center {@include arrow('bottom','center', 1rem, $secondary-color)}
+  &.arrow-left-top {@include arrow('left','top', 1rem, $secondary-color)}
+  &.arrow-left-center {@include arrow('left','center', 1rem, $secondary-color)}
+  &.arrow-left-bottom {@include arrow('left','bottom', 1rem, $secondary-color)}
+  &.arrow-right-top {@include arrow('right','top', 1rem, $secondary-color)}
+  &.arrow-right-center {@include arrow('right','center', 1rem, $secondary-color)}
+  &.arrow-right-bottom {@include arrow('right','bottom', 1rem, $secondary-color)}
+}
+
+
+.box-with-border {
+  &.arrow-top-left {@include arrow('top','left', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-top-right {@include arrow('top','right', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-top-center {@include arrow('top','center', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-bottom-left {@include arrow('bottom','left', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-bottom-right {@include arrow('bottom','right', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-bottom-center {@include arrow('bottom','center', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-left-top {@include arrow('left','top', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-left-center {@include arrow('left','center', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-left-bottom {@include arrow('left','bottom', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-right-top {@include arrow('right','top', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-right-center {@include arrow('right','center', 1rem, $background-color1, $secondary-color, 0.6rem)}
+  &.arrow-right-bottom {@include arrow('right','bottom', 1rem, $background-color1, $secondary-color, 0.6rem)}
+}
+
+
+
+
+
+
+/*arrow - automatic shape*/
+$width1: 19rem;
+$needle1: $width1/2;
+$needle2: $needle1+0.4rem; // arrow border's that you could change with +_._rem
+
+/*arrow - automatic shape*/
+$width1b: 19rem;
+$needle1b: $width1b/2;
+$needle2b: $needle1b+0.4rem; // arrow border's that you could change with +_._rem
+$width2b: $width1b/2+0,4rem;
+
+
 /*background color for boxes*/
 $background1: linear-gradient(150deg, transparent 15px, rgba(221, 81, 22, 0.2) 0) top left,
 linear-gradient(0deg, transparent 0px, rgba(221, 81, 22, 0.2) 0) top right,
@@ -24,3 +154,4 @@ $background2: linear-gradient(150deg, transparent 15px, rgb(154, 192, 10) 0) top
 linear-gradient(0deg, transparent 0px, rgb(154, 192, 10) 0) top right,
 linear-gradient(330deg, transparent 15px, rgb(154, 192, 10) 0) bottom right,
 linear-gradient(0deg, transparent 0px, rgb(154, 192, 10) 0) bottom left;
+
