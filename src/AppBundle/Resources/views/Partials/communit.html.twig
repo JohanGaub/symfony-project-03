@@ -1,16 +1,12 @@
-<section>
+<section id="communit">
     <h2>Votre communauté de la téléphonie IP</h2>
     <div class="flex-container-1">
-        <div class="box-communit box">
-            <p class="p2">La COMMUN’it est un groupement de revendeurs au niveau national mais avant tout un réseau de partenaires convaincus, qui souhaitent se libérer des contraintes imposées par les constructeurs traditionnels et des formations et certifications obligatoires et coûteuses.</p>
-        </div>
-        <div class="box-communit">
-            <p class="p2">La COMMUN’it vous offre la possibilité d’interagir avec nos développeurs afin de faire évoluer la solution itnéo en répondant aux attentes de vos clients et de vos services techniques. Vous pourrez via l’extranet proposer vos compétences techniques au réseau d’intégrateurs et en rechercher afin d’être toujours plus efficace sur le terrain.</p>
-        </div>
-        <div class="box-communit">
-            <p class="p2">Pas de formations obligatoires, nous vous accompagnons sur le terrain aussi bien commercialement que techniquement. Des formations spécifiques peuvent être proposées ou demandées.</p>
-        </div>
+        {% import 'AppBundle:Elements:macro.svgBox.html.twig' as box %}
+        {{ box.svgBox("La COMMUN’it est un groupement de revendeurs au niveau national mais avant tout un réseau de partenaires convaincus, qui souhaitent se libérer des contraintes imposées par les constructeurs traditionnels et des formations et certifications obligatoires et coûteuses.") }}
+        {{ box.svgBox("La COMMUN’it vous offre la possibilité d’interagir avec nos développeurs afin de faire évoluer la solution itnéo en répondant aux attentes de vos clients et de vos services techniques. Vous pourrez via l’extranet proposer vos compétences techniques au réseau d’intégrateurs et en rechercher afin d’être toujours plus efficace sur le terrain.") }}
+        {{ box.svgBox("Pas de formations obligatoires, nous vous accompagnons sur le terrain aussi bien commercialement que techniquement. Des formations spécifiques peuvent être proposées ou demandées.") }}
     </div>
+
     <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
         <h3>La COMMUN’it c’est :</h3>
     </div>
