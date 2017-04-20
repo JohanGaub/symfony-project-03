@@ -2,9 +2,6 @@
   min-height: 100%;
   background-color: $background-color1;
   }
-
-
-
 .flex-container-1{
   display: flex;
   flex-wrap: wrap;
@@ -20,7 +17,6 @@
   padding: 6rem 2.5rem;
   margin: 6rem 2rem;
 }
-
 .flex-container-2{
   display: flex;
   flex-wrap: wrap;
@@ -54,8 +50,6 @@
     }
   }
 }
-
-
 .rectangle{
   z-index: 3;
   background-color: $background-color1;
@@ -89,9 +83,6 @@
   margin-left: -$needle2;
   margin-top: -$width;
 }
-
-
-
 @media screen and (max-width: 1024px) {
 
 
@@ -102,7 +93,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
 .questions{
   min-width: 30rem;
