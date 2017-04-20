@@ -86,11 +86,10 @@ a.link {
   .navbar-default .navbar-nav > li > a:focus,
   .navbar-default .navbar-nav > li > a:hover,
   .navbar-default .navbar-nav > li > a {
-    font-size: 1.1em;
+    font-size: 1.2em;
     padding-right: 0; }
   ul.nav.navbar-nav.navbar-right {
-    top: 15%;
-    padding-right: 2em; }
+    top: 15%; }
   #itneo-link {
     padding-left: 0; } }
 
@@ -117,7 +116,7 @@ a.link {
   ul.nav.navbar-nav.navbar-right {
     position: relative;
     padding: 1em 0;
-    width: 100%;
+    padding-right: 2rem;
     margin: 0 auto; }
   button.navbar-toggle {
     position: absolute;
@@ -243,15 +242,18 @@ p {
 #index-itneo {
   margin: 2% 0; }
   #index-itneo .it-logo {
-    width: 70%;
-    max-width: 345px;
+    width: 65%;
+    max-width: 305px;
     height: auto;
     display: block;
-    margin: 8rem auto; }
+    margin: 2rem auto; }
   #index-itneo .itneo-top-case {
     width: 100%;
     text-align: center;
-    margin: 5rem 0; }
+    margin: 0; }
+    #index-itneo .itneo-top-case .it-h2 {
+      padding: 4rem 0 6rem 0;
+      text-align: center; }
 
 .it-ul-box-1 {
   padding: 7% 0; }
@@ -261,7 +263,7 @@ p {
     .it-ul-box-1 .it-first-list li {
       width: 100%;
       font-family: dinregular, sans-serif;
-      font-size: 1.4rem;
+      font-size: 2.2rem;
       line-height: 1.1em;
       font-weight: 800;
       text-transform: uppercase;
@@ -273,31 +275,41 @@ p {
   -ms-flex-direction: column;
   flex-direction: column;
   text-align: center;
-  margin-top: 10%; }
+  margin-top: 2rem; }
 
 @media (max-width: 767px) {
+  .itneo-top-case {
+    margin: 0 !important; }
   .it-first-list {
     text-align: center;
-    margin: 2em 0 5em 0; } }
+    margin: 2em 0 5em 0; }
+  .it-h2 {
+    text-align: center; } }
 
 @media (min-width: 768px) {
   .it-first-list {
     text-align: center;
-    margin: 2em 0 5em 0; } }
+    margin: 2em 0 5em 0; }
+  .it-h2 {
+    text-align: center; } }
+
+@media (max-width: 1250px) {
+  .it-first-list {
+    text-align: center;
+    padding-top: 2em !important; } }
 
 @media (max-width: 1200px) {
-  #index-itneo .it-btn-group {
-    margin-top: 5%; }
-    #index-itneo .it-btn-group .itneo-button {
-      width: 34rem; }
   #index-itneo .it-first-list {
     text-align: center;
-    margin: 2em 0; } }
+    margin: 0; }
+  #index-itneo .it-h2 {
+    text-align: center; } }
 
 @media (min-width: 1200px) {
+  .it-h2 {
+    text-align: left; }
   .it-first-list {
-    text-align: right;
-    margin: 2em 0 5em 0; } }
+    text-align: right; } }
 
 /* Align Media Queries */
 @media (max-width: 1400px) {
@@ -311,7 +323,7 @@ p {
 /* Align Media Queries */
 @media (max-width: 1500px) {
   #index-itneo .it-logo {
-    margin: 5rem auto; }
+    margin: 4rem auto; }
   #index-itneo .it-ul-box-1 {
     padding-top: 3%; }
   #index-itneo .itneo-button {
@@ -336,14 +348,118 @@ p {
       display: inline-block;
       width: 80%; }
 
+/**
+ * Swiper 3.4.2
+ * Most modern mobile touch slider and framework with hardware accelerated transitions
+ *
+ * http://www.idangero.us/swiper/
+ *
+ * Copyright 2017, Vladimir Kharlampidi
+ * The iDangero.us
+ * http://www.idangero.us/
+ *
+ * Licensed under MIT
+ *
+ * Released on: March 10, 2017
+ */
+.swiper-container {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  /* Fix of Webkit flickering */
+  z-index: 1; }
+
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -ms-flexbox;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box; }
+
+.swiper-wrapper {
+  transform: translate3d(0px, 0, 0); }
+
+.swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative; }
+
+/* Auto Height */
+
+/* a11y */
+
+/* IE10 Windows Phone 8 Fixes */
+
+/* Arrows */
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  width: 27px;
+  height: 44px;
+  margin-top: -22px;
+  z-index: 10;
+  cursor: pointer;
+  background-size: 27px 44px;
+  background-position: center;
+  background-repeat: no-repeat; }
+
+.swiper-button-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23E6397E'%2F%3E%3C%2Fsvg%3E");
+  left: 10px;
+  right: auto; }
+
+.swiper-button-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+  right: 10px;
+  left: auto; }
+
+/* Pagination Styles */
+.swiper-pagination {
+  position: absolute;
+  text-align: center;
+  transition: 300ms;
+  transform: translate3d(0, 0, 0);
+  z-index: 10; }
+
+/* Common Styles */
+
+/* Bullets */
+
+/* Progress */
+
+/* 3D Container */
+
+/* Coverflow */
+
+/* Cube + Flip */
+
+/* Cube */
+
+/* Fade */
+
+/* Scrollbar */
+
+/* Preloader */
+
 #itneo-slider-block {
   padding: 2rem;
   /* Rewrite to swiper.css */ }
-  #itneo-slider-block .swiper-container {
+  #itneo-slider-block .itneo-slider .swiper-container {
     background-color: #fff;
+    min-width: 26rem;
+    max-width: 75rem;
     width: 100%;
     height: 42rem; }
-  #itneo-slider-block .swiper-slide {
+  #itneo-slider-block .itneo-slider .swiper-slide {
     text-align: center;
     font-size: 18px;
     /* Center slide text vertically */
@@ -353,23 +469,59 @@ p {
     justify-content: center;
     -ms-flex-align: center;
     align-items: center; }
-    #itneo-slider-block .swiper-slide img {
+    #itneo-slider-block .itneo-slider .swiper-slide img {
       width: 100%;
       margin: 0 auto;
       display: block;
       position: absolute;
       z-index: -10; }
-    #itneo-slider-block .swiper-slide p {
-      text-transform: uppercase;
-      color: #fff;
-      font-family: dinregular, sans-serif;
-      font-weight: 700;
-      font-size: 3rem;
-      display: block;
-      position: absolute;
-      bottom: 50px; }
+  #itneo-slider-block a.plus-info-2 {
+    min-width: 26rem;
+    max-width: 75rem;
+    margin: 0 auto;
+    display: block; }
+  #itneo-slider-block .swiper-button-prev {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23E6397E'%2F%3E%3C%2Fsvg%3E");
+    transition: 0.5s ease-in-out; }
+    #itneo-slider-block .swiper-button-prev:hover {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%238A8A8A'%2F%3E%3C%2Fsvg%3E"); }
   #itneo-slider-block .swiper-button-next {
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E"); }
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23E6397E'%2F%3E%3C%2Fsvg%3E");
+    transition: 0.5s ease-in-out; }
+    #itneo-slider-block .swiper-button-next:hover {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%238A8A8A'%2F%3E%3C%2Fsvg%3E"); }
+
+@media screen and (min-width: 1200px) {
+  #itneo-slider-block .swiper-container {
+    height: 28rem !important; } }
+
+@media screen and (max-width: 1201px) {
+  #itneo-slider-block {
+    padding: 0; }
+    #itneo-slider-block .swiper-container {
+      height: 36rem !important; }
+  .it-h2 {
+    padding: 2rem 0 3rem 0 !important; } }
+
+@media screen and (max-width: 870px) {
+  #itneo-slider-block .swiper-container {
+    height: 33rem !important; } }
+
+@media screen and (max-width: 630px) {
+  #itneo-slider-block .swiper-container {
+    height: 30rem !important; } }
+
+@media screen and (max-width: 540px) {
+  #itneo-slider-block .swiper-container {
+    height: 25rem !important; } }
+
+@media screen and (max-width: 500px) {
+  .swiper-container {
+    height: 20rem !important; } }
+
+@media screen and (max-width: 420px) {
+  #itneo-slider-block {
+    display: none !important; } }
 
 /* FOOTER */
 footer {
