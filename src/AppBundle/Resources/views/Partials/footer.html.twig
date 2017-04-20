@@ -53,11 +53,17 @@
                 </li>
             </ul>
         </div>
+        <!-- Twig modal import -->
+        {% include 'AppBundle:Partials:mentionsLegales.html.twig'%}
         <div id="footer-right-triangle">
             <div id="footer-right-triangle-img">
                 <img src="{{ asset('assets/img/triangle.png') }}" alt="green triangle">
-                <p><span><a href="#">&copy; commun<span id="it">it</span>.fr</a></span><br/>
-                    Développé par la Wild Code School</p>
+                <p>
+                    <!-- Mentions Legales Button -->
+                    <a id="mentions-legales-link" href="" data-toggle="modal" data-target="#modal-fullscreen">Mentions légales</a>
+                    <span><a href="#">&copy; commun<span id="it">it</span>.fr</a></span><br/>
+                    Développé par la Wild Code School
+                </p>
             </div>
         </div>
     </div>

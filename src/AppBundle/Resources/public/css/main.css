@@ -806,6 +806,101 @@ footer {
       #footer-right #footer-right-triangle-img p span {
         font-size: 1.7rem; } }
 
+/* .modal-fullscreen */
+@media (max-width: 520px) {
+  .modal-adress {
+    display: inherit !important; }
+  .modal-info-label {
+    width: 100% !important; } }
+
+.modal-information {
+  color: #7b9908; }
+
+.modal-header {
+  border-bottom: 1px solid #9ac00a; }
+
+.modal-footer {
+  border-top: 1px solid #9ac00a; }
+
+#mentions-legales-link:active, #mentions-legales-link:target, #mentions-legales-link:focus {
+  border: none;
+  outline: none;
+  text-decoration: none; }
+
+.modal-info-label {
+  width: 22rem;
+  display: inline-block;
+  font-weight: 500; }
+
+.modal-adress {
+  display: -ms-flexbox;
+  display: flex; }
+  .modal-adress ul {
+    margin: 0;
+    padding: 0; }
+  .modal-adress p {
+    word-wrap: break-word;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    font-size: 1.8rem;
+    text-align: justify !important; }
+
+.modal-fullscreen {
+  background: #fff; }
+  .modal-fullscreen .title3 {
+    color: #dd5116;
+    font-size: 2.5rem;
+    border-bottom: 1px solid #dd5116; }
+  .modal-fullscreen .paragraphe {
+    font-size: 1.8rem;
+    text-align: justify !important; }
+  .modal-fullscreen .closed-cross {
+    font-size: 2em;
+    color: #dd5116; }
+  .modal-fullscreen .modal-title {
+    font-size: 2.7rem;
+    text-align: center;
+    color: #dd5116; }
+  .modal-fullscreen .closed-text {
+    background-color: #dd5116;
+    border: 2px solid #dd5116;
+    border-radius: 0;
+    transition: 0.3s ease-in-out;
+    width: 12rem; }
+    .modal-fullscreen .closed-text p {
+      color: #ffffff;
+      padding: 0;
+      margin: 0 !important; }
+    .modal-fullscreen .closed-text:hover {
+      transform: scale(0.95); }
+    .modal-fullscreen .closed-text:active, .modal-fullscreen .closed-text:focus, .modal-fullscreen .closed-text:target {
+      border: 2px solid #fff;
+      background-color: #dd5116;
+      outline: none; }
+
+.modal-fullscreen .modal-content {
+  background: transparent;
+  border: 0;
+  box-shadow: none; }
+
+.modal-fullscreen .modal-dialog {
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%; }
+
+@media (min-width: 768px) {
+  .modal-fullscreen .modal-dialog {
+    width: 750px; } }
+
+@media (min-width: 992px) {
+  .modal-fullscreen .modal-dialog {
+    width: 970px; } }
+
+@media (min-width: 1200px) {
+  .modal-fullscreen .modal-dialog {
+    width: 1170px; } }
+
 .be-inline {
   display: inline-block; }
 
