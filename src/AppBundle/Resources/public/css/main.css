@@ -2,7 +2,6 @@
 /*orange*/
 /*page background color*/
 /*background color for boxes*/
-
 /* HEADER */
 .header {
   padding: 0 !important;
@@ -86,11 +85,10 @@ a.link {
   .navbar-default .navbar-nav > li > a:focus,
   .navbar-default .navbar-nav > li > a:hover,
   .navbar-default .navbar-nav > li > a {
-    font-size: 1.1em;
+    font-size: 1.2em;
     padding-right: 0; }
   ul.nav.navbar-nav.navbar-right {
-    top: 15%;
-    padding-right: 2em; }
+    top: 15%; }
   #itneo-link {
     padding-left: 0; } }
 
@@ -117,7 +115,7 @@ a.link {
   ul.nav.navbar-nav.navbar-right {
     position: relative;
     padding: 1em 0;
-    width: 100%;
+    padding-right: 2rem;
     margin: 0 auto; }
   button.navbar-toggle {
     position: absolute;
@@ -168,7 +166,11 @@ p {
   font-family: dinregular, sans-serif;
   font-weight: 700;
   font-size: 1.4rem;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  bottom: 5px;
+  position: absolute;
+  right: 25%;
+  left: 25%; }
 
 .plus-info-2 {
   color: #8a8a8a;
@@ -182,63 +184,62 @@ p {
   color: #E6397E;
   text-decoration: none; }
 
-/* Buttons */
-.join-button {
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: #dd5116;
-  width: 28rem;
-  height: 60px;
-  color: white;
-  border: none;
-  transition: all .5s;
-  background: linear-gradient(135deg, transparent 6px, #dd5116 0) top left, linear-gradient(315deg, transparent 6px, #dd5116 0) bottom right, linear-gradient(0deg, transparent 0px, #dd5116 0) top right, linear-gradient(0deg, transparent 0px, #dd5116 0) bottom left;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
-
-.discover-button {
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: #9ac00a;
-  width: 28rem;
-  height: 60px;
-  color: white;
-  border: none;
-  transition: all .5s;
-  background: linear-gradient(135deg, transparent 6px, #9ac00a 0) top left, linear-gradient(315deg, transparent 6px, #9ac00a 0) bottom right, linear-gradient(0deg, transparent 0px, #9ac00a 0) top right, linear-gradient(0deg, transparent 0px, #9ac00a 0) bottom left;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
-
-.itneo-button {
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: #E6397E;
-  width: 34rem;
-  height: 60px;
-  color: white;
-  border: none;
-  transition: all .5s;
-  background: linear-gradient(135deg, transparent 6px, #E6397E 0) top left, linear-gradient(315deg, transparent 6px, #E6397E 0) bottom right, linear-gradient(0deg, transparent 0px, #E6397E 0) top right, linear-gradient(0deg, transparent 0px, #E6397E 0) bottom left;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
+.svg-button {
+  width: 28rem; }
+  .svg-button p {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-family: inherit;
+    font-weight: bold;
+    color: white; }
 
 .index-home {
-  margin-top: 15rem; }
+  margin-top: 21rem;
+  padding-top: 5rem;
+  margin-bottom: 5rem;
+  background-image: url("/assets/img/img-home-index.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1500px 1200px; }
 
-.row {
-  margin-right: 0 !important;
-  margin-left: 0 !important; }
+.index-button {
+  margin-top: 20rem;
+  margin-bottom: 10rem;
+  text-align: center;
+  padding-left: 25%;
+  padding-right: 25%; }
+
+.index-comment {
+  margin-bottom: 5rem; }
+
+@media screen and (max-width: 1400px) {
+  .background-comment {
+    background: rgba(255, 255, 255, 0.6);
+    height: 18rem !important;
+    width: 28rem !important; } }
+
+.background-comment {
+  background: rgba(255, 255, 255, 0.6);
+  height: 18rem !important;
+  width: 28rem !important;
+  position: relative; }
 
 @media (max-width: 480px) {
   h1 {
     margin-top: 4em;
     margin-bottom: 10px;
     font-size: 2em; }
-  .mrg-top-1 {
-    margin-top: 10px; } }
+  .join {
+    margin-bottom: 5rem;
+    margin-top: 5rem; }
+  .index-button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    padding-left: 5%;
+    padding-right: 5%; }
+  .background-comment {
+    margin-bottom: 10px; } }
 
 #index-itneo {
   margin: 2% 0; }
@@ -288,8 +289,6 @@ p {
 @media (max-width: 1200px) {
   #index-itneo .it-btn-group {
     margin-top: 5%; }
-    #index-itneo .it-btn-group .itneo-button {
-      width: 34rem; }
   #index-itneo .it-first-list {
     text-align: center;
     margin: 2em 0; } }
@@ -313,9 +312,7 @@ p {
   #index-itneo .it-logo {
     margin: 5rem auto; }
   #index-itneo .it-ul-box-1 {
-    padding-top: 3%; }
-  #index-itneo .itneo-button {
-    width: 80%; } }
+    padding-top: 3%; } }
 
 #communit {
   background-color: #fdf0eb; }
@@ -368,6 +365,8 @@ p {
       display: block;
       position: absolute;
       bottom: 50px; }
+  #itneo-slider-block .swiper-pagination-bullet, #itneo-slider-block .swiper-pagination-bullet-active {
+    background-color: #E6397E; }
   #itneo-slider-block .swiper-button-next {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E"); }
 
@@ -535,9 +534,6 @@ footer {
   #footer-left #footer-left-join-button {
     display: block;
     padding-left: 1rem; }
-    #footer-left #footer-left-join-button .join-button {
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem; }
   #footer-right #footer-right-contact {
     width: 27.5rem;
     height: 16rem;
@@ -582,8 +578,6 @@ footer {
       #footer-left #footer-left-up #footer-left-join-button {
         margin-top: 2rem;
         padding-left: 0; }
-        #footer-left #footer-left-up #footer-left-join-button .join-button {
-          padding-left: 0; }
     #footer-left #footer-left-down {
       margin: 0 auto;
       padding-bottom: 1rem; }
@@ -656,6 +650,3 @@ footer {
 
 .be-inline {
   display: inline-block; }
-
-.mrg-top-1 {
-  margin-top: 8rem; }
