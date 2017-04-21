@@ -17,6 +17,12 @@ html, body, section {
   width:100%;
   height: 100%;
 }
+header {
+  margin-bottom: 13rem;
+}
+footer {
+  margin-top: 5rem!important;
+}
 h1, h2 {
   color: $secondary-color;
   font-family: $primary-font;

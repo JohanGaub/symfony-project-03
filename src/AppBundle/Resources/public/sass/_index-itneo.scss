@@ -2,24 +2,21 @@
   margin: 2% 0;
 
   .it-logo {
-    width: 70%;
-    max-width: 345px;
+    width: 65%;
+    max-width: 305px;
     height: auto;
     display: block;
-    margin: 8rem auto;
+    margin: 2rem auto;
   }
 
   .itneo-top-case {
     width: 100%;
     text-align: center;
-    margin: 5rem 0;
+    margin: 0;
 
     .it-h2 {
-      font-family: Arial, sans-serif;
-      font-size: 3.5em;
-      font-weight: 700;
-      color: $secondary-color;
-      text-transform: uppercase;
+      padding: 4rem 0 6rem 0;
+      text-align: center;
     }
   }
 }
@@ -33,7 +30,7 @@
     li {
       width: 100%;
       font-family: $primary-font;
-      font-size: 1.4rem;
+      font-size: 2.2rem;
       line-height: 1.1em;
       font-weight: 800;
       text-transform: uppercase;
@@ -45,10 +42,13 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top: 10%;
+  margin-top: 2rem;
 }
 
 @media(max-width:767px){
+  .itneo-top-case {
+    margin: 0!important;
+  }
   .it-first-list {
     text-align: center;
     margin: 2em 0 5em 0;
@@ -66,22 +66,21 @@
     text-align: center;
   }
 }
+@media(max-width:1250px){
+  .it-first-list {
+    text-align: center;
+    padding-top: 2em!important;
+  }
+}
 @media(max-width:1200px){
   #index-itneo {
-    .it-btn-group {
-      margin-top: 5%;
-
-      .itneo-button {
-        width: 34rem;
-      }
-      .join-button {
-        width: 28rem;
-      }
-    }
-
     .it-first-list {
+      .it-ul-box-1 {
+        padding-top: 0!important;
+      }
+
       text-align: center;
-      margin: 2em 0;
+      margin: 0;
     }
     .it-h2 {
       text-align: center;
@@ -97,7 +96,6 @@
   }
   .it-first-list {
     text-align: right;
-    margin: 2em 0 5em 0;
   }
 }
 
@@ -121,7 +119,7 @@
   #index-itneo {
 
     .it-logo {
-      margin: 5rem auto;
+      margin: 4rem auto;
     }
     .it-ul-box-1 {
       padding-top: 3%;
