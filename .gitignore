@@ -15,3 +15,5 @@
 /.sass-cache/
 /vendor/
 /web/bundles/
+/.sass-cache/
+/node_modules/

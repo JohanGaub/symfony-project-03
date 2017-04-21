@@ -1,0 +1,136 @@
+#index-itneo {
+  margin: 2% 0;
+
+  .it-logo {
+    width: 65%;
+    max-width: 305px;
+    height: auto;
+    display: block;
+    margin: 2rem auto;
+  }
+
+  .itneo-top-case {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+
+    .it-h2 {
+      padding: 4rem 0 6rem 0;
+      text-align: center;
+    }
+  }
+}
+.it-ul-box-1 {
+  padding: 7% 0;
+
+  .it-first-list {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      width: 100%;
+      font-family: $primary-font;
+      font-size: 2.2rem;
+      line-height: 1.1em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: $it-second-color;
+    }
+  }
+}
+.it-btn-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media(max-width:767px){
+  .itneo-top-case {
+    margin: 0!important;
+  }
+  .it-first-list {
+    text-align: center;
+    margin: 2em 0 5em 0;
+  }
+  .it-h2 {
+    text-align: center;
+  }
+}
+@media(min-width:768px){
+  .it-first-list {
+    text-align: center;
+    margin: 2em 0 5em 0;
+  }
+  .it-h2 {
+    text-align: center;
+  }
+}
+@media(max-width:1250px){
+  .it-first-list {
+    text-align: center;
+    padding-top: 2em!important;
+  }
+}
+@media(max-width:1200px){
+  #index-itneo {
+    .it-first-list {
+      .it-ul-box-1 {
+        padding-top: 0!important;
+      }
+
+      text-align: center;
+      margin: 0;
+    }
+    .it-h2 {
+      text-align: center;
+    }
+    .out-slider-block {
+      padding: 0 3%;
+    }
+  }
+}
+@media(min-width:1200px){
+  .it-h2 {
+    text-align: left;
+  }
+  .it-first-list {
+    text-align: right;
+  }
+}
+
+/* Align Media Queries */
+@media(max-width:1400px) {
+  #index-itneo {
+
+    .it-logo {
+      margin: 1rem auto;
+    }
+    .it-ul-box-1 {
+      padding-top: 0;
+    }
+    .it-first-list {
+      margin: 0;
+    }
+  }
+}
+/* Align Media Queries */
+@media(max-width:1500px) {
+  #index-itneo {
+
+    .it-logo {
+      margin: 4rem auto;
+    }
+    .it-ul-box-1 {
+      padding-top: 3%;
+    }
+    .itneo-button {
+      width: 80%;
+    }
+    .join-button {
+      width: 70%;
+    }
+  }
+}
+
+

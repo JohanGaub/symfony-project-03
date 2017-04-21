@@ -4,7 +4,10 @@
             <div id="footer-left-join">
                 <div id="footer-left-join-title">
                     <h3>Integrez notre communauté</h3>
-                    <button class="join-button" id="hidden-button" type="button">rejoignez-nous !</button>
+                    {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
+                    <div class="join-button" id="hidden-button" type="button" class="index-button2">
+                          {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+                    </div>
                 </div>
                 <div id="footer-left-join-list">
                     <ul>
@@ -14,8 +17,9 @@
                     </ul>
                 </div>
             </div>
+            {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
             <div  id="footer-left-join-button">
-                <button class="join-button" type="button">rejoignez-nous !</button>
+                {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
             </div>
         </div>
         <div id="footer-left-down">
@@ -44,7 +48,7 @@
                         </span>
                     </a>
                 </li>
-                <li><a href="https://www.www.inside_cummunit.fr" target="_blank">
+                <li><a href="https://www.www.inside_communit.fr" target="_blank">
                         <span class="fa-stack fa-rotate">
                             <i class="fa fa-circle fa-stack-2x"></i>
                             <i class="fa fa-users fa-stack-1x fa-inverse"></i>
@@ -53,11 +57,17 @@
                 </li>
             </ul>
         </div>
+        <!-- Twig modal import -->
+        {% include 'AppBundle:Partials:mentionsLegales.html.twig'%}
         <div id="footer-right-triangle">
             <div id="footer-right-triangle-img">
                 <img src="{{ asset('assets/img/triangle.png') }}" alt="green triangle">
-                <p><span><a href="#">&copy; commun<span id="it">it</span>.fr</a></span><br/>
-                    Développé par la Wild Code School</p>
+                <p>
+                    <!-- Mentions Legales Button -->
+                    <a id="mentions-legales-link" href="" data-toggle="modal" data-target="#modal-fullscreen">Mentions légales</a>
+                    <span><a href="#">&copy; commun<span id="it">it</span>.fr</a></span><br/>
+                    <a href="https://wildcodeschool.fr/" target="_blank">Développé par la Wild Code School</a>
+                </p>
             </div>
         </div>
     </div>
