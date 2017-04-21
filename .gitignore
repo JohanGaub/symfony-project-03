@@ -14,5 +14,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-.sass-cache/
+/.sass-cache/
 /node_modules/
