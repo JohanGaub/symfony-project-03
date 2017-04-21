@@ -253,7 +253,11 @@ p {
   font-family: dinregular, sans-serif;
   font-weight: 700;
   font-size: 1.4rem;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  bottom: 5px;
+  position: absolute;
+  right: 25%;
+  left: 25%; }
 
 .plus-info-2 {
   color: #8a8a8a;
@@ -267,55 +271,44 @@ p {
   color: #E6397E;
   text-decoration: none; }
 
-/* Buttons */
-.join-button {
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: #dd5116;
-  width: 28rem;
-  height: 60px;
-  color: white;
-  border: none;
-  transition: all .5s;
-  background: linear-gradient(135deg, transparent 6px, #dd5116 0) top left, linear-gradient(315deg, transparent 6px, #dd5116 0) bottom right, linear-gradient(0deg, transparent 0px, #dd5116 0) top right, linear-gradient(0deg, transparent 0px, #dd5116 0) bottom left;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
-
-.discover-button {
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: #9ac00a;
-  width: 28rem;
-  height: 60px;
-  color: white;
-  border: none;
-  transition: all .5s;
-  background: linear-gradient(135deg, transparent 6px, #9ac00a 0) top left, linear-gradient(315deg, transparent 6px, #9ac00a 0) bottom right, linear-gradient(0deg, transparent 0px, #9ac00a 0) top right, linear-gradient(0deg, transparent 0px, #9ac00a 0) bottom left;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
-
-.itneo-button {
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: #E6397E;
-  width: 34rem;
-  height: 60px;
-  color: white;
-  border: none;
-  transition: all .5s;
-  background: linear-gradient(135deg, transparent 6px, #E6397E 0) top left, linear-gradient(315deg, transparent 6px, #E6397E 0) bottom right, linear-gradient(0deg, transparent 0px, #E6397E 0) top right, linear-gradient(0deg, transparent 0px, #E6397E 0) bottom left;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
+.svg-button {
+  width: 28rem; }
+  .svg-button p {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-family: inherit;
+    font-weight: bold;
+    color: white; }
 
 .index-home {
-  margin-top: 15rem; }
+  margin-top: 21rem;
+  padding-top: 5rem;
+  margin-bottom: 5rem;
+  background-image: url("/assets/img/img-home-index.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1500px 1200px; }
 
-.row {
-  margin-right: 0 !important;
-  margin-left: 0 !important; }
+.index-button {
+  margin-top: 20rem;
+  margin-bottom: 10rem;
+  text-align: center;
+  padding-left: 25%;
+  padding-right: 25%; }
+
+.index-comment {
+  margin-bottom: 5rem; }
+
+@media screen and (max-width: 1400px) {
+  .background-comment {
+    background: rgba(255, 255, 255, 0.6);
+    height: 18rem !important;
+    width: 28rem !important; } }
+.background-comment {
+  background: rgba(255, 255, 255, 0.6);
+  height: 18rem !important;
+  width: 28rem !important;
+  position: relative; }
 
 @media (max-width: 480px) {
   h1 {
@@ -323,11 +316,19 @@ p {
     margin-bottom: 10px;
     font-size: 2em; }
 
-  .join, .discover {
-    margin-top: 10px; }
+  .join {
+    margin-bottom: 5rem;
+    margin-top: 5rem; }
 
-  .mrg-top-1 {
-    margin-top: 10px; } }
+  .index-button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    padding-left: 5%;
+    padding-right: 5%; }
+
+  .background-comment {
+    margin-bottom: 10px; } }
 #index-itneo {
   margin: 2% 0; }
   #index-itneo .it-logo {

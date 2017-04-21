@@ -14,8 +14,9 @@
                     </ul>
                 </div>
             </div>
+            {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
             <div  id="footer-left-join-button">
-                <button class="join-button" type="button">rejoignez-nous !</button>
+                {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
             </div>
         </div>
         <div id="footer-left-down">
