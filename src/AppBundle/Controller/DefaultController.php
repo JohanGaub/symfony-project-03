@@ -8,10 +8,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function indexAction()
     {
         return $this->render('AppBundle:Default:index.html.twig');
+    }
+
+    /**
+     * @Route("/historique", name="historique")
+     */
+    public function viewHistoriqueAction()
+    {
+        return $this->render('AppBundle:Pages:historique.html.twig');
     }
 }
