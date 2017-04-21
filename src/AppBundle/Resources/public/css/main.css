@@ -1,6 +1,36 @@
 /*green*/
 /*orange*/
 /*page background color*/
+/************
+ Mixin
+************/
+/************
+ Use
+************/
+
+.box-with-border.arrow-right-center:after, .box-with-border.arrow-right-center:before {
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  visibility: visible; }
+
+.box-with-border.arrow-right-center:after {
+  border-width: 7rem;
+  border-left-color: #fdf0eb;
+  right: -14rem;
+  top: 50%;
+  margin-top: -7rem; }
+
+.box-with-border.arrow-right-center:before {
+  border-width: 7.6rem;
+  border-left-color: #dd5116;
+  right: -15.2rem;
+  top: 50%;
+  margin-top: -7.6rem; }
+
 /*background color for boxes*/
 
 /* HEADER */
@@ -86,11 +116,10 @@ a.link {
   .navbar-default .navbar-nav > li > a:focus,
   .navbar-default .navbar-nav > li > a:hover,
   .navbar-default .navbar-nav > li > a {
-    font-size: 1.1em;
+    font-size: 1.2em;
     padding-right: 0; }
   ul.nav.navbar-nav.navbar-right {
-    top: 15%;
-    padding-right: 2em; }
+    top: 15%; }
   #itneo-link {
     padding-left: 0; } }
 
@@ -117,7 +146,7 @@ a.link {
   ul.nav.navbar-nav.navbar-right {
     position: relative;
     padding: 1em 0;
-    width: 100%;
+    padding-right: 2rem;
     margin: 0 auto; }
   button.navbar-toggle {
     position: absolute;
@@ -136,10 +165,11 @@ a.link {
   font-style: normal; }
 
 /* Style */
-html, body {
+html, body, section {
   margin: 0;
   padding: 0;
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
 
 h1, h2 {
   color: #dd5116;
@@ -154,7 +184,8 @@ h3 {
   font-size: 1.8rem;
   font-weight: bold;
   text-transform: uppercase;
-  text-align: center; }
+  text-align: center;
+  font-family: dinregular, sans-serif; }
 
 /* Comment under parts */
 p {
@@ -194,8 +225,7 @@ p {
   transition: all .5s;
   background: linear-gradient(135deg, transparent 6px, #dd5116 0) top left, linear-gradient(315deg, transparent 6px, #dd5116 0) bottom right, linear-gradient(0deg, transparent 0px, #dd5116 0) top right, linear-gradient(0deg, transparent 0px, #dd5116 0) bottom left;
   background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
+  background-repeat: no-repeat; }
 
 .discover-button {
   text-transform: uppercase;
@@ -208,8 +238,7 @@ p {
   transition: all .5s;
   background: linear-gradient(135deg, transparent 6px, #9ac00a 0) top left, linear-gradient(315deg, transparent 6px, #9ac00a 0) bottom right, linear-gradient(0deg, transparent 0px, #9ac00a 0) top right, linear-gradient(0deg, transparent 0px, #9ac00a 0) bottom left;
   background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
+  background-repeat: no-repeat; }
 
 .itneo-button {
   text-transform: uppercase;
@@ -222,8 +251,10 @@ p {
   transition: all .5s;
   background: linear-gradient(135deg, transparent 6px, #E6397E 0) top left, linear-gradient(315deg, transparent 6px, #E6397E 0) bottom right, linear-gradient(0deg, transparent 0px, #E6397E 0) top right, linear-gradient(0deg, transparent 0px, #E6397E 0) bottom left;
   background-size: 50%;
-  background-repeat: no-repeat;
-  margin: 1.5em auto; }
+  background-repeat: no-repeat; }
+
+a {
+  text-decoration: none !important; }
 
 .index-home {
   margin-top: 15rem; }
@@ -318,12 +349,11 @@ p {
     width: 80%; } }
 
 #communit {
-  background-color: #fdf0eb; }
+  background-color: #fdf0eb;
+  padding: 2rem 0; }
   #communit .flex-container-1 {
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
     -ms-flex-pack: distribute;
     justify-content: space-around; }
   #communit .svg-container-1 {
@@ -335,6 +365,128 @@ p {
       text-align: justify;
       display: inline-block;
       width: 80%; }
+  #communit .flex-container-2 {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    width: 100%; }
+    #communit .flex-container-2 a {
+      color: #E6397E; }
+      #communit .flex-container-2 a:hover {
+        color: #8a8a8a; }
+    #communit .flex-container-2 h3 {
+      padding: 0 0 1rem;
+      color: #545454; }
+    #communit .flex-container-2 ul {
+      padding: 0;
+      list-style: none; }
+      #communit .flex-container-2 ul li {
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        color: #545454;
+        text-align: justify;
+        line-height: 2.2rem;
+        font-size: 1.6rem;
+        padding: 0 2rem 1rem 2rem; }
+  #communit .box-with-border {
+    width: 40%;
+    display: inline-block;
+    position: relative;
+    transition: 2s ease; }
+  #communit .box-with-border {
+    border: 0.4rem solid #dd5116;
+    background: #fdf0eb;
+    padding: 0;
+    margin: 0; }
+  #communit .empty {
+    width: 0;
+    padding: 0;
+    margin: 0; }
+  #communit .block-questions {
+    width: 40%;
+    display: inline-block;
+    vertical-align: middle;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0; }
+    #communit .block-questions .questions {
+      padding: 0 2rem 0 0; }
+      #communit .block-questions .questions h4 {
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        color: #dd5116; }
+      #communit .block-questions .questions p {
+        color: #dd5116;
+        font-weight: bold;
+        text-align: justify;
+        line-height: 2.2rem;
+        padding: 0 0 1rem 4rem;
+        background-image: url("../img/green-flea3.svg");
+        background-repeat: no-repeat;
+        background-position: 1rem 0.4rem;
+        background-size: 2rem; }
+  #communit .questions-button {
+    width: 28rem;
+    margin: 0 auto;
+    padding-right: 2.5rem; }
+  @media screen and (max-width: 640px) {
+    #communit .flex-container-2 {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      width: 100%;
+      padding: 3rem 0; }
+      #communit .flex-container-2 .empty {
+        width: 0;
+        height: 6%;
+        padding: 4rem 0;
+        margin: 0; }
+      #communit .flex-container-2 .block-questions {
+        border: solid darkgoldenrod 3px;
+        width: 100%;
+        height: 47%;
+        display: inline-block;
+        vertical-align: middle;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-pack: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0; }
+        #communit .flex-container-2 .block-questions .questions {
+          padding: 0 2rem 0 0;
+          border: solid black 7px; }
+          #communit .flex-container-2 .block-questions .questions h4 {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            color: #dd5116;
+            border: solid 7px yellow; }
+          #communit .flex-container-2 .block-questions .questions p {
+            color: #dd5116;
+            font-weight: bold;
+            text-align: justify;
+            line-height: 2.2rem;
+            padding: 0 0 1rem 4rem;
+            background-image: url("../img/green-flea3.svg");
+            background-repeat: no-repeat;
+            background-position: 1rem 0.4rem;
+            background-size: 2rem; }
+      #communit .flex-container-2 .questions-button {
+        border: solid blue 3px;
+        width: 28rem;
+        margin: 0 auto;
+        padding: 0; } }
 
 #itneo-slider-block {
   padding: 2rem;
@@ -368,6 +520,8 @@ p {
       display: block;
       position: absolute;
       bottom: 50px; }
+  #itneo-slider-block .swiper-pagination-bullet, #itneo-slider-block .swiper-pagination-bullet-active {
+    background-color: #E6397E; }
   #itneo-slider-block .swiper-button-next {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E"); }
 

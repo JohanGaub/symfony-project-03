@@ -1,3 +1,22 @@
+// Change class name in "html.twig" file in order to use a specific scss mixin
+function redimensionnement() {
+    var result = document.getElementById('result');
+    if("matchMedia" in window) { // Détection
+        if(window.matchMedia("(max-width:640px)").matches) {
+            // Il y a de la place
+            $( "p" ).removeClass( "myClass noClass" ).addClass( "yourClass" );
+        } else {
+            // Il y en a moins...
+
+        }
+    }
+}
+// On lie l'événement resize à la fonction
+window.addEventListener('resize', redimensionnement, false);
+
+
+
+
 // Swiper Slider
 $(document).ready(function () {
     var swiper = new Swiper('.swiper-container', {

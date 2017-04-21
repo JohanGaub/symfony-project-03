@@ -1,9 +1,9 @@
 #communit {
   background-color: $background-color1;
+  padding: 2rem 0;
 
   .flex-container-1 {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
   }
 
@@ -16,12 +16,10 @@
     padding: 6rem 2.5rem;
     margin: 6rem 2rem;
   }
-
   // Svg to box with green border
   .svg-container-1 {
     width: 36rem;
     margin: 6rem 2rem;
-
     p {
       color: $primary-color;
       font-family: $primary-font;
@@ -30,4 +28,192 @@
       width: 80%;
     }
   }
+  .flex-container-2{
+    //border: solid purple 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;// it centers blocks horizontally if margin is not set to "auto"
+    width: 100%;
+
+    a { // itnéo link
+      color: $it-color;
+      &:hover {
+        color: $it-second-color;
+      }
+    }
+    h3{
+      padding: 0 0 1rem;
+      color: $paragraph-color;
+    }
+    ul {
+      padding: 0;
+      list-style: none;
+      li {
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        color: $paragraph-color;
+        text-align: justify;
+        line-height: 2.2rem;
+        font-size: 1.6rem;
+        padding: 0 2rem 1rem 2rem;
+      }
+    }
+  }
+  //.block-arrow {
+  //  border: solid grey 3px;
+  //}
+    .box-with-border, .box {
+      width: 40%;
+      display:inline-block;
+      position:relative;
+      transition:  2s ease;
+    }
+
+    .box-with-border {
+      border: 0.4rem solid $secondary-color;
+      background: $background-color1;
+      padding: 0;
+      margin: 0; // If "auto", it affects flex-container-2 with justify-content : center which become unefficient
+    }
+
+  .empty{
+    width: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .block-questions{
+    width: 40%;
+    //border: solid deeppink 3px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+
+    .questions{
+      padding: 0 2rem 0 0;
+      //border: solid black 7px;
+
+      h4{
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        color: $secondary-color;
+        //border: solid 7px yellow;
+      }
+
+      p{
+        color: $secondary-color;
+        font-weight: bold;
+        text-align: justify;
+        line-height: 2.2rem;
+        padding: 0 0 1rem 4rem; // 4.5rem : it makes the suitable indent for the text after each flea
+        // Fleas
+        background-image: url('../img/green-flea3.svg');
+        background-repeat: no-repeat;
+        background-position: 1rem 0.4rem; // 1rem = flea position on the extrem left ; 0.4rem = vertical position
+        background-size: 2rem;
+      }
+    }
+  }
+  .questions-button{
+    //border: solid blue 3px;
+    width: 28rem;
+    margin: 0 auto;
+    padding-right: 2.5rem;
+  }
+
+  @media screen and (max-width: 640px) {
+
+    .flex-container-2 {
+      //border: solid violet 0.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between; // it centers blocks horizontally if margin is not set to "auto"
+      width: 100%;
+      padding: 3rem 0;
+
+
+      .block-arrow {
+        display: inline-block;
+        transform: rotate(90deg);
+
+        .box-with-border, .box {
+          width: 100%;
+          height: 47%;
+          display: inline-block;
+          position: relative;
+
+          transform: rotate(90deg);
+        }
+
+        .box-with-border {
+          border: 0.4rem solid $secondary-color;
+          background: $background-color1;
+          padding: 0;
+          margin: 0; // If "auto", it affects flex-container-2 with justify-content : center which become unefficient
+        }
+      }
+
+      .empty {
+        width: 0;
+        height: 6%;
+        padding: 4rem 0;
+        margin: 0;
+      }
+
+      .block-questions {
+        border: solid darkgoldenrod 3px;
+        width: 100%;
+        height: 47%;
+        display: inline-block;
+        vertical-align: middle;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+
+        .questions {
+          padding: 0 2rem 0 0;
+          border: solid black 7px;
+
+          h4 {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            color: $secondary-color;
+            border: solid 7px yellow;
+          }
+
+          p {
+            color: $secondary-color;
+            font-weight: bold;
+            text-align: justify;
+            line-height: 2.2rem;
+            padding: 0 0 1rem 4rem; // 4.5rem : it makes the suitable indent for the text after each flea
+            // Fleas
+            background-image: url('../img/green-flea3.svg');
+            background-repeat: no-repeat;
+            background-position: 1rem 0.4rem; // 1rem = flea position on the extrem left ; 0.4rem = vertical position
+            background-size: 2rem;
+          }
+        }
+      }
+      .questions-button {
+        border: solid blue 3px;
+        width: 28rem;
+        margin: 0 auto;
+        padding: 0;
+      }
+    }
+
+  }
 }
+
+
+
+
+
+
+
