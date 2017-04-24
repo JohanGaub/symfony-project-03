@@ -1,7 +1,7 @@
 <section id="index-itneo" class="row">
     <!-- Part top (logo + h3 text -> descript product) -->
     <div class="col-xs-12 itneo-top-case">
-        <h2>Notre solution téléphonie ip</h2>
+        <h2 class="it-h2">Notre solution téléphonie ip</h2>
     </div>
     <!-- Part down (3parts -> text-info -> slider -> button -->
     <div class="row">
@@ -20,37 +20,30 @@
         <!-- Second col (slider) -->
         <div id="itneo-slider-block" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
 
-            <!-- Swiper -->
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="{{ asset('assets/img/slide1.jpeg') }}" alt="it photo">
-                        <p>Slide 1</p>
+            <div class="itneo-slider">
+                <!-- Swiper -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="{{ asset('assets/img/slide1.jpeg') }}" alt="it photo"></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/img/slide1.jpeg') }}" alt="it photo"></div>
+                        <div class="swiper-slide"><img src="{{ asset('assets/img/slide1.jpeg') }}" alt="it photo"></div>
                     </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('assets/img/slide1.jpeg') }}" alt="it photo">
-                        <p>Slide 2</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('assets/img/slide1.jpeg') }}" alt="it photo">
-                        <p>Slide 3</p>
-                    </div>
-
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-                <!-- Add Arrows -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
 
             <a href="#" class="plus-info-2">Plus d'info</a>
         </div>
         <!-- Last part (button) -->
+        {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <img class="it-logo be-inline" src="{{ asset('assets/img/itneo_logo_HD.png') }}" alt="it neo logo">
             <div class="it-btn-group">
-                <button type="button" class="itneo-button">Découvrez Itnéo!</button>
+                {{ button.svgButton("#e6397e", "Découvez itnéo !") }}
 
                 <!--
                 - TODO => SEND TO FOOTER

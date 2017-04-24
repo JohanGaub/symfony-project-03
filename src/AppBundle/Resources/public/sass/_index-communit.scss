@@ -1,6 +1,6 @@
 #communit {
   background-color: $background-color1;
-  padding: 2rem 0;
+  padding: 20rem 0;
 
   .flex-container-1 {
     display: flex;
@@ -60,9 +60,7 @@
       }
     }
   }
-  //.block-arrow {
-  //  border: solid grey 3px;
-  //}
+
   .box-with-border, .box {
     width: 40%;
     display:inline-block;
@@ -123,6 +121,7 @@
     width: 28rem;
     margin: 0 auto;
     padding-right: 2.5rem;
+
   }
 }
 
