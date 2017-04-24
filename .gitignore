@@ -12,6 +12,7 @@
 /var/sessions/*
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
+/.sass-cache/
 /vendor/
 /web/bundles/
 /.sass-cache/

@@ -33,7 +33,7 @@ var del = require('del');
 var sass            = require('gulp-sass');
 var uglifycss       = require('gulp-uglifycss');
 var autoprefixer    = require('gulp-autoprefixer');
-var uncss           = require('gulp-uncss');
+// var uncss           = require('gulp-uncss');
 // -> Js
 var minify          = require('gulp-minify');
 // -> Other
@@ -52,6 +52,7 @@ gulp.task('build:css', function(callback) {
        'clean:webcss',
        'clean:srccss',
        'scss',
+       //'unused:css',
        'autofix',
        'uglify:css',
    callback);
@@ -98,13 +99,13 @@ gulp.task('scss', function () {
         .pipe(gulp.dest('src/AppBundle/Resources/public/css/'));
 });
 // -> Delete unused css
-gulp.task('unused:css', function () {
+/*gulp.task('unused:css', function () {
     return gulp.src('src/AppBundle/Resources/public/css/*.css')
         .pipe(uncss({
             html: ['http://localhost:8000', 'http://localhost:8000/historique']
         }))
         .pipe(gulp.dest('src/AppBundle/Resources/public/css'));
-});
+});*/
 // -> Autoprefixer CSS
 gulp.task('autofix', function() {
     gulp.src('src/AppBundle/Resources/public/css/*.css')
@@ -142,8 +143,8 @@ gulp.task('img:compact', function () {
 });
 
 // -> Delete unused css
-gulp.task('unused:bootstrap:css', function () {
+ /*gulp.task('unused:bootstrap:css', function () {
     return gulp.src('web/assets/vendor/bootstrap-3.3.7-dist/css/*.css')
         .pipe(uncss({html: ['http://localhost:8000']}))
         .pipe(gulp.dest('web/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.transform'));
-});
+});*/
