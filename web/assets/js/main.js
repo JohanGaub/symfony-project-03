@@ -1,40 +1,3 @@
-// Change class name in "html.twig" file in order to use a specific scss mixin
-
-
-$(window).on('load, resize', function mobileViewUpdate() {
-    var viewportWidth = $(window).width();
-    if (viewportWidth < 768) {
-        $("#arrowbox").removeClass("arrow-right-center").addClass("arrow-bottom-center");
-    }else{
-        $("#arrowbox").removeClass("arrow-bottom-center").addClass("arrow-right-center");
-         }
-});
-
-
-$( "div" ).click(function() {
-    $( this ).switchClass( "big", "blue", 1000, "easeInOutQuad" );
-});
-
-
-// We link the event "resize" to the function
-window.addEventListener('resize', redimensionnement, false);
-
-
-// Swiper Slider
-$(document).ready(function () {
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        paginationClickable: true,
-        spaceBetween: 20,
-        centeredSlides: true,
-        autoplay: 60000,
-        loop: true,
-        autoplayDisableOnInteraction: false
-    });
-});
-
 $(document).ready(function () {
 
 
@@ -71,6 +34,36 @@ $(document).ready(function () {
 
 
 });
+
+
+
+// Change class name in "html.twig" file in order to use a specific scss mixin
+$(window).on('load, resize', function mobileViewUpdate() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth < 768) {
+        $("#arrowbox").removeClass("arrow-right-center").addClass("arrow-bottom-center");
+    }else{
+        $("#arrowbox").removeClass("arrow-bottom-center").addClass("arrow-right-center");
+         }
+});
+
+
+// Swiper Slider
+$(document).ready(function () {
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 20,
+        centeredSlides: true,
+        autoplay: 60000,
+        loop: true,
+        autoplayDisableOnInteraction: false
+    });
+});
+
+
 
 // Modal
 $(document).ready(function () {
