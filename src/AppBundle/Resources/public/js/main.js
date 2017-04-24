@@ -2,19 +2,26 @@
 function redimensionnement() {
     var result = document.getElementById('result');
     if("matchMedia" in window) { // Détection
-        if(window.matchMedia("(max-width:640px)").matches) {
-            // Il y a de la place
-            $( "p" ).removeClass( "myClass noClass" ).addClass( "yourClass" );
-        } else {
-            // Il y en a moins...
+        if(window.matchMedia("(max-width:768px)").matches) {
 
+            // There is less place
+            $( "#arrowbox" ).removeClass( "arrow-bottom-center" ).addClass( "arrow-right-center" );
+        } else {
+            // The is more...
+            $( "#arrowbox" ).removeClass( "arrow-right-center" ).addClass( "arrow-bottom-center" );
         }
     }
 }
-// On lie l'événement resize à la fonction
+redimensionnement();
+
+
+$( "div" ).click(function() {
+    $( this ).switchClass( "big", "blue", 1000, "easeInOutQuad" );
+});
+
+
+// We link the event "resize" to the function
 window.addEventListener('resize', redimensionnement, false);
-
-
 
 
 // Swiper Slider
