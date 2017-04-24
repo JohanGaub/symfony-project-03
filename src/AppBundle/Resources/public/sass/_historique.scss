@@ -1,3 +1,23 @@
+// Adds
+.historique-communit {
+  margin-top: 21rem;
+  margin-bottom: 6rem;
+  transition: 0.3s ease;
+}
+.historique-text {
+  padding: 1rem;
+  margin: 5rem auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 1025px) {
+
+  .historique-communit {
+    margin-top: 14rem;
+  }
+
+}
+
 /* ================ The Timeline ================ */
 .flag-right {
   margin-left: 0.4rem;
