@@ -7,19 +7,11 @@
     justify-content: space-around;
   }
 
-  .box-communit {
-    height: 23rem;
-    width: 35rem;
-    background: $background1;
-    background-size: 50% 50%;
-    background-repeat: no-repeat;
-    padding: 6rem 2.5rem;
-    margin: 6rem 2rem;
-  }
   // Svg to box with green border
   .svg-container-1 {
-    width: 36rem;
+    min-width: 32rem;
     margin: 6rem 2rem;
+
     p {
       color: $primary-color;
       font-family: $primary-font;
@@ -122,6 +114,7 @@
     width: 28rem;
     margin: 0 auto;
     padding-right: 2.5rem;
+
   }
 
   @media screen and (max-width: 640px) {

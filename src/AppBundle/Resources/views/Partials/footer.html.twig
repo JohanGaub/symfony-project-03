@@ -4,22 +4,26 @@
             <div id="footer-left-join">
                 <div id="footer-left-join-title">
                     <h3>Integrez notre communauté</h3>
-                    <button class="join-button" id="hidden-button" type="button">rejoignez-nous !</button>
+                    {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
+                    <div id="hidden-button">
+                          {{ button.svgButton("#dd5116", " Rejoignez-nous !") }}
+                    </div>
                 </div>
                 <div id="footer-left-join-list">
                     <ul>
-                        <li><h3><a href="#anchor_communit">Offre globale</a></h3></li>
-                        <li><h3><a href="#anchor_communit">Mutualisation</a></h3></li>
-                        <li><h3><a href="#anchor_communit">Accompagnement</a></h3></li>
+                        <li><h3><a href="#communit">Offre globale</a></h3></li>
+                        <li><h3><a href="#communit">Mutualisation</a></h3></li>
+                        <li><h3><a href="#communit">Accompagnement</a></h3></li>
                     </ul>
                 </div>
             </div>
+            {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
             <div  id="footer-left-join-button">
-                <button class="join-button" type="button">rejoignez-nous !</button>
+                {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
             </div>
         </div>
         <div id="footer-left-down">
-            <h3><a href="src/view/partials/story.php" target="_blank">A propos de nous</a></h3>
+            <h3><a href="/historique">A propos de nous</a></h3>
         </div>
     </div>
     <div id="footer-right">

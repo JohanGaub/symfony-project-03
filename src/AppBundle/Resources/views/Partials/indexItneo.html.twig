@@ -39,10 +39,13 @@
             <a href="#" class="plus-info-2">Plus d'info</a>
         </div>
         <!-- Last part (button) -->
+        {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
             <img class="it-logo be-inline" src="{{ asset('assets/img/itneo_logo_HD.png') }}" alt="it neo logo">
             <div class="it-btn-group">
-                <button type="button" class="itneo-button">Découvrez Itnéo!</button>
+                <a href="http://itneo.fr">
+                    {{ button.svgButton("#e6397e", "Découvrez itnéo !") }}
+                </a>
 
                 <!--
                 - TODO => SEND TO FOOTER
