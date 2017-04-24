@@ -4,7 +4,10 @@
             <div id="footer-left-join">
                 <div id="footer-left-join-title">
                     <h3>Integrez notre communauté</h3>
-                    <button class="join-button" id="hidden-button" type="button">rejoignez-nous !</button>
+                    {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
+                    <div class="join-button" id="hidden-button" type="button" class="index-button2">
+                          {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+                    </div>
                 </div>
                 <div id="footer-left-join-list">
                     <ul>
@@ -14,8 +17,9 @@
                     </ul>
                 </div>
             </div>
+            {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
             <div  id="footer-left-join-button">
-                <button class="join-button" type="button">rejoignez-nous !</button>
+                {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
             </div>
         </div>
         <div id="footer-left-down">

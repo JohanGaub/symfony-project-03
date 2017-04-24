@@ -36,8 +36,9 @@
                 <p>travailler avec une équipe compétente et disponible ?</p>
                 <p>proposer une solution de téléphonie sur IP innovante sans système de licence à l’utilisateur ?</p>
             </div>
+            {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
             <div class="questions-button">
-                <button class="join-button" type="button">Rejoignez-nous</button>
+                {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
             </div>
         </div>
     </div>
