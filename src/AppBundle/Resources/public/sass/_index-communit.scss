@@ -1,6 +1,7 @@
 #communit {
   background-color: $background-color1;
-  padding: 20rem 0;
+  padding: 2rem 0;
+
 
   .flex-container-1 {
     display: flex;
@@ -34,7 +35,6 @@
     flex-wrap: wrap;
     justify-content: space-around;// it centers blocks horizontally if margin is not set to "auto"
     width: 100%;
-
 
     a { // itnéo link
       color: $it-color;
