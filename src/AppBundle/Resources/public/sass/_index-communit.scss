@@ -1,13 +1,16 @@
 #communit {
   background-color: $background-color1;
-  padding: 2rem 0;
+  padding: 5rem 0;
+
+  h2 {
+    padding: 0 0 2rem 0;
+  }
 
 
   .flex-container-1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 0 0 5rem 0 !important;
     width: 100%;
     overflow: hidden;
   }
@@ -24,13 +27,15 @@
   // Svg to box with green border
   .svg-container-1 {
     display: block;
-    min-width: 36rem;
-    margin: 6rem 1.75rem;
+    min-width: 40rem;
+    margin: 0 0 6rem 0;
 
     p {
-      color: $primary-color;
-      font-family: $primary-font;
+      color: darken($primary-color, 12%);
       font-size: 1.7rem;
+      font-family: $secondary-font;
+
+      line-height: 2.5rem;
       text-align: justify;
       display: inline-block;
       width: 80%;
@@ -56,6 +61,7 @@
       padding: 0 0 1rem;
       color: $paragraph-color;
     }
+
     ul {
       padding: 0;
       list-style: none;
@@ -76,7 +82,7 @@
     min-width: 30rem;
     display: inline-block;
     position: relative;
-    //transition:  2s ease;
+
   }
 
   .box-with-border {
@@ -128,13 +134,13 @@
         background-size: 2rem;
       }
     }
-  }
 
-  .questions-button {
-    //border: solid blue 3px;
-    width: 28rem;
-    margin: 0 auto;
-    padding-right: 2.5rem;
+    .questions-button {
+      //border: solid blue 3px;
+      width: 28rem;
+      margin: 0 auto;
+
+    }
   }
 
   @media screen and (max-width: 768px) {
@@ -144,7 +150,6 @@
       min-width: 30rem;
       display: inline-block;
       position: relative;
-      //transition:  2s ease;
     }
 
     .box-with-border {
@@ -199,11 +204,20 @@
     }
 
     .questions-button {
-      //border: solid blue 3px;
-      width: 28rem;
+      border: solid blue 3px;
+      width: 100%;
       margin: 0 auto;
-      padding-right: 2.5rem;
+    }
+  }
 
+  @media screen and (max-width: 1200px) {
+    .flex-container-1 {
+      margin: 2rem 0 !important;
+
+      .svg-container-1 {
+        margin-bottom: 3rem !important;
+        margin-top: 1rem !important;
+      }
     }
   }
 
@@ -211,24 +225,24 @@
     .questions-button {
     padding-right: 0;
     }
-  }
-
-  @media screen and (max-width: 840px) {
 
     .svg-container-1 {
-      min-width: 30rem !important;
+      min-width: 38rem !important;
       margin: 6rem 1rem !important;
     }
-
   }
 
-  @media screen and (max-width: 1200px) {
+
+  @media screen and (max-width: 400px ) {
     .flex-container-1 {
-      margin: 5rem 0 5rem 0 !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      //border: solid blue 3px;
 
       .svg-container-1 {
-        margin-bottom: 3rem !important;
-        margin-top: 1rem !important;
+        padding: 0;
+        margin: 0;
+        min-width: 30rem !important;
       }
     }
   }
