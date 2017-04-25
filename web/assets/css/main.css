@@ -668,7 +668,9 @@ h1, h2 {
   font-size: 3.6rem;
   font-weight: bold;
   text-align: center;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  padding: 0;
+  margin: 0; }
 
 h3 {
   color: #dd5116;
@@ -885,22 +887,24 @@ a {
 
 #communit {
   background-color: #fdf0eb;
-  padding: 2rem 0; }
+  padding: 5rem 0; }
+  #communit h2 {
+    padding: 0 0 2rem 0; }
   #communit .flex-container-1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 0 0 5rem 0 !important;
     width: 100%;
     overflow: hidden; }
   #communit .svg-container-1 {
     display: block;
-    min-width: 36rem;
-    margin: 6rem 1.75rem; }
+    min-width: 40rem;
+    margin: 0 0 6rem 0; }
     #communit .svg-container-1 p {
-      color: #9ac00a;
-      font-family: dinregular, sans-serif;
+      color: #6b8607;
       font-size: 1.7rem;
+      font-family: Arial, sans-serif;
+      line-height: 2.5rem;
       text-align: justify;
       display: inline-block;
       width: 80%; }
@@ -965,10 +969,10 @@ a {
         background-repeat: no-repeat;
         background-position: 1rem 0.4rem;
         background-size: 2rem; }
-  #communit .questions-button {
-    width: 28rem;
-    margin: 0 auto;
-    padding-right: 2.5rem; }
+    #communit .block-questions .questions-button {
+      width: 28rem;
+      margin: 0 auto;
+      padding-right: 2.5rem; }
   @media screen and (max-width: 768px) {
     #communit .box-with-border, #communit .box {
       width: 100%;
@@ -1012,16 +1016,24 @@ a {
       width: 28rem;
       margin: 0 auto;
       padding-right: 2.5rem; } }
-  @media screen and (max-width: 840px) {
-    #communit .svg-container-1 {
-      min-width: 30rem !important;
-      margin: 6rem 1rem !important; } }
   @media screen and (max-width: 1200px) {
     #communit .flex-container-1 {
-      margin: 5rem 0 5rem 0 !important; }
+      margin: 2rem 0 !important; }
       #communit .flex-container-1 .svg-container-1 {
         margin-bottom: 3rem !important;
         margin-top: 1rem !important; } }
+  @media screen and (max-width: 840px) {
+    #communit .svg-container-1 {
+      min-width: 38rem !important;
+      margin: 6rem 1rem !important; } }
+  @media screen and (max-width: 400px) {
+    #communit .flex-container-1 {
+      flex-direction: column !important;
+      align-items: center !important; }
+    #communit .svg-container-1 {
+      padding: 0;
+      margin: 0;
+      min-width: 30rem !important; } }
 
 /**
  * Swiper 3.4.2
