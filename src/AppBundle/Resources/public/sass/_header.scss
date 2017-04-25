@@ -54,7 +54,6 @@ ul.nav.navbar-nav.navbar-right {
   position: absolute;
   top: 25%;
   right: 0;
-  //background-color: white !important;
   padding-right: 3em; /* pushes links to the left */
 
 }
@@ -100,6 +99,7 @@ a.link {
     padding-left: 0;
   }
 }
+
 
 @media screen and (max-width: 768px){
   .navbar {
@@ -148,10 +148,7 @@ a.link {
     border-top: none !important;
   }
   .nav >li >a {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 1rem 0;
     text-align: center;
   }
   ul.nav.navbar-nav.navbar-right {
