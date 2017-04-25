@@ -8,7 +8,9 @@
     justify-content: space-around;
     margin: 0 0 5rem 0!important;
     width: 100%;
+    overflow: hidden;
   }
+
   .svg-container-1 {
     display: block;
     min-width: 36rem;
@@ -23,11 +25,11 @@
       width: 80%;
     }
   }
-  .flex-container-2 {
+  .flex-container-2{
     //border: solid purple 0.5rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around; // it centers blocks horizontally if margin is not set to "auto"
+    justify-content: space-around;// it centers blocks horizontally if margin is not set to "auto"
     width: 100%;
 
     a { // itnéo link
@@ -37,7 +39,7 @@
         color: $it-second-color;
       }
     }
-    h3 {
+    h3{
       padding: 0 0 1rem;
       color: $paragraph-color;
     }
@@ -55,14 +57,12 @@
       }
     }
   }
-  //.block-arrow {
-  //  border: solid grey 3px;
-  //}
+
   .box-with-border, .box {
     width: 40%;
-    display: inline-block;
-    position: relative;
-    transition: 2s ease;
+    display:inline-block;
+    position:relative;
+    //transition:  2s ease;
   }
 
   .box-with-border {
@@ -205,6 +205,15 @@
     }
   }
 }
+@media screen and (max-width: 840px) {
+
+  .svg-container-1 {
+    min-width: 30rem!important;
+    margin: 6rem 1rem!important;
+  }
+
+}
+
 @media screen and (max-width: 1200px) {
   .flex-container-1 {
     margin: 5rem 0 5rem 0!important;
@@ -215,12 +224,3 @@
     }
   }
 }
-
-
-
-
-
-
-
-
-
