@@ -29,10 +29,7 @@ $(document).ready(function () {
         } else {
             $('.navbar, .navbar-default .navbar-brand, .navbar-brand img, .navbar-collapse, div.navbar-header.header').removeClass('scroll-small');
         }
-
     });
-
-
 });
 
 

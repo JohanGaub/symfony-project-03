@@ -3,3 +3,8 @@ app:
     type:     annotation
     prefix:   /
 
+
+#someaction:
+ #   pattern:  /someaction
+  #  defaults: { _controller: AppBundle:Index:someAction }
+   # options:  { mobile: redirect, tablet: no_redirect, full: redirect_without_path }
