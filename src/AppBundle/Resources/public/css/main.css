@@ -794,7 +794,8 @@ a {
     margin: 0; }
     #index-itneo .itneo-top-case .it-h2 {
       padding: 4rem 0 6rem 0;
-      text-align: center; }
+      text-align: center;
+      color: #E6397E; }
 
 .it-ul-box-1 {
   padding: 7% 0; }
@@ -804,7 +805,7 @@ a {
     .it-ul-box-1 .it-first-list li {
       width: 100%;
       font-family: dinregular, sans-serif;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       line-height: 1.1em;
       font-weight: 800;
       text-transform: uppercase;
@@ -836,15 +837,12 @@ a {
 
 @media (max-width: 1250px) {
   .it-first-list {
-    text-align: center;
-    padding-top: 2em !important; } }
+    text-align: center; } }
 
 @media (max-width: 1200px) {
   #index-itneo .it-first-list {
     text-align: center;
     margin: 0; }
-    #index-itneo .it-first-list .it-ul-box-1 {
-      padding-top: 0 !important; }
   #index-itneo .it-h2 {
     text-align: center; }
   #index-itneo .out-slider-block {
@@ -853,6 +851,8 @@ a {
 @media (min-width: 1200px) {
   .it-h2 {
     text-align: left; }
+  .it-ul-box-1 {
+    padding-top: 4rem; }
   .it-first-list {
     text-align: right; } }
 
@@ -861,7 +861,7 @@ a {
   #index-itneo .it-logo {
     margin: 1rem auto; }
   #index-itneo .it-ul-box-1 {
-    padding-top: 0; }
+    padding-top: 4rem; }
   #index-itneo .it-first-list {
     margin: 0; } }
 
@@ -870,7 +870,7 @@ a {
   #index-itneo .it-logo {
     margin: 4rem auto; }
   #index-itneo .it-ul-box-1 {
-    padding-top: 3%; }
+    padding-top: 5rem; }
   #index-itneo .itneo-button {
     width: 80%; }
   #index-itneo .join-button {
@@ -884,16 +884,8 @@ a {
     display: flex;
     -ms-flex-pack: distribute;
     justify-content: space-around; }
-  #communit .box-communit {
-    height: 23rem;
-    width: 35rem;
-    background: linear-gradient(150deg, transparent 15px, rgba(221, 81, 22, 0.2) 0) top left, linear-gradient(0deg, transparent 0px, rgba(221, 81, 22, 0.2) 0) top right, linear-gradient(330deg, transparent 15px, rgba(221, 81, 22, 0.2) 0) bottom right, linear-gradient(0deg, transparent 0px, rgba(221, 81, 22, 0.2) 0) bottom left;
-    background-size: 50% 50%;
-    background-repeat: no-repeat;
-    padding: 6rem 2.5rem;
-    margin: 6rem 2rem; }
   #communit .svg-container-1 {
-    width: 36rem;
+    min-width: 32rem;
     margin: 6rem 2rem; }
     #communit .svg-container-1 p {
       color: #9ac00a;
