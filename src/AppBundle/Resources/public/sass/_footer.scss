@@ -36,10 +36,10 @@ footer {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    width: 58%;
 
     #footer-left-join-title{
       h3 {
-        text-align: right;
         line-height: 150%;
       }
       #hidden-button {
@@ -48,7 +48,6 @@ footer {
     }
     #footer-left-join-list {
       width: auto;
-      padding-left: 3rem;
       ul{
        list-style-image: url("../img/puce_xxxs.png");;
         a {
