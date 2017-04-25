@@ -6,6 +6,7 @@
     padding: 0 0 2rem 0;
   }
 
+
   .flex-container-1 {
     display: flex;
     flex-wrap: wrap;
@@ -14,6 +15,16 @@
     overflow: hidden;
   }
 
+  .box-communit {
+    height: 23rem;
+    width: 35rem;
+    background: $background1;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 6rem 2.5rem;
+    margin: 6rem 2rem;
+  }
+  // Svg to box with green border
   .svg-container-1 {
     display: block;
     min-width: 40rem;
@@ -71,7 +82,7 @@
     min-width: 30rem;
     display: inline-block;
     position: relative;
-    //transition:  2s ease;
+
   }
 
   .box-with-border {
@@ -109,7 +120,8 @@
         //border: solid 7px yellow;
       }
 
-      p {
+      p{
+
         color: $secondary-color;
         font-weight: bold;
         text-align: justify;
@@ -127,7 +139,7 @@
       //border: solid blue 3px;
       width: 28rem;
       margin: 0 auto;
-      padding-right: 2.5rem;
+
     }
   }
 
@@ -192,11 +204,9 @@
     }
 
     .questions-button {
-      //border: solid blue 3px;
-      width: 28rem;
+      border: solid blue 3px;
+      width: 100%;
       margin: 0 auto;
-      padding-right: 2.5rem;
-
     }
   }
 
@@ -212,12 +222,16 @@
   }
 
   @media screen and (max-width: 840px) {
+    .questions-button {
+    padding-right: 0;
+    }
 
     .svg-container-1 {
       min-width: 38rem !important;
       margin: 6rem 1rem !important;
     }
   }
+
 
   @media screen and (max-width: 400px ) {
     .flex-container-1 {
