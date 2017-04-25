@@ -1,5 +1,7 @@
 .background-home{
   margin-top: 8rem;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
   margin-bottom: 5rem;
   background-image: url("../img/intro-telephonie.jpg");
   background-repeat: no-repeat;
@@ -8,8 +10,9 @@
 
 }
 
+
 .index-button {
-  margin-top: 10rem;
+  margin-top: 6rem;
   margin-bottom: 5rem;
   justify-content: space-around;
   display: flex;
@@ -19,10 +22,12 @@
 }
 
 .index-comment {
+  margin-top: 5rem;
   margin-bottom: 5rem;
   justify-content: space-around;
   display: flex;
 }
+
 
 .background-comment {
   background: rgba(255, 255, 255, 0.6);
@@ -94,9 +99,10 @@
   }
 
   .join {
-    margin-right: 1%;
     padding-left: 1%;
+    padding-right: 1%;
     margin-bottom: 2rem;
+    margin-right: 1%;
   }
 
   .discover{
@@ -138,8 +144,11 @@
   }
   .join {
     align-items: center;
-    margin: auto;
+    margin: 0 auto;
     width: 100%;
+    margin-bottom: 2rem;
+    padding-left: 1%;
+    padding-right: 1%;
   }
 
   .index-button {
@@ -150,6 +159,9 @@
     align-items: center;
     margin:0 auto;
     width: 100%;
+    padding-left: 1%;
+    padding-right: 1%;
+
   }
 
   .background-home{

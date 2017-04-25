@@ -55,11 +55,15 @@ p {
 
 /* Links Green */
 .plus-info {
-  @include itBoldLink($primary-color, 1.4rem);
+  @include itBoldLink(darken($primary-color, 20%), 1.4rem);
   bottom: 5px;
   position: absolute;
   right: 15%;
   left: 15%;
+
+  &:hover{
+    color: $secondary-color;
+  }
 }
 
 .plus-info-2 {
