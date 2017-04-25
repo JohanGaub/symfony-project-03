@@ -29,6 +29,8 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var del = require('del');
+var browserSync = require('browser-sync').create();
+
 // -> Css
 var sass            = require('gulp-sass');
 var uglifycss       = require('gulp-uglifycss');
@@ -60,14 +62,12 @@ gulp.task('build:css', function(callback) {
 // -> Js Builder
 gulp.task('build:js', function(callback) {
     runSequence(
-        'clean:webjs',
         'uglify:js',
     callback);
 });
 // -> Img Builder
 gulp.task('img:compact', function(callback) {
     runSequence(
-        'clean:webimg',
         'img:min',
     callback);
 });
@@ -148,3 +148,20 @@ gulp.task('img:compact', function () {
         .pipe(uncss({html: ['http://localhost:8000']}))
         .pipe(gulp.dest('web/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.transform'));
 });*/
+
+ // -> Browser-sync + sass compatibility
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        proxy: "http://localhost:8000"
+    });
+
+    gulp.watch("src/AppBundle/Resources/public/sass/*.scss", ['scss:sync']);
+    gulp.watch("src/AppBundle/Resources/views/*/*.twig").on('change', browserSync.reload);
+});
+// --- Compile sass into CSS & auto-inject into browsers -->
+gulp.task('scss:sync', function() {
+    return gulp.src("src/AppBundle/Resources/public/sass/*.scss")
+        .pipe(sass())
+        .pipe(gulp.dest("web/assets/css"))
+        .pipe(browserSync.stream());
+});
