@@ -5,15 +5,15 @@
                 <div id="footer-left-join-title">
                     <h3>Integrez notre communauté</h3>
                     {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
-                    <div class="join-button" id="hidden-button" type="button" class="index-button2">
-                          {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+                    <div id="hidden-button">
+                          {{ button.svgButton("#dd5116", " Rejoignez-nous !") }}
                     </div>
                 </div>
                 <div id="footer-left-join-list">
                     <ul>
-                        <li><h3><a href="#anchor_communit">Offre globale</a></h3></li>
-                        <li><h3><a href="#anchor_communit">Mutualisation</a></h3></li>
-                        <li><h3><a href="#anchor_communit">Accompagnement</a></h3></li>
+                        <li><h3><a href="#offer">Offre globale</a></h3></li>
+                        <li><h3><a href="#mutualisation">Mutualisation</a></h3></li>
+                        <li><h3><a href="#accompaniment">Accompagnement</a></h3></li>
                     </ul>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div id="footer-left-down">
-            <h3><a href="src/view/partials/story.php" target="_blank">A propos de nous</a></h3>
+            <h3><a href="/historique">A propos de nous</a></h3>
         </div>
     </div>
     <div id="footer-right">

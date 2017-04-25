@@ -29,11 +29,13 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var del = require('del');
+var browserSync = require('browser-sync').create();
+
 // -> Css
 var sass            = require('gulp-sass');
 var uglifycss       = require('gulp-uglifycss');
 var autoprefixer    = require('gulp-autoprefixer');
-var uncss           = require('gulp-uncss');
+// var uncss           = require('gulp-uncss');
 // -> Js
 var minify          = require('gulp-minify');
 // -> Other
@@ -52,7 +54,7 @@ gulp.task('build:css', function(callback) {
        'clean:webcss',
        'clean:srccss',
        'scss',
-       'unused:css',
+       //'unused:css',
        'autofix',
        'uglify:css',
    callback);
@@ -60,14 +62,12 @@ gulp.task('build:css', function(callback) {
 // -> Js Builder
 gulp.task('build:js', function(callback) {
     runSequence(
-        'clean:webjs',
         'uglify:js',
     callback);
 });
 // -> Img Builder
 gulp.task('img:compact', function(callback) {
     runSequence(
-        'clean:webimg',
         'img:min',
     callback);
 });
@@ -99,13 +99,13 @@ gulp.task('scss', function () {
         .pipe(gulp.dest('src/AppBundle/Resources/public/css/'));
 });
 // -> Delete unused css
-gulp.task('unused:css', function () {
+/*gulp.task('unused:css', function () {
     return gulp.src('src/AppBundle/Resources/public/css/*.css')
         .pipe(uncss({
             html: ['http://localhost:8000', 'http://localhost:8000/historique']
         }))
         .pipe(gulp.dest('src/AppBundle/Resources/public/css'));
-});
+});*/
 // -> Autoprefixer CSS
 gulp.task('autofix', function() {
     gulp.src('src/AppBundle/Resources/public/css/*.css')
@@ -143,8 +143,25 @@ gulp.task('img:compact', function () {
 });
 
 // -> Delete unused css
-gulp.task('unused:bootstrap:css', function () {
+ /*gulp.task('unused:bootstrap:css', function () {
     return gulp.src('web/assets/vendor/bootstrap-3.3.7-dist/css/*.css')
         .pipe(uncss({html: ['http://localhost:8000']}))
         .pipe(gulp.dest('web/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.transform'));
+});*/
+
+ // -> Browser-sync + sass compatibility
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        proxy: "http://localhost:8000"
+    });
+
+    gulp.watch("src/AppBundle/Resources/public/sass/*.scss", ['scss:sync']);
+    gulp.watch("src/AppBundle/Resources/views/*/*.twig").on('change', browserSync.reload);
+});
+// --- Compile sass into CSS & auto-inject into browsers -->
+gulp.task('scss:sync', function() {
+    return gulp.src("src/AppBundle/Resources/public/sass/*.scss")
+        .pipe(sass())
+        .pipe(gulp.dest("web/assets/css"))
+        .pipe(browserSync.stream());
 });
