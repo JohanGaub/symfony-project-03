@@ -1030,10 +1030,10 @@ a {
     #communit .flex-container-1 {
       flex-direction: column !important;
       align-items: center !important; }
-    #communit .svg-container-1 {
-      padding: 0;
-      margin: 0;
-      min-width: 30rem !important; } }
+      #communit .flex-container-1 .svg-container-1 {
+        padding: 0;
+        margin: 0;
+        min-width: 30rem !important; } }
 
 /**
  * Swiper 3.4.2
