@@ -207,8 +207,8 @@ p {
   text-transform: uppercase;
   bottom: 5px;
   position: absolute;
-  right: 25%;
-  left: 25%; }
+  right: 15%;
+  left: 15%; }
 
 .plus-info-2 {
   color: #8a8a8a;
@@ -223,10 +223,12 @@ p {
   text-decoration: none; }
 
 .svg-button {
-  width: 28rem; }
+  width: 28rem;
+  margin: 0 auto; }
   .svg-button p {
     text-transform: uppercase;
     font-size: 1.6rem;
+    text-align: center;
     font-family: inherit;
     font-weight: bold;
     color: white; }
@@ -234,36 +236,59 @@ p {
 a {
   text-decoration: none !important; }
 
-.index-home {
-  margin-top: 21rem;
-  padding-top: 5rem;
+.background-home {
+  margin-top: 8rem;
   margin-bottom: 5rem;
-  background-image: url("/assets/img/img-home-index.jpg");
-  background-position: center;
+  background-image: url("/assets/img/intro-telephonie.jpg");
   background-repeat: no-repeat;
-  background-size: 1500px 1200px; }
+  background-position: center;
+  background-size: cover; }
 
 .index-button {
-  margin-top: 20rem;
-  margin-bottom: 10rem;
-  text-align: center;
-  padding-left: 25%;
-  padding-right: 25%; }
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
 
 .index-comment {
-  margin-bottom: 5rem; }
-
-@media screen and (max-width: 1400px) {
-  .background-comment {
-    background: rgba(255, 255, 255, 0.6);
-    height: 18rem !important;
-    width: 28rem !important; } }
+  margin-bottom: 5rem;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  display: -ms-flexbox;
+  display: flex; }
 
 .background-comment {
   background: rgba(255, 255, 255, 0.6);
   height: 18rem !important;
-  width: 28rem !important;
-  position: relative; }
+  width: 28rem !important; }
+
+@media screen and (max-width: 1150px) {
+  .index-comment {
+    -ms-flex-direction: column;
+    flex-direction: column; }
+  .index-button {
+    -ms-flex-direction: column !important;
+    flex-direction: column !important; }
+  .join {
+    padding-right: 25%;
+    padding-left: 25%; }
+  .discover {
+    padding-right: 25%;
+    padding-left: 25%; }
+  .background-comment {
+    background: rgba(255, 255, 255, 0.6);
+    height: 13rem !important;
+    width: 60rem !important;
+    margin: auto;
+    margin-top: 5rem; } }
+
+@media screen and (max-width: 820px) {
+  .background-comment {
+    background: rgba(255, 255, 255, 0.6);
+    height: 13rem !important;
+    width: 40rem !important;
+    margin: auto;
+    margin-top: 5rem; } }
 
 @media (max-width: 480px) {
   h1 {
@@ -271,16 +296,14 @@ a {
     margin-bottom: 10px;
     font-size: 2em; }
   .join {
-    margin-bottom: 5rem;
+    margin-bottom: 10rem;
     margin-top: 5rem; }
   .index-button {
     margin-top: 15px;
     margin-bottom: 15px;
     text-align: center;
     padding-left: 5%;
-    padding-right: 5%; }
-  .background-comment {
-    margin-bottom: 10px; } }
+    padding-right: 5%; } }
 
 #index-itneo {
   margin: 2% 0; }
