@@ -60,9 +60,8 @@ p {
   position: absolute;
   right: 15%;
   left: 15%;
-
-
 }
+
 .plus-info-2 {
   @include itBoldLink($it-second-color, 1.8rem);
   transition: all .2s ease-in-out;
