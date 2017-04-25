@@ -129,15 +129,35 @@
 
 @media screen and (max-width: 420px) {
   .background-comment{
-  background: rgba(255,255,255,0.6);
-  height: 22rem!important;
-  width: 20rem!important;
-  margin: auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+    background: rgba(255,255,255,0.6);
+    height: 19rem!important;
+    width: 23rem!important;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
   .join {
     align-items: center;
+    margin: auto;
+    width: 100%;
+  }
+
+  .index-button {
+    width: 100%;
+  }
+
+  .discover {
+    align-items: center;
+    margin:0 auto;
+    width: 100%;
+  }
+
+  .background-home{
+    width: 100%;
+  }
+
+  .index-home{
+    width: 100%;
   }
 
 }

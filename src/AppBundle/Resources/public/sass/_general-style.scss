@@ -82,9 +82,13 @@ p {
     font-weight: bold;
     color:white;
   }
-
 }
 
+@media screen and (max-width: 420px) {
+  .svg-button{
+    width: 100%;
+  }
+}
 
 a {
   text-decoration: none!important;
