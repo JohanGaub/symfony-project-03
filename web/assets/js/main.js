@@ -37,7 +37,7 @@ $(document).ready(function () {
 // Change class name in "html.twig" file in order to use a specific scss mixin
     $(window).on('load, resize', function mobileViewUpdate() {
         var viewportWidth = $(window).width();
-        if (viewportWidth < 768) {
+        if (viewportWidth <= 768) {
             $("#arrowbox").removeClass("arrow-right-center").addClass("arrow-bottom-center");
         } else {
             $("#arrowbox").removeClass("arrow-bottom-center").addClass("arrow-right-center");
