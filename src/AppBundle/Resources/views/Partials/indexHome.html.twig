@@ -1,46 +1,45 @@
-<section class="container-fluid index-home">
+<section class="row index-home">
 
-    <div class="background-home text-center col-xs-10 col-xs-offset-1">
-        <div class="col-xs-12">
-            <div>
-                <h1>Intégrez la communauté de</br> revendeurs téléphonie ip</h1>
-            </div>
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div>
+            <h1>Intégrez la communauté de</br> revendeurs téléphonie ip</h1>
         </div>
-        <div class="row index-button">
-            <div class="col-xs-12 col-sm-12 col-md-12 index-button text-center">
-                {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
-                <div class="join">
-                    {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
-                </div>
-                <div class="discover">
-                    {{ button.svgButton("#9AC00A", "Découvrez notre offre !") }}
-                </div>
-            </div>
+    </div>
+    <div class="row index-button">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+        {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
+        <div class="col-xs-12   col-sm-5 col-sm-offset-1   join">
+            {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
         </div>
+        <div class="col-xs-12  col-sm-5  col-sm-offset-1 discover">
+            {{ button.svgButton("#9AC00A", "Découvrez notre offre !") }}
+        </div>
+        </div>
+    </div>
 
+    <div class="row index-comment">
 
-        <div class="container-fluid index-comment">
-            <div class="col-xs-3 col-sm-12 col-md-4 text-center background-comment">
+        <div class="col-xs-12  col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 text-center">
+            <div class="col-xs-8 col-xs-offset-2 col-sm-3 col-sm-offset-1 text-center background-comment">
                 <h3>OFFRE GLOBALE</h3>
                 <p>bénéficiez du réseau national d’intégrateurs qualifiés, participez à l’amélioration de l’offre,
                     vendez en marque blanche</p>
                 <a href="#" class="plus-info">Plus d'info</a>
             </div>
 
-            <div class="col-xs-3 col-sm-12 col-md-4   text-center background-comment">
+            <div class="col-xs-8 col-xs-offset-2 col-sm-3 col-sm-offset-1 text-center background-comment">
                 <h3>MUTUALISATION</h3>
                 <p class="fd">partagez les ressources et compétences Optimisez vos achats de matériel, innovez en mode collaboratif</p>
                 <a href="#" class="plus-info">Plus d'info</a>
             </div>
 
-            <div class="col-xs-3 col-sm-12 col-md-4  text-center background-comment">
+            <div class="col-xs-8 col-xs-offset-2 col-sm-3 col-sm-offset-1 text-center background-comment">
                 <h3>ACCOMPAGNEMENT</h3>
-                <p class="fd">profitez du support technique du service Avant-vente, de conseil & audit, et de formation</p>
+                <p class="fd">profitez du support technique </br>du service Avant-vente,</br> de conseil & audit,</br> et de formation</p>
                 <a href="#" class="plus-info">Plus d'info</a>
             </div>
         </div>
-        </div>
-
+    </div>
 
 </section>
 
