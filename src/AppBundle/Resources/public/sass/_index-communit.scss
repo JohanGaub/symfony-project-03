@@ -11,6 +11,16 @@
     overflow: hidden;
   }
 
+  .box-communit {
+    height: 23rem;
+    width: 35rem;
+    background: $background1;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 6rem 2.5rem;
+    margin: 6rem 2rem;
+  }
+  // Svg to box with green border
   .svg-container-1 {
     display: block;
     min-width: 36rem;
@@ -99,9 +109,6 @@
         //border: solid 7px yellow;
       }
 
-<<<<<<< HEAD
-      p {
-=======
       p{
 >>>>>>> parent of d90c6c9... block comment responsive, left button to make responsive
         color: $secondary-color;
