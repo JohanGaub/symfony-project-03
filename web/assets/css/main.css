@@ -986,6 +986,7 @@ a {
     margin: 6rem 2rem; }
   #communit .svg-container-1 {
     display: block;
+    max-width: 40rem;
     min-width: 40rem;
     margin: 0 0 6rem 0; }
     #communit .svg-container-1 p {
