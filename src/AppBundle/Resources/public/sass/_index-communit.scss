@@ -1,6 +1,11 @@
 #communit {
   background-color: $background-color1;
-  padding: 2rem 0;
+  padding: 5rem 0;
+
+  h2 {
+    padding: 0 0 2rem 0;
+  }
+
 
   .flex-container-1 {
     display: flex;
@@ -11,26 +16,38 @@
     overflow: hidden;
   }
 
+  .box-communit {
+    height: 23rem;
+    width: 35rem;
+    background: $background1;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 6rem 2.5rem;
+    margin: 6rem 2rem;
+  }
+  // Svg to box with green border
   .svg-container-1 {
     display: block;
-    min-width: 36rem;
-    margin: 6rem 1.75rem;
+    min-width: 40rem;
+    max-width: 40rem;
+    margin: 0 0 6rem 0;
 
     p {
-      color: $primary-color;
-      font-family: $primary-font;
+      color: darken($primary-color, 12%);
       font-size: 1.7rem;
+      font-family: $secondary-font;
+
+      line-height: 2.5rem;
       text-align: justify;
       display: inline-block;
       width: 80%;
     }
   }
-
   .flex-container-2{
     //border: solid purple 0.5rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;// it centers blocks horizontally if margin is not set to "auto"
+    justify-content: space-around; // it centers blocks horizontally if margin is not set to "auto"
     width: 100%;
 
     a { // itnéo link
@@ -40,10 +57,12 @@
         color: $it-second-color;
       }
     }
-    h3{
+
+    h3 {
       padding: 0 0 1rem;
       color: $paragraph-color;
     }
+
     ul {
       padding: 0;
       list-style: none;
@@ -61,9 +80,10 @@
 
   .box-with-border, .box {
     width: 40%;
-    display:inline-block;
-    position:relative;
-    //transition:  2s ease;
+    min-width: 30rem;
+    display: inline-block;
+    position: relative;
+
   }
 
   .box-with-border {
@@ -81,9 +101,10 @@
 
   .block-questions {
     width: 40%;
+    min-width: 30rem;
     //border: solid deeppink 3px;
     display: inline-block;
-    vertical-align: middle;
+    //vertical-align: middle;
     flex-direction: column;
     justify-content: center;
     padding: 0;
@@ -100,7 +121,8 @@
         //border: solid 7px yellow;
       }
 
-      p {
+      p{
+
         color: $secondary-color;
         font-weight: bold;
         text-align: justify;
@@ -113,75 +135,59 @@
         background-size: 2rem;
       }
     }
+
+    .questions-button {
+      //border: solid blue 3px;
+      width: 28rem;
+      margin: 0 auto;
+
+    }
   }
-  .questions-button {
-    //border: solid blue 3px;
-    width: 28rem;
-    margin: 0 auto;
-    padding-right: 2.5rem;
 
-  }
-}
+  @media screen and (max-width: 768px) {
 
-@media screen and (max-width: 640px) {
-
-  .flex-container-2 {
-    //border: solid violet 0.5rem;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between; // it centers blocks horizontally if margin is not set to "auto"
-    width: 100%;
-    padding: 3rem 0;
-
-    .block-arrow {
+    .box-with-border, .box {
+      width: 100%;
+      min-width: 30rem;
       display: inline-block;
-      transform: rotate(90deg);
+      position: relative;
+    }
 
-      .box-with-border, .box {
-        width: 100%;
-        height: 47%;
-        display: inline-block;
-        position: relative;
-
-        transform: rotate(90deg);
-      }
-
-      .box-with-border {
-        border: 0.4rem solid $secondary-color;
-        background: $background-color1;
-        padding: 0;
-        margin: 0; // If "auto", it affects flex-container-2 with justify-content : center which become unefficient
-      }
+    .box-with-border {
+      border: 0.4rem solid $secondary-color;
+      background: $background-color1;
+      padding: 0;
+      margin: 0; // If "auto", it affects flex-container-2 with justify-content : center which become unefficient
     }
 
     .empty {
       width: 0;
-      height: 6%;
-      padding: 4rem 0;
+      padding: 5rem;
       margin: 0;
+      //border: solid black 3px;
     }
 
     .block-questions {
       border: solid darkgoldenrod 3px;
       width: 100%;
-      height: 47%;
+      min-width: 30rem;
+      //border: solid deeppink 3px;
       display: inline-block;
-      vertical-align: middle;
+      //vertical-align: middle;
       flex-direction: column;
       justify-content: center;
       padding: 0;
       margin: 0;
 
       .questions {
-        padding: 0 2rem 0 0;
-        border: solid black 7px;
+        padding: 0 2rem 0 2rem;
+        //border: solid black 7px;
 
         h4 {
           font-family: Arial, sans-serif;
           font-weight: bold;
           color: $secondary-color;
-          border: solid 7px yellow;
+          //border: solid 7px yellow;
         }
 
         p {
@@ -198,30 +204,48 @@
         }
       }
     }
+
     .questions-button {
-      border: solid blue 3px;
-      width: 28rem;
+
+      width: 100%;
       margin: 0 auto;
-      padding: 0;
     }
   }
-}
-@media screen and (max-width: 840px) {
 
-  .svg-container-1 {
-    min-width: 30rem!important;
-    margin: 6rem 1rem!important;
+  @media screen and (max-width: 1200px) {
+    .flex-container-1 {
+      margin: 2rem 0 !important;
+
+      .svg-container-1 {
+        margin-bottom: 3rem !important;
+        margin-top: 1rem !important;
+      }
+    }
   }
 
-}
-
-@media screen and (max-width: 1200px) {
-  .flex-container-1 {
-    margin: 5rem 0 5rem 0!important;
+  @media screen and (max-width: 840px) {
+    .questions-button {
+    padding-right: 0;
+    }
 
     .svg-container-1 {
-      margin-bottom: 3rem !important;
-      margin-top: 1rem !important;
+      min-width: 38rem !important;
+      margin: 6rem 1rem !important;
+    }
+  }
+
+
+  @media screen and (max-width: 400px ) {
+    .flex-container-1 {
+      flex-direction: column !important;
+      align-items: center !important;
+      //border: solid blue 3px;
+
+      .svg-container-1 {
+        padding: 0;
+        margin: 0;
+        min-width: 30rem !important;
+      }
     }
   }
 }

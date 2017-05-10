@@ -30,6 +30,8 @@ h1, h2 {
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
+  padding: 0;
+  margin: 0;
 }
 h3 {
   color: $secondary-color;
@@ -55,14 +57,17 @@ p {
 
 /* Links Green */
 .plus-info {
-  @include itBoldLink($primary-color, 1.4rem);
+  @include itBoldLink(darken($primary-color, 20%), 1.4rem);
   bottom: 5px;
   position: absolute;
-  right: 25%;
-  left: 25%;
+  right: 15%;
+  left: 15%;
 
-
+  &:hover{
+    color: $secondary-color;
+  }
 }
+
 .plus-info-2 {
   @include itBoldLink($it-second-color, 1.8rem);
   transition: all .2s ease-in-out;
@@ -78,14 +83,18 @@ p {
   p{
     text-transform: uppercase;
     font-size: 1.6rem;
-    text-align:center;
+    text-align: center;
     font-family: inherit;
     font-weight: bold;
     color:white;
   }
-
 }
 
+@media screen and (max-width: 420px) {
+  .svg-button{
+    width: 100%;
+  }
+}
 
 a {
   text-decoration: none!important;
