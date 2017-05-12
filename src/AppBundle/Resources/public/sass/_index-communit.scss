@@ -11,6 +11,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin: 0 0 5rem 0!important;
     width: 100%;
     overflow: hidden;
   }
@@ -28,6 +29,7 @@
   .svg-container-1 {
     display: block;
     min-width: 40rem;
+    max-width: 40rem;
     margin: 0 0 6rem 0;
 
     p {
@@ -41,8 +43,7 @@
       width: 80%;
     }
   }
-
-  .flex-container-2 {
+  .flex-container-2{
     //border: solid purple 0.5rem;
     display: flex;
     flex-wrap: wrap;
@@ -167,6 +168,7 @@
     }
 
     .block-questions {
+      border: solid darkgoldenrod 3px;
       width: 100%;
       min-width: 30rem;
       //border: solid deeppink 3px;
@@ -204,7 +206,7 @@
     }
 
     .questions-button {
-      border: solid blue 3px;
+
       width: 100%;
       margin: 0 auto;
     }
