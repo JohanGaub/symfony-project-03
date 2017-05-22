@@ -1,0 +1,61 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Faq
+ *
+ * @ORM\Table(name="faq")
+ * @ORM\Entity
+ */
+class Faq
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sum_up", type="text", nullable=false)
+     */
+    private $sumUp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=false)
+     */
+    private $content;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="upload", type="blob", length=16777215, nullable=true)
+     */
+    private $upload;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="creation_date", type="string", length=45, nullable=false)
+     */
+    private $creationDate;
+
+
+}
+

@@ -1,0 +1,63 @@
+AppBundle\Entity\TechnicalEvolution:
+    type: entity
+    table: technical_evolution
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        sumUp:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+            column: sum_up
+        content:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        reason:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        status:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        origin:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        expectedDelay:
+            type: datetime
+            nullable: false
+            column: expected_delay
+        creationDate:
+            type: datetime
+            nullable: false
+            column: creation_date
+        updateDate:
+            type: datetime
+            nullable: true
+            column: update_date
+    lifecycleCallbacks: {  }
