@@ -63,7 +63,25 @@ class User
      */
     private $tokenLimitDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="users")
+     */
+    private $company;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user")
+     */
+    private $technicalEvolutions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="userTechnicalEvolution", mappedBy="user")
+     */
+    private $userTechnicalEvolutions;
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserProfile")
+     */
+    private $userProfile;
 
     /**
      * Get id
@@ -217,5 +235,128 @@ class User
     public function getTokenLimitDate()
     {
         return $this->tokenLimitDate;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set company
+     *
+     * @param \AppBundle\Entity\Company $company
+     *
+     * @return User
+     */
+    public function setCompany(\AppBundle\Entity\Company $company = null)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return \AppBundle\Entity\Company
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * Add technicalEvolution
+     *
+     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     *
+     * @return User
+     */
+    public function addTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
+    {
+        $this->technicalEvolutions[] = $technicalEvolution;
+
+        return $this;
+    }
+
+    /**
+     * Remove technicalEvolution
+     *
+     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     */
+    public function removeTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
+    {
+        $this->technicalEvolutions->removeElement($technicalEvolution);
+    }
+
+    /**
+     * Get technicalEvolutions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTechnicalEvolutions()
+    {
+        return $this->technicalEvolutions;
+    }
+
+    /**
+     * Set userProfile
+     *
+     * @param \AppBundle\Entity\UserProfile $userProfile
+     *
+     * @return User
+     */
+    public function setUserProfile(\AppBundle\Entity\UserProfile $userProfile = null)
+    {
+        $this->userProfile = $userProfile;
+
+        return $this;
+    }
+
+    /**
+     * Get userProfile
+     *
+     * @return \AppBundle\Entity\UserProfile
+     */
+    public function getUserProfile()
+    {
+        return $this->userProfile;
+    }
+
+    /**
+     * Add userTechnicalEvolution
+     *
+     * @param \AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution
+     *
+     * @return User
+     */
+    public function addUserTechnicalEvolution(\AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution)
+    {
+        $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
+
+        return $this;
+    }
+
+    /**
+     * Remove userTechnicalEvolution
+     *
+     * @param \AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution
+     */
+    public function removeUserTechnicalEvolution(\AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution)
+    {
+        $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
+    }
+
+    /**
+     * Get userTechnicalEvolutions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserTechnicalEvolutions()
+    {
+        return $this->userTechnicalEvolutions;
     }
 }

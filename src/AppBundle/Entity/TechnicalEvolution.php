@@ -84,7 +84,25 @@ class TechnicalEvolution
      */
     private $updateDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="technicalEvolutions")
+     */
+    private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="technicalEvolutions")
+     */
+    private $product;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="technicalEvolutions")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution")
+     */
+    private $userTechnicalEvolutions;
 
     /**
      * Get id
@@ -310,5 +328,118 @@ class TechnicalEvolution
     public function getUpdateDate()
     {
         return $this->updateDate;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userTechnicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return TechnicalEvolution
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \AppBundle\Entity\Product $product
+     *
+     * @return TechnicalEvolution
+     */
+    public function setProduct(\AppBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \AppBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return TechnicalEvolution
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add userTechnicalEvolution
+     *
+     * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
+     *
+     * @return TechnicalEvolution
+     */
+    public function addUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
+    {
+        $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
+
+        return $this;
+    }
+
+    /**
+     * Remove userTechnicalEvolution
+     *
+     * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
+     */
+    public function removeUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
+    {
+        $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
+    }
+
+    /**
+     * Get userTechnicalEvolutions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserTechnicalEvolutions()
+    {
+        return $this->userTechnicalEvolutions;
     }
 }

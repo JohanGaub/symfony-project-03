@@ -42,7 +42,15 @@ class UserTechnicalEvolution
      */
     private $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="TechnicalEvolution", inversedBy="userTechnicalEvolutions")
+     */
+    private $technicalEvolution;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions")
+     */
+    private $user;
 
     /**
      * Get id
@@ -124,5 +132,53 @@ class UserTechnicalEvolution
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set technicalEvolution
+     *
+     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     *
+     * @return UserTechnicalEvolution
+     */
+    public function setTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution = null)
+    {
+        $this->technicalEvolution = $technicalEvolution;
+
+        return $this;
+    }
+
+    /**
+     * Get technicalEvolution
+     *
+     * @return \AppBundle\Entity\TechnicalEvolution
+     */
+    public function getTechnicalEvolution()
+    {
+        return $this->technicalEvolution;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return UserTechnicalEvolution
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
