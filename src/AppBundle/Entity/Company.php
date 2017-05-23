@@ -31,9 +31,9 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="addresse", type="string", length=255, nullable=false)
+     * @ORM\Column(name="address", type="string", length=255, nullable=false)
      */
-    private $addresse;
+    private $address;
 
     /**
      * @var string
@@ -102,29 +102,7 @@ class Company
         return $this->name;
     }
 
-    /**
-     * Set addresse
-     *
-     * @param string $addresse
-     *
-     * @return Company
-     */
-    public function setAddresse($addresse)
-    {
-        $this->addresse = $addresse;
 
-        return $this;
-    }
-
-    /**
-     * Get addresse
-     *
-     * @return string
-     */
-    public function getAddresse()
-    {
-        return $this->addresse;
-    }
 
     /**
      * Set town
@@ -261,5 +239,29 @@ class Company
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Company
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }
