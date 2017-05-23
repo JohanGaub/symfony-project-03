@@ -6,7 +6,6 @@
     padding: 0 0 2rem 0;
   }
 
-
   .flex-container-1 {
     display: flex;
     flex-wrap: wrap;
@@ -43,12 +42,27 @@
     }
   }
 
+  .background-commun {
+    margin-top: 8rem;
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+    margin-bottom: 5rem;
+    background-image: url("../img/commun-partie2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+  }
+
   .flex-container-2 {
     //border: solid purple 0.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; // it centers blocks horizontally if margin is not set to "auto"
     width: 100%;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background: rgba(255, 255, 255, 0.6);
 
     a { // itnéo link
       color: $it-color;
@@ -83,6 +97,7 @@
     min-width: 30rem;
     display: inline-block;
     position: relative;
+    padding-right: 3em;
 
   }
 
@@ -91,12 +106,6 @@
     background: $background-color1;
     padding: 0;
     margin: 0; // If "auto", it affects flex-container-2 with justify-content : center which become unefficient
-  }
-
-  .empty {
-    width: 0;
-    padding: 0;
-    margin: 0;
   }
 
   .block-questions {
@@ -121,7 +130,7 @@
         //border: solid 7px yellow;
       }
 
-      p{
+      p {
 
         color: $secondary-color;
         font-weight: bold;
@@ -151,6 +160,7 @@
       min-width: 30rem;
       display: inline-block;
       position: relative;
+      margin-bottom: 5em;
     }
 
     .box-with-border {
@@ -158,13 +168,6 @@
       background: $background-color1;
       padding: 0;
       margin: 0; // If "auto", it affects flex-container-2 with justify-content : center which become unefficient
-    }
-
-    .empty {
-      width: 0;
-      padding: 5rem;
-      margin: 0;
-      //border: solid black 3px;
     }
 
     .block-questions {
@@ -205,10 +208,10 @@
     }
 
     .questions-button {
-
       width: 100%;
       margin: 0 auto;
     }
+
   }
 
   @media screen and (max-width: 1200px) {
@@ -220,30 +223,59 @@
         margin-top: 1rem !important;
       }
     }
+    #arrowbox{
+      width: auto;
+    }
+    .box {
+      margin-bottom: 5em;
+    }
+
   }
+
+  @media screen and (max-width: 1300px) {
+    .block-questions {
+      width: 100%;
+      min-width: 30rem;
+      //border: solid deeppink 3px;
+      display: inline-block;
+      //vertical-align: middle;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
 
   @media screen and (max-width: 840px) {
     .questions-button {
-    padding-right: 0;
+      padding-right: 0;
+    }
+
+    .box {
+      margin-bottom: 5em;
     }
 
     .svg-container-1 {
       min-width: 38rem !important;
       margin: 6rem 1rem !important;
     }
-  }
 
+    @media screen and (max-width: 400px) {
+      .flex-container-1 {
+        flex-direction: column !important;
+        align-items: center !important;
+        //border: solid blue 3px;
 
-  @media screen and (max-width: 400px ) {
-    .flex-container-1 {
-      flex-direction: column !important;
-      align-items: center !important;
-      //border: solid blue 3px;
+        .svg-container-1 {
+          padding: 0;
+          margin: 0;
+          min-width: 30rem !important;
+        }
+      }
+      .box-with-border, .box {
+        margin-bottom: 5em;
 
-      .svg-container-1 {
-        padding: 0;
-        margin: 0;
-        min-width: 30rem !important;
       }
     }
   }
