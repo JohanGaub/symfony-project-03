@@ -996,13 +996,13 @@ a {
     margin: 6rem 2rem; }
   #communit .svg-container-1 {
     display: block;
+    max-width: 40rem;
     min-width: 40rem;
     margin: 0 0 6rem 0; }
     #communit .svg-container-1 p {
       color: #6b8607;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-family: Arial, sans-serif;
-      line-height: 2.5rem;
       text-align: justify;
       display: inline-block;
       width: 80%; }

@@ -27,15 +27,16 @@
   // Svg to box with green border
   .svg-container-1 {
     display: block;
+    max-width: 40rem;
     min-width: 40rem;
     margin: 0 0 6rem 0;
 
     p {
       color: darken($primary-color, 12%);
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-family: $secondary-font;
 
-      line-height: 2.5rem;
+      //line-height: 2.5rem;
       text-align: justify;
       display: inline-block;
       width: 80%;
@@ -243,6 +244,10 @@
         padding: 0;
         margin: 0;
         min-width: 30rem !important;
+
+        p {
+          //font-size: 1.4rem;
+        }
       }
     }
   }
