@@ -92,12 +92,12 @@ $background-color1: lighten($secondary-color, 48%);
   &.arrow-top-center {@include arrow('top','center', 1rem, $secondary-color)}
   &.arrow-bottom-left {@include arrow('bottom','left', 1rem, $secondary-color)}
   &.arrow-bottom-right {@include arrow('bottom','right', 1rem, $secondary-color)}
-  &.arrow-bottom-center {@include arrow('bottom','center', 1rem, $secondary-color)}
+  &.arrow-bottom-center {@include arrow('bottom','center', 6rem, $secondary-color)}
   &.arrow-left-top {@include arrow('left','top', 1rem, $secondary-color)}
   &.arrow-left-center {@include arrow('left','center', 1rem, $secondary-color)}
   &.arrow-left-bottom {@include arrow('left','bottom', 1rem, $secondary-color)}
   &.arrow-right-top {@include arrow('right','top', 1rem, $secondary-color)}
-  &.arrow-right-center {@include arrow('right','center', 1rem, $secondary-color)}
+  &.arrow-right-center {@include arrow('right','center', 8rem, $secondary-color)}
   &.arrow-right-bottom {@include arrow('right','bottom', 1rem, $secondary-color)}
 }
 

@@ -29,7 +29,7 @@ class DataParameters
 
     const NB_COMPANY                    = 30;
     const NB_PRODUCT                    = 2;
-    const NB_CATEGORY                   = 10;
+    const NB_CATEGORY                   = 9;
     const NB_TECHNICAL_EVOLUTION        = 50;
     const NB_DOCUMENTATION              = 25;
     const NB_FAQ                        = 20;

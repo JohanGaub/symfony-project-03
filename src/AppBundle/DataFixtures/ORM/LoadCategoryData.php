@@ -16,24 +16,36 @@ use Faker;
 class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
+     * Load data fixtures with the passed EntityManager
+     *
      * @param ObjectManager $em
      */
     public function load(ObjectManager $em)
     {
-        $nb = new DataParameters();
+        $nb    = new DataParameters();
         $faker = Faker\Factory::create('fr_FR');
-
-        for ($i = 0; $i < $nb::NB_CATEGORY; $i++)
-        {
-            $type = ($i % 2 == 0) ? 'technical' : 'commercial';
-            $category = new Category();
-            $category->setTitle($faker->words(1, true));
-            $category->setTag($faker->words(1, true));
-            $category->setDescription($faker->sentences(7, true));
-            $category->setType($type);
-            $em->persist($category);
-
-            $this->setReference('category_id_' . $i, $category);
+        $count = 0;
+        for ($i = 0; $i < $nb::NB_CATEGORY / 3; $i++){
+            $title = $faker->words(3, true);
+            $tag = $faker->word;
+            $description  = $faker->sentences(3, true);
+            for ($j = 0; $j <= 2; $j++) {
+                $category = new Category();
+                if ($j ==0 ) {
+                    $type = "technical";
+                } elseif ($j ==1 ) {
+                    $type = "commercial";
+                } else {
+                    $type = "other";
+                }
+                $category->setTitle($title);
+                $category->setTag( $tag);
+                $category->setDescription($description);
+                $category->setType($type);
+                $em->persist($category);
+                $this->setReference('category_id_' . $count , $category);
+                $count++;
+            }
         }
         $em->flush();
     }
