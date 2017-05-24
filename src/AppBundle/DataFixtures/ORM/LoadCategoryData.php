@@ -21,7 +21,7 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
     public function load(ObjectManager $em)
     {
         $nb = new DataParameters();
-        $faker = Faker\Factory::create();
+        $faker = Faker\Factory::create('fr_FR');
 
         for ($i = 0; $i < $nb::NB_CATEGORY; $i++)
         {

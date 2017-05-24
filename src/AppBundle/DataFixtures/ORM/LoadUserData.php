@@ -16,16 +16,18 @@ use Faker;
  */
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
-    public $count = 0;
-
+    /**
+     * @param $faker
+     * @return UserProfile
+     */
     private function setUserProfile($faker)
     {
         // -> Profile
         $profile = new UserProfile();
         $profile->setFirstname($faker->word);
         $profile->setLastname($faker->word);
-        $profile->setDateOfBirth($faker->dateTime);
-        $profile->setPhone($faker->phoneNumber);
+        $profile->setPhone1($faker->phoneNumber);
+        $profile->setPhone2($faker->phoneNumber);
 
         return $profile;
     }
@@ -36,7 +38,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $em)
     {
         $nb = new DataParameters();
-        $faker = Faker\Factory::create();
+        $faker = Faker\Factory::create('fr_FR');
 
         /**
          * SuperAdmin
@@ -47,7 +49,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setEmail('superadmin' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_SUPER_ADMIN']);
-            $user->setIsActive(0);
+            $user->setIsActive(1);
             $profile = $this->setUserProfile($faker);
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -65,7 +67,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setEmail('admin' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_ADMIN']);
-            $user->setIsActive(0);
+            $user->setIsActive(1);
             $profile = $this->setUserProfile($faker);
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -83,7 +85,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setEmail('projresp' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_PROJET_RESP']);
-            $user->setIsActive(0);
+            $user->setIsActive(1);
             $profile = $this->setUserProfile($faker);
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -101,7 +103,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setEmail('technician' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_TECHNICIAN']);
-            $user->setIsActive(0);
+            $user->setIsActive(1);
             $profile = $this->setUserProfile($faker);
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -119,7 +121,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setEmail('commercial' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_COMMERCIAL']);
-            $user->setIsActive(0);
+            $user->setIsActive(1);
             $profile = $this->setUserProfile($faker);
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -137,7 +139,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setEmail('finalclient' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_USER']);
-            $user->setIsActive(0);
+            $user->setIsActive(1);
             $profile = $this->setUserProfile($faker);
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
