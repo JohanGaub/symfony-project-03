@@ -17,7 +17,7 @@ use Faker;
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * @var
+     * @var Faker\Factory
      */
     private $faker;
 
