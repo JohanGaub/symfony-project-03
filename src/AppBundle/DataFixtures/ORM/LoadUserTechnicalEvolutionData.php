@@ -20,13 +20,12 @@ class LoadUserTechnicalEvolutionData extends AbstractFixture implements OrderedF
      */
     public function load(ObjectManager $em)
     {
-        $nb = new DataParameters();
         $faker = Faker\Factory::create('fr_FR');
 
-        for($i = 0; $i < $nb::NB_USER_TECHNICAL_EVOLUTION ; $i++)
+        for($i = 0; $i < DataParameters::NB_USER_TECHNICAL_EVOLUTION ; $i++)
         {
-            $randomTechnical = 'technical_evolution_id_' . mt_rand(0, $nb::NB_TECHNICAL_EVOLUTION - 1);
-            $randomUser = $nb->getRandomUser();
+            $randomTechnical = 'technical_evolution_id_' . mt_rand(0, DataParameters::NB_TECHNICAL_EVOLUTION - 1);
+            $randomUser = DataParameters::getRandomUser();
 
             $type = ($i % 2 == 0) ? 'note' : 'comment';
 

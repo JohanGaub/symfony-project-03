@@ -20,13 +20,11 @@ class LoadFaqData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $em)
     {
-        $nb = new DataParameters();
         $faker = Faker\Factory::create('fr_FR');
+        $randomCategory = 'category_id_' . mt_rand(0, DataParameters::NB_CATEGORY - 1);
+        $randomProduct = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
 
-        $randomCategory = 'category_id_' . mt_rand(0, $nb::NB_CATEGORY - 1);
-        $randomProduct = 'product_id_' . mt_rand(0, $nb::NB_PRODUCT - 1);
-
-        for($i = 0; $i < $nb::NB_FAQ; $i++){
+        for($i = 0; $i < DataParameters::NB_FAQ; $i++){
             $faq = new Faq();
             $faq->setTitle($faker->title);
             $faq->setSumUp($faker->sentence);

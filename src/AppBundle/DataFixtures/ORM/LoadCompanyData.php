@@ -20,10 +20,9 @@ class LoadCompanyData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $em)
     {
-        $nb = new DataParameters();
         $faker = Faker\Factory::create('fr_FR');
 
-        for($i = 0; $i < $nb::NB_COMPANY ; $i++)
+        for($i = 0; $i < DataParameters::NB_COMPANY ; $i++)
         {
             $company = new Company();
             $company->setName($faker->company);

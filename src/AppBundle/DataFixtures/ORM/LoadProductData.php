@@ -22,10 +22,9 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $em)
     {
-        $nb = new DataParameters();
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < $nb::NB_PRODUCT; $i++)
+        for ($i = 0; $i < DataParameters::NB_PRODUCT; $i++)
         {
             $product = new Product();
             $product->setName($faker->words(1, true));

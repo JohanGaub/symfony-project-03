@@ -37,7 +37,7 @@ class DataParameters
     /**
      * @return mixed
      */
-    public function getRandomUser()
+    public static function getRandomUser()
     {
         $users = [
             0 => 'user_super_admin_id_' . mt_rand(0, self::NB_SUPER_ADMIN - 1),

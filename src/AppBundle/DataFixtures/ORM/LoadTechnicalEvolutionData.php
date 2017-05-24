@@ -20,14 +20,13 @@ class LoadTechnicalEvolutionData extends AbstractFixture implements OrderedFixtu
      */
     public function load(ObjectManager $em)
     {
-        $nb = new DataParameters();
         $faker = Faker\Factory::create('fr_FR');
 
-        for($i = 0; $i < $nb::NB_TECHNICAL_EVOLUTION; $i++){
+        for($i = 0; $i < DataParameters::NB_TECHNICAL_EVOLUTION; $i++){
 
-            $randomUser = $nb->getRandomUser();
-            $randomCategory = 'category_id_' . mt_rand(0, $nb::NB_CATEGORY - 1);
-            $randomProduct = 'product_id_' . mt_rand(0, $nb::NB_PRODUCT - 1);
+            $randomUser = DataParameters::getRandomUser();
+            $randomCategory = 'category_id_' . mt_rand(0, DataParameters::NB_CATEGORY - 1);
+            $randomProduct = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
 
             $te= new TechnicalEvolution();
             $te->setTitle($faker->title);

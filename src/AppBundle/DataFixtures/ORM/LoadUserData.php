@@ -17,17 +17,22 @@ use Faker;
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
+     * @var
+     */
+    private $faker;
+
+    /**
      * @param $faker
      * @return UserProfile
      */
-    private function setUserProfile($faker)
+    private function setUserProfile()
     {
         // -> Profile
         $profile = new UserProfile();
-        $profile->setFirstname($faker->word);
-        $profile->setLastname($faker->word);
-        $profile->setPhone1($faker->phoneNumber);
-        $profile->setPhone2($faker->phoneNumber);
+        $profile->setFirstname($this->faker->word);
+        $profile->setLastname($this->faker->word);
+        $profile->setPhone1($this->faker->phoneNumber);
+        $profile->setPhone2($this->faker->phoneNumber);
 
         return $profile;
     }
@@ -37,20 +42,19 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $em)
     {
-        $nb = new DataParameters();
-        $faker = Faker\Factory::create('fr_FR');
+        $this->faker = Faker\Factory::create('fr_FR');
 
         /**
          * SuperAdmin
          */
-        for ($i = 0; $i < $nb::NB_SUPER_ADMIN; $i++){
-            $randomCompany = 'company_id_' . mt_rand(0, $nb::NB_COMPANY - 1);
+        for ($i = 0; $i < DataParameters::NB_SUPER_ADMIN; $i++){
+            $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
             $user = new User();
             $user->setEmail('superadmin' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_SUPER_ADMIN']);
             $user->setIsActive(1);
-            $profile = $this->setUserProfile($faker);
+            $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
             $this->setReference('user_super_admin_id_' . $i, $user);
@@ -61,14 +65,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         /**
          * Admin
          */
-        for ($i = 0; $i < $nb::NB_ADMIN; $i++){
-            $randomCompany = 'company_id_' . mt_rand(0, $nb::NB_COMPANY - 1);
+        for ($i = 0; $i < DataParameters::NB_ADMIN; $i++){
+            $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
             $user = new User();
             $user->setEmail('admin' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_ADMIN']);
             $user->setIsActive(1);
-            $profile = $this->setUserProfile($faker);
+            $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
             $this->setReference('user_admin_id_' . $i, $user);
@@ -79,14 +83,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         /**
          * ProjetctResp
          */
-        for ($i = 0; $i < $nb::NB_PROJECT_RESP; $i++){
-            $randomCompany = 'company_id_' . mt_rand(0, $nb::NB_COMPANY - 1);
+        for ($i = 0; $i < DataParameters::NB_PROJECT_RESP; $i++){
+            $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
             $user = new User();
             $user->setEmail('projresp' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_PROJET_RESP']);
             $user->setIsActive(1);
-            $profile = $this->setUserProfile($faker);
+            $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
             $this->setReference('user_projet_resp_id_' . $i, $user);
@@ -97,14 +101,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         /**
          * Technician
          */
-        for ($i = 0; $i < $nb::NB_TECHNICIAN; $i++){
-            $randomCompany = 'company_id_' . mt_rand(0, $nb::NB_COMPANY - 1);
+        for ($i = 0; $i < DataParameters::NB_TECHNICIAN; $i++){
+            $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
             $user = new User();
             $user->setEmail('technician' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_TECHNICIAN']);
             $user->setIsActive(1);
-            $profile = $this->setUserProfile($faker);
+            $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
             $this->setReference('user_technician_id_' . $i, $user);
@@ -115,14 +119,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         /**
          * Commercial
          */
-        for ($i = 0; $i < $nb::NB_COMMERCIAL; $i++){
-            $randomCompany = 'company_id_' . mt_rand(0, $nb::NB_COMPANY - 1);
+        for ($i = 0; $i < DataParameters::NB_COMMERCIAL; $i++){
+            $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
             $user = new User();
             $user->setEmail('commercial' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_COMMERCIAL']);
             $user->setIsActive(1);
-            $profile = $this->setUserProfile($faker);
+            $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
             $this->setReference('user_commercial_id_' . $i, $user);
@@ -133,14 +137,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         /**
          * Final Client
          */
-        for ($i = 0; $i < $nb::NB_FINAL_CLIENT; $i++){
-            $randomCompany = 'company_id_' . mt_rand(0, $nb::NB_COMPANY - 1);
+        for ($i = 0; $i < DataParameters::NB_FINAL_CLIENT; $i++){
+            $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
             $user = new User();
             $user->setEmail('finalclient' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_USER']);
             $user->setIsActive(1);
-            $profile = $this->setUserProfile($faker);
+            $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
             $this->setReference('user_final_client_id_' . $i, $user);
