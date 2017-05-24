@@ -13,6 +13,14 @@ security:
                     admin:
                         password: laurent
                         roles: 'ROLE_ADMIN'
+
+    role_hierarchy:
+        ROLE_COMMERCIAL: [ROLE_FINAL_CLIENT]
+        ROLE_TECHNICIAN: [ROLE_FINAL_CLIENT]
+        ROLE_PROJECT_RESP: [ROLE_TECHNICIAN, ROLE_COMMERCIAL]
+        ROLE_ADMIN: [ROLE_PROJECT_RESP]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
