@@ -219,4 +219,9 @@ class Product
     {
         return $this->documentations;
     }
+
+    public function __toString()
+    {
+        return $this->getDescription();
+    }
 }

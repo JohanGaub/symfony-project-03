@@ -31,9 +31,9 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="addresse", type="string", length=255, nullable=false)
+     * @ORM\Column(name="address", type="string", length=255, nullable=false)
      */
-    private $addresse;
+    private $address;
 
     /**
      * @var string
