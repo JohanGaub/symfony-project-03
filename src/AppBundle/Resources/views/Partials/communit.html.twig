@@ -1,3 +1,5 @@
+<div id="ancre_communit" class="ancre"></div>
+
 <section id="communit">
     <h2>Votre communauté de la téléphonie IP</h2>
 
@@ -8,12 +10,17 @@
         {{ box.svgBox("55", "La COMMUN’it vous offre la possibilité d’interagir avec nos développeurs afin de faire évoluer la solution itnéo en répondant aux attentes de vos clients et de vos services techniques. Vous pourrez via l’extranet proposer vos compétences techniques au réseau d’intégrateurs et en rechercher afin d’être toujours plus efficace sur le terrain.") }}
         {{ box.svgBox("100", "Pas de formations obligatoires, nous vous accompagnons sur le terrain aussi bien commercialement que techniquement. Des formations spécifiques peuvent être proposées ou demandées.") }}
     </div>
+    {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
+    <div class="questions-button">
+        {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+    </div>
 
+    <div class="background-commun text-center col-xs-12 col-sm-10 col-sm-offset-1">
+    <div><h2 class="commun-it-title">La COMMUN’it c’est :</h2></div>
     <div class="flex-container-2">
 
         <!--<div class="block-arrow">-->
-            <div id="arrowbox" class="box-with-border">
-                <div><h3>La COMMUN’it c’est :</h3></div>
+            <div id="arrowbox" class="box">
                 <div>
                     <ul>
                         <li>100% de ventes indirectes</li>
@@ -27,7 +34,7 @@
             </div>
 
 
-        <div class="empty"></div>
+
 
         <div class="block-questions">
             <div class="questions">
@@ -38,11 +45,12 @@
                 <p>travailler avec une équipe compétente et disponible&nbsp;?</p>
                 <p>proposer une solution de téléphonie sur IP innovante sans système de licence à l’utilisateur&nbsp;?</p>
             </div>
-            {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
-            <div class="questions-button">
-                {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
-            </div>
         </div>
+    </div>
+    {% import 'AppBundle:Elements:macro.svgButton.html.twig' as button %}
+    <div class="questions-button">
+        {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+    </div>
     </div>
 </section>
 
