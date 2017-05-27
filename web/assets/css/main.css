@@ -1827,10 +1827,8 @@ button.swiper-pagination-bullet {
     list-style-type: none;
     display: flex;
     justify-content: space-around;
-    margin: 1.9rem 0 1.9rem 0;
-    border: solid red 2px; }
+    margin: 2.2rem 0 2.2rem 0; }
     #footer-left ul li {
-      border: solid black 2px;
       text-align: left; }
     #footer-left ul a {
       color: #dd5116;
@@ -1869,7 +1867,8 @@ button.swiper-pagination-bullet {
   #footer-right #footer-right-triangle-img {
     position: absolute;
     bottom: 0;
-    right: 0; }
+    right: 0;
+    width: 44rem; }
     #footer-right #footer-right-triangle-img p {
       position: absolute;
       bottom: 0;
@@ -1911,11 +1910,11 @@ button.swiper-pagination-bullet {
     #footer-left #footer-left-up ul {
       flex-wrap: wrap;
       justify-content: space-between;
-      margin: 1.5rem 0; }
+      margin: 2.5rem 0; }
     #footer-left #footer-left-down ul {
       flex-wrap: wrap;
       justify-content: space-between;
-      margin: 1.5rem 4.5rem 0 4.5rem; }
+      margin: 2.5rem 4.5rem 2rem 4.5rem; }
   #footer-right #footer-right-contact {
     width: 20rem;
     height: 10rem;
@@ -1934,8 +1933,6 @@ button.swiper-pagination-bullet {
     width: 80%; } }
 
 @media screen and (max-width: 920px) {
-  #footer-left #footer-left-up ul {
-    margin: 1.5rem 0; }
   #footer-left #footer-left-down ul {
     margin: 0 4.5rem 0 4.5rem; }
     #footer-left #footer-left-down ul a {
@@ -1943,9 +1940,9 @@ button.swiper-pagination-bullet {
 
 @media screen and (max-width: 640px) {
   #footer-left #footer-left-up ul {
-    margin: 0.5rem 0 0 0; }
+    margin: 0.8rem 0 0 0; }
   #footer-left #footer-left-down ul {
-    margin: 0.5rem 0 0 4.5rem; }
+    margin: 0.8rem 0 0 4.5rem; }
   #footer-right #footer-right-contact {
     width: 15rem;
     height: 9rem;
@@ -1966,8 +1963,12 @@ button.swiper-pagination-bullet {
 @media screen and (max-width: 500px) {
   #footer-left {
     width: 60%; }
-    #footer-left ul a {
+    #footer-left #footer-left-up ul {
+      margin: 0.9rem 0 0 0; }
+    #footer-left #footer-left-up a {
       font-size: 1.2rem; }
+    #footer-left #footer-left-down ul {
+      margin: 0.9rem 0 0 4.5rem; }
   #footer-right #footer-right-contact {
     width: 13rem;
     height: 7rem;
