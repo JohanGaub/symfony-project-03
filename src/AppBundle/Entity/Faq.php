@@ -52,7 +52,7 @@ class Faq
     /**
      * @var string
      *
-     * @ORM\Column(name="creation_date", type="string", length=45, nullable=false)
+     * @ORM\Column(name="creation_date", type="datetime", length=45, nullable=false)
      */
     private $creationDate;
 
@@ -176,20 +176,6 @@ class Faq
     }
 
     /**
-     * Set creationDate
-     *
-     * @param string $creationDate
-     *
-     * @return Faq
-     */
-    public function setCreationDate($creationDate)
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    /**
      * Get creationDate
      *
      * @return string
@@ -197,6 +183,19 @@ class Faq
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * Set creationDate
+     *
+     * @param $creationDate
+     * @return $this
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
     }
 
     /**
