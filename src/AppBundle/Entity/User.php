@@ -36,11 +36,9 @@ class User
     private $password;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="roles", type="text", nullable=false)
+     * @ORM\Column(name="roles", type="array")
      */
-    private $roles;
+    private $roles = array();
 
     /**
      * @var boolean
@@ -79,7 +77,7 @@ class User
     private $userTechnicalEvolutions;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserProfile")
+     * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist"})
      */
     private $userProfile;
 
@@ -142,27 +140,23 @@ class User
     }
 
     /**
-     * Set roles
-     *
-     * @param string $roles
-     *
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
      * Get roles
      *
-     * @return string
+     * @return mixed
      */
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     /**

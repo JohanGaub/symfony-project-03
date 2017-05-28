@@ -36,18 +36,18 @@ class UserProfile
     private $lastname;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="date_of_birth", type="datetime", nullable=false)
+     * @ORM\Column(name="phone1", type="string", length=255, nullable=false)
      */
-    private $dateOfBirth;
+    private $phone1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255, nullable=false)
+     * @ORM\Column(name="phone2", type="string", length=255, nullable=true)
      */
-    private $phone;
+    private $phone2;
 
 
 
