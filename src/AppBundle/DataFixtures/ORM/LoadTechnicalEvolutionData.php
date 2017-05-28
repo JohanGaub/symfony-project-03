@@ -29,7 +29,7 @@ class LoadTechnicalEvolutionData extends AbstractFixture implements OrderedFixtu
             $randomProduct = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
 
             $te= new TechnicalEvolution();
-            $te->setTitle($faker->title);
+            $te->setTitle($faker->words(4, true));
             $te->setSumUp($faker->sentence(6));
             $te->setContent($faker->paragraph(7));
             $te->setReason($faker->word);

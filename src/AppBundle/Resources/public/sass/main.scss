@@ -1,21 +1,24 @@
-@import "settings";
+@import "general/settings";
 
-@import "general-tools";
+@import "general/general-tools";
 
-@import "header";
-@import "general-style";
-@import "index-home";
-@import "index-itneo";
-@import "index-communit";
-@import "swiper-slider";
-@import "index-itneo-slider";
-@import "footer";
+@import "partials/header";
+@import "general/general-style";
+@import "dedicated/index-home";
+@import "dedicated/index-itneo";
+@import "dedicated/index-communit";
+@import "dedicated/swiper-slider";
+@import "dedicated/index-itneo-slider";
+@import "partials/footer";
 
-@import "mentions-legales";
+@import "partials/simple-sidebar";
 
-@import "historique";
-@import "more";
+@import "dedicated/mentions-legales";
+@import "dedicated/bo_general";
 
-@import "ancre";
+@import "dedicated/historique";
+@import "general/more";
+
+@import "general/ancre";
 
 

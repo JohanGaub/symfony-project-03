@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TechnicalEvolution
  *
  * @ORM\Table(name="technical_evolution")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TechnicalEvolutionRepository")
  */
 class TechnicalEvolution
 {
@@ -100,7 +100,7 @@ class TechnicalEvolution
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution")
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution", cascade={"persist"})
      */
     private $userTechnicalEvolutions;
 

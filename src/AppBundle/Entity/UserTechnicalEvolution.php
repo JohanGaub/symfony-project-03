@@ -43,7 +43,7 @@ class UserTechnicalEvolution
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TechnicalEvolution", inversedBy="userTechnicalEvolutions")
+     * @ORM\ManyToOne(targetEntity="TechnicalEvolution", inversedBy="userTechnicalEvolutions", cascade={"persist"})
      */
     private $technicalEvolution;
 

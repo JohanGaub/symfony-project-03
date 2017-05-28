@@ -33,18 +33,12 @@ $(document).ready(function () {
 });
 
 
-
-
-
 $(document).ready(function () {
         if ($(window).width() <= 1024) {
             $("#arrowbox").addClass("arrow-bottom-center");
         } else {
             $("#arrowbox").addClass("arrow-right-center");
         }
-
-
-
 
 // Change class name in "html.twig" file in order to use a specific scss mixin
     $(window).on('resize', function() {
@@ -55,7 +49,6 @@ $(document).ready(function () {
         }
     });
 });
-
 
 // Swiper Slider
 $(document).ready(function () {
@@ -71,8 +64,6 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
-
-
 
 // Modal
 $(document).ready(function () {
@@ -86,18 +77,8 @@ $(document).ready(function () {
     });
 });
 
-// Swiper Slider
+// Side bar back office
 $(document).ready(function () {
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        paginationClickable: true,
-        spaceBetween: 20,
-        centeredSlides: true,
-        autoplay: 60000,
-        loop: true,
-        autoplayDisableOnInteraction: false
-    });
+    $("#wrapper").toggleClass("toggled");
 });
 

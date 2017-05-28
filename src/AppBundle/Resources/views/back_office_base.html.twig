@@ -10,17 +10,16 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}" />
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicon.ico') }}">
     </head>
-    <body>
-        <header id="communit-base">
-            {% include 'AppBundle:Partials:header.html.twig' %}
+    <body id="wrapper">
+        <header id="sidebar-wrapper" class="sidebar-communit">
+            {% include 'AppBundle:Partials:bo_sidebar.html.twig' %}
         </header>
 
-        <main>
+        <main id="page-content-wrapper">
             {% block body %}{% endblock %}
         </main>
 
         <footer>
-            {% include 'AppBundle:Partials:footer.html.twig' %}
         </footer>
 
         {% include 'AppBundle:Partials:foot.html.twig' %}

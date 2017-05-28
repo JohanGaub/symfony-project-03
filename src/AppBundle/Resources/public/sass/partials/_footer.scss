@@ -1,5 +1,8 @@
 /* FOOTER */
-footer {
+#footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 0;
   margin: 0;
   border:0;
@@ -13,11 +16,6 @@ footer {
   a:hover {
     text-decoration:none;
   }
-}
-#footer{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 #footer-left {
   display: flex;
@@ -49,7 +47,7 @@ footer {
     #footer-left-join-list {
       width: auto;
       ul{
-       list-style-image: url("../img/puce_xxxs.png");;
+       list-style-image: url("../../img/puce_xxxs.png");;
         a {
           color: $secondary-color;
         }
