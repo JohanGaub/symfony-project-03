@@ -123,7 +123,7 @@ class TechnicalEvolutionRepository extends \Doctrine\ORM\EntityRepository
         # make a query
         /** @noinspection SqlResolve */
         $query = $this->getEntityManager()->createQuery("
-            SELECT COUNT(te.id)
+            SELECT te.id
             FROM 'AppBundle\Entity\TechnicalEvolution' te 
             JOIN 'AppBundle\Entity\Category' c WITH te.category = c.id
             WHERE 1=1 AND {$searches}

@@ -20,6 +20,7 @@ class TechnicalEvolutionController extends Controller
     public function indexAction($page = 1)
     {
         $params = [
+            'c.type' => 'other'
         ];
 
         # get technical evolution repository
@@ -27,12 +28,12 @@ class TechnicalEvolutionController extends Controller
 
         # Set Pagination parameters
         $evoByPage = 9;
-        $test  = $repo->getNbEvolution($params);
+        $evoTotal  = count($repo->getNbEvolution($params));
 
         $pagination = [
             'page'          => $page,
             'route'         => 'evolutionHome',
-            'pages_count'   => ceil(10 / $evoByPage),
+            'pages_count'   => ceil($evoTotal / $evoByPage),
             'route_params'  => array(),
         ];
 
@@ -41,7 +42,7 @@ class TechnicalEvolutionController extends Controller
         return $this->render('AppBundle:Pages/Evolutions:index_evolution.html.twig', [
             'evolutions' => $evolutions,
             'pagination' => $pagination,
-            'test'       => $test
+            'test'=>$evoTotal
         ]);
     }
 
