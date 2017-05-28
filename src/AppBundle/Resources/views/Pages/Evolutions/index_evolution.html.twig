@@ -12,7 +12,8 @@
             </div>
 
             <div class="col-lg-12">
-                {{ dump(test) }}
+                <a href="{{ path('evolutionAdd') }}">Ajouter une nouvelle évolution</a>
+                {{ dump(evolutions[0].userTechnicalEvolutions[0].comment) }}
                 {{ dump(evolutions) }}
             </div>
 
@@ -21,17 +22,31 @@
             </div>
 
             {% for evolution in evolutions %}
-                <div class="col-lg-4">
+                <div class="bo-evolution col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="panel-top-line">{{ evolution.status }}</div>
-                            <h4>{{ evolution.title }}</h4>
+                            <div class="panel-top-line">
+                                <p class="evolution-status">{{ evolution.status }}</p>
+                                <h4>{{ evolution.title }}</h4>
+                            </div>
+                            <p>{{ evolution.sumUp }}</p>
                         </div>
                         <div class="panel-footer">
-                            <p>{{ evolution.sumUp }}</p>
-
-                            <p>Debut : {{ evolution.creationDate|date("d/m/Y", "Europe/Paris") }}</p>
-                            <p>Fin : {{ evolution.expectedDelay|date("d/m/Y", "Europe/Paris") }}</p>
+                            <div class="top-footer">
+                                <p>Type de catégorie : {{ evolution.category.type }}</p>
+                                <p>Nom de catégorie : {{ evolution.category.title }}</p>
+                                <p>Tag de catégorie : {{ evolution.category.tag }}</p>
+                            </div>
+                            <div class="bottom-footer">
+                                <div class="footer-date">
+                                    <p>Fin : {{ evolution.expectedDelay|date("d/m/Y", "Europe/Paris") }}</p>
+                                    <p>Debut : {{ evolution.creationDate|date("d/m/Y", "Europe/Paris") }}</p>
+                                </div>
+                                <div class="footer-more">
+                                    <p>{{ evolution.userTechnicalEvolutions[0].note }}/10</p>
+                                    <p>{{ evolution.userTechnicalEvolutions[0].comment }} commentaire(s)</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {{ dump(evolution) }}

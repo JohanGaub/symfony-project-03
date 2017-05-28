@@ -3,8 +3,6 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\Query\ResultSetMapping;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * Class TechnicalEvolutionRepository

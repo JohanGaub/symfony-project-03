@@ -2249,6 +2249,19 @@ body {
 .bo-title-page h3 {
   padding: 1rem 0; }
 
+.bo-evolution .panel-top-line {
+  display: flex; }
+  .bo-evolution .panel-top-line .evolution-status {
+    display: inline-block;
+    border: 1px solid #1d1d1d;
+    border-radius: 3px;
+    padding: 0.25rem 0.75rem;
+    margin: auto 0.5rem auto 0; }
+
+.bo-evolution .panel-footer .bottom-footer {
+  display: flex;
+  justify-content: space-between; }
+
 .historique-communit {
   margin-top: 21rem;
   margin-bottom: 6rem;
