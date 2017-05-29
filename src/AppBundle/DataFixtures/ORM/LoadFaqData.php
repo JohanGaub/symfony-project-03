@@ -26,7 +26,7 @@ class LoadFaqData extends AbstractFixture implements OrderedFixtureInterface
 
         for($i = 0; $i < DataParameters::NB_FAQ; $i++){
             $faq = new Faq();
-            $faq->setTitle($faker->title);
+            $faq->setTitle($faker->words(3, true));
             $faq->setSumUp($faker->sentence);
             $faq->setContent($faker->paragraph());
             $faq->setUpload($faker->sentence());

@@ -2,6 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Company;
+use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Entity\Ticket;
+use AppBundle\Entity\UserProfile;
+use AppBundle\Entity\userTechnicalEvolution;
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,14 +63,14 @@ class User
     private $token;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="token_limit_date", type="datetime", nullable=true)
      */
     private $tokenLimitDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Company", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="users", cascade={"persist"})
      */
     private $company;
 
@@ -80,6 +88,12 @@ class User
      * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist"})
      */
     private $userProfile;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="user")
+     */
+    private $tickets;
+
 
     /**
      * Get id
@@ -210,7 +224,7 @@ class User
     /**
      * Set tokenLimitDate
      *
-     * @param \DateTime $tokenLimitDate
+     * @param DateTime $tokenLimitDate
      *
      * @return User
      */
@@ -224,7 +238,7 @@ class User
     /**
      * Get tokenLimitDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTokenLimitDate()
     {
@@ -235,17 +249,17 @@ class User
      */
     public function __construct()
     {
-        $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->technicalEvolutions = new ArrayCollection();
     }
 
     /**
      * Set company
      *
-     * @param \AppBundle\Entity\Company $company
+     * @param Company $company
      *
      * @return User
      */
-    public function setCompany(\AppBundle\Entity\Company $company = null)
+    public function setCompany(Company $company = null)
     {
         $this->company = $company;
 
@@ -255,7 +269,7 @@ class User
     /**
      * Get company
      *
-     * @return \AppBundle\Entity\Company
+     * @return Company
      */
     public function getCompany()
     {
@@ -265,11 +279,11 @@ class User
     /**
      * Add technicalEvolution
      *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     * @param TechnicalEvolution $technicalEvolution
      *
      * @return User
      */
-    public function addTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
+    public function addTechnicalEvolution(TechnicalEvolution $technicalEvolution)
     {
         $this->technicalEvolutions[] = $technicalEvolution;
 
@@ -279,9 +293,9 @@ class User
     /**
      * Remove technicalEvolution
      *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     * @param TechnicalEvolution $technicalEvolution
      */
-    public function removeTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
+    public function removeTechnicalEvolution(TechnicalEvolution $technicalEvolution)
     {
         $this->technicalEvolutions->removeElement($technicalEvolution);
     }
@@ -289,7 +303,7 @@ class User
     /**
      * Get technicalEvolutions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getTechnicalEvolutions()
     {
@@ -299,11 +313,11 @@ class User
     /**
      * Set userProfile
      *
-     * @param \AppBundle\Entity\UserProfile $userProfile
+     * @param UserProfile $userProfile
      *
      * @return User
      */
-    public function setUserProfile(\AppBundle\Entity\UserProfile $userProfile = null)
+    public function setUserProfile(UserProfile $userProfile = null)
     {
         $this->userProfile = $userProfile;
 
@@ -313,7 +327,7 @@ class User
     /**
      * Get userProfile
      *
-     * @return \AppBundle\Entity\UserProfile
+     * @return UserProfile
      */
     public function getUserProfile()
     {
@@ -323,11 +337,11 @@ class User
     /**
      * Add userTechnicalEvolution
      *
-     * @param \AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution
+     * @param userTechnicalEvolution $userTechnicalEvolution
      *
      * @return User
      */
-    public function addUserTechnicalEvolution(\AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution)
+    public function addUserTechnicalEvolution(userTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
 
@@ -337,9 +351,9 @@ class User
     /**
      * Remove userTechnicalEvolution
      *
-     * @param \AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution
+     * @param userTechnicalEvolution $userTechnicalEvolution
      */
-    public function removeUserTechnicalEvolution(\AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution)
+    public function removeUserTechnicalEvolution(userTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
     }
@@ -347,10 +361,44 @@ class User
     /**
      * Get userTechnicalEvolutions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getUserTechnicalEvolutions()
     {
         return $this->userTechnicalEvolutions;
+    }
+
+    /**
+     * Add ticket
+     *
+     * @param Ticket $ticket
+     *
+     * @return User
+     */
+    public function addTicket(Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param Ticket $ticket
+     */
+    public function removeTicket(Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 }

@@ -33,6 +33,7 @@ class DataParameters
     const NB_TECHNICAL_EVOLUTION        = 50;
     const NB_DOCUMENTATION              = 25;
     const NB_FAQ                        = 20;
+    const NB_TICKET                     = 10;
 
     /**
      * @return mixed
@@ -50,4 +51,6 @@ class DataParameters
 
         return $users[mt_rand(0, 5)];
     }
+
+
 }

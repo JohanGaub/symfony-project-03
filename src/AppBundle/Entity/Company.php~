@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -204,17 +207,17 @@ class Company
      */
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
      * Add user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return Company
      */
-    public function addUser(\AppBundle\Entity\User $user)
+    public function addUser(User $user)
     {
         $this->users[] = $user;
 
@@ -224,9 +227,9 @@ class Company
     /**
      * Remove user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      */
-    public function removeUser(\AppBundle\Entity\User $user)
+    public function removeUser(User $user)
     {
         $this->users->removeElement($user);
     }
@@ -234,7 +237,7 @@ class Company
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getUsers()
     {

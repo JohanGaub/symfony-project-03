@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -58,13 +60,13 @@ class Faq
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="faqs")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="faqs", cascade={"persist"})
      */
     private $category;
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="faqs")
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="faqs", cascade={"persist"})
      */
     private $product;
 
@@ -201,11 +203,11 @@ class Faq
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category
      *
      * @return Faq
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -215,7 +217,7 @@ class Faq
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category
+     * @return Category
      */
     public function getCategory()
     {
@@ -225,11 +227,11 @@ class Faq
     /**
      * Set product
      *
-     * @param \AppBundle\Entity\Product $product
+     * @param Product $product
      *
      * @return Faq
      */
-    public function setProduct(\AppBundle\Entity\Product $product = null)
+    public function setProduct(Product $product = null)
     {
         $this->product = $product;
 
@@ -239,7 +241,7 @@ class Faq
     /**
      * Get product
      *
-     * @return \AppBundle\Entity\Product
+     * @return Product
      */
     public function getProduct()
     {
