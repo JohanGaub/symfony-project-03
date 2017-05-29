@@ -25,9 +25,9 @@ class TechnicalEvolutionRepository extends \Doctrine\ORM\EntityRepository
      * @param $params
      * @return array
      */
-    public function getNbEvolution($params)
+    public function getNbEvolution($params = [])
     {
-        return $this->getNbEvolutionNativeQuery($params)->getResult();
+        return $this->getNbEvolutionQuery($params)->getResult();
     }
 
     /**
@@ -113,7 +113,7 @@ class TechnicalEvolutionRepository extends \Doctrine\ORM\EntityRepository
      * @param $params
      * @return \Doctrine\ORM\Query
      */
-    private function getNbEvolutionNativeQuery($params)
+    private function getNbEvolutionQuery($params)
     {
         # get string params
         $searches = $this->getStringParameters($params);
