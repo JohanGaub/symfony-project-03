@@ -95,7 +95,7 @@ class TechnicalEvolution
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="technicalEvolutions")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="technicalEvolutions", cascade={"persist"})
      */
     private $user;
 

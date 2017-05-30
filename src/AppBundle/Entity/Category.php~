@@ -8,73 +8,43 @@ use Doctrine\ORM\Mapping as ORM;
  * Category
  *
  * @ORM\Table(name="category")
-<<<<<<< HEAD
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
-=======
  * @ORM\Entity
->>>>>>> 82611720d58f7a4360151235bbd5fcfd1fc92b21
  */
 class Category
 {
     /**
-<<<<<<< HEAD
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-=======
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
->>>>>>> 82611720d58f7a4360151235bbd5fcfd1fc92b21
      */
     private $id;
 
     /**
      * @var string
      *
-<<<<<<< HEAD
-     * @ORM\Column(name="title", type="string", length=255)
-=======
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
->>>>>>> 82611720d58f7a4360151235bbd5fcfd1fc92b21
      */
     private $title;
 
     /**
      * @var string
      *
-<<<<<<< HEAD
-     * @ORM\Column(name="tag", type="string", length=255)
-=======
      * @ORM\Column(name="tag", type="string", length=255, nullable=false)
->>>>>>> 82611720d58f7a4360151235bbd5fcfd1fc92b21
      */
     private $tag;
 
     /**
      * @var string
      *
-<<<<<<< HEAD
-     * @ORM\Column(name="description", type="text")
-=======
      * @ORM\Column(name="description", type="text", nullable=false)
->>>>>>> 82611720d58f7a4360151235bbd5fcfd1fc92b21
      */
     private $description;
 
     /**
      * @var string
      *
-<<<<<<< HEAD
-     * @ORM\Column(name="type", type="string", length=255)
-     */
-    private $type;
-
-=======
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
     private $type;
@@ -95,16 +65,11 @@ class Category
      */
     private $documentations;
 
->>>>>>> 82611720d58f7a4360151235bbd5fcfd1fc92b21
 
     /**
      * Get id
      *
-<<<<<<< HEAD
-     * @return int
-=======
      * @return integer
->>>>>>> 82611720d58f7a4360151235bbd5fcfd1fc92b21
      */
     public function getId()
     {
@@ -206,10 +171,6 @@ class Category
     {
         return $this->type;
     }
-<<<<<<< HEAD
-}
-
-=======
     /**
      * Constructor
      */
@@ -322,4 +283,3 @@ class Category
         return $this->documentations;
     }
 }
->>>>>>> 82611720d58f7a4360151235bbd5fcfd1fc92b21
