@@ -63,7 +63,7 @@ class Ticket
     /**
      * @var string
      *
-     * @ORM\Column(name="upload", type="blob")
+     * @ORM\Column(name="upload", type="blob", nullable=true)
      */
     private $upload;
 
@@ -88,7 +88,6 @@ class Ticket
      */
     private $endDate;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="tickets", cascade={"persist"})
      */
@@ -104,8 +103,10 @@ class Ticket
      */
     private $product;
 
-
-
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="ticket")
+     */
+    private $comments;
 
     /**
      * Get id
@@ -403,5 +404,46 @@ class Ticket
     public function getProduct()
     {
         return $this->product;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Ticket
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

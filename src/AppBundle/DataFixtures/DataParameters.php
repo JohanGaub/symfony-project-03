@@ -34,6 +34,7 @@ class DataParameters
     const NB_DOCUMENTATION              = 25;
     const NB_FAQ                        = 20;
     const NB_TICKET                     = 10;
+    const NB_COMMENT                    = 5;
 
     /**
      * @return mixed
@@ -43,14 +44,25 @@ class DataParameters
         $users = [
             0 => 'user_super_admin_id_' . mt_rand(0, self::NB_SUPER_ADMIN - 1),
             1 => 'user_admin_id_' . mt_rand(0, self::NB_ADMIN - 1),
-            2 => 'user_projet_resp_id_' . mt_rand(0, self::NB_PROJECT_RESP - 1),
+            2 => 'user_project_resp_id_' . mt_rand(0, self::NB_PROJECT_RESP - 1),
             3 => 'user_technician_id_' . mt_rand(0, self::NB_TECHNICIAN - 1),
             4 => 'user_commercial_id_' . mt_rand(0, self::NB_COMMERCIAL - 1),
             5 => 'user_final_client_id_' . mt_rand(0, self::NB_FINAL_CLIENT - 1),
         ];
-
         return $users[mt_rand(0, 5)];
     }
 
+    /**
+     * @return mixed
+     */
+    public static function getRandomResponsibleUser()
+    {
+        $users = [
+            0 => 'user_super_admin_id_' . mt_rand(0, self::NB_SUPER_ADMIN - 1),
+            1 => 'user_admin_id_' . mt_rand(0, self::NB_ADMIN - 1),
+            2 => 'user_project_resp_id_' . mt_rand(0, self::NB_PROJECT_RESP - 1),
+        ];
+        return $users[mt_rand(0,2)];
+    }
 
 }

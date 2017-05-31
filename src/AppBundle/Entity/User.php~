@@ -80,7 +80,7 @@ class User
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="userTechnicalEvolution", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="user")
      */
     private $userTechnicalEvolutions;
 
@@ -94,6 +94,10 @@ class User
      */
     private $tickets;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+     */
+    private $comments;
 
     /**
      * Get id
@@ -400,5 +404,39 @@ class User
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return User
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

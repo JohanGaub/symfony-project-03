@@ -81,19 +81,19 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         }
 
         /**
-         * ProjetctResp
+         * ProjectResp
          */
         for ($i = 0; $i < DataParameters::NB_PROJECT_RESP; $i++){
             $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
             $user = new User();
             $user->setEmail('projresp' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
-            $user->setRoles(['ROLE_PROJET_RESP']);
+            $user->setRoles(['ROLE_PROJECT_RESP']);
             $user->setIsActive(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
-            $this->setReference('user_projet_resp_id_' . $i, $user);
+            $this->setReference('user_project_resp_id_' . $i, $user);
             $em->persist($user);
             $em->persist($profile);
         }
