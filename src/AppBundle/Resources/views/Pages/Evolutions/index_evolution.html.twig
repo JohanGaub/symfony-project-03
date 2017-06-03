@@ -13,7 +13,6 @@
 
             <div class="col-lg-12">
                 <a href="{{ path('evolutionAdd') }}">Ajouter une nouvelle évolution</a>
-                {{ dump(evolutions[0].userTechnicalEvolutions[0].comment) }}
                 {{ dump(evolutions) }}
             </div>
 
@@ -35,7 +34,6 @@
                             <div class="top-footer">
                                 <p>Type de catégorie : {{ evolution.category.type }}</p>
                                 <p>Nom de catégorie : {{ evolution.category.title }}</p>
-                                <p>Tag de catégorie : {{ evolution.category.tag }}</p>
                             </div>
                             <div class="bottom-footer">
                                 <div class="footer-date">

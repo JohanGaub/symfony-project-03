@@ -1,7 +1,7 @@
 <div class="listPagination">
     <nav>
         <ul class="pagination">
-            {% if pagination.page > 1 %}
+            {% if pagination.page > 1 and pagination.pages_count > 1 %}
                 <li>
                     <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}">
                         <i class="material-icons">Début</i>

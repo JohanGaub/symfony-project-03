@@ -23,7 +23,7 @@ class TechnicalEvolutionController extends Controller
     public function indexAction($page = 1)
     {
         $params = [
-            'c.type' => 'other'
+            'ct.value' => 'technical',
         ];
 
         # get technical evolution repository
