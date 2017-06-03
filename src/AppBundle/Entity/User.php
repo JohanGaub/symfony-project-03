@@ -72,7 +72,7 @@ class User
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="userTechnicalEvolution", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="user")
      */
     private $userTechnicalEvolutions;
 

@@ -3,12 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  */
 class Category
 {
@@ -31,29 +32,14 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="tag", type="string", length=255, nullable=false)
-     */
-    private $tag;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
-     */
-    private $type;
-
-    /**
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="category")
      */
     private $technicalEvolutions;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Faq", mappedBy="category")
@@ -64,6 +50,12 @@ class Category
      * @ORM\OneToMany(targetEntity="Documentation", mappedBy="category")
      */
     private $documentations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="type", referencedColumnName="id")
+     */
+    private $type;
 
 
     /**
@@ -101,30 +93,6 @@ class Category
     }
 
     /**
-     * Set tag
-     *
-     * @param string $tag
-     *
-     * @return Category
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
@@ -149,29 +117,6 @@ class Category
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Category
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-    /**
      * Constructor
      */
     public function __construct()
@@ -179,6 +124,7 @@ class Category
         $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->documentations = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->types = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -281,5 +227,37 @@ class Category
     public function getDocumentations()
     {
         return $this->documentations;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \AppBundle\Entity\Dictionary $type
+     *
+     * @return Category
+     */
+    public function setType(\AppBundle\Entity\Dictionary $type = null)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \AppBundle\Entity\Dictionary
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

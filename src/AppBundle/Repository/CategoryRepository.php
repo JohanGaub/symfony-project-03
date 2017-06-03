@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Query\ResultSetMapping;
+
 /**
  * CategoryRepository
  *
@@ -10,4 +12,31 @@ namespace AppBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
+    public function getCategoryTypeQuery()
+    {
+        return $this->getCategoryTypeNativeQuery()->getResult();
+    }
+
+    /**
+     * @return \Doctrine\ORM\NativeQuery
+     */
+    private function getCategoryTypeNativeQuery()
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult($this->getEntityName(), 'c');
+        $rsm->addFieldResult('c', 'id', 'id');
+        $rsm->addFieldResult('c', 'type', 'type');
+
+        $table = $this->getClassMetadata()->getTableName();
+
+        /** @noinspection SqlResolve */
+        return $this->getEntityManager()->createNativeQuery("
+            SELECT DISTINCT c.type
+            FROM {$table} c 
+        ", $rsm);
+    }
+
 }

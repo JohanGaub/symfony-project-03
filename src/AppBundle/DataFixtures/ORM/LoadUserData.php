@@ -22,8 +22,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     private $faker;
 
     /**
-     * @param $faker
      * @return UserProfile
+     * @internal param $faker
      */
     private function setUserProfile()
     {

@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Form\TechnicalEvolutionType;
+use AppBundle\Form\Evolution\TechnicalEvolutionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,6 +59,9 @@ class TechnicalEvolutionController extends Controller
         $form = $this->createForm(TechnicalEvolutionType::class, $te);
         $form->handleRequest($request);
 
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Category');
+        $typeCategory = $repo->getCategoryTypeQuery();
+
         if ($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
             $em->persist($te);
@@ -69,6 +72,7 @@ class TechnicalEvolutionController extends Controller
 
         return $this->render('AppBundle:Pages/Evolutions:add_evolution.html.twig', [
             'form' => $form->createView(),
+            'test' => $typeCategory,
         ]);
     }
 

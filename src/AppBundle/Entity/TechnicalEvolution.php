@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * TechnicalEvolution
@@ -50,16 +51,14 @@ class TechnicalEvolution
     private $reason;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="status", referencedColumnName="id")
      */
     private $status;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="origin", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="origin", referencedColumnName="id")
      */
     private $origin;
 
@@ -213,21 +212,19 @@ class TechnicalEvolution
     /**
      * Set status
      *
-     * @param string $status
-     *
+     * @param Dictionary|string $status
      * @return TechnicalEvolution
      */
-    public function setStatus($status)
+    public function setStatus(\AppBundle\Entity\Dictionary $status)
     {
         $this->status = $status;
-
         return $this;
     }
 
     /**
      * Get status
      *
-     * @return string
+     * @return \AppBundle\Entity\Dictionary
      */
     public function getStatus()
     {
@@ -235,23 +232,9 @@ class TechnicalEvolution
     }
 
     /**
-     * Set origin
-     *
-     * @param string $origin
-     *
-     * @return TechnicalEvolution
-     */
-    public function setOrigin($origin)
-    {
-        $this->origin = $origin;
-
-        return $this;
-    }
-
-    /**
      * Get origin
      *
-     * @return string
+     * @return \AppBundle\Entity\Dictionary
      */
     public function getOrigin()
     {
@@ -259,10 +242,21 @@ class TechnicalEvolution
     }
 
     /**
+     * Set origin
+     *
+     * @param mixed $origin
+     * @return TechnicalEvolution
+     */
+    public function setOrigin(\AppBundle\Entity\Dictionary $origin = null)
+    {
+        $this->origin = $origin;
+        return $this;
+    }
+
+    /**
      * Set expectedDelay
      *
      * @param \DateTime $expectedDelay
-     *
      * @return TechnicalEvolution
      */
     public function setExpectedDelay($expectedDelay)
@@ -286,7 +280,6 @@ class TechnicalEvolution
      * Set creationDate
      *
      * @param \DateTime $creationDate
-     *
      * @return TechnicalEvolution
      */
     public function setCreationDate($creationDate)
@@ -310,7 +303,6 @@ class TechnicalEvolution
      * Set updateDate
      *
      * @param \DateTime $updateDate
-     *
      * @return TechnicalEvolution
      */
     public function setUpdateDate($updateDate)
@@ -341,7 +333,6 @@ class TechnicalEvolution
      * Set category
      *
      * @param \AppBundle\Entity\Category $category
-     *
      * @return TechnicalEvolution
      */
     public function setCategory(\AppBundle\Entity\Category $category = null)
@@ -365,7 +356,6 @@ class TechnicalEvolution
      * Set product
      *
      * @param \AppBundle\Entity\Product $product
-     *
      * @return TechnicalEvolution
      */
     public function setProduct(\AppBundle\Entity\Product $product = null)
@@ -389,7 +379,6 @@ class TechnicalEvolution
      * Set user
      *
      * @param \AppBundle\Entity\User $user
-     *
      * @return TechnicalEvolution
      */
     public function setUser(\AppBundle\Entity\User $user = null)
@@ -413,7 +402,6 @@ class TechnicalEvolution
      * Add userTechnicalEvolution
      *
      * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
-     *
      * @return TechnicalEvolution
      */
     public function addUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
