@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * TechnicalEvolution
@@ -85,6 +86,7 @@ class TechnicalEvolution
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="technicalEvolutions")
+     * @Assert\NotBlank()
      */
     private $category;
 

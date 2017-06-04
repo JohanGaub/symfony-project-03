@@ -35,7 +35,6 @@ class Dictionary
      */
     private $value;
 
-
     /**
      * Get id
      *

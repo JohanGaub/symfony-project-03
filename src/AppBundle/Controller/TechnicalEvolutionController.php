@@ -59,20 +59,27 @@ class TechnicalEvolutionController extends Controller
         $form = $this->createForm(TechnicalEvolutionType::class, $te);
         $form->handleRequest($request);
 
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Category');
-        $typeCategory = $repo->getCategoryTypeQuery();
-
         if ($form->isSubmitted() && $form->isValid()){
+            /**
+             * Form works
+             * TODO -> need to rewords has user relations
+             */
+            $dictionaryStatus = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
+                ->getStartingEvolutionStatus();
+
+            $te->setCreationDate(new \DateTime('now'));
+            $te->setStatus($dictionaryStatus[0]);
+            $te->setCategory($form->getData()->getCategory());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($te);
             $em->flush();
             $this->addFlash('notice', 'Votre demande d\'évolution à bien été prise en compte !');
-            return $this->redirectToRoute('evolutionHome');
+            #return $this->redirectToRoute('evolutionHome');
         }
 
         return $this->render('AppBundle:Pages/Evolutions:add_evolution.html.twig', [
             'form' => $form->createView(),
-            'test' => $typeCategory,
         ]);
     }
 

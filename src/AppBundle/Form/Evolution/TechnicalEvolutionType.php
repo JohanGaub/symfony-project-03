@@ -2,22 +2,20 @@
 
 namespace AppBundle\Form\Evolution;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Product;
+use AppBundle\Repository\CategoryRepository;
 use AppBundle\Entity\TechnicalEvolution;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Repository\DictionaryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 /**
  * Class TechnicalEvolutionType
@@ -33,40 +31,79 @@ class TechnicalEvolutionType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
-            ->add('category_type', EntityType::class, [
-                'class'             => 'AppBundle\Entity\Category',
-                'choice_label'      => function ($category) { return $category->getType(); },
-                'placeholder'       => 'Sélectionnez votre type de catégorie',
-                'mapped'            => false,
-                'label'             => 'Type de categorie',
+            ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
+            ->add('content', TextareaType::class, ['label' => 'Contenu'])
+            ->add('reason', TextType::class, [
+                'label'         => 'Raison',
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Enregistrer']);
+            ->add('origin', EntityType::class, [
+                'class'         => 'AppBundle\Entity\Dictionary',
+                'query_builder' => function (DictionaryRepository $repo) {
+                    #Find all status in dictionary
+                    return $repo->getEvolutionOriginTypeList();
+                },
+                'label'         => 'Origine de la demande',
+                'placeholder'   => 'Qui est à la base de cette évolution ?',
+                'multiple'      => false,
+            ])
+            ->add('expectedDelay', DateType::class, [
+                'label'         => 'Délais souhaité',
+                'format'        => 'dd MM yyyy'
+            ])
+            ->add('category_type', EntityType::class, [
+                'class'         => 'AppBundle\Entity\Dictionary',
+                'query_builder' => function (DictionaryRepository $repo) {
+                    # Find all category_type for select list
+                    return $repo->getCategoryTypeList();
+                },
+                'label'         => 'Type de catégorie',
+                'placeholder'   => 'Sélectionnez votre région',
+                'mapped'        => false,
+                'required'      => true,
+                'multiple'      => false,
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' =>  'Soumettre la demande'
+            ])
+        ;
 
         $builder->get('category_type')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
-                $form           = $event->getForm()->getParent();
-                $category_type  = $event->getForm()->getData()->getType();
-
-                $formOptions = [
-                    'class'         => 'AppBundle\Entity\Category',
-                    'choice_label'  => $form->getData()->getTitle(),
-                    'query_builder' => function(EntityRepository $er) use ($category_type){
-                        return $er->createQueryBuilder('c')
-                            ->select('c.title')
-                            ->where('c.type = :category_type')
-                            ->setParameter('category_type', $category_type);
-                    },
-                    'placeholder'   => 'Sélectionnez votre type de catégorie',
-                    'label'         => 'Nom de la categorie',
-                    'mapped'        => false,
-                ];
-
-                $form->add('category_name', EntityType::class, $formOptions);
+                $categoryType = $event->getForm()->getData()->getId();
+                $form = $event->getForm();
+                $this->addCategoryNameField($form->getParent(), $categoryType);
             }
         );
+    }
 
-
+    /**
+     * Add Category name field to form
+     *
+     * @param FormInterface $form
+     * @param $categoryType
+     * @internal param Dictionary $dictionary
+     */
+    private function addCategoryNameField(FormInterface $form, $categoryType)
+    {
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'category',
+            EntityType::class,
+            null,
+            [
+                'class'         => 'AppBundle\Entity\Category',
+                'query_builder' => function(CategoryRepository $repo) use ($categoryType) {
+                    # find category name by select type
+                    return $repo->getCategoryNameList($categoryType);
+                },
+                'label'         => 'Catégorie',
+                'placeholder'   => 'Séléctionnez votre catégorie',
+                'mapped'        => true,
+                'required'      => true,
+                'auto_initialize' => false,
+            ]
+        );
+        $form->add($builder->getForm());
     }
 
     /**
@@ -84,7 +121,7 @@ class TechnicalEvolutionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle_technicalEvolution_type';
+        return 'app_bundle_technicalEvolution';
     }
 
 }

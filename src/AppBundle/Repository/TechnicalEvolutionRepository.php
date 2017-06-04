@@ -167,8 +167,9 @@ class TechnicalEvolutionRepository extends \Doctrine\ORM\EntityRepository
          * Here we get all params send in function for search
          * Work with key LIKE 'value%'
          */
-        $totalSearches = count($params);
-        $searches = [];
+        $totalSearches  = count($params);
+        $searches       = [];
+
         foreach ($params as $key => $value)
             $searches[] = $key . " LIKE " . "'" . $value . "%'";
 
