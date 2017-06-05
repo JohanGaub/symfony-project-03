@@ -62,7 +62,7 @@ class TechnicalEvolutionController extends Controller
         if ($form->isSubmitted() && $form->isValid()){
             /**
              * Form works
-             * TODO -> need to rewords has user relations
+             * TODO -> need to rework on user relations
              */
             $dictionaryStatus = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
                 ->getStartingEvolutionStatus();

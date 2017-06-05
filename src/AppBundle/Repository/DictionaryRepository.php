@@ -59,4 +59,37 @@ class DictionaryRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    /**
+     * Get all dictionary
+     *
+     * @return array
+     */
+    public function getDictionaryList()
+    {
+        return $this->getDictionaryListNativeQuery()->getResult();
+    }
+
+    /**
+     * @return \Doctrine\ORM\NativeQuery
+     */
+    private function getDictionaryListNativeQuery()
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult($this->getEntityName(), 'd');
+        $rsm->addFieldResult('d', 'id', 'id');
+        $rsm->addFieldResult('d', 'type', 'type');
+        $rsm->addFieldResult('d', 'value', 'value');
+
+        # set entity name
+        $table = $this->getClassMetadata()->getTableName();
+
+        /** @noinspection SqlResolve */
+        $query = $this->getEntityManager()->createNativeQuery("
+            SELECT d.id, d.type, d.value
+            FROM {$table} d
+        ", $rsm);
+
+        return $query;
+    }
 }
