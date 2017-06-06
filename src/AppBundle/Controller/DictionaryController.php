@@ -62,11 +62,9 @@ class DictionaryController extends Controller
      */
     public function addAction(Request $request)
     {
-        if ($request->isXmlHttpRequest())
-        {
-
-            return new JsonResponse();
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
         }
-        throw new HttpException('500', 'Invalid call');;
+
     }
 }

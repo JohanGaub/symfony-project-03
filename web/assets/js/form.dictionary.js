@@ -8,14 +8,25 @@ function formListening(formId)
 {
     $("#dictionary_form_" + formId).submit( function (e) {
         e.preventDefault()
-        let $form = $(this).closest('form')
-        let data = {}
-        data[$(this).attr('name')] = $(this).val()
-        //dump($(this))
+        let $this = $(this)
+        let value = $('#value').val()
 
-        $.post($form.attr('action'), data).then(function (data) {
-
-        })
+        if (value === ''){
+            alert('Votre valeur ne peut être vide !')
+        } else {
+            $.ajax({
+                type: $this.attr('method'),
+                url: $this.attr('action'),
+                dataType: $this.serialize(),
+                timeout: 3000,
+                success: function(){
+                    $("list-" + formId).append('<li class="list-group-item">' + value + '</li>')
+                },
+            });
+        }
     })
 }
-formListening('category_type')
+
+for (let id of formId){
+    formListening(id)
+}
