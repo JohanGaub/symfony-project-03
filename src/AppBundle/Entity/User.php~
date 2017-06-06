@@ -36,11 +36,9 @@ class User
     private $password;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="roles", type="text", nullable=false)
+     * @ORM\Column(name="roles", type="array")
      */
-    private $roles;
+    private $roles = array();
 
     /**
      * @var boolean
@@ -72,13 +70,14 @@ class User
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user")
      */
     private $technicalEvolutions;
+
     /**
      * @ORM\OneToMany(targetEntity="userTechnicalEvolution", mappedBy="user")
      */
     private $userTechnicalEvolutions;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserProfile")
+     * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist"})
      */
     private $userProfile;
 
@@ -141,27 +140,23 @@ class User
     }
 
     /**
-     * Set roles
-     *
-     * @param string $roles
-     *
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
      * Get roles
      *
-     * @return string
+     * @return mixed
      */
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -323,5 +318,39 @@ class User
     public function getUserProfile()
     {
         return $this->userProfile;
+    }
+
+    /**
+     * Add userTechnicalEvolution
+     *
+     * @param \AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution
+     *
+     * @return User
+     */
+    public function addUserTechnicalEvolution(\AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution)
+    {
+        $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
+
+        return $this;
+    }
+
+    /**
+     * Remove userTechnicalEvolution
+     *
+     * @param \AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution
+     */
+    public function removeUserTechnicalEvolution(\AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution)
+    {
+        $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
+    }
+
+    /**
+     * Get userTechnicalEvolutions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserTechnicalEvolutions()
+    {
+        return $this->userTechnicalEvolutions;
     }
 }
