@@ -121,9 +121,9 @@ class SecurityController extends Controller
                     $user->setToken(null);
                     $em->flush();
                     $this->addFlash("notice", "Votre mot de passe à bien été changé. Vous pouvez vous desormais connecter.");
-                    return $this->redirectToRoute('home');
+                    return $this->redirectToRoute('login');
                 } else {
-                    $message = "Les mots de passes ne correspondent pas.";
+                    $message = "Les mots des passe ne correspondent pas.";
                 }
             }
             return $this->render('AppBundle:Security:passwordReset.html.twig', [
