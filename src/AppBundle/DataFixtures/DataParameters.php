@@ -42,7 +42,7 @@ class DataParameters
         $users = [
             0 => 'user_super_admin_id_' . mt_rand(0, self::NB_SUPER_ADMIN - 1),
             1 => 'user_admin_id_' . mt_rand(0, self::NB_ADMIN - 1),
-            2 => 'user_projet_resp_id_' . mt_rand(0, self::NB_PROJECT_RESP - 1),
+            2 => 'user_project_resp_id_' . mt_rand(0, self::NB_PROJECT_RESP - 1),
             3 => 'user_technician_id_' . mt_rand(0, self::NB_TECHNICIAN - 1),
             4 => 'user_commercial_id_' . mt_rand(0, self::NB_COMMERCIAL - 1),
             5 => 'user_final_client_id_' . mt_rand(0, self::NB_FINAL_CLIENT - 1),

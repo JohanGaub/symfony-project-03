@@ -1,0 +1,116 @@
+#login, #password-reset, #password-process, #password-change {
+  padding-top: 4rem;
+  color: $paragraph-color;
+  min-height: 100%;
+  font-family: Arial, sans-serif;
+}
+/* Set up width of form */
+.form-wrap {
+  width: 40%;
+  margin: 0 auto;
+  }
+.form-comment-paragraph {
+  text-align: center;
+}
+/* Set up style of checkbox */
+.form-group {
+  margin-bottom: 2rem;
+  font-size: 1.9rem;
+}
+.form-group:hover {
+  color: $secondary-color;
+}
+.checkbox {
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+
+  .login-checkbox {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    border-radius: 0 !important;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  .label {
+    color: #6d6d6d;
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+}
+
+.form-paragraph {
+  color: $primary-color;
+  font-size: 2.3rem;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 2rem;
+}
+.btn.btn-custom {
+  margin-bottom: 2rem;
+}
+/* style of input fields */
+.form-control {
+  color: #212121;
+  border-radius: 0 !important;
+  height: 5.8rem !important;
+  line-height: 3rem;
+  font-size: 2rem;
+}
+.btn-custom {
+  color: #fff;
+  background-color: $primary-color;
+}
+.btn-custom:hover,
+.btn-custom:focus {
+  color: #fff;
+}
+/* style of submit button*/
+.form-submit-button{
+  border-radius: 0;
+  font-size: 1.9rem;
+  font-weight: bold;
+  height: 6rem;
+  vertical-align: middle;
+}
+.form-submit-button:hover {
+  background-color: $secondary-color;
+}
+
+.forget-link {
+  font-size: 1.8rem;
+  color: $secondary-color;
+  text-align: center;
+  display: block;
+}
+.forget-link:hover {
+  color: $primary-color;
+}
+
+@media screen and (max-width: 1024px) {
+  .form-wrap {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #login, #password-reset {
+    padding-top: 1rem;
+  }
+  .form-wrap {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 440px) {
+  #login, #password-reset {
+    padding-top: 0;
+  }
+  .form-wrap {
+    width: 100%;
+  }
+}
