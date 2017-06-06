@@ -64,7 +64,42 @@ class DictionaryController extends Controller
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
-        }
+        } else {
+            /**
+             * Get result from ajax call
+             * delete 'dictionary_form_' from id to get category type
+             */
+            $getRequest = $request->request;
+            $fullType = $getRequest->get('dataType');
+            $type = str_replace('dictionary_form_', '', $fullType);
+            $data = $getRequest->get('dataForm');
 
+            $dictionary = new Dictionary();
+            $dictionary->setType($type);
+            $dictionary->setValue($data);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($dictionary);
+            $em->flush();
+
+            return new JsonResponse(array("data" => json_encode($data)));
+        }
+    }
+
+    /**
+     * @param $dictionaryId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/suppression/{dictionaryId}", name="dictionaryDelete")
+     */
+    public function deleteAction($dictionaryId)
+    {
+        $doctrine = $this->getDoctrine();
+        $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
+            ->find($dictionaryId);
+        $em = $doctrine->getManager();
+        $em->remove($dictionary);
+        $em->flush();
+        $this->addFlash("notice", "L'entrée du dictionnaire a bien été supprimé !");
+        return $this->redirectToRoute('dictionaryHome');
     }
 }

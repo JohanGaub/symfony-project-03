@@ -1,3 +1,9 @@
+$( document ).ready(function() {
+    for (let id of formId) {
+        formListening(id)
+    }
+})
+
 let formId = [
     'category_type',
     'technical_evolution_status',
@@ -9,24 +15,26 @@ function formListening(formId)
     $("#dictionary_form_" + formId).submit( function (e) {
         e.preventDefault()
         let $this = $(this)
-        let value = $('#value').val()
+        let value = $('#value_' + formId).val()
+        let type = $(this).attr('id')
 
         if (value === ''){
-            alert('Votre valeur ne peut être vide !')
+            // if field is empty
         } else {
             $.ajax({
                 type: $this.attr('method'),
-                url: $this.attr('action'),
-                dataType: $this.serialize(),
+                url: '/dictionnaire/nouveau',
+                data : {
+                    'dataForm': value,
+                    'dataType': type
+                },
+                dataType: 'json',
                 timeout: 3000,
                 success: function(){
-                    $("list-" + formId).append('<li class="list-group-item">' + value + '</li>')
+                    $("#list_" + formId).append('<li class="list-group-item">' + value + '</li>')
                 },
-            });
+            })
         }
     })
 }
 
-for (let id of formId){
-    formListening(id)
-}
