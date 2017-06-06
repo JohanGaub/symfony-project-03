@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class TicketController
  * @package AppBundle\Controller
+ * @Route("/ticket", name="ticket")
  */
 class TicketController extends Controller
 {
@@ -20,10 +21,9 @@ class TicketController extends Controller
     /**
      * @param $name
      * @return Response
-     * @Route("/ticket", name="ticket")
+     * @Route("/", name="index_ticket")
      */
-
-    public function indexAction($name)
+    public function indexAction()
     {
         $tickets = $this->getDoctrine()->getRepository('AppBundle:Ticket')->findAll();
         return $this->render('@App/Ticket/ticket.html.twig', [
@@ -33,7 +33,7 @@ class TicketController extends Controller
     /**
      * @param Request $request
      * @return RedirectResponse|Response
-     * @Route("/ticket/add", name="add_ticket")
+     * @Route("/add", name="add_ticket")
      */
     public function addAction(Request $request)
     {
@@ -55,7 +55,7 @@ class TicketController extends Controller
      * @param Request $request
      * @param Ticket $ticket
      * @return RedirectResponse|Response
-     * @Route("/ticket/edit", name="edit_category")
+     * @Route("/edit/{category}", name="edit_category")
      */
     public function editAction(Request $request, Ticket $ticket)
     {
@@ -65,6 +65,7 @@ class TicketController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $em->persist($ticket);
             $em->flush();
             return $this->redirectToRoute('ticket');
         }
@@ -77,7 +78,7 @@ class TicketController extends Controller
     /**
      * @param Ticket $ticket
      * @return RedirectResponse
-     * @Route("/ticket/delete", name="delete_ticket")
+     * @Route("/delete/{id}", name="delete_ticket")
      */
     public function deleteAction(Ticket $ticket)
     {

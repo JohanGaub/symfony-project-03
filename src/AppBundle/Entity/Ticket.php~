@@ -3,9 +3,12 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\User;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +48,13 @@ class Ticket
      * @ORM\Column(name="origin", type="string", length=255)
      */
     private $origin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
 
     /**
      * @var string
@@ -410,17 +420,17 @@ class Ticket
      */
     public function __construct()
     {
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
      * Add comment
      *
-     * @param \AppBundle\Entity\Comment $comment
+     * @param Comment $comment
      *
      * @return Ticket
      */
-    public function addComment(\AppBundle\Entity\Comment $comment)
+    public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
 
@@ -430,9 +440,9 @@ class Ticket
     /**
      * Remove comment
      *
-     * @param \AppBundle\Entity\Comment $comment
+     * @param Comment $comment
      */
-    public function removeComment(\AppBundle\Entity\Comment $comment)
+    public function removeComment(Comment $comment)
     {
         $this->comments->removeElement($comment);
     }
@@ -440,10 +450,34 @@ class Ticket
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Ticket
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

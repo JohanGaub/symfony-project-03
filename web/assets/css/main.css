@@ -2317,6 +2317,37 @@ footer {
   .direction-r .desc {
     margin: 1em 4em 0 4em; } }
 
+#ticket {
+  background-color: #fdf0eb; }
+  #ticket .background-ticket {
+    width: 70%;
+    min-width: 30rem;
+    margin: 16.2rem auto 7rem auto;
+    background-image: url("../img/commun-partie2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; }
+  #ticket .block-ticket {
+    width: 70%;
+    min-width: 20rem;
+    padding: 5rem 0;
+    margin: 0 auto; }
+    #ticket .block-ticket .ticket {
+      padding: 1rem 0 5rem 0;
+      background: rgba(255, 255, 255, 0.6); }
+      #ticket .block-ticket .ticket a {
+        color: #dd5116;
+        font-weight: bold;
+        text-align: justify;
+        line-height: 2.2rem;
+        padding: 0 0 1rem 4rem;
+        background-image: url("../img/green-flea3.svg");
+        background-repeat: no-repeat;
+        background-position: 1rem 0.4rem;
+        background-size: 2rem; }
+        #ticket .block-ticket .ticket a:hover {
+          color: #9ac00a; }
+
 .be-flex {
   display: flex; }
 

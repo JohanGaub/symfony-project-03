@@ -1,4 +1,21 @@
-<div>
-    Page ticket
+{% extends ('@App/base.html.twig') %}
 
-</div>
+{% block body %}
+
+    <section id="ticket">
+        <div class="background-ticket">
+            <div class="block-ticket">
+                <div class="ticket">
+
+                    <h3>Tickets</h3>
+                    {%  for ticket in tickets %}
+
+                    <a href="{{ ticket.subject }}"></a></br>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -56,6 +56,11 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             4 => 'non résolu',
             5 => 'archivé',
         ];
+        $types                       = [
+            0 => 'Technique',
+            1 => 'Commercial',
+            2 => 'Autre',
+        ];
 
         for($i = 0 ; $i < DataParameters::NB_TICKET ; $i++)
         {
@@ -66,6 +71,7 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $origin                     = $origins[mt_rand(0, count($origins) - 1)];
             $emergency                  = $emergencies[mt_rand(0, count($emergencies) - 1)];
             $oneStatus                  = $status[mt_rand(0, count($status) - 1)];
+            $type                       = $types[mt_rand(0, count($types) - 1)];
 
             $root                       = $this->container->get('kernel')->getRootDir();
 
@@ -73,6 +79,7 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $ticket->setSubject($faker->sentences(7, true));
             $ticket->setContent($faker->sentences(mt_rand(1, 50), true));
             $ticket->setOrigin($origin);
+            $ticket->setType($type);
             $ticket->setEmergency($emergency);
             $ticket->setStatus($oneStatus);
 
