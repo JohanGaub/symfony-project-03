@@ -3,14 +3,18 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
  *
+ * @property array userProfiles
  * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -31,16 +35,16 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(name="password", type="string", length=64, nullable=false)
      */
     private $password;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="roles", type="text", nullable=false)
+     * @ORM\Column(name="roles", type="array", nullable=false)
      */
-    private $roles;
+    private $roles = array();
 
     /**
      * @var boolean
@@ -64,7 +68,8 @@ class User
     private $tokenLimitDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Company", inversedBy="users")
+     * @var array
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="users", cascade={"persist"})
      */
     private $company;
 
@@ -74,14 +79,28 @@ class User
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="userTechnicalEvolution", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="user")
      */
     private $userTechnicalEvolutions;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserProfile")
+     * @ORM\OneToOne(targetEntity="UserProfile",  cascade={"persist"})
      */
     private $userProfile;
+
+    /**
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    protected $compagnies;
+
+    /**
+     * @var
+     */
+    private $username;
 
     /**
      * Get id
@@ -118,33 +137,25 @@ class User
     }
 
     /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
+     * @return mixed
      */
-    public function setPassword($password)
+    public function getUsername()
     {
-        $this->password = $password;
-
-        return $this;
+        return $this->email;
     }
 
     /**
-     * Get password
-     *
-     * @return string
+     * @param $username
      */
-    public function getPassword()
+    public function setUsername($username)
     {
-        return $this->password;
+        $this->username = $username;
     }
 
     /**
      * Set roles
      *
-     * @param string $roles
+     * @param array $roles
      *
      * @return User
      */
@@ -158,7 +169,7 @@ class User
     /**
      * Get roles
      *
-     * @return string
+     * @return array
      */
     public function getRoles()
     {
@@ -242,6 +253,8 @@ class User
     public function __construct()
     {
         $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->compagnies = new \Doctrine\Common\Collections\ArrayCollection();
+       /* $this->userProfile = new \Doctrine\Common\Collections\ArrayCollection();*/
     }
 
     /**
@@ -261,11 +274,23 @@ class User
     /**
      * Get company
      *
-     * @return \AppBundle\Entity\Company
+     * @return array
      */
     public function getCompany()
     {
         return $this->company;
+    }
+
+
+
+    /**
+     * Get compagnies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCompagnies()
+    {
+        return $this->compagnies;
     }
 
     /**
@@ -303,30 +328,6 @@ class User
     }
 
     /**
-     * Set userProfile
-     *
-     * @param \AppBundle\Entity\UserProfile $userProfile
-     *
-     * @return User
-     */
-    public function setUserProfile(\AppBundle\Entity\UserProfile $userProfile = null)
-    {
-        $this->userProfile = $userProfile;
-
-        return $this;
-    }
-
-    /**
-     * Get userProfile
-     *
-     * @return \AppBundle\Entity\UserProfile
-     */
-    public function getUserProfile()
-    {
-        return $this->userProfile;
-    }
-
-    /**
      * Add userTechnicalEvolution
      *
      * @param \AppBundle\Entity\userTechnicalEvolution $userTechnicalEvolution
@@ -358,5 +359,87 @@ class User
     public function getUserTechnicalEvolutions()
     {
         return $this->userTechnicalEvolutions;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param $password
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
+    /**
+     * Get plainPassword
+     *
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * Set userProfile
+     *
+     * @param \AppBundle\Entity\UserProfile $userProfile
+     *
+     * @return User
+     */
+    public function setUserProfile(\AppBundle\Entity\UserProfile $userProfile = null)
+    {
+        $this->userProfile = $userProfile;
+
+        return $this;
+    }
+
+    /**
+     * Get userProfile
+     *
+     * @return string
+     */
+    public function getUserProfile()
+    {
+        return $this->email;
     }
 }

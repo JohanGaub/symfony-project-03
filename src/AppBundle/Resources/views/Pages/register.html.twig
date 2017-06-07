@@ -1,0 +1,13 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+{{ dump(form) }}
+
+{{ form_start(form) }}
+    {{ form_row(form) }}
+
+    <button type="submit">Register!</button>
+{{ form_end(form) }}
+
+{% endblock %}
+

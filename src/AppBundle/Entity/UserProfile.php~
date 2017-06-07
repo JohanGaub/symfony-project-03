@@ -2,13 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * UserProfile
  *
  * @ORM\Table(name="user_profile")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserProfileRepository")
  */
 class UserProfile
 {
@@ -35,12 +36,6 @@ class UserProfile
      */
     private $lastname;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_of_birth", type="datetime", nullable=false)
-     */
-    private $dateOfBirth;
 
     /**
      * @var string
@@ -48,8 +43,6 @@ class UserProfile
      * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
     private $phone;
-
-
 
     /**
      * Get id
@@ -109,29 +102,7 @@ class UserProfile
         return $this->lastname;
     }
 
-    /**
-     * Set dateOfBirth
-     *
-     * @param \DateTime $dateOfBirth
-     *
-     * @return UserProfile
-     */
-    public function setDateOfBirth($dateOfBirth)
-    {
-        $this->dateOfBirth = $dateOfBirth;
 
-        return $this;
-    }
-
-    /**
-     * Get dateOfBirth
-     *
-     * @return \DateTime
-     */
-    public function getDateOfBirth()
-    {
-        return $this->dateOfBirth;
-    }
 
     /**
      * Set phone
@@ -156,4 +127,7 @@ class UserProfile
     {
         return $this->phone;
     }
+
+
+
 }

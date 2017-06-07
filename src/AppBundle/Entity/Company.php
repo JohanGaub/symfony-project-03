@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,9 +32,9 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="addresse", type="string", length=255, nullable=false)
+     * @ORM\Column(name="adress", type="string", length=255, nullable=false)
      */
-    private $addresse;
+    private $adress;
 
     /**
      * @var string
@@ -69,6 +70,16 @@ class Company
     private $users;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -102,29 +113,7 @@ class Company
         return $this->name;
     }
 
-    /**
-     * Set addresse
-     *
-     * @param string $addresse
-     *
-     * @return Company
-     */
-    public function setAddresse($addresse)
-    {
-        $this->addresse = $addresse;
 
-        return $this;
-    }
-
-    /**
-     * Get addresse
-     *
-     * @return string
-     */
-    public function getAddresse()
-    {
-        return $this->addresse;
-    }
 
     /**
      * Set town
@@ -221,13 +210,7 @@ class Company
     {
         return $this->siret;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
      * Add user
@@ -242,6 +225,7 @@ class Company
 
         return $this;
     }
+
 
     /**
      * Remove user
@@ -262,4 +246,30 @@ class Company
     {
         return $this->users;
     }
+
+    /**
+     * Set adress
+     *
+     * @param string $adress
+     *
+     * @return Company
+     */
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get adress
+     *
+     * @return string
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+
 }
