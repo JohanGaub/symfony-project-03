@@ -6,6 +6,7 @@ use AppBundle\Entity\Dictionary;
 use AppBundle\Form\Dictionary\DictionaryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,35 +65,58 @@ class DictionaryController extends Controller
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
-        } else {
-            /**
-             * Get result from ajax call
-             * delete 'dictionary_form_' from id to get category type
-             */
-            $getRequest = $request->request;
-            $fullType = $getRequest->get('dataType');
-            $type = str_replace('dictionary_form_', '', $fullType);
-            $data = $getRequest->get('dataForm');
-
-            $dictionary = new Dictionary();
-            $dictionary->setType($type);
-            $dictionary->setValue($data);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($dictionary);
-            $em->flush();
-
-            return new JsonResponse(array("data" => json_encode($data)));
         }
+
+        /**
+         * Get result from ajax call
+         * delete 'dictionary_form_' from id to get category type
+         */
+        $getRequest = $request->request;
+        $fullType = $getRequest->get('dataType');
+        $type = str_replace('dictionary_form_', '', $fullType);
+        $data = $getRequest->get('dataForm');
+
+        $dictionary = new Dictionary();
+        $dictionary->setType($type);
+        $dictionary->setValue($data);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($dictionary);
+        $em->flush();
+
+        $id = $dictionary->getId();
+
+        return new JsonResponse(array("data" => json_encode($data), "id" => json_encode($id)));
     }
 
     /**
+     * @param Request $request
      * @param $dictionaryId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/suppression/{dictionaryId}", name="dictionaryDelete")
      */
-    public function deleteAction($dictionaryId)
+    public function deleteAction(Request $request, $dictionaryId)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+
+        $getRequest = $request->request;
+        $id = $getRequest->get('dataId');
+        $type = $getRequest->get('dataType');
+
+        $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
+            ->find($id);
+        #$em = $this->getDoctrine()->getManager();
+        #$em->remove($dictionary[0]);
+        #$em->flush();
+
+
+
+
+        /***
+          OldDeleteAction
+
         $doctrine = $this->getDoctrine();
         $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
             ->find($dictionaryId);
@@ -101,5 +125,6 @@ class DictionaryController extends Controller
         $em->flush();
         $this->addFlash("notice", "L'entrée du dictionnaire a bien été supprimé !");
         return $this->redirectToRoute('dictionaryHome');
+        */
     }
 }

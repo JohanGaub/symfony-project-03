@@ -2262,6 +2262,9 @@ body {
   display: flex;
   justify-content: space-between; }
 
+.dictionary-list a {
+  color: #fff; }
+
 .historique-communit {
   margin-top: 21rem;
   margin-bottom: 6rem;
