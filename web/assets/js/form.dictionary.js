@@ -75,7 +75,6 @@ function updateModalList()
         let dbElementId         = listElementId.replace('list_group_item_', '')
         let dbElementValue      = listElementValue.trim()
 
-
         updateLiFromList(dbElementId, dbElementValue)
     })
 }

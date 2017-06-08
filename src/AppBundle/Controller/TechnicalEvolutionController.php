@@ -44,7 +44,7 @@ class TechnicalEvolutionController extends Controller
 
         return $this->render('AppBundle:Pages/Evolutions:index_evolution.html.twig', [
             'evolutions' => $evolutions,
-            'pagination' => $pagination,
+            'pagination' => $pagination
         ]);
     }
 
@@ -75,11 +75,29 @@ class TechnicalEvolutionController extends Controller
             $em->persist($te);
             $em->flush();
             $this->addFlash('notice', 'Votre demande d\'évolution à bien été prise en compte !');
-            #return $this->redirectToRoute('evolutionHome');
+            return $this->redirectToRoute('evolutionHome');
         }
 
         return $this->render('AppBundle:Pages/Evolutions:add_evolution.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $technicalEvolutionId
+     * @Route("/modification/{technicalEvolutionId}", name="evolutionUpdate")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function updateAction(Request $request, $technicalEvolutionId)
+    {
+        $te = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
+            ->find($technicalEvolutionId);
+        $form = $this->createForm(TechnicalEvolutionType::class, $te);
+        $form->handleRequest($request);
+
+        return $this->render('@App/Pages/Evolutions/add_evolution.html.twig', [
+            'form' => $form
         ]);
     }
 

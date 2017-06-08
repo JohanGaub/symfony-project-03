@@ -12,12 +12,7 @@
             </div>
 
             <div class="col-lg-12">
-                <a href="{{ path('evolutionAdd') }}">Ajouter une nouvelle évolution</a>
-                {{ dump(evolutions) }}
-            </div>
-
-            <div class="bo-title-page col-lg-12">
-                <h3>Nos dernière évolutions techniques</h3>
+                <a href="{{ path('evolutionAdd') }}" class="btn btn-default">Ajouter une nouvelle évolution</a>
             </div>
 
             {% for evolution in evolutions %}
@@ -47,7 +42,6 @@
                             </div>
                         </div>
                     </div>
-                    {{ dump(evolution) }}
                 </div>
             {% endfor %}
 
