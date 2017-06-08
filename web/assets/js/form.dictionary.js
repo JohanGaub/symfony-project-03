@@ -31,9 +31,9 @@ function formSubmitListening(formId)
          * && get id and value
          */
         e.preventDefault()
-        let $this = $(this)
-        let value = $('#value_' + formId).val()
-        let type = $(this).attr('id')
+        let $this   = $(this)
+        let value   = $('#value_' + formId).val()
+        let type    = $(this).attr('id')
 
         if (value === ''){
             // if field is empty
@@ -58,6 +58,10 @@ function formSubmitListening(formId)
     })
 }
 
+/**
+ * updateModalList
+ * Function call information in modal
+ */
 function updateModalList()
 {
     $("#dictionarys-list ul li span a.update").click( function (e) {
@@ -66,15 +70,23 @@ function updateModalList()
          * && get id from li for update by id
          */
         e.preventDefault()
-        let listElementId = $(this).parent().parent().attr('id')
-        let listElementValue = $(this).parent().parent().text()
-        let dbElementId = listElementId.replace('list_group_item_', '')
-        let dbElementValue = listElementValue.trim()
+        let listElementId       = $(this).parent().parent().attr('id')
+        let listElementValue    = $(this).parent().parent().text()
+        let dbElementId         = listElementId.replace('list_group_item_', '')
+        let dbElementValue      = listElementValue.trim()
+
 
         updateLiFromList(dbElementId, dbElementValue)
     })
 }
 
+/**
+ * updateFormList
+ *
+ * Function to refresh new name list after request
+ * @param id
+ * @param value
+ */
 function updateLiFromList(id, value)
 {
     let inputForm   = '#dictionary_input_update'
@@ -84,16 +96,14 @@ function updateLiFromList(id, value)
 
     $(fullForm).submit( function (e) {
         e.preventDefault()
-        let $this       = $(this)
-        let newValue    = $(inputForm).val()
+        let newValue = $(inputForm).val()
 
         if (newValue === '' || newValue === value) {
             // if field is empty or no change are detected
-            alert('BOUM  ' + value)
         } else {
             $.ajax({
-                type: $this.attr('method'),
-                url: '/dictionnaire/modificiation/' + id,
+                type: 'POST',
+                url: '/dictionnaire/modification/' + id,
                 data : {
                     'data': newValue
                 },
@@ -101,13 +111,17 @@ function updateLiFromList(id, value)
                 timeout: 3000,
                 success: function(){
                     // change content of span who have current value
-                    $("#list_value_" + id).replaceWith(newValue)
+                    let focusLi = '#li_value_' + id;
+                    $(focusLi).replaceWith(newValue)
                 },
             })
         }
     })
 }
 
+/**
+ * Function to delete li from list and db
+ */
 function deleteLiFromList()
 {
     $("#dictionarys-list ul li span a.delete").click( function (e) {
@@ -117,8 +131,8 @@ function deleteLiFromList()
          */
         e.preventDefault()
         let $this = $(this)
-        let listElementId = $this.parent().parent().attr('id')
-        let dbElementId = listElementId.replace('list_group_item_', '')
+        let listElementId   = $this.parent().parent().attr('id')
+        let dbElementId     = listElementId.replace('list_group_item_', '')
 
         $.ajax({
             type: 'GET',

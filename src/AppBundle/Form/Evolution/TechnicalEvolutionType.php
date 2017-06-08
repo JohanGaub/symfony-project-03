@@ -6,6 +6,7 @@ use AppBundle\Repository\CategoryRepository;
 use AppBundle\Entity\TechnicalEvolution;
 use AppBundle\Repository\DictionaryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -57,10 +58,14 @@ class TechnicalEvolutionType extends AbstractType
                     return $repo->getCategoryTypeList();
                 },
                 'label'         => 'Type de catégorie',
-                'placeholder'   => 'Sélectionnez votre région',
+                'placeholder'   => 'Sélectionnez votre type de catégorie',
                 'mapped'        => false,
                 'required'      => true,
                 'multiple'      => false,
+            ])
+            ->add('category', ChoiceType::class, [
+                'label'         => 'Catégorie',
+                'placeholder'   => 'Séléctionnez votre catégorie',
             ])
             ->add('submit', SubmitType::class, [
                 'label' =>  'Soumettre la demande'

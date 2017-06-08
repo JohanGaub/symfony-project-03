@@ -54,7 +54,7 @@ class DictionaryController extends Controller
 
         return $this->render('@App/Pages/Dictionary/index_dictionary.html.twig', [
             'dictionarys'   => $dictionarys,
-            'form'          => $form->createView(),
+            'form'          => $form->createView()
         ]);
     }
 
@@ -90,7 +90,10 @@ class DictionaryController extends Controller
 
         $id = $dictionary->getId();
 
-        return new JsonResponse(array("data" => json_encode($data), "id" => json_encode($id)));
+        return new JsonResponse([
+            "data" => json_encode($data),
+            "id" => json_encode($id)
+        ]);
     }
 
     /**
@@ -99,6 +102,7 @@ class DictionaryController extends Controller
      * @Route("/modification/{dictionaryId}", name="dictionaryUpdate")
      * @param Request $request
      * @param $dictionaryId
+     * @return JsonResponse
      */
     public function updateAction(Request $request, $dictionaryId)
     {
@@ -116,6 +120,7 @@ class DictionaryController extends Controller
         $em->persist($dictionary);
         $em->flush();
 
+        return new JsonResponse('Valid XmlHttp request !');
     }
 
     /**
