@@ -2,8 +2,11 @@ $( document ).ready(function() {
     // loop on array to init different ajax form
     for (let id of formId) {
         formSubmitListening(id)
-        deleteLastLiList(id)
     }
+    // update action for all page list
+    updateModalList()
+    // delete action for all page list
+    deleteLiFromList()
 })
 
 /**
@@ -46,25 +49,86 @@ function formSubmitListening(formId)
                 timeout: 3000,
                 success: function(result){
                     // add full li with value + button to update && delete
-                    $("#list_" + formId).append('<li id="list_item_' + result.id + '" class="list-group-item">' + value + '<span class="badge"><a href="/dictionnaire/suppression/' + result.id + '"><i class="fa fa-window-close" aria-hidden="true"></i></a></span></li>')
+                    let list = "#list_" + formId
+                    $(list).append('<li id="list_group_item_' + result.id + '" class="list-group-item"><span id="li_value_' + result.id + '">' + value + '</span><span class="badge"><a class="update" href="/dictionnaire/modification/' + result.id + '"><i class="fa fa-cog" aria-hidden="true"></i></a><a class="delete" href="/dictionnaire/suppression/' + result.id + '"><i class="fa fa-close" aria-hidden="true"></i></a></span></li>')
+                    e.preventDefault()
                 },
             })
         }
     })
 }
 
-function deleteLastLiList(formId)
+function updateModalList()
 {
-    $("#list_" + formId + " a").click( function (e) {
+    $("#dictionarys-list ul li span a.update").click( function (e) {
         /**
          * Disable normal form event
-         * && get id and value
+         * && get id from li for update by id
+         */
+        e.preventDefault()
+        let listElementId = $(this).parent().parent().attr('id')
+        let listElementValue = $(this).parent().parent().text()
+        let dbElementId = listElementId.replace('list_group_item_', '')
+        let dbElementValue = listElementValue.trim()
+
+        updateLiFromList(dbElementId, dbElementValue)
+    })
+}
+
+function updateLiFromList(id, value)
+{
+    let inputForm   = '#dictionary_input_update'
+    let fullForm    = '#dictionary_form_update'
+
+    $(inputForm).attr('value', value)
+
+    $(fullForm).submit( function (e) {
+        e.preventDefault()
+        let $this       = $(this)
+        let newValue    = $(inputForm).val()
+
+        if (newValue === '' || newValue === value) {
+            // if field is empty or no change are detected
+            alert('BOUM  ' + value)
+        } else {
+            $.ajax({
+                type: $this.attr('method'),
+                url: '/dictionnaire/modificiation/' + id,
+                data : {
+                    'data': newValue
+                },
+                dataType: 'json',
+                timeout: 3000,
+                success: function(){
+                    // change content of span who have current value
+                    $("#list_value_" + id).replaceWith(newValue)
+                },
+            })
+        }
+    })
+}
+
+function deleteLiFromList()
+{
+    $("#dictionarys-list ul li span a.delete").click( function (e) {
+        /**
+         * Disable normal form event
+         * && get id from li for delete by id
          */
         e.preventDefault()
         let $this = $(this)
-        let value = $('#value_' + formId).val()
-        let listId = "#list_" + formId
-        console.log($this)
+        let listElementId = $this.parent().parent().attr('id')
+        let dbElementId = listElementId.replace('list_group_item_', '')
+
+        $.ajax({
+            type: 'GET',
+            url: '/dictionnaire/suppression/' + dbElementId,
+            timeout: 3000,
+            success: function(){
+                // delete the target element
+                $("#" + listElementId).remove()
+            },
+        })
     })
 }
 

@@ -20,6 +20,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class DictionaryController extends Controller
 {
     /**
+     * Index dictionary
+     *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/liste", name="dictionaryHome")
@@ -57,6 +59,8 @@ class DictionaryController extends Controller
     }
 
     /**
+     * Add dictionary
+     *
      * @param Request $request
      * @return JsonResponse|Response
      * @Route("/nouveau", name="dictionaryAdd")
@@ -90,9 +94,34 @@ class DictionaryController extends Controller
     }
 
     /**
+     * Update dicionary
+     *
+     * @Route("/modification/{dictionaryId}", name="dictionaryUpdate")
      * @param Request $request
      * @param $dictionaryId
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function updateAction(Request $request, $dictionaryId)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+
+        $getRequest = $request->request;
+        $newValue = $getRequest->get('data');
+
+        $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
+            ->find($dictionaryId);
+        $dictionary->setValue($newValue);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($dictionary);
+        $em->flush();
+
+    }
+
+    /**
+     * @param Request $request
+     * @param $dictionaryId
+     * @return JsonResponse
      * @Route("/suppression/{dictionaryId}", name="dictionaryDelete")
      */
     public function deleteAction(Request $request, $dictionaryId)
@@ -101,30 +130,12 @@ class DictionaryController extends Controller
             throw new HttpException('500', 'Invalid call');
         }
 
-        $getRequest = $request->request;
-        $id = $getRequest->get('dataId');
-        $type = $getRequest->get('dataType');
-
         $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
-            ->find($id);
-        #$em = $this->getDoctrine()->getManager();
-        #$em->remove($dictionary[0]);
-        #$em->flush();
-
-
-
-
-        /***
-          OldDeleteAction
-
-        $doctrine = $this->getDoctrine();
-        $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
             ->find($dictionaryId);
-        $em = $doctrine->getManager();
+        $em = $this->getDoctrine()->getManager();
         $em->remove($dictionary);
         $em->flush();
-        $this->addFlash("notice", "L'entrée du dictionnaire a bien été supprimé !");
-        return $this->redirectToRoute('dictionaryHome');
-        */
+
+        return new JsonResponse('Valid XmlHttp request !');
     }
 }
