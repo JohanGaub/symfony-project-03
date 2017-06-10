@@ -52,7 +52,7 @@ class DictionaryController extends Controller
             $em->flush();
         }
 
-        return $this->render('@App/Pages/Dictionary/index_dictionary.html.twig', [
+        return $this->render('indexDictionary.html.twig', [
             'dictionarys'   => $dictionarys,
             'form'          => $form->createView()
         ]);

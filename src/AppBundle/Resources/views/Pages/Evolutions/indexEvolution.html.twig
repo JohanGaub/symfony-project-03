@@ -1,4 +1,4 @@
-{% extends '@App/back_office_base.html.twig' %}
+{% extends '@App/backoffice-base.html.twig' %}
 
 {% block title %}
     Evolutions techniques
@@ -15,13 +15,17 @@
                 <a href="{{ path('evolutionAdd') }}" class="btn btn-default">Ajouter une nouvelle évolution</a>
             </div>
 
+            {{ dump(evolutions) }}
+
             {% for evolution in evolutions %}
                 <div class="bo-evolution col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="panel-top-line">
                                 <p class="evolution-status">{{ evolution.status }}</p>
-                                <h4>{{ evolution.title }}</h4>
+                                <a href="{{ path('evolutionUnit', {'technicalEvolutionId': evolution.id}) }}">
+                                    <h4>{{ evolution.title }}</h4>
+                                </a>
                             </div>
                             <p>{{ evolution.sumUp }}</p>
                         </div>
@@ -39,6 +43,9 @@
                                     <p>{{ evolution.userTechnicalEvolutions[0].note }}/10</p>
                                     <p>{{ evolution.userTechnicalEvolutions[0].comment }} commentaire(s)</p>
                                 </div>
+                            </div>
+                            <div class="under-bottom-footer">
+                                <a href="{{ path('evolutionUpdate', {'technicalEvolutionId': evolution.id}) }}">Modifier l'évolution</a>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,43 @@
+{% extends '@App/backoffice-base.html.twig' %}
+
+{% block title %}
+    Evolutions techniques
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="bo-title-page col-lg-12">
+                <h2>Evolutions techniques</h2>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nom de l'évolution</th>
+                    <th>Type de catégorie</th>
+                    <th>Catégorie</th>
+                    <th>Proposé par</th>
+                    <th>Date de création</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for evolution in evolutions %}
+                        <tr>
+                            <th><a href="">{{ evolution.title }}</a></th>
+                            <th>{{ evolution.category.type.value }}</th>
+                            <th>{{ evolution.category.title }}</th>
+                            <th>"USER"</th>
+                            <th>{{ evolution.creationDate|date("d/m/Y", "Europe/Paris") }}</th>
+                            <th class="table-cell-action">
+                                <a href=""><i class="fa fa-ban" aria-hidden="true"></i></a>
+                                <a href=""><i class="fa fa-check" aria-hidden="true"></i></a>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

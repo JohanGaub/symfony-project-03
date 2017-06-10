@@ -19,10 +19,10 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TechnicalEvolutionType
+ * Class UpdateAdminTechnicalEvolutionType
  * @package AppBundle\Form\Evolution
  */
-class TechnicalEvolutionType extends AbstractType
+class UpdateAdminTechnicalEvolutionType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -31,6 +31,16 @@ class TechnicalEvolutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('status', EntityType::class, [
+                'class'         => 'AppBundle\Entity\Dictionary',
+                'query_builder' => function (DictionaryRepository $repo) {
+                    #Find all status in dictionary
+                    return $repo->getEvolutionStatusTypeList();
+                },
+                'label'         => 'Status',
+                'placeholder'   => 'Status de l\'évolution',
+                'multiple'      => false,
+            ])
             ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
             ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
             ->add('content', TextareaType::class, ['label' => 'Contenu'])

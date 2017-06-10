@@ -2517,6 +2517,12 @@ body {
   .direction-r .desc {
     margin: 1em 4em 0 4em; } }
 
+.table-cell-action {
+  display: flex;
+  justify-content: space-between; }
+  .table-cell-action a {
+    padding: 0 0.5rem; }
+
 .be-flex {
   display: flex; }
 

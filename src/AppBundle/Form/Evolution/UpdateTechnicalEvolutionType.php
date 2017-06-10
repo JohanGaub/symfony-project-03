@@ -19,10 +19,10 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TechnicalEvolutionType
+ * Class UpdateTechnicalEvolutionType
  * @package AppBundle\Form\Evolution
  */
-class TechnicalEvolutionType extends AbstractType
+class UpdateTechnicalEvolutionType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

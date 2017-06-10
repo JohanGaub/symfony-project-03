@@ -1,4 +1,4 @@
-{% extends '@App/back_office_base.html.twig' %}
+{% extends '@App/backoffice-base.html.twig' %}
 
 {% block title %}
     Nouvelle évolution
@@ -22,6 +22,7 @@
                     {{ form_row(form.reason) }}
                     {{ form_row(form.origin) }}
                     {{ form_row(form.expectedDelay) }}
+                    {{ form_row(form.product) }}
                     {{ form_row(form.category_type) }}
                     {% if form.category is defined %}
                         {{ form_row(form.category) }}
@@ -36,5 +37,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/form.evolution.js') }}"></script>
+    <script src="{{ asset('assets/js/page.add-evolution.js') }}"></script>
 {% endblock %}
