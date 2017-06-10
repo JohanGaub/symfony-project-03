@@ -6,7 +6,7 @@ $( document ).ready(function() {
     // update action for all page list
     updateModalList()
     // delete action for all page list
-    deleteLiFromList()
+    deleteModalList()
 })
 
 /**
@@ -31,27 +31,38 @@ function formSubmitListening(formId)
          * && get id and value
          */
         e.preventDefault()
-        let $this   = $(this)
-        let value   = $('#value_' + formId).val()
-        let type    = $(this).attr('id')
+        let $this       = $(this)
+        let data        = {}
+        data['value']   = $('#value_' + formId).val()
+        data['type']    = $this.attr('id')
 
-        if (value === ''){
+        if (data['value'] === ''){
             // if field is empty
         } else {
             $.ajax({
                 type: $this.attr('method'),
                 url: '/dictionnaire/nouveau',
                 data : {
-                    'dataForm': value,
-                    'dataType': type
+                    'data': data
                 },
                 dataType: 'json',
                 timeout: 3000,
                 success: function(result){
                     // add full li with value + button to update && delete
                     let list = "#list_" + formId
-                    $(list).append('<li id="list_group_item_' + result.id + '" class="list-group-item"><span id="li_value_' + result.id + '">' + value + '</span><span class="badge"><a class="update" href="/dictionnaire/modification/' + result.id + '"><i class="fa fa-cog" aria-hidden="true"></i></a><a class="delete" href="/dictionnaire/suppression/' + result.id + '"><i class="fa fa-close" aria-hidden="true"></i></a></span></li>')
-                    e.preventDefault()
+                    let domSend = '<li id="list_group_item_' + result.id + '" class="list-group-item">'
+                    domSend += '<span id="li_value_' + result.id + '">' + data['value'] + '</span>'
+                    domSend += '<span class="badge">'
+                    domSend += '<a class="modal-update" href="" data-toggle="modal" data-target="#dictionary-modal-update">'
+                    domSend += '<i class="fa fa-cog" aria-hidden="true"></i></a>'
+                    domSend += '<a class="modal-delete" href="" data-toggle="modal" data-target="#dictionary-modal-delete">'
+                    domSend += '<i class="fa fa-close" aria-hidden="true"></i></a>'
+                    domSend += '</span></li>'
+                    $(list).append(domSend)
+                    $('#dictionarys-list ul li span a').click( function (e) {
+                        e.preventDefault()
+                        deleteLiFromList()
+                    })
                 },
             })
         }
@@ -64,7 +75,7 @@ function formSubmitListening(formId)
  */
 function updateModalList()
 {
-    $("#dictionarys-list ul li span a.update").click( function (e) {
+    $("#dictionarys-list ul li span a.modal-update").click( function (e) {
         /**
          * Disable normal form event
          * && get id from li for update by id
@@ -118,24 +129,42 @@ function updateLiFromList(id, value)
     })
 }
 
-/**
- * Function to delete li from list and db
- */
-function deleteLiFromList()
+function deleteModalList()
 {
-    $("#dictionarys-list ul li span a.delete").click( function (e) {
+    $("#dictionarys-list ul li span a.modal-delete").click( function (e) {
         /**
          * Disable normal form event
          * && get id from li for delete by id
          */
         e.preventDefault()
-        let $this = $(this)
-        let listElementId   = $this.parent().parent().attr('id')
-        let dbElementId     = listElementId.replace('list_group_item_', '')
+        let listElementId       = $(this).parent().parent().attr('id')
+        let listElementValue    = $(this).parent().parent().text()
+        let dbElementId         = listElementId.replace('list_group_item_', '')
+        let dbElementValue      = listElementValue.trim()
+
+        $('#dictionary_delete_value').append(dbElementValue)
+
+        deleteLiFromList(dbElementId)
+    })
+}
+
+/**
+ * Function to delete li from list and db
+ */
+function deleteLiFromList(id)
+{
+    $("#dictionary_link_delete").click( function (e) {
+
+        /**
+         * Disable normal form event
+         * && get id from li for delete by id
+         */
+        e.preventDefault()
+        let listElementId   = 'list_group_item_' + id
 
         $.ajax({
             type: 'GET',
-            url: '/dictionnaire/suppression/' + dbElementId,
+            url: '/dictionnaire/suppression/' + id,
             timeout: 3000,
             success: function(){
                 // delete the target element

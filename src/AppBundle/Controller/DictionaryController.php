@@ -75,25 +75,25 @@ class DictionaryController extends Controller
          * Get result from ajax call
          * delete 'dictionary_form_' from id to get category type
          */
-        $getRequest = $request->request;
-        $fullType = $getRequest->get('dataType');
-        $type = str_replace('dictionary_form_', '', $fullType);
-        $data = $getRequest->get('dataForm');
+        $data       = $request->request->get('data');
+        $fullType   = $data['type'];
+        $type       = str_replace('dictionary_form_', '', $fullType);
+        $value      = $data['value'];
 
         $dictionary = new Dictionary();
         $dictionary->setType($type);
-        $dictionary->setValue($data);
+        $dictionary->setValue($value);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($dictionary);
         $em->flush();
 
-        $id = $dictionary->getId();
+        $responseData = [
+            'data'  => json_encode($value),
+            "id"    => json_encode($dictionary->getId())
+        ];
 
-        return new JsonResponse([
-            "data" => json_encode($data),
-            "id" => json_encode($id)
-        ]);
+        return new JsonResponse($responseData);
     }
 
     /**
@@ -111,11 +111,12 @@ class DictionaryController extends Controller
         }
 
         $getRequest = $request->request;
-        $newValue = $getRequest->get('data');
+        $newValue   = $getRequest->get('data');
 
         $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
             ->find($dictionaryId);
         $dictionary->setValue($newValue);
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($dictionary);
         $em->flush();
@@ -137,6 +138,7 @@ class DictionaryController extends Controller
 
         $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
             ->find($dictionaryId);
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($dictionary);
         $em->flush();

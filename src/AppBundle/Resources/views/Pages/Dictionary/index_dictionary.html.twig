@@ -30,10 +30,10 @@
                                         {{ elementList.value }}
                                     </span>
                                     <span class="badge">
-                                        <a class="update" href="" data-toggle="modal" data-target="#dictionary-modal">
+                                        <a class="modal-update" href="" data-toggle="modal" data-target="#dictionary-modal-update">
                                             <i class="fa fa-cog" aria-hidden="true"></i>
                                         </a>
-                                        <a class="delete" href="{{ path('dictionaryDelete', {'dictionaryId': elementList.id}) }}">
+                                        <a class="modal-delete" href="" data-toggle="modal" data-target="#dictionary-modal-delete">
                                             <i class="fa fa-close" aria-hidden="true"></i>
                                         </a>
                                     </span>
@@ -48,7 +48,7 @@
     </div>
 
     {# dictionary update modal #}
-    <div id="dictionary-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div id="dictionary-modal-update" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,12 +59,31 @@
                     <form method="post" id="dictionary_form_update">
                         <div class="form-group">
                             <input id='dictionary_input_update' type="text" name="_value" class="form-control required" required="required">
-                            <input type="submit" name="_submit" class="form-control required" value="Enregistrer les modifications" required="required">
+                            <input type="submit" name="_submit" class="form-control required" value="Enregistrer les modifications">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# dictionary delete modal #}
+    <div id="dictionary-modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Suppression d'une entrée du dictionnaire</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes vous sur de vouloir supprimer l'entrée <span id="dictionary_delete_value" class="be-strong text-color-2"></span> du dictionnaire</p>
+                    <a id="dictionary_link_delete" href="" class="text-color-1" data-dismiss="modal">Je confirmer vouloir supprimer cette entrée</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>

@@ -14,19 +14,21 @@
         </div>
 
         <div class="row">
-            {{ form_start(form) }}
-                {{ form_row(form.title) }}
-                {{ form_row(form.sum_up) }}
-                {{ form_row(form.content) }}
-                {{ form_row(form.reason) }}
-                {{ form_row(form.origin) }}
-                {{ form_row(form.expectedDelay) }}
-                {{ form_row(form.category_type) }}
-                {% if form.category is defined %}
-                    {{ form_row(form.category) }}
-                {% endif %}
-                {{ form_row(form.submit) }}
-            {{ form_end(form) }}
+            <div class="col-lg-6 col-lg-offset-3">
+                {{ form_start(form) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.sum_up) }}
+                    {{ form_row(form.content) }}
+                    {{ form_row(form.reason) }}
+                    {{ form_row(form.origin) }}
+                    {{ form_row(form.expectedDelay) }}
+                    {{ form_row(form.category_type) }}
+                    {% if form.category is defined %}
+                        {{ form_row(form.category) }}
+                    {% endif %}
+                    {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+            </div>
         </div>
 
     </div>

@@ -452,6 +452,15 @@
   bottom: 0.4rem; }
 
 /*background color for boxes*/
+.text-color-1 {
+  color: #9ac00a; }
+
+.text-color-2 {
+  color: #dd5116; }
+
+.text-color-3 {
+  color: #E6397E; }
+
 #communit-base {
   /* HEADER */
   /* removes dotted lines in Firefox browser when links are visited and another link is hovered */
@@ -2516,6 +2525,9 @@ body {
 
 .mrg-top-1 {
   margin-top: 8rem; }
+
+.be-strong {
+  font-weight: 700; }
 
 .ancre:target {
   padding-top: 7em;
