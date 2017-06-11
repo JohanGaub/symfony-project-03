@@ -83,7 +83,7 @@ class TechnicalEvolutionType extends AbstractType
         $builder->get('category_type')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
-                $categoryType = $event->getForm()->getData()->getId();
+                $categoryType = $event->getForm()->getData();
                 $form = $event->getForm();
                 $this->addCategoryNameField($form->getParent(), $categoryType);
             }

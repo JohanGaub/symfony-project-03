@@ -3,12 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
 use AppBundle\Form\Evolution\TechnicalEvolutionType;
-use AppBundle\Form\Evolution\UpdateAdminTechnicalEvolutionType;
-use AppBundle\Form\Evolution\UpdateTechnicalEvolutionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Class TechnicalEvolutionController
@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\Request;
 class TechnicalEvolutionController extends Controller
 {
     /**
+     * List all evolution with filter
+     *
      * @Route("/liste/{page}", name="evolutionHome")
      * @param int $page
      * @return \Symfony\Component\HttpFoundation\Response
@@ -25,15 +27,18 @@ class TechnicalEvolutionController extends Controller
     public function indexAction($page = 1)
     {
         $params = [
-            'ct.value' => 'technical',
+            'ct.value' => 'commercial',
         ];
+
+        $paramsTranformers = $this->get('app.sql.search_params_getter');
+        $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
 
         # get technical evolution repository
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
 
         # Set Pagination parameters
         $evoByPage = 9;
-        $evoTotal  = count($repo->getNbEvolution($params));
+        $evoTotal  = count($repo->getNbEvolution($allowParamsFormat));
 
         $pagination = [
             'page'          => $page,
@@ -42,7 +47,7 @@ class TechnicalEvolutionController extends Controller
             'route_params'  => array(),
         ];
 
-        $evolutions = $repo->getListEvolution($params, $page, $evoByPage);
+        $evolutions = $repo->getListEvolution($allowParamsFormat, $page, $evoByPage);
 
         return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
             'evolutions' => $evolutions,
@@ -51,6 +56,10 @@ class TechnicalEvolutionController extends Controller
     }
 
     /**
+     * Add new evolution
+     * TODO -> need to rework on user relations
+     * TODO -> mail & admin confirmation
+     *
      * @Route("/nouveau", name="evolutionAdd")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -64,8 +73,6 @@ class TechnicalEvolutionController extends Controller
         if ($form->isSubmitted() && $form->isValid()){
             /**
              * Form works
-             * TODO -> need to rework on user relations
-             * $user = $this->getUser();
              */
             $dictionaryStatus = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
                 ->getStartingEvolutionStatus();
@@ -87,6 +94,8 @@ class TechnicalEvolutionController extends Controller
     }
 
     /**
+     * Update evolution (Admin && Basic users)
+     *
      * @Route("/modification/{technicalEvolutionId}", name="evolutionUpdate")
      * @param Request $request
      * @param int $technicalEvolutionId
@@ -98,10 +107,10 @@ class TechnicalEvolutionController extends Controller
             ->find($technicalEvolutionId);
 
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $form = $this->createForm(UpdateTechnicalEvolutionType::class, $te);
+            $form = $this->createForm(TechnicalEvolutionType::class, $te);
             $view = '@App/Pages/Evolutions/basicFormEvolution.html.twig';
         } else {
-            $form = $this->createForm(UpdateAdminTechnicalEvolutionType::class, $te);
+            $form = $this->createForm(AdminTechnicalEvolutionType::class, $te);
             $view = '@App/Pages/Evolutions/adminFormEvolution.html.twig';
         }
 
@@ -113,24 +122,39 @@ class TechnicalEvolutionController extends Controller
             $em->persist($te);
             $em->flush();
 
-            $this->redirectToRoute('evolutionUnit', ['technicalEvolutionId' => $technicalEvolutionId]);
+            $this->redirectToRoute('evolutionUnit', [
+                'technicalEvolutionId' => $technicalEvolutionId
+            ]);
         }
 
         return $this->render($view, ['form' => $form->createView()]);
     }
 
     /**
+     * Get unit evolution with note & comment
+     *
      * @Route("/{technicalEvolutionId}", name="evolutionUnit")
      * @param int $technicalEvolutionId
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function unitIndexAction(int $technicalEvolutionId)
     {
-        $evolution = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
+        $doctrine = $this->getDoctrine();
+
+        $evolution = $doctrine->getRepository('AppBundle:TechnicalEvolution')
             ->getUnitEvolution($technicalEvolutionId)[0];
 
+        $uteRepository  = $doctrine->getRepository('AppBundle:UserTechnicalEvolution');
+
+        $comments = $uteRepository->getUserTechnicalEvolution($evolution['te_id']);
+
+
+
+
+
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
-            'evolution' => $evolution
+            'evolution' => $evolution,
+            'comments' => $comments
         ]);
     }
 
@@ -146,6 +170,24 @@ class TechnicalEvolutionController extends Controller
         return $this->render('@App/Pages/Evolutions/waitingEvolution.html.twig', [
             'evolutions' => $evolutions
         ]);
+    }
+
+    /**
+     * @Route("/{technicalEvolutionId}", name="evolutionAdminValidate")
+     * @param Request $request
+     */
+    public function adminWaitingAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+        $data       = $request->request->get('data');
+        $doctrine   = $this->getDoctrine();
+        $em         = $doctrine->getManager();
+
+
+
+
     }
 
 }

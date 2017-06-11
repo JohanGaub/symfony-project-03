@@ -22,11 +22,10 @@ class DictionaryController extends Controller
     /**
      * Index dictionary
      *
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/liste", name="dictionaryHome")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $repo           = $this->getDoctrine()->getRepository('AppBundle:Dictionary');
         $dictionaryList = $repo->getDictionaryList();
@@ -42,19 +41,8 @@ class DictionaryController extends Controller
             }
         }
 
-        $dictionaryNewObj = new Dictionary();
-        $form = $this->createForm(DictionaryType::class, $dictionaryNewObj);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($dictionaryNewObj);
-            $em->flush();
-        }
-
-        return $this->render('indexDictionary.html.twig', [
-            'dictionarys'   => $dictionarys,
-            'form'          => $form->createView()
+        return $this->render('@App/Pages/Dictionary/indexDictionary.html.twig', [
+            'dictionarys'   => $dictionarys
         ]);
     }
 

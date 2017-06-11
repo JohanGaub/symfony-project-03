@@ -14,12 +14,12 @@ use Doctrine\ORM\Query\ResultSetMapping;
 class TechnicalEvolutionRepository extends EntityRepository
 {
     /**
-     * @param array $params
+     * @param string $params
      * @param int $page
      * @param int $maxByPage
      * @return array
      */
-    public function getListEvolution(array $params = [], int $page = 0, int $maxByPage = 9)
+    public function getListEvolution(string $params = '', int $page = 0, int $maxByPage = 9)
     {
         return $this->getListEvolutionNativeQuery($params, $page, $maxByPage)->getResult();
     }
@@ -42,10 +42,10 @@ class TechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
-     * @param array $params
+     * @param string $params
      * @return array
      */
-    public function getNbEvolution(array $params = [])
+    public function getNbEvolution(string $params = '')
     {
         return $this->getNbEvolutionQuery($params)->getResult();
     }
@@ -54,12 +54,12 @@ class TechnicalEvolutionRepository extends EntityRepository
      * getListEvolutionNativeQuery
      * get evolutions with multi params or not
      *
-     * @param array $params
+     * @param string $params
      * @param int $page
      * @param int $maxByPage
      * @return \Doctrine\ORM\NativeQuery
      */
-    private function getListEvolutionNativeQuery(array $params, int $page,int $maxByPage)
+    private function getListEvolutionNativeQuery($params, int $page,int $maxByPage)
     {
         # create rsm object
         $rsm        = new ResultSetMapping();
@@ -82,9 +82,6 @@ class TechnicalEvolutionRepository extends EntityRepository
 
         # set product start limit
         $startProduct = $page * $maxByPage;
-
-        # get string params
-        $searches = $this->getStringParameters($params);
 
         # make a query
         /** @noinspection SqlResolve */
@@ -126,7 +123,7 @@ class TechnicalEvolutionRepository extends EntityRepository
             INNER JOIN dictionary dtes ON te.status = dtes.id
             INNER JOIN dictionary dteo ON te.origin = dteo.id
             INNER JOIN user_technical_evolution ute ON ute.technical_evolution_id = te.id
-            WHERE 1=1 AND {$searches}
+            WHERE 1=1 AND {$params}
             GROUP BY ute.id
             LIMIT {$startProduct}, {$maxByPage}
             
@@ -257,14 +254,11 @@ class TechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
-     * @param array $params
+     * @param string $params
      * @return \Doctrine\ORM\Query
      */
-    private function getNbEvolutionQuery(array $params)
+    private function getNbEvolutionQuery(string $params)
     {
-        # get string params
-        $searches = $this->getStringParameters($params);
-
         # make a query
         /** @noinspection SqlResolve */
         $query = $this->getEntityManager()->createQuery("
@@ -274,7 +268,7 @@ class TechnicalEvolutionRepository extends EntityRepository
             JOIN 'AppBundle\Entity\Dictionary' dteo WITH te.origin = dteo.id
             JOIN 'AppBundle\Entity\Category' c WITH te.category = c.id
             JOIN 'AppBundle\Entity\Dictionary' ct WITH c.type = ct.id
-            WHERE 1=1 AND {$searches}
+            WHERE 1=1 AND {$params}
             GROUP BY te.id
                 
         ");
@@ -282,30 +276,4 @@ class TechnicalEvolutionRepository extends EntityRepository
         return $query;
     }
 
-    /**
-     * @param array $params
-     * @return string
-     */
-    private function getStringParameters(array $params)
-    {
-        /**
-         * Get query parameters
-         * Here we get all params send in function for search
-         * Work with key LIKE 'value%'
-         */
-        $totalSearches  = count($params);
-        $searches       = [];
-
-        foreach ($params as $key => $value)
-            $searches[] = $key . " LIKE " . "'" . $value . "%'";
-
-        if (1 < $totalSearches)
-            $searches = implode(' AND ', $searches);
-        elseif (1 == $totalSearches)
-            $searches = $searches[0];
-        else
-            $searches = '0=0';
-
-        return (string) $searches;
-    }
 }

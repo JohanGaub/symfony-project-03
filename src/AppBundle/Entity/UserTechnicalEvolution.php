@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * UserTechnicalEvolution
  *
  * @ORM\Table(name="user_technical_evolution")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserTechnicalEvolutionRepository")
  */
 class UserTechnicalEvolution
 {

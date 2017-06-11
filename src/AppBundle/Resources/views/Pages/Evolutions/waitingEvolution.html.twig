@@ -25,7 +25,7 @@
                 <tbody>
                     {% for evolution in evolutions %}
                         <tr>
-                            <th><a href="">{{ evolution.title }}</a></th>
+                            <th><a href="{{ path('evolutionUnit', {'technicalEvolutionId': evolution.id}) }}">{{ evolution.title }}</a></th>
                             <th>{{ evolution.category.type.value }}</th>
                             <th>{{ evolution.category.title }}</th>
                             <th>"USER"</th>

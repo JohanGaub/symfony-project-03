@@ -19,10 +19,10 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class UpdateAdminTechnicalEvolutionType
+ * Class AdminTechnicalEvolutionType
  * @package AppBundle\Form\Evolution
  */
-class UpdateAdminTechnicalEvolutionType extends AbstractType
+class AdminTechnicalEvolutionType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -31,19 +31,19 @@ class UpdateAdminTechnicalEvolutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
+            ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
+            ->add('content', TextareaType::class, ['label' => 'Contenu'])
             ->add('status', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     #Find all status in dictionary
                     return $repo->getEvolutionStatusTypeList();
                 },
-                'label'         => 'Status',
-                'placeholder'   => 'Status de l\'évolution',
+                'label'         => 'Status de la demande',
+                'placeholder'   => 'Séléctionnez un status',
                 'multiple'      => false,
             ])
-            ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
-            ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
-            ->add('content', TextareaType::class, ['label' => 'Contenu'])
             ->add('reason', TextType::class, [
                 'label'         => 'Raison',
             ])
@@ -93,7 +93,7 @@ class UpdateAdminTechnicalEvolutionType extends AbstractType
         $builder->get('category_type')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
-                $categoryType = $event->getForm()->getData()->getId();
+                $categoryType = $event->getForm()->getData();
                 $form = $event->getForm();
                 $this->addCategoryNameField($form->getParent(), $categoryType);
             }
