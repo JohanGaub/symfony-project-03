@@ -2535,6 +2535,9 @@ body {
 .be-strong {
   font-weight: 700; }
 
+.transition-2s-ease {
+  transition: 2s ease; }
+
 .ancre:target {
   padding-top: 7em;
   margin-top: -7em; }

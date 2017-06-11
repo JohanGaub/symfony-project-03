@@ -11,33 +11,45 @@
                 <h2>Evolutions techniques</h2>
             </div>
 
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Nom de l'évolution</th>
-                    <th>Type de catégorie</th>
-                    <th>Catégorie</th>
-                    <th>Proposé par</th>
-                    <th>Date de création</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {% for evolution in evolutions %}
-                        <tr>
-                            <th><a href="{{ path('evolutionUnit', {'technicalEvolutionId': evolution.id}) }}">{{ evolution.title }}</a></th>
-                            <th>{{ evolution.category.type.value }}</th>
-                            <th>{{ evolution.category.title }}</th>
-                            <th>"USER"</th>
-                            <th>{{ evolution.creationDate|date("d/m/Y", "Europe/Paris") }}</th>
-                            <th class="table-cell-action">
-                                <a href=""><i class="fa fa-ban" aria-hidden="true"></i></a>
-                                <a href=""><i class="fa fa-check" aria-hidden="true"></i></a>
-                            </th>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            {% if evolutions|length > 0 %}
+                <table class="table table-bordered waiting-list">
+                    <thead>
+                    <tr>
+                        <th>Nom de l'évolution</th>
+                        <th>Type de catégorie</th>
+                        <th>Catégorie</th>
+                        <th>Proposé par</th>
+                        <th>Date de création</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for evolution in evolutions %}
+                            <tr id="tr_element_{{ evolution.id }}" class="transition-2s-ease">
+                                <th><a href="{{ path('evolutionUnit', {'technicalEvolutionId': evolution.id}) }}">
+                                        {{ evolution.title }}</a>
+                                </th>
+                                <th>{{ evolution.category.type.value }} || {{ evolution.id }}</th>
+                                <th>{{ evolution.category.title }}</th>
+                                <th>"USER"</th>
+                                <th>{{ evolution.creationDate|date("d/m/Y", "Europe/Paris") }}</th>
+                                <th class="table-cell-action">
+                                    <a class="delete-action" id="delete_action_{{ evolution.id }}" href="">
+                                        <i class="fa fa-ban" aria-hidden="true"></i></a>
+                                    <a class="validate-action" id="validate_action_{{ evolution.id }}" href="">
+                                        <i class="fa fa-check" aria-hidden="true"></i></a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Il n'y a aucune demande d'évolutions en attente !</p>
+            {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/page.waiting-evolution.js') }}"></script>
 {% endblock %}

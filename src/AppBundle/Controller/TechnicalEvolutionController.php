@@ -7,6 +7,7 @@ use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
 use AppBundle\Form\Evolution\TechnicalEvolutionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -24,7 +25,7 @@ class TechnicalEvolutionController extends Controller
      * @param int $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction($page = 1)
+    public function indexAction(int $page = 1)
     {
         $params = [
             'ct.value' => 'commercial',
@@ -143,14 +144,9 @@ class TechnicalEvolutionController extends Controller
 
         $evolution = $doctrine->getRepository('AppBundle:TechnicalEvolution')
             ->getUnitEvolution($technicalEvolutionId)[0];
-
-        $uteRepository  = $doctrine->getRepository('AppBundle:UserTechnicalEvolution');
+        $uteRepository = $doctrine->getRepository('AppBundle:UserTechnicalEvolution');
 
         $comments = $uteRepository->getUserTechnicalEvolution($evolution['te_id']);
-
-
-
-
 
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $evolution,
@@ -159,7 +155,9 @@ class TechnicalEvolutionController extends Controller
     }
 
     /**
-     * @Route("/admin/liste", name="evolutionWaiting")
+     * Get full evolution have status
+     *
+     * @Route("/en-attente/liste", name="evolutionWaiting")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function adminListWaitingAction()
@@ -173,21 +171,41 @@ class TechnicalEvolutionController extends Controller
     }
 
     /**
-     * @Route("/{technicalEvolutionId}", name="evolutionAdminValidate")
+     * Do action in evolution have status 'En attente'
+     * Validate Or Closest action
+     *
+     * @Route("/en-attente/traitement/{technicalEvolutionId}", name="evolutionAdminWorks")
      * @param Request $request
+     * @param int $technicalEvolutionId
+     * @return JsonResponse
      */
-    public function adminWaitingAction(Request $request)
+    public function adminWaitingWorksAction(Request $request, int $technicalEvolutionId)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
         $data       = $request->request->get('data');
         $doctrine   = $this->getDoctrine();
-        $em         = $doctrine->getManager();
 
+        if ($data === true) {
+            // if validate action
+            $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
+                ->findBy(array('value' => 'En cours'))[0];
+        } else {
+            // else to bad for validate
+            $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
+                ->findBy(array('value' => 'Refusé'))[0];
+        }
 
+        $evolution  = $doctrine->getRepository('AppBundle:TechnicalEvolution')
+            ->find($technicalEvolutionId);
+        $evolution->setStatus($dictionary);
 
+        $em = $doctrine->getManager();
+        $em->persist($evolution);
+        $em->flush();
 
+        return new JsonResponse('Valid XmlHttp request !');
     }
 
 }
