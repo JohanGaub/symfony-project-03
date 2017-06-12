@@ -2,13 +2,14 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * Class DictionaryRepository
  * @package AppBundle\Repository
  */
-class DictionaryRepository extends \Doctrine\ORM\EntityRepository
+class DictionaryRepository extends EntityRepository
 {
     /**
      * FormQueryBuilder to get all type of categories

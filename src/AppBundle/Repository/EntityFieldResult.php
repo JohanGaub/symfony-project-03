@@ -25,7 +25,7 @@ class EntityFieldResult
     }
 
     /**
-     * Set Basicfield for technicalEvolution
+     * Set Basic fields for technicalEvolution
      *
      * @param string $alias
      * @return ResultSetMapping
@@ -43,6 +43,8 @@ class EntityFieldResult
     }
 
     /**
+     * Set dictionary status fields
+     *
      * @param string $alias
      * @return ResultSetMapping
      */
@@ -56,6 +58,8 @@ class EntityFieldResult
     }
 
     /**
+     * Set dictionary origin fields
+     *
      * @param string $alias
      * @return ResultSetMapping
      */
@@ -69,6 +73,8 @@ class EntityFieldResult
     }
 
     /**
+     * Set basic category fields
+     *
      * @param string $alias
      * @return ResultSetMapping
      */
@@ -81,6 +87,8 @@ class EntityFieldResult
     }
 
     /**
+     * Set basic category type fields
+     *
      * @param string $alias
      * @return ResultSetMapping
      */
@@ -94,6 +102,8 @@ class EntityFieldResult
     }
 
     /**
+     * Set basic user technical evolution fields
+     *
      * @param string $alias
      * @return ResultSetMapping
      */
@@ -103,54 +113,6 @@ class EntityFieldResult
         $this->rsm->addFieldResult($alias, 'ute_note', 'note');
         $this->rsm->addFieldResult($alias, 'ute_comment', 'comment');
         $this->rsm->addFieldResult($alias, 'ute_technical_evolution_id', 'technicalEvolution');
-
-        return $this->rsm;
-    }
-
-    /**
-     * WIP
-     *
-     * @param string $alias
-     * @return ResultSetMapping
-     */
-    public function rsmFullUserTechnicalEvolution(string $alias)
-    {
-        $this->rsm->addFieldResult($alias, 'ute_id', 'id');
-        $this->rsm->addFieldResult($alias, 'ute_type', 'type');
-        $this->rsm->addFieldResult($alias, 'ute_note', 'note');
-        $this->rsm->addFieldResult($alias, 'ute_comment', 'comment');
-        $this->rsm->addFieldResult($alias, 'ute_user_id', 'user');
-        $this->rsm->addFieldResult($alias, 'ute_technical_evolution_id', 'technicalEvolution');
-
-        return $this->rsm;
-    }
-
-    /**
-     * WIP
-     *
-     * @param string $alias
-     * @return ResultSetMapping
-     */
-    public function rsmUser(string $alias)
-    {
-        $this->rsm->addFieldResult($alias, 'u_id', 'id');
-        $this->rsm->addFieldResult($alias, 'u_user_profile_id', 'userProfile');
-        $this->rsm->addFieldResult($alias, 'u_email', 'email');
-
-        return $this->rsm;
-    }
-
-    /**
-     * WIP
-     *
-     * @param string $alias
-     * @return ResultSetMapping
-     */
-    public function rsmUserProfile(string $alias)
-    {
-        $this->rsm->addFieldResult($alias, 'up_id', 'id');
-        $this->rsm->addFieldResult($alias, 'up_user_profile_id', 'userProfile');
-        $this->rsm->addFieldResult($alias, 'up_email', 'email');
 
         return $this->rsm;
     }

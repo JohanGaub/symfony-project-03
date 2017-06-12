@@ -13,24 +13,24 @@ class UserTechnicalEvolutionRepository extends EntityRepository
 {
     /**
      * @param int $evolution
+     * @param string $type
      * @return mixed
      */
-    public function getUserTechnicalEvolution(int $evolution)
+    public function getUserTechnicalEvolution(int $evolution, string $type)
     {
-        return $this->getUserTechnicalEvolutionNativeQuery($evolution)->getScalarResult();
+        return $this->getUserTechnicalEvolutionNativeQuery($evolution, $type)->getResult();
     }
 
     /**
      * @param int $evolution
+     * @param $type
      * @return \Doctrine\ORM\NativeQuery
      */
-    private function getUserTechnicalEvolutionNativeQuery($evolution)
+    private function getUserTechnicalEvolutionNativeQuery($evolution, $type)
     {
         # create rsm object
         $rsm = new ResultSetMapping();
 
-        //$rsmGetter  = new EntityFieldResult($rsm);
-        
         $rsm->addEntityResult($this->getEntityName(), 'ute');
         $rsm->addFieldResult('ute', 'ute_id', 'id');
         $rsm->addFieldResult('ute', 'ute_type', 'type');
@@ -38,14 +38,12 @@ class UserTechnicalEvolutionRepository extends EntityRepository
         $rsm->addFieldResult('ute', 'ute_comment', 'comment');
         $rsm->addFieldResult('ute', 'ute_user', 'id');
         $rsm->addFieldResult('ute', 'ute_technical_evolution', 'technicalEvolution');
-        
+
         $rsm->addJoinedEntityResult('AppBundle\Entity\User', 'u', 'ute', 'user');
         $rsm->addFieldResult('u', 'u_id', 'id');
-        $rsm->addFieldResult('u', 'u_user_profile', 'userProfile');
 
         $rsm->addJoinedEntityResult('AppBundle\Entity\UserProfile', 'up', 'u', 'userProfile');
         $rsm->addFieldResult('up', 'up_id', 'id');
-        $rsm->addFieldResult('up', 'up_email', 'email');
         $rsm->addFieldResult('up', 'up_firstname', 'firstname');
         $rsm->addFieldResult('up', 'up_lastname', 'lastname');
 
@@ -67,9 +65,9 @@ class UserTechnicalEvolutionRepository extends EntityRepository
                 up.firstname AS up_firstname,
                 up.lastname AS up_lastname
             FROM {$table} ute 
-            INNER JOIN communit.user u ON u.id = ute.user_id
+            INNER JOIN user u ON u.id = ute.user_id
             INNER JOIN user_profile up ON up.id = u.user_profile_id
-            WHERE ute.type = 'comment' AND ute.technical_evolution_id = {$evolution}
+            WHERE ute.type = '{$type}' AND ute.technical_evolution_id = {$evolution}
             
         ", $rsm);
 

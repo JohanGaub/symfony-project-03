@@ -146,11 +146,13 @@ class TechnicalEvolutionController extends Controller
             ->getUnitEvolution($technicalEvolutionId)[0];
         $uteRepository = $doctrine->getRepository('AppBundle:UserTechnicalEvolution');
 
-        $comments = $uteRepository->getUserTechnicalEvolution($evolution['te_id']);
+        $comments   = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'comment');
+        $notes      = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'note');
 
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $evolution,
-            'comments' => $comments
+            'comments'  => $comments,
+            'notes'     => $notes
         ]);
     }
 
