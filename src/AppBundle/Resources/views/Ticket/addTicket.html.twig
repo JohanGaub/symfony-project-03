@@ -1,20 +1,18 @@
-{% extends ('@App/base.html.twig') %}
+{% extends ('@App/backoffice-base.html.twig') %}
 
 {% block body %}
 
-    <section id="ticket">
-        <div class="background-ticket">
-            <div class="block-ticket">
-                <div class="ticket">
+    <section class="form-all">
 
-                    <h3>AJouter un ticket</h3>
-                    {{ form_start(form) }}
-                    {{ form_row(form) }}
-                    {{ form_end(form) }}
+        <div class="row">
+            <div class="col-xs-12 col-lg-6 col-lg-offset-3">
+                {{ form(form) }}
 
-                </div>
+                {#{{ dump(test) }}#}
             </div>
         </div>
     </section>
+
+
 
 {% endblock %}

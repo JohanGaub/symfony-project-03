@@ -10,6 +10,8 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Ticket
@@ -73,7 +75,13 @@ class Ticket
     /**
      * @var string
      *
-     * @ORM\Column(name="upload", type="blob", nullable=true)
+     * @ORM\Column(name="upload", type="string", nullable=true)
+     * @Assert\File(
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png", "application/txt", "application/pdf", "application/doc", "application/odt"},
+     *     mimeTypesMessage = "Vous pouvez uploader des fichiers images ou txt. Si vous souhaitez uploader d'autres types de fichier, adressez-vous à l'administrateur",
+     *     maxSizeMessage = "Votre fichier est trop volumineux. Veuillez vous adressez à l'administrateur pour plus d'informations.",
+     *     maxSize = "3M"
+     * )
      */
     private $upload;
 
@@ -81,6 +89,7 @@ class Ticket
      * @var DateTime
      *
      * @ORM\Column(name="creation_date", type="datetime")
+     * @Assert\DateTime()
      */
     private $creationDate;
 
@@ -88,6 +97,7 @@ class Ticket
      * @var DateTime
      *
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $updateDate;
 
@@ -95,6 +105,7 @@ class Ticket
      * @var DateTime
      *
      * @ORM\Column(name="end_date", type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $endDate;
 

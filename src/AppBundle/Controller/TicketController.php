@@ -3,7 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ticket;
-use AppBundle\Form\TicketType;
+use AppBundle\Form\EditTicketType;
+use AppBundle\Form\Ticket\AddTicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,8 +20,8 @@ class TicketController extends Controller
 {
 
     /**
-     * @param $name
      * @return Response
+     * @internal param $name
      * @Route("/", name="index_ticket")
      */
     public function indexAction()
@@ -39,52 +40,93 @@ class TicketController extends Controller
     {
         $ticket     = new Ticket();
         $em         = $this->getDoctrine()->getManager();
-        $form       = $this->createForm(TicketType::class, $ticket);
+        $form       = $this->createForm(AddTicketType::class, $ticket);
+        $test = '';
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            // $file stores the uploaded files
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $ticket->getUpload();
+
+            $test = $form->getData();
+
+            if($file != null)
+            {
+                // Generate a unique filename before saving it
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                // Move the file to the uploaded files directory
+                $file->move(
+                    $this->getParameter('upload_directory'),
+                    $fileName
+                );
+                // Update the 'files' property to store the file name
+                // instead of its contents
+                $ticket->setUpload($fileName);
+            }
+
+            $ticket->setCreationDate(new \DateTime('NOW')); // To set the default creationDate to NOW
+            $ticket->setStatus('En attente'); // To set the default status to "En attente"
+
             $em->persist($ticket);
             $em->flush();
-            return $this->redirectToRoute('ticket');
+            return $this->redirectToRoute('index_ticket');
         }
-        return $this->render('@App/Ticket/addTicket.html.twig',['form' => $form->createView(),]);
+        return $this->render('@App/Ticket/addTicket.html.twig',[
+            'form' => $form->createView(),
+//            'test' => $test,
+            ]);
     }
 
     /**
      * @param Request $request
      * @param Ticket $ticket
      * @return RedirectResponse|Response
-     * @Route("/edit/{category}", name="edit_category")
+     * @Route("/edit/{ticket}", name="edit_ticket")
      */
     public function editAction(Request $request, Ticket $ticket)
     {
         $em     = $this->getDoctrine()->getManager();
-        $form   = $this->createForm(TicketType::class, $ticket);
+        $form   = $this->createForm(EditTicketType::class, $ticket);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $em->persist($ticket);
+
+            $file = $ticket->getUpload();
+
+            if($file != null)
+            {
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('upload_directory'),
+                    $fileName
+                );
+                $ticket->setUpload($fileName);
+            }
+            $ticket->setUpdateDate(new \DateTime('NOW')); // To set the default UpdateDate to NOW
+
             $em->flush();
-            return $this->redirectToRoute('ticket');
+            return $this->redirectToRoute('index_ticket');
         }
 
-    return $this->render('@App/Ticket/addTicket.html.twig',[
-        'form' => $form->createView(),
-    ]);
+        return $this->render('@App/Ticket/addTicket.html.twig',[
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
      * @param Ticket $ticket
      * @return RedirectResponse
-     * @Route("/delete/{id}", name="delete_ticket")
+     * @Route("/delete/{ticket}", name="delete_ticket")
      */
     public function deleteAction(Ticket $ticket)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($ticket);
         $em->flush();
-        return $this->redirectToRoute('ticket');
+        return $this->redirectToRoute('index_ticket');
     }
 }

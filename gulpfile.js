@@ -95,7 +95,7 @@ gulp.task('clean:webimg', function() {
 
 //-> Scss to Css
 gulp.task('scss', function () {
-    return gulp.src('src/AppBundle/Resources/public/sass/main.scss')
+    return gulp.src('src/AppBundle/Resources/public/sass/showcase-main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('src/AppBundle/Resources/public/css/'));
 });

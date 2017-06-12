@@ -1,21 +1,53 @@
-{% extends ('@App/base.html.twig') %}
+{% extends ('@App/backoffice-base.html.twig') %}
 
 {% block body %}
 
-    <section id="ticket">
-        <div class="background-ticket">
-            <div class="block-ticket">
-                <div class="ticket">
+    <section class="ticket">
+        <div class="row">
+            <div class="col-xs-12 col-lg-6 col-lg-offset-3">
+                <h3>Tickets</h3>
 
-                    <h3>Tickets</h3>
-                    {%  for ticket in tickets %}
+                {%  for ticket in tickets %}
 
-                    <a href="{{ ticket.subject }}"></a></br>
+                    <div class="list-group">
+                        <a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}" class="list-group-item list-group-item-action">{{ ticket.id }} {{ ticket.subject }} </a>
+                    </div>
 
-                    {% endfor %}
-                </div>
+                    {#<table class="table table-hover table-responsive">
+                        ...
+                    </table>
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Age</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%   for user in users %}
+
+                            <tr>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.firstname }}</td>
+                                <td>{{ user.age }}</td>
+                                <td><a href="{{ path('edit', {"user": user.id}) }}">Modifier</a></td>
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>#}
+
+
+                {% endfor %}
+
+
             </div>
         </div>
     </section>
+
 
 {% endblock %}

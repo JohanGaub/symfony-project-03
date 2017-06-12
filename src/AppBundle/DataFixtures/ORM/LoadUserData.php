@@ -9,24 +9,33 @@ use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\DataFixtures\DataParameters;
 use AppBundle\Entity\User;
 use Faker;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class LoadUserData
  * @package AppBundle\DataFixtures\ORM
  */
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    /**
+     * @var Container
+     */
+    private $container;
+
     /**
      * @var Faker\Factory
      */
     private $faker;
 
     /**
-     * @param $faker
+     *
      * @return UserProfile
      */
     private function setUserProfile()
     {
+        $this->faker = Faker\Factory::create('fr_FR');
         // -> Profile
         $profile = new UserProfile();
         $profile->setFirstname($this->faker->word);
@@ -162,5 +171,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     {
         return 6;
     }
-
+    /**
+     * Sets the container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface instance of null
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
 }

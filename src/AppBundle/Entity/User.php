@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Company;
 use AppBundle\Entity\TechnicalEvolution;
 use AppBundle\Entity\Ticket;
@@ -11,6 +12,8 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -18,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity
  */
-class User
+class User implements UserInterface, Serializable
 {
     /**
      * @var integer
@@ -160,7 +163,7 @@ class User
     /**
      * Get roles
      *
-     * @return mixed
+     * @return array The user roles
      */
     public function getRoles()
     {
@@ -170,11 +173,13 @@ class User
     /**
      * Set roles
      *
-     * @param mixed $roles
+     * @param array $roles
+     * @return User
      */
     public function setRoles($roles)
     {
         $this->roles = $roles;
+        return $this;
     }
 
     /**
@@ -254,6 +259,8 @@ class User
     public function __construct()
     {
         $this->technicalEvolutions = new ArrayCollection();
+
+        $this->isActive = true;
     }
 
     /**
@@ -409,11 +416,11 @@ class User
     /**
      * Add comment
      *
-     * @param \AppBundle\Entity\Comment $comment
+     * @param Comment $comment
      *
      * @return User
      */
-    public function addComment(\AppBundle\Entity\Comment $comment)
+    public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
 
@@ -423,9 +430,9 @@ class User
     /**
      * Remove comment
      *
-     * @param \AppBundle\Entity\Comment $comment
+     * @param Comment $comment
      */
-    public function removeComment(\AppBundle\Entity\Comment $comment)
+    public function removeComment(Comment $comment)
     {
         $this->comments->removeElement($comment);
     }
@@ -438,5 +445,79 @@ class User
     public function getComments()
     {
         return $this->comments;
+    }
+
+    public function generateToken()
+    {
+        $today = new \DateTime("now");
+        $string = $this->getUsername() . $today->getTimestamp();
+
+        return sha1($string);
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+
+    }
+
+    /**
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password,
+        ]);
+    }
+
+    /**
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            ) = unserialize($serialized);
     }
 }

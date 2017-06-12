@@ -52,9 +52,8 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             0 => 'en attente',
             1 => 'en cours',
             2 => 'résolu',
-            3 => 'annulé',
-            4 => 'non résolu',
-            5 => 'archivé',
+            3 => 'fermé',
+            4 => 'archivé',
         ];
         $types                       = [
             0 => 'Technique',
@@ -76,14 +75,14 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $root                       = $this->container->get('kernel')->getRootDir();
 
             $ticket                     = new Ticket();
-            $ticket->setSubject($faker->sentences(7, true));
+            $ticket->setSubject($faker->sentence(4, true));
             $ticket->setContent($faker->sentences(mt_rand(1, 50), true));
             $ticket->setOrigin($origin);
             $ticket->setType($type);
             $ticket->setEmergency($emergency);
             $ticket->setStatus($oneStatus);
 
-            $ticket->setUpload($faker->file($root . '/../web/assets/img',$root . '/../web/assets/uploadtest'));
+            $ticket->setUpload($faker->file($root . '/../web/assets/img',$root . '/../web/assets/upload'));
 
             $ticket->setCreationDate($faker->dateTime);
             $ticket->setUpdateDate($faker->dateTime);

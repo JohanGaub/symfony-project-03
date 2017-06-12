@@ -5,8 +5,6 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use Symfony\Component\Finder\Finder;
-
 
 /**
  * Class DefaultController
@@ -30,36 +28,15 @@ class DefaultController extends Controller
         return $this->render('AppBundle:Pages:historique.html.twig');
     }
 
-
-
-
-
     /**
+     * This function is temporary to check if default path after login works well to be deleted and placed somewhere else
+     *
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/test", name="test")
+     * @Route("/dashboard", name="dashboard")
      */
-    public function test()
+    public function dashboardAction()
     {
-        $finder = new Finder();
-        $finder->files()->in('../web/assets/img');
-
-        foreach ($finder as $file) {
-            // Dump the absolute path
-            $test1 = ($file->getRealPath());
-
-            // Dump the relative path to the file, omitting the filename
-            $test2 = ($file->getRelativePath());
-
-            // Dump the relative path to the file
-            $test3 = ($file->getRelativePathname());
-
-
-        }
-        return $this->render('@App/Partials/test.html.twig', [
-            'test1' => $test1,
-            'test2' => $test2,
-            'test3' => $test3,
-        ]);
-
+        return $this->render('AppBundle:Partials:dashboard.html.twig');
     }
+
 }
