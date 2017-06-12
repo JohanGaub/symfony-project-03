@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,33 +30,19 @@ class UserType extends AbstractType
             ->add('email', EmailType::class,  ['label' => 'email'])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options' => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options' => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Répéter votre mot de passe'),
             ))
 
             ->add('company', CompanyType::class, array(
-                'label' => 'AppBundle:Company',
+                'label' => false,
             ))
             ->add('userProfile', User_profileType::class, array(
-                'label' => 'AppBundle:UserProfile',
-            ));
-
-            /*
-            ->add( 'compagnies', CollectionType::class, array(
-            'entry_type' => CompanyType::class));
-            /*
-            ->add('firstname', TextType::class, ['label' => 'Prénom'])
-            ->add('lastname', TextType::class, ['label' => 'Nom'])
-            ->add('phone', IntegerType::class, ['label' => 'Mobile']);
-        */
-
-            /*
-            ->add('userProfile', CollectionType::class, array(
-            'entry_type' => User_profileType::class));
-            */
-
-
-
+                'label' => false,
+            ))
+            ->add('submit', SubmitType::class, [
+                'label' => 'Enregistrer'
+            ]);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

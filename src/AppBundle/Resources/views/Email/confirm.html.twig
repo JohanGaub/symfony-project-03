@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Email</title>
+</head>
+
+<body style="font-family: Arial, Helvetica, sans-serif; ">
+
+<header style="display: block;margin-bottom: 2rem;">
+
+    <div class="header">
+        <div>
+            <img src="http://164.132.59.135/assets/img/commun-it_logo.png" alt="Logo CommunIt" height="150" style="-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;"/>
+        </div>
+    </div>
+</header>
+<div class="main" style="font-size: 16px;padding-left:3rem;">
+    <p>
+        Bonjour {{ name }},
+    </p>
+    <p>
+        Nous vous remercions pour votre pré-inscription sur CommunIt. <br />
+        Votre inscription sera validé dans un délai de 24 heures par l'un de nos administrateurs.<br/>.
+    </p>
+    <p>
+    </p>
+    <p style="margin-bottom: 3rem; margin-top:3rem;">
+        Cordialement, <br />
+        L'equipe de <span style="color:rgb(221, 81, 22);"><b>COMMUNIT</b></span>
+    </p>
+</div>
+<footer style="background-color: rgba(221, 81, 22, 0.1); height: 2rem;">
+    <p style="text-align: center;font-size: 14px;line-height: 2rem; color:rgb(221, 81, 22);"><b>&copy;CommunIt  {{ 'now'|date('Y') }}</b></p>
+
+</footer>
+<p style="font-size: 13px;padding-top: 1.3rem;">Veuillez ne pas répondre à cette adresse; cet e-mail a été envoyé par un automate.</p>
+</body>
+</html>

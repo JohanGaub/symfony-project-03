@@ -1,13 +1,105 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-{{ dump(form) }}
+    <section id="register">
+{#
+        <div class="container form">
+            <div class="row">
+                <div class="col-md-12">
+                    {% for flash_message in app.session.flashBag.get('notice') %}
+                        <div class="alert alert-info">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        #}
+        <div class="register-title col-md-12">
+            <h1>Formulaire d'inscription</h1>
+        </div>
+        {{ form_start(form) }}
+        <div class="container form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-wrap">
+                        <hr>
+                        <div class="form-group">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.plainPassword.first) }}
+                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.plainPassword.first) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.plainPassword.second) }}
+                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.plainPassword.second) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.company.name) }}
+                            {{ form_widget(form.company.name, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.company.name) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.company.adress) }}
+                            {{ form_widget(form.company.adress, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.company.adress) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.company.town) }}
+                            {{ form_widget(form.company.town, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.company.town) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.company.email) }}
+                            {{ form_widget(form.company.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.company.email) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.company.siret) }}
+                            {{ form_widget(form.company.siret, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.company.siret) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.company.phone2) }}
+                            {{ form_widget(form.company.phone2, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.company.phone2) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.userProfile.firstname) }}
+                            {{ form_widget(form.userProfile.firstname, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.userProfile.firstname) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.userProfile.lastname) }}
+                            {{ form_widget(form.userProfile.lastname, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.userProfile.lastname) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.userProfile.phone1) }}
+                            {{ form_widget(form.userProfile.phone1, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.userProfile.phone1) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-custom btn-lg btn-block form-submit-button'}}) }}
+                        </div>
+                        <hr>
+                    </div>
 
-{{ form_start(form) }}
-    {{ form_row(form) }}
-
-    <button type="submit">Register!</button>
-{{ form_end(form) }}
-
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </section>
 {% endblock %}
+
+
 

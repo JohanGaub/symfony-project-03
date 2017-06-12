@@ -1,0 +1,53 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <section id="login">
+        <div class="container form form-wrap">
+        {% if error %}
+            <div class="alert alert-danger text-center">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+        </div>
+
+        <div class="container form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-wrap">
+                        <hr>
+                        <p class="form-paragraph">Connectez vous avec e-mail</p>
+                        <form role="form" action="{{ path('login') }}" method="post" id="login-form" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {% for flash_message in app.session.flashBag.get('notice') %}
+                                        <div class="alert alert-info">
+                                            {{ flash_message }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="username" class="sr-only">E-mail :</label>
+                                <input type="text" class="form-control" id="username" name="_username"  placeholder="Entrez votre e-mail" value="{{ last_username }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="sr-only">Mot de passe : </label>
+                                <input type="password" class="form-control" id="password" name="_password" placeholder="Entrez votre mot de passse">
+                            </div>
+                            <div class="form-group checkbox-inline">
+                                <input type="checkbox" id="remember_me" name="_remember_me" class="character-checkbox login-checkbox" />
+
+                                <label for="remember_me" class="checkbox-inline">Se rappeler de moi</label>
+                            </div>
+                            <input type="submit" id="btn-login" name="login" class="btn btn-custom btn-lg btn-block form-submit-button" value="Connexion">
+                        </form>
+                        <a href="{{ path('forgotten') }}" class="forget-link text-center">Mot de passe oublié ?</a>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

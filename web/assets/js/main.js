@@ -30,6 +30,10 @@ $(document).ready(function () {
             $('.navbar, .navbar-default .navbar-brand, .navbar-brand img, .navbar-collapse, div.navbar-header.header').removeClass('scroll-small');
         }
     });
+
+    $('#login-link').click(function() {
+        $('#footer').css({'display':'none'})
+    });
 });
 
 
@@ -85,7 +89,6 @@ $(document).ready(function () {
         $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
     });
 });
-
 
 // Swiper Slider
 $(document).ready(function () {

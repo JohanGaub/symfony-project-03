@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
+use Serializable;
 
 /**
  * User
@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, Serializable
 {
     /**
      * @var integer
@@ -95,13 +95,6 @@ class User implements UserInterface
      */
     private $plainPassword;
 
-    protected $compagnies;
-
-    /**
-     * @var
-     */
-    private $username;
-
     /**
      * Get id
      *
@@ -137,19 +130,13 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * Get roles
+     *
+     * @return array The user roles
      */
-    public function getUsername()
+    public function getRoles()
     {
-        return $this->email;
-    }
-
-    /**
-     * @param $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
+        return $this->roles;
     }
 
     /**
@@ -162,18 +149,7 @@ class User implements UserInterface
     public function setRoles($roles)
     {
         $this->roles = $roles;
-
         return $this;
-    }
-
-    /**
-     * Get roles
-     *
-     * @return array
-     */
-    public function getRoles()
-    {
-        return $this->roles;
     }
 
     /**
@@ -253,8 +229,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->compagnies = new \Doctrine\Common\Collections\ArrayCollection();
-       /* $this->userProfile = new \Doctrine\Common\Collections\ArrayCollection();*/
+        $this->isActive = true;
     }
 
     /**
@@ -279,18 +254,6 @@ class User implements UserInterface
     public function getCompany()
     {
         return $this->company;
-    }
-
-
-
-    /**
-     * Get compagnies
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCompagnies()
-    {
-        return $this->compagnies;
     }
 
     /**
@@ -325,6 +288,30 @@ class User implements UserInterface
     public function getTechnicalEvolutions()
     {
         return $this->technicalEvolutions;
+    }
+
+    /**
+     * Set userProfile
+     *
+     * @param \AppBundle\Entity\UserProfile $userProfile
+     *
+     * @return User
+     */
+    public function setUserProfile(\AppBundle\Entity\UserProfile $userProfile = null)
+    {
+        $this->userProfile = $userProfile;
+
+        return $this;
+    }
+
+    /**
+     * Get userProfile
+     *
+     * @return \AppBundle\Entity\UserProfile
+     */
+    public function getUserProfile()
+    {
+        return $this->userProfile;
     }
 
     /**
@@ -419,27 +406,54 @@ class User implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
-    /**
-     * Set userProfile
-     *
-     * @param \AppBundle\Entity\UserProfile $userProfile
-     *
-     * @return User
-     */
-    public function setUserProfile(\AppBundle\Entity\UserProfile $userProfile = null)
+    public function generateToken()
     {
-        $this->userProfile = $userProfile;
+        $today = new \DateTime("now");
+        $string = $this->getUsername() . $today->getTimestamp();
 
-        return $this;
+        return sha1($string);
     }
 
     /**
-     * Get userProfile
+     * Returns the username used to authenticate the user.
      *
-     * @return string
+     * @return string The username
      */
-    public function getUserProfile()
+    public function getUsername()
     {
         return $this->email;
+    }
+
+    /**
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password,
+        ]);
+    }
+
+    /**
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            ) = unserialize($serialized);
     }
 }

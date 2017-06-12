@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,9 +40,9 @@ class UserProfile
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255, nullable=false)
+     * @ORM\Column(name="phone1", type="string", length=255, nullable=false)
      */
-    private $phone;
+    private $phone1;
 
     /**
      * Get id
@@ -102,32 +102,29 @@ class UserProfile
         return $this->lastname;
     }
 
-
-
     /**
-     * Set phone
+     * Set phone1
      *
-     * @param string $phone
+     * @param string $phone1
      *
      * @return UserProfile
      */
-    public function setPhone($phone)
+    public function setPhone1($phone1)
     {
-        $this->phone = $phone;
+        $this->phone1 = $phone1;
 
         return $this;
     }
 
     /**
-     * Get phone
+     * Get phone1
      *
      * @return string
      */
-    public function getPhone()
+    public function getPhone1()
     {
-        return $this->phone;
+        return $this->phone1;
     }
-
 
 
 }

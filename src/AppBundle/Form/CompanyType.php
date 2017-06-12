@@ -18,12 +18,12 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Socièté'])
-            ->add('adress', TextType::class, ['label' => 'Addresse'])
+            ->add('name', TextType::class, ['label' => 'Nom de votre Socièté'])
+            ->add('adress', TextType::class, ['label' => 'Adresse'])
             ->add('town', TextType::class, ['label' => 'Ville'])
-            ->add('phone', IntegerType::class,  ['label' => 'Telephone'])
+            ->add('phone2', IntegerType::class,  ['label' => 'Téléphone fixe'])
             ->add('siret', IntegerType::class,  ['label' => 'N° Siret'])
-            ->add('email', TextType::class,  ['label' => 'Email2']);
+            ->add('email', TextType::class,  ['label' => 'Email de votre socièté']);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

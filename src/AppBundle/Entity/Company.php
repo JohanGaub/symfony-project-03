@@ -53,9 +53,9 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255, nullable=false)
+     * @ORM\Column(name="phone2", type="string", length=255, nullable=false)
      */
-    private $phone;
+    private $phone2;
 
     /**
      * @var string
@@ -164,27 +164,27 @@ class Company
     }
 
     /**
-     * Set phone
+     * Set phone2
      *
-     * @param string $phone
+     * @param string $phone2
      *
      * @return Company
      */
-    public function setPhone($phone)
+    public function setPhone2($phone2)
     {
-        $this->phone = $phone;
+        $this->phone2 = $phone2;
 
         return $this;
     }
 
     /**
-     * Get phone
+     * Get phone2
      *
      * @return string
      */
-    public function getPhone()
+    public function getPhone2()
     {
-        return $this->phone;
+        return $this->phone2;
     }
 
     /**

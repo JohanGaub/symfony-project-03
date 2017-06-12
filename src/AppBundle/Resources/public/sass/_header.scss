@@ -54,7 +54,6 @@ ul.nav.navbar-nav.navbar-right {
   position: absolute;
   top: 25%;
   right: 0;
-  //background-color: white !important;
   padding-right: 3em; /* pushes links to the left */
 
 }
@@ -67,7 +66,7 @@ button.navbar-toggle span {
   color: #9AC00A;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 1.3em;
+  font-size: 1.4em;
   padding-right: 1.5em;
   padding-left: 1.5em;
 }
@@ -90,7 +89,7 @@ a.link {
   .navbar-default .navbar-nav > li > a:focus,
   .navbar-default .navbar-nav > li > a:hover,
   .navbar-default .navbar-nav > li > a {
-    font-size: 1.2em;
+    font-size: 1.3em;
     padding-right: 0;
   }
   ul.nav.navbar-nav.navbar-right {
@@ -100,6 +99,7 @@ a.link {
     padding-left: 0;
   }
 }
+
 
 @media screen and (max-width: 768px){
   .navbar {
@@ -148,10 +148,7 @@ a.link {
     border-top: none !important;
   }
   .nav >li >a {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 1rem 0;
     text-align: center;
   }
   ul.nav.navbar-nav.navbar-right {
