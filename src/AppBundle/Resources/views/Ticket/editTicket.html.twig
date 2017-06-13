@@ -1,0 +1,71 @@
+{% extends ('@App/backoffice-base.html.twig') %}
+
+{% block body %}
+
+    <section class="form-all">
+
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-6 col-lg-offset-3">
+                <table class="table table-responsive table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>N° de ticket</th>
+                        <th>Société</th>
+                        <th>Utilisateur</th>
+                        <th>Produit</th>
+                        <th>Catégorie</th>
+                        <th>Sujet</th>
+                        <th>Explication</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-striped">
+                    <tr>
+                        <td>{{ informations.id }}</td>
+                        <td>{{ informations.user.company.name }}</td>
+                        <td>{{ informations.user.userprofile.lastname }}</td>
+                        <td>{{ informations.product.name }}</td>
+                        <td>{{ informations.category.title }}</td>
+                        <td>{{ informations.subject }}</td>
+                        <td>{{ informations.content }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <table class="table table-responsive table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Origine</th>
+                        <th>Type</th>
+                        <th>Fichier uploadé</th>
+                        <th>Date de création</th>
+                        <th>Date d'actualisation</th>
+                        <th>Date de clôture</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="table-striped">
+                    <tr>
+                        <td>{{ informations.origin }}</td>
+                        <td>{{ informations.type }}</td>
+                        {#<td><a href="{{ informations.upload }}"> <img src="{{ informations.upload }}"/></a></td>#}
+                        <td><a href="{{ asset('' ~ informations.upload) }}"><img src="{{ asset('' ~ informations.upload) }}"/></a></td>
+                        {#<img src="{{ path('route_to_stream_action', {'fileId':'some_id'}) }}">#}
+                        <td>{{ informations.creationdate|date("d/m/Y") }}</td>
+                        <td>{{ informations.updatedate|date("d/m/Y") }}</td>
+                        <td>{{ informations.creationdate|date("d/m/Y") }}</td>
+                        {#<td><a href="{{ path('edit', {"user": user.id}) }}">Modifier</a></td>#}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{ dump(informations) }}
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-6 col-lg-offset-3">
+                {{ form(form) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

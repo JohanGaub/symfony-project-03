@@ -491,4 +491,6 @@ class Ticket
     {
         return $this->type;
     }
+
+
 }

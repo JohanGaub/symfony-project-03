@@ -3,13 +3,15 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ticket;
-use AppBundle\Form\EditTicketType;
+use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
+use AppBundle\Repository\TicketRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class TicketController
@@ -41,7 +43,7 @@ class TicketController extends Controller
         $ticket     = new Ticket();
         $em         = $this->getDoctrine()->getManager();
         $form       = $this->createForm(AddTicketType::class, $ticket);
-        $test = '';
+//        $test = '';
 
         $form->handleRequest($request);
 
@@ -50,7 +52,7 @@ class TicketController extends Controller
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $ticket->getUpload();
 
-            $test = $form->getData();
+//            $test = $form->getData();
 
             if($file != null)
             {
@@ -91,10 +93,13 @@ class TicketController extends Controller
         $em     = $this->getDoctrine()->getManager();
         $form   = $this->createForm(EditTicketType::class, $ticket);
 
+        $informations = $em->getRepository('AppBundle:Ticket')->find($ticket);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-
+            // $file stores the uploaded files
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $ticket->getUpload();
 
             if($file != null)
@@ -112,7 +117,8 @@ class TicketController extends Controller
             return $this->redirectToRoute('index_ticket');
         }
 
-        return $this->render('@App/Ticket/addTicket.html.twig',[
+        return $this->render('@App/Ticket/editTicket.html.twig',[
+            'informations' => $informations,
             'form' => $form->createView(),
         ]);
     }

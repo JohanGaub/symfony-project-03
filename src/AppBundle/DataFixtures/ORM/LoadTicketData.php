@@ -10,8 +10,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Finder\Finder;
-
 
 /**
  * Class LoadTicketData
@@ -66,13 +64,15 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $randomCategory             = 'category_id_' . mt_rand(0, DataParameters::NB_CATEGORY - 1);
             $randomProduct              = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
             $randomProjectResponsible   = 'user_project_resp_id_' . mt_rand(0, DataParameters::NB_PROJECT_RESP - 1);
+  /*          $connectedUserProfile       = 'user_profile_id_' . // I want the exact name of the Project responsible chosen
+            $connectedCompany           = 'company_id_' .  // I want the exact name of the user profile above*/
 
             $origin                     = $origins[mt_rand(0, count($origins) - 1)];
             $emergency                  = $emergencies[mt_rand(0, count($emergencies) - 1)];
             $oneStatus                  = $status[mt_rand(0, count($status) - 1)];
             $type                       = $types[mt_rand(0, count($types) - 1)];
 
-            $root                       = $this->container->get('kernel')->getRootDir();
+            $root                       = $this->container->get('kernel')->getRootDir(); // Necessary to upload a file
 
             $ticket                     = new Ticket();
             $ticket->setSubject($faker->sentence(4, true));
@@ -90,6 +90,9 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $ticket->setCategory($this->getReference($randomCategory));
             $ticket->setProduct($this->getReference($randomProduct));
             $ticket->setUser($this->getReference($randomProjectResponsible));
+
+/*            $ticket->setUserprofile()
+            $ticket->setCompany()*/
 
             $this->setReference('ticket_id_' . $i,$ticket);
 
