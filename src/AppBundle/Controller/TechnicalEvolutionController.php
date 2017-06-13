@@ -33,10 +33,8 @@ class TechnicalEvolutionController extends Controller
 
         $paramsTranformers = $this->get('app.sql.search_params_getter');
         $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
-
         # get technical evolution repository
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
-
         # Set Pagination parameters
         $evoByPage = 9;
         $evoTotal  = count($repo->getNbEvolution($allowParamsFormat));
@@ -47,7 +45,6 @@ class TechnicalEvolutionController extends Controller
             'pages_count'   => ceil($evoTotal / $evoByPage),
             'route_params'  => array(),
         ];
-
         $evolutions = $repo->getListEvolution($allowParamsFormat, $page, $evoByPage);
 
         return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
@@ -114,7 +111,6 @@ class TechnicalEvolutionController extends Controller
             $form = $this->createForm(AdminTechnicalEvolutionType::class, $te);
             $view = '@App/Pages/Evolutions/adminFormEvolution.html.twig';
         }
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
@@ -186,24 +182,23 @@ class TechnicalEvolutionController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-        $data       = $request->request->get('data');
-        $doctrine   = $this->getDoctrine();
+        $data   = $request->request->get('data');
 
         if ($data === true) {
             // if validate action
-            $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
-                ->findBy(array('value' => 'En cours'))[0];
+            $needed = ['value' => 'En cours'];
         } else {
             // else to bad for validate
-            $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
-                ->findBy(array('value' => 'Refusé'))[0];
+            $needed = ['value' => 'Refusé'];
         }
+        $em = $this->getDoctrine()->getManager();
 
-        $evolution  = $doctrine->getRepository('AppBundle:TechnicalEvolution')
+        $dictionary = $em->getRepository('AppBundle:Dictionary')
+            ->findBy($needed[0]);
+        $evolution = $em->getRepository('AppBundle:TechnicalEvolution')
             ->find($technicalEvolutionId);
         $evolution->setStatus($dictionary);
 
-        $em = $doctrine->getManager();
         $em->persist($evolution);
         $em->flush();
 
