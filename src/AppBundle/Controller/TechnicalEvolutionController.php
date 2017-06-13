@@ -27,17 +27,17 @@ class TechnicalEvolutionController extends Controller
      */
     public function indexAction(int $page = 1)
     {
+        // TODO => Transform that array in searchFormEngine ??
         $params = [
             'ct.value' => 'commercial',
         ];
-
         $paramsTranformers = $this->get('app.sql.search_params_getter');
         $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
 
-        # get technical evolution repository
+        // get technical evolution repository
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
 
-        # Set Pagination parameters
+        // set Pagination parameters
         $evoByPage = 9;
         $evoTotal  = count($repo->getNbEvolution($allowParamsFormat));
 
@@ -47,7 +47,6 @@ class TechnicalEvolutionController extends Controller
             'pages_count'   => ceil($evoTotal / $evoByPage),
             'route_params'  => array(),
         ];
-
         $evolutions = $repo->getListEvolution($allowParamsFormat, $page, $evoByPage);
 
         return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
@@ -72,9 +71,6 @@ class TechnicalEvolutionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            /**
-             * Form works
-             */
             $dictionaryStatus = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
                 ->getStartingEvolutionStatus();
 
@@ -88,7 +84,6 @@ class TechnicalEvolutionController extends Controller
             $this->addFlash('notice', 'Votre demande d\'évolution à bien été prise en compte !');
             return $this->redirectToRoute('evolutionHome');
         }
-
         return $this->render('@App/Pages/Evolutions/basicFormEvolution.html.twig', [
             'form' => $form->createView()
         ]);
@@ -104,7 +99,8 @@ class TechnicalEvolutionController extends Controller
      */
     public function updateAction(Request $request, int $technicalEvolutionId)
     {
-        $te = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
+        $em = $this->getDoctrine()->getManager();
+        $te = $em->getRepository('AppBundle:TechnicalEvolution')
             ->find($technicalEvolutionId);
 
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
@@ -114,12 +110,10 @@ class TechnicalEvolutionController extends Controller
             $form = $this->createForm(AdminTechnicalEvolutionType::class, $te);
             $view = '@App/Pages/Evolutions/adminFormEvolution.html.twig';
         }
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
             $te->setUpdateDate(new \DateTime('now'));
-            $em = $this->getDoctrine()->getManager();
             $em->persist($te);
             $em->flush();
 
@@ -127,7 +121,6 @@ class TechnicalEvolutionController extends Controller
                 'technicalEvolutionId' => $technicalEvolutionId
             ]);
         }
-
         return $this->render($view, ['form' => $form->createView()]);
     }
 
@@ -146,8 +139,8 @@ class TechnicalEvolutionController extends Controller
             ->getUnitEvolution($technicalEvolutionId)[0];
         $uteRepository = $doctrine->getRepository('AppBundle:UserTechnicalEvolution');
 
-        $comments   = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'comment');
-        $notes      = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'note');
+        $comments   = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'comment', 10);
+        $notes      = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'note', 9999999);
 
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $evolution,
@@ -158,6 +151,7 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Get full evolution have status
+     * TODO => Find a solution for doing infinite scroll loader for load comments
      *
      * @Route("/en-attente/liste", name="evolutionWaiting")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -168,7 +162,7 @@ class TechnicalEvolutionController extends Controller
             ->getListWaitingEvolution();
 
         return $this->render('@App/Pages/Evolutions/waitingEvolution.html.twig', [
-            'evolutions' => $evolutions
+            'evolutions' => $evolutions,
         ]);
     }
 
@@ -186,24 +180,22 @@ class TechnicalEvolutionController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-        $data       = $request->request->get('data');
-        $doctrine   = $this->getDoctrine();
+        $data   = $request->request->get('data');
+        $em     = $this->getDoctrine()->getManager();
 
-        if ($data === true) {
+        if ($data) {
             // if validate action
-            $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
-                ->findBy(array('value' => 'En cours'))[0];
+            $dictionary = $em->getRepository('AppBundle:Dictionary')
+                ->findOneBy(['value' => 'En cours']);
         } else {
             // else to bad for validate
-            $dictionary = $doctrine->getRepository('AppBundle:Dictionary')
-                ->findBy(array('value' => 'Refusé'))[0];
+            $dictionary = $em->getRepository('AppBundle:Dictionary')
+                ->findOneBy(['value' => 'Refusé']);
         }
-
-        $evolution  = $doctrine->getRepository('AppBundle:TechnicalEvolution')
+        $evolution = $em->getRepository('AppBundle:TechnicalEvolution')
             ->find($technicalEvolutionId);
         $evolution->setStatus($dictionary);
 
-        $em = $doctrine->getManager();
         $em->persist($evolution);
         $em->flush();
 

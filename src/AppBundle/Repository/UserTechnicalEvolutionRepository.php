@@ -14,19 +14,21 @@ class UserTechnicalEvolutionRepository extends EntityRepository
     /**
      * @param int $evolution
      * @param string $type
+     * @param mixed $limit
      * @return mixed
      */
-    public function getUserTechnicalEvolution(int $evolution, string $type)
+    public function getUserTechnicalEvolution(int $evolution, string $type, $limit)
     {
-        return $this->getUserTechnicalEvolutionNativeQuery($evolution, $type)->getResult();
+        return $this->getUserTechnicalEvolutionNativeQuery($evolution, $type, $limit)->getResult();
     }
 
     /**
      * @param int $evolution
      * @param $type
+     * @param $limit
      * @return \Doctrine\ORM\NativeQuery
      */
-    private function getUserTechnicalEvolutionNativeQuery($evolution, $type)
+    private function getUserTechnicalEvolutionNativeQuery($evolution, $type, $limit)
     {
         # create rsm object
         $rsm = new ResultSetMapping();
@@ -68,7 +70,7 @@ class UserTechnicalEvolutionRepository extends EntityRepository
             INNER JOIN user u ON u.id = ute.user_id
             INNER JOIN user_profile up ON up.id = u.user_profile_id
             WHERE ute.type = '{$type}' AND ute.technical_evolution_id = {$evolution}
-            
+            LIMIT {$limit}
         ", $rsm);
 
         return $query;

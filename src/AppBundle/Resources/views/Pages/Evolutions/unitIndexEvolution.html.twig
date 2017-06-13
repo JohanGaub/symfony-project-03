@@ -1,6 +1,7 @@
 {% extends '@App/backoffice-base.html.twig' %}
 
 {% block title %}
+    {{ evolution.te_title }}
 {% endblock %}
 
 {% block body %}
@@ -12,12 +13,36 @@
 
         <div class="row">
             <div class="bo-title-page col-lg-12">
+                <h3>{{ evolution.te_title }}</h3>
             </div>
         </div>
 
         <div class="row">
+            <div class="col-lg-12">
+                <h4>Liste des commentaires</h4>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="comment-list">
+                    {% for comment in comments %}
+                        <div class="unit-comment">
+                            <h5>{{ comment.user.userProfile.firstname }} {{ comment.user.userProfile.lastname }}</h5>
+                            <p>{{ comment.comment }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="loader-wcs">
+
         </div>
 
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/page.evolution-unit.js') }}"></script>
 {% endblock %}
