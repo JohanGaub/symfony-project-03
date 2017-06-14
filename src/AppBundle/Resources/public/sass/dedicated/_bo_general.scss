@@ -117,16 +117,18 @@
 /**
  * Comments Parts
  */
+.add-new-comment {
+  border: 1px solid $secondary-color;
+  border-radius: 3px;
+  margin: 2rem 0;
+  padding: 1rem 2rem 0 2rem;
+}
 .comment-list {
-
   .unit-comment {
-
-    border: 1px solid $secondary-color;
+    border: 1px solid $primary-color;
     border-radius: 3px;
     margin: 2rem 0;
     padding: 1rem;
-
-
   }
 }
 

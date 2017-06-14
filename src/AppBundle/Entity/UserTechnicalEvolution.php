@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,13 @@ class UserTechnicalEvolution
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
     private $type;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity="TechnicalEvolution", inversedBy="userTechnicalEvolutions", cascade={"persist"})
@@ -135,13 +144,35 @@ class UserTechnicalEvolution
     }
 
     /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return UserTechnicalEvolution
+     */
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
+        return $this;
+    }
+
+    /**
      * Set technicalEvolution
      *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     * @param TechnicalEvolution $technicalEvolution
      *
      * @return UserTechnicalEvolution
      */
-    public function setTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution = null)
+    public function setTechnicalEvolution(TechnicalEvolution $technicalEvolution = null)
     {
         $this->technicalEvolution = $technicalEvolution;
 
@@ -151,7 +182,7 @@ class UserTechnicalEvolution
     /**
      * Get technicalEvolution
      *
-     * @return \AppBundle\Entity\TechnicalEvolution
+     * @return TechnicalEvolution
      */
     public function getTechnicalEvolution()
     {
@@ -161,11 +192,11 @@ class UserTechnicalEvolution
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return UserTechnicalEvolution
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -175,7 +206,7 @@ class UserTechnicalEvolution
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {

@@ -39,6 +39,7 @@ class LoadUserTechnicalEvolutionData extends AbstractFixture implements OrderedF
                 $ute->setNote(mt_rand(1, 10));
             }
             $ute->setType($type);
+            $ute->setDate($faker->dateTime);
             $ute->setTechnicalEvolution($this->getReference($randomTechnical));
             $ute->setUser($this->getReference($randomUser));
             $em->persist($ute);

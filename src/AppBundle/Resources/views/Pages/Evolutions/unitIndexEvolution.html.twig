@@ -23,11 +23,27 @@
             </div>
 
             <div class="col-lg-12">
+                <div class="add-new-comment">
+                    {{ form_start(form, {'attr': {
+                        'id': 'app_bundle_comment_userTechnicalEvolution',
+                        'data-index-number': evolution.te_id
+                    }}) }}
+                    {{ form_end(form) }}
+                </div>
                 <div class="comment-list">
                     {% for comment in comments %}
-                        <div class="unit-comment">
+                        <div id="ute_id_{{ comment.id }}" class="unit-comment">
                             <h5>{{ comment.user.userProfile.firstname }} {{ comment.user.userProfile.lastname }}</h5>
-                            <p>{{ comment.comment }}</p>
+                            <i>Le {{ comment.date|date("d/m/Y")}} à {{ comment.date|date("h:i:s")}}</i>
+                            <p id="comment-value-id-{{ comment.id }}" class="comment-value">{{ comment.comment }}</p>
+                            <a class="modal-update" href="" data-toggle="modal" data-target="#comment-modal-update"
+                                data-index-number="{{ comment.id }}">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </a>
+                            <a class="modal-delete" href="" data-toggle="modal" data-target="#comment-modal-delete"
+                                data-index-number="{{ comment.id }}">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
@@ -39,6 +55,47 @@
 
         </div>
 
+    </div>
+
+    {# comment delete modal #}
+    <div id="comment-modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Suppression d'un commentaire</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes vous sur de vouloir supprimer ce commentaire ?</p>
+                    <p class="delete-value"></p>
+                    <a id="comment-link-delete" href="" class="text-color-1" data-dismiss="modal">Je confirmer vouloir supprimer ce commentaire</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# comment update modal #}
+    <div id="comment-modal-update" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modification d'un commentaire</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(updateForm, {'attr': {'id': 'app_bundle_comment_userTechnicalEvolution_update'}}) }}
+                    {{ form_label(updateForm.comment) }}
+                    {{ form_widget(updateForm.comment, {'attr': {'class': 'app_bundle_comment_userTechnicalEvolution_updateField'}}) }}
+                    {{ form_end(updateForm) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

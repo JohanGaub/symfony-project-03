@@ -10,7 +10,11 @@ use Doctrine\ORM\Mapping\JoinTable;
  * Category
  *
  * @ORM\Table(name="category")
+<<<<<<< HEAD
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+=======
+ * @ORM\Entity
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
  */
 class Category
 {
@@ -33,11 +37,31 @@ class Category
     /**
      * @var string
      *
+<<<<<<< HEAD
+=======
+     * @ORM\Column(name="tag", type="string", length=255, nullable=false)
+     */
+    private $tag;
+
+    /**
+     * @var string
+     *
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     */
+    private $type;
+
+    /**
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="category")
      */
     private $technicalEvolutions;
@@ -52,12 +76,15 @@ class Category
      */
     private $documentations;
 
+<<<<<<< HEAD
     /**
      * @ORM\OneToOne(targetEntity="Dictionary")
      * @JoinColumn(name="type_id", referencedColumnName="id")
      */
     private $type;
 
+=======
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
 
     /**
      * Get id
@@ -118,6 +145,32 @@ class Category
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Category
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+    /**
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * Constructor
      */
     public function __construct()

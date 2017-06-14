@@ -1,3 +1,40 @@
+/**
+ * Add new comment
+ * TODO => Fix date echo need good format
+ */
+$(document).ready( function () {
+    let formId  = '#app_bundle_comment_userTechnicalEvolution'
+    let fieldId = '#app_bundle_comment_userTechnicalEvolution_comment'
+    let id      = $(formId).attr('data-index-number')
+
+    $(formId).submit( function (e) {
+        e.preventDefault()
+
+        let newCommentValue = $(fieldId).val()
+
+        $.ajax({
+            type: 'POST',
+            url: '/evolution-technique/commentaires/ajout/' + id,
+            data : {
+                'data': newCommentValue
+            },
+            dataType: 'json',
+            timeout: 3000,
+            success: function(data){
+                let uteId   = data['id']
+                let user    = data['user']
+                let comment = data['comment']
+                let date    = new Date(data['date']['date'])
+                $('.comment-list').prepend(createComment(uteId, user, date, comment))
+                $(fieldId).val('')
+            },
+        })
+    })
+})
+
+/**
+ * Listen user screen to load new comments
+ */
 $(document).ready( function () {
     let loaderDom = '<div class="loader">'
         loaderDom += '<div class="inner one"></div>'
@@ -23,23 +60,23 @@ $(document).ready( function () {
 
             $.ajax({
                 type: 'POST',
-                url: '/evolution-technique/commentaires-chargement/' + id,
+                url: '/evolution-technique/commentaires/chargement/' + id,
                 data: {
                     'data': nbElements
                 },
-                timeout: 3000,
+                timeout: 100000,
                 success: function(data){
                     setTimeout(function () {
                         $(data).each(function (key, values) {
-                            let user    = values['up_firstname'] + ' ' + values['up_lastname']
-                            let comment = values['ute_comment']
+                            let uteId   = values['id']
+                            let user    = values['user']['userProfile']['firstname']
+                                user    += ' ' + values['user']['userProfile']['lastname']
+                            let date    = (new Date(values['date']['date']))
+                            let comment = values['comment']
+                            //let date    = new Date(values['ute_date']['date'])
+                            $('.comment-list').append(createComment(uteId, user, date, comment))
 
-                            let elementList = '<div class="unit-comment">'
-                                elementList += '<h5>' + user + '<h5>'
-                                elementList += '<p>' + comment + '</p>'
-                                elementList += '</div>'
-                            $('.comment-list').append(elementList)
-
+                            // TODO => Find a solution if last data length is equal to 10
                             if (data.length < 10){
                                 $(loader).hide(function () {
                                     clearInterval(interval)
@@ -47,11 +84,86 @@ $(document).ready( function () {
                             }
                             status = false;
                         })
-                    } ,1000)
+                    } ,3000)
                 },
             })
         }
     }, 500)
+})
+
+/**
+ * Delete comment
+ * TODO => Fix probleme with chain delete
+ */
+$(document).ready( function () {
+    $('.modal-delete').click( function () {
+        let $this           = $(this)
+        let commentFullId   = $this.parent().attr('id')
+        let commentId       = commentFullId.replace('ute_id_', '')
+        let commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
+
+        $('.delete-value').replaceWith('<p class="delete-value">' + commentValue + '</p>')
+
+        $('#comment-link-delete').click( function (e) {
+            e.preventDefault()
+
+            $.ajax({
+                type: 'GET',
+                url: '/evolution-technique/commentaires/suppression/' + commentId,
+                timeout: 3000,
+                success: function(){
+                    let elementList = '<div class="unit-comment">'
+                        elementList += '<h5>Commentaire supprimé<h5>'
+                        elementList += '</div>'
+                    $('#' + commentFullId).replaceWith(elementList)
+                },
+            })
+        })
+    })
+})
+
+/**
+ * Update action
+ * TODO => Need to fix multi upload ?? :(
+ * TODO => Find solution to upload dynamic loading comments (delete to)
+ */
+$(document).ready( function () {
+    $('.modal-update').click( function (e) {
+        let $this = $(this)
+        let commentFullId   = $this.parent().attr('id')
+        let commentId       = commentFullId.replace('ute_id_', '')
+        let commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
+        let commentForm     = '#app_bundle_comment_userTechnicalEvolution_update'
+        let commentField    = '.app_bundle_comment_userTechnicalEvolution_updateField'
+
+        $(commentField).val(commentValue)
+
+        $(commentForm).submit( function (e) {
+            e.preventDefault()
+            let newComment = $(commentField).val()
+            console.log(newComment)
+
+            if(newComment !== commentValue) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/evolution-technique/commentaires/modification/' + commentId,
+                    data: {
+                        'data': newComment
+                    },
+                    dataType: 'json',
+                    timeout: 3000,
+                    success: function(){
+                        let textId = 'comment-value-id-' + commentId
+                        let newContent = '<p id="' + textId + '" class="comment-value">'
+                            newContent += newComment
+                            newContent += '</p>'
+
+                        $('#' + textId).replaceWith(newContent)
+                    },
+                })
+            }
+        })
+    })
 })
 
 /**
@@ -68,4 +180,24 @@ function isScrolledIntoView(elem)
     let elemBottom      = elemTop + $(elem).height();
 
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+
+function createComment(uteId, user, date, comment)
+{
+    let elementList = '<div id="ute_id_' + uteId + '" class="unit-comment">'
+        elementList += '<h5>' + user + '</h5>'
+        elementList += '<i>Le ' + date + '</i>'
+        elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
+        elementList += '<a class="modal-update" href="" data-toggle="modal" '
+        elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
+        elementList += '<i class="fa fa-cog" aria-hidden="true"></i>'
+        elementList += '</a>'
+        elementList += '<span> </span>'
+        elementList += '<a class="modal-delete" href="" data-toggle="modal" '
+        elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
+        elementList += '<i class="fa fa-close" aria-hidden="true"></i>'
+        elementList += '</a>'
+        elementList += '</div>'
+    return elementList;
 }
