@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Entity\User;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
 use AppBundle\Form\Evolution\CommentUserTechnicalEvolutionType;
@@ -144,22 +145,19 @@ class TechnicalEvolutionController extends Controller
         $comments   = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'comment', 10);
         $notes      = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'note', 9999999);
 
-        $ute = new UserTechnicalEvolution();
-        $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $ute);
-        $form->handleRequest($request);
+        $uteComment     = new UserTechnicalEvolution();
+        $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
+        $formComment->handleRequest($request);
 
-        $updateForm = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
-
-        $comment = $uteRepository->findOneBy(['id' => 10017]);
-
-        dump($comment);
+        $formUpdate = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
+        $formUpdate->handleRequest($request);
 
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $evolution,
             'comments'  => $comments,
             'notes'     => $notes,
-            'form'      => $form->createView(),
-            'updateForm'=> $updateForm->createView()
+            'form'      => $formComment->createView(),
+            'updateForm'=> $formUpdate->createView(),
         ]);
     }
 
@@ -252,6 +250,7 @@ class TechnicalEvolutionController extends Controller
         }
         throw $this->createAccessDeniedException();
     }
+
     /**
      * Update comments for TechnicalEvolutions
      *
@@ -282,6 +281,29 @@ class TechnicalEvolutionController extends Controller
             return new JsonResponse($data);
         }
         throw $this->createAccessDeniedException();
+    }
+
+    /**
+     * Add new note for TechnicalEvolutions
+     *
+     * @Route("/notes/ajout/{userTechnicalEvolutionId}", name="evolutionCommentsUpdate")
+     * @param Request $request
+     * @param int $userTechnicalEvolutionId
+     * @return JsonResponse
+     */
+    public function addNoteAction(Request $request, int $userTechnicalEvolutionId)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+        $em = $this->getDoctrine()->getManager();
+        $note = $request->request->get('data');
+        $user = $this->getUser();
+        $company = $user->getCompany();
+        $users = $em->getRepository('AppBundle:User')->find($company);
+
+
+        return new JsonResponse($users);
     }
 
     /**

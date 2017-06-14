@@ -2257,6 +2257,40 @@ body {
   margin: 2rem 0;
   padding: 1rem; }
 
+/**
+ * Star rank system
+ */
+.star-rating {
+  /****** Style Star Rating Widget *****/
+  /***** CSS Magic to Highlight Stars on Hover *****/
+  /* hover previous stars in list */ }
+  .star-rating .rating {
+    border: none;
+    float: left; }
+  .star-rating .rating > input {
+    display: none; }
+  .star-rating .rating > label:before {
+    margin: 5px;
+    font-size: 2em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005"; }
+  .star-rating .rating > .half:before {
+    content: "\f089";
+    position: absolute; }
+  .star-rating .rating > label {
+    color: #ddd;
+    float: right; }
+  .star-rating .rating > input:checked ~ label,
+  .star-rating .rating:not(:checked) > label:hover,
+  .star-rating .rating:not(:checked) > label:hover ~ label {
+    color: #FFD700; }
+  .star-rating .rating > input:checked + label:hover,
+  .star-rating .rating > input:checked ~ label:hover,
+  .star-rating .rating > label:hover ~ input:checked ~ label,
+  .star-rating .rating > input:checked ~ label:hover ~ label {
+    color: #FFED85; }
+
 .dictionary-list a {
   color: #fff; }
 

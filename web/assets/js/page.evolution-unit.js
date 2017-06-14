@@ -9,7 +9,6 @@ $(document).ready( function () {
 
     $(formId).submit( function (e) {
         e.preventDefault()
-
         let newCommentValue = $(fieldId).val()
 
         $.ajax({
@@ -141,7 +140,6 @@ $(document).ready( function () {
         $(commentForm).submit( function (e) {
             e.preventDefault()
             let newComment = $(commentField).val()
-            console.log(newComment)
 
             if(newComment !== commentValue) {
                 $.ajax({
@@ -157,7 +155,6 @@ $(document).ready( function () {
                         let newContent = '<p id="' + textId + '" class="comment-value">'
                             newContent += newComment
                             newContent += '</p>'
-
                         $('#' + textId).replaceWith(newContent)
                     },
                 })
@@ -165,6 +162,32 @@ $(document).ready( function () {
         })
     })
 })
+
+/**
+ * Star rating system
+ */
+$(document).ready( function () {
+    $('.star-link').click( function () {
+        let $this       = $(this)
+        let valueVote   = $this.attr('value')
+        let evoId       = $('.star-rating').attr('data-index-number')
+
+        // => TODO need to finish ajax request for vote here
+        $.ajax({
+            type: 'POST',
+            url: '/evolution-technique/notes/ajout/' + evoId,
+            data: {
+                'data': valueVote
+            },
+            dataType: 'json',
+            timeout: 3000,
+            success: function(){
+
+            },
+        })
+    })
+})
+
 
 /**
  * Know if loader is in view
