@@ -33,17 +33,12 @@ $(document).ready(function () {
 });
 
 
-
-
-
 $(document).ready(function () {
-        if ($(window).width() <= 767) {
-            $("#arrowbox").addClass("arrow-bottom-center");
-        } else {
-            $("#arrowbox").addClass("arrow-right-center");
-        }
-
-
+    if ($(window).width() <= 767) {
+        $("#arrowbox").addClass("arrow-bottom-center");
+    } else {
+        $("#arrowbox").addClass("arrow-right-center");
+    }
 
 
 // Change class name in "html.twig" file in order to use a specific scss mixin
@@ -73,7 +68,6 @@ $(document).ready(function () {
 });
 
 
-
 // Modal
 $(document).ready(function () {
     $(".modal-fullscreen").on('show.bs.modal', function () {
@@ -100,4 +94,3 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
-

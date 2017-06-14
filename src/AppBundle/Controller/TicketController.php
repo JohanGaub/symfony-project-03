@@ -106,7 +106,7 @@ class TicketController extends Controller
             {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move(
-                    $this->getParameter('upload_directory'),
+//                    $this->getParameter('upload_directory'),
                     $fileName
                 );
                 $ticket->setUpload($fileName);

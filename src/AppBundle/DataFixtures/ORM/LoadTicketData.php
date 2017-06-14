@@ -64,7 +64,7 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $randomCategory             = 'category_id_' . mt_rand(0, DataParameters::NB_CATEGORY - 1);
             $randomProduct              = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
             $randomProjectResponsible   = 'user_project_resp_id_' . mt_rand(0, DataParameters::NB_PROJECT_RESP - 1);
-  /*          $connectedUserProfile       = 'user_profile_id_' . // I want the exact name of the Project responsible chosen
+  /*        $connectedUserProfile       = 'user_profile_id_' . // I want the exact name of the Project responsible chosen
             $connectedCompany           = 'company_id_' .  // I want the exact name of the user profile above*/
 
             $origin                     = $origins[mt_rand(0, count($origins) - 1)];
@@ -82,7 +82,7 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $ticket->setEmergency($emergency);
             $ticket->setStatus($oneStatus);
 
-            $ticket->setUpload($faker->file($root . '/../web/assets/img',$root . '/../web/assets/upload'));
+            $ticket->setUpload($faker->file($root . '/../web/assets/img',$root . '/../web/assets/upload', false));
 
             $ticket->setCreationDate($faker->dateTime);
             $ticket->setUpdateDate($faker->dateTime);
@@ -91,7 +91,7 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $ticket->setProduct($this->getReference($randomProduct));
             $ticket->setUser($this->getReference($randomProjectResponsible));
 
-/*            $ticket->setUserprofile()
+/*          $ticket->setUserprofile()entitygetréfrence($
             $ticket->setCompany()*/
 
             $this->setReference('ticket_id_' . $i,$ticket);

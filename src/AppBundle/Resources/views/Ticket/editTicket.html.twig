@@ -10,8 +10,8 @@
                     <thead>
                     <tr>
                         <th>N° de ticket</th>
-                        <th>Société</th>
-                        <th>Utilisateur</th>
+                        {#  <th>Société</th>
+                          <th>Utilisateur</th>#}
                         <th>Produit</th>
                         <th>Catégorie</th>
                         <th>Sujet</th>
@@ -21,8 +21,8 @@
                     <tbody class="table-striped">
                     <tr>
                         <td>{{ informations.id }}</td>
-                        <td>{{ informations.user.company.name }}</td>
-                        <td>{{ informations.user.userprofile.lastname }}</td>
+                        {#<td>{{ informations.user.company.name }}</td>
+                        <td>{{ informations.user.userprofile.lastname }}</td>#}
                         <td>{{ informations.product.name }}</td>
                         <td>{{ informations.category.title }}</td>
                         <td>{{ informations.subject }}</td>
@@ -48,13 +48,38 @@
                     <tr>
                         <td>{{ informations.origin }}</td>
                         <td>{{ informations.type }}</td>
-                        {#<td><a href="{{ informations.upload }}"> <img src="{{ informations.upload }}"/></a></td>#}
-                        <td><a href="{{ asset('' ~ informations.upload) }}"><img src="{{ asset('' ~ informations.upload) }}"/></a></td>
-                        {#<img src="{{ path('route_to_stream_action', {'fileId':'some_id'}) }}">#}
+
+
+
+
+
+                        {#<td><a class="modal-content" href="{{ asset('assets/upload/' ~ informations.upload) }}"><img src="{{ asset('assets/upload/' ~ informations.upload) }}" width = "150px"/></a></td>#}
+                        <td><a type="button" class="btn btn-primary btn-lg" data-toggle="modal" href="#myModal"><img src="{{ asset('assets/upload/' ~ informations.upload) }}" width = "150px"/></a></td>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        img src="{{ asset('assets/upload/' ~ informations.upload) }}"/>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <td>{{ informations.creationdate|date("d/m/Y") }}</td>
                         <td>{{ informations.updatedate|date("d/m/Y") }}</td>
                         <td>{{ informations.creationdate|date("d/m/Y") }}</td>
-                        {#<td><a href="{{ path('edit', {"user": user.id}) }}">Modifier</a></td>#}
+
                     </tr>
                     </tbody>
                 </table>
@@ -67,5 +92,17 @@
                 {{ form(form) }}
             </div>
         </div>
+
+
+
+        {#<div id="fileModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+                <img src="{{ asset('assets/upload/' ~ informations.upload) }}" style="width:100%" />
+            </div>
+        </div>#}
+
+
+
     </section>
 {% endblock %}
