@@ -24,6 +24,17 @@ class UserTechnicalEvolutionRepository extends EntityRepository
 
     /**
      * @param int $evolution
+     * @param string $type
+     * @param $limit
+     * @return array
+     */
+    public function getUserTechnicalEvolutionScalar(int $evolution, string $type, $limit)
+    {
+        return $this->getUserTechnicalEvolutionNativeQuery($evolution, $type, $limit)->getScalarResult();
+    }
+
+    /**
+     * @param int $evolution
      * @param $type
      * @param $limit
      * @return \Doctrine\ORM\NativeQuery

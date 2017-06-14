@@ -126,6 +126,7 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Get unit evolution with note & comment
+     * TODO => Find a solution for doing infinite scroll loader for load comments
      *
      * @Route("/{technicalEvolutionId}", name="evolutionUnit")
      * @param int $technicalEvolutionId
@@ -150,8 +151,29 @@ class TechnicalEvolutionController extends Controller
     }
 
     /**
+     * Load more comments for TechnicalEvolutions
+     *
+     * @Route("/commentaires-chargement/{technicalEvolutionId}", name="evolutionCommentsLoading")
+     * @param Request $request
+     * @param int $technicalEvolutionId
+     * @return JsonResponse
+     */
+    public function loadMoreCommentsAction(Request $request, int $technicalEvolutionId)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+        // data is nb element page already get
+        $data = $request->request->get('data');
+
+        $comments = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution')
+            ->getUserTechnicalEvolutionScalar($technicalEvolutionId, 'comment', "$data, 10");
+
+        return new JsonResponse($comments);
+    }
+
+    /**
      * Get full evolution have status
-     * TODO => Find a solution for doing infinite scroll loader for load comments
      *
      * @Route("/en-attente/liste", name="evolutionWaiting")
      * @return \Symfony\Component\HttpFoundation\Response
