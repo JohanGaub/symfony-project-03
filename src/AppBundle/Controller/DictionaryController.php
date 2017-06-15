@@ -30,9 +30,12 @@ class DictionaryController extends Controller
         $repo           = $this->getDoctrine()->getRepository('AppBundle:Dictionary');
         $dictionaryList = $repo->getDictionaryList();
         $dictionarys    = [];
-
-        foreach ($dictionaryList as $dictionary)
-        {
+        $listName       = [
+            'Type de catégorie',
+            'Status des évolutions technique',
+            'Origine des évolutions tehcnique'
+        ];
+        foreach ($dictionaryList as $dictionary) {
             $type = $dictionary->getType();
             if (array_key_exists($type, $dictionarys)) {
                 $dictionarys[$type][] = $dictionary;
@@ -40,8 +43,10 @@ class DictionaryController extends Controller
                 $dictionarys[$type] = [$dictionary];
             }
         }
+
         return $this->render('@App/Pages/Dictionary/indexDictionary.html.twig', [
-            'dictionarys'   => $dictionarys
+            'dictionarys'   => $dictionarys,
+            'listName'      => $listName
         ]);
     }
 
@@ -123,7 +128,6 @@ class DictionaryController extends Controller
         }
         $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
             ->find($dictionaryId);
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($dictionary);
         $em->flush();

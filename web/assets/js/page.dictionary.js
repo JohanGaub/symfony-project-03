@@ -1,43 +1,16 @@
-// TODO => Find a solution for news add (update && delete) is not send
-$(document).ready(function () {
-    // loop on array to init different ajax form
-    for (let id of formId) {
-        formSubmitListening(id)
-    }
-    // update action for all page list
-    updateModalList()
-    // delete action for all page list
-    deleteModalList()
-})
 
 /**
- * Data type, should be same than db type
- * @type {[*]}
- */
-let formId = [
-    'category_type',
-    'technical_evolution_status',
-    'technical_evolution_origin',
-]
-
-/**
- * formSubmitListener
+ * Add
  * Function to send new element in vue + db
  * View append many things in html
- *
- * @param formId
  */
-function formSubmitListening(formId) {
-    $("#dictionary_form_" + formId).submit(function (e) {
-        /**
-         * Disable normal form event
-         * && get id and value
-         */
+$(document).ready( function () {
+    $('.dictionary_form').submit( function (e) {
         e.preventDefault()
-        let $this = $(this)
-        let data = {}
-        data['value'] = $('#value_' + formId).val()
-        data['type'] = $this.attr('id')
+        let $this       = $(this)
+        let data        = {}
+        data['type']    = $this.children().children().attr('data-index-number')
+        data['value']   = $this.children().children().val()
 
         if (data['value'] === '') {
             // if field is empty
@@ -52,7 +25,6 @@ function formSubmitListening(formId) {
                 timeout: 3000,
                 success: function (result) {
                     // add full li with value + button to update && delete
-                    let list = "#list_" + formId
                     let domSend = '<li id="list_group_item_' + result.id + '" class="list-group-item">'
                     domSend += '<span id="li_value_' + result.id + '">' + data['value'] + '</span>'
                     domSend += '<span class="badge">'
@@ -62,28 +34,34 @@ function formSubmitListening(formId) {
                     domSend += '<a class="modal-delete" href="" data-toggle="modal" data-target="#dictionary-modal-delete">'
                     domSend += '<i class="fa fa-close" aria-hidden="true"></i></a>'
                     domSend += '</span></li>'
-                    $(list).append(domSend)
+                    $('#' + data['type']).append(domSend)
                 },
             })
         }
     })
-}
+})
 
 /**
+ * Update
  * Function call information in modal (form)
  * After we can confirm the update with submit
  * && get new view
- * TODO => Find a solution to get many update without reload page
  */
-function updateModalList() {
+$(document).ready(function () {
+    let listElementId = ''
+    let listElementValue = ''
+    let id = ''
+    let value = ''
+    let inputForm = ''
+
     $("#dictionarys-list ul li span a.modal-update").click(function (e) {
         e.preventDefault()
-        let listElementId = $(this).parent().parent().attr('id')
-        let listElementValue = $(this).parent().parent().text()
-        let id = listElementId.replace('list_group_item_', '')
-        let value = listElementValue.trim()
-        let inputForm = '#dictionary_input_update'
-        // TODO => Find why this text replace at all click don't work
+        listElementId       = $(this).parent().parent().attr('id')
+        listElementValue    = $(this).parent().parent().text()
+        id                  = listElementId.replace('list_group_item_', '')
+        value               = listElementValue.trim()
+        inputForm           = '#dictionary_input_update'
+        // TODO => Find why i can't send many times content to input form ???
         $(inputForm).attr('value', value)
     })
 
@@ -110,46 +88,49 @@ function updateModalList() {
             })
         }
     })
-}
+})
 
 /**
+ * Delete
  * Function to open a modal and send in informations
  * After can confirm delete action with click on link
  */
-function deleteModalList() {
+$(document).ready( function () {
+    let listElementId = ''
+    let listElementValue = ''
+    let id = ''
+    let value = ''
+
     $("#dictionarys-list ul li span a.modal-delete").click(function (e) {
         /**
          * Disable normal form event
          * && get id from li for delete by id
          */
         e.preventDefault()
-        let listElementId = $(this).parent().parent().attr('id')
-        let listElementValue = $(this).parent().parent().text()
-        let id = listElementId.replace('list_group_item_', '')
-        let value = listElementValue.trim()
-
-        console.log('id -> ' + id + '|| v -> ' + value)
-
+        listElementId       = $(this).parent().parent().attr('id')
+        listElementValue    = $(this).parent().parent().text()
+        id                  = listElementId.replace('list_group_item_', '')
+        value               = listElementValue.trim()
         $("#dictionary_delete_value").text(value)
+    })
 
-        $("#dictionary_link_delete").click(function (e) {
+    $("#dictionary_link_delete").click(function (e) {
+        console.log(id)
+        /**
+         * Disable normal form event
+         * && get id from li for delete by id
+         */
+        e.preventDefault()
+        let elementId = 'list_group_item_' + id
 
-            /**
-             * Disable normal form event
-             * && get id from li for delete by id
-             */
-            e.preventDefault()
-            let listElementId = 'list_group_item_' + id
-
-            $.ajax({
-                type: 'GET',
-                url: '/dictionnaire/suppression/' + id,
-                timeout: 3000,
-                success: function () {
-                    // delete the target element
-                    $("#" + listElementId).remove()
-                },
-            })
+        $.ajax({
+            type: 'GET',
+            url: '/dictionnaire/suppression/' + id,
+            timeout: 3000,
+            success: function () {
+                // delete the target element
+                $("#" + elementId).remove()
+            },
         })
     })
-}
+})
