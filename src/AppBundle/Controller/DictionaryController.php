@@ -40,7 +40,6 @@ class DictionaryController extends Controller
                 $dictionarys[$type] = [$dictionary];
             }
         }
-
         return $this->render('@App/Pages/Dictionary/indexDictionary.html.twig', [
             'dictionarys'   => $dictionarys
         ]);
@@ -58,7 +57,6 @@ class DictionaryController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-
         /**
          * Get result from ajax call
          * delete 'dictionary_form_' from id to get category type
@@ -123,7 +121,6 @@ class DictionaryController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-
         $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
             ->find($dictionaryId);
 
