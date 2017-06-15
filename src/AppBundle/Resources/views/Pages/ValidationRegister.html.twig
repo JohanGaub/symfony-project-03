@@ -1,0 +1,53 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12 col-xs-offset-0 col-lg-6 col-lg-offset-3">
+            <table class="table table-responsive table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>Socièté</th>
+                    <th>Email/login</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Siret</th>
+                    <th>Mobile</th>
+                    <th>Adresse</th>
+                    <th>Ville</th>
+                    <th>Email/Employé</th>
+                    <th>Tel</th>
+                </tr>
+            </thead>
+    {% for user in User %}
+            <tbody class="table-striped">
+                <tr>
+                    <td>{{ user.company.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.userProfile.firstname }}</td>
+                    <td>{{ user.userProfile.lastname }}</td>
+                    <td>{{ user.company.siret }}</td>
+                    <td>{{ user.userProfile.phone1 }}</td>
+                    <td>{{ user.company.adress }}</td>
+                    <td>{{ user.company.town }}</td>
+                    <td>{{ user.company.email }}</td>
+                    <td>{{ user.company.phone2 }}</td>
+                    <td>
+                        <a class="waves-effect waves-light btn" href="{{ path('delete_register', {'id': user.id }) }}">
+                            <i class="material-icons left">delete</i>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn" href="{{ path('activate_register', {'id': user.id }) }}">
+                            <i class="material-icons left">activate</i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+    {% endfor %}
+            </table>
+        </div>
+        </div>
+
+
+
+{% endblock %}
