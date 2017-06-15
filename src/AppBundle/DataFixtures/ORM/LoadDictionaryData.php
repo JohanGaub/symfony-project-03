@@ -21,7 +21,7 @@ class LoadDictionaryData extends AbstractFixture implements OrderedFixtureInterf
         $categoryType = [
             'technical',
             'commercial',
-            'other',
+            'other'
         ];
 
         $teStatus = [
@@ -29,12 +29,13 @@ class LoadDictionaryData extends AbstractFixture implements OrderedFixtureInterf
             'En attente',
             'Fermé',
             'Annulé',
+            'Refusé'
         ];
 
         $teOrigin = [
             'Responsable projet',
             'Technicien',
-            'Commercial',
+            'Commercial'
         ];
 
         for ($i = 0; $i < count($categoryType); ++$i){

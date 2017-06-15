@@ -14,19 +14,43 @@ class UserTechnicalEvolutionRepository extends EntityRepository
     /**
      * @param int $evolution
      * @param string $type
+     * @param mixed $limit
      * @return mixed
      */
-    public function getUserTechnicalEvolution(int $evolution, string $type)
+    public function getUserTechnicalEvolution(int $evolution, string $type, $limit)
     {
-        return $this->getUserTechnicalEvolutionNativeQuery($evolution, $type)->getResult();
+        return $this->getUserTechnicalEvolutionNativeQuery($evolution, $type, $limit)->getResult();
+    }
+
+    /**
+     * @param int $evolution
+     * @param string $type
+     * @param mixed $limit
+     * @return mixed
+     */
+    public function getUserTechnicalEvolutionArray(int $evolution, string $type, $limit)
+    {
+        return $this->getUserTechnicalEvolutionNativeQuery($evolution, $type, $limit)->getArrayResult();
+    }
+
+    /**
+     * @param int $evolution
+     * @param string $type
+     * @param $limit
+     * @return array
+     */
+    public function getUserTechnicalEvolutionScalar(int $evolution, string $type, $limit)
+    {
+        return $this->getUserTechnicalEvolutionNativeQuery($evolution, $type, $limit)->getScalarResult();
     }
 
     /**
      * @param int $evolution
      * @param $type
+     * @param $limit
      * @return \Doctrine\ORM\NativeQuery
      */
-    private function getUserTechnicalEvolutionNativeQuery($evolution, $type)
+    private function getUserTechnicalEvolutionNativeQuery($evolution, $type, $limit)
     {
         # create rsm object
         $rsm = new ResultSetMapping();
@@ -34,6 +58,7 @@ class UserTechnicalEvolutionRepository extends EntityRepository
         $rsm->addEntityResult($this->getEntityName(), 'ute');
         $rsm->addFieldResult('ute', 'ute_id', 'id');
         $rsm->addFieldResult('ute', 'ute_type', 'type');
+        $rsm->addFieldResult('ute', 'ute_date', 'date');
         $rsm->addFieldResult('ute', 'ute_note', 'note');
         $rsm->addFieldResult('ute', 'ute_comment', 'comment');
         $rsm->addFieldResult('ute', 'ute_user', 'id');
@@ -55,6 +80,7 @@ class UserTechnicalEvolutionRepository extends EntityRepository
         $query = $this->getEntityManager()->createNativeQuery("
             SELECT ute.id AS ute_id,
                 ute.type,
+                ute.date AS ute_date,
                 ute.comment AS ute_comment,
                 ute.note AS ute_note,
                 ute.technical_evolution_id AS ute_techncial_evolution,
@@ -68,7 +94,8 @@ class UserTechnicalEvolutionRepository extends EntityRepository
             INNER JOIN user u ON u.id = ute.user_id
             INNER JOIN user_profile up ON up.id = u.user_profile_id
             WHERE ute.type = '{$type}' AND ute.technical_evolution_id = {$evolution}
-            
+            ORDER BY ute.date DESC
+            LIMIT {$limit} 
         ", $rsm);
 
         return $query;
