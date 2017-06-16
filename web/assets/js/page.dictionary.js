@@ -3,6 +3,8 @@
  * Add
  * Function to send new element in vue + db
  * View append many things in html
+ * TODO => Find a solution to clean form after add (formSubmit) element
+ * TODO => Find problem when add element (can't delete or update them after)
  */
 $(document).ready( function () {
     $('.dictionary_form').submit( function (e) {
@@ -62,6 +64,7 @@ $(document).ready(function () {
         value               = listElementValue.trim()
         inputForm           = '#dictionary_input_update'
         // TODO => Find why i can't send many times content to input form ???
+        console.log(value)
         $(inputForm).attr('value', value)
     })
 

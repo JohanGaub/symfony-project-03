@@ -23,8 +23,8 @@
                 {% set loop = 0 %}
                 {% for title,dictionary in dictionarys %}
                     <div class="col-lg-4 dictionary-list">
-                        {{ dump(loop) }}
-                        {{ dump(listName) }}
+                        {#{{ dump(loop) }}
+                        {{ dump(listName) }}#}
                         <h3></h3>
                         <ul id="{{ title }}" class="list-group">
                             {% for elementList in dictionary %}
@@ -50,7 +50,7 @@
                             </div>
                         </form>
                     </div>
-                    {# TODO => Print a french title in list#}
+                    {# TODO => Print a french title in list #}
                 {% endfor %}
             </div>
         </div>
