@@ -8,32 +8,48 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 class EditTicketType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventListener(FormEvents::POST_SUBMIT, function(FormEvent $event){
+                $event->stopPropagation();
+            },900) // To disable Symfony to check if uploaded file is too large or if non-existing fields were submitted.
 
             ->add('emergency', ChoiceType::class, [
                 'label' => 'Urgence',
                 'choices'  => [
-                    'Normal' => 'normal',
-                    'Haute' => 'high',
+                    'Normal' => 'Normal',
+                    'Haute' => 'High',
                 ],
                 'required' => true,
             ])
-            ->add('Status', ChoiceType::class, [
+            ->add('status', ChoiceType::class, [
                 'label' => 'Statut',
                 'choices' => [
-                    'En attente' => 'waiting',
-                    'En cours' => 'in_progress',
-                    'Résolu' => 'resolved',
-                    'Fermé' => 'closed',
-                    'Archivé' => 'archived',
+                    'En attente' => 'En attente',
+                    'En cours' => 'En cours',
+                    'Résolu' => 'Résolu',
+                    'Fermé' => 'Fermé',
                 ],
                 'required' => true,
             ])
+            ->add('isArchive', ChoiceType::class, [
+                'label' => 'Archivage',
+                'expanded' => true,
+                'choices'
+                => [
+                    'Ne pas archiver' => false,
+                    'Archiver' => true,
+                ],
+                'required' => true,
+            ])
+
+
 
             ->add('submit', SubmitType::class)
         ;

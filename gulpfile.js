@@ -50,26 +50,26 @@ gulp.task('watch', function() {
 
 // -> Css Builder
 gulp.task('build:css', function(callback) {
-   runSequence(
-       'clean:webcss',
-       'clean:srccss',
-       'scss',
-       //'unused:css',
-       'autofix',
-       'uglify:css',
-   callback);
+    runSequence(
+        'clean:webcss',
+        'clean:srccss',
+        'scss',
+        //'unused:css',
+        'autofix',
+        'uglify:css',
+        callback);
 });
 // -> Js Builder
 gulp.task('build:js', function(callback) {
     runSequence(
         'uglify:js',
-    callback);
+        callback);
 });
 // -> Img Builder
 gulp.task('img:compact', function(callback) {
     runSequence(
         'img:min',
-    callback);
+        callback);
 });
 
 /* ---------- Tasks ---------- */
@@ -95,18 +95,18 @@ gulp.task('clean:webimg', function() {
 
 //-> Scss to Css
 gulp.task('scss', function () {
-    return gulp.src('src/AppBundle/Resources/public/sass/showcase-main.scss')
+    return gulp.src('src/AppBundle/Resources/public/sass/main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('src/AppBundle/Resources/public/css/'));
 });
 // -> Delete unused css
 /*gulp.task('unused:css', function () {
-    return gulp.src('src/AppBundle/Resources/public/css/*.css')
-        .pipe(uncss({
-            html: ['http://localhost:8000', 'http://localhost:8000/historique']
-        }))
-        .pipe(gulp.dest('src/AppBundle/Resources/public/css'));
-});*/
+ return gulp.src('src/AppBundle/Resources/public/css/*.css')
+ .pipe(uncss({
+ html: ['http://localhost:8000', 'http://localhost:8000/historique']
+ }))
+ .pipe(gulp.dest('src/AppBundle/Resources/public/css'));
+ });*/
 // -> Autoprefixer CSS
 gulp.task('autofix', function() {
     gulp.src('src/AppBundle/Resources/public/css/*.css')
@@ -144,13 +144,13 @@ gulp.task('img:compact', function () {
 });
 
 // -> Delete unused css
- /*gulp.task('unused:bootstrap:css', function () {
-    return gulp.src('web/assets/vendor/bootstrap-3.3.7-dist/css/*.css')
-        .pipe(uncss({html: ['http://localhost:8000']}))
-        .pipe(gulp.dest('web/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.transform'));
-});*/
+/*gulp.task('unused:bootstrap:css', function () {
+ return gulp.src('web/assets/vendor/bootstrap-3.3.7-dist/css/*.css')
+ .pipe(uncss({html: ['http://localhost:8000']}))
+ .pipe(gulp.dest('web/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.transform'));
+ });*/
 
- // -> Browser-sync + sass compatibility
+// -> Browser-sync + sass compatibility
 gulp.task('browser-sync', function() {
     browserSync.init({
         proxy: "http://localhost:8000"

@@ -7,3 +7,15 @@
   color: #545454;
   min-height: 100%;
   font-family: Arial, sans-serif; }
+
+.close {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform .2s ease-in-out;
+  transition: transform .5s ease-in-out; }
+
+.close:hover {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  filter: brightness(10%); }

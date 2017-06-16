@@ -40,6 +40,8 @@ class TicketController extends Controller
      */
     public function addAction(Request $request)
     {
+        $user       = $this->getUser();             // I get the user from User Entity to set it in the database (see upstairs)
+
         $ticket     = new Ticket();
         $em         = $this->getDoctrine()->getManager();
         $form       = $this->createForm(AddTicketType::class, $ticket);
@@ -71,6 +73,9 @@ class TicketController extends Controller
 
             $ticket->setCreationDate(new \DateTime('NOW')); // To set the default creationDate to NOW
             $ticket->setStatus('En attente'); // To set the default status to "En attente"
+            $ticket->setIsArchive(false); // To set the default to NOT archived
+            $ticket->setUser($user); // I got (see upstairs) the user and set it hear.
+
 
             $em->persist($ticket);
             $em->flush();
@@ -98,20 +103,16 @@ class TicketController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            // $file stores the uploaded files
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $ticket->getUpload();
 
-            if($file != null)
-            {
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move(
-//                    $this->getParameter('upload_directory'),
-                    $fileName
-                );
-                $ticket->setUpload($fileName);
-            }
             $ticket->setUpdateDate(new \DateTime('NOW')); // To set the default UpdateDate to NOW
+
+            // To manage the endDate when you chose one particular status
+            $status = $ticket->getStatus();
+            if($status == 'Fermé' or $status == 'Résolu'){
+                $ticket->setEndDate(new \DateTime('NOW'));
+            } else {
+                $ticket->setEndDate(null);
+            }
 
             $em->flush();
             return $this->redirectToRoute('index_ticket');

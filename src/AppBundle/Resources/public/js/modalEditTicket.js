@@ -1,3 +1,0 @@
-$(function() {
-    $('#myModal').modal(options)
-});

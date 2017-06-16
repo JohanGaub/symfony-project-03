@@ -57,15 +57,15 @@ class AddTicketType extends AbstractType
             ->add('origin', ChoiceType::class, [
                 'label' => 'Origine',
                 'choices'   => [
-                    'Super adminitrateur' => 'super_administrator',
-                    'Administrateur' => 'administrator',
-                    'Responsable projet' => 'project_responsible',
-                    'Technicien' => 'technician',
-                    'Commercial' => 'commercial',
-                    'Client final' => 'final_client',
+                    'Super adminitrateur' => 'Super adminitrateur',
+                    'Administrateur' => 'Administrateur',
+                    'Responsable projet' => 'Responsable projet',
+                    'Technicien' => 'Technicien',
+                    'Commercial' => 'Commercial',
+                    'Client final' => 'Client final',
                 ],
                 'preferred_choices' => [
-                    'Responsable projet' => 'project_responsible',
+                    'Responsable projet' => 'Responsable projet',
                 ],
                 'required' => true, // To avoid blank response
                 #'placeholder' => 'Sélectionner une origine',
@@ -73,17 +73,17 @@ class AddTicketType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'label' => 'Type',
                 'choices'   => [
-                    'Technique' => 'technical',
-                    'Commercial' => 'commercial',
-                    'Autre' => 'other',
+                    'Technique' => 'Technique',
+                    'Commercial' => 'Commercial',
+                    'Autre' => 'Autre',
                 ],
                 'required' => true,
             ])
             ->add('emergency', ChoiceType::class, [
                 'label' => 'Urgence',
                 'choices'  => [
-                    'Normal' => 'normal',
-                    'Haute' => 'high',
+                    'Normal' => 'Normal',
+                    'Haute' => 'Haute',
                 ],
                 'required' => true,
             ])
@@ -91,7 +91,7 @@ class AddTicketType extends AbstractType
                 'label' => 'Fichier à uploader',
                 'required' => false,
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }
 

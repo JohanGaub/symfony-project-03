@@ -109,6 +109,14 @@ class Ticket
      */
     private $endDate;
 
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_archive", type="boolean", nullable=false)
+     */
+    private $isArchive;
+
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="tickets", cascade={"persist"})
      */

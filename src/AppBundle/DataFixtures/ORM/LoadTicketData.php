@@ -47,11 +47,10 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             2 => 'Basse',
         ];
         $status                       = [
-            0 => 'en attente',
-            1 => 'en cours',
-            2 => 'résolu',
-            3 => 'fermé',
-            4 => 'archivé',
+            0 => 'En attente',
+            1 => 'En cours',
+            2 => 'Résolu',
+            3 => 'Fermé',
         ];
         $types                       = [
             0 => 'Technique',
@@ -64,8 +63,6 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $randomCategory             = 'category_id_' . mt_rand(0, DataParameters::NB_CATEGORY - 1);
             $randomProduct              = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
             $randomProjectResponsible   = 'user_project_resp_id_' . mt_rand(0, DataParameters::NB_PROJECT_RESP - 1);
-  /*        $connectedUserProfile       = 'user_profile_id_' . // I want the exact name of the Project responsible chosen
-            $connectedCompany           = 'company_id_' .  // I want the exact name of the user profile above*/
 
             $origin                     = $origins[mt_rand(0, count($origins) - 1)];
             $emergency                  = $emergencies[mt_rand(0, count($emergencies) - 1)];
@@ -87,12 +84,12 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $ticket->setCreationDate($faker->dateTime);
             $ticket->setUpdateDate($faker->dateTime);
             $ticket->setEndDate($faker->dateTime);
+            $ticket->setIsArchive($faker->boolean);
             $ticket->setCategory($this->getReference($randomCategory));
             $ticket->setProduct($this->getReference($randomProduct));
             $ticket->setUser($this->getReference($randomProjectResponsible));
 
-/*          $ticket->setUserprofile()entitygetréfrence($
-            $ticket->setCompany()*/
+
 
             $this->setReference('ticket_id_' . $i,$ticket);
 
