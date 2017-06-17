@@ -682,6 +682,9 @@ p {
   text-align: justify;
   color: #545454; }
 
+a, a:focus, a:hover, a:target {
+  outline: none; }
+
 /* Links Green */
 .plus-info {
   color: #4c5f05;
@@ -725,6 +728,12 @@ p {
 
 a {
   text-decoration: none !important; }
+
+/**
+ * Modal Parts
+ */
+.modal {
+  border-radius: 1px; }
 
 .background-home {
   margin-top: 8rem;
@@ -1986,7 +1995,7 @@ body {
   .sidebar-communit .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 25rem;
     margin: 0;
     padding: 0;
     list-style: none; }
@@ -2037,13 +2046,11 @@ body {
   width: 250px; }
 
 #page-content-wrapper {
-  width: 100%;
   position: absolute;
   padding: 15px; }
 
 #wrapper.toggled #page-content-wrapper {
-  position: absolute;
-  margin-right: -250px; }
+  position: absolute; }
 
 @media (min-width: 768px) {
   #wrapper {
@@ -2168,19 +2175,6 @@ body {
 .bo-title-page h3 {
   padding: 1rem 0; }
 
-.bo-evolution .panel-top-line {
-  display: flex; }
-  .bo-evolution .panel-top-line .evolution-status {
-    display: inline-block;
-    border: 1px solid #1d1d1d;
-    border-radius: 3px;
-    padding: 0.25rem 0.75rem;
-    margin: auto 0.5rem auto 0; }
-
-.bo-evolution .panel-footer .bottom-footer {
-  display: flex;
-  justify-content: space-between; }
-
 /**
  * Loader Parts
  */
@@ -2242,6 +2236,50 @@ body {
   100% {
     transform: translateY(-32px); } }
 
+.dictionary-list {
+  border: 1px solid #9ac00a;
+  margin: 2rem 0;
+  padding: 0 2rem; }
+  .dictionary-list .list-group-item {
+    border-radius: 2px; }
+    .dictionary-list .list-group-item .badge {
+      background-color: #9ac00a;
+      border-radius: 2px; }
+      .dictionary-list .list-group-item .badge a i {
+        transition: 0.4s ease; }
+      .dictionary-list .list-group-item .badge a:hover > i {
+        color: #dd5116; }
+    .dictionary-list .list-group-item input[type='text']:focus {
+      outline: 1px solid #9ac00a; }
+  .dictionary-list a {
+    color: #fff; }
+  .dictionary-list .msg-return-box .msg-return {
+    display: block;
+    background-color: #dd5116;
+    border-radius: 2px;
+    color: #fff;
+    transition: 1s ease;
+    text-align: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    width: 100%; }
+
+/**
+ * Evolutions Parts
+ */
+.bo-evolution .panel-top-line {
+  display: flex; }
+  .bo-evolution .panel-top-line .evolution-status {
+    display: inline-block;
+    border: 1px solid #1d1d1d;
+    border-radius: 3px;
+    padding: 0.25rem 0.75rem;
+    margin: auto 0.5rem auto 0; }
+
+.bo-evolution .panel-footer .bottom-footer {
+  display: flex;
+  justify-content: space-between; }
+
 /**
  * Comments Parts
  */
@@ -2291,8 +2329,12 @@ body {
   .star-rating .rating > input:checked ~ label:hover ~ label {
     color: #FFED85; }
 
-.dictionary-list a {
-  color: #fff; }
+.bo-top-bar {
+  border-bottom: 2px solid #9ac00a;
+  padding: 1rem 0 0 0.5rem;
+  width: 100%; }
+  .bo-top-bar p {
+    text-align: center; }
 
 .historique-communit {
   margin-top: 21rem;

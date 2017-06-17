@@ -1,31 +1,24 @@
 /**
- * Add new comment
- * TODO => Fix date echo need good format
+ * Star rating system
  */
 $(document).ready( function () {
-    let formId  = '#app_bundle_comment_userTechnicalEvolution'
-    let fieldId = '#app_bundle_comment_userTechnicalEvolution_comment'
-    let id      = $(formId).attr('data-index-number')
+    $('.star-link').click( function () {
+        let $this       = $(this)
+        let valueVote   = $this.attr('value')
+        let evoId       = $('.star-rating').attr('data-index-number')
+        console.log(evoId+' '+valueVote)
 
-    $(formId).submit( function (e) {
-        e.preventDefault()
-        let newCommentValue = $(fieldId).val()
-
+        // => TODO need to finish ajax request for vote here
         $.ajax({
             type: 'POST',
-            url: '/evolution-technique/commentaires/ajout/' + id,
-            data : {
-                'data': newCommentValue
+            url: '/evolution-technique/notes/ajout/' + evoId,
+            data: {
+                'data': valueVote
             },
             dataType: 'json',
             timeout: 3000,
-            success: function(data){
-                let uteId   = data['id']
-                let user    = data['user']
-                let comment = data['comment']
-                let date    = new Date(data['date']['date'])
-                $('.comment-list').prepend(createComment(uteId, user, date, comment))
-                $(fieldId).val('')
+            success: function(){
+
             },
         })
     })
@@ -36,11 +29,11 @@ $(document).ready( function () {
  */
 $(document).ready( function () {
     let loaderDom = '<div class="loader">'
-        loaderDom += '<div class="inner one"></div>'
-        loaderDom += '<div class="inner two"></div>'
-        loaderDom += '<div class="inner three"></div>'
-        loaderDom += '<div class="inner four"></div>'
-        loaderDom += '</div>'
+    loaderDom += '<div class="inner one"></div>'
+    loaderDom += '<div class="inner two"></div>'
+    loaderDom += '<div class="inner three"></div>'
+    loaderDom += '<div class="inner four"></div>'
+    loaderDom += '</div>'
     let loader = '.loader-wcs'
     let status = false;
     $(loader).append(loaderDom);
@@ -69,7 +62,7 @@ $(document).ready( function () {
                         $(data).each(function (key, values) {
                             let uteId   = values['id']
                             let user    = values['user']['userProfile']['firstname']
-                                user    += ' ' + values['user']['userProfile']['lastname']
+                            user    += ' ' + values['user']['userProfile']['lastname']
                             let date    = (new Date(values['date']['date']))
                             let comment = values['comment']
                             //let date    = new Date(values['ute_date']['date'])
@@ -91,39 +84,68 @@ $(document).ready( function () {
 })
 
 /**
- * Delete comment
- * TODO => Fix probleme with chain delete
+ * Add new comment
+ * TODO => Fix date echo need good format
  */
 $(document).ready( function () {
+    let formId  = '#app_bundle_comment_userTechnicalEvolution'
+    let fieldId = '#app_bundle_comment_userTechnicalEvolution_comment'
+    let id      = $(formId).attr('data-index-number')
+
+    $(formId).submit( function (e) {
+        e.preventDefault()
+        let form = $(this).serialize()
+
+        $.ajax({
+            type: 'POST',
+            url: '/evolution-technique/commentaires/ajout/' + id,
+            data : form,
+            dataType: 'json',
+            timeout: 3000,
+            success: function(data){
+                let date = new Date(data['date']['date'])
+                $('.comment-list').prepend(createComment(data['id'], data['user'], date, data['comment']))
+                $(fieldId).val('')
+            },
+        })
+    })
+})
+
+/**
+ * Delete comment
+ */
+$(document).ready( function () {
+    let commentFullId   = ''
+    let commentId       = ''
+    let commentValue    = ''
+
     $('.modal-delete').click( function () {
         let $this           = $(this)
-        let commentFullId   = $this.parent().attr('id')
-        let commentId       = commentFullId.replace('ute_id_', '')
-        let commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
-
+        commentFullId       = $this.parent().attr('id')
+        commentId           = commentFullId.replace('ute_id_', '')
+        commentValue        = $this.parent().children($('.comment-value'))[2]['outerText']
         $('.delete-value').replaceWith('<p class="delete-value">' + commentValue + '</p>')
+    })
 
-        $('#comment-link-delete').click( function (e) {
-            e.preventDefault()
-
-            $.ajax({
-                type: 'GET',
-                url: '/evolution-technique/commentaires/suppression/' + commentId,
-                timeout: 3000,
-                success: function(){
-                    let elementList = '<div class="unit-comment">'
-                        elementList += '<h5>Commentaire supprimé<h5>'
-                        elementList += '</div>'
-                    $('#' + commentFullId).replaceWith(elementList)
-                },
-            })
+    $('#comment-link-delete').click( function (e) {
+        e.preventDefault()
+        $.ajax({
+            type: 'GET',
+            url: '/evolution-technique/commentaires/suppression/' + commentId,
+            timeout: 3000,
+            success: function(){
+                let elementList = '<div class="unit-comment">'
+                elementList += '<h5>Commentaire supprimé<h5>'
+                elementList += '</div>'
+                $('#' + commentFullId).replaceWith(elementList)
+            },
         })
     })
 })
 
 /**
  * Update action
- * TODO => Need to fix multi upload ?? :(
+ * TODO => Need to fix multi update ?? :(
  * TODO => Find solution to upload dynamic loading comments (delete to)
  */
 $(document).ready( function () {
@@ -162,32 +184,6 @@ $(document).ready( function () {
         })
     })
 })
-
-/**
- * Star rating system
- */
-$(document).ready( function () {
-    $('.star-link').click( function () {
-        let $this       = $(this)
-        let valueVote   = $this.attr('value')
-        let evoId       = $('.star-rating').attr('data-index-number')
-
-        // => TODO need to finish ajax request for vote here
-        $.ajax({
-            type: 'POST',
-            url: '/evolution-technique/notes/ajout/' + evoId,
-            data: {
-                'data': valueVote
-            },
-            dataType: 'json',
-            timeout: 3000,
-            success: function(){
-
-            },
-        })
-    })
-})
-
 
 /**
  * Know if loader is in view

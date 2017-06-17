@@ -1,9 +1,16 @@
+/**
+ * Text replacement for list title
+ */
+$(document).ready( function () {
+    $('.list-title-category_type').text('Type de catégorie')
+    $('.list-title-technical_evolution_status').text('Status d\'un élément')
+    $('.list-title-technical_evolution_origin').text('Origine d\'un élément')
+})
 
 /**
  * Add
  * Function to send new element in vue + db
  * View append many things in html
- * TODO => Find a solution to clean form after add (formSubmit) element
  * TODO => Find problem when add element (can't delete or update them after)
  */
 $(document).ready( function () {
@@ -37,6 +44,7 @@ $(document).ready( function () {
                     domSend += '<i class="fa fa-close" aria-hidden="true"></i></a>'
                     domSend += '</span></li>'
                     $('#' + data['type']).append(domSend)
+                    $('#form_' + data['type']).val('')
                 },
             })
         }
@@ -63,9 +71,7 @@ $(document).ready(function () {
         id                  = listElementId.replace('list_group_item_', '')
         value               = listElementValue.trim()
         inputForm           = '#dictionary_input_update'
-        // TODO => Find why i can't send many times content to input form ???
-        console.log(value)
-        $(inputForm).attr('value', value)
+        $(inputForm).val(value)
     })
 
     $('#dictionary_form_update').submit(function (e) {
@@ -87,6 +93,7 @@ $(document).ready(function () {
                     // change content of span who have current value
                     $("#li_value_" + id).text(newValue)
                     $('#dictionary-modal-update').modal('hide');
+                    $(inputForm).val('')
                 },
             })
         }
@@ -103,6 +110,7 @@ $(document).ready( function () {
     let listElementValue = ''
     let id = ''
     let value = ''
+    let type = ''
 
     $("#dictionarys-list ul li span a.modal-delete").click(function (e) {
         /**
@@ -112,13 +120,13 @@ $(document).ready( function () {
         e.preventDefault()
         listElementId       = $(this).parent().parent().attr('id')
         listElementValue    = $(this).parent().parent().text()
+        type                = $(this).parent().parent().parent().attr('id')
         id                  = listElementId.replace('list_group_item_', '')
         value               = listElementValue.trim()
         $("#dictionary_delete_value").text(value)
     })
 
     $("#dictionary_link_delete").click(function (e) {
-        console.log(id)
         /**
          * Disable normal form event
          * && get id from li for delete by id
@@ -130,9 +138,28 @@ $(document).ready( function () {
             type: 'GET',
             url: '/dictionnaire/suppression/' + id,
             timeout: 3000,
-            success: function () {
-                // delete the target element
-                $("#" + elementId).remove()
+            success: function (data) {
+                /**
+                 * We Secure an entities relationship,
+                 * can't delete if one element have it !
+                 */
+                if (data === 'error_datas_001'){
+                    let msg = '<p class="msg-return">Vous ne pouvez pas supprimer cette entrée, des éléments y sont associés !</p>'
+                    $('#msg-return-box-' + type).append(msg)
+                    let target = ''
+                    setTimeout( function () {
+                        target = '.msg-return'
+                        $(target).css('opacity', '0')
+                        setTimeout( function () {
+                            // Need replace title for delete an espace
+                            $('.list-title-' + type).replaceWith('<h3 class="list-title-' + type + '">' + type + '</h3>')
+                            $(target).remove()
+                        }, 1000)
+                    }, 6000)
+                } else {
+                    // delete the target element
+                    $("#" + elementId).remove()
+                }
             },
         })
     })

@@ -1,5 +1,48 @@
 .dictionary-list {
+  border: 1px solid $primary-color;
+  margin: 2rem 0;
+  padding: 0 2rem;
+
+  .list-group-item {
+    border-radius: 2px;
+
+    .badge {
+      background-color: $primary-color;
+      border-radius: 2px;
+
+      a {
+        i {
+          transition: 0.4s ease;
+        }
+        &:hover > i {
+          color: $secondary-color;
+        }
+      }
+    }
+
+    input[type='text'] {
+      &:focus {
+        outline: 1px solid $primary-color;
+      }
+    }
+  }
+
   a {
     color: #fff;
+  }
+
+  .msg-return-box {
+
+    .msg-return {
+      display: block;
+      background-color: $secondary-color;
+      border-radius: 2px;
+      color: #fff;
+      transition: 1s ease;
+      text-align: center;
+      margin: 1rem 0;
+      padding: 1rem;
+      width: 100%;
+    }
   }
 }

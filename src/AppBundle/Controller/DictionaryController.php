@@ -3,8 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Dictionary;
+use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Dictionary\DictionaryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,8 +24,9 @@ class DictionaryController extends Controller
     /**
      * Index dictionary
      *
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/liste", name="dictionaryHome")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -31,9 +34,9 @@ class DictionaryController extends Controller
         $dictionaryList = $repo->getDictionaryList();
         $dictionarys    = [];
         $listName       = [
-            'Type de catégorie',
-            'Status des évolutions technique',
-            'Origine des évolutions tehcnique'
+            0 => 'Type de catégorie',
+            1 => 'Status des évolutions technique',
+            2 => 'Origine des évolutions tehcnique'
         ];
         foreach ($dictionaryList as $dictionary) {
             $type = $dictionary->getType();
@@ -45,17 +48,17 @@ class DictionaryController extends Controller
         }
 
         return $this->render('@App/Pages/Dictionary/indexDictionary.html.twig', [
-            'dictionarys'   => $dictionarys,
-            'listName'      => $listName
+            'dictionarys'   => $dictionarys
         ]);
     }
 
     /**
      * Add dictionary
      *
+     * @Route("/nouveau", name="dictionaryAdd")
      * @param Request $request
      * @return JsonResponse|Response
-     * @Route("/nouveau", name="dictionaryAdd")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)
     {
@@ -67,9 +70,9 @@ class DictionaryController extends Controller
          * delete 'dictionary_form_' from id to get category type
          */
         $data       = $request->request->get('data');
-        $fullType   = $data['type'];
+        $fullType   = htmlspecialchars($data['type']);
         $type       = str_replace('dictionary_form_', '', $fullType);
-        $value      = $data['value'];
+        $value      = htmlspecialchars($data['value']);
 
         $dictionary = new Dictionary();
         $dictionary->setType($type);
@@ -80,8 +83,8 @@ class DictionaryController extends Controller
         $em->flush();
 
         $responseData = [
-            'data'  => json_encode($value),
-            "id"    => json_encode($dictionary->getId())
+            'data'  => $value,
+            "id"    => $dictionary->getId()
         ];
 
         return new JsonResponse($responseData);
@@ -94,6 +97,7 @@ class DictionaryController extends Controller
      * @param Request $request
      * @param $dictionaryId
      * @return JsonResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function updateAction(Request $request, $dictionaryId)
     {
@@ -116,21 +120,28 @@ class DictionaryController extends Controller
     }
 
     /**
+     * Delete dictionary
+     *
+     * @Route("/suppression/{dictionaryId}", name="dictionaryDelete")
      * @param Request $request
      * @param $dictionaryId
-     * @return JsonResponse
-     * @Route("/suppression/{dictionaryId}", name="dictionaryDelete")
+     * @return JsonResponse|Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, $dictionaryId)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-        $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
-            ->find($dictionaryId);
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($dictionary);
-        $em->flush();
+        try {
+            $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
+                ->find($dictionaryId);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($dictionary);
+            $em->flush();
+        } catch (\Exception $e) {
+            return new Response('error_datas_001');
+        }
 
         return new JsonResponse('Valid XmlHttp request !');
     }

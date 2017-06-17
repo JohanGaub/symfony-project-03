@@ -9,7 +9,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 /* Style */
 html, body {
   margin: 0;
@@ -55,6 +54,9 @@ p {
   text-align: justify;
   color: $paragraph-color;
 }
+a, a:focus, a:hover, a:target {
+  outline: none;
+}
 
 /* Links Green */
 .plus-info {
@@ -99,4 +101,12 @@ p {
 
 a {
   text-decoration: none!important;
+}
+
+
+/**
+ * Modal Parts
+ */
+.modal {
+  border-radius: 1px;
 }

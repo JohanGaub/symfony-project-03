@@ -9,7 +9,6 @@ body {
 }
 
 /* Toggle Styles */
-
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -17,14 +16,13 @@ body {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-
 .sidebar-communit {
-  /* Sidebar Styles */
 
+  /* Sidebar Styles */
   .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 25rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -94,14 +92,12 @@ body {
 }
 
 #page-content-wrapper {
-  width: 100%;
   position: absolute;
   padding: 15px;
 }
 
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
-  margin-right: -250px;
 }
 
 @media(min-width:768px) {

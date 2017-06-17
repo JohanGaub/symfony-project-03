@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
 use AppBundle\Form\Evolution\CommentUserTechnicalEvolutionType;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Class TechnicalEvolutionController
  * @package AppBundle\Controller
- * @Route("/evolution-technique", name="evolutionArea")
+ * @Route("/evolution-technique")
  */
 class TechnicalEvolutionController extends Controller
 {
@@ -28,6 +28,7 @@ class TechnicalEvolutionController extends Controller
      * @Route("/liste/{page}", name="evolutionHome")
      * @param int $page
      * @return Response
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
     public function indexAction(int $page = 1)
     {
@@ -65,6 +66,7 @@ class TechnicalEvolutionController extends Controller
      * @Route("/nouveau", name="evolutionAdd")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Security("has_role('ROLE_PROJET_RESP')")
      */
     public function addAction(Request $request)
     {
@@ -129,34 +131,26 @@ class TechnicalEvolutionController extends Controller
     /**
      * Get unit evolution with note & comment
      *
-     * @Route("/{technicalEvolutionId}", name="evolutionUnit")
-     * @param Request $request
-     * @param int $technicalEvolutionId
+     * @Route("/{technicalEvolution}", name="evolutionUnit")
+     * @param TechnicalEvolution $technicalEvolution
      * @return Response
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
-    public function unitIndexAction(Request $request, int $technicalEvolutionId)
+    public function unitIndexAction(TechnicalEvolution $technicalEvolution)
     {
-        $doctrine = $this->getDoctrine();
-
-        $evolution = $doctrine->getRepository('AppBundle:TechnicalEvolution')
-            ->getUnitEvolution($technicalEvolutionId)[0];
-        $uteRepository = $doctrine->getRepository('AppBundle:UserTechnicalEvolution');
-
-        $comments   = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'comment', 10);
-        $notes      = $uteRepository->getUserTechnicalEvolution($evolution['te_id'], 'note', 9999999);
-
+        $uteRepository  = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');
+        $teId           = $technicalEvolution->getId();
+        $comments       = $uteRepository->getUserTechnicalEvolution($teId, 'comment', 10);
+        $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
-        $formComment->handleRequest($request);
-
-        $formUpdate = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
-        $formUpdate->handleRequest($request);
+        $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
 
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
-            'evolution' => $evolution,
+            'evolution' => $technicalEvolution,
             'comments'  => $comments,
             'notes'     => $notes,
-            'form'      => $formComment->createView(),
+            'addForm'   => $formComment->createView(),
             'updateForm'=> $formUpdate->createView(),
         ]);
     }
@@ -164,38 +158,41 @@ class TechnicalEvolutionController extends Controller
     /**
      * Add new comment for TechnicalEvolutions
      *
-     * @Route("/commentaires/ajout/{technicalEvolutionId}", name="evolutionCommentsAdd")
+     * @Route("/commentaires/ajout/{technicalEvolution}", name="evolutionCommentsAdd")
      * @param Request $request
-     * @param int $technicalEvolutionId
+     * @param TechnicalEvolution $technicalEvolution
      * @return JsonResponse
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
-    public function addCommentsAction(Request $request, int $technicalEvolutionId)
+    public function addCommentsAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-        // data is nb element page already get
-        $data['comment']    = $request->request->get('data');
-        $userProfile        = $this->getUser()->getUserProfile();
-        $data['user']       = $userProfile->getFirstname() . ' ' . $userProfile->getLastname();
-        $data['date']       = new \DateTime('now');
+        $comment = new UserTechnicalEvolution('comment');
+        $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
+        $form->handleRequest($request);
+        $data = [];
 
-        $em = $this->getDoctrine()->getManager();
-        $technicalEvolution = $em->getRepository('AppBundle:TechnicalEvolution')
-            ->findOneBy(['id' => $technicalEvolutionId]);
+        if ($form->isValid()) {
+            $user = $this->getUser();
+            $currentDate = new \DateTime('now');
+            $comment->setUser($user);
+            $comment->setTechnicalEvolution($technicalEvolution);
+            $comment->setDate($currentDate);
 
-        $comment = new UserTechnicalEvolution();
-        $comment->setTechnicalEvolution($technicalEvolution);
-        $comment->setUser($this->getUser());
-        $comment->setType('comment');
-        $comment->setDate($data['date']);
-        $comment->setComment($data['comment']);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
 
-        $em->persist($comment);
-        $em->flush();
-
-        $data['id'] = $comment->getId();
-
+            $userProfile = $user->getUserProfile();
+            $data = [
+                'id'      => $comment->getId(),
+                'user'    => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
+                'date'    => $currentDate,
+                'comment' => $comment->getComment()
+            ];
+        }
         return new JsonResponse($data);
     }
 
@@ -220,6 +217,42 @@ class TechnicalEvolutionController extends Controller
 
         return new JsonResponse($comments);
     }
+
+    /**
+     * Update comments for TechnicalEvolutions
+     * // TODO => Fix no route find
+     * @Route("/commentaires/modification/{userTechnicalEvolution}", name="evolutionCommentsUpdate")
+     * @param Request $request
+     * @param UserTechnicalEvolution $userTechnicalEvolution
+     * @return JsonResponse
+     */
+    public function updateCommentsAction(Request $request, UserTechnicalEvolution $userTechnicalEvolution)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+        $comment = $userTechnicalEvolution;
+        $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
+        $form->handleRequest($request);
+        $data = [];
+
+        if ($form->isValid()) {
+            $user = $this->getUser();
+            $currentDate = new \DateTime('now');
+            $comment->setUpdateDate($currentDate);
+            $userProfile = $user->getUserProfile();
+            $data = [
+                'user'    => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
+                'date'    => $currentDate,
+                'comment' => $comment->getComment()
+            ];
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+        }
+        return new JsonResponse($data);
+    }
+
 
     /**
      * Delete comments for TechnicalEvolutions
@@ -252,38 +285,6 @@ class TechnicalEvolutionController extends Controller
     }
 
     /**
-     * Update comments for TechnicalEvolutions
-     *
-     * @Route("/commentaires/modification/{userTechnicalEvolutionId}", name="evolutionCommentsUpdate")
-     * @param Request $request
-     * @param int $userTechnicalEvolutionId
-     * @return JsonResponse
-     */
-    public function updateCommentsAction(Request $request, int $userTechnicalEvolutionId)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('500', 'Invalid call');
-        }
-        $data = $request->request->get('data');
-        $em = $this->getDoctrine()->getManager();
-        $comment = $em->getRepository('AppBundle:UserTechnicalEvolution')
-            ->findOneBy(['id' => $userTechnicalEvolutionId]);
-
-        /**
-         * Check if the user have a comment
-         * or if user is admin
-         */
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
-            || $this->getUser()->getId() == $comment->getUser()->getId()) {
-            $comment->setComment($data);
-            $em->persist($comment);
-            $em->flush();
-            return new JsonResponse($data);
-        }
-        throw $this->createAccessDeniedException();
-    }
-
-    /**
      * Add new note for TechnicalEvolutions
      *
      * @Route("/notes/ajout/{userTechnicalEvolutionId}", name="evolutionCommentsUpdate")
@@ -301,6 +302,7 @@ class TechnicalEvolutionController extends Controller
         $user = $this->getUser();
         $company = $user->getCompany();
         $users = $em->getRepository('AppBundle:User')->find($company);
+        // => TODO Work at rank action
 
 
         return new JsonResponse($users);

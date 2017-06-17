@@ -1,7 +1,7 @@
 {% extends '@App/backoffice-base.html.twig' %}
 
 {% block title %}
-    {{ evolution.te_title }}
+    {{ evolution.title }}
 {% endblock %}
 
 {% block body %}
@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="bo-title-page col-lg-12">
-                <h3>{{ evolution.te_title }}</h3>
+                <h3>{{ evolution.title }}</h3>
             </div>
         </div>
 
@@ -22,7 +22,7 @@
                 <h4>Votez pour cette évolution technique ! </h4>
                 <p>Il y a pour le moment x notes</p>
                 <p>La moyenne est de </p>
-                <div class="star-rating" data-index-number="{{ evolution.te_id }}">
+                <div class="star-rating" data-index-number="{{ evolution.id }}">
                     <fieldset class="rating">
                         <input class="star-link" type="radio" id="star10" name="rating" value="10" /><label class = "full" for="star10"></label>
                         <input class="star-link" type="radio" id="star9" name="rating" value="9" /><label class = "full" for="star9"></label>
@@ -46,11 +46,11 @@
 
             <div class="col-lg-12">
                 <div class="add-new-comment">
-                    {{ form_start(form, {'attr': {
+                    {{ form_start(addForm, {'attr': {
                         'id': 'app_bundle_comment_userTechnicalEvolution',
-                        'data-index-number': evolution.te_id
+                        'data-index-number': evolution.id
                     }}) }}
-                    {{ form_end(form) }}
+                    {{ form_end(addForm) }}
                 </div>
                 <div class="comment-list">
                     {% for comment in comments %}
@@ -73,7 +73,7 @@
 
         </div>
 
-        <div class="loader-wcs" data-index-number="{{ evolution.te_id }}">
+        <div class="loader-wcs" data-index-number="{{ evolution.id }}">
 
         </div>
 

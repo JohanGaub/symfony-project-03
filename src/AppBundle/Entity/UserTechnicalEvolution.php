@@ -52,6 +52,13 @@ class UserTechnicalEvolution
     private $date;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="update_date", type="datetime", nullable=true)
+     */
+    private $updateDate;
+
+    /**
      * @ORM\ManyToOne(targetEntity="TechnicalEvolution", inversedBy="userTechnicalEvolutions", cascade={"persist"})
      */
     private $technicalEvolution;
@@ -60,6 +67,15 @@ class UserTechnicalEvolution
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions")
      */
     private $user;
+
+    /**
+     * UserTechnicalEvolution constructor.
+     * @param $type
+     */
+    public function __construct($type = 'undefined')
+    {
+        $this->type = $type;
+    }
 
     /**
      * Get id
@@ -162,6 +178,28 @@ class UserTechnicalEvolution
     public function setDate(\DateTime $date)
     {
         $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * Get updateDate
+     *
+     * @return \DateTime
+     */
+    public function getUpdateDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $updateDate
+     * @return UserTechnicalEvolution
+     */
+    public function setUpdateDate(\DateTime $updateDate)
+    {
+        $this->date = $updateDate;
         return $this;
     }
 
