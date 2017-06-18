@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Form\Evolution\NoteUserTechnicalEvolutionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
@@ -66,7 +67,7 @@ class TechnicalEvolutionController extends Controller
      * @Route("/nouveau", name="evolutionAdd")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     * @Security("has_role('ROLE_PROJET_RESP')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)
     {
@@ -145,6 +146,8 @@ class TechnicalEvolutionController extends Controller
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
+        $uteNote        = new UserTechnicalEvolution();
+        $formNote       = $this->createForm(NoteUserTechnicalEvolutionType::class, $uteNote);
 
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $technicalEvolution,
@@ -152,6 +155,7 @@ class TechnicalEvolutionController extends Controller
             'notes'     => $notes,
             'addForm'   => $formComment->createView(),
             'updateForm'=> $formUpdate->createView(),
+            'noteForm'  => $formNote->createView()
         ]);
     }
 

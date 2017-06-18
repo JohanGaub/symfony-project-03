@@ -24,6 +24,10 @@
   }
 }
 
+.unit-evolution {
+
+}
+
 /**
  * Comments Parts
  */
@@ -45,11 +49,31 @@
 /**
  * Star rank system
  */
+
 .star-rating {
+  display: flex;
+  justify-content: space-around;
+  transition: 1s ease-in-out;
+
+  /****** Counter at Right ? *******/
+  .rating-counter {
+    padding: 1rem 0 0 0;
+    .rating-counter-value {
+      font-size: 3rem;
+      font-weight: 700;
+
+    }
+  }
+  
+  .star-link {
+    display: block;
+  }
+
   /****** Style Star Rating Widget *****/
   .rating {
     border: none;
     float: left;
+    transition: 1s ease-in-out;
   }
 
   .rating > input { display: none; }

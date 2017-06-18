@@ -100,4 +100,28 @@ class UserTechnicalEvolutionRepository extends EntityRepository
 
         return $query;
     }
+
+    /**
+     * Count nb notes by company
+     *
+     * @param int $te
+     * @param int $company
+     * @return mixed
+     */
+    public function countNotesByCompany(int $te, int $company)
+    {
+        return $this->createQueryBuilder('ute')
+            ->select('COUNT(ute)')
+            ->join('ute.technicalEvolution', 'te')
+            ->join('ute.user', 'u')
+            ->where('ute.type = :type')
+            ->andWhere('te.id = :te')
+            ->andWhere('u.company = :company')
+            ->setParameter('type', 'note')
+            ->setParameter('te', $te)
+            ->setParameter('company', $company)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+    }
 }

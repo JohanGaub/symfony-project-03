@@ -7,36 +7,57 @@
 {% block body %}
 
     <div class="container-fluid">
-        {{ dump(evolution) }}
-        {{ dump(comments) }}
-        {{ dump(notes) }}
-
         <div class="row">
-            <div class="bo-title-page col-lg-12">
-                <h3>{{ evolution.title }}</h3>
+            <div class="col-lg-12 unit-evolution">
+                <div class="et-title"><h2>{{ evolution.title }}</h2></div>
+                <div class="et-sum-up"><h4>{{ evolution.sumUp }}</h4></div>
+                <div class="et-status"><p>{{ evolution.status }}</p></div>
+                <div class="et-category">
+                    <div class="et-category-type"><p>Type de la catégorie : {{ evolution.category.type }}</p></div>
+                    <div class="et-category-name"><p>Nom de la catégorie : {{ evolution.category.title }}</p></div>
+                </div>
+                <div class="et-content"><p>{{ evolution.content }}</p></div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
-                <h4>Votez pour cette évolution technique ! </h4>
-                <p>Il y a pour le moment x notes</p>
-                <p>La moyenne est de </p>
-                <div class="star-rating" data-index-number="{{ evolution.id }}">
-                    <fieldset class="rating">
-                        <input class="star-link" type="radio" id="star10" name="rating" value="10" /><label class = "full" for="star10"></label>
-                        <input class="star-link" type="radio" id="star9" name="rating" value="9" /><label class = "full" for="star9"></label>
-                        <input class="star-link" type="radio" id="star8" name="rating" value="8" /><label class = "full" for="star8"></label>
-                        <input class="star-link" type="radio" id="star7" name="rating" value="7" /><label class = "full" for="star7"></label>
-                        <input class="star-link" type="radio" id="star6" name="rating" value="6" /><label class = "full" for="star6"></label>
-                        <input class="star-link" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
-                        <input class="star-link" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4"></label>
-                        <input class="star-link" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3"></label>
-                        <input class="star-link" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2"></label>
-                        <input class="star-link" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1"></label>
-                    </fieldset>
+            {% if is_granted('ROLE_PROJECT_RESP') %}
+                <div class="col-lg-12">
+                    <h4 class="vote-title">Votez pour cette évolution technique ! </h4>
+                    <div class="error-box"></div>
+                    <div class="form-group star-rating" data-index-number="{{ evolution.id }}">
+                        <fieldset class="rating" data-index-number="">
+                            <input class="star-link" type="radio" id="star10" name="rating" value="10"/>
+                            <label class="full label-star-link label-star-link" for="star10" data-index-number="10"></label>
+                            <input class="star-link" type="radio" id="star9" name="rating" value="9"/>
+                            <label class="full label-star-link" for="star9" id="label-star9" data-index-number="9"></label>
+                            <input class="star-link" type="radio" id="star8" name="rating" value="8"/>
+                            <label class="full label-star-link" for="star8" id="label-star8" data-index-number="8"></label>
+                            <input class="star-link" type="radio" id="star7" name="rating" value="7"/>
+                            <label class="full label-star-link" for="star7" id="label-star7" data-index-number="7"></label>
+                            <input class="star-link" type="radio" id="star6" name="rating" value="6"/>
+                            <label class="full label-star-link" for="star6" id="label-star6" data-index-number="6"></label>
+                            <input class="star-link" type="radio" id="star5" name="rating" value="5"/>
+                            <label class="full label-star-link" for="star5" id="label-star5" data-index-number="5"></label>
+                            <input class="star-link" type="radio" id="star4" name="rating" value="4"/>
+                            <label class="full label-star-link" for="star4" id="label-star4" data-index-number="4"></label>
+                            <input class="star-link" type="radio" id="star3" name="rating" value="3"/>
+                            <label class="full label-star-link" for="star3" id="label-star3" data-index-number="3"></label>
+                            <input class="star-link" type="radio" id="star2" name="rating" value="2"/>
+                            <label class="full label-star-link" for="star2" id="label-star2" data-index-number="2"></label>
+                            <input class="star-link" type="radio" id="star1" name="rating" value="1"/>
+                            <label class="full label-star-link" for="star1" id="label-star1" data-index-number="1"></label>
+                        </fieldset>
+                        <div class="rating-counter">
+                            <p class="rating-counter-value"><span class="rating-value"></span> / 10</p>
+                        </div>
+                    </div>
+                    {{ form_start(noteForm, {'attr': {
+                        'id': 'app_bundle_note_userTechnicalEvolution'
+                    }}) }}
+                    {{ form_end(noteForm) }}
                 </div>
-            </div>
+            {% endif %}
         </div>
 
         <div class="row">

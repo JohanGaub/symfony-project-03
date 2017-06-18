@@ -33,11 +33,7 @@ class DictionaryController extends Controller
         $repo           = $this->getDoctrine()->getRepository('AppBundle:Dictionary');
         $dictionaryList = $repo->getDictionaryList();
         $dictionarys    = [];
-        $listName       = [
-            0 => 'Type de catégorie',
-            1 => 'Status des évolutions technique',
-            2 => 'Origine des évolutions tehcnique'
-        ];
+
         foreach ($dictionaryList as $dictionary) {
             $type = $dictionary->getType();
             if (array_key_exists($type, $dictionarys)) {

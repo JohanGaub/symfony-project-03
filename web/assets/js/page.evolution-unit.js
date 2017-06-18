@@ -1,26 +1,84 @@
 /**
  * Star rating system
  */
-$(document).ready( function () {
+$(document).ready(function() {
+    let status = true
+    let value = ''
+
+    $('.label-star-link').hover(
+        function () {
+            $('.rating-value').text($(this).attr('data-index-number'))
+        },
+        function () {
+            if (status){
+                $('.rating-value').text($(this).parent().attr('data-index-number'))
+            } else {
+                $('.rating').attr('data-index-number', value)
+            }
+        }
+    );
+
+    // TODO => Find a solution to don't any change after first note click
+    // TODO => Do a preselect system if user have already vote
     $('.star-link').click( function () {
-        let $this       = $(this)
-        let valueVote   = $this.attr('value')
-        let evoId       = $('.star-rating').attr('data-index-number')
-        console.log(evoId+' '+valueVote)
+            value = $(this).attr('data-index-number')
+            $('.rating').attr('data-index-number', value)
+            status = false
+        }
+    );
 
-        // => TODO need to finish ajax request for vote here
-        $.ajax({
-            type: 'POST',
-            url: '/evolution-technique/notes/ajout/' + evoId,
-            data: {
-                'data': valueVote
-            },
-            dataType: 'json',
-            timeout: 3000,
-            success: function(){
+});
+$(document).ready( function () {
+    let link    = '.star-link'
+    let status  = true
 
-            },
-        })
+    $(link).click( function () {
+        if (status === true){
+            status          = false
+            let $this       = $(this)
+            let valueVote   = $this.attr('value')
+            let evoId       = $('.star-rating').attr('data-index-number')
+            let form        = $('#app_bundle_note_userTechnicalEvolution').serialize()
+            $('#app_bundle_note_userTechnicalEvolution_note').val(valueVote)
+
+            $.ajax({
+                type: 'POST',
+                url: '/evolution-technique/notes/ajout/' + evoId,
+                data: form,
+                dataType: 'json',
+                timeout: 3000,
+                success: function(data){
+                    // TODO => Know if we need to verify that or if is to bad ?
+                    if (data === 'msg_max_vote_allowed') {
+                        let viewTemplate   = '<p class="error-message">'
+                        viewTemplate       += 'Vous avez atteind le nombre de vote limite par entreprise'
+                        viewTemplate       += '</p>'
+                        $('.vote-title').hide()
+                        $('.error-box').append(viewTemplate)
+                        let target = '.star-rating'
+                        $(target).css('opacity', 0)
+                        setTimeout( function () {
+                            $(target).hide()
+                            status = true
+                        }, 1500)
+
+                    } else if (data === 'msg_update_vote') {
+                        let viewTemplate   = '<p class="valid-message">'
+                        viewTemplate       += 'Votre vote à bien été modifié !'
+                        viewTemplate       += '</p>'
+                        $('.error-box').append(viewTemplate)
+                        setTimeout( function () {
+                            let target = '.valid-message'
+                            $(target).css('opacity', '0')
+                            setTimeout( function () {
+                                $(target).hide()
+                                status = true
+                            }, 1500)
+                        }, 5000)
+                    }
+                },
+            })
+        }
     })
 })
 
@@ -31,8 +89,6 @@ $(document).ready( function () {
     let loaderDom = '<div class="loader">'
     loaderDom += '<div class="inner one"></div>'
     loaderDom += '<div class="inner two"></div>'
-    loaderDom += '<div class="inner three"></div>'
-    loaderDom += '<div class="inner four"></div>'
     loaderDom += '</div>'
     let loader = '.loader-wcs'
     let status = false;
@@ -62,13 +118,11 @@ $(document).ready( function () {
                         $(data).each(function (key, values) {
                             let uteId   = values['id']
                             let user    = values['user']['userProfile']['firstname']
-                            user    += ' ' + values['user']['userProfile']['lastname']
+                                user    += ' ' + values['user']['userProfile']['lastname']
                             let date    = (new Date(values['date']['date']))
                             let comment = values['comment']
-                            //let date    = new Date(values['ute_date']['date'])
                             $('.comment-list').append(createComment(uteId, user, date, comment))
 
-                            // TODO => Find a solution if last data length is equal to 10
                             if (data.length < 10){
                                 $(loader).hide(function () {
                                     clearInterval(interval)
@@ -145,43 +199,45 @@ $(document).ready( function () {
 
 /**
  * Update action
- * TODO => Need to fix multi update ?? :(
- * TODO => Find solution to upload dynamic loading comments (delete to)
  */
 $(document).ready( function () {
-    $('.modal-update').click( function (e) {
-        let $this = $(this)
-        let commentFullId   = $this.parent().attr('id')
-        let commentId       = commentFullId.replace('ute_id_', '')
-        let commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
-        let commentForm     = '#app_bundle_comment_userTechnicalEvolution_update'
-        let commentField    = '.app_bundle_comment_userTechnicalEvolution_updateField'
+    let commentField    = '.app_bundle_comment_userTechnicalEvolution_updateField'
+    let commentForm     = '#app_bundle_comment_userTechnicalEvolution_update'
+    let commentFullId   = ''
+    let commentId       = ''
+    let commentValue    = ''
 
+    $('.modal-update').click( function () {
+        let $this       = $(this)
+        commentFullId   = $this.parent().attr('id')
+        commentId       = commentFullId.replace('ute_id_', '')
+        commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
         $(commentField).val(commentValue)
+        console.log()
+    })
 
-        $(commentForm).submit( function (e) {
-            e.preventDefault()
-            let newComment = $(commentField).val()
+    $(commentForm).submit( function (e) {
+        e.preventDefault()
+        let newComment  = $(commentField).val()
+        let form        = $(this).serialize()
 
-            if(newComment !== commentValue) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/evolution-technique/commentaires/modification/' + commentId,
-                    data: {
-                        'data': newComment
-                    },
-                    dataType: 'json',
-                    timeout: 3000,
-                    success: function(){
-                        let textId = 'comment-value-id-' + commentId
-                        let newContent = '<p id="' + textId + '" class="comment-value">'
-                            newContent += newComment
-                            newContent += '</p>'
-                        $('#' + textId).replaceWith(newContent)
-                    },
-                })
-            }
-        })
+        if(newComment !== commentValue) {
+            $.ajax({
+                type: 'POST',
+                url: '/evolution-technique/commentaires/modification/' + commentId,
+                data: form,
+                dataType: 'json',
+                timeout: 3000,
+                success: function(){
+                    let textId = 'comment-value-id-' + commentId
+                    let newContent = '<p id="' + textId + '" class="comment-value">'
+                    newContent += newComment
+                    newContent += '</p>'
+                    $('#' + textId).replaceWith(newContent)
+                    $('#comment-modal-update').modal('hide')
+                },
+            })
+        }
     })
 })
 
@@ -201,7 +257,15 @@ function isScrolledIntoView(elem)
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }
 
-
+/**
+ * Add new Comments to DOM
+ *
+ * @param uteId
+ * @param user
+ * @param date
+ * @param comment
+ * @returns {string}
+ */
 function createComment(uteId, user, date, comment)
 {
     let elementList = '<div id="ute_id_' + uteId + '" class="unit-comment">'
