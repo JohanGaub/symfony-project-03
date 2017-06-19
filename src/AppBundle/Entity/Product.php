@@ -46,9 +46,9 @@ class Product
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Documentation", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Download", mappedBy="product")
      */
-    private $documentations;
+    private $downloads;
 
 
     /**
@@ -115,7 +115,7 @@ class Product
     {
         $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->documentations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->downloads = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -187,37 +187,37 @@ class Product
     }
 
     /**
-     * Add documentation
+     * Add Download
      *
-     * @param \AppBundle\Entity\Documentation $documentation
+     * @param \AppBundle\Entity\Download $download
      *
      * @return Product
      */
-    public function addDocumentation(\AppBundle\Entity\Documentation $documentation)
+    public function addDownload(\AppBundle\Entity\Download $download)
     {
-        $this->documentations[] = $documentation;
+        $this->downloads[] = $download;
 
         return $this;
     }
 
     /**
-     * Remove documentation
+     * Remove Download
      *
-     * @param \AppBundle\Entity\Documentation $documentation
+     * @param \AppBundle\Entity\Download $download
      */
-    public function removeDocumentation(\AppBundle\Entity\Documentation $documentation)
+    public function removeDownload(\AppBundle\Entity\Download $download)
     {
-        $this->documentations->removeElement($documentation);
+        $this->downloads->removeElement($download);
     }
 
     /**
-     * Get documentations
+     * Get downloads
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDocumentations()
+    public function getDownloads()
     {
-        return $this->documentations;
+        return $this->downloads;
     }
 
     public function __toString()

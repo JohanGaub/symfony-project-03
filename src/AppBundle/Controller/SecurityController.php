@@ -6,8 +6,9 @@ use AppBundle\Entity\User;
 use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\ForgetPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Swift_Mailer;
+use Swift_MailTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +16,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SecurityController extends Controller
 {
+
     /**
-     * @return Response
+     * @param Request $request
+     * @return RedirectResponse|Response
      * @Route("/login", name="login")
      */
     public function loginAction(Request $request)
@@ -33,28 +36,24 @@ class SecurityController extends Controller
             'last_username' => $lastUsername
         ]);
     }
-
     /**
-     * @param Request $request
-     * @Route("/forgotten", name="forgotten")
-     * @return Response
-     */
+    * @param Request $request
+    * @return Response
+    * @Route("/forgotten", name="forgotten")
+    */
     public function forgottenAction(Request $request)
     {
         $user = new User();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(ForgetPasswordType::class, $user);
         $form->handleRequest($request);
-        $message = "";
         if ($form->isSubmitted() && $form->isValid()) {
             /**
              * @var User $newUser
              */
-            $newUser = $em->getRepository('AppBundle:User')->findOneBy([
-                'email' => $user->getEmail()
-            ]);
+            $newUser = $em->getRepository('AppBundle:User')->loadUserByUsername($user->getEmail());
             if (null == $newUser) {
-                $message = "Nous n'avons pas trouvé cet utilisateur";
+                $this->addFlash("notice", "Nous n'avons pas trouvé cet utilisateur.");
             } else {
                 $newUser->setToken($newUser->generateToken());
                 $dueDate = new \DateTime("now");
@@ -63,78 +62,113 @@ class SecurityController extends Controller
                 $em->persist($newUser);
                 $em->flush();
 
+                $mailer = \Swift_Mailer::newInstance($this->get('mailer')->getTransport());
+
                 $email = \Swift_Message::newInstance()
                     ->setSubject('CommunIt : Réinitialisation du mot de passe')
                     ->setFrom('irena.jakubec@gmail.com')
                     ->setTo($newUser->getEmail())
                     ->setBody(
                         $this->renderView('AppBundle:Email:forgetpassword.html.twig', [
-                            'name' => $newUser->getUserProfile()->getFirstname(),
+                            'firstName' => $newUser->getUserProfile()->getFirstname(),
+                            'lastName' => $newUser->getUserProfile()->getLastname(),
                             'resetPasswordLink' => $this->generateUrl("reset", [
                                 'token' => $newUser->getToken(),
                             ],
-
                                 UrlGeneratorInterface::ABSOLUTE_URL),
                         ]),
                         'text/html'
                     );
-                $this->get('mailer')->send($email);
-                $this->addFlash("notice", "Un e-mail vous a été envoyé.");
 
-                return $this->redirectToRoute('login');
+                //$this->get('app.mailer_logger');
+
+                if (!$mailer->send($email)) {
+                    $this->addFlash("notice", " Veuillez patientez un instant et essayez à nouveau ");
+                    return $this->redirectToRoute('forgotten');
+                }
+                $this->addFlash("notice", "Un e-mail vous a été envoyé.");
+                return $this->redirectToRoute('home');
             }
         }
         return $this->render('AppBundle:Security:passwordProcess.html.twig', [
             'form' => $form->createView(),
             'email' => $user->getEmail(),
-            'message' => $message
         ]);
     }
 
     /**
      * @param Request $request
      * @param string $token
-     * @Route("/reset/{token}", name="reset")
      * @return RedirectResponse|Response
+     * @Route("/reset/{token}", name="reset")
      */
     public function resetPasswordAction(Request $request, $token)
     {
-
-        $message = "";
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('AppBundle:User')->findOneBy([
             "token" => $token
         ]);
         $today = new \DateTime('now');
+
         if (null !== $user && $user->getTokenLimitDate() > $today) {
             $user->setPassword("");
             $form = $this->createForm(ChangePasswordType::class, $user);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $password = $user->getPassword();
-                $verificationPassword = $request->request->get('app_bundle_change_password_type')['passwordCompare'];
-                if ($password == $verificationPassword) {
-                    $encoder = $this->get('security.password_encoder');
-                    $encoded = $encoder->encodePassword($user, $user->getPassword());
-                    $user->setPassword($encoded);
-                    $user->setTokenLimitDate(null);
-                    $user->setToken(null);
-                    $em->flush();
-                    $this->addFlash("notice", "Votre mot de passe à bien été changé. Vous pouvez vous desormais connecter.");
-                    return $this->redirectToRoute('login');
-                } else {
-                    $message = "Les mots des passe ne correspondent pas.";
-                }
+                $encoder = $this->get('security.password_encoder');
+                $encoded = $encoder->encodePassword($user, $user->getPlainPassword());
+                $user->setPassword($encoded);
+                $user->setTokenLimitDate(null);
+                $user->setToken(null);
+                $em->flush();
+                $this->addFlash("notice", "Votre mot de passe à bien été changé. Vous pouvez vous desormais connecter.");
+
+                return $this->redirectToRoute('login');
             }
             return $this->render('AppBundle:Security:passwordReset.html.twig', [
                 'form' => $form->createView(),
-                'message' => $message,
-
             ]);
+
         } else {
             $this->addFlash("notice", "Cette demande de réinitialisation de mot de passe n'est pas valide.");
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('forgotten');
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("/change", name="change_password")
+     */
+    public function changePasswordAction(Request $request)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ChangePasswordType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $row = $request->request-> get('app_bundle_change_password_type')['oldPassword'];
+            $encoder = $this->get('security.password_encoder');
+
+            if ($encoder->isPasswordValid($user, $row)) {
+                $plainPassword = $user->getPlainPassword();
+                $encoded = $encoder->encodePassword($user, $plainPassword);
+                $user->setPassword($encoded);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                $this->addFlash('notice', "Le mot de passe est changé ! ");
+
+                return $this->redirectToRoute('dashboard');
+
+            } else {
+                $this->addFlash('notice', "Le mot de passe actuel n'est pas correct !");
+            }
+        }
+
+        return $this->render('AppBundle:Security:passwordChange.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
 }

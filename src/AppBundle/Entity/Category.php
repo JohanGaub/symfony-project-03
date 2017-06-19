@@ -61,9 +61,9 @@ class Category
     private $faqs;
 
     /**
-     * @ORM\OneToMany(targetEntity="Documentation", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Download", mappedBy="category")
      */
-    private $documentations;
+    private $downloads;
 
 
     /**
@@ -178,7 +178,7 @@ class Category
     {
         $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->documentations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->downloads = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -250,15 +250,15 @@ class Category
     }
 
     /**
-     * Add documentation
+     * Add download
      *
-     * @param \AppBundle\Entity\Documentation $documentation
+     * @param \AppBundle\Entity\Download $download
      *
      * @return Category
      */
-    public function addDocumentation(\AppBundle\Entity\Documentation $documentation)
+    public function addDocumentation(\AppBundle\Entity\Download $download)
     {
-        $this->documentations[] = $documentation;
+        $this->downloads[] = $download;
 
         return $this;
     }
@@ -266,11 +266,11 @@ class Category
     /**
      * Remove documentation
      *
-     * @param \AppBundle\Entity\Documentation $documentation
+     * @param \AppBundle\Entity\Download $download
      */
-    public function removeDocumentation(\AppBundle\Entity\Documentation $documentation)
+    public function removeDocumentation(\AppBundle\Entity\Download $download)
     {
-        $this->documentations->removeElement($documentation);
+        $this->downloads->removeElement($download);
     }
 
     /**
@@ -280,6 +280,6 @@ class Category
      */
     public function getDocumentations()
     {
-        return $this->documentations;
+        return $this->downloads;
     }
 }

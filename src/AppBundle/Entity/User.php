@@ -5,12 +5,13 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User implements UserInterface, Serializable
 {
@@ -26,9 +27,16 @@ class User implements UserInterface, Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false, unique=true)
+     * @Assert\Email()
      */
     private $email;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @var string
@@ -115,6 +123,24 @@ class User implements UserInterface, Serializable
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return User
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
     }
 
     /**
@@ -240,7 +266,7 @@ class User implements UserInterface, Serializable
     public function __construct()
     {
         $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->isActive = true;
+        $this->isActive = false;
     }
 
     /**
@@ -432,4 +458,5 @@ class User implements UserInterface, Serializable
             $this->password,
             ) = unserialize($serialized);
     }
+
 }

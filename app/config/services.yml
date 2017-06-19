@@ -4,6 +4,12 @@ parameters:
     #parameter_name: value
 
 services:
+    app.mailer_logger:
+        class: AppBundle\Service\MailerLoggerService
+        arguments: ['@logger']
+        tags:
+            - { name: monolog.logger, channel: mailer}
+            - { name: 'swiftmailer.default.plugin' }
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']

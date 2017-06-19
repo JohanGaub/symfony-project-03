@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="documentation")
  * @ORM\Entity
  */
-class Documentation
+class Download
 {
     /**
      * @var integer
@@ -81,7 +81,7 @@ class Documentation
      *
      * @param string $title
      *
-     * @return Documentation
+     * @return Download
      */
     public function setTitle($title)
     {
@@ -105,7 +105,7 @@ class Documentation
      *
      * @param string $sumUp
      *
-     * @return Documentation
+     * @return Download
      */
     public function setSumUp($sumUp)
     {
@@ -129,7 +129,7 @@ class Documentation
      *
      * @param string $content
      *
-     * @return Documentation
+     * @return Download
      */
     public function setContent($content)
     {
@@ -153,7 +153,7 @@ class Documentation
      *
      * @param \DateTime $creationDate
      *
-     * @return Documentation
+     * @return Download
      */
     public function setCreationDate($creationDate)
     {
@@ -177,7 +177,7 @@ class Documentation
      *
      * @param \DateTime $updateDate
      *
-     * @return Documentation
+     * @return Download
      */
     public function setUpdateDate($updateDate)
     {
@@ -201,7 +201,7 @@ class Documentation
      *
      * @param \AppBundle\Entity\Category $category
      *
-     * @return Documentation
+     * @return Download
      */
     public function setCategory(\AppBundle\Entity\Category $category = null)
     {
@@ -225,7 +225,7 @@ class Documentation
      *
      * @param \AppBundle\Entity\Product $product
      *
-     * @return Documentation
+     * @return Download
      */
     public function setProduct(\AppBundle\Entity\Product $product = null)
     {
