@@ -47,15 +47,16 @@ class RegistrationController extends Controller
             $user->setTokenLimitDate($dueDate);
 
             $company->setName($form['company']['name']->getData());
-            $company->setAdress($form['company']['adress']->getData());
+            $company->setAddress($form['company']['address']->getData());
             $company->setTown($form['company']['town']->getData());
-            $company->setPhone2($form['company']['phone2']->getData());
+            $company->setPostCode($form['company']['postCode']->getData());
+            $company->setPhone($form['company']['phone']->getData());
             $company->setSiret($form['company']['siret']->getData());
             $company->setEmail($form['company']['email']->getData());
 
             $userProfile->setFirstname($form['userProfile']['firstname']->getData());
             $userProfile->setLastname($form['userProfile']['lastname']->getData());
-            $userProfile->setPhone1($form['userProfile']['phone1']->getData());
+            $userProfile->setPhone($form['userProfile']['phone']->getData());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -79,7 +80,7 @@ class RegistrationController extends Controller
                     );
 
             if(!$mailer->send($email)) {
-                $this->addFlash("notice", "Votre inscription à échouez, veuillez recommencer ultériorment");
+                $this->addFlash("notice", "Service indisponible, veuillez réessayer ultérieurement");
                 return $this->redirectToRoute('user_registration');
 
             }
@@ -162,9 +163,9 @@ class RegistrationController extends Controller
 
             $em->persist($user);
             $em->flush();
-            $this->addFlash("notice", "Votre mail à bien été validé, un administrateur va valider votre inscription !");
+            $this->addFlash("notice", "Votre avez confirmé votre mail, un administrateur va valider votre inscription !");
         } else {
-            $this->addFlash("notice", "Votre token de validation plus valide !");
+            $this->addFlash("notice", "Votre token d'inscription a expiré !");
         }
         dump($user);
         return $this->redirectToRoute('home');

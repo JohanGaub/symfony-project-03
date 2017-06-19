@@ -27,7 +27,7 @@ class User implements UserInterface, Serializable
 
     /**
      * @var string
-     *
+     * @Assert\Email()
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;

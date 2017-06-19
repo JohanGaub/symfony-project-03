@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Company
@@ -32,9 +33,9 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=255, nullable=false)
+     * @ORM\Column(name="address", type="string", length=255, nullable=false)
      */
-    private $adress;
+    private $address;
 
     /**
      * @var string
@@ -45,24 +46,33 @@ class Company
 
     /**
      * @var string
-     *
+     * @Assert\Email()
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="phone2", type="string", length=255, nullable=false)
+     * @Assert\Regex("^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$")
+     * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
-    private $phone2;
+    private $phone;
 
     /**
      * @var string
+     * @Assert\Regex("/[0-9]{3}[ \.\-]?[0-9]{3}[ \.\-]?[0-9]{3}[ \.\-]?[0-9]{5}/")
      *
      * @ORM\Column(name="siret", type="string", length=255, nullable=false)
      */
     private $siret;
+
+    /**
+     * @var string
+     * @Assert\Regex("/[0-9]{5}/")
+     *
+     * @ORM\Column(name="postcode", type="string", length=5)
+     */
+    private $postCode;
 
     /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="company")
@@ -164,27 +174,27 @@ class Company
     }
 
     /**
-     * Set phone2
+     * Set phone
      *
-     * @param string $phone2
+     * @param string $phone
      *
      * @return Company
      */
-    public function setPhone2($phone2)
+    public function setPhone($phone)
     {
-        $this->phone2 = $phone2;
+        $this->phone = $phone;
 
         return $this;
     }
 
     /**
-     * Get phone2
+     * Get phone
      *
      * @return string
      */
-    public function getPhone2()
+    public function getPhone()
     {
-        return $this->phone2;
+        return $this->phone;
     }
 
     /**
@@ -254,9 +264,9 @@ class Company
      *
      * @return Company
      */
-    public function setAdress($adress)
+    public function setAddress($address)
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
@@ -266,10 +276,34 @@ class Company
      *
      * @return string
      */
-    public function getAdress()
+    public function getAddress()
     {
-        return $this->adress;
+        return $this->address;
     }
 
 
+
+    /**
+     * Set postCode
+     *
+     * @param string $postCode
+     *
+     * @return Company
+     */
+    public function setPostCode($postCode)
+    {
+        $this->postCode = $postCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postCode
+     *
+     * @return string
+     */
+    public function getPostCode()
+    {
+        return $this->postCode;
+    }
 }

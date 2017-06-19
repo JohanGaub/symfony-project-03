@@ -6,7 +6,7 @@
             <table class="table table-responsive table-bordered table-condensed">
             <thead>
                 <tr>
-                    <th>Socièté</th>
+                    <th>Entreprise</th>
                     <th>Email/login</th>
                     <th>Prénom</th>
                     <th>Nom</th>
@@ -26,11 +26,11 @@
                     <td>{{ user.userProfile.firstname }}</td>
                     <td>{{ user.userProfile.lastname }}</td>
                     <td>{{ user.company.siret }}</td>
-                    <td>{{ user.userProfile.phone1 }}</td>
-                    <td>{{ user.company.adress }}</td>
+                    <td>{{ user.userProfile.phone }}</td>
+                    <td>{{ user.company.address }}</td>
                     <td>{{ user.company.town }}</td>
                     <td>{{ user.company.email }}</td>
-                    <td>{{ user.company.phone2 }}</td>
+                    <td>{{ user.company.phone }}</td>
                     <td>
                         <a class="waves-effect waves-light btn" href="{{ path('delete_register', {'id': user.id }) }}">
                             <i class="material-icons left">delete</i>
