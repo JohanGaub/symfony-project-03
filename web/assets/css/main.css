@@ -2181,51 +2181,60 @@ body {
 .loader-wcs {
   padding: 2rem 0; }
   .loader-wcs .loader {
-    position: absolute;
-    left: calc(50% - 32px);
-    width: 64px;
-    height: 64px; }
+    top: calc(50% - 24px);
+    left: calc(50% - 24px);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    transform: perspective(128px) rotateX(30deg);
+    margin: 0 auto; }
   .loader-wcs .inner {
     position: absolute;
-    border-radius: 50%;
-    border: 8px solid transparent;
     box-sizing: border-box;
-    opacity: 0.5;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; }
+    width: 16px;
+    height: 16px;
+    background-color: #9ac00a;
+    border-radius: 50%; }
   .loader-wcs .inner.one {
-    border-left: 8px solid #9ac00a;
-    border-right: 8px solid #9ac00a;
-    animation: rotate-left 2s linear infinite; }
+    left: 0%;
+    top: 0%;
+    animation: move-right 1s ease-out infinite; }
   .loader-wcs .inner.two {
-    border-top: 8px solid #dd5116;
-    border-bottom: 8px solid #dd5116;
-    animation: rotate-left 3s linear infinite; }
+    right: 0%;
+    top: 0%;
+    animation: move-down 1s ease-in-out infinite; }
+  .loader-wcs .inner.three {
+    right: 0%;
+    bottom: 0%;
+    animation: move-left 1s ease-in-out infinite; }
+  .loader-wcs .inner.four {
+    left: 0%;
+    bottom: 0%;
+    animation: move-up 1s ease-out infinite; }
 
-@keyframes rotate-left {
+@keyframes move-right {
   0% {
-    transform: rotate(360deg); }
+    transform: translateX(0); }
   100% {
-    transform: rotate(0deg); } }
+    transform: translateX(32px); } }
 
-/**
- * Error message
- */
-.error-box p {
-  display: block;
-  border-radius: 2px;
-  color: #fff;
-  text-align: center;
-  transition: 1s ease;
-  padding: 2rem; }
+@keyframes move-down {
+  0% {
+    transform: translateY(0); }
+  100% {
+    transform: translateY(32px); } }
 
-.error-box .error-msg {
-  background-color: #dd5116; }
+@keyframes move-left {
+  0% {
+    transform: translateX(0); }
+  100% {
+    transform: translateX(-32px); } }
 
-.error-box .valid-message {
-  background-color: #9ac00a; }
+@keyframes move-up {
+  0% {
+    transform: translateY(0); }
+  100% {
+    transform: translateY(-32px); } }
 
 .dictionary-list {
   border: 1px solid #9ac00a;
@@ -2290,24 +2299,12 @@ body {
  * Star rank system
  */
 .star-rating {
-  display: flex;
-  justify-content: space-around;
-  transition: 1s ease-in-out;
-  /****** Counter at Right ? *******/
   /****** Style Star Rating Widget *****/
   /***** CSS Magic to Highlight Stars on Hover *****/
   /* hover previous stars in list */ }
-  .star-rating .rating-counter {
-    padding: 1rem 0 0 0; }
-    .star-rating .rating-counter .rating-counter-value {
-      font-size: 3rem;
-      font-weight: 700; }
-  .star-rating .star-link {
-    display: block; }
   .star-rating .rating {
     border: none;
-    float: left;
-    transition: 1s ease-in-out; }
+    float: left; }
   .star-rating .rating > input {
     display: none; }
   .star-rating .rating > label:before {
