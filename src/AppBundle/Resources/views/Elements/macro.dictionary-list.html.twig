@@ -1,0 +1,28 @@
+{% macro getDictionary(type, title, dictionary, form) %}
+    <div class="col-lg-4 col-lg-offset-0 col-md-8 col-md-offset-2">
+        <div class="dictionary-list">
+            <h3 class="list-title-{{ type }}">{{ title }}</h3>
+            <ul id="{{ type }}" class="list-group">
+                {% for elementList in dictionary %}
+                    <li id="list-group-item-{{ elementList.id }}" class="list-group-item"
+                        data-index-number="{{ elementList.id }}">
+                        <span id="li-value-{{ elementList.id }}">
+                            {{ elementList.value }}
+                        </span>
+                        <span class="badge">
+                            <a class="modal-update" href="" data-toggle="modal" data-target="#dictionary-modal-update">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </a>
+                            <a class="modal-delete" href="" data-toggle="modal" data-target="#dictionary-modal-delete">
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+            {{ form_start(form, {'attr': {'class': 'dictionary-form dictionary-form-'~type} }) }}
+            {{ form_widget(form.value, {'attr': {'class': 'dictionary-field dictionary-field-'~type} }) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endmacro %}

@@ -1,53 +1,49 @@
 /**
- * Text replacement for list title
- */
-$(document).ready( function () {
-    $('.list-title-category_type').text('Type de catégorie')
-    $('.list-title-technical_evolution_status').text('Status d\'un élément')
-    $('.list-title-technical_evolution_origin').text('Origine d\'un élément')
-})
-
-/**
  * Add
  * Function to send new element in vue + db
  * View append many things in html
  * TODO => Find problem when add element (can't delete or update them after)
  */
 $(document).ready( function () {
-    $('.dictionary_form').submit( function (e) {
+    $('.dictionary-form').submit( function (e) {
         e.preventDefault()
         let $this       = $(this)
-        let data        = {}
-        data['type']    = $this.children().children().attr('data-index-number')
-        data['value']   = $this.children().children().val()
+        let formType    = $this.prev().attr('id')
+        let field       = $('.dictionary-form-' + formType + ' :input')
+        let fieldValue  = field.val()
+        let form        = $this.serialize()
 
-        if (data['value'] === '') {
-            // if field is empty
-        } else {
-            $.ajax({
-                type: $this.attr('method'),
-                url: '/dictionnaire/nouveau',
-                data: {
-                    'data': data
-                },
-                dataType: 'json',
-                timeout: 3000,
-                success: function (result) {
+        $.ajax({
+            type: $this.attr('method'),
+            url: '/dictionnaire/nouveau/' + formType,
+            data: form,
+            dataType: 'json',
+            timeout: 3000,
+            success: function (data) {
+                let elementId = data.element
+                if (data.status === 'succes') {
                     // add full li with value + button to update && delete
-                    let domSend = '<li id="list_group_item_' + result.id + '" class="list-group-item">'
-                    domSend += '<span id="li_value_' + result.id + '">' + data['value'] + '</span>'
+                    let domSend = '<li id="list-group-item-' + elementId + '" class="list-group-item">'
+                    domSend += '<span id="li-value-' + elementId + '">' + fieldValue + '</span>'
                     domSend += '<span class="badge">'
                     domSend += '<a class="modal-update" href="" data-toggle="modal" data-target="#dictionary-modal-update">'
-                    domSend += '<i class="fa fa-cog" aria-hidden="true"></i></a>'
-                    domSend += '<span> </span>'
+                    domSend += '<i class="fa fa-cog" aria-hidden="true"></i></a><span> </span>'
                     domSend += '<a class="modal-delete" href="" data-toggle="modal" data-target="#dictionary-modal-delete">'
                     domSend += '<i class="fa fa-close" aria-hidden="true"></i></a>'
                     domSend += '</span></li>'
-                    $('#' + data['type']).append(domSend)
-                    $('#form_' + data['type']).val('')
-                },
-            })
-        }
+                    $('#' + formType).append(domSend)
+                    $('#form_' + formType).val('')
+                    field.val('')
+
+                } else if (data.status === 'error'){
+                    let target = '#' + formType
+                    /** function to add error msg element (see under !) */
+                    addMsgError(target, data.status, formType, data.element)
+                    /** function to remove error msg element (see under !) */
+                    hideMsgError($('.list-group-item-' + data.status + '-' + formType))
+                }
+            },
+        })
     })
 })
 
@@ -58,42 +54,51 @@ $(document).ready( function () {
  * && get new view
  */
 $(document).ready(function () {
+    let updateField = $('.dictionary-update-field')
     let listElementId = ''
-    let listElementValue = ''
-    let id = ''
-    let value = ''
+    let currentValue = ''
+    let currentId = ''
     let inputForm = ''
+    let type = ''
 
-    $("#dictionarys-list ul li span a.modal-update").click(function (e) {
+    $(".modal-update").click(function (e) {
         e.preventDefault()
-        listElementId       = $(this).parent().parent().attr('id')
-        listElementValue    = $(this).parent().parent().text()
-        id                  = listElementId.replace('list_group_item_', '')
-        value               = listElementValue.trim()
-        inputForm           = '#dictionary_input_update'
-        $(inputForm).val(value)
+        let $this       = $(this)
+        currentId       = $($this).parent().parent().attr('data-index-number')
+        listElementId   = $this.parent().parent().attr('id')
+        currentValue    = $('#li-value-' + currentId).text().trim()
+        type            = $this.parent().parent().parent().attr('id')
+        $(updateField).val(currentValue)
     })
 
-    $('#dictionary_form_update').submit(function (e) {
+    $('.dictionary-update-form').submit(function (e) {
         e.preventDefault()
-        let newValue = $(inputForm).val()
+        let newValue    = $(updateField).val()
+        let form        = $(this).serialize()
 
-        if (newValue === '' || newValue === value) {
+        if (newValue === '' || newValue === currentValue) {
             // if field is empty or no change are detected
         } else {
             $.ajax({
                 type: 'POST',
-                url: '/dictionnaire/modification/' + id,
-                data: {
-                    'data': newValue
-                },
+                url: '/dictionnaire/modification/' + currentId,
+                data: form,
                 dataType: 'json',
                 timeout: 3000,
-                success: function () {
-                    // change content of span who have current value
-                    $("#li_value_" + id).text(newValue)
-                    $('#dictionary-modal-update').modal('hide');
-                    $(inputForm).val('')
+                success: function (data) {
+                    if (data.status === 'succes') {
+                        // change content of span who have current value
+                        $("#li-value-" + currentId).text(newValue)
+                        $('#dictionary-modal-update').modal('hide');
+                        $(inputForm).val('')
+                    } else if (data.status === 'error') {
+                        /** function to add error msg element (see under !) */
+                        addMsgError('#modal-update-msg', data.status, type, data.element)
+                        let hideTarget = $('.msg-return-' + type).parent().parent()
+                        $(hideTarget).css('transition', '1s ease')
+                        /** function to remove error msg element (see under !) */
+                        hideMsgError($(hideTarget))
+                    }
                 },
             })
         }
@@ -106,61 +111,95 @@ $(document).ready(function () {
  * After can confirm delete action with click on link
  */
 $(document).ready( function () {
+    let listElement = ''
     let listElementId = ''
     let listElementValue = ''
+    let fieldValueId = ''
     let id = ''
-    let value = ''
     let type = ''
 
-    $("#dictionarys-list ul li span a.modal-delete").click(function (e) {
+    $(".modal-delete").click(function (e) {
         /**
          * Disable normal form event
          * && get id from li for delete by id
          */
         e.preventDefault()
-        listElementId       = $(this).parent().parent().attr('id')
-        listElementValue    = $(this).parent().parent().text()
-        type                = $(this).parent().parent().parent().attr('id')
-        id                  = listElementId.replace('list_group_item_', '')
-        value               = listElementValue.trim()
-        $("#dictionary_delete_value").text(value)
+        let $this           = $(this)
+        listElement         = $this.parent().parent()
+        listElementId       = listElement.attr('id')
+        listElementValue    = listElement.text().trim()
+        fieldValueId        = $('#' + listElementId).children('span').attr('id')
+        type                = listElement.parent().attr('id')
+        id                  = listElement.attr('data-index-number')
+        $("#dictionary-delete-value").text(listElementValue)
     })
 
-    $("#dictionary_link_delete").click(function (e) {
+    $("#dictionary-link-delete").click(function (e) {
         /**
          * Disable normal form event
          * && get id from li for delete by id
          */
         e.preventDefault()
-        let elementId = 'list_group_item_' + id
 
         $.ajax({
             type: 'GET',
             url: '/dictionnaire/suppression/' + id,
             timeout: 3000,
             success: function (data) {
-                /**
-                 * We Secure an entities relationship,
-                 * can't delete if one element have it !
-                 */
-                if (data === 'error_datas_001'){
-                    let msg = '<p class="msg-return">Vous ne pouvez pas supprimer cette entrée, des éléments y sont associés !</p>'
-                    $('#msg-return-box-' + type).append(msg)
-                    let target = ''
+                if (data.status === 'succes') {
+                    $('#' + listElementId).children('.badge').remove()
+                    let target = '#' + fieldValueId
+                    $(target).text('Entrée supprimée')
                     setTimeout( function () {
-                        target = '.msg-return'
-                        $(target).css('opacity', '0')
-                        setTimeout( function () {
-                            // Need replace title for delete an espace
-                            $('.list-title-' + type).replaceWith('<h3 class="list-title-' + type + '">' + type + '</h3>')
-                            $(target).remove()
-                        }, 1000)
+                        $(target).css('transition', '2s ease-out').css('opacity', 0)
+                            setTimeout( function () {
+                                $(target).parent().remove()
+                            }, 2000)
+                    }, 3000)
+                } else if (data.status === 'error') {
+                    $('#' + listElementId + ' span').css('display', 'none')
+                    /** function to add error msg element (see under !) */
+                    let target = $('#' + listElementId)
+                    addMsgError(target, data.status, type, data.element)
+                    /** function to remove error msg element (see under !) */
+                    target = $('.list-group-item-error-' + type)
+                    hideMsgError(target)
+                    setTimeout( function () {
+                        $('#' + listElementId + ' span').css('display', 'inline-block')
                     }, 6000)
-                } else {
-                    // delete the target element
-                    $("#" + elementId).remove()
                 }
             },
         })
     })
 })
+
+/**
+ * Add error message
+ *
+ * @param target
+ * @param status
+ * @param formType
+ * @param value
+ */
+function addMsgError(target, status, formType, value)
+{
+    let domSend = '<li class="list-group-item list-group-item-' + status + '-' + formType + '">'
+    domSend += '<span>'
+    domSend += '<p class="msg-return msg-return-' + formType + '">' + value + '</p>'
+    domSend += '</span></li>'
+    $(target).append(domSend)
+}
+/**
+ * Remove error message
+ *
+ * @param target
+ */
+function hideMsgError(target)
+{
+    setTimeout( function () {
+        target.css('opacity', '0');
+        setTimeout( function () {
+            target.remove()
+        }, 1000)
+    }, 5000)
+}

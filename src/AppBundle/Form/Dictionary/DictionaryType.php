@@ -22,7 +22,12 @@ class DictionaryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('value', TextType::class, ['label' => false]);
+            ->add('value', TextType::class, [
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'Appuyez sur ENTRER',
+                )
+            ]);
 
     }
 

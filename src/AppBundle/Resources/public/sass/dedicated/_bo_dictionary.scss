@@ -1,10 +1,11 @@
 .dictionary-list {
   border: 1px solid $primary-color;
   margin: 2rem 0;
-  padding: 0 2rem;
+  padding: 2rem 2rem;
 
   .list-group-item {
     border-radius: 2px;
+    transition: 1s ease;
 
     .badge {
       background-color: $primary-color;
@@ -30,19 +31,16 @@
   a {
     color: #fff;
   }
+}
 
-  .msg-return-box {
-
-    .msg-return {
-      display: block;
-      background-color: $secondary-color;
-      border-radius: 2px;
-      color: #fff;
-      transition: 1s ease;
-      text-align: center;
-      margin: 1rem 0;
-      padding: 1rem;
-      width: 100%;
-    }
-  }
+.msg-return {
+  display: block!important;
+  background-color: $secondary-color!important;
+  border-radius: 2px;
+  color: #fff;
+  transition: 1s ease;
+  text-align: center;
+  margin: 1rem 0;
+  padding: 1rem;
+  width: 100%;
 }

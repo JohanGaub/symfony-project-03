@@ -40,8 +40,8 @@ class TechnicalEvolutionType extends AbstractType
             ->add('origin', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
-                    #Find all status in dictionary
-                    return $repo->getEvolutionOriginTypeList();
+                    #Find all origin in dictionary
+                    return $repo->getItemListByType('technical_evolution_origin');
                 },
                 'label'         => 'Origine de la demande',
                 'placeholder'   => 'Qui est à la base de cette évolution ?',
@@ -63,7 +63,7 @@ class TechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     # Find all category_type for select list
-                    return $repo->getCategoryTypeList();
+                    return $repo->getItemListByType('category_type');
                 },
                 'label'         => 'Type de catégorie',
                 'placeholder'   => 'Sélectionnez votre type de catégorie',

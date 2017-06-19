@@ -30,33 +30,49 @@ class DictionaryController extends Controller
      */
     public function indexAction()
     {
-        $repo           = $this->getDoctrine()->getRepository('AppBundle:Dictionary');
-        $dictionaryList = $repo->getDictionaryList();
-        $dictionarys    = [];
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Dictionary');
 
-        foreach ($dictionaryList as $dictionary) {
-            $type = $dictionary->getType();
-            if (array_key_exists($type, $dictionarys)) {
-                $dictionarys[$type][] = $dictionary;
-            } else {
-                $dictionarys[$type] = [$dictionary];
-            }
-        }
+        $typeTitle      = 'category_type';
+        $statusTitle    = 'technical_evolution_status';
+        $originTitle    = 'technical_evolution_origin';
+
+        $typeList   = $repo->getItemListByType($typeTitle);
+        $statusList = $repo->getItemListByType($statusTitle);
+        $originList = $repo->getItemListByType($originTitle);
+
+        $dictionary = new Dictionary();
+        $typeForm = $this->createForm(DictionaryType::class, $dictionary);
+        $statusForm = $this->createForm(DictionaryType::class, $dictionary);
+        $originForm = $this->createForm(DictionaryType::class, $dictionary);
+        $generalUpdateForm = $this->createForm(DictionaryType::class, $dictionary);
 
         return $this->render('@App/Pages/Dictionary/indexDictionary.html.twig', [
-            'dictionarys'   => $dictionarys
+            /** Here get my title "type" */
+            'typeTitle'     => $typeTitle,
+            'statusTitle'   => $statusTitle,
+            'originTitle'   => $originTitle,
+            /** Here get my dictionary's data */
+            'typeList'      => $typeList,
+            'statusList'    => $statusList,
+            'originList'     => $originList,
+            /** Here get my form */
+            'typeForm'      => $typeForm->createView(),
+            'statusForm'    => $statusForm->createView(),
+            'originForm'    => $originForm->createView(),
+            'genUpdateForm' => $generalUpdateForm->createView()
         ]);
     }
 
     /**
      * Add dictionary
      *
-     * @Route("/nouveau", name="dictionaryAdd")
+     * @Route("/nouveau/{type}", name="dictionaryAdd")
      * @param Request $request
+     * @param string $type
      * @return JsonResponse|Response
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function addAction(Request $request)
+    public function addAction(Request $request, string $type)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
@@ -65,25 +81,33 @@ class DictionaryController extends Controller
          * Get result from ajax call
          * delete 'dictionary_form_' from id to get category type
          */
-        $data       = $request->request->get('data');
-        $fullType   = htmlspecialchars($data['type']);
-        $type       = str_replace('dictionary_form_', '', $fullType);
-        $value      = htmlspecialchars($data['value']);
-
         $dictionary = new Dictionary();
-        $dictionary->setType($type);
-        $dictionary->setValue($value);
+        $form = $this->createForm(DictionaryType::class, $dictionary);
+        $form->handleRequest($request);
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($dictionary);
-        $em->flush();
+        $verification = $em->getRepository('AppBundle:Dictionary')
+            ->findBy(['type' => $type, 'value' => $dictionary->getValue()]);
 
-        $responseData = [
-            'data'  => $value,
-            "id"    => $dictionary->getId()
-        ];
+        if (count($verification) > 0) {
+            $data = [
+                'status'    => 'error',
+                'element'   => 'Vous avez déjà une entrée qui porte ce nom !'
+            ];
+            return new JsonResponse($data);
+        }
+        if ($form->isValid()) {
+            $dictionary->setType($type);
+            $em->persist($dictionary);
+            $em->flush();
 
-        return new JsonResponse($responseData);
+            $data = [
+                'status'    => 'succes',
+                'element'   => $dictionary->getId()
+            ];
+            return new JsonResponse($data);
+        }
+
     }
 
     /**
@@ -100,19 +124,36 @@ class DictionaryController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-
-        $getRequest = $request->request;
-        $newValue   = $getRequest->get('data');
-
-        $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
-            ->find($dictionaryId);
-        $dictionary->setValue($newValue);
-
         $em = $this->getDoctrine()->getManager();
-        $em->persist($dictionary);
-        $em->flush();
+        $repo = $em->getRepository('AppBundle:Dictionary');
 
-        return new JsonResponse('Valid XmlHttp request !');
+        $dictionary = $repo->find($dictionaryId);
+        $form = $this->createForm(DictionaryType::class, $dictionary);
+        $form->handleRequest($request);
+
+        $verification = $repo->findBy(['value' => $dictionary->getValue()]);
+
+        if (count($verification) > 0) {
+            $data = [
+                'status'    => 'error',
+                'element'   => 'Il y a déjà une entée qui a ce nom !'
+            ];
+            return new JsonResponse($data);
+        }
+
+        $dictionary = $repo->find($dictionaryId);
+        $form = $this->createForm(DictionaryType::class, $dictionary);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->persist($dictionary);
+            $em->flush();
+
+            $data = [
+                'status' => 'succes'
+            ];
+            return new JsonResponse($data);
+        }
     }
 
     /**
@@ -121,7 +162,7 @@ class DictionaryController extends Controller
      * @Route("/suppression/{dictionaryId}", name="dictionaryDelete")
      * @param Request $request
      * @param $dictionaryId
-     * @return JsonResponse|Response
+     * @return JsonResponse
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, $dictionaryId)
@@ -136,9 +177,12 @@ class DictionaryController extends Controller
             $em->remove($dictionary);
             $em->flush();
         } catch (\Exception $e) {
-            return new Response('error_datas_001');
+            $data = [
+                'status'    => 'error',
+                'element'   => 'Vous ne pouvez pas supprimer cette entrée, des élements y sonts associés !'
+            ];
+            return new JsonResponse($data);
         }
-
-        return new JsonResponse('Valid XmlHttp request !');
+        return new JsonResponse(['status' => 'succes']);
     }
 }
