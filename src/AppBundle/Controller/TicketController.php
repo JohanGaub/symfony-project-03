@@ -79,6 +79,12 @@ class TicketController extends Controller
 
             $em->persist($ticket);
             $em->flush();
+
+/*            $this->addFlash(
+                'notice-green',
+                'Votre ticket a été enregistré !'
+            );*/
+
             return $this->redirectToRoute('index_ticket');
         }
         return $this->render('@App/Ticket/addTicket.html.twig',[
