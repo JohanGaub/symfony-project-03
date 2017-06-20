@@ -79,7 +79,7 @@ class TechnicalEvolutionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()){
             $dictionaryStatus = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
-                ->getStartingEvolutionStatus();
+                ->findOneBy(['type' => 'technical_evolution_status', 'value' => 'En attente']);
 
             $te->setCreationDate(new \DateTime('now'));
             $te->setStatus($dictionaryStatus[0]);
@@ -291,30 +291,6 @@ class TechnicalEvolutionController extends Controller
     }
 
     /**
-     * Add new note for TechnicalEvolutions
-     *
-     * @Route("/notes/ajout/{userTechnicalEvolutionId}", name="evolutionCommentsUpdate")
-     * @param Request $request
-     * @param int $userTechnicalEvolutionId
-     * @return JsonResponse
-     */
-    public function addNoteAction(Request $request, int $userTechnicalEvolutionId)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('500', 'Invalid call');
-        }
-        $em = $this->getDoctrine()->getManager();
-        $note = $request->request->get('data');
-        $user = $this->getUser();
-        $company = $user->getCompany();
-        $users = $em->getRepository('AppBundle:User')->find($company);
-        // => TODO Work at rank action
-
-
-        return new JsonResponse($users);
-    }
-
-    /**
      * Get full evolution have status
      *
      * @Route("/en-attente/liste", name="evolutionWaiting")
@@ -322,12 +298,12 @@ class TechnicalEvolutionController extends Controller
      */
     public function adminListWaitingAction()
     {
-        $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
-            ->getListWaitingEvolution();
-
-        return $this->render('@App/Pages/Evolutions/waitingEvolution.html.twig', [
-            'evolutions' => $evolutions,
-        ]);
+//        $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
+//            ->getListWaitingEvolution();
+//
+//        return $this->render('@App/Pages/Evolutions/waitingEvolution.html.twig', [
+//            'evolutions' => $evolutions,
+//        ]);
     }
 
     /**

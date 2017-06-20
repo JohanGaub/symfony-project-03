@@ -2,20 +2,23 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * Class CategoryRepository
  * @package AppBundle\Repository
  */
-class CategoryRepository extends \Doctrine\ORM\EntityRepository
+class CategoryRepository extends EntityRepository
 {
     /**
-     * @param $typeId
+     * @param $type
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getCategoryNameList($typeId)
+    public function getCategoryNameList($type)
     {
         return $this->createQueryBuilder('c')
             ->where('c.type = :type')
-            ->setParameter('type', $typeId);
+            ->setParameter('type', $type)
+            ->getQuery();
     }
 }
