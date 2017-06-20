@@ -2,7 +2,8 @@
  * Add
  * Function to send new element in vue + db
  * View append many things in html
- * TODO => Find problem when add element (can't delete or update them after)
+ * (Here idk why but i need to get temp storage of token
+ * for rewrite him on token field)
  */
 $(document).ready( function () {
     $('.dictionary-form').submit( function (e) {
@@ -10,7 +11,8 @@ $(document).ready( function () {
         let $this       = $(this)
         let formType    = $this.prev().attr('id')
         let field       = $('.dictionary-form-' + formType + ' :input')
-        let fieldValue  = field.val()
+        let tokenTarget = $('.dictionary-token-' + formType)
+        let tokenValue  = tokenTarget.val()
         let form        = $this.serialize()
 
         $.ajax({
@@ -21,10 +23,11 @@ $(document).ready( function () {
             timeout: 3000,
             success: function (data) {
                 let elementId = data.element
+                let elementValue = data.value
                 if (data.status === 'succes') {
                     // add full li with value + button to update && delete
-                    let domSend = '<li id="list-group-item-' + elementId + '" class="list-group-item">'
-                    domSend += '<span id="li-value-' + elementId + '">' + fieldValue + '</span>'
+                    let domSend = '<li id="list-group-item-' + elementId + '" class="list-group-item" data-index-number="' + elementId + '">'
+                    domSend += '<span id="li-value-' + elementId + '">' + elementValue + '</span>'
                     domSend += '<span class="badge">'
                     domSend += '<a class="modal-update" href="" data-toggle="modal" data-target="#dictionary-modal-update">'
                     domSend += '<i class="fa fa-cog" aria-hidden="true"></i></a><span> </span>'
@@ -34,7 +37,6 @@ $(document).ready( function () {
                     $('#' + formType).append(domSend)
                     $('#form_' + formType).val('')
                     field.val('')
-
                 } else if (data.status === 'error'){
                     let target = '#' + formType
                     /** function to add error msg element (see under !) */
@@ -42,6 +44,8 @@ $(document).ready( function () {
                     /** function to remove error msg element (see under !) */
                     hideMsgError($('.list-group-item-' + data.status + '-' + formType))
                 }
+                /** Rewrite token here ! */
+                tokenTarget.val(tokenValue)
             },
         })
     })
@@ -69,6 +73,7 @@ $(document).ready(function () {
         currentValue    = $('#li-value-' + currentId).text().trim()
         type            = $this.parent().parent().parent().attr('id')
         $(updateField).val(currentValue)
+        console.log('test => ' + $(listElementId).attr('data-index-number'))
     })
 
     $('.dictionary-update-form').submit(function (e) {
@@ -93,7 +98,7 @@ $(document).ready(function () {
                         $(inputForm).val('')
                     } else if (data.status === 'error') {
                         /** function to add error msg element (see under !) */
-                        addMsgError('#modal-update-msg', data.status, type, data.element)
+                        addMsgError('#modal-update-msg', data.status, type, data.element, currentId)
                         let hideTarget = $('.msg-return-' + type).parent().parent()
                         $(hideTarget).css('transition', '1s ease')
                         /** function to remove error msg element (see under !) */
@@ -180,10 +185,11 @@ $(document).ready( function () {
  * @param status
  * @param formType
  * @param value
+ * @param id
  */
-function addMsgError(target, status, formType, value)
+function addMsgError(target, status, formType, value, id)
 {
-    let domSend = '<li class="list-group-item list-group-item-' + status + '-' + formType + '">'
+    let domSend = '<li class="list-group-item list-group-item-' + status + '-' + formType + '" data-index-number="' + id + '">'
     domSend += '<span>'
     domSend += '<p class="msg-return msg-return-' + formType + '">' + value + '</p>'
     domSend += '</span></li>'

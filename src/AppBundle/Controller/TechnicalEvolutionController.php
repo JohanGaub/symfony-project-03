@@ -53,6 +53,8 @@ class TechnicalEvolutionController extends Controller
         ];
         $evolutions = $repo->getListEvolution($allowParamsFormat, $page, $evoByPage);
 
+        dump($evolutions);
+
         return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
             'evolutions' => $evolutions,
             'pagination' => $pagination

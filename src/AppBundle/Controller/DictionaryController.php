@@ -3,18 +3,18 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Dictionary;
-use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Dictionary\DictionaryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
+ * TODO => Can't add my input why ??
+ * TODO => Can't delete or update added's inputs
  * Class DictionaryController
  * @package AppBundle\Controller
  * @Route("/dictionnaire", name="dictionaryArea")
@@ -86,6 +86,7 @@ class DictionaryController extends Controller
         $form->handleRequest($request);
 
         $em = $this->getDoctrine()->getManager();
+        $dictionary->setValue(htmlspecialchars_decode($dictionary->getValue(), ENT_QUOTES));
         $verification = $em->getRepository('AppBundle:Dictionary')
             ->findBy(['type' => $type, 'value' => $dictionary->getValue()]);
 
@@ -103,11 +104,15 @@ class DictionaryController extends Controller
 
             $data = [
                 'status'    => 'succes',
-                'element'   => $dictionary->getId()
+                'element'   => $dictionary->getId(),
+                'value'     => htmlspecialchars_decode($dictionary->getValue(), ENT_QUOTES)
             ];
             return new JsonResponse($data);
         }
-
+        return new JsonResponse([
+            'status'    => 'error',
+            'element'   => 'Une erreur est survenue ! Veuillez réessayer !'
+        ]);
     }
 
     /**
