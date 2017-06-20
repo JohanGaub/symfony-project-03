@@ -10,10 +10,30 @@
   cursor: pointer;
   -webkit-transition: -webkit-transform .2s ease-in-out;
   transition: transform .5s ease-in-out;
+  &:hover {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    filter: brightness(10%);
+  }
+}
+.back-button {
+  text-decoration: none;
+  border-radius: 0 !important;
+  background-color: $primary-color;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+  font-family: $secondary-font;
+  color: whitesmoke;
+  padding: 3rem 5rem;
+  width: 40%;
+  margin: 0 auto;
+  a{
+    color: whitesmoke;
+  }
+
+  a:hover{
+    text-decoration: none;
+  }
 }
 
-.close:hover {
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
-  filter: brightness(10%);
-}

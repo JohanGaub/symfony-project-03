@@ -40,7 +40,7 @@ class AddTicketType extends AbstractType
                         ->orderBy('c.title', 'ASC');
                  },
                 'choice_label' => 'title',
-                'label' => 'Categorie',
+                'label' => 'Catégorie',
                 'required' => true,
             ])
             ->add('subject', TextType::class, ['label' => 'Sujet du ticket'])
@@ -82,7 +82,7 @@ class AddTicketType extends AbstractType
             ->add('emergency', ChoiceType::class, [
                 'label' => 'Urgence',
                 'choices'  => [
-                    'Normal' => 'Normal',
+                    'Normale' => 'Normale',
                     'Haute' => 'Haute',
                 ],
                 'required' => true,

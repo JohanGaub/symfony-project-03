@@ -19,13 +19,15 @@ class EditTicketType extends AbstractType
             ->addEventListener(FormEvents::POST_SUBMIT, function(FormEvent $event){
                 $event->stopPropagation();
             },900) // To disable Symfony to check if uploaded file is too large or if non-existing fields were submitted.
-
             ->add('emergency', ChoiceType::class, [
                 'label' => 'Urgence',
                 'choices'  => [
-                    'Normal' => 'Normal',
-                    'Haute' => 'High',
+                    'Normale' => 'Normale',
+                    'Haute' => 'Haute',
                 ],
+/*                'preferred_choices' => [
+                    'persistedEmergency' => 'persistedEmergency',
+                ],*/
                 'required' => true,
             ])
             ->add('status', ChoiceType::class, [
@@ -48,10 +50,7 @@ class EditTicketType extends AbstractType
                 ],
                 'required' => true,
             ])
-
-
-
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }
 

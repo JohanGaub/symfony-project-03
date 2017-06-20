@@ -440,6 +440,12 @@ class Ticket
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->creationDate = new \DateTime('NOW');
+        $this->status = 'En attente';
+        $this->isArchive = false;
+
+        $user       = $this->getUser();
+        $this->setUser($user);
     }
 
     /**
@@ -501,4 +507,28 @@ class Ticket
     }
 
 
+
+    /**
+     * Set isArchive
+     *
+     * @param boolean $isArchive
+     *
+     * @return Ticket
+     */
+    public function setIsArchive($isArchive)
+    {
+        $this->isArchive = $isArchive;
+
+        return $this;
+    }
+
+    /**
+     * Get isArchive
+     *
+     * @return boolean
+     */
+    public function getIsArchive()
+    {
+        return $this->isArchive;
+    }
 }

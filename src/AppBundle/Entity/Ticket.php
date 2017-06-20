@@ -440,6 +440,9 @@ class Ticket
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->creationDate = new \DateTime('NOW');
+        $this->status = 'En attente';
+        $this->isArchive = false;
     }
 
     /**

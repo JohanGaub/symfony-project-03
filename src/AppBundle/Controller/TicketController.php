@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ticket;
+use AppBundle\Form\Ticket\UpdateTicketType;
 use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
 use AppBundle\Repository\TicketRepository;
@@ -71,11 +72,10 @@ class TicketController extends Controller
                 $ticket->setUpload($fileName);
             }
 
-            $ticket->setCreationDate(new \DateTime('NOW')); // To set the default creationDate to NOW
-            $ticket->setStatus('En attente'); // To set the default status to "En attente"
-            $ticket->setIsArchive(false); // To set the default to NOT archived
+            // $ticket->setCreationDate(new \DateTime('NOW')); // To set the default creationDate to NOW
+            // $ticket->setStatus('En attente'); // To set the default status to "En attente"
+            // $ticket->setIsArchive(false); // To set the default to NOT archived
             $ticket->setUser($user); // I got (see upstairs) the user and set it hear.
-
 
             $em->persist($ticket);
             $em->flush();
@@ -84,7 +84,7 @@ class TicketController extends Controller
         return $this->render('@App/Ticket/addTicket.html.twig',[
             'form' => $form->createView(),
 //            'test' => $test,
-            ]);
+        ]);
     }
 
     /**
@@ -106,23 +106,59 @@ class TicketController extends Controller
 
             $ticket->setUpdateDate(new \DateTime('NOW')); // To set the default UpdateDate to NOW
 
-            // To manage the endDate when you chose one particular status
             $status = $ticket->getStatus();
-            if($status == 'Fermé' or $status == 'Résolu'){
-                $ticket->setEndDate(new \DateTime('NOW'));
-            } else {
-                $ticket->setEndDate(null);
-            }
+            $endDate = $ticket->getEndDate();
 
+            // To make the endDate impossible to change when you already have one with either "Fermé" status or "Résolu" status
+            if(!($endDate != null and ($status == 'Fermé' or  $status == 'Résolu'))){
+                if($status == 'Fermé' or $status == 'Résolu'){
+                    $ticket->setEndDate(new \DateTime('NOW'));
+                } else {
+                    $ticket->setEndDate(null);
+                }
+            }
             $em->flush();
             return $this->redirectToRoute('index_ticket');
         }
 
+//        $persistedEmergency = $ticket->getEmergency();
         return $this->render('@App/Ticket/editTicket.html.twig',[
+            'informations' => $informations,
+//            'persistedEmergency' => $persistedEmergency,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param Ticket $ticket
+     * @return RedirectResponse|Response
+     * @Route("/update/{ticket}", name="update_ticket")
+     */
+    public function updateAction(Request $request, Ticket $ticket)
+    {
+        $em     = $this->getDoctrine()->getManager();
+        $form   = $this->createForm(UpdateTicketType::class, $ticket);
+
+        $informations = $em->getRepository('AppBundle:Ticket')->find($ticket);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            // Add message to inform the user changes have been saved
+
+            return $this->redirectToRoute('index_ticket');
+        }
+
+        return $this->render('@App/Ticket/updateTicket.html.twig',[
             'informations' => $informations,
             'form' => $form->createView(),
         ]);
     }
+
 
     /**
      * @param Ticket $ticket

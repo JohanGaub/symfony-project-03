@@ -4,39 +4,50 @@
 
     <section class="form-all">
 
-    <div class="row">
-    <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
-    <h2>Liste des tickets</h2>
-    <table class="table table-responsive table-bordered table-condensed">
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+                <h2>Liste des tickets</h2>
+                <table class="table table-responsive table-bordered table-condensed">
 
-    <thead >
-    <tr class="text-center">
-        <th>Société</th>
-        <th>N° de ticket</th>
-        <th>Sujet</th>
-        <th>Statut</th>
-    </tr>
-    </thead>
+                    <thead >
+                    <tr class="text-center">
+                        <th>Société</th>
+                        <th>N° de ticket</th>
+                        <th>Sujet</th>
+                        <th>Statut</th>
+                    </tr>
+                    </thead>
 
-    <tbody class="table-striped">
-    {%  for ticket in tickets %}
-        <tr>
-        {% if ticket.isarchive = true %}
-            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.user.company.name }}</a></td>
-            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.id }}</a></td>
-            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.subject }}</a></td>
-            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.status }}</a></td>
-{% endif %}
-            </tr>
-            {% endfor %}
-            </tbody>
+                    <tbody class="table-striped">
+                    {%  for ticket in tickets %}
+                        <tr>
+                            {% if ticket.isArchive == false %}
 
-            </table>
+                                <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.user.company.name }}</a></td>
+                                <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.id }}</a></td>
+                                <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.subject }}</a></td>
+                                <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.status }}</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
 
-            <a href="{{ path('add_ticket') }}">Ajouter un ticket</a>
+
+                    {#{% if is_granted('ROLE_ADMIN') %}
+                        <tr>
+                            <td><a href="{{ path('update_ticket', {"informations": informations.id}) }}">{{ informations.user.company.name }}</a></td>
+                            <td><a href="{{ path('update_ticket', {"informations": informations.id}) }}">{{ informations.id }}</a></td>
+                            <td><a href="{{ path('update_ticket', {"informations": informations.id}) }}">{{ informations.subject }}</a></td>
+                            <td><a href="{{ path('update_ticket', {"informations": informations.id}) }}">{{ informations.status }}</a></td>
+                        </tr>
+                    {% endif %}#}
+                    </tbody>
+
+                </table>
+
+                <a href="{{ path('add_ticket') }}">Ajouter un ticket</a>
             </div>
-            </div>
+        </div>
 
-            </section>
+    </section>
 
-            {% endblock %}
+{% endblock %}

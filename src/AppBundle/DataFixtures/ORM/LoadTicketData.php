@@ -42,9 +42,8 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             5 => 'Client final',
         ];
         $emergencies                  = [
-            0 => 'Haute',
-            1 => 'Moyenne',
-            2 => 'Basse',
+            0 => 'Normale',
+            1 => 'Haute',
         ];
         $status                       = [
             0 => 'En attente',
@@ -88,8 +87,6 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $ticket->setCategory($this->getReference($randomCategory));
             $ticket->setProduct($this->getReference($randomProduct));
             $ticket->setUser($this->getReference($randomProjectResponsible));
-
-
 
             $this->setReference('ticket_id_' . $i,$ticket);
 
