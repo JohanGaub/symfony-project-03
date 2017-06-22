@@ -27,7 +27,7 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
         for ($i = 0; $i < DataParameters::NB_PRODUCT; $i++)
         {
             $product = new Product();
-            $product->setName($faker->words(1, true));
+            $product->setName($faker->word(1, true));
             $product->setDescription($faker->sentences(7, true));
             $em->persist($product);
 

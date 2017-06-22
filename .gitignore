@@ -17,3 +17,5 @@
 /web/bundles/
 /.sass-cache/
 /node_modules/
+/src/AppBundle/Command/Test*.php
+/web/assets/upload/

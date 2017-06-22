@@ -30,29 +30,24 @@ $(document).ready(function () {
             $('.navbar, .navbar-default .navbar-brand, .navbar-brand img, .navbar-collapse, div.navbar-header.header').removeClass('scroll-small');
         }
     });
-
-    $('#login-link').click(function() {
-        $('#footer').css({'display':'none'})
-    });
 });
 
 
 
 
-
 $(document).ready(function () {
-        if ($(window).width() <= 1024) {
-            $("#arrowbox").addClass("arrow-bottom-center");
-        } else {
-            $("#arrowbox").addClass("arrow-right-center");
-        }
+    if ($(window).width() <= 767) {
+        $("#arrowbox").addClass("arrow-bottom-center");
+    } else {
+        $("#arrowbox").addClass("arrow-right-center");
+    }
 
 
 
 
 // Change class name in "html.twig" file in order to use a specific scss mixin
     $(window).on('resize', function() {
-        if ($(window).width() <= 1024) {
+        if ($(window).width() <= 767) {
             $("#arrowbox").removeClass("arrow-right-center").addClass("arrow-bottom-center");
         } else {
             $("#arrowbox").removeClass("arrow-bottom-center").addClass("arrow-right-center");
@@ -104,4 +99,3 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
-
