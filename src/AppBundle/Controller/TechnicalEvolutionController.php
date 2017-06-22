@@ -63,8 +63,7 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Add new evolution
-     * TODO -> need to rework on user relations
-     * TODO -> mail & admin confirmation
+     * TODO -> mail & admin confirmation (service)
      *
      * @Route("/nouveau", name="evolutionAdd")
      * @param Request $request
@@ -226,7 +225,7 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Update comments for TechnicalEvolutions
-     * // TODO => Fix no route find
+     * TODO => Fix no route find
      * @Route("/commentaires/modification/{userTechnicalEvolution}", name="evolutionCommentsUpdate")
      * @param Request $request
      * @param UserTechnicalEvolution $userTechnicalEvolution

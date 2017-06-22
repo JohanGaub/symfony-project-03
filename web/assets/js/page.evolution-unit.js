@@ -55,7 +55,6 @@ $(document).ready( function () {
 
 /**
  * Add new comment
- * TODO => Fix date echo need good format
  */
 $(document).ready( function () {
     let formId  = '#app_bundle_comment_userTechnicalEvolution'

@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * TODO => Can't add my input why ??
  * TODO => Can't delete or update added's inputs
  * Class DictionaryController
  * @package AppBundle\Controller
@@ -36,9 +35,9 @@ class DictionaryController extends Controller
         $statusTitle    = 'technical_evolution_status';
         $originTitle    = 'technical_evolution_origin';
 
-        $typeList   = $repo->getItemListByType($typeTitle);
-        $statusList = $repo->getItemListByType($statusTitle);
-        $originList = $repo->getItemListByType($originTitle);
+        $typeList   = $repo->getItemListByType($typeTitle)->getQuery()->getResult();
+        $statusList = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
+        $originList = $repo->getItemListByType($originTitle)->getQuery()->getResult();
 
         $dictionary = new Dictionary();
         $typeForm = $this->createForm(DictionaryType::class, $dictionary);

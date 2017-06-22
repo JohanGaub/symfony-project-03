@@ -46,7 +46,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 
         /**
          * Laurent BigBossAccount
-         * TODO => Delete after prod version
          * ........Only for client join project
          */
         $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);

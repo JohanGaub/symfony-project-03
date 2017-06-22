@@ -21,9 +21,7 @@ class DictionaryRepository extends EntityRepository
     {
         return $this->createQueryBuilder('d')
             ->where('d.type = :type')
-            ->setParameter('type', $type)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('type', $type);
     }
 
 }

@@ -139,7 +139,6 @@ class TechnicalEvolutionRepository extends EntityRepository
             
         ", $rsm);
 
-        // TODO =>
         return $query;
     }
 

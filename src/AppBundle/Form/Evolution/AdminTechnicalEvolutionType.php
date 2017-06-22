@@ -38,20 +38,20 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     #Find all status in dictionary
-                    return $repo->getEvolutionStatusTypeList();
+                    return $repo->getItemListByType('technical_evolution_status');
                 },
                 'label'         => 'Status de la demande',
                 'placeholder'   => 'Séléctionnez un status',
                 'multiple'      => false,
             ])
             ->add('reason', TextType::class, [
-                'label'         => 'Raison',
+                'label'         => 'Raison'
             ])
             ->add('origin', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     #Find all status in dictionary
-                    return $repo->getEvolutionOriginTypeList();
+                    return $repo->getItemListByType('technical_evolution_origin');
                 },
                 'label'         => 'Origine de la demande',
                 'placeholder'   => 'Qui est à la base de cette évolution ?',
@@ -59,7 +59,7 @@ class AdminTechnicalEvolutionType extends AbstractType
             ])
             ->add('expectedDelay', DateType::class, [
                 'label'         => 'Délais souhaité',
-                'format'        => 'dd MM yyyy'
+                'widget'        => 'single_text',
             ])
             ->add('product', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Product',
@@ -73,7 +73,7 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     # Find all category_type for select list
-                    return $repo->getCategoryTypeList();
+                    return $repo->getItemListByType('category_type');
                 },
                 'label'         => 'Type de catégorie',
                 'placeholder'   => 'Sélectionnez votre type de catégorie',
