@@ -6,6 +6,7 @@ use AppBundle\Entity\Ticket;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -17,15 +18,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 
+/**
+ * Class UpdateTicketType
+ * @package AppBundle\Form\Ticket
+ */
 class UpdateTicketType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->addEventListener(FormEvents::POST_SUBMIT, function(FormEvent $event){
                 $event->stopPropagation();
-            },900) // To disable Symfony to check if uploaded file is too large or if non-existing fields were submitted.
-
+            },900)
             ->add('product', EntityType::class, [
                 'class' => 'AppBundle\Entity\Product',
                 'query_builder' => function (EntityRepository $entityRepository) {
@@ -79,12 +87,9 @@ class UpdateTicketType extends AbstractType
                     'Haute' => 'Haute',
                 ],
                 'required' => true,
+                'expanded' => true,
+                'multiple' => false,
             ])
-  /*         ->add('upload', FileType::class, [
-                'label' => 'Fichier à uploader',
-                'csrf_field_name' => 'upload_directory',
-                'required' => false,
-            ])*/
             ->add('status', ChoiceType::class, [
                 'label' => 'Statut',
                 'choices' => [
@@ -95,20 +100,17 @@ class UpdateTicketType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('isArchive', ChoiceType::class, [
+            ->add('isArchive', CheckboxType::class, [
                 'label' => 'Archivage',
-                'expanded' => true,
-                'choices'
-                => [
-                    'Ne pas archiver' => false,
-                    'Archiver' => true,
-                ],
-                'required' => true,
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -116,6 +118,9 @@ class UpdateTicketType extends AbstractType
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function getBlockPrefix()
     {
         return 'app_bundle_admin_ticket_type';

@@ -12,7 +12,17 @@
     </header>
 
     <main>
-        {% block body %}{% endblock %}
+        {% block body %}
+
+{#        {% for label, message in app.flashes %}
+        {% for message  %}
+            <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+            {% endfor %}#}
+
+        {% endblock %}
     </main>
 
     <footer>

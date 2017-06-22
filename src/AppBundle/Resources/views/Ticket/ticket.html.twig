@@ -1,53 +1,68 @@
 {% extends ('@App/backoffice-base.html.twig') %}
 
 {% block body %}
-
     <section class="form-all">
 
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 <h2>Liste des tickets</h2>
-                <table class="table table-responsive table-bordered table-condensed">
 
+                <table class="table table-responsive table-bordered table-condensed">
                     <thead >
                     <tr class="text-center">
-                        <th>Société</th>
                         <th>N° de ticket</th>
+                        <th>Société</th>
+                        <th>Urgence</th>
                         <th>Sujet</th>
                         <th>Statut</th>
+                        <th>Date de création</th>
+                        <th>Date de clôture</th>
                     </tr>
                     </thead>
 
                     <tbody class="table-striped">
                     {%  for ticket in tickets %}
                         <tr>
-                            {% if ticket.isArchive == false %}
-
-                                <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.user.company.name }}</a></td>
-                                <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.id }}</a></td>
-                                <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.subject }}</a></td>
-                                <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.status }}</a></td>
-                            {% endif %}
+                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.id }}</a></td>
+                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.user.company.name }}</a></td>
+                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.emergency }}</a></td>
+                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.subject }}</a></td>
+                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.status }}</a></td>
+                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.creationdate|date("d/m/Y") }}</a></td>
+                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.Enddate|date("d/m/Y") }}</a></td>
                         </tr>
                     {% endfor %}
-
-
-                    {#{% if is_granted('ROLE_ADMIN') %}
-                        <tr>
-                            <td><a href="{{ path('update_ticket', {"informations": informations.id}) }}">{{ informations.user.company.name }}</a></td>
-                            <td><a href="{{ path('update_ticket', {"informations": informations.id}) }}">{{ informations.id }}</a></td>
-                            <td><a href="{{ path('update_ticket', {"informations": informations.id}) }}">{{ informations.subject }}</a></td>
-                            <td><a href="{{ path('update_ticket', {"informations": informations.id}) }}">{{ informations.status }}</a></td>
-                        </tr>
-                    {% endif %}#}
                     </tbody>
-
                 </table>
 
-                <a href="{{ path('add_ticket') }}">Ajouter un ticket</a>
+                <div class="pagination">
+                    <div class="pagination-buttons">
+                        {% if pagination.page > 1 %}
+                            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}"><<</a>
+                            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}"><</a>
+                        {% endif %}
+
+                        {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
+                        {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
+                            <a{% if p == pagination.page %} class="current-page" {% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a>
+                        {% endfor %}
+
+                        {% if pagination.page<pagination.pages_count %}
+                            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page+1})) }}">></a>
+                            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">>></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+                <div>
+                    <a href="{{ path('add_ticket') }}">Ajouter un ticket</a>
+                </div>
             </div>
         </div>
 
     </section>
-
 {% endblock %}

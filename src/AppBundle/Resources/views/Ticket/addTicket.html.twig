@@ -5,8 +5,7 @@
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 {{ form(form) }}
-                {#{{ dump(test) }}#}
-                <a href="{{ path('index_ticket') }}">Retour à la liste des tickets</a>
+                <a href="{{ path('index_ticket', {'page': 1}) }}">Retour à la liste des tickets</a>
             </div>
         </div>
     </section>

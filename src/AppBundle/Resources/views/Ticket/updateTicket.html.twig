@@ -4,6 +4,7 @@
     <section class="form-all">
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+
                 <table class="table table-responsive table-bordered table-condensed">
                     <thead>
                     <tr>
@@ -34,10 +35,12 @@
                     </tr>
                     </tbody>
                 </table>
+
             </div>
         </div>
 
         <div class="row">
+
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 {{ form_start(form) }}
                 {{ form_row(form.product) }}
@@ -51,9 +54,7 @@
                 {{ form_row(form.status) }}
                 {{ form_row(form.isArchive) }}
                 {{ form_row(form.submit) }}
-                {#{{ form_end(form, {'render_rest': false}) }}#}
                 {{ form_end(form) }}
-
                 <a href="{{ path('index_ticket') }}" class="btn active back-button" role="button">Retour</a>
             </div>
 

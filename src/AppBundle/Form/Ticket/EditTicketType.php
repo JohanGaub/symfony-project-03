@@ -4,6 +4,7 @@ namespace AppBundle\Form\Ticket;
 
 use AppBundle\Entity\Ticket;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,8 +12,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 
+/**
+ * Class EditTicketType
+ * @package AppBundle\Form\Ticket
+ */
 class EditTicketType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -25,10 +34,9 @@ class EditTicketType extends AbstractType
                     'Normale' => 'Normale',
                     'Haute' => 'Haute',
                 ],
-/*                'preferred_choices' => [
-                    'persistedEmergency' => 'persistedEmergency',
-                ],*/
                 'required' => true,
+                'expanded' => true,
+                'multiple' => false,
             ])
             ->add('status', ChoiceType::class, [
                 'label' => 'Statut',
@@ -40,20 +48,17 @@ class EditTicketType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('isArchive', ChoiceType::class, [
+            ->add('isArchive', CheckboxType::class, [
                 'label' => 'Archivage',
-                'expanded' => true,
-                'choices'
-                => [
-                    'Ne pas archiver' => false,
-                    'Archiver' => true,
-                ],
-                'required' => true,
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

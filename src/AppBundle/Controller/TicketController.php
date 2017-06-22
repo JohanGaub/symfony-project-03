@@ -21,18 +21,32 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class TicketController extends Controller
 {
-
     /**
+     * @param $page
      * @return Response
-     * @internal param $name
-     * @Route("/", name="index_ticket")
+     * @Route("/index/{page}", name="index_ticket")
      */
-    public function indexAction()
+    public function indexAction($page = 1)
     {
-        $tickets = $this->getDoctrine()->getRepository('AppBundle:Ticket')->findAll();
-        return $this->render('@App/Ticket/ticket.html.twig', [
-            'tickets' => $tickets,]);
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Ticket');
+        $maxTickets = 10;
+        $tickets_count = $repo->countTicketTotal();
+
+        $pagination = [
+            'page' => $page,
+            'route' => 'index_ticket',
+            'pages_count' => ceil($tickets_count / $maxTickets),
+            'route_params' => [],
+        ];
+
+        $tickets = $repo->getList($page, $maxTickets);
+
+        return $this->render('@App/Ticket/ticket.html.twig',[
+            'tickets' => $tickets,
+            'pagination' => $pagination,
+        ]);
     }
+
 
     /**
      * @param Request $request
@@ -41,12 +55,11 @@ class TicketController extends Controller
      */
     public function addAction(Request $request)
     {
-        $user       = $this->getUser();             // I get the user from User Entity to set it in the database (see upstairs)
+        $user       = $this->getUser();
 
         $ticket     = new Ticket();
         $em         = $this->getDoctrine()->getManager();
         $form       = $this->createForm(AddTicketType::class, $ticket);
-//        $test = '';
 
         $form->handleRequest($request);
 
@@ -54,8 +67,6 @@ class TicketController extends Controller
             // $file stores the uploaded files
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $ticket->getUpload();
-
-//            $test = $form->getData();
 
             if($file != null)
             {
@@ -72,26 +83,18 @@ class TicketController extends Controller
                 $ticket->setUpload($fileName);
             }
 
-            // $ticket->setCreationDate(new \DateTime('NOW')); // To set the default creationDate to NOW
-            // $ticket->setStatus('En attente'); // To set the default status to "En attente"
-            // $ticket->setIsArchive(false); // To set the default to NOT archived
-            $ticket->setUser($user); // I got (see upstairs) the user and set it hear.
+            $ticket->setUser($user);
 
             $em->persist($ticket);
             $em->flush();
-
-/*            $this->addFlash(
-                'notice-green',
-                'Votre ticket a été enregistré !'
-            );*/
 
             return $this->redirectToRoute('index_ticket');
         }
         return $this->render('@App/Ticket/addTicket.html.twig',[
             'form' => $form->createView(),
-//            'test' => $test,
         ]);
     }
+
 
     /**
      * @param Request $request
@@ -110,7 +113,7 @@ class TicketController extends Controller
 
         if($form->isSubmitted() && $form->isValid()) {
 
-            $ticket->setUpdateDate(new \DateTime('NOW')); // To set the default UpdateDate to NOW
+            $ticket->setUpdateDate(new \DateTime('NOW'));
 
             $status = $ticket->getStatus();
             $endDate = $ticket->getEndDate();
@@ -126,11 +129,8 @@ class TicketController extends Controller
             $em->flush();
             return $this->redirectToRoute('index_ticket');
         }
-
-//        $persistedEmergency = $ticket->getEmergency();
         return $this->render('@App/Ticket/editTicket.html.twig',[
             'informations' => $informations,
-//            'persistedEmergency' => $persistedEmergency,
             'form' => $form->createView(),
         ]);
     }
@@ -154,11 +154,8 @@ class TicketController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
-            // Add message to inform the user changes have been saved
-
             return $this->redirectToRoute('index_ticket');
         }
-
         return $this->render('@App/Ticket/updateTicket.html.twig',[
             'informations' => $informations,
             'form' => $form->createView(),
@@ -179,3 +176,5 @@ class TicketController extends Controller
         return $this->redirectToRoute('index_ticket');
     }
 }
+
+
