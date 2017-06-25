@@ -1,4 +1,4 @@
-{% extends '@App/backoffice-base.html.twig' %}
+{% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block title %}
     Liste des dictionnaires
@@ -13,7 +13,7 @@
             </div>
 
             <div class="bo-title-page col-lg-12">
-                {% include '@App/Elements/flash_bag_message.html.twig' %}
+                {% include '@App/Elements/include.flashBagMessage.html.twig' %}
             </div>
 
             {# list of all dictionary #}

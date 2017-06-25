@@ -2,16 +2,17 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\JoinColumn;
+use DateTime;
 
 /**
  * TechnicalEvolution
  *
  * @ORM\Table(name="technical_evolution")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TechnicalEvolutionRepository")
-
+ * @ORM\Entity
  */
 class TechnicalEvolution
 {
@@ -89,21 +90,21 @@ class TechnicalEvolution
     private $origin;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="expected_delay", type="datetime", nullable=false)
      */
     private $expectedDelay;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
@@ -242,9 +243,10 @@ class TechnicalEvolution
      * @param Dictionary|string $status
      * @return TechnicalEvolution
      */
-    public function setStatus(\AppBundle\Entity\Dictionary $status)
+    public function setStatus(Dictionary $status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -261,7 +263,7 @@ class TechnicalEvolution
     /**
      * Get origin
      *
-     * @return \AppBundle\Entity\Dictionary
+     * @return Dictionary
      */
     public function getOrigin()
     {
@@ -271,19 +273,20 @@ class TechnicalEvolution
     /**
      * Set origin
      *
-     * @param mixed $origin
+     * @param Dictionary $origin
      * @return TechnicalEvolution
      */
-    public function setOrigin(\AppBundle\Entity\Dictionary $origin = null)
+    public function setOrigin(Dictionary $origin = null)
     {
         $this->origin = $origin;
+
         return $this;
     }
 
     /**
      * Set expectedDelay
      *
-     * @param \DateTime $expectedDelay
+     * @param DateTime $expectedDelay
      * @return TechnicalEvolution
      */
     public function setExpectedDelay($expectedDelay)
@@ -296,7 +299,7 @@ class TechnicalEvolution
     /**
      * Get expectedDelay
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getExpectedDelay()
     {
@@ -306,7 +309,7 @@ class TechnicalEvolution
     /**
      * Set creationDate
      *
-     * @param \DateTime $creationDate
+     * @param DateTime $creationDate
      * @return TechnicalEvolution
      */
     public function setCreationDate($creationDate)
@@ -319,7 +322,7 @@ class TechnicalEvolution
     /**
      * Get creationDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCreationDate()
     {
@@ -329,7 +332,7 @@ class TechnicalEvolution
     /**
      * Set updateDate
      *
-     * @param \DateTime $updateDate
+     * @param DateTime $updateDate
      * @return TechnicalEvolution
      */
     public function setUpdateDate($updateDate)
@@ -342,7 +345,7 @@ class TechnicalEvolution
     /**
      * Get updateDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdateDate()
     {
@@ -359,10 +362,11 @@ class TechnicalEvolution
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category
+     *
      * @return TechnicalEvolution
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -372,7 +376,7 @@ class TechnicalEvolution
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category
+     * @return Category
      */
     public function getCategory()
     {
@@ -382,10 +386,10 @@ class TechnicalEvolution
     /**
      * Set product
      *
-     * @param \AppBundle\Entity\Product $product
+     * @param Product $product
      * @return TechnicalEvolution
      */
-    public function setProduct(\AppBundle\Entity\Product $product = null)
+    public function setProduct(Product $product = null)
     {
         $this->product = $product;
 
@@ -395,7 +399,7 @@ class TechnicalEvolution
     /**
      * Get product
      *
-     * @return \AppBundle\Entity\Product
+     * @return Product
      */
     public function getProduct()
     {
@@ -405,10 +409,10 @@ class TechnicalEvolution
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      * @return TechnicalEvolution
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -418,7 +422,7 @@ class TechnicalEvolution
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {
@@ -428,10 +432,10 @@ class TechnicalEvolution
     /**
      * Add userTechnicalEvolution
      *
-     * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
+     * @param UserTechnicalEvolution $userTechnicalEvolution
      * @return TechnicalEvolution
      */
-    public function addUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
+    public function addUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
 
@@ -441,9 +445,9 @@ class TechnicalEvolution
     /**
      * Remove userTechnicalEvolution
      *
-     * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
+     * @param UserTechnicalEvolution $userTechnicalEvolution
      */
-    public function removeUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
+    public function removeUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
     }
@@ -451,7 +455,7 @@ class TechnicalEvolution
     /**
      * Get userTechnicalEvolutions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getUserTechnicalEvolutions()
     {

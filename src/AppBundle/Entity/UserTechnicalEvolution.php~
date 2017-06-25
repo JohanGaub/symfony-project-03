@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,12 +45,12 @@ class UserTechnicalEvolution
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TechnicalEvolution", inversedBy="userTechnicalEvolutions")
+     * @ORM\ManyToOne(targetEntity="TechnicalEvolution", inversedBy="userTechnicalEvolutions", cascade={"persist"})
      */
     private $technicalEvolution;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions", cascade={"persist"})
      */
     private $user;
 
@@ -137,11 +139,11 @@ class UserTechnicalEvolution
     /**
      * Set technicalEvolution
      *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     * @param TechnicalEvolution $technicalEvolution
      *
      * @return UserTechnicalEvolution
      */
-    public function setTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution = null)
+    public function setTechnicalEvolution(TechnicalEvolution $technicalEvolution = null)
     {
         $this->technicalEvolution = $technicalEvolution;
 
@@ -151,7 +153,7 @@ class UserTechnicalEvolution
     /**
      * Get technicalEvolution
      *
-     * @return \AppBundle\Entity\TechnicalEvolution
+     * @return TechnicalEvolution
      */
     public function getTechnicalEvolution()
     {
@@ -161,11 +163,11 @@ class UserTechnicalEvolution
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return UserTechnicalEvolution
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -175,7 +177,7 @@ class UserTechnicalEvolution
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {

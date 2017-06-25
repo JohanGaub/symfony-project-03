@@ -98,7 +98,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         }
 
         /**
-         * ProjetctResp
+         * ProjectResp
          */
         for ($i = 0; $i < DataParameters::NB_PROJECT_RESP; $i++){
             $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);

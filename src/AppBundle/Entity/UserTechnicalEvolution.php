@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * UserTechnicalEvolution
  *
  * @ORM\Table(name="user_technical_evolution")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserTechnicalEvolutionRepository")
+ * @ORM\Entity
  */
 class UserTechnicalEvolution
 {
@@ -64,7 +64,7 @@ class UserTechnicalEvolution
     private $technicalEvolution;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions", cascade={"persist"})
      */
     private $user;
 

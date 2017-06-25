@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
@@ -37,6 +39,12 @@ class Category
     private $description;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="type", referencedColumnName="id")
+     */
+    private $type;
+
+    /**
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="category")
      */
     private $technicalEvolutions;
@@ -52,11 +60,9 @@ class Category
     private $documentations;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
-     * @JoinColumn(name="type", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="category")
      */
-    private $type;
-
+    private $tickets;
 
     /**
      * Get id
@@ -121,130 +127,19 @@ class Category
      */
     public function __construct()
     {
-        $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->documentations = new \Doctrine\Common\Collections\ArrayCollection();
-        //$this->types = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add technicalEvolution
-     *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
-     *
-     * @return Category
-     */
-    public function addTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
-    {
-        $this->technicalEvolutions[] = $technicalEvolution;
-
-        return $this;
-    }
-
-    /**
-     * Remove technicalEvolution
-     *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
-     */
-    public function removeTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
-    {
-        $this->technicalEvolutions->removeElement($technicalEvolution);
-    }
-
-    /**
-     * Get technicalEvolutions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTechnicalEvolutions()
-    {
-        return $this->technicalEvolutions;
-    }
-
-    /**
-     * Add faq
-     *
-     * @param \AppBundle\Entity\Faq $faq
-     *
-     * @return Category
-     */
-    public function addFaq(\AppBundle\Entity\Faq $faq)
-    {
-        $this->faqs[] = $faq;
-
-        return $this;
-    }
-
-    /**
-     * Remove faq
-     *
-     * @param \AppBundle\Entity\Faq $faq
-     */
-    public function removeFaq(\AppBundle\Entity\Faq $faq)
-    {
-        $this->faqs->removeElement($faq);
-    }
-
-    /**
-     * Get faqs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFaqs()
-    {
-        return $this->faqs;
-    }
-
-    /**
-     * Add documentation
-     *
-     * @param \AppBundle\Entity\Documentation $documentation
-     *
-     * @return Category
-     */
-    public function addDocumentation(\AppBundle\Entity\Documentation $documentation)
-    {
-        $this->documentations[] = $documentation;
-
-        return $this;
-    }
-
-    /**
-     * Remove documentation
-     *
-     * @param \AppBundle\Entity\Documentation $documentation
-     */
-    public function removeDocumentation(\AppBundle\Entity\Documentation $documentation)
-    {
-        $this->documentations->removeElement($documentation);
-    }
-
-    /**
-     * Get documentations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getDocumentations()
-    {
-        return $this->documentations;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->title;
+        $this->technicalEvolutions = new ArrayCollection();
+        $this->faqs = new ArrayCollection();
+        $this->documentations = new ArrayCollection();
     }
 
     /**
      * Set type
      *
-     * @param \AppBundle\Entity\Dictionary $type
+     * @param Dictionary $type
      *
      * @return Category
      */
-    public function setType(\AppBundle\Entity\Dictionary $type = null)
+    public function setType(Dictionary $type = null)
     {
         $this->type = $type;
 
@@ -254,10 +149,154 @@ class Category
     /**
      * Get type
      *
-     * @return \AppBundle\Entity\Dictionary
+     * @return Dictionary
      */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Add technicalEvolution
+     *
+     * @param TechnicalEvolution $technicalEvolution
+     *
+     * @return Category
+     */
+    public function addTechnicalEvolution(TechnicalEvolution $technicalEvolution)
+    {
+        $this->technicalEvolutions[] = $technicalEvolution;
+
+        return $this;
+    }
+
+    /**
+     * Remove technicalEvolution
+     *
+     * @param TechnicalEvolution $technicalEvolution
+     */
+    public function removeTechnicalEvolution(TechnicalEvolution $technicalEvolution)
+    {
+        $this->technicalEvolutions->removeElement($technicalEvolution);
+    }
+
+    /**
+     * Get technicalEvolutions
+     *
+     * @return Collection
+     */
+    public function getTechnicalEvolutions()
+    {
+        return $this->technicalEvolutions;
+    }
+
+    /**
+     * Add faq
+     *
+     * @param Faq $faq
+     *
+     * @return Category
+     */
+    public function addFaq(Faq $faq)
+    {
+        $this->faqs[] = $faq;
+
+        return $this;
+    }
+
+    /**
+     * Remove faq
+     *
+     * @param Faq $faq
+     */
+    public function removeFaq(Faq $faq)
+    {
+        $this->faqs->removeElement($faq);
+    }
+
+    /**
+     * Get faqs
+     *
+     * @return Collection
+     */
+    public function getFaqs()
+    {
+        return $this->faqs;
+    }
+
+    /**
+     * Add documentation
+     *
+     * @param Documentation $documentation
+     *
+     * @return Category
+     */
+    public function addDocumentation(Documentation $documentation)
+    {
+        $this->documentations[] = $documentation;
+
+        return $this;
+    }
+
+    /**
+     * Remove documentation
+     *
+     * @param Documentation $documentation
+     */
+    public function removeDocumentation(Documentation $documentation)
+    {
+        $this->documentations->removeElement($documentation);
+    }
+
+    /**
+     * Get documentations
+     *
+     * @return Collection
+     */
+    public function getDocumentations()
+    {
+        return $this->documentations;
+    }
+
+    /**
+     * Add ticket
+     *
+     * @param Ticket $ticket
+     *
+     * @return Category
+     */
+    public function addTicket(Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param Ticket $ticket
+     */
+    public function removeTicket(Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
     }
 }

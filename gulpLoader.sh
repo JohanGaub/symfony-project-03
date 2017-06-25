@@ -5,7 +5,6 @@ echo '*                                                    *'
 echo '*               Welcome to GulpLoader                *'
 echo '*                                                    *'
 echo '******************************************************'
-echo '                Type CTRL+C for exit                  '
 
 npm init
 npm install gulp --save-dev
