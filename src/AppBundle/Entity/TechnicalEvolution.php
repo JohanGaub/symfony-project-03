@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="technical_evolution")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TechnicalEvolutionRepository")
+
  */
 class TechnicalEvolution
 {
@@ -27,6 +28,12 @@ class TechnicalEvolution
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 40,
+     *      minMessage = "Votre titre doit faire au minimum {{ limit }} caractères ",
+     *      maxMessage = "Votre titre doit faire au maximum {{ limit }} caractères "
+     * )
      */
     private $title;
 
@@ -34,6 +41,12 @@ class TechnicalEvolution
      * @var string
      *
      * @ORM\Column(name="sum_up", type="text", nullable=false)
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 120,
+     *      minMessage = "Votre résumé doit faire au minimum {{ limit }} caractères ",
+     *      maxMessage = "Votre résumé doit faire au maximum {{ limit }} caractères "
+     * )
      */
     private $sumUp;
 
@@ -41,6 +54,12 @@ class TechnicalEvolution
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=false)
+     * @Assert\Length(
+     *      min = 120,
+     *      max = 120000,
+     *      minMessage = "Votre contenu doit faire au minimum {{ limit }} caractères ",
+     *      maxMessage = "Votre contenu doit faire au maximum {{ limit }} caractères "
+     * )
      */
     private $content;
 
@@ -48,6 +67,12 @@ class TechnicalEvolution
      * @var string
      *
      * @ORM\Column(name="reason", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 540,
+     *      minMessage = "Votre raison doit faire au minimum {{ limit }} caractères ",
+     *      maxMessage = "Votre raison doit faire au maximum {{ limit }} caractères "
+     * )
      */
     private $reason;
 

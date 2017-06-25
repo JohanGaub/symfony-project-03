@@ -7,64 +7,44 @@
 {% block body %}
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 unit-evolution">
-                <div class="et-title"><h2>{{ evolution.title }}</h2></div>
-                <div class="et-sum-up"><h4>{{ evolution.sumUp }}</h4></div>
-                <div class="et-status"><p>{{ evolution.status }}</p></div>
-                <div class="et-category">
-                    <div class="et-category-type"><p>Type de la catégorie : {{ evolution.category.type }}</p></div>
-                    <div class="et-category-name"><p>Nom de la catégorie : {{ evolution.category.title }}</p></div>
-                </div>
-                <div class="et-content"><p>{{ evolution.content }}</p></div>
-            </div>
-        </div>
+        {% include '@App/Pages/Evolutions/buttonBarEvolution.html.twig' %}
 
-        <div class="row">
-            {% if is_granted('ROLE_PROJECT_RESP') %}
-                <div class="col-lg-12">
-                    <h4 class="vote-title">Votez pour cette évolution technique ! </h4>
-                    <div class="error-box"></div>
-                    <div class="form-group star-rating" data-index-number="{{ evolution.id }}">
-                        <fieldset class="rating" data-index-number="">
-                            <input class="star-link" type="radio" id="star10" name="rating" value="10"/>
-                            <label class="full label-star-link label-star-link" for="star10" data-index-number="10"></label>
-                            <input class="star-link" type="radio" id="star9" name="rating" value="9"/>
-                            <label class="full label-star-link" for="star9" id="label-star9" data-index-number="9"></label>
-                            <input class="star-link" type="radio" id="star8" name="rating" value="8"/>
-                            <label class="full label-star-link" for="star8" id="label-star8" data-index-number="8"></label>
-                            <input class="star-link" type="radio" id="star7" name="rating" value="7"/>
-                            <label class="full label-star-link" for="star7" id="label-star7" data-index-number="7"></label>
-                            <input class="star-link" type="radio" id="star6" name="rating" value="6"/>
-                            <label class="full label-star-link" for="star6" id="label-star6" data-index-number="6"></label>
-                            <input class="star-link" type="radio" id="star5" name="rating" value="5"/>
-                            <label class="full label-star-link" for="star5" id="label-star5" data-index-number="5"></label>
-                            <input class="star-link" type="radio" id="star4" name="rating" value="4"/>
-                            <label class="full label-star-link" for="star4" id="label-star4" data-index-number="4"></label>
-                            <input class="star-link" type="radio" id="star3" name="rating" value="3"/>
-                            <label class="full label-star-link" for="star3" id="label-star3" data-index-number="3"></label>
-                            <input class="star-link" type="radio" id="star2" name="rating" value="2"/>
-                            <label class="full label-star-link" for="star2" id="label-star2" data-index-number="2"></label>
-                            <input class="star-link" type="radio" id="star1" name="rating" value="1"/>
-                            <label class="full label-star-link" for="star1" id="label-star1" data-index-number="1"></label>
-                        </fieldset>
-                        <div class="rating-counter">
-                            <p class="rating-counter-value"><span class="rating-value"></span> / 10</p>
-                        </div>
-                    </div>
-                    {{ form_start(noteForm, {'attr': {
-                        'id': 'app_bundle_note_userTechnicalEvolution'
-                    }}) }}
-                    {{ form_end(noteForm) }}
-                </div>
-            {% endif %}
-        </div>
-
-        <div class="row">
+        <div class="row unit-evolution">
             <div class="col-lg-12">
-                <h4>Liste des commentaires</h4>
+                <div class="evolution-title"><h2>{{ evolution.title }}</h2></div>
+                <div class="evolution-sum-up"><h4>{{ evolution.sumUp }}</h4></div>
+                <div class="row evo-cols">
+                    <ul class="col-xs-12 col-lg-6 evo-list-infos">
+                        <li><p><span class="evo-label">Status de l'évolution : </span>
+                                <span class="info-evo">{{ evolution.status }}</span></p></li>
+                        <li><p><span class="evo-label">Type de la catégorie : </span>
+                                <span class="info-evo">{{ evolution.category.type }}</span></p></li>
+                        <li><p><span class="evo-label">Nom de la catégorie : </span>
+                                <span class="info-evo">{{ evolution.category.title }}</span></p></li>
+                        <li><p><span class="evo-label">Origine de la demande : </span>
+                                <span class="info-evo">{{ evolution.origin }}</span></p></li>
+                        <li><p><span class="evo-label">Date de création : </span>
+                                <span class="info-evo">{{ evolution.creationDate|date("d/m/Y") }}</span></p></li>
+                        {% if evolution.updateDate is defined %}
+                            {# TODO => Find why this condition isn't working #}
+                        <li><p><span class="evo-label">Date d'édition : </span>
+                                <span class="info-evo">{{ evolution.updateDate|date("d/m/Y") }}</span></p></li>
+                        {% endif %}
+                        <li><p><span class="evo-label">Date de fin : </span>
+                                <span class="info-evo">{{ evolution.expectedDelay|date("d/m/Y") }}</span></p></li>
+                    </ul>
+                    <div class="col-xs-12 col-lg-6 evolution-content-block">
+                        <h4>Détails : </h4>
+                        <p class="evolution-content">{{ evolution.content }}</p>
+                    </div>
+                </div>
+                {% if is_granted('ROLE_ADMIN') or app.user.id == evolution.user %}
+                    <a href="{{ path('evolutionUpdate', {'technicalEvolution': evolution.id}) }}">Modifier l'évolution</a>
+                {% endif %}
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-lg-12">
                 <div class="add-new-comment">
                     {{ form_start(addForm, {'attr': {
@@ -91,13 +71,9 @@
                     {% endfor %}
                 </div>
             </div>
-
         </div>
 
-        <div class="loader-wcs" data-index-number="{{ evolution.id }}">
-
-        </div>
-
+        <div class="loader-wcs" data-index-number="{{ evolution.id }}"></div>
     </div>
 
     {# comment delete modal #}

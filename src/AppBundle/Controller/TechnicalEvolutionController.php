@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
 use AppBundle\Form\Evolution\NoteUserTechnicalEvolutionType;
+use AppBundle\Form\Evolution\SearchTechnicalEvolution;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
@@ -11,6 +12,7 @@ use AppBundle\Form\Evolution\CommentUserTechnicalEvolutionType;
 use AppBundle\Form\Evolution\TechnicalEvolutionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,23 +29,42 @@ class TechnicalEvolutionController extends Controller
      * List all evolution with filter
      *
      * @Route("/liste/{page}", name="evolutionHome")
+     * @param Request $request
      * @param int $page
      * @return Response
      * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
-    public function indexAction(int $page = 1)
+    public function indexAction(Request $request, int $page = 1)
     {
-        // TODO => Transform that array in searchFormEngine ??
+        /**
+         * TODO => Transform that array in searchFormEngine ??
+         * TODO => Maybe get and this format with general params ? evolution-technique/liste/1/te.id=000&te.title=name
+         * TODO => Find a solution to block access to any status for user update
+         * TODO => Access technical / commercial ?
+         */
+        $searchForm = $this->createForm(SearchTechnicalEvolution::class);
+        $searchForm->handleRequest($request);
+
+        $searchTitle = '';
+        $searchStatus = '';
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $searchTitle    = $searchForm['search']->getData();
+            $searchStatus   = $searchForm['status']->getData();
+        }
         $params = [
-            'ct.value' => 'commercial',
+            'te.title'      => !empty($searchTitle) ? $searchTitle : '',
+            'dtes.value'    => !empty($searchStatus) ? $searchStatus : 'En cours',
         ];
+
         $paramsTranformers = $this->get('app.sql.search_params_getter');
         $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
+
         // get technical evolution repository
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
         // set Pagination parameters
-        $evoByPage = 9;
-        $evoTotal = count($repo->getNbEvolution($allowParamsFormat));
+        $evoByPage = 8;
+        $evoTotal = $repo->getNbEvolution($allowParamsFormat);
 
         $pagination = [
             'page'          => $page,
@@ -51,13 +72,19 @@ class TechnicalEvolutionController extends Controller
             'pages_count'   => ceil($evoTotal / $evoByPage),
             'route_params'  => array(),
         ];
-        $evolutions = $repo->getListEvolution($allowParamsFormat, $page, $evoByPage);
+        $evolutions = $repo->getEvolutions($allowParamsFormat, $page, $evoByPage);
 
-        dump($evolutions);
+        // TODO => Find a better solution for rounding (implement ROUND to DQL)
+        foreach ($evolutions as $key => $value) {
+            if (strlen($value['avg_notes']) > 3) {
+                $evolutions[$key]['avg_notes'] = substr($value['avg_notes'], 0, 3);
+            }
+        }
 
         return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
             'evolutions' => $evolutions,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'searchForm' => $searchForm->createView()
         ]);
     }
 
@@ -81,14 +108,15 @@ class TechnicalEvolutionController extends Controller
                 ->findOneBy(['type' => 'technical_evolution_status', 'value' => 'En attente']);
 
             $te->setCreationDate(new \DateTime('now'));
-            $te->setStatus($dictionaryStatus[0]);
+            $te->setStatus($dictionaryStatus);
+            $te->setUser($this->getUser());
             $te->setCategory($form->getData()->getCategory());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($te);
             $em->flush();
             $this->addFlash('notice', 'Votre demande d\'évolution à bien été prise en compte !');
-            return $this->redirectToRoute('evolutionHome');
+            return $this->redirectToRoute('evolutionUser');
         }
         return $this->render('@App/Pages/Evolutions/basicFormEvolution.html.twig', [
             'form' => $form->createView()
@@ -97,17 +125,18 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Update evolution (Admin && Basic users)
+     * TODO => Fix preselect category & category_type
      *
-     * @Route("/modification/{technicalEvolutionId}", name="evolutionUpdate")
+     * @Route("/modification/{technicalEvolution}", name="evolutionUpdate")
      * @param Request $request
-     * @param int $technicalEvolutionId
+     * @param TechnicalEvolution $technicalEvolution
      * @return Response
      */
-    public function updateAction(Request $request, int $technicalEvolutionId)
+    public function updateAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
         $em = $this->getDoctrine()->getManager();
         $te = $em->getRepository('AppBundle:TechnicalEvolution')
-            ->find($technicalEvolutionId);
+            ->find($technicalEvolution);
 
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $form = $this->createForm(TechnicalEvolutionType::class, $te);
@@ -124,7 +153,7 @@ class TechnicalEvolutionController extends Controller
             $em->flush();
 
             $this->redirectToRoute('evolutionUnit', [
-                'technicalEvolutionId' => $technicalEvolutionId
+                'technicalEvolution' => $technicalEvolution
             ]);
         }
         return $this->render($view, ['form' => $form->createView()]);
@@ -147,8 +176,6 @@ class TechnicalEvolutionController extends Controller
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
-        $uteNote        = new UserTechnicalEvolution();
-        $formNote       = $this->createForm(NoteUserTechnicalEvolutionType::class, $uteNote);
 
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $technicalEvolution,
@@ -156,189 +183,85 @@ class TechnicalEvolutionController extends Controller
             'notes'     => $notes,
             'addForm'   => $formComment->createView(),
             'updateForm'=> $formUpdate->createView(),
-            'noteForm'  => $formNote->createView()
         ]);
     }
 
     /**
-     * Add new comment for TechnicalEvolutions
+     * Get user opened evolutions
      *
-     * @Route("/commentaires/ajout/{technicalEvolution}", name="evolutionCommentsAdd")
-     * @param Request $request
-     * @param TechnicalEvolution $technicalEvolution
-     * @return JsonResponse
-     * @Security("has_role('ROLE_FINAL_CLIENT')")
+     * @Route("/utilisateur/liste", name="evolutionUser")
+     * @return Response
      */
-    public function addCommentsAction(Request $request, TechnicalEvolution $technicalEvolution)
+    public function userListAction()
     {
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('500', 'Invalid call');
-        }
-        $comment = new UserTechnicalEvolution('comment');
-        $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
-        $form->handleRequest($request);
-        $data = [];
+        $params = ['u.id' => $this->getUser()->getId()];
+        $paramsTranformers = $this->get('app.sql.search_params_getter');
+        $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
 
-        if ($form->isValid()) {
-            $user = $this->getUser();
-            $currentDate = new \DateTime('now');
-            $comment->setUser($user);
-            $comment->setTechnicalEvolution($technicalEvolution);
-            $comment->setDate($currentDate);
+        $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
+            ->getSimpleEvolutions($allowParamsFormat);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($comment);
-            $em->flush();
-
-            $userProfile = $user->getUserProfile();
-            $data = [
-                'id'      => $comment->getId(),
-                'user'    => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
-                'date'    => $currentDate,
-                'comment' => $comment->getComment()
-            ];
-        }
-        return new JsonResponse($data);
-    }
-
-    /**
-     * Load more comments for TechnicalEvolutions
-     *
-     * @Route("/commentaires/chargement/{technicalEvolutionId}", name="evolutionCommentsLoading")
-     * @param Request $request
-     * @param int $technicalEvolutionId
-     * @return JsonResponse
-     */
-    public function loadMoreCommentsAction(Request $request, int $technicalEvolutionId)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('500', 'Invalid call');
-        }
-        // data is nb element page already get
-        $data = $request->request->get('data');
-
-        $comments = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution')
-            ->getUserTechnicalEvolutionArray($technicalEvolutionId, 'comment', "$data, 10");
-
-        return new JsonResponse($comments);
-    }
-
-    /**
-     * Update comments for TechnicalEvolutions
-     * TODO => Fix no route find
-     * @Route("/commentaires/modification/{userTechnicalEvolution}", name="evolutionCommentsUpdate")
-     * @param Request $request
-     * @param UserTechnicalEvolution $userTechnicalEvolution
-     * @return JsonResponse
-     */
-    public function updateCommentsAction(Request $request, UserTechnicalEvolution $userTechnicalEvolution)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('500', 'Invalid call');
-        }
-        $comment = $userTechnicalEvolution;
-        $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
-        $form->handleRequest($request);
-        $data = [];
-
-        if ($form->isValid()) {
-            $user = $this->getUser();
-            $currentDate = new \DateTime('now');
-            $comment->setUpdateDate($currentDate);
-            $userProfile = $user->getUserProfile();
-            $data = [
-                'user'    => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
-                'date'    => $currentDate,
-                'comment' => $comment->getComment()
-            ];
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($comment);
-            $em->flush();
-        }
-        return new JsonResponse($data);
-    }
-
-
-    /**
-     * Delete comments for TechnicalEvolutions
-     *
-     * @Route("/commentaires/suppression/{userTechnicalEvolutionId}", name="evolutionCommentsDelete")
-     * @param Request $request
-     * @param int $userTechnicalEvolutionId
-     * @return JsonResponse
-     */
-    public function deleteCommentsAction(Request $request, int $userTechnicalEvolutionId)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('500', 'Invalid call');
-        }
-        $em = $this->getDoctrine()->getManager();
-        $comment = $em->getRepository('AppBundle:UserTechnicalEvolution')
-            ->findOneBy(['id' => $userTechnicalEvolutionId]);
-
-        /**
-         * Here we do delete only if user is admin or if
-         * userTechnicalEvolution->user_id is current user id
-         */
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
-            || $this->getUser()->getId() == $comment->getUser()->getId()) {
-            $em->remove($comment);
-            $em->flush();
-            return new JsonResponse('Suppression reussie !');
-        }
-        throw $this->createAccessDeniedException();
+        return $this->render('@App/Pages/Evolutions/waitingUserEvolution.html.twig', [
+            'evolutions' => $evolutions,
+        ]);
     }
 
     /**
      * Get full evolution have status
      *
-     * @Route("/en-attente/liste", name="evolutionWaiting")
+     * @Route("/admin/en-attente/liste", name="evolutionWaiting")
      * @return Response
      */
     public function adminListWaitingAction()
     {
-//        $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
-//            ->getListWaitingEvolution();
-//
-//        return $this->render('@App/Pages/Evolutions/waitingEvolution.html.twig', [
-//            'evolutions' => $evolutions,
-//        ]);
+        $params = [
+            'dtes.value' => 'En attente'
+        ];
+        $paramsTranformers = $this->get('app.sql.search_params_getter');
+        $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
+
+        $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
+            ->getSimpleEvolutions($allowParamsFormat);
+
+        return $this->render('@App/Pages/Evolutions/waitingEvolution.html.twig', [
+            'evolutions' => $evolutions,
+        ]);
     }
 
     /**
      * Do action in evolution have status 'En attente'
      * Validate Or Closest action
      *
-     * @Route("/en-attente/traitement/{technicalEvolutionId}", name="evolutionAdminWorks")
+     * @Route("/en-attente/traitement/{technicalEvolution}", name="evolutionAdminWorks")
      * @param Request $request
-     * @param int $technicalEvolutionId
+     * @param TechnicalEvolution $technicalEvolution
      * @return JsonResponse
      */
-    public function adminWaitingWorksAction(Request $request, int $technicalEvolutionId)
+    public function adminWaitingWorksAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
         $data   = $request->request->get('data');
-        $em     = $this->getDoctrine()->getManager();
 
-        if ($data) {
-            // if validate action
-            $dictionary = $em->getRepository('AppBundle:Dictionary')
-                ->findOneBy(['value' => 'En cours']);
+        if ($data === 'true') {
+            $newStatus = 'En cours';
+        } else if ($data === 'false') {
+            $newStatus = 'Refusé';
         } else {
-            // else to bad for validate
-            $dictionary = $em->getRepository('AppBundle:Dictionary')
-                ->findOneBy(['value' => 'Refusé']);
+            throw new Exception('Une erreur est survenue, veuillez réessayer plus tard');
         }
-        $evolution = $em->getRepository('AppBundle:TechnicalEvolution')
-            ->find($technicalEvolutionId);
-        $evolution->setStatus($dictionary);
+        $em     = $this->getDoctrine()->getManager();
+        $status = $em->getRepository('AppBundle:Dictionary')->findOneBy([
+            'type'  => 'technical_evolution_status',
+            'value' => $newStatus
+        ]);
 
-        $em->persist($evolution);
+        $technicalEvolution->setStatus($status);
+        $em->persist($technicalEvolution);
         $em->flush();
 
-        return new JsonResponse('Valid XmlHttp request !');
+        return new JsonResponse($data);
     }
 
 }

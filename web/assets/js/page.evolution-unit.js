@@ -48,6 +48,11 @@ $(document).ready( function () {
                         })
                     } ,2000)
                 },
+                error: function () {
+                    $(loader).hide(function () {
+                        clearInterval(interval)
+                    })
+                }
             })
         }
     }, 500)
@@ -88,7 +93,7 @@ $(document).ready( function () {
     let commentId       = ''
     let commentValue    = ''
 
-    $('.modal-delete').click( function () {
+    $(document).on('click', '.modal-delete', function (e) {
         let $this           = $(this)
         commentFullId       = $this.parent().attr('id')
         commentId           = commentFullId.replace('ute_id_', '')
@@ -122,7 +127,7 @@ $(document).ready( function () {
     let commentId       = ''
     let commentValue    = ''
 
-    $('.modal-update').click( function () {
+    $(document).on('click', '.modal-update', function () {
         let $this       = $(this)
         commentFullId   = $this.parent().attr('id')
         commentId       = commentFullId.replace('ute_id_', '')

@@ -1,55 +1,34 @@
 $(document).ready( function () {
     /**
-     * Click for validate
+     * Click for validate or closest
      */
-    $(".validate-action").click( function (e) {
-        /**
-         * Disable normal form event
-         * && get id from li for update by id
-         */
+    $('.link-action').click( function (e) {
         e.preventDefault()
-        let id = $(this).attr('id').replace('validate_action_', '');
+        let $this       = $(this)
+        let data        = $this.attr('data-info')
+        let evolutionId = $this.parent().attr('data-index-number')
 
         $.ajax({
             type: 'POST',
-            url: '/evolution-technique/en-attente/traitement/' + id,
+            url: '/evolution-technique/en-attente/traitement/' + evolutionId,
             data : {
-                'data': true
+                'data': data
             },
             dataType: 'json',
             timeout: 3000,
-            success: function(){
+            success: function(data){
                 // change content of span who have current value
-                $('#tr_element_' + id).css({
-                    backgroundColor : '#5CB85C',
-                    color : '#FFF'
-                })
-            },
-        })
-    })
-
-    $(".delete-action").click( function (e) {
-        /**
-         * Disable normal form event
-         * && get id from li for update by id
-         */
-        e.preventDefault()
-        let id = $(this).attr('id').replace('delete_action_', '');
-
-        $.ajax({
-            type: 'POST',
-            url: '/evolution-technique/en-attente/traitement/' + id,
-            data : {
-                'data': false
-            },
-            dataType: 'json',
-            timeout: 3000,
-            success: function(){
-                // change content of span who have current value
-                $('#tr_element_' + id).css({
-                    backgroundColor : '#D9534F',
-                    color : '#FFF'
-                })
+                if (data === 'true'){
+                    $('#tr_element_' + evolutionId).css({
+                        backgroundColor : '#bfd9b7',
+                        color : '#FFF'
+                    })
+                } else if (data === 'false'){
+                    $('#tr_element_' + evolutionId).css({
+                        backgroundColor : '#e9bdb5',
+                        color : '#FFF'
+                    })
+                }
             },
         })
     })

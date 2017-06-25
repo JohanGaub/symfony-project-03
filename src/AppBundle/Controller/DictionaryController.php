@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * TODO => Can't delete or update added's inputs
  * Class DictionaryController
  * @package AppBundle\Controller
  * @Route("/dictionnaire", name="dictionaryArea")

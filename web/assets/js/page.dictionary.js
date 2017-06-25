@@ -65,7 +65,7 @@ $(document).ready(function () {
     let inputForm = ''
     let type = ''
 
-    $(".modal-update").click(function (e) {
+    $(document).on('click', '.modal-update', function (e) {
         e.preventDefault()
         let $this       = $(this)
         currentId       = $($this).parent().parent().attr('data-index-number')
@@ -73,7 +73,6 @@ $(document).ready(function () {
         currentValue    = $('#li-value-' + currentId).text().trim()
         type            = $this.parent().parent().parent().attr('id')
         $(updateField).val(currentValue)
-        console.log('test => ' + $(listElementId).attr('data-index-number'))
     })
 
     $('.dictionary-update-form').submit(function (e) {
@@ -123,7 +122,7 @@ $(document).ready( function () {
     let id = ''
     let type = ''
 
-    $(".modal-delete").click(function (e) {
+    $(document).on('click', '.modal-delete', function (e) {
         /**
          * Disable normal form event
          * && get id from li for delete by id

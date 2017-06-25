@@ -84,6 +84,10 @@ class UserTechnicalEvolutionController extends Controller
         $comments = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution')
             ->getUserTechnicalEvolutionArray($technicalEvolutionId, 'comment', "$data, 10");
 
+        if (count($comments) == 0) {
+            throw new Exception('No comment are find !');
+        }
+
         return new JsonResponse($comments);
     }
 
