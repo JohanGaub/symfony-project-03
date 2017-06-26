@@ -99,3 +99,12 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
+
+// Filter a list
+/*$(document).ready(function() {
+    $('#filter').DataTable( {
+        colReorder: true,
+        paging: false,
+        info: false
+    } );
+} );*/

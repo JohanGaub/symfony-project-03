@@ -121,6 +121,6 @@ class AddTicketType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle_ticket_type';
+        return 'app_bundle_add_ticket_type';
     }
 }

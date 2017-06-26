@@ -123,6 +123,6 @@ class UpdateTicketType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle_admin_ticket_type';
+        return 'app_bundle_update_ticket_type';
     }
 }
