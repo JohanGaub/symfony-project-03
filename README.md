@@ -1,8 +1,7 @@
 Lyon-0217-communit
 ==================
 
-[![Visual Studio Team services](https://img.shields.io/badge/build-symfony-green.svg)]() [![David](https://img.shields.io/david/expressjs/express.svg?style=plastic)]() [![Visual Studio Team services](https://img.shields.io/badge/Do%20at-WildCodeSchool-orange.svg)]()
-
+[![Visual Studio Team services](https://img.shields.io/badge/Do%20at-WildCodeSchool-orange.svg)]()
 
 Do an intranet for clickDev !
 
@@ -17,6 +16,18 @@ bin/console doctrine:fixture:load
 
 # run server
 bin/console server:run 
+```
+## Dev Started
+
+```bash
+# if gulpLoader.sh can"t execute 
+sudo chmod +x gulpLoader.sh
+
+# install gulp dependencies
+./gulpLoader.sh
+
+# run browser-sync
+gulp browser-sync
 ```
 
 ## Build with

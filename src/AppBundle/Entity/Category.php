@@ -2,19 +2,16 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Documentation;
-use AppBundle\Entity\Faq;
-use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\Ticket;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  */
 class Category
 {
@@ -37,21 +34,13 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="tag", type="string", length=255, nullable=false)
-     */
-    private $tag;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="type", referencedColumnName="id")
      */
     private $type;
 
@@ -59,7 +48,6 @@ class Category
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="category")
      */
     private $technicalEvolutions;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Faq", mappedBy="category")
@@ -71,14 +59,10 @@ class Category
      */
     private $documentations;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="category")
      */
     private $tickets;
-
-
-
 
     /**
      * Get id
@@ -115,30 +99,6 @@ class Category
     }
 
     /**
-     * Set tag
-     *
-     * @param string $tag
-     *
-     * @return Category
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
@@ -163,13 +123,23 @@ class Category
     }
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->technicalEvolutions = new ArrayCollection();
+        $this->faqs = new ArrayCollection();
+        $this->documentations = new ArrayCollection();
+    }
+
+    /**
      * Set type
      *
-     * @param string $type
+     * @param Dictionary $type
      *
      * @return Category
      */
-    public function setType($type)
+    public function setType(Dictionary $type = null)
     {
         $this->type = $type;
 
@@ -179,20 +149,11 @@ class Category
     /**
      * Get type
      *
-     * @return string
+     * @return Dictionary
      */
     public function getType()
     {
         return $this->type;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->technicalEvolutions = new ArrayCollection();
-        $this->faqs = new ArrayCollection();
-        $this->documentations = new ArrayCollection();
     }
 
     /**
@@ -329,5 +290,13 @@ class Category
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
     }
 }

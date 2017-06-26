@@ -41,7 +41,7 @@ class TicketController extends Controller
 
         $tickets = $repo->getList($page, $maxTickets);
 
-        return $this->render('@App/Ticket/ticket.html.twig',[
+        return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             'tickets' => $tickets,
             'pagination' => $pagination,
         ]);
@@ -90,7 +90,7 @@ class TicketController extends Controller
 
             return $this->redirectToRoute('index_ticket');
         }
-        return $this->render('@App/Ticket/addTicket.html.twig',[
+        return $this->render('@App/Pages/Ticket/addTicket.html.twig',[
             'form' => $form->createView(),
         ]);
     }
@@ -129,7 +129,7 @@ class TicketController extends Controller
             $em->flush();
             return $this->redirectToRoute('index_ticket');
         }
-        return $this->render('@App/Ticket/editTicket.html.twig',[
+        return $this->render('@App/Pages/Ticket/editTicket.html.twig',[
             'informations' => $informations,
             'form' => $form->createView(),
         ]);
@@ -156,7 +156,7 @@ class TicketController extends Controller
 
             return $this->redirectToRoute('index_ticket');
         }
-        return $this->render('@App/Ticket/updateTicket.html.twig',[
+        return $this->render('@App/Pages/Ticket/updateTicket.html.twig',[
             'informations' => $informations,
             'form' => $form->createView(),
         ]);
