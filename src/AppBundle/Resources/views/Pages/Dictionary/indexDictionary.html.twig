@@ -18,7 +18,7 @@
 
             {# list of all dictionary #}
             <div id="dictionarys-list" class="col-lg-12">
-                {% import 'AppBundle:Elements:macro.dictionary-list.html.twig' as list %}
+                {% import 'AppBundle:Elements:macro.dictionaryList.html.twig' as list %}
                 {{ list.getDictionary(typeTitle, 'Type de catégories', typeList, typeForm) }}
                 {{ list.getDictionary(statusTitle, 'Status d\'un element', statusList, statusForm) }}
                 {{ list.getDictionary(originTitle, 'Origine d\'un élément', originList, originForm) }}
@@ -36,6 +36,7 @@
                     <h4 class="modal-title" id="myModalLabel">Modificatation du dictionnaire</h4>
                 </div>
                 <div class="modal-body">
+                    <p>Vous pouvez directement modifier votre entrée ci-dessous.</p>
                     <div id="modal-update-msg"></div>
                     {{ form_start(genUpdateForm, {'attr': {'class': 'dictionary-update-form'} }) }}
                     {{ form_row(genUpdateForm.value, {'attr': {'class': 'dictionary-update-field'} }) }}

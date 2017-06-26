@@ -128,14 +128,33 @@ class DictionaryController extends Controller
             throw new HttpException('500', 'Invalid call');
         }
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Dictionary');
+        $repoDictionary = $em->getRepository('AppBundle:Dictionary');
 
-        $dictionary = $repo->find($dictionaryId);
+        $dictionary = $repoDictionary->find($dictionaryId);
         $form = $this->createForm(DictionaryType::class, $dictionary);
         $form->handleRequest($request);
 
-        $verification = $repo->findBy(['value' => $dictionary->getValue()]);
+        /**
+         * Verification if input have already liaison
+         */
+        $nbElements = $this->get('app.dictionary_verification')
+            ->getAllowedAction($dictionary->getType(), $dictionaryId);
 
+        if (count($nbElements) > 0) {
+            $data = [
+                'status'    => 'error',
+                'element'   => 'Vous ne pouvez pas supprimer cette entrée, des éléments y sont associés !'
+            ];
+            return new JsonResponse($data);
+        }
+
+        /**
+         * Verification if any input already have sending name
+         */
+        $verification = $repoDictionary->findBy([
+            'type'  => $dictionary->getType(),
+            'value' => $dictionary->getValue()
+        ]);
         if (count($verification) > 0) {
             $data = [
                 'status'    => 'error',
@@ -143,18 +162,10 @@ class DictionaryController extends Controller
             ];
             return new JsonResponse($data);
         }
-
-        $dictionary = $repo->find($dictionaryId);
-        $form = $this->createForm(DictionaryType::class, $dictionary);
-        $form->handleRequest($request);
-
         if ($form->isValid()) {
             $em->persist($dictionary);
             $em->flush();
-
-            $data = [
-                'status' => 'succes'
-            ];
+            $data = ['status' => 'succes'];
             return new JsonResponse($data);
         }
     }
@@ -173,19 +184,25 @@ class DictionaryController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-        try {
-            $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
-                ->find($dictionaryId);
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($dictionary);
-            $em->flush();
-        } catch (\Exception $e) {
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * Verification if input have already liaison
+         */
+        $dictionary = $em->getRepository('AppBundle:Dictionary')
+            ->find($dictionaryId);
+        $nbElements = $this->get('app.dictionary_verification')
+            ->getAllowedAction($dictionary->getType(), $dictionaryId);
+
+        if (count($nbElements) > 0) {
             $data = [
-                'status'    => 'error',
-                'element'   => 'Vous ne pouvez pas supprimer cette entrée, des élements y sonts associés !'
+                'status' => 'error',
+                'element' => 'Vous ne pouvez pas supprimer cette entrée, des éléments y sont associés !'
             ];
             return new JsonResponse($data);
         }
+
+        $em->remove($dictionary);
+        $em->flush();
         return new JsonResponse(['status' => 'succes']);
     }
 }
