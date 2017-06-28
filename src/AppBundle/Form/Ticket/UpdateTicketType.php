@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Ticket;
 
 use AppBundle\Entity\Ticket;
+use AppBundle\Repository\DictionaryRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -56,30 +57,26 @@ class UpdateTicketType extends AbstractType
             ])
             ->add('subject', TextType::class, ['label' => 'Sujet du ticket'])
             ->add('content', TextareaType::class, ['label' =>  'Explications'])
-            ->add('origin', ChoiceType::class, [
+
+            ->add('origin', EntityType::class, [
                 'label' => 'Origine',
-                'choices'   => [
-                    'Super adminitrateur' => 'Super adminitrateur',
-                    'Administrateur' => 'Administrateur',
-                    'Responsable projet' => 'Responsable projet',
-                    'Technicien' => 'Technicien',
-                    'Commercial' => 'Commercial',
-                    'Client final' => 'Client final',
-                ],
-                'preferred_choices' => [
-                    'Responsable projet' => 'Responsable projet',
-                ],
+                'class' => 'AppBundle\Entity\Dictionary',
                 'required' => true,
+                'query_builder' => function(DictionaryRepository $dictionaryRepository) {
+                    return $dictionaryRepository->getItemListByType('origin');
+                },
+                //'preferred_choices' => ,
             ])
-            ->add('type', ChoiceType::class, [
+
+            ->add('type', EntityType::class, [
                 'label' => 'Type',
-                'choices'   => [
-                    'Technique' => 'Technique',
-                    'Commercial' => 'Commercial',
-                    'Autre' => 'Autre',
-                ],
+                'class' => 'AppBundle\Entity\Dictionary',
                 'required' => true,
+                'query_builder' => function(DictionaryRepository $dictionaryRepository) {
+                    return $dictionaryRepository->getItemListByType('ticket_type');
+                }
             ])
+
             ->add('emergency', ChoiceType::class, [
                 'label' => 'Urgence',
                 'choices'  => [
@@ -90,15 +87,13 @@ class UpdateTicketType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ])
-            ->add('status', ChoiceType::class, [
+            ->add('status', EntityType::class, [
                 'label' => 'Statut',
-                'choices' => [
-                    'En attente' => 'En attente',
-                    'En cours' => 'En cours',
-                    'Résolu' => 'Résolu',
-                    'Fermé' => 'Fermé',
-                ],
+                'class' => 'AppBundle\Entity\Dictionary',
                 'required' => true,
+                'query_builder' => function(DictionaryRepository $dictionaryRepository) {
+                    return $dictionaryRepository->getItemListByType('status');
+                }
             ])
             ->add('isArchive', CheckboxType::class, [
                 'label' => 'Archivage',

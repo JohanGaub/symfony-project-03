@@ -1,0 +1,83 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}
+    Liste des dictionnaires
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="bo-title-page col-lg-12">
+                <h1>Liste des dictionnaires</h1>
+            </div>
+
+            <div class="bo-title-page col-lg-12">
+                {% include '@App/Elements/include.flashBagMessage.html.twig' %}
+            </div>
+
+            {# list of all dictionary #}
+            <div id="dictionarys-list" class="col-lg-12">
+                {% import 'AppBundle:Elements:macro.dictionaryList.html.twig' as list %}
+                {{ list.getDictionary(typeTitle, 'Type de catégories', typeList, typeForm) }}
+                {{ list.getDictionary(statusTitle, 'Status d\'un element', statusList, statusForm) }}
+                {{ list.getDictionary(originTitle, 'Origine d\'un élément', originList, originForm) }}
+                {{ list.getDictionary(ticketTypeTitle, 'Type d\'un ticket', ticketTypeList, ticketTypeForm) }}
+            </div>
+        </div>
+    </div>
+
+    {# dictionary update modal #}
+    <div id="dictionary-modal-update" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modificatation du dictionnaire</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Vous pouvez directement modifier votre entrée ci-dessous.</p>
+                    <div id="modal-update-msg"></div>
+                    {{ form_start(genUpdateForm, {'attr': {'class': 'dictionary-update-form'} }) }}
+                    {{ form_row(genUpdateForm.value, {'attr': {'class': 'dictionary-update-field'} }) }}
+                        <div class="form-group">
+                            <input type="submit" name="_submit" class="form-control required"
+                                   value="Enregistrer les modifications">
+                        </div>
+                    {{ form_end(genUpdateForm) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# dictionary delete modal #}
+    <div id="dictionary-modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Suppression d'une entrée du dictionnaire</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes vous sur de vouloir supprimer l'entrée
+                        <span id="dictionary-delete-value" class="be-strong text-color-2"></span> du dictionnaire</p>
+                    <a id="dictionary-link-delete" href="" class="text-color-1"
+                       data-dismiss="modal">Je confirmer vouloir supprimer cette entrée</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/page.dictionary.js') }}"></script>
+{% endblock %}

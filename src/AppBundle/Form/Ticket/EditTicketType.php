@@ -3,6 +3,8 @@
 namespace AppBundle\Form\Ticket;
 
 use AppBundle\Entity\Ticket;
+use AppBundle\Repository\DictionaryRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -38,15 +40,13 @@ class EditTicketType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ])
-            ->add('status', ChoiceType::class, [
+            ->add('status', EntityType::class, [
                 'label' => 'Statut',
-                'choices' => [
-                    'En attente' => 'En attente',
-                    'En cours' => 'En cours',
-                    'Résolu' => 'Résolu',
-                    'Fermé' => 'Fermé',
-                ],
+                'class' => 'AppBundle\Entity\Dictionary',
                 'required' => true,
+                'query_builder' => function(DictionaryRepository $dictionaryRepository) {
+                    return $dictionaryRepository->getItemListByType('status');
+                }
             ])
             ->add('isArchive', CheckboxType::class, [
                 'label' => 'Archivage',

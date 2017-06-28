@@ -24,15 +24,17 @@ class LoadUserTechnicalEvolutionData extends AbstractFixture implements OrderedF
 
         for($i = 0; $i < DataParameters::NB_USER_TECHNICAL_EVOLUTION ; $i++)
         {
-            $randomTechnical = 'technical_evolution_id_' . mt_rand(0, DataParameters::NB_TECHNICAL_EVOLUTION - 1);
-            $randomUser = DataParameters::getRandomUser();
+            $randomTechnical    = 'technical_evolution_id_' . mt_rand(0, DataParameters::NB_TECHNICAL_EVOLUTION - 1);
+            $randomUser         = DataParameters::getRandomUser();
 
-            $type = ($i % 2 == 0) ? 'note' : 'comment';
-
-            $ute = new UserTechnicalEvolution();
-            $ute->setNote(mt_rand(1, 4));
-            $ute->setComment($faker->sentence(6));
-            $ute->setType($type);
+            if ($i % 2 == 0){
+                $ute = new UserTechnicalEvolution('comment');
+                $ute->setComment($faker->sentence(mt_rand(5, 10)));
+            } else {
+                $ute = new UserTechnicalEvolution('note');
+                $ute->setNote(mt_rand(1, 10));
+            }
+            $ute->setDate($faker->dateTime);
             $ute->setTechnicalEvolution($this->getReference($randomTechnical));
             $ute->setUser($this->getReference($randomUser));
             $em->persist($ute);

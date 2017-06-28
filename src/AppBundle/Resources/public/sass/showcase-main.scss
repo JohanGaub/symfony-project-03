@@ -1,24 +1,28 @@
-@import "settings";
+/**
+ * Showcase scss import
+ */
+// --- General --->
+@import "general/settings";
+@import "general/general-tools";
+@import "general/general-style";
+@import "general/more";
+@import "general/form";
+@import "general/table";
+@import "general/ancre";
 
-@import "general-tools";
+@import "general/login";
 
-@import "showcase-header";
-@import "general-style";
-@import "index-home";
-@import "index-itneo";
-@import "index-communit";
-@import "swiper-slider";
-@import "index-itneo-slider";
-@import "showcase-footer";
+// --- Partials --->
+@import "partials/show-footer";
+@import "partials/show-header";
 
-@import "mentions-legales";
-
-@import "historique";
-@import "ticket";
-@import "more";
-
-@import "ancre";
-
-@import "login";
+// --- Showcase --->
+@import "showcase/show-historique";
+@import "showcase/show-index-communit";
+@import "showcase/show-index-home";
+@import "showcase/show-index-itneo";
+@import "showcase/show-index-itneo-slider";
+@import "showcase/show-mentions-legales";
+@import "showcase/show-swiper-slider";
 
 

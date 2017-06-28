@@ -1,6 +1,7 @@
+/**
+ * Function to do dynamic topbar with scroll event
+ */
 $(document).ready(function () {
-
-
     // animate navbar on scroll
     $(window).scroll(function () {
 
@@ -32,18 +33,15 @@ $(document).ready(function () {
     });
 });
 
-
-
-
+/**
+ * Function to transform right to down arrow
+ */
 $(document).ready(function () {
     if ($(window).width() <= 767) {
         $("#arrowbox").addClass("arrow-bottom-center");
     } else {
         $("#arrowbox").addClass("arrow-right-center");
     }
-
-
-
 
 // Change class name in "html.twig" file in order to use a specific scss mixin
     $(window).on('resize', function() {
@@ -55,8 +53,7 @@ $(document).ready(function () {
     });
 });
 
-
-// Swiper Slider
+// Swiper Slider init and conf
 $(document).ready(function () {
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -71,40 +68,22 @@ $(document).ready(function () {
     });
 });
 
-
-
-// Modal
+// Modal front office part (mld)
 $(document).ready(function () {
-    $(".modal-fullscreen").on('show.bs.modal', function () {
+    var target = ".modal-fullscreen";
+    var modal  = ".modal-backdrop";
+    $(target).on('show.bs.modal', function () {
         setTimeout( function() {
-            $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
+            $(modal).addClass("modal-backdrop-fullscreen");
         }, 0);
     });
-    $(".modal-fullscreen").on('hidden.bs.modal', function () {
-        $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
+    $(target).on('hidden.bs.modal', function () {
+        $(modal).addClass("modal-backdrop-fullscreen");
     });
 });
 
-// Swiper Slider
+// Side bar back office
 $(document).ready(function () {
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        paginationClickable: true,
-        spaceBetween: 20,
-        centeredSlides: true,
-        autoplay: 60000,
-        loop: true,
-        autoplayDisableOnInteraction: false
-    });
+    $("#wrapper").toggleClass("toggled");
 });
 
-// Filter a list
-/*$(document).ready(function() {
-    $('#filter').DataTable( {
-        colReorder: true,
-        paging: false,
-        info: false
-    } );
-} );*/

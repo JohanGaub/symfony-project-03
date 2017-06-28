@@ -19,7 +19,7 @@ class SecurityController extends Controller
      * @return Response
      * @Route("/login", name="login")
      */
-    public function loginAction(Request $request)
+    public function loginAction()
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('dashboard');
@@ -68,7 +68,7 @@ class SecurityController extends Controller
                     ->setFrom('irena.jakubec@gmail.com')
                     ->setTo($newUser->getEmail())
                     ->setBody(
-                        $this->renderView('AppBundle:Email:forgetpassword.html.twig', [
+                        $this->renderView('forgetPassword.html.twig', [
                             'name' => $newUser->getUserProfile()->getFirstname(),
                             'resetPasswordLink' => $this->generateUrl("reset", [
                                 'token' => $newUser->getToken(),

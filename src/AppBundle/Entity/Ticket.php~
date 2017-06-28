@@ -56,7 +56,7 @@ class Ticket
      *
      * @ORM\Column(name="type", type="string", length=255)
      */
-    private $type;
+    private $Type;
 
     /**
      * @var string
@@ -443,9 +443,6 @@ class Ticket
         $this->creationDate = new \DateTime('NOW');
         $this->status = 'En attente';
         $this->isArchive = false;
-
-        $user       = $this->getUser();
-        $this->setUser($user);
     }
 
     /**
@@ -482,31 +479,6 @@ class Ticket
         return $this->comments;
     }
 
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Ticket
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-
 
     /**
      * Set isArchive
@@ -531,4 +503,6 @@ class Ticket
     {
         return $this->isArchive;
     }
+
+
 }

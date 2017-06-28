@@ -2,13 +2,11 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Product;
-use AppBundle\Entity\User;
-use AppBundle\Entity\UserTechnicalEvolution;
-use DateTime;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\JoinColumn;
+use DateTime;
 
 /**
  * TechnicalEvolution
@@ -31,6 +29,12 @@ class TechnicalEvolution
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 40,
+     *      minMessage = "Votre titre doit faire au minimum {{ limit }} caractères ",
+     *      maxMessage = "Votre titre doit faire au maximum {{ limit }} caractères "
+     * )
      */
     private $title;
 
@@ -38,6 +42,12 @@ class TechnicalEvolution
      * @var string
      *
      * @ORM\Column(name="sum_up", type="text", nullable=false)
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 120,
+     *      minMessage = "Votre résumé doit faire au minimum {{ limit }} caractères ",
+     *      maxMessage = "Votre résumé doit faire au maximum {{ limit }} caractères "
+     * )
      */
     private $sumUp;
 
@@ -45,6 +55,12 @@ class TechnicalEvolution
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=false)
+     * @Assert\Length(
+     *      min = 120,
+     *      max = 120000,
+     *      minMessage = "Votre contenu doit faire au minimum {{ limit }} caractères ",
+     *      maxMessage = "Votre contenu doit faire au maximum {{ limit }} caractères "
+     * )
      */
     private $content;
 
@@ -52,20 +68,24 @@ class TechnicalEvolution
      * @var string
      *
      * @ORM\Column(name="reason", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 540,
+     *      minMessage = "Votre raison doit faire au minimum {{ limit }} caractères ",
+     *      maxMessage = "Votre raison doit faire au maximum {{ limit }} caractères "
+     * )
      */
     private $reason;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="status", referencedColumnName="id")
      */
     private $status;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="origin", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="origin", referencedColumnName="id")
      */
     private $origin;
 
@@ -91,12 +111,13 @@ class TechnicalEvolution
     private $updateDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="technicalEvolutions", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="technicalEvolutions")
+     * @Assert\NotBlank()
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="technicalEvolutions", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="technicalEvolutions")
      */
     private $product;
 
@@ -106,7 +127,7 @@ class TechnicalEvolution
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution")
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution", cascade={"persist"})
      */
     private $userTechnicalEvolutions;
 
@@ -219,11 +240,10 @@ class TechnicalEvolution
     /**
      * Set status
      *
-     * @param string $status
-     *
+     * @param Dictionary|string $status
      * @return TechnicalEvolution
      */
-    public function setStatus($status)
+    public function setStatus(Dictionary $status)
     {
         $this->status = $status;
 
@@ -233,7 +253,7 @@ class TechnicalEvolution
     /**
      * Get status
      *
-     * @return string
+     * @return \AppBundle\Entity\Dictionary
      */
     public function getStatus()
     {
@@ -241,23 +261,9 @@ class TechnicalEvolution
     }
 
     /**
-     * Set origin
-     *
-     * @param string $origin
-     *
-     * @return TechnicalEvolution
-     */
-    public function setOrigin($origin)
-    {
-        $this->origin = $origin;
-
-        return $this;
-    }
-
-    /**
      * Get origin
      *
-     * @return string
+     * @return Dictionary
      */
     public function getOrigin()
     {
@@ -265,10 +271,22 @@ class TechnicalEvolution
     }
 
     /**
+     * Set origin
+     *
+     * @param Dictionary $origin
+     * @return TechnicalEvolution
+     */
+    public function setOrigin(Dictionary $origin = null)
+    {
+        $this->origin = $origin;
+
+        return $this;
+    }
+
+    /**
      * Set expectedDelay
      *
      * @param DateTime $expectedDelay
-     *
      * @return TechnicalEvolution
      */
     public function setExpectedDelay($expectedDelay)
@@ -292,7 +310,6 @@ class TechnicalEvolution
      * Set creationDate
      *
      * @param DateTime $creationDate
-     *
      * @return TechnicalEvolution
      */
     public function setCreationDate($creationDate)
@@ -316,7 +333,6 @@ class TechnicalEvolution
      * Set updateDate
      *
      * @param DateTime $updateDate
-     *
      * @return TechnicalEvolution
      */
     public function setUpdateDate($updateDate)
@@ -371,7 +387,6 @@ class TechnicalEvolution
      * Set product
      *
      * @param Product $product
-     *
      * @return TechnicalEvolution
      */
     public function setProduct(Product $product = null)
@@ -395,7 +410,6 @@ class TechnicalEvolution
      * Set user
      *
      * @param User $user
-     *
      * @return TechnicalEvolution
      */
     public function setUser(User $user = null)
@@ -419,7 +433,6 @@ class TechnicalEvolution
      * Add userTechnicalEvolution
      *
      * @param UserTechnicalEvolution $userTechnicalEvolution
-     *
      * @return TechnicalEvolution
      */
     public function addUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)

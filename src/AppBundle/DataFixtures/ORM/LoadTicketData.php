@@ -52,9 +52,8 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             3 => 'Fermé',
         ];
         $types                       = [
-            0 => 'Technique',
-            1 => 'Commercial',
-            2 => 'Autre',
+            0 => 'Résolution de bug',
+            1 => 'Autre',
         ];
 
         for($i = 0 ; $i < DataParameters::NB_TICKET ; $i++)
