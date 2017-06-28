@@ -2,12 +2,18 @@
 
 {% block body %}
     <section class="form-all">
-
+        <form>
+            <input>recherche</input>
+        </form>
         <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+            <form class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 <h2>Liste des tickets</h2>
 
-                <table class="table table-responsive table-bordered table-condensed">
+
+
+
+                <table id="filter" class="table table-responsive table-bordered table-condensed">
+                    {# table-responsive table-bordered table-condensed#}
                     <thead >
                     <tr class="text-center">
                         <th>N° de ticket</th>

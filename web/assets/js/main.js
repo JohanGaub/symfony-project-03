@@ -71,7 +71,7 @@ $(document).ready(function () {
 // Modal front office part (mld)
 $(document).ready(function () {
     let target = ".modal-fullscreen";
-    let modal  = ".modal-backdrop"
+    let modal  = ".modal-backdrop";
     $(target).on('show.bs.modal', function () {
         setTimeout( function() {
             $(modal).addClass("modal-backdrop-fullscreen");

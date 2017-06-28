@@ -479,31 +479,6 @@ class Ticket
         return $this->comments;
     }
 
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Ticket
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-
 
     /**
      * Set isArchive
@@ -527,5 +502,31 @@ class Ticket
     public function getIsArchive()
     {
         return $this->isArchive;
+    }
+
+
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Ticket
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

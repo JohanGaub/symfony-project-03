@@ -25,7 +25,8 @@ class TicketRepository extends EntityRepository
             ->orderBy('t.emergency','ASC')
             ->addOrderBy('t.id', 'DESC')
             ->setFirstResult(($page - 1) * $maxTickets)
-            ->setMaxResults($maxTickets);
+            ->setMaxResults($maxTickets)
+            ->getQuery();
         //exit(dump($q->getQuery()->getResult()));
 
         return new Paginator($q, $fetchJoinCollection = false);
@@ -42,4 +43,5 @@ class TicketRepository extends EntityRepository
         ;
         return $q;
     }
+
 }

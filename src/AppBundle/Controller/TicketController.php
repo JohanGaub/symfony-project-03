@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ticket;
+use AppBundle\Form\SearchTicketType;
 use AppBundle\Form\Ticket\UpdateTicketType;
 use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
@@ -22,8 +23,9 @@ use Symfony\Component\HttpFoundation\File\File;
 class TicketController extends Controller
 {
     /**
-     * @param $page
+     * @param int $page
      * @return Response
+     * @internal param $page
      * @Route("/index/{page}", name="index_ticket")
      */
     public function indexAction($page = 1)
@@ -51,6 +53,28 @@ class TicketController extends Controller
     /**
      * @param Request $request
      * @return RedirectResponse|Response
+     */
+    public function searchAction(Request $request)
+    {
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Ticket');
+        $search = $repo->getSearch();
+
+        $form       = $this->createForm(SearchTicketType::class, $search);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('index_ticket');
+        }
+
+        return $this->render('@App/Ticket/ticket.html.twig',[
+            'form' => $form->createview(),
+        ]);
+    }
+
+
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
      * @Route("/add", name="add_ticket")
      */
     public function addAction(Request $request)
@@ -59,13 +83,12 @@ class TicketController extends Controller
 
         $ticket     = new Ticket();
         $em         = $this->getDoctrine()->getManager();
+
         $form       = $this->createForm(AddTicketType::class, $ticket);
-
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()) {
             // $file stores the uploaded files
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            /** @var File $file */
             $file = $ticket->getUpload();
 
             if($file != null)
@@ -88,7 +111,7 @@ class TicketController extends Controller
             $em->persist($ticket);
             $em->flush();
 
-            return $this->redirectToRoute('index_ticket');
+            //return $this->redirectToRoute('index_ticket');
         }
         return $this->render('@App/Pages/Ticket/addTicket.html.twig',[
             'form' => $form->createView(),
@@ -105,12 +128,10 @@ class TicketController extends Controller
     public function editAction(Request $request, Ticket $ticket)
     {
         $em     = $this->getDoctrine()->getManager();
-        $form   = $this->createForm(EditTicketType::class, $ticket);
 
         $informations = $em->getRepository('AppBundle:Ticket')->find($ticket);
-
+        $form   = $this->createForm(EditTicketType::class, $ticket);
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()) {
 
             $ticket->setUpdateDate(new \DateTime('NOW'));

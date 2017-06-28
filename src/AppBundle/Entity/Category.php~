@@ -2,25 +2,16 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Documentation;
-use AppBundle\Entity\Faq;
-use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\Ticket;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
-<<<<<<< HEAD
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
-=======
- * @ORM\Entity
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
  */
 class Category
 {
@@ -43,31 +34,17 @@ class Category
     /**
      * @var string
      *
-<<<<<<< HEAD
-=======
-     * @ORM\Column(name="tag", type="string", length=255, nullable=false)
-     */
-    private $tag;
-
-    /**
-     * @var string
-     *
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
-<<<<<<< HEAD
-=======
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="type", referencedColumnName="id")
      */
     private $type;
 
     /**
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="category")
      */
     private $technicalEvolutions;
@@ -82,23 +59,10 @@ class Category
      */
     private $documentations;
 
-<<<<<<< HEAD
-    /**
-     * @ORM\OneToOne(targetEntity="Dictionary")
-     * @JoinColumn(name="type_id", referencedColumnName="id")
-     */
-    private $type;
-
-=======
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
-
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="category")
      */
     private $tickets;
-
-
-
 
     /**
      * Get id
@@ -159,15 +123,23 @@ class Category
     }
 
     /**
-<<<<<<< HEAD
-=======
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->technicalEvolutions = new ArrayCollection();
+        $this->faqs = new ArrayCollection();
+        $this->documentations = new ArrayCollection();
+    }
+
+    /**
      * Set type
      *
-     * @param string $type
+     * @param Dictionary $type
      *
      * @return Category
      */
-    public function setType($type)
+    public function setType(Dictionary $type = null)
     {
         $this->type = $type;
 
@@ -177,28 +149,11 @@ class Category
     /**
      * Get type
      *
-     * @return string
+     * @return Dictionary
      */
     public function getType()
     {
         return $this->type;
-    }
-    /**
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
-     * Constructor
-     */
-    public function __construct()
-    {
-<<<<<<< HEAD
-        $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->documentations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->types = new \Doctrine\Common\Collections\ArrayCollection();
-=======
-        $this->technicalEvolutions = new ArrayCollection();
-        $this->faqs = new ArrayCollection();
-        $this->documentations = new ArrayCollection();
->>>>>>> a5f735b43e68a726dd053bce53b89bbe165d14ae
     }
 
     /**
@@ -304,37 +259,6 @@ class Category
     }
 
     /**
-<<<<<<< HEAD
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set type
-     *
-     * @param \AppBundle\Entity\Dictionary $type
-     *
-     * @return Category
-     */
-    public function setType(\AppBundle\Entity\Dictionary $types = null)
-    {
-        $this->types = $types;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return \AppBundle\Entity\Dictionary
-     */
-    public function getType()
-    {
-        return $this->type;
-=======
      * Add ticket
      *
      * @param Ticket $ticket
@@ -366,6 +290,13 @@ class Category
     public function getTickets()
     {
         return $this->tickets;
->>>>>>> a5f735b43e68a726dd053bce53b89bbe165d14ae
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
     }
 }

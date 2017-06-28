@@ -36,12 +36,6 @@ class Dictionary
     private $value;
 
     /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="types")
-     */
-    private $category;
-
-
-    /**
      * Get id
      *
      * @return int
@@ -106,4 +100,5 @@ class Dictionary
     {
         return $this->value;
     }
+
 }

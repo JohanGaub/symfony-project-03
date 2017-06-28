@@ -1,0 +1,822 @@
+[33mcommit 8225c264acb42f370f0983d411c1f9fdf0898d2a[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon Jun 26 11:21:24 2017 +0200
+
+    Ticket: search engine WIP
+
+[33mcommit 5fa2095cd606169dda4d334bb3e3cdcbf4eaec5d[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Thu Jun 22 13:43:50 2017 +0200
+
+    Ticket : add, edit, update functional with pagination
+
+[33mcommit 087b48a694149578384b745f6f115d981939f733[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Jun 20 13:15:37 2017 +0200
+
+    ticket functional, WIP : addFlash() message
+
+[33mcommit d7454b1ca1a9345ff1db716fe9c83a42bc4fcfd9[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Jun 20 11:05:09 2017 +0200
+
+    Ticket add, edit and update functional
+
+[33mcommit d219411b24536460ec6a5b5d2d95a2b71db4334f[m
+Merge: 57c57c2 973f69a
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Fri Jun 16 13:48:33 2017 +0200
+
+    EditTicket functional
+
+[33mcommit 57c57c231203408cc8d3684931c25d3c1d23c117[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Wed Jun 14 14:24:27 2017 +0200
+
+    EditTicket : view image tag and access by clicking
+
+[33mcommit 973f69a36d835bdc0395afd4c53528243b3f8368[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Tue Jun 13 17:36:43 2017 +0200
+
+    Save before deploy
+    - Add new fixtures user
+    - Update new parameters
+
+[33mcommit c55d7aa5262e8b5243622996cd75d1dbbdf4674f[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Jun 13 15:02:30 2017 +0200
+
+    TICKET : list, add = OK ; edit = WIP, try to download files
+
+[33mcommit a77c171c1931c9cc787bc5cde8100c038df38060[m
+Merge: ba4eb74 4bdba1d
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon Jun 12 15:34:14 2017 +0200
+
+    Form add&edit WIP + CSS structure updated
+
+[33mcommit ba4eb741f1e3feae96cc3d1e0ab2b1ba3dccc24a[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Jun 6 14:56:06 2017 +0200
+
+    form add WIP, form edit adn delete doesn't work
+
+[33mcommit 4bdba1d74ae2cc0da1cb1d343421f7c9ba824f9a[m
+Merge: d0489b5 b5609fd
+Author: irjabe <irena.jakubec@gmail.com>
+Date:   Tue Jun 6 14:54:47 2017 +0200
+
+    Merge pull request #41 from WildCodeSchool/security
+    
+    Security
+
+[33mcommit b5609fd1c00fc546cd1acff23da351a4dcb0e16b[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Jun 6 14:42:09 2017 +0200
+
+    connection, password reset
+
+[33mcommit ef4bcb81cd9c232d4be990b8860eafcdfce74ccc[m
+Merge: 0b09b1f d0489b5
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Jun 6 14:17:22 2017 +0200
+
+    Merge branch 'devmaster' of github.com:WildCodeSchool/Lyon-0217-communit into security
+
+[33mcommit 0b09b1f7c28325462a86558988c39772f92a9c32[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Jun 6 14:13:16 2017 +0200
+
+    connection, password reset
+
+[33mcommit 78b03742eb9f77b4f530645dc98caa0b3e62a4b8[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Wed May 31 17:37:22 2017 +0200
+
+    fixtures Ticket and Comment debugged
+
+[33mcommit d0489b5b6a11bfc058761ebbc5a34a186284c8eb[m
+Merge: ca3ab32 1ea8694
+Author: Johangaub <johangaub@gmail.com>
+Date:   Tue May 30 10:32:43 2017 +0200
+
+    Merge pull request #40 from WildCodeSchool/footersimplified
+    
+    Footersimplified new PR
+
+[33mcommit fcce4bdac40db88105b9f30982d645718c7d5fc2[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue May 30 00:28:01 2017 +0200
+
+    entity ticket+relations done ; fixtures WIP
+
+[33mcommit 1ea86942b42337390413791e81be153f2f3253c0[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon May 29 16:45:26 2017 +0200
+
+    overflow-x:hidden put into triangle-img to avoid flowing at the right
+
+[33mcommit 48edd33d33a7518eb62b0b5cbcb1baefc24d0190[m
+Merge: e52863c 68a83a4
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon May 29 15:43:57 2017 +0200
+
+    Ok
+    Merge branch 'footersimplified' of github.com:WildCodeSchool/Lyon-0217-communit into footersimplified
+
+[33mcommit e52863c68371e51f0f9b3545cd14e5e2aa96667f[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon May 29 15:43:48 2017 +0200
+
+    don't take this commit
+
+[33mcommit 68a83a47704d8c5ace169e0717fe1afb770c6b5a[m
+Merge: 5f154d0 ca3ab32
+Author: Johangaub <johangaub@gmail.com>
+Date:   Sun May 28 18:46:52 2017 +0200
+
+    Merge branch 'devmaster' into footersimplified
+
+[33mcommit 5f154d08c102446f03a78858f5ce0cc7eee7f9be[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Sat May 27 23:23:38 2017 +0200
+
+    footer corrected with line in the middle of the card
+
+[33mcommit 1075b0699e64e7e4eaca6e6230f125b63eb62519[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Sat May 27 20:44:12 2017 +0200
+
+    footer finished and responsive
+
+[33mcommit ca3ab32ff7d2d179a127145ee26199763f1eccf5[m
+Merge: 8261172 770cbf8
+Author: JulienMastro <mastromonaco.julien@gmail.com>
+Date:   Wed May 24 16:45:02 2017 +0200
+
+    Merge pull request #38 from WildCodeSchool/entitiesDb
+    
+    Entities db
+    I've fix a type of $faker -> @var Faker\Factory
+
+[33mcommit 770cbf88f5dc5a5c9a8c7e73b009f12c3d4e441b[m
+Author: JulienMastro <mastromonaco.julien@gmail.com>
+Date:   Wed May 24 16:40:17 2017 +0200
+
+    Update LoadUserData.php
+
+[33mcommit 2b0e7ae9df3cba8148808f1bec041e53c7e7bdca[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Wed May 24 15:36:09 2017 +0200
+
+    Fix fixtures
+
+[33mcommit 3fd4c6f1c22fbca3af2e531ddf8b26ce9ace0b43[m
+Merge: db3779d f23250a
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Wed May 24 12:15:36 2017 +0200
+
+    fixtures OK + category fixtures with 3 different titles
+
+[33mcommit db3779dde0714a2665f617647258cc50a9260f27[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Wed May 24 12:00:42 2017 +0200
+
+    fixtures saved before merging with category algo (same title for many categories)
+
+[33mcommit f23250a43ec10b8b9bc27a3bf89ba4a3f7a69501[m
+Merge: 23b320a 8261172
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Wed May 24 11:54:21 2017 +0200
+
+    Fixtures Category
+
+[33mcommit 37285225d8675c7e14250c5d0b350d7188e2e225[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Wed May 24 11:23:35 2017 +0200
+
+    Add new README.md
+
+[33mcommit 23b320adfecb12377a7ef7b9bf5820d09d9b9ac8[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Wed May 24 11:15:17 2017 +0200
+
+    Fixtures for Category
+
+[33mcommit 82611720d58f7a4360151235bbd5fcfd1fc92b21[m
+Merge: aa1d302 63c95aa
+Author: Johangaub <johangaub@gmail.com>
+Date:   Wed May 24 09:09:18 2017 +0200
+
+    Merge pull request #35 from WildCodeSchool/background-partie2
+    
+    Background partie2 - merge validate by the team
+
+[33mcommit 47057280980f45fef0b9d89ad8d38925d4ef5583[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Tue May 23 22:28:27 2017 +0200
+
+    Add fixtures
+    - Category
+    - Company
+    - Faq
+    - Product
+    - TechnicianEvolutions
+    - User
+    - UserTechnicalEvololutions
+
+[33mcommit 63c95aad09d7841a0d7ab0d829fb73783e60c5d4[m
+Merge: 58b36a6 aa1d302
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue May 23 09:47:51 2017 +0200
+
+    fusion webmaster
+
+[33mcommit 58b36a66335ea163d5a46fdc82a0c30afc4879aa[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue May 23 09:40:45 2017 +0200
+
+    update design party two
+
+[33mcommit aa1d302c893621012787ac1b42c0bb08c87a4b03[m
+Merge: 7d122a5 3eaefc6
+Author: JulienMastro <mastromonaco.julien@gmail.com>
+Date:   Mon May 22 19:12:20 2017 +0200
+
+    Merge pull request #34 from WildCodeSchool/entitiesDb
+    
+    Entities db
+
+[33mcommit 3eaefc63ffadc5f99b1a62730b89a506a8a3734d[m
+Merge: 8353049 7d122a5
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Mon May 22 17:08:47 2017 +0200
+
+    Merge branch 'devmaster' of github.com:WildCodeSchool/Lyon-0217-communit into entitiesDb
+
+[33mcommit 8353049ed0d494e1c5f42d2692494a82f131cd19[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Mon May 22 17:07:59 2017 +0200
+
+    database, tables and relations created
+
+[33mcommit cba8558a611cc49927c3d52257fcf034e28e75bb[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Mon May 22 15:00:09 2017 +0200
+
+    Save
+
+[33mcommit 7d122a5cbc73b0f0e7c3e445404aedb566a4cb2e[m
+Merge: ea79560 92b3393
+Author: Johangaub <johangaub@gmail.com>
+Date:   Tue May 16 00:33:43 2017 +0200
+
+    Merge pull request #33 from WildCodeSchool/security
+    
+    Security
+
+[33mcommit 92b3393ec312473e42ef29b323fd83afd3d115e8[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon May 15 17:45:34 2017 +0200
+
+    security and access done
+
+[33mcommit 979f8e75f41a76729f8356a0bbc99dbf557e3d93[m
+Merge: 3112091 ea79560
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon May 15 15:06:41 2017 +0200
+
+    updated but was alredy up-to-date. Only main.css is different
+
+[33mcommit ea79560861a649602db6562f41c1fc44daa3e9a4[m
+Merge: b3c8dda 96e7e41
+Author: JulienMastro <mastromonaco.julien@gmail.com>
+Date:   Fri May 12 11:57:17 2017 +0200
+
+    Merge pull request #32 from WildCodeSchool/deploiement
+    
+    Deploiement
+
+[33mcommit 311209151cad79ec4092a4d9bb7bb5e31bf044c5[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Wed May 10 09:40:27 2017 +0200
+
+    devmaster pulled from github
+
+[33mcommit 96e7e4106ff76f017e0477c8d666ad41fa6b037a[m
+Merge: 838c64c f93c634
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Wed May 10 09:37:36 2017 +0200
+
+    Save conflits
+
+[33mcommit 838c64cffe421ef50f5d0af5b6f4bb730d77bd34[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Wed May 10 09:33:10 2017 +0200
+
+    Save works
+
+[33mcommit f93c6341c7dbaa1144956c93e05f2bb8b569d956[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Wed May 10 09:29:44 2017 +0200
+
+    version final phase one
+
+[33mcommit db8907156c18eb4f9d88a7ada295382bda4b8b6b[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Wed Apr 26 11:34:07 2017 +0200
+
+    version presentation customer  26.06.17
+
+[33mcommit 0cb9664a6cf8df711bf2c82cb305a5d355f1c803[m
+Merge: d1c04c6 b3c8dda
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Apr 25 20:56:29 2017 +0200
+
+    optimising  header css
+
+[33mcommit d1c04c6bcdb0d1c952d9f9bc30a88f97938503f7[m
+Merge: ae972a6 e2c9c04
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Apr 25 19:19:24 2017 +0200
+
+    changed link solution asterisk
+
+[33mcommit b3c8dda2b3811c467836c9406d13adabc5a963ff[m
+Merge: 05e15a8 12d5dc0
+Author: Johangaub <johangaub@gmail.com>
+Date:   Tue Apr 25 18:09:21 2017 +0200
+
+    Merge pull request #31 from WildCodeSchool/communit-arrow
+    
+    Communit arrow
+
+[33mcommit 12d5dc04530512358fdd3655eaecad01fc4d98b8[m
+Merge: c7650c7 05e15a8
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 18:00:25 2017 +0200
+
+    Merge last work from part 1 - index-home4
+    
+    Merge branch 'devmaster' of github.com:WildCodeSchool/Lyon-0217-communit into communit-arrow
+
+[33mcommit 05e15a8724c2156ffee3fced46363076927aa926[m
+Merge: e2c9c04 36a9084
+Author: Johangaub <johangaub@gmail.com>
+Date:   Tue Apr 25 17:59:37 2017 +0200
+
+    Merge pull request #30 from WildCodeSchool/index-home4
+    
+    Index home4
+
+[33mcommit c7650c7c9f5e0dbcae8cf1147b890fad1a799db1[m
+Merge: 6ee0eff 36a9084
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 17:58:05 2017 +0200
+
+    all responsive and accurate
+
+[33mcommit 6ee0eff412b9115ae8b898dc039953d34ed5830b[m
+Merge: 0d72da5 e2c9c04
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 17:42:54 2017 +0200
+
+    Merge branch 'devmaster' of github.com:WildCodeSchool/Lyon-0217-communit into communit-arrow
+
+[33mcommit 0d72da5facd38d5c961c4ee2b18d63735c198f74[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 17:42:44 2017 +0200
+
+    scss little modifications
+
+[33mcommit 36a90840348db18d2911704ef8260ae276c084fc[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 17:38:54 2017 +0200
+
+    last version before customer presentation
+
+[33mcommit 3fa64e66f4ca8e84bd2d959225c6ec3bd95cf70d[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 17:06:12 2017 +0200
+
+    corrected media query at 400px
+
+[33mcommit 7302db452a5ef63888b7250c39a0cf1907b93bf1[m
+Merge: 05642c9 e2c9c04
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 14:20:53 2017 +0200
+
+    final version
+
+[33mcommit 05642c9e912812eada159149a7a2dc12e76efb90[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 13:53:29 2017 +0200
+
+    pull my branch
+
+[33mcommit 45682fa42fc2878a691e0203603d6b047ade0252[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Tue Apr 25 13:50:32 2017 +0200
+
+    Flavicon fix + small change
+
+[33mcommit 3e3ac6672acf354bc9db0d39e4c972db793fcc72[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 13:48:27 2017 +0200
+
+    miss button iphone size
+
+[33mcommit ae972a635ad43caacf8e6273a09f4c757aad6e7c[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Apr 25 13:12:27 2017 +0200
+
+    review links
+
+[33mcommit e2c9c04a7bd13d74a075d22b5c86df29f8d1f9f6[m
+Merge: edff7b3 9e2d7b5
+Author: Johangaub <johangaub@gmail.com>
+Date:   Tue Apr 25 13:10:38 2017 +0200
+
+    Merge pull request #28 from WildCodeSchool/communit-arrow
+    
+    Communit arrow
+
+[33mcommit 92e35ff64ed79fd3eb2c057f69adb2c06ccb9222[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 11:37:34 2017 +0200
+
+    restart before pull master
+
+[33mcommit 428cc8af961b4de8b9d3fdcf65397434d958b7c6[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 11:34:07 2017 +0200
+
+    before last pull devmaster
+
+[33mcommit bf2c24e5ed628d40ea31366c4a960c0a2cb1e0ad[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 10:55:38 2017 +0200
+
+    last try
+
+[33mcommit 88864b5c86fa667fa10f2ade99cc20c74bccb4bc[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 10:42:40 2017 +0200
+
+    Revert "Return before pull"
+    
+    This reverts commit a146bbbdbece8667a9459caf3a2b4a555191f974.
+
+[33mcommit a146bbbdbece8667a9459caf3a2b4a555191f974[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 10:35:40 2017 +0200
+
+    Return before pull
+
+[33mcommit 9e2d7b5aacbe756ea167a943620ead53d9a0add9[m
+Merge: 0b0e146 edff7b3
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 10:31:03 2017 +0200
+
+    scss corrected in the button of communit-part
+
+[33mcommit 9a2f93ab234191726a3e4a790966131e09455879[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 10:30:06 2017 +0200
+
+    last try
+
+[33mcommit f95a4f256182acf746f5e867ef40ac5eece74e56[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 10:21:40 2017 +0200
+
+     rescue
+
+[33mcommit bc875b473219bd9a459ead79b24728a79198236c[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 10:12:22 2017 +0200
+
+     fourth
+
+[33mcommit 0518394b83d2000cdd65705a0baf776399a65cbf[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 10:09:59 2017 +0200
+
+    Return before push
+    
+    Revert "block comment responsive, left button to make responsive"
+    
+    This reverts commit d90c6c96a17e3346384538b11fdd1f2fbfd61964.
+
+[33mcommit 9d2d6dca7a9751885e078dd5359cdf6e012804fb[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 10:09:53 2017 +0200
+
+    third
+
+[33mcommit 6c730276ee6b39098adfb5bdc2a9b6ce2b4f0a93[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 09:56:08 2017 +0200
+
+    vddvee
+
+[33mcommit e5e0cd608be6894be5535439eb4b3bc617626c11[m
+Merge: d90c6c9 edff7b3
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 09:55:09 2017 +0200
+
+     vvvfgv
+
+[33mcommit e6f872298b83d035ca64e779b5ba311ab4e19083[m
+Merge: 46ebaf8 edff7b3
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Apr 25 09:49:44 2017 +0200
+
+    solved conflicts
+
+[33mcommit 46ebaf8a77c9e181da4c78d456543d1f98830371[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Apr 25 09:44:51 2017 +0200
+
+    automatic generation of main.css
+
+[33mcommit d90c6c96a17e3346384538b11fdd1f2fbfd61964[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Tue Apr 25 09:40:49 2017 +0200
+
+    block comment responsive, left button to make responsive
+
+[33mcommit edff7b362bf37bb29093cc4b99f7bdd0c393c0ba[m
+Merge: 17020b4 16a37ca
+Author: JulienMastro <mastromonaco.julien@gmail.com>
+Date:   Tue Apr 25 09:39:54 2017 +0200
+
+    Merge pull request #26 from WildCodeSchool/before-demo
+    
+    Add historique page & fix some bugs
+
+[33mcommit 0b0e14652d9d105edab159df3b4e7bcb513c514c[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 09:36:32 2017 +0200
+
+    MobileDetectBundle deleted
+
+[33mcommit 16a37cadcf68a687b9096cc2320c451b5a95c8a4[m
+Merge: b5643f6 17020b4
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Tue Apr 25 09:36:12 2017 +0200
+
+    fix before merge
+
+[33mcommit b5643f690f29f41aaabb56c775221349bf8352e0[m
+Merge: d1f8a48 f113c28
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Tue Apr 25 09:32:56 2017 +0200
+
+    small responsive fix
+
+[33mcommit 3e415c2ba31c972d0593435d9dee76e60f999b30[m
+Merge: 3c22863 17020b4
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 09:26:49 2017 +0200
+
+    resolved conflict after arrow ajusted
+
+[33mcommit 17020b447d0763103bf036e065e8a278157e2027[m
+Merge: f113c28 1d5d2a3
+Author: irjabe <irena.jakubec@gmail.com>
+Date:   Tue Apr 25 09:25:01 2017 +0200
+
+    Merge pull request #24 from WildCodeSchool/footernew2
+    
+    Footernew2
+
+[33mcommit 3c228633924106e6af9d2be146e5d2d8cd867098[m
+Merge: bd4bff3 f113c28
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 09:23:21 2017 +0200
+
+    Merge devmaster with arrow ajusted
+    Merge branch 'devmaster' of github.com:WildCodeSchool/Lyon-0217-communit into communit-arrow
+
+[33mcommit bd4bff309b5cfd40392b56e7a1797753ef9fef14[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Tue Apr 25 09:23:04 2017 +0200
+
+    responsive arrow ajusted
+
+[33mcommit 1d5d2a3a1af4b73c36d7207a65ab8374d31c78bb[m
+Merge: 4ae17d0 f113c28
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Tue Apr 25 09:17:51 2017 +0200
+
+    solved conflicts
+
+[33mcommit d1f8a48e2b4113e41d9ab405955f33b77f7572e3[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Tue Apr 25 09:17:27 2017 +0200
+
+    Small fix
+
+[33mcommit f113c28eef15daa5ba735a3d25859290880b369d[m
+Merge: f0c24ff 60eb12a
+Author: irjabe <irena.jakubec@gmail.com>
+Date:   Tue Apr 25 09:12:22 2017 +0200
+
+    Merge pull request #23 from WildCodeSchool/communit-arrow
+    
+    Communit arrow
+
+[33mcommit 43a0d01b0dc92a0fc5629630e813b23599d7a1ce[m
+Merge: 8cff212 5b3515a
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Tue Apr 25 08:42:13 2017 +0200
+
+    Save after resolve conflits from before-demo
+
+[33mcommit 5b3515ad52ebb38bfcc0d08f9c9d10eeae322074[m
+Author: JuMastro <mastromonaco.julien@gmail.com>
+Date:   Mon Apr 24 22:20:35 2017 +0200
+
+    Fix before demo + small adds
+
+[33mcommit 4c07ac0252b8f4b36f374beb2c536a66e5747dc6[m
+Author: JuMastro <mastromonaco.julien@gmail.com>
+Date:   Mon Apr 24 20:02:42 2017 +0200
+
+    Rework
+
+[33mcommit 8cff212a13700279b98b6e88799524ee9ad2c508[m
+Merge: 7bf3be3 f0c24ff
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Mon Apr 24 18:45:38 2017 +0200
+
+    save
+
+[33mcommit 4ae17d03401eb1f7df70a1ed56c1beb42c607565[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Mon Apr 24 17:54:13 2017 +0200
+
+    links update
+
+[33mcommit 407442867bf5381ff2d3560f45f8711c150b645a[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Mon Apr 24 17:15:00 2017 +0200
+
+    Cenered footer-up
+
+[33mcommit 60eb12aa20a17e03dc6521950f11d2fc39e76385[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon Apr 24 15:05:22 2017 +0200
+
+    js ready function added
+
+[33mcommit 7bf3be36604bbc0c34550b87fef07d760fabf4b2[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Mon Apr 24 14:43:04 2017 +0200
+
+    Save git
+
+[33mcommit d9199a048ee69e3deb50195d2cf84a93ea311b96[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon Apr 24 14:42:45 2017 +0200
+
+    js corrected for navbar
+
+[33mcommit 5c7a7805c73ac788a91530763fd17169cacbd4e8[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon Apr 24 14:37:05 2017 +0200
+
+    js to add/remove class for arrow working
+
+[33mcommit 24db4a73ee287f51d2f4a5528ef1fdfad969a482[m
+Merge: 4b7ba18 f0c24ff
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon Apr 24 14:26:11 2017 +0200
+
+    conflicts resolve 'gulp uncss unset
+
+[33mcommit 4b7ba1841096f12ffa51406cea95493988883f9f[m
+Merge: 1c4813f dcefb5a
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon Apr 24 14:21:42 2017 +0200
+
+    new js for arrow to move !
+
+[33mcommit f0c24ffa636605a794960f9a97427466cede67ba[m
+Merge: dcefb5a bb83457
+Author: irjabe <irena.jakubec@gmail.com>
+Date:   Mon Apr 24 13:12:03 2017 +0200
+
+    Merge pull request #21 from WildCodeSchool/footernew2
+    
+    Footernew2
+
+[33mcommit 1c4813f15ca136334abf8c84138f9e36cd33e6f9[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Mon Apr 24 11:47:31 2017 +0200
+
+    don't take this commit
+
+[33mcommit bb83457797c97d7b95dcec136cff8af864095ebb[m
+Merge: dd0b12b dcefb5a
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Mon Apr 24 11:44:52 2017 +0200
+
+    Problem with navbar scroll is solved - desactivation of uncss in gulpfile (uncss deletes all classes that are not in html file). Text is centered in svg button. Svg buttons is centered in its block. id top-page is added to the section class="row index-home" and is linked to logo in header.
+    Merge branch 'devmaster' of github.com:WildCodeSchool/Lyon-0217-communit into footernew2
+
+[33mcommit dcefb5a45df41c2f0ba18771e85ba320a5199b16[m
+Merge: 19fa932 8bb972f
+Author: LETELLIER <f.letellier0@gmail.com>
+Date:   Mon Apr 24 11:24:08 2017 +0200
+
+    Merge pull request #20 from WildCodeSchool/index-home4
+    
+    Index home4
+
+[33mcommit dd0b12b65acd3640bfb14186dcd838b11dc63d59[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Sat Apr 22 15:17:22 2017 +0200
+
+    debug navbar on scroll:  desactivate ucss in gulpfile, new main.css containing classes for scroll; svg buttons text center align...
+
+[33mcommit 8369c9467e23c95ed508d422f783d4edc7bb6c03[m
+Merge: 1c76bee 8bb972f
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Fri Apr 21 17:48:34 2017 +0200
+
+    Gulp + buttons
+    Merge branch 'index-home4' of github.com:WildCodeSchool/Lyon-0217-communit into footernew2
+
+[33mcommit 1c76beedacba84bcea5d3d7078361888c3863758[m
+Author: Irena Jakubec-Berenguel <irena.jakubec@gmail.com>
+Date:   Fri Apr 21 17:36:03 2017 +0200
+
+    add gitignore .sass-cache
+
+[33mcommit 8bb972f47b7bba63680e97318e96e48893617007[m
+Merge: 4d2d6a6 19fa932
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Fri Apr 21 17:26:30 2017 +0200
+
+    Presentation spring
+
+[33mcommit 4d2d6a6f9a3984edf9932ec511f5f4dbaee85e27[m
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Fri Apr 21 13:31:53 2017 +0200
+
+    gulp
+
+[33mcommit 19fa932f7dd0c7bbee65e4a92b1991c049e1ed5f[m
+Merge: ec87293 2c000e9
+Author: JulienMastro <mastromonaco.julien@gmail.com>
+Date:   Fri Apr 21 13:30:55 2017 +0200
+
+    Merge pull request #19 from WildCodeSchool/index-itneo
+    
+    Index itneo
+
+[33mcommit 2c000e9f95576ae8b8916323e76c2e21bfec95b8[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Fri Apr 21 13:27:49 2017 +0200
+
+    Add link to wild code school
+
+[33mcommit d2bbddcf3b7df9333173db4d443a1a5ebe206d27[m
+Merge: be8ac1e ec87293
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Fri Apr 21 13:11:07 2017 +0200
+
+    Get Yo works and resolve conflits
+
+[33mcommit ec87293e04d3a04cde9c7ae4c924238365e7a55a[m
+Merge: 64851d9 0cfd61d
+Author: Johangaub <johangaub@gmail.com>
+Date:   Fri Apr 21 13:09:34 2017 +0200
+
+    Merge pull request #17 from WildCodeSchool/communit-arrow
+    
+    Communit arrow
+
+[33mcommit be8ac1e6dd71ab3fc60752b8c9ee07de22ba8f7b[m
+Author: JulienMa <mastromonaco.julien@gmail.com>
+Date:   Fri Apr 21 13:09:09 2017 +0200
+
+    Add historique page
+
+[33mcommit 0cfd61d2f1b787da21cfe62a7d41147b87d5e2d1[m
+Author: Johan Gaub <johangaub@gmail.com>
+Date:   Fri Apr 21 11:50:42 2017 +0200
+
+    New arrow first try
+
+[33mcommit f00253d1949b8d86e5252c78fbcf4b0feb59f47a[m
+Merge: 579d193 64851d9
+Author: François LETELLIER <f.letellier0@gmail.com>
+Date:   Fri Apr 21 11:48:43 2017 +0200
+
+    gulp add
+
+[33mcommit 579d1933eb8005018934a85071a1b8a5e4bbf83
