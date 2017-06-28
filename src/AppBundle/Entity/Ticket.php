@@ -56,7 +56,7 @@ class Ticket
      *
      * @ORM\Column(name="type", type="string", length=255)
      */
-    private $Type;
+    private $type;
 
     /**
      * @var string
@@ -515,7 +515,7 @@ class Ticket
      */
     public function setType($type)
     {
-        $this->Type = $type;
+        $this->type = $type;
 
         return $this;
     }
@@ -527,6 +527,6 @@ class Ticket
      */
     public function getType()
     {
-        return $this->Type;
+        return $this->type;
     }
 }

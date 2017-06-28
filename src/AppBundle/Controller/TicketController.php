@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\File\File;
 class TicketController extends Controller
 {
     /**
+     * @param int $page
      * @return Response
      * @internal param $page
      * @Route("/index/{page}", name="index_ticket")
@@ -49,7 +50,10 @@ class TicketController extends Controller
     }
 
 
-
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
     public function searchAction(Request $request)
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Ticket');

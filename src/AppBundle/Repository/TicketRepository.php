@@ -44,15 +44,4 @@ class TicketRepository extends EntityRepository
         return $q;
     }
 
-    public function getSearch()
-    {
-        $q = $this->createQueryBuilder('s')
-            ->select('s')
-
-;
-        exit(dump($q->getQuery()->getResult()));
-
-    }
-
-
 }

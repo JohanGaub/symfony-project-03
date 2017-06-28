@@ -55,7 +55,7 @@ $(document).ready(function () {
 
 // Swiper Slider init and conf
 $(document).ready(function () {
-    var swiper = new Swiper('.swiper-container', {
+    let swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
@@ -70,8 +70,8 @@ $(document).ready(function () {
 
 // Modal front office part (mld)
 $(document).ready(function () {
-    var target = ".modal-fullscreen";
-    var modal  = ".modal-backdrop";
+    let target = ".modal-fullscreen";
+    let modal  = ".modal-backdrop";
     $(target).on('show.bs.modal', function () {
         setTimeout( function() {
             $(modal).addClass("modal-backdrop-fullscreen");
