@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        {% include 'AppBundle:Partials:head.html.twig' %}
+        {% include '@App/Partials/head.html.twig' %}
     </head>
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Commun'It{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}" />
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicon.ico') }}">
+
+
     </head>
     <body>
         <header>
-            {% include 'AppBundle:Partials:header.html.twig' %}
+            {% include '@App/Partials/header.html.twig' %}
         </header>
 
         <main>
@@ -20,10 +20,12 @@
         </main>
 
         <footer>
-            {% include 'AppBundle:Partials:footer.html.twig' %}
+            {% include '@App/Partials/footer.html.twig' %}
         </footer>
 
-        {% include 'AppBundle:Partials:foot.html.twig' %}
+        {% include '@App/Partials/foot.html.twig' %}
+
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

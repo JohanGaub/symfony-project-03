@@ -40,4 +40,5 @@ class DefaultController extends Controller
         return $this->render('AppBundle:Partials:dashboard.html.twig');
     }
 
+
 }

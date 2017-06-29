@@ -653,6 +653,10 @@ html, body {
   width: 100%;
   height: 100%; }
 
+.validate {
+  margin-top: 15em;
+  margin-bottom: 15em; }
+
 .register-title {
   margin-top: 5em; }
 

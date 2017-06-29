@@ -101,3 +101,9 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function() {
+    $('#register').DataTable( {
+        colReoder: true
+    } );
+} );
+

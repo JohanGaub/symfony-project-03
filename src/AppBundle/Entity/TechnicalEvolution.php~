@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * TechnicalEvolution
@@ -100,7 +102,7 @@ class TechnicalEvolution
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution")
+     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="technicalEvolution")
      */
     private $userTechnicalEvolutions;
 
@@ -329,6 +331,7 @@ class TechnicalEvolution
     {
         return $this->updateDate;
     }
+
     /**
      * Constructor
      */
@@ -408,6 +411,8 @@ class TechnicalEvolution
     {
         return $this->user;
     }
+
+
 
     /**
      * Add userTechnicalEvolution

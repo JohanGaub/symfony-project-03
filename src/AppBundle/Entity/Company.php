@@ -10,7 +10,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Company
  *
  * @ORM\Table(name="company")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CompanyRepository")
+ *
  */
 class Company
 {
@@ -53,7 +54,7 @@ class Company
 
     /**
      * @var string
-     * @Assert\Regex("^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$")
+     * @Assert\Regex("^[1-9]([-. ]?[0-9]{2}){4}$")
      * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
     private $phone;
