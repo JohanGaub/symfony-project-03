@@ -1,13 +1,13 @@
 {% macro svgBox(posY, textSend) %}
     <div class="svg-container-1">
-        <svg version="1.1" viewBox="0.0 0.0 372.753280839895 318.0262467191601" fill="none" stroke="none" stroke-linecap="square"
-             stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-
-            <g clip-path="url(#p.0)"><!--dec x2   l=dec   l     t.corner hauteurx2 l largeur l angtop top l -->
-                <path fill="#9ac00a" d="m-00 318.3l319.2 0l50.0 -41.0l0 -265.0l0 14l-319.22 0l-53.12 31.12l0 265.61575z" fill-rule="evenodd"></path>
-                <path fill="#fdf0eb" d="m7.18 302l302.36 0l48.0 -30.0l0 -242.24l0 0l-305.36 0l-48.02 29.03l0 255.14334z" fill-rule="evenodd"></path>
+        <svg version="1.1" viewBox="0.0 0.0 372.753280839895 318.0262467191601" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g clip-path="url(#p.0)">
+                <path stroke="#9ac00a" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="butt"
+                      d="m5.18 302l302.36 0l51 -30l0 -267l0 0l-305.36 0l-48.02 29.03l0 255.14334z"
+                      fill-rule="evenodd">
+                </path>
             </g>
-            <foreignobject x="40" y="{{ posY }}" width="360" height="280">
+            <foreignobject x="35" y="{{ posY }}" width="360" height="280">
                 <p>
                     {{ textSend }}
                 </p>
@@ -15,3 +15,7 @@
         </svg>
     </div>
 {% endmacro %}
+
+
+
+

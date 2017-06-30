@@ -1,0 +1,360 @@
+/**
+ * Star rating system
+ */
+$(document).ready(function () {
+    $(init);
+    function init() {
+        $('.star-link').unwrap().unwrap()
+        /*for (i = 0; i < 10; i++) {
+            $('#app_bundle_note_userTechnicalEvolution_note_' + i).unwrap().unwrap();
+        }*/
+    }
+});
+
+    let DisplayRating = function($el) {
+        $el.addClass('on').prevAll().addClass('on');
+        $el.nextAll().removeClass('on');
+    };
+
+    $('.controls.rating')
+        .addClass('starRating')
+        .on('mouseenter', 'label', function() {
+        if($(this).parent().is('div'))
+            DisplayRating($(this));
+    })
+        .on('mouseleave', function() {
+            let $this = $(this);
+            $selectedRating = $this.find('input:checked');
+
+            if ($selectedRating.length === 1) {
+                if ($selectedRating.parent().is('label'))
+                    DisplayRating($selectedRating.parent());
+
+            } else {
+                console.log($this);
+                $this.find('on').removeClass('on');
+            }
+        })
+
+
+
+
+
+
+
+$(document).ready(function() {
+    let status = true
+
+    $('.label-star-link').hover(
+        function () {
+            $('.rating-value').text($(this).attr('data-index-number'))
+        },
+        function () {
+            if (status) {
+                $('.rating-value').text($(this).attr('data-index-number'))
+            }
+        });
+
+    // TODO => Find a solution to don't any change after first note click
+    // TODO => Do a preselect system if user have already vote
+    $('.star-link').click( function () {
+            value = $(this).attr('value')
+            $('.rating-value').attr('data-index-number', value)
+            status = false
+        }
+    );
+
+});
+
+$(document).ready(function() {
+
+    $('.star-link').click( function () {
+        let $this = $(this);
+        //note = $(this).find("input[name=app_bundle_note_userTechnicalEvolution[note]]").val();
+        let note = $this.find('input:checked').val();
+        let evoId = $('.controls.rating').attr('data-index-number');
+
+    //function ajaxSubmit(){
+        let form  = $('#app_bundle_note_userTechnicalEvolution').serialize();
+        $ajax({
+            type:'POST',
+            url: '/evolution-technique/notes/ajout/' + evoId,
+            data: form,
+           // ajaxSubmit();
+            success: function(data) {
+                alert(note);
+            }
+        })
+        //alert(note);
+
+        //alert('test');
+        return false;
+       // }
+        }
+    );
+
+
+});
+
+
+
+
+
+
+/*
+$(document).ready( function () {
+    let link    = '.star-link'
+    let status  = true
+
+    $(link).click( function () {
+        if (status === true){
+            status          = false
+            let $this       = $(this)
+            let valueVote   = $this.attr('value')
+            let evoId       = $('.controls.rating').attr('data-index-number')
+            let form        = $('#app_bundle_note_userTechnicalEvolution').serialize()
+            $('#app_bundle_note_userTechnicalEvolution_note').val(valueVote)
+
+            $.ajax({
+                type: 'POST',
+                url: '/evolution-technique/notes/ajout/' + evoId,
+                data: form,
+                dataType: 'json',
+                timeout: 3000,
+                success: function(data){
+                    // TODO => Know if we need to verify that or if is to bad ?
+                    if (data === 'msg_max_vote_allowed') {
+                        let viewTemplate   = '<p class="error-message">'
+                        viewTemplate       += 'Vous avez atteind le nombre de vote limite par entreprise'
+                        viewTemplate       += '</p>'
+                        $('.vote-title').hide()
+                        $('.error-box').append(viewTemplate)
+                        let target = '.controls.rating'
+                        $(target).css('opacity', 0)
+                        setTimeout( function () {
+                            $(target).hide()
+                            status = true
+                        }, 1500)
+
+                    } else if (data === 'msg_update_vote') {
+                        let viewTemplate   = '<p class="valid-message">'
+                        viewTemplate       += 'Votre vote à bien été modifié !'
+                        viewTemplate       += '</p>'
+                        $('.error-box').append(viewTemplate)
+                        setTimeout( function () {
+                            let target = '.valid-message'
+                            $(target).css('opacity', '0')
+                            setTimeout( function () {
+                                $(target).hide()
+                                status = true
+                            }, 1500)
+                        }, 5000)
+                    }
+                },
+            })
+        }
+    })
+})*/
+
+/**
+ * Listen user screen to load new comments
+ */
+$(document).ready( function () {
+    let loaderDom = '<div class="loader">'
+    loaderDom += '<div class="inner one"></div>'
+    loaderDom += '<div class="inner two"></div>'
+    loaderDom += '</div>'
+    let loader = '.loader-wcs'
+    let status = false;
+    $(loader).append(loaderDom);
+
+    /**
+     * Every 0.5s we need if user see the loader
+     * After we send new comments he need by 10
+     * if comment result is under than 10 we
+     * stop interval (stop function)
+     */
+    let interval = setInterval(function(){
+        if (isScrolledIntoView($(loader)) && !status) {
+            status = true;
+            let id = $(loader).attr('data-index-number')
+            let nbElements = $('.unit-comment').length;
+
+            $.ajax({
+                type: 'POST',
+                url: '/evolution-technique/commentaires/chargement/' + id,
+                data: {
+                    'data': nbElements
+                },
+                timeout: 100000,
+                success: function(data){
+                    setTimeout(function () {
+                        $(data).each(function (key, values) {
+                            let uteId   = values['id']
+                            let user    = values['user']['userProfile']['firstname']
+                            user    += ' ' + values['user']['userProfile']['lastname']
+                            let date    = (new Date(values['date']['date']))
+                            let comment = values['comment']
+                            $('.comment-list').append(createComment(uteId, user, date, comment))
+
+                            if (data.length < 10){
+                                $(loader).hide(function () {
+                                    clearInterval(interval)
+                                })
+                            }
+                            status = false;
+                        })
+                    } ,2000)
+                },
+            })
+        }
+    }, 500)
+})
+
+/**
+ * Add new comment
+ * TODO => Fix date echo need good format
+ */
+$(document).ready( function () {
+    let formId  = '#app_bundle_comment_userTechnicalEvolution'
+    let fieldId = '#app_bundle_comment_userTechnicalEvolution_comment'
+    let id      = $(formId).attr('data-index-number')
+
+    $(formId).submit( function (e) {
+        e.preventDefault()
+        let form = $(this).serialize()
+
+        $.ajax({
+            type: 'POST',
+            url: '/evolution-technique/commentaires/ajout/' + id,
+            data : form,
+            dataType: 'json',
+            timeout: 3000,
+            success: function(data){
+                let date = new Date(data['date']['date'])
+                $('.comment-list').prepend(createComment(data['id'], data['user'], date, data['comment']))
+                $(fieldId).val('')
+            },
+        })
+    })
+})
+
+/**
+ * Delete comment
+ */
+$(document).ready( function () {
+    let commentFullId   = ''
+    let commentId       = ''
+    let commentValue    = ''
+
+    $('.modal-delete').click( function () {
+        let $this           = $(this)
+        commentFullId       = $this.parent().attr('id')
+        commentId           = commentFullId.replace('ute_id_', '')
+        commentValue        = $this.parent().children($('.comment-value'))[2]['outerText']
+        $('.delete-value').replaceWith('<p class="delete-value">' + commentValue + '</p>')
+    })
+
+    $('#comment-link-delete').click( function (e) {
+        e.preventDefault()
+        $.ajax({
+            type: 'GET',
+            url: '/evolution-technique/commentaires/suppression/' + commentId,
+            timeout: 3000,
+            success: function(){
+                let elementList = '<div class="unit-comment">'
+                elementList += '<h5>Commentaire supprimé<h5>'
+                elementList += '</div>'
+                $('#' + commentFullId).replaceWith(elementList)
+            },
+        })
+    })
+})
+
+/**
+ * Update action
+ */
+$(document).ready( function () {
+    let commentField    = '.app_bundle_comment_userTechnicalEvolution_updateField'
+    let commentForm     = '#app_bundle_comment_userTechnicalEvolution_update'
+    let commentFullId   = ''
+    let commentId       = ''
+    let commentValue    = ''
+
+    $('.modal-update').click( function () {
+        let $this       = $(this)
+        commentFullId   = $this.parent().attr('id')
+        commentId       = commentFullId.replace('ute_id_', '')
+        commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
+        $(commentField).val(commentValue)
+        console.log()
+    })
+
+    $(commentForm).submit( function (e) {
+        e.preventDefault()
+        let newComment  = $(commentField).val()
+        let form        = $(this).serialize()
+
+        if(newComment !== commentValue) {
+            $.ajax({
+                type: 'POST',
+                url: '/evolution-technique/commentaires/modification/' + commentId,
+                data: form,
+                dataType: 'json',
+                timeout: 3000,
+                success: function(){
+                    let textId = 'comment-value-id-' + commentId
+                    let newContent = '<p id="' + textId + '" class="comment-value">'
+                    newContent += newComment
+                    newContent += '</p>'
+                    $('#' + textId).replaceWith(newContent)
+                    $('#comment-modal-update').modal('hide')
+                },
+            })
+        }
+    })
+})
+
+/**
+ * Know if loader is in view
+ *
+ * @param elem
+ * @returns {boolean}
+ */
+function isScrolledIntoView(elem)
+{
+    let docViewTop      = $(window).scrollTop();
+    let docViewBottom   = docViewTop + $(window).height();
+    let elemTop         = $(elem).offset().top;
+    let elemBottom      = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+/**
+ * Add new Comments to DOM
+ *
+ * @param uteId
+ * @param user
+ * @param date
+ * @param comment
+ * @returns {string}
+ */
+function createComment(uteId, user, date, comment)
+{
+    let elementList = '<div id="ute_id_' + uteId + '" class="unit-comment">'
+    elementList += '<h5>' + user + '</h5>'
+    elementList += '<i>Le ' + date + '</i>'
+    elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
+    elementList += '<a class="modal-update" href="" data-toggle="modal" '
+    elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
+    elementList += '<i class="fa fa-cog" aria-hidden="true"></i>'
+    elementList += '</a>'
+    elementList += '<span> </span>'
+    elementList += '<a class="modal-delete" href="" data-toggle="modal" '
+    elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
+    elementList += '<i class="fa fa-close" aria-hidden="true"></i>'
+    elementList += '</a>'
+    elementList += '</div>'
+    return elementList;
+}

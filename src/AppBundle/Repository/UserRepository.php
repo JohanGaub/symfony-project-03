@@ -32,6 +32,6 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult();
-
     }
+
 }

@@ -127,4 +127,8 @@ linear-gradient(0deg, transparent 0px, rgb(154, 192, 10) 0) top right,
 linear-gradient(330deg, transparent 15px, rgb(154, 192, 10) 0) bottom right,
 linear-gradient(0deg, transparent 0px, rgb(154, 192, 10) 0) bottom left;
 
+.text-color-1 { color: $primary-color; }
+.text-color-2 { color: $secondary-color; }
+.text-color-3 { color: $it-color; }
+
 

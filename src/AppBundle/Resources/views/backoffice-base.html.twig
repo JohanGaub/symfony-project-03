@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'AppBundle:Partials:head.html.twig' %}
+</head>
+<body id="wrapper">
+    <header id="sidebar-wrapper" class="sidebar-communit">
+        {% include 'AppBundle:Partials:bo_sidebar.html.twig' %}
+    </header>
+
+    {% include '@App/Partials/bo-top-bar.html.twig' %}
+
+    <main id="page-content-wrapper">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer>
+    </footer>
+
+    {% include 'AppBundle:Partials:foot.html.twig' %}
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -3,12 +3,18 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
+<<<<<<< HEAD
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+=======
  * @ORM\Entity
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
  */
 class Category
 {
@@ -31,6 +37,8 @@ class Category
     /**
      * @var string
      *
+<<<<<<< HEAD
+=======
      * @ORM\Column(name="tag", type="string", length=255, nullable=false)
      */
     private $tag;
@@ -38,11 +46,14 @@ class Category
     /**
      * @var string
      *
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
+<<<<<<< HEAD
+=======
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
@@ -50,10 +61,10 @@ class Category
     private $type;
 
     /**
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="category")
      */
     private $technicalEvolutions;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Faq", mappedBy="category")
@@ -65,6 +76,15 @@ class Category
      */
     private $documentations;
 
+<<<<<<< HEAD
+    /**
+     * @ORM\OneToOne(targetEntity="Dictionary")
+     * @JoinColumn(name="type_id", referencedColumnName="id")
+     */
+    private $type;
+
+=======
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
 
     /**
      * Get id
@@ -101,30 +121,6 @@ class Category
     }
 
     /**
-     * Set tag
-     *
-     * @param string $tag
-     *
-     * @return Category
-     */
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return string
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
@@ -149,6 +145,8 @@ class Category
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Set type
      *
      * @param string $type
@@ -172,6 +170,7 @@ class Category
         return $this->type;
     }
     /**
+>>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * Constructor
      */
     public function __construct()
@@ -179,6 +178,7 @@ class Category
         $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->documentations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->types = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -281,5 +281,37 @@ class Category
     public function getDocumentations()
     {
         return $this->documentations;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \AppBundle\Entity\Dictionary $type
+     *
+     * @return Category
+     */
+    public function setType(\AppBundle\Entity\Dictionary $types = null)
+    {
+        $this->types = $types;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \AppBundle\Entity\Dictionary
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

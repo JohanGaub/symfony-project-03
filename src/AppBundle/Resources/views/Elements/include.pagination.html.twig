@@ -1,0 +1,40 @@
+<div class="listPagination">
+    <nav>
+        <ul class="pagination">
+            {% if pagination.page > 1 and pagination.pages_count > 1 %}
+                <li>
+                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}">
+                        <i class="material-icons">Début</i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page - 1})) }}">
+                        <i class="material-icons">Précédent</i>
+                    </a>
+                </li>
+            {% endif %}
+
+            {# display p numbers only from p - 4 to p + 4 but don't go < 1 or > pages_count #}
+            {% for p in range(max(pagination.page - 4, 1), min(pagination.page + 4, pagination.pages_count)) %}
+                <li>
+                    <a{% if p == pagination.page %} class="current-page"{% endif %}
+                        href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}
+                    </a>
+                </li>
+            {% endfor %}
+
+            {% if pagination.page < pagination.pages_count %}
+                <li>
+                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page + 1})) }}">
+                        <i class="material-icons">Suivant</i>
+                    </a>
+                </li>
+                <li class="waves-effect">
+                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">
+                        <i class="material-icons">Fin</i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>

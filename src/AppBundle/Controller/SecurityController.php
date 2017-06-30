@@ -66,7 +66,7 @@ class SecurityController extends Controller
 
                 $email = \Swift_Message::newInstance()
                     ->setSubject('CommunIt : Réinitialisation du mot de passe')
-                    ->setFrom('irena.jakubec@gmail.com')
+                    ->setFrom($this->getParameter('mail_sender_address'))
                     ->setTo($newUser->getEmail())
                     ->setBody(
                         $this->renderView('AppBundle:Email:forgetpassword.html.twig', [
@@ -80,10 +80,10 @@ class SecurityController extends Controller
                         'text/html'
                     );
 
-                //$this->get('app.mailer_logger');
-
+                $this->get('app.mailer_logger');
+                $this->get('mailer')->send($email);
                 if (!$mailer->send($email)) {
-                    $this->addFlash("notice", " Veuillez patientez un instant et essayez à nouveau ");
+                    $this->addFlash("notice", " Nous sommes désolés, mais le service est actuellement indisponible. Merci de réessayer ultérieurement. Un mail a été envoyé au service technique afin de corriger le problème au plus vite. ");
                     return $this->redirectToRoute('forgotten');
                 }
                 $this->addFlash("notice", "Un e-mail vous a été envoyé.");

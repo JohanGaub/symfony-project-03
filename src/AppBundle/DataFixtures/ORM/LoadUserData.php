@@ -9,33 +9,24 @@ use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\DataFixtures\DataParameters;
 use AppBundle\Entity\User;
 use Faker;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class LoadUserData
  * @package AppBundle\DataFixtures\ORM
  */
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
-    /**
-     * @var Container
-     */
-    private $container;
-
     /**
      * @var Faker\Factory
      */
     private $faker;
 
     /**
-     *
      * @return UserProfile
+     * @internal param $faker
      */
     private function setUserProfile()
     {
-        $this->faker = Faker\Factory::create('fr_FR');
         // -> Profile
         $profile = new UserProfile();
         $profile->setFirstname($this->faker->word);
@@ -52,6 +43,24 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     public function load(ObjectManager $em)
     {
         $this->faker = Faker\Factory::create('fr_FR');
+
+        /**
+         * Laurent BigBossAccount
+         * TODO => Delete after prod version
+         * ........Only for client join project
+         */
+        $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
+        $user = new User();
+        $user->setEmail('laurent');
+        $user->setPassword(password_hash("admin", PASSWORD_BCRYPT));
+        $user->setRoles(['ROLE_ADMIN']);
+        $user->setIsActive(1);
+        $profile = $this->setUserProfile();
+        $user->setUserProfile($profile);
+        $user->setCompany($this->getReference($randomCompany));
+        $this->setReference('laurent_boss', $user);
+        $em->persist($user);
+        $em->persist($profile);
 
         /**
          * SuperAdmin
@@ -171,13 +180,5 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     {
         return 6;
     }
-    /**
-     * Sets the container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance of null
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
+
 }
