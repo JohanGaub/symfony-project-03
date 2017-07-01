@@ -41,7 +41,7 @@ class TechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     #Find all origin in dictionary
-                    return $repo->getItemListByType('technical_evolution_origin');
+                    return $repo->getItemListByType('origin');
                 },
                 'label'         => 'Origine de la demande',
                 'placeholder'   => 'Qui est à la base de cette évolution ?',

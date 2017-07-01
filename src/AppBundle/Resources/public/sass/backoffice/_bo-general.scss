@@ -8,10 +8,10 @@
 }
 
 a {
-  color: $secondary-color;
+  color: $primary-color;
   transition: 0.4s ease;
   &:hover {
-    color: $primary-color;
+    color: darken($primary-color, 20%);
   }
   &:focus {
     color: darken($primary-color, 20%);
@@ -120,38 +120,67 @@ a {
   .pagination > li:last-child > a, .pagination > li:last-child > span {
     border-radius: 0!important;
   }
+}
 
-  /**
+/**
    * Buttons
    */
-  .buttons-block {
-    margin: 0 0 2rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
+.buttons-content {
+  .dropdown-menu {
+    padding: 0;
 
-    .btn-group-right {
-      display: flex;
-      flex-wrap: wrap;
+    li a {
+      color: $primary-color;
+      font-weight: 700;
+      text-align: center;
+      padding: 1.4rem 1.8rem;
+
+      &:hover {
+        background-color: $primary-color;
+        color: #fff;
+      }
     }
   }
-  .simple-btn-1 {
-    color: $secondary-color;
-    font-weight: 700;
-    display: inline-block;
-    border: 1px solid $primary-color;
-    border-radius: 0!important;
-    transition: 0.4s ease;
-    padding: 1rem;
-    margin: 0 0.5rem;
-    width: 24rem;
-    text-align: center;
+}
+.buttons-block {
+  margin: 0 0 2rem 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
 
-    &:hover {
-      color: #fff;
-      background-color: desaturate(lighten($primary-color, 20%), 40%);
-      border: 1px solid lighten($primary-color, 10%);
-      box-shadow: 1px lighten($primary-color, 10%);
-    }
+}
+
+.simple-btn-1 {
+  border: 2px solid $primary-color;
+  color: $primary-color;
+  font-weight: 700;
+  display: block;
+  text-align: center;
+  transition: 0.3s ease-out;
+  padding: 1.25rem 0;
+  width: 18rem;
+
+  &:hover {
+    background-color: $primary-color;
+    color: #fff;
+  }
+}
+/**
+ * Admin
+ */
+.admin-actions {
+  border: 1px solid #1b1a1b;
+  border-radius: 3px;
+  background-color: #ebe5ed;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+
+  .link-action {
+    display: block;
+    width: 100%;
+    font-weight: 700;
   }
 }

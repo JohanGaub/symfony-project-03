@@ -7,7 +7,7 @@
 {% block body %}
 
     <div class="container-fluid">
-        {% include '@App/Pages/Evolutions/buttonBarEvolution.html.twig' %}
+        {% include '@App/Pages/Evolutions/buttonBarEvolutions.html.twig' %}
 
         <div class="row unit-evolution">
             <div class="col-lg-12">
@@ -38,40 +38,28 @@
                     </div>
                 </div>
                 {% if is_granted('ROLE_ADMIN') or app.user.id == evolution.user %}
-                    <a href="{{ path('evolutionUpdate', {'technicalEvolution': evolution.id}) }}">Modifier l'évolution</a>
+                    <a href="{{ path('evolutionUpdate', {
+                        'technicalEvolution': evolution.id
+                    }) }}">Modifier l'évolution</a>
                 {% endif %}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
-                <div class="add-new-comment">
-                    {{ form_start(addForm, {'attr': {
-                        'id': 'app_bundle_comment_userTechnicalEvolution',
-                        'data-index-number': evolution.id
-                    }}) }}
-                    {{ form_end(addForm) }}
-                </div>
+            <div class="col-lg-12 no-padding">
+                {% if evolution.status != 'En attente' %}
+                    <div class="add-new-comment">
+                        {{ form_start(addForm, {'attr': {
+                            'id': 'app_bundle_comment_userTechnicalEvolution',
+                            'data-index-number': evolution.id
+                        }}) }}
+                        {{ form_end(addForm) }}
+                    </div>
+                {% endif %}
                 <div class="comment-list">
-                    {% for comment in comments %}
-                        <div id="ute_id_{{ comment.id }}" class="unit-comment">
-                            <h5>{{ comment.user.userProfile.firstname }} {{ comment.user.userProfile.lastname }}</h5>
-                            <i>Le {{ comment.date|date("d/m/Y")}} à {{ comment.date|date("h:i:s")}}</i>
-                            <p id="comment-value-id-{{ comment.id }}" class="comment-value">{{ comment.comment }}</p>
-                            <a class="modal-update" href="" data-toggle="modal" data-target="#comment-modal-update"
-                                data-index-number="{{ comment.id }}">
-                                <i class="fa fa-cog" aria-hidden="true"></i>
-                            </a>
-                            <a class="modal-delete" href="" data-toggle="modal" data-target="#comment-modal-delete"
-                                data-index-number="{{ comment.id }}">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
-
         <div class="loader-wcs" data-index-number="{{ evolution.id }}"></div>
     </div>
 
@@ -80,13 +68,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title" id="myModalLabel">Suppression d'un commentaire</h4>
                 </div>
                 <div class="modal-body">
                     <p>Êtes vous sur de vouloir supprimer ce commentaire ?</p>
                     <p class="delete-value"></p>
-                    <a id="comment-link-delete" href="" class="text-color-1" data-dismiss="modal">Je confirmer vouloir supprimer ce commentaire</a>
+                    <a id="comment-link-delete" href="" class="text-color-1" data-dismiss="modal">
+                        Je confirmer vouloir supprimer ce commentaire
+                    </a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
@@ -100,13 +92,19 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title" id="myModalLabel">Modification d'un commentaire</h4>
                 </div>
                 <div class="modal-body">
-                    {{ form_start(updateForm, {'attr': {'id': 'app_bundle_comment_userTechnicalEvolution_update'}}) }}
+                    {{ form_start(updateForm, {
+                        'attr': {'id': 'app_bundle_comment_userTechnicalEvolution_update'}
+                    }) }}
                     {{ form_label(updateForm.comment) }}
-                    {{ form_widget(updateForm.comment, {'attr': {'class': 'app_bundle_comment_userTechnicalEvolution_updateField'}}) }}
+                    {{ form_widget(updateForm.comment, {
+                        'attr': {'class': 'app_bundle_comment_userTechnicalEvolution_updateField'}
+                    }) }}
                     {{ form_end(updateForm) }}
                 </div>
                 <div class="modal-footer">

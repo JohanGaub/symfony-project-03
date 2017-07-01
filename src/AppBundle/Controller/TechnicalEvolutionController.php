@@ -75,7 +75,7 @@ class TechnicalEvolutionController extends Controller
         if ($form->isSubmitted() && $form->isValid()){
             $doctrine = $this->getDoctrine();
             $dictionaryStatus = $doctrine->getRepository('AppBundle:Dictionary')
-                ->findOneBy(['type' => 'technical_evolution_status', 'value' => 'En attente']);
+                ->findOneBy(['type' => 'status', 'value' => 'En attente']);
             $te->setCreationDate(new \DateTime('now'));
             $te->setStatus($dictionaryStatus);
             $te->setUser($this->getUser());
@@ -96,7 +96,8 @@ class TechnicalEvolutionController extends Controller
             return $this->redirectToRoute('evolutionUser');
         }
         return $this->render('@App/Pages/Evolutions/basicFormEvolution.html.twig', [
-            'form' => $form->createView()
+            'form'      => $form->createView(),
+            'titlePage' => 'Nouvelle évolution'
         ]);
     }
 
@@ -126,6 +127,7 @@ class TechnicalEvolutionController extends Controller
             ->getCategoryByType($categoryType)->getQuery()->getResult();
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
             ->getItemListByType('category_type')->getQuery()->getResult();
+
         if ($form->isSubmitted() && $form->isValid()){
             $technicalEvolution->setUpdateDate(new \DateTime('now'));
             $em->persist($technicalEvolution);
@@ -137,7 +139,8 @@ class TechnicalEvolutionController extends Controller
             'categoryId'    => $category->getId(),
             'categoryType'  => $categoryType->getId(),
             'categorys'     => $categorys,
-            'categoryTypes' => $categoryTypes
+            'categoryTypes' => $categoryTypes,
+            'titlePage'     => 'Modification d\'évolution'
         ]);
     }
 
@@ -153,14 +156,13 @@ class TechnicalEvolutionController extends Controller
     {
         $uteRepository  = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');
         $teId           = $technicalEvolution->getId();
-        $comments       = $uteRepository->getUserTechnicalEvolution($teId, 'comment', 10);
         $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
+
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $technicalEvolution,
-            'comments'  => $comments,
             'notes'     => $notes,
             'addForm'   => $formComment->createView(),
             'updateForm'=> $formUpdate->createView(),

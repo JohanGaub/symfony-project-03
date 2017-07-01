@@ -3,8 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\User;
-use AppBundle\Form\Evolution\NoteUserTechnicalEvolutionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\CommentUserTechnicalEvolutionType;
@@ -13,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -125,6 +122,7 @@ class UserTechnicalEvolutionController extends Controller
     }
 
     /**
+     * TODO => Can't find this route ???
      * Delete comments for TechnicalEvolutions
      *
      * @Route("/commentaires/suppression/{userTechnicalEvolutionId}", name="evolutionCommentsDelete")
