@@ -42,29 +42,18 @@ class TechnicalEvolutionController extends Controller
          * TODO => Find a solution to block access to any status for user update
          * TODO => Access technical / commercial ?
          */
-        $searchForm = $this->createForm(SearchTechnicalEvolution::class);
-        $searchForm->handleRequest($request);
-
-        $searchTitle = '';
-        $searchStatus = '';
-
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $searchTitle    = $searchForm['search']->getData();
-            $searchStatus   = $searchForm['status']->getData();
-        }
         $params = [
             'te.title'      => !empty($searchTitle) ? $searchTitle : '',
             'dtes.value'    => !empty($searchStatus) ? $searchStatus : 'En cours',
         ];
-
         $paramsTranformers = $this->get('app.sql.search_params_getter');
         $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
 
         // get technical evolution repository
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
         // set Pagination parameters
-        $evoByPage = 8;
-        $evoTotal = $repo->getNbEvolution($allowParamsFormat);
+        $evoByPage  = 8;
+        $evoTotal   = $repo->getNbEvolution($allowParamsFormat);
 
         $pagination = [
             'page'          => $page,
@@ -84,7 +73,6 @@ class TechnicalEvolutionController extends Controller
         return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
             'evolutions' => $evolutions,
             'pagination' => $pagination,
-            'searchForm' => $searchForm->createView()
         ]);
     }
 
@@ -104,7 +92,8 @@ class TechnicalEvolutionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $dictionaryStatus = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
+            $doctrine = $this->getDoctrine();
+            $dictionaryStatus = $doctrine->getRepository('AppBundle:Dictionary')
                 ->findOneBy(['type' => 'technical_evolution_status', 'value' => 'En attente']);
 
             $te->setCreationDate(new \DateTime('now'));
@@ -116,6 +105,16 @@ class TechnicalEvolutionController extends Controller
             $em->persist($te);
             $em->flush();
             $this->addFlash('notice', 'Votre demande d\'évolution à bien été prise en compte !');
+
+            /**
+             * Mailling part (service)
+             */
+            $this->get('app.email.sending')->emailSend(
+                'Une nouvelle évolution technique vient d\'arrivée',
+                'contact@ashara.fr',
+                [],
+                ''
+            );
             return $this->redirectToRoute('evolutionUser');
         }
         return $this->render('@App/Pages/Evolutions/basicFormEvolution.html.twig', [
@@ -138,6 +137,9 @@ class TechnicalEvolutionController extends Controller
         $te = $em->getRepository('AppBundle:TechnicalEvolution')
             ->find($technicalEvolution);
 
+        $category = $te->getCategory();
+        $categoryType = $category->getType();
+
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $form = $this->createForm(TechnicalEvolutionType::class, $te);
             $view = '@App/Pages/Evolutions/basicFormEvolution.html.twig';
@@ -156,7 +158,11 @@ class TechnicalEvolutionController extends Controller
                 'technicalEvolution' => $technicalEvolution
             ]);
         }
-        return $this->render($view, ['form' => $form->createView()]);
+        return $this->render($view, [
+            'form'          => $form->createView(),
+            'category'      => $category,
+            'categoryType'  => $categoryType
+        ]);
     }
 
     /**

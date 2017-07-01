@@ -14,25 +14,6 @@
             </div>
 
             <div class="row list-evolution">
-                <div class="search-form">
-                    {{ form_start(searchForm) }}
-                    <div class="search-form-rows">
-                        <div class="search-field search-form-search">
-                            {{ form_row(searchForm.search) }}
-                        </div>
-                        <div class="search-field search-form-status">
-                            {{ form_row(searchForm.status) }}
-                        </div>
-                        <div class="search-field search-form-submit">
-                            <button type="submit" id="app_bundle_technicalEvolution_submit"
-                                    name="app_bundle_technicalEvolution[submit]" class="btn-default btn">
-                                <i class="fa fa-search" aria-hidden="true"></i></a>
-                            </button>
-                        </div>
-                    </div>
-                    {{ form_end(searchForm) }}
-                </div>
-
                 {% for evolution in evolutions %}
                     <div class="col-xs-12 col-md-12 col-lg-6">
                         <div class="bo-evolution">
@@ -93,5 +74,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/page.evolution-add.js') }}"></script>
+    <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
 {% endblock %}

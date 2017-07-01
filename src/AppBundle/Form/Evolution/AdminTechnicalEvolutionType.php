@@ -59,7 +59,7 @@ class AdminTechnicalEvolutionType extends AbstractType
             ])
             ->add('expectedDelay', DateType::class, [
                 'label'         => 'Délais souhaité',
-                'widget'        => 'single_text',
+                'format'        => 'dd MM yyyy'
             ])
             ->add('product', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Product',
@@ -93,9 +93,8 @@ class AdminTechnicalEvolutionType extends AbstractType
         $builder->get('category_type')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
-                $categoryType = $event->getForm()->getData();
                 $form = $event->getForm();
-                $this->addCategoryNameField($form->getParent(), $categoryType);
+                $this->addCategoryNameField($form->getParent(), $form->getData());
             }
         );
     }
@@ -117,7 +116,7 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Category',
                 'query_builder' => function(CategoryRepository $repo) use ($categoryType) {
                     # find category name by select type
-                    return $repo->getCategoryNameList($categoryType);
+                    return $repo->getCategoryByType($categoryType);
                 },
                 'label'         => 'Catégorie',
                 'placeholder'   => 'Séléctionnez votre catégorie',
@@ -144,7 +143,7 @@ class AdminTechnicalEvolutionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle_technicalEvolution';
+        return 'app_bundle';
     }
 
 }

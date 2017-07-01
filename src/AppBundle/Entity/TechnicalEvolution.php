@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="technical_evolution")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TechnicalEvolutionRepository")
-
  */
 class TechnicalEvolution
 {
@@ -239,10 +239,10 @@ class TechnicalEvolution
     /**
      * Set status
      *
-     * @param Dictionary|string $status
+     * @param Dictionary $status
      * @return TechnicalEvolution
      */
-    public function setStatus(\AppBundle\Entity\Dictionary $status)
+    public function setStatus(Dictionary $status)
     {
         $this->status = $status;
         return $this;
@@ -274,7 +274,7 @@ class TechnicalEvolution
      * @param mixed $origin
      * @return TechnicalEvolution
      */
-    public function setOrigin(\AppBundle\Entity\Dictionary $origin = null)
+    public function setOrigin(Dictionary $origin = null)
     {
         $this->origin = $origin;
         return $this;
@@ -353,16 +353,16 @@ class TechnicalEvolution
      */
     public function __construct()
     {
-        $this->userTechnicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userTechnicalEvolutions = new ArrayCollection();
     }
 
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category
      * @return TechnicalEvolution
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -372,7 +372,7 @@ class TechnicalEvolution
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category
+     * @return Category
      */
     public function getCategory()
     {
@@ -382,10 +382,10 @@ class TechnicalEvolution
     /**
      * Set product
      *
-     * @param \AppBundle\Entity\Product $product
+     * @param Product $product
      * @return TechnicalEvolution
      */
-    public function setProduct(\AppBundle\Entity\Product $product = null)
+    public function setProduct(Product $product = null)
     {
         $this->product = $product;
 
@@ -395,7 +395,7 @@ class TechnicalEvolution
     /**
      * Get product
      *
-     * @return \AppBundle\Entity\Product
+     * @return Product
      */
     public function getProduct()
     {
@@ -405,10 +405,10 @@ class TechnicalEvolution
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      * @return TechnicalEvolution
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -418,7 +418,7 @@ class TechnicalEvolution
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {
@@ -428,10 +428,10 @@ class TechnicalEvolution
     /**
      * Add userTechnicalEvolution
      *
-     * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
+     * @param UserTechnicalEvolution $userTechnicalEvolution
      * @return TechnicalEvolution
      */
-    public function addUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
+    public function addUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
 
@@ -441,9 +441,9 @@ class TechnicalEvolution
     /**
      * Remove userTechnicalEvolution
      *
-     * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
+     * @param UserTechnicalEvolution $userTechnicalEvolution
      */
-    public function removeUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
+    public function removeUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
     }

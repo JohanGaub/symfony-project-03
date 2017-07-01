@@ -9,9 +9,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="bo-title-page col-lg-12">
-                <h2>Nouvelle évolution</h2>
+                <h2>Modification d'évolution</h2>
             </div>
         </div>
+
+        {{ dump(category) }}
+        {{ dump(categoryType) }}
 
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3">
@@ -38,5 +41,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/page.evolution-add.js') }}"></script>
+    <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
 {% endblock %}

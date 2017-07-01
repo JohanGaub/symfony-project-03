@@ -26,9 +26,8 @@
                         <li><p><span class="evo-label">Date de création : </span>
                                 <span class="info-evo">{{ evolution.creationDate|date("d/m/Y") }}</span></p></li>
                         {% if evolution.updateDate is defined %}
-                            {# TODO => Find why this condition isn't working #}
-                        <li><p><span class="evo-label">Date d'édition : </span>
-                                <span class="info-evo">{{ evolution.updateDate|date("d/m/Y") }}</span></p></li>
+                            <li><p><span class="evo-label">Date d'édition : </span>
+                                    <span class="info-evo">{{ evolution.updateDate|date("d/m/Y") }}</span></p></li>
                         {% endif %}
                         <li><p><span class="evo-label">Date de fin : </span>
                                 <span class="info-evo">{{ evolution.expectedDelay|date("d/m/Y") }}</span></p></li>

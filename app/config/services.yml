@@ -7,3 +7,7 @@ services:
     app.sql.search_params_getter:
         class: AppBundle\Service\SqlWhereParamsSetter
         arguments: []
+
+    app.email.sending:
+        class: AppBundle\Service\MaillerService
+        arguments: ['@service_container', '@swiftmailer.mailer']
