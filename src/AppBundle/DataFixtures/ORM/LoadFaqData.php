@@ -27,7 +27,7 @@ class LoadFaqData extends AbstractFixture implements OrderedFixtureInterface
             $randomProduct = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
 
             $faq = new Faq();
-            $faq->setTitle($faker->title);
+            $faq->setTitle($faker->words(3, true));
             $faq->setSumUp($faker->sentence);
             $faq->setContent($faker->paragraph());
             $faq->setUpload($faker->sentence());

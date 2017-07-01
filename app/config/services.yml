@@ -8,6 +8,10 @@ services:
         class: AppBundle\Service\SqlWhereParamsSetter
         arguments: []
 
+    app.dictionary_verification:
+        class: AppBundle\Service\DictionaryVerification
+        arguments: ["@doctrine.orm.entity_manager"]
+
     app.email.sending:
         class: AppBundle\Service\MaillerService
         arguments: ['@service_container', '@swiftmailer.mailer']

@@ -1,4 +1,4 @@
-{% extends '@App/backoffice-base.html.twig' %}
+{% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block title %}
     Evolutions techniques
@@ -7,7 +7,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            {% include '@App/Pages/Evolutions/buttonBarEvolution.html.twig' %}
+            {% include 'button' %}
 
             <div class="bo-title-page col-lg-12">
                 <h2>Evolutions techniques</h2>

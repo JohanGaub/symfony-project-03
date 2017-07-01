@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\Entity\TechnicalEvolution;
 use AppBundle\Entity\User;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,14 +46,14 @@ class UserTechnicalEvolution
     private $type;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
@@ -97,7 +98,6 @@ class UserTechnicalEvolution
     public function setNote($note)
     {
         $this->note = $note;
-
         return $this;
     }
 
@@ -121,7 +121,6 @@ class UserTechnicalEvolution
     public function setComment($comment)
     {
         $this->comment = $comment;
-
         return $this;
     }
 
@@ -145,7 +144,6 @@ class UserTechnicalEvolution
     public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -162,7 +160,7 @@ class UserTechnicalEvolution
     /**
      * Get date
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDate()
     {
@@ -172,34 +170,34 @@ class UserTechnicalEvolution
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      * @return UserTechnicalEvolution
      */
-    public function setDate(\DateTime $date)
+    public function setDate(DateTime $date)
     {
         $this->date = $date;
         return $this;
     }
 
     /**
-     * Get updateDate
+     * Get UpdateDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdateDate()
     {
-        return $this->date;
+        return $this->updateDate;
     }
 
     /**
-     * Set date
+     * Set UpdateDate
      *
-     * @param \DateTime $updateDate
+     * @param DateTime $updateDate
      * @return UserTechnicalEvolution
      */
-    public function setUpdateDate(\DateTime $updateDate)
+    public function setUpdateDate(DateTime $updateDate)
     {
-        $this->date = $updateDate;
+        $this->updateDate = $updateDate;
         return $this;
     }
 
@@ -213,7 +211,6 @@ class UserTechnicalEvolution
     public function setTechnicalEvolution(TechnicalEvolution $technicalEvolution = null)
     {
         $this->technicalEvolution = $technicalEvolution;
-
         return $this;
     }
 
@@ -237,7 +234,6 @@ class UserTechnicalEvolution
     public function setUser(User $user = null)
     {
         $this->user = $user;
-
         return $this;
     }
 

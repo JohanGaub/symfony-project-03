@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Product;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,26 +46,26 @@ class Documentation
     private $content;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="documentations")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="documentations", cascade={"persist"})
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="documentations")
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="documentations", cascade={"persist"})
      */
     private $product;
 
@@ -151,7 +154,7 @@ class Documentation
     /**
      * Set creationDate
      *
-     * @param \DateTime $creationDate
+     * @param DateTime $creationDate
      *
      * @return Documentation
      */
@@ -165,7 +168,7 @@ class Documentation
     /**
      * Get creationDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCreationDate()
     {
@@ -175,7 +178,7 @@ class Documentation
     /**
      * Set updateDate
      *
-     * @param \DateTime $updateDate
+     * @param DateTime $updateDate
      *
      * @return Documentation
      */
@@ -189,7 +192,7 @@ class Documentation
     /**
      * Get updateDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdateDate()
     {
@@ -199,11 +202,11 @@ class Documentation
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category
      *
      * @return Documentation
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -213,7 +216,7 @@ class Documentation
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category
+     * @return Category
      */
     public function getCategory()
     {
@@ -223,11 +226,11 @@ class Documentation
     /**
      * Set product
      *
-     * @param \AppBundle\Entity\Product $product
+     * @param Product $product
      *
      * @return Documentation
      */
-    public function setProduct(\AppBundle\Entity\Product $product = null)
+    public function setProduct(Product $product = null)
     {
         $this->product = $product;
 
@@ -237,7 +240,7 @@ class Documentation
     /**
      * Get product
      *
-     * @return \AppBundle\Entity\Product
+     * @return Product
      */
     public function getProduct()
     {

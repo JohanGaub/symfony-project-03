@@ -1,6 +1,7 @@
+/**
+ * Function to do dynamic topbar with scroll event
+ */
 $(document).ready(function () {
-
-
     // animate navbar on scroll
     $(window).scroll(function () {
 
@@ -30,23 +31,21 @@ $(document).ready(function () {
             $('.navbar, .navbar-default .navbar-brand, .navbar-brand img, .navbar-collapse, div.navbar-header.header').removeClass('scroll-small');
         }
     });
-
-    $('#login-link').click(function() {
-        $('#footer').css({'display':'none'})
-    });
 });
 
-
+/**
+ * Function to transform right to down arrow
+ */
 $(document).ready(function () {
-        if ($(window).width() <= 1024) {
-            $("#arrowbox").addClass("arrow-bottom-center");
-        } else {
-            $("#arrowbox").addClass("arrow-right-center");
-        }
+    if ($(window).width() <= 767) {
+        $("#arrowbox").addClass("arrow-bottom-center");
+    } else {
+        $("#arrowbox").addClass("arrow-right-center");
+    }
 
 // Change class name in "html.twig" file in order to use a specific scss mixin
     $(window).on('resize', function() {
-        if ($(window).width() <= 1024) {
+        if ($(window).width() <= 767) {
             $("#arrowbox").removeClass("arrow-right-center").addClass("arrow-bottom-center");
         } else {
             $("#arrowbox").removeClass("arrow-bottom-center").addClass("arrow-right-center");
@@ -54,9 +53,9 @@ $(document).ready(function () {
     });
 });
 
-// Swiper Slider
+// Swiper Slider init and conf
 $(document).ready(function () {
-    var swiper = new Swiper('.swiper-container', {
+    let swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
@@ -69,15 +68,17 @@ $(document).ready(function () {
     });
 });
 
-// Modal
+// Modal front office part (mld)
 $(document).ready(function () {
-    $(".modal-fullscreen").on('show.bs.modal', function () {
+    let target = ".modal-fullscreen";
+    let modal  = ".modal-backdrop";
+    $(target).on('show.bs.modal', function () {
         setTimeout( function() {
-            $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
+            $(modal).addClass("modal-backdrop-fullscreen");
         }, 0);
     });
-    $(".modal-fullscreen").on('hidden.bs.modal', function () {
-        $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
+    $(target).on('hidden.bs.modal', function () {
+        $(modal).addClass("modal-backdrop-fullscreen");
     });
 });
 
@@ -85,6 +86,4 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#wrapper").toggleClass("toggled");
 });
-
-
 

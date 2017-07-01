@@ -144,13 +144,11 @@ class TechnicalEvolution
      * Set title
      *
      * @param string $title
-     *
      * @return TechnicalEvolution
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -168,13 +166,11 @@ class TechnicalEvolution
      * Set sumUp
      *
      * @param string $sumUp
-     *
      * @return TechnicalEvolution
      */
     public function setSumUp($sumUp)
     {
         $this->sumUp = $sumUp;
-
         return $this;
     }
 
@@ -192,13 +188,11 @@ class TechnicalEvolution
      * Set content
      *
      * @param string $content
-     *
      * @return TechnicalEvolution
      */
     public function setContent($content)
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -216,13 +210,11 @@ class TechnicalEvolution
      * Set reason
      *
      * @param string $reason
-     *
      * @return TechnicalEvolution
      */
     public function setReason($reason)
     {
         $this->reason = $reason;
-
         return $this;
     }
 
@@ -289,7 +281,6 @@ class TechnicalEvolution
     public function setExpectedDelay($expectedDelay)
     {
         $this->expectedDelay = $expectedDelay;
-
         return $this;
     }
 
@@ -312,7 +303,6 @@ class TechnicalEvolution
     public function setCreationDate($creationDate)
     {
         $this->creationDate = $creationDate;
-
         return $this;
     }
 
@@ -335,7 +325,6 @@ class TechnicalEvolution
     public function setUpdateDate($updateDate)
     {
         $this->updateDate = $updateDate;
-
         return $this;
     }
 
@@ -348,6 +337,7 @@ class TechnicalEvolution
     {
         return $this->updateDate;
     }
+
     /**
      * Constructor
      */
@@ -365,7 +355,6 @@ class TechnicalEvolution
     public function setCategory(Category $category = null)
     {
         $this->category = $category;
-
         return $this;
     }
 
@@ -388,7 +377,6 @@ class TechnicalEvolution
     public function setProduct(Product $product = null)
     {
         $this->product = $product;
-
         return $this;
     }
 
@@ -411,7 +399,6 @@ class TechnicalEvolution
     public function setUser(User $user = null)
     {
         $this->user = $user;
-
         return $this;
     }
 
@@ -434,7 +421,6 @@ class TechnicalEvolution
     public function addUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
-
         return $this;
     }
 

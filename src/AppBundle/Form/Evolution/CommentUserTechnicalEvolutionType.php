@@ -47,5 +47,4 @@ class CommentUserTechnicalEvolutionType extends AbstractType
     {
         return 'app_bundle_comment_userTechnicalEvolution';
     }
-
 }

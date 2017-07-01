@@ -11,6 +11,12 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class TechnicalEvolutionRepository extends EntityRepository
 {
+    /**
+     * Get evolution with a bit informations
+     *
+     * @param $params
+     * @return array
+     */
     public function getSimpleEvolutions($params)
     {
         $qb = $this->createQueryBuilder('te')
@@ -27,34 +33,40 @@ class TechnicalEvolutionRepository extends EntityRepository
             ->join('c.type', 'ct', 'c.type = ct.id')
             ->where('1 = 1 AND ' . $params)
             ->orderBy('te.id');
-
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Get evolutions
+     *
+     * @param $params
+     * @param $page
+     * @param $maxByPage
+     * @return array
+     */
     public function getEvolutions($params, $page, $maxByPage)
     {
         $qb = $this->createQueryBuilder('te')
-                ->select('te.id', 'te.title', 'te.sumUp', 'te.creationDate', 'te.updateDate', 'te.reason', 'te.expectedDelay')
-                ->addSelect('dtes.value as status')
-                ->addSelect('dteo.value as origin')
-                ->addSelect('c.title as category_title')
-                ->addSelect('ct.value as category_type')
-                ->addSelect('u.id as user_id')
-                ->addSelect('COUNT(ute.note) as nb_notes')
-                ->addSelect('COUNT(ute.comment) as nb_comments')
-                ->addSelect('AVG(ute.note) as avg_notes')
-                ->join('te.status', 'dtes', 'te.status = dtes.id')
-                ->join('te.origin', 'dteo', 'te.origin = dteo.id')
-                ->join('te.category', 'c', 'te.category = c.id')
-                ->join('te.user', 'u', 'te.user = u.id')
-                ->join('c.type', 'ct', 'c.type = ct.id')
-                ->join('te.userTechnicalEvolutions', 'ute', 'te.id = ute.technicalEvolution')
-                ->where('1 = 1 AND ' . $params)
-                ->orderBy('te.id')
-                ->groupBy('te.id')
-                ->setFirstResult(($page - 1) * $maxByPage)
-                ->setMaxResults($maxByPage);
-
+            ->select('te.id', 'te.title', 'te.sumUp', 'te.creationDate', 'te.updateDate', 'te.reason', 'te.expectedDelay')
+            ->addSelect('dtes.value as status')
+            ->addSelect('dteo.value as origin')
+            ->addSelect('c.title as category_title')
+            ->addSelect('ct.value as category_type')
+            ->addSelect('u.id as user_id')
+            ->addSelect('COUNT(ute.note) as nb_notes')
+            ->addSelect('COUNT(ute.comment) as nb_comments')
+            ->addSelect('AVG(ute.note) as avg_notes')
+            ->join('te.status', 'dtes', 'te.status = dtes.id')
+            ->join('te.origin', 'dteo', 'te.origin = dteo.id')
+            ->join('te.category', 'c', 'te.category = c.id')
+            ->join('te.user', 'u', 'te.user = u.id')
+            ->join('c.type', 'ct', 'c.type = ct.id')
+            ->join('te.userTechnicalEvolutions', 'ute', 'te.id = ute.technicalEvolution')
+            ->where('1 = 1 AND ' . $params)
+            ->orderBy('te.id')
+            ->groupBy('te.id')
+            ->setFirstResult(($page - 1) * $maxByPage)
+            ->setMaxResults($maxByPage);
         return $qb->getQuery()->getResult();
     }
 
@@ -94,29 +106,23 @@ class TechnicalEvolutionRepository extends EntityRepository
         $rsm->addFieldResult('te', 'expected_delay', 'expectedDelay');
         $rsm->addFieldResult('te', 'creation_date', 'creationDate');
         $rsm->addFieldResult('te', 'update_date', 'updateDate');
-
         $rsm->addJoinedEntityResult('AppBundle\Entity\Dictionary', 'dtes', 'te', 'status');
         $rsm->addFieldResult('dtes', 'dictionary_tes_id', 'id');
         $rsm->addFieldResult('dtes', 'dictionary_tes_type', 'type');
         $rsm->addFieldResult('dtes', 'dictionary_tes_value', 'value');
-
         $rsm->addJoinedEntityResult('AppBundle\Entity\Dictionary', 'dteo', 'te', 'origin');
         $rsm->addFieldResult('dteo', 'dictionary_teo_id', 'id');
         $rsm->addFieldResult('dteo', 'dictionary_teo_type', 'type');
         $rsm->addFieldResult('dteo', 'dictionary_teo_value', 'value');
-
         $rsm->addJoinedEntityResult('AppBundle\Entity\Category', 'c', 'te', 'category');
         $rsm->addFieldResult('c', 'category_id', 'id');
         $rsm->addFieldResult('c', 'category_title', 'title');
-
         $rsm->addJoinedEntityResult('AppBundle\Entity\Dictionary', 'ct', 'c', 'type');
         $rsm->addFieldResult('ct', 'dictionary_ct_id', 'id');
         $rsm->addFieldResult('ct', 'dictionary_ct_type', 'type');
         $rsm->addFieldResult('ct', 'dictionary_ct_value', 'value');
-
         # set entity name
         $table = $this->getClassMetadata()->getTableName();
-
         # make a query
         /** @noinspection SqlResolve */
         $query = $this->getEntityManager()->createNativeQuery("
@@ -150,7 +156,6 @@ class TechnicalEvolutionRepository extends EntityRepository
             LIMIT 1
             
         ", $rsm);
-
         return $query;
     }
 
@@ -172,8 +177,6 @@ class TechnicalEvolutionRepository extends EntityRepository
             WHERE 1=1 AND {$params}
                 
         ");
-
         return $query;
     }
-
 }

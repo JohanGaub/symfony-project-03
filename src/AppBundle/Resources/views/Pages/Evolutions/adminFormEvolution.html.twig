@@ -1,4 +1,4 @@
-{% extends '@App/backoffice-base.html.twig' %}
+{% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block title %}
     Nouvelle évolution
@@ -39,6 +39,7 @@
         </div>
     </div>
 
+    {# Hidden parts for form select inject  #}
     <select id="hidden-select-inject-category_type" name="app_bundle[category_type]" required="required" class="form-control hidden">
         <option value="">Sélectionnez votre type catégorie</option>
         {% for type in categoryTypes %}

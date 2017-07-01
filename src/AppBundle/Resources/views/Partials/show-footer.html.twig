@@ -1,0 +1,72 @@
+<div id="footer-line">
+    <div id="footer-left">
+        <div id="footer-left-up">
+            <ul class="center">
+                <li><a href="#ancre_communit">Offre globale</a></li>
+                <li><a href="#ancre_communit">Mutualisation</a></li>
+                <li><a href="#ancre_communit">Accompagnement</a></li>
+            </ul>
+        </div>
+
+        <!-- Twig modal import -->
+        {% include '@App/Pages/Index/show-mentionsLegales.html.twig'%}
+
+        <div id="footer-left-down">
+            <ul>
+                <li><a href="/historique">A propos de nous</a></li>
+                <li><a id="mentions-legales-link" href="" data-toggle="modal" data-target="#modal-fullscreen">Mentions légales</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div id="footer-right">
+
+        <div id="footer-right-triangle">
+            <div id="footer-right-triangle-img">
+                <img src="{{ asset('assets/img/triangle.png') }}" alt="green triangle">
+                <p><span><a href="#">&copy; commun<span id="it">it</span>.fr</a></span>
+                    <a href="https://wildcodeschool.fr/" target="_blank">- Développé par la Wild Code School</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="footer-right-contact">
+            <h3 id="hidden-contact">Contactez-nous !</h3>
+            <span itemprop="telephone">
+            <a href="tel:+33428382468">04 28 38 24 68
+            </a>
+        </span>
+            <ul class="centerUL centerLI">
+                <li><a href="mailto:laurent.chareille@communit.fr" target="_blank">
+                    <span class="fa-stack fa-rotate">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                    </span>
+                    </a>
+                </li>
+
+                <li><a href="https://fr.linkedin.com/company/itn%C3%A9o" target="_blank">
+                    <span class="fa-stack fa-rotate">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                    </span>
+                    </a>
+                </li>
+                <li><a href="https://www.communit.fr" target="_blank">
+                    <span class="fa-stack fa-rotate">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+                    </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+
+
+
+

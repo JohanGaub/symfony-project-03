@@ -3,8 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Form\Evolution\NoteUserTechnicalEvolutionType;
-use AppBundle\Form\Evolution\SearchTechnicalEvolution;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
@@ -54,7 +52,6 @@ class TechnicalEvolutionController extends Controller
                 $evolutions[$key]['avg_notes'] = substr($value['avg_notes'], 0, 3);
             }
         }
-
         return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
             'evolutions' => $evolutions,
             'pagination' => $pagination,
@@ -75,22 +72,18 @@ class TechnicalEvolutionController extends Controller
         $te = new TechnicalEvolution();
         $form = $this->createForm(TechnicalEvolutionType::class, $te);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()){
             $doctrine = $this->getDoctrine();
             $dictionaryStatus = $doctrine->getRepository('AppBundle:Dictionary')
                 ->findOneBy(['type' => 'technical_evolution_status', 'value' => 'En attente']);
-
             $te->setCreationDate(new \DateTime('now'));
             $te->setStatus($dictionaryStatus);
             $te->setUser($this->getUser());
             $te->setCategory($form->getData()->getCategory());
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($te);
             $em->flush();
             $this->addFlash('notice', 'Votre demande d\'évolution à bien été prise en compte !');
-
             /**
              * Mailling part (service)
              */
@@ -126,25 +119,19 @@ class TechnicalEvolutionController extends Controller
             $view = '@App/Pages/Evolutions/adminFormEvolution.html.twig';
         }
         $form->handleRequest($request);
-
         $em = $this->getDoctrine()->getManager();
         $category = $technicalEvolution->getCategory();
         $categoryType = $category->getType();
-
         $categorys = $em->getRepository('AppBundle:Category')
             ->getCategoryByType($categoryType)->getQuery()->getResult();
-
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
             ->getItemListByType('category_type')->getQuery()->getResult();
-
         if ($form->isSubmitted() && $form->isValid()){
             $technicalEvolution->setUpdateDate(new \DateTime('now'));
             $em->persist($technicalEvolution);
             $em->flush();
-
             $this->redirectToRoute('evolutionHome');
         }
-
         return $this->render($view, [
             'form'          => $form->createView(),
             'categoryId'    => $category->getId(),
@@ -171,7 +158,6 @@ class TechnicalEvolutionController extends Controller
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
-
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $technicalEvolution,
             'comments'  => $comments,
@@ -192,10 +178,8 @@ class TechnicalEvolutionController extends Controller
         $params = ['u.id' => $this->getUser()->getId()];
         $paramsTranformers = $this->get('app.sql.search_params_getter');
         $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
-
         $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
             ->getSimpleEvolutions($allowParamsFormat);
-
         return $this->render('@App/Pages/Evolutions/waitingUserEvolution.html.twig', [
             'evolutions' => $evolutions,
         ]);
@@ -214,10 +198,8 @@ class TechnicalEvolutionController extends Controller
         ];
         $paramsTranformers = $this->get('app.sql.search_params_getter');
         $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
-
         $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
             ->getSimpleEvolutions($allowParamsFormat);
-
         return $this->render('@App/Pages/Evolutions/waitingEvolution.html.twig', [
             'evolutions' => $evolutions,
         ]);
@@ -238,7 +220,6 @@ class TechnicalEvolutionController extends Controller
             throw new HttpException('500', 'Invalid call');
         }
         $data   = $request->request->get('data');
-
         if ($data === 'true') {
             $newStatus = 'En cours';
         } else if ($data === 'false') {
@@ -251,12 +232,9 @@ class TechnicalEvolutionController extends Controller
             'type'  => 'technical_evolution_status',
             'value' => $newStatus
         ]);
-
         $technicalEvolution->setStatus($status);
         $em->persist($technicalEvolution);
         $em->flush();
-
         return new JsonResponse($data);
     }
-
 }

@@ -54,7 +54,6 @@ class UserTechnicalEvolutionRepository extends EntityRepository
     {
         # create rsm object
         $rsm = new ResultSetMapping();
-
         $rsm->addEntityResult($this->getEntityName(), 'ute');
         $rsm->addFieldResult('ute', 'ute_id', 'id');
         $rsm->addFieldResult('ute', 'ute_type', 'type');
@@ -63,18 +62,14 @@ class UserTechnicalEvolutionRepository extends EntityRepository
         $rsm->addFieldResult('ute', 'ute_comment', 'comment');
         $rsm->addFieldResult('ute', 'ute_user', 'id');
         $rsm->addFieldResult('ute', 'ute_technical_evolution', 'technicalEvolution');
-
         $rsm->addJoinedEntityResult('AppBundle\Entity\User', 'u', 'ute', 'user');
         $rsm->addFieldResult('u', 'u_id', 'id');
-
         $rsm->addJoinedEntityResult('AppBundle\Entity\UserProfile', 'up', 'u', 'userProfile');
         $rsm->addFieldResult('up', 'up_id', 'id');
         $rsm->addFieldResult('up', 'up_firstname', 'firstname');
         $rsm->addFieldResult('up', 'up_lastname', 'lastname');
-
         # set entity name
         $table = $this->getClassMetadata()->getTableName();
-
         # make a query
         /** @noinspection SqlResolve */
         $query = $this->getEntityManager()->createNativeQuery("
@@ -97,7 +92,6 @@ class UserTechnicalEvolutionRepository extends EntityRepository
             ORDER BY ute.date DESC
             LIMIT {$limit} 
         ", $rsm);
-
         return $query;
     }
 
@@ -122,6 +116,5 @@ class UserTechnicalEvolutionRepository extends EntityRepository
             ->setParameter('company', $company)
             ->getQuery()
             ->getSingleScalarResult();
-
     }
 }

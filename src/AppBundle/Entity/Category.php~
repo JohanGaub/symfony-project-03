@@ -3,18 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
-<<<<<<< HEAD
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
-=======
- * @ORM\Entity
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
  */
 class Category
 {
@@ -37,31 +34,17 @@ class Category
     /**
      * @var string
      *
-<<<<<<< HEAD
-=======
-     * @ORM\Column(name="tag", type="string", length=255, nullable=false)
-     */
-    private $tag;
-
-    /**
-     * @var string
-     *
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
     /**
-<<<<<<< HEAD
-=======
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="type", referencedColumnName="id")
      */
     private $type;
 
     /**
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="category")
      */
     private $technicalEvolutions;
@@ -76,15 +59,10 @@ class Category
      */
     private $documentations;
 
-<<<<<<< HEAD
     /**
-     * @ORM\OneToOne(targetEntity="Dictionary")
-     * @JoinColumn(name="type_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="category")
      */
-    private $type;
-
-=======
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
+    private $tickets;
 
     /**
      * Get id
@@ -145,15 +123,23 @@ class Category
     }
 
     /**
-<<<<<<< HEAD
-=======
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->technicalEvolutions = new ArrayCollection();
+        $this->faqs = new ArrayCollection();
+        $this->documentations = new ArrayCollection();
+    }
+
+    /**
      * Set type
      *
-     * @param string $type
+     * @param Dictionary $type
      *
      * @return Category
      */
-    public function setType($type)
+    public function setType(Dictionary $type = null)
     {
         $this->type = $type;
 
@@ -163,32 +149,21 @@ class Category
     /**
      * Get type
      *
-     * @return string
+     * @return Dictionary
      */
     public function getType()
     {
         return $this->type;
     }
-    /**
->>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->documentations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->types = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add technicalEvolution
      *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     * @param TechnicalEvolution $technicalEvolution
      *
      * @return Category
      */
-    public function addTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
+    public function addTechnicalEvolution(TechnicalEvolution $technicalEvolution)
     {
         $this->technicalEvolutions[] = $technicalEvolution;
 
@@ -198,9 +173,9 @@ class Category
     /**
      * Remove technicalEvolution
      *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     * @param TechnicalEvolution $technicalEvolution
      */
-    public function removeTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
+    public function removeTechnicalEvolution(TechnicalEvolution $technicalEvolution)
     {
         $this->technicalEvolutions->removeElement($technicalEvolution);
     }
@@ -208,7 +183,7 @@ class Category
     /**
      * Get technicalEvolutions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getTechnicalEvolutions()
     {
@@ -218,11 +193,11 @@ class Category
     /**
      * Add faq
      *
-     * @param \AppBundle\Entity\Faq $faq
+     * @param Faq $faq
      *
      * @return Category
      */
-    public function addFaq(\AppBundle\Entity\Faq $faq)
+    public function addFaq(Faq $faq)
     {
         $this->faqs[] = $faq;
 
@@ -232,9 +207,9 @@ class Category
     /**
      * Remove faq
      *
-     * @param \AppBundle\Entity\Faq $faq
+     * @param Faq $faq
      */
-    public function removeFaq(\AppBundle\Entity\Faq $faq)
+    public function removeFaq(Faq $faq)
     {
         $this->faqs->removeElement($faq);
     }
@@ -242,7 +217,7 @@ class Category
     /**
      * Get faqs
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getFaqs()
     {
@@ -252,11 +227,11 @@ class Category
     /**
      * Add documentation
      *
-     * @param \AppBundle\Entity\Documentation $documentation
+     * @param Documentation $documentation
      *
      * @return Category
      */
-    public function addDocumentation(\AppBundle\Entity\Documentation $documentation)
+    public function addDocumentation(Documentation $documentation)
     {
         $this->documentations[] = $documentation;
 
@@ -266,9 +241,9 @@ class Category
     /**
      * Remove documentation
      *
-     * @param \AppBundle\Entity\Documentation $documentation
+     * @param Documentation $documentation
      */
-    public function removeDocumentation(\AppBundle\Entity\Documentation $documentation)
+    public function removeDocumentation(Documentation $documentation)
     {
         $this->documentations->removeElement($documentation);
     }
@@ -276,11 +251,45 @@ class Category
     /**
      * Get documentations
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getDocumentations()
     {
         return $this->documentations;
+    }
+
+    /**
+     * Add ticket
+     *
+     * @param Ticket $ticket
+     *
+     * @return Category
+     */
+    public function addTicket(Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param Ticket $ticket
+     */
+    public function removeTicket(Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 
     /**
@@ -289,29 +298,5 @@ class Category
     public function __toString()
     {
         return $this->title;
-    }
-
-    /**
-     * Set type
-     *
-     * @param \AppBundle\Entity\Dictionary $type
-     *
-     * @return Category
-     */
-    public function setType(\AppBundle\Entity\Dictionary $types = null)
-    {
-        $this->types = $types;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return \AppBundle\Entity\Dictionary
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 }

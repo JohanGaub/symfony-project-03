@@ -30,34 +30,40 @@ class DictionaryController extends Controller
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Dictionary');
 
-        $typeTitle      = 'category_type';
-        $statusTitle    = 'technical_evolution_status';
-        $originTitle    = 'technical_evolution_origin';
+        $typeTitle       = 'category_type';
+        $statusTitle     = 'status';
+        $originTitle     = 'origin';
+        $ticketTypeTitle = 'ticket_type';
 
         $typeList   = $repo->getItemListByType($typeTitle)->getQuery()->getResult();
         $statusList = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
         $originList = $repo->getItemListByType($originTitle)->getQuery()->getResult();
+        $ticketTypeList = $repo->getItemListByType($ticketTypeTitle)->getQuery()->getResult();
 
-        $dictionary = new Dictionary();
-        $typeForm = $this->createForm(DictionaryType::class, $dictionary);
-        $statusForm = $this->createForm(DictionaryType::class, $dictionary);
-        $originForm = $this->createForm(DictionaryType::class, $dictionary);
-        $generalUpdateForm = $this->createForm(DictionaryType::class, $dictionary);
+        $dictionary         = new Dictionary();
+        $typeForm           = $this->createForm(DictionaryType::class, $dictionary);
+        $statusForm         = $this->createForm(DictionaryType::class, $dictionary);
+        $originForm         = $this->createForm(DictionaryType::class, $dictionary);
+        $ticketTypeForm     = $this->createForm(DictionaryType::class, $dictionary);
+        $generalUpdateForm  = $this->createForm(DictionaryType::class, $dictionary);
 
         return $this->render('@App/Pages/Dictionary/indexDictionary.html.twig', [
             /** Here get my title "type" */
-            'typeTitle'     => $typeTitle,
-            'statusTitle'   => $statusTitle,
-            'originTitle'   => $originTitle,
+            'typeTitle'         => $typeTitle,
+            'statusTitle'       => $statusTitle,
+            'originTitle'       => $originTitle,
+            'ticketTypeTitle'   => $ticketTypeTitle,
             /** Here get my dictionary's data */
-            'typeList'      => $typeList,
-            'statusList'    => $statusList,
-            'originList'     => $originList,
+            'typeList'          => $typeList,
+            'statusList'        => $statusList,
+            'originList'        => $originList,
+            'ticketTypeList'    => $ticketTypeList,
             /** Here get my form */
-            'typeForm'      => $typeForm->createView(),
-            'statusForm'    => $statusForm->createView(),
-            'originForm'    => $originForm->createView(),
-            'genUpdateForm' => $generalUpdateForm->createView()
+            'typeForm'          => $typeForm->createView(),
+            'statusForm'        => $statusForm->createView(),
+            'originForm'        => $originForm->createView(),
+            'ticketTypeForm'    => $ticketTypeForm->createView(),
+            'genUpdateForm'     => $generalUpdateForm->createView()
         ]);
     }
 
@@ -128,14 +134,33 @@ class DictionaryController extends Controller
             throw new HttpException('500', 'Invalid call');
         }
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Dictionary');
+        $repoDictionary = $em->getRepository('AppBundle:Dictionary');
 
-        $dictionary = $repo->find($dictionaryId);
+        $dictionary = $repoDictionary->find($dictionaryId);
         $form = $this->createForm(DictionaryType::class, $dictionary);
         $form->handleRequest($request);
 
-        $verification = $repo->findBy(['value' => $dictionary->getValue()]);
+        /**
+         * Verification if input have already liaison
+         */
+        $nbElements = $this->get('app.dictionary_verification')
+            ->getAllowedAction($dictionary->getType(), $dictionaryId);
 
+        if (count($nbElements) > 0) {
+            $data = [
+                'status'    => 'error',
+                'element'   => 'Vous ne pouvez pas supprimer cette entrée, des éléments y sont associés !'
+            ];
+            return new JsonResponse($data);
+        }
+
+        /**
+         * Verification if any input already have sending name
+         */
+        $verification = $repoDictionary->findBy([
+            'type'  => $dictionary->getType(),
+            'value' => $dictionary->getValue()
+        ]);
         if (count($verification) > 0) {
             $data = [
                 'status'    => 'error',
@@ -143,18 +168,10 @@ class DictionaryController extends Controller
             ];
             return new JsonResponse($data);
         }
-
-        $dictionary = $repo->find($dictionaryId);
-        $form = $this->createForm(DictionaryType::class, $dictionary);
-        $form->handleRequest($request);
-
         if ($form->isValid()) {
             $em->persist($dictionary);
             $em->flush();
-
-            $data = [
-                'status' => 'succes'
-            ];
+            $data = ['status' => 'succes'];
             return new JsonResponse($data);
         }
     }
@@ -173,19 +190,25 @@ class DictionaryController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-        try {
-            $dictionary = $this->getDoctrine()->getRepository('AppBundle:Dictionary')
-                ->find($dictionaryId);
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($dictionary);
-            $em->flush();
-        } catch (\Exception $e) {
+        $em = $this->getDoctrine()->getManager();
+        /**
+         * Verification if input have already liaison
+         */
+        $dictionary = $em->getRepository('AppBundle:Dictionary')
+            ->find($dictionaryId);
+        $nbElements = $this->get('app.dictionary_verification')
+            ->getAllowedAction($dictionary->getType(), $dictionaryId);
+
+        if (count($nbElements) > 0) {
             $data = [
-                'status'    => 'error',
-                'element'   => 'Vous ne pouvez pas supprimer cette entrée, des élements y sonts associés !'
+                'status' => 'error',
+                'element' => 'Vous ne pouvez pas supprimer cette entrée, des éléments y sont associés !'
             ];
             return new JsonResponse($data);
         }
+
+        $em->remove($dictionary);
+        $em->flush();
         return new JsonResponse(['status' => 'succes']);
     }
 }
