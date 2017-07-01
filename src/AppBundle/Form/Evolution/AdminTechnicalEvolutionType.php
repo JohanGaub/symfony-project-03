@@ -34,23 +34,22 @@ class AdminTechnicalEvolutionType extends AbstractType
             ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
             ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
             ->add('content', TextareaType::class, ['label' => 'Contenu'])
+            ->add('reason', TextType::class, [
+                'label'         => 'Raison',
+            ])
             ->add('status', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
-                    #Find all status in dictionary
                     return $repo->getItemListByType('technical_evolution_status');
                 },
                 'label'         => 'Status de la demande',
-                'placeholder'   => 'Séléctionnez un status',
-                'multiple'      => false,
-            ])
-            ->add('reason', TextType::class, [
-                'label'         => 'Raison'
+                'placeholder'   => 'Status cette évolution',
+                'multiple'      => false
             ])
             ->add('origin', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
-                    #Find all status in dictionary
+                    #Find all origin in dictionary
                     return $repo->getItemListByType('technical_evolution_origin');
                 },
                 'label'         => 'Origine de la demande',
@@ -94,19 +93,17 @@ class AdminTechnicalEvolutionType extends AbstractType
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
                 $form = $event->getForm();
-                $this->addCategoryNameField($form->getParent(), $form->getData());
+                $this->addCategoryTitleField($form->getParent(), $form->getData());
             }
         );
     }
 
+
     /**
-     * Add Category name field to form
-     *
      * @param FormInterface $form
      * @param $categoryType
-     * @internal param Dictionary $dictionary
      */
-    private function addCategoryNameField(FormInterface $form, $categoryType)
+    private function addCategoryTitleField(FormInterface $form, $categoryType)
     {
         $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
             'category',
@@ -145,5 +142,4 @@ class AdminTechnicalEvolutionType extends AbstractType
     {
         return 'app_bundle';
     }
-
 }

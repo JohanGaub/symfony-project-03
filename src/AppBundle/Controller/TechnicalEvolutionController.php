@@ -36,32 +36,17 @@ class TechnicalEvolutionController extends Controller
      */
     public function indexAction(Request $request, int $page = 1)
     {
-        /**
-         * TODO => Transform that array in searchFormEngine ??
-         * TODO => Maybe get and this format with general params ? evolution-technique/liste/1/te.id=000&te.title=name
-         * TODO => Find a solution to block access to any status for user update
-         * TODO => Access technical / commercial ?
-         */
-        $params = [
-            'te.title'      => !empty($searchTitle) ? $searchTitle : '',
-            'dtes.value'    => !empty($searchStatus) ? $searchStatus : 'En cours',
-        ];
-        $paramsTranformers = $this->get('app.sql.search_params_getter');
-        $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
-
-        // get technical evolution repository
+        // TODO => Don't forget to change that 0 = 0
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
-        // set Pagination parameters
         $evoByPage  = 8;
-        $evoTotal   = $repo->getNbEvolution($allowParamsFormat);
-
+        $evoTotal   = $repo->getNbEvolution('0 = 0');
         $pagination = [
             'page'          => $page,
             'route'         => 'evolutionHome',
             'pages_count'   => ceil($evoTotal / $evoByPage),
             'route_params'  => array(),
         ];
-        $evolutions = $repo->getEvolutions($allowParamsFormat, $page, $evoByPage);
+        $evolutions = $repo->getEvolutions('0 = 0', $page, $evoByPage);
 
         // TODO => Find a better solution for rounding (implement ROUND to DQL)
         foreach ($evolutions as $key => $value) {
@@ -133,35 +118,39 @@ class TechnicalEvolutionController extends Controller
      */
     public function updateAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
-        $em = $this->getDoctrine()->getManager();
-        $te = $em->getRepository('AppBundle:TechnicalEvolution')
-            ->find($technicalEvolution);
-
-        $category = $te->getCategory();
-        $categoryType = $category->getType();
-
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $form = $this->createForm(TechnicalEvolutionType::class, $te);
+            $form = $this->createForm(TechnicalEvolutionType::class, $technicalEvolution);
             $view = '@App/Pages/Evolutions/basicFormEvolution.html.twig';
         } else {
-            $form = $this->createForm(AdminTechnicalEvolutionType::class, $te);
+            $form = $this->createForm(AdminTechnicalEvolutionType::class, $technicalEvolution);
             $view = '@App/Pages/Evolutions/adminFormEvolution.html.twig';
         }
         $form->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+        $category = $technicalEvolution->getCategory();
+        $categoryType = $category->getType();
+
+        $categorys = $em->getRepository('AppBundle:Category')
+            ->getCategoryByType($categoryType)->getQuery()->getResult();
+
+        $categoryTypes = $em->getRepository('AppBundle:Dictionary')
+            ->getItemListByType('category_type')->getQuery()->getResult();
+
         if ($form->isSubmitted() && $form->isValid()){
-            $te->setUpdateDate(new \DateTime('now'));
-            $em->persist($te);
+            $technicalEvolution->setUpdateDate(new \DateTime('now'));
+            $em->persist($technicalEvolution);
             $em->flush();
 
-            $this->redirectToRoute('evolutionUnit', [
-                'technicalEvolution' => $technicalEvolution
-            ]);
+            $this->redirectToRoute('evolutionHome');
         }
+
         return $this->render($view, [
             'form'          => $form->createView(),
-            'category'      => $category,
-            'categoryType'  => $categoryType
+            'categoryId'    => $category->getId(),
+            'categoryType'  => $categoryType->getId(),
+            'categorys'     => $categorys,
+            'categoryTypes' => $categoryTypes
         ]);
     }
 

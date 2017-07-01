@@ -15,5 +15,6 @@
 /.sass-cache/
 /vendor/
 /web/bundles/
-/.sass-cache/
+/web/assets/upload/*.*
+!/web/assets/upload/.gitkeep
 /node_modules/

@@ -14,10 +14,10 @@ class DictionaryRepository extends EntityRepository
     /**
      * FormQueryBuilder to get all type of dictionary
      *
-     * @param string $type
+     * @param $type
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getItemListByType(string $type)
+    public function getItemListByType($type)
     {
         return $this->createQueryBuilder('d')
             ->where('d.type = :type')
