@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * Class DictionaryRepository
@@ -14,10 +15,10 @@ class DictionaryRepository extends EntityRepository
     /**
      * FormQueryBuilder to get all type of dictionary
      *
-     * @param string $type
-     * @return \Doctrine\ORM\QueryBuilder
+     * @param $type
+     * @return QueryBuilder
      */
-    public function getItemListByType(string $type)
+    public function getItemListByType($type)
     {
         return $this->createQueryBuilder('d')
             ->where('d.type = :type')

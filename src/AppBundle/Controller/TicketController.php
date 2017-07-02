@@ -2,12 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Ticket;
+use AppBundle\Form\CommentType;
 use AppBundle\Form\SearchTicketType;
 use AppBundle\Form\Ticket\UpdateTicketType;
 use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
-use AppBundle\Repository\TicketRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,11 +23,12 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class TicketController extends Controller
 {
+
     /**
      * @param int $page
      * @return Response
      * @internal param $page
-     * @Route("/index/{page}", name="index_ticket")
+     * @Route("/index/{page}", name="ticket_index")
      */
     public function indexAction($page = 1)
     {
@@ -36,7 +38,7 @@ class TicketController extends Controller
 
         $pagination = [
             'page' => $page,
-            'route' => 'index_ticket',
+            'route' => 'ticket_index',
             'pages_count' => ceil($tickets_count / $maxTickets),
             'route_params' => [],
         ];
@@ -62,20 +64,19 @@ class TicketController extends Controller
         $form       = $this->createForm(SearchTicketType::class, $search);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('index_ticket');
+            return $this->redirectToRoute('ticket_index');
         }
 
-        return $this->render('@App/Ticket/ticket.html.twig',[
+        return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             'form' => $form->createview(),
         ]);
     }
 
 
-
     /**
      * @param Request $request
      * @return RedirectResponse|Response
-     * @Route("/add", name="add_ticket")
+     * @Route("/add", name="ticket_add")
      */
     public function addAction(Request $request)
     {
@@ -111,7 +112,7 @@ class TicketController extends Controller
             $em->persist($ticket);
             $em->flush();
 
-            //return $this->redirectToRoute('index_ticket');
+            return $this->redirectToRoute('ticket_index');
         }
         return $this->render('@App/Pages/Ticket/addTicket.html.twig',[
             'form' => $form->createView(),
@@ -123,21 +124,21 @@ class TicketController extends Controller
      * @param Request $request
      * @param Ticket $ticket
      * @return RedirectResponse|Response
-     * @Route("/edit/{ticket}", name="edit_ticket")
+     * @Route("/edit/{ticket}", name="ticket_edit")
      */
     public function editAction(Request $request, Ticket $ticket)
     {
-        $em     = $this->getDoctrine()->getManager();
+        $em       = $this->getDoctrine()->getManager();
+        $comments = $em->getRepository('AppBundle:Comment')->getComment($ticket);
 
-        $informations = $em->getRepository('AppBundle:Ticket')->find($ticket);
         $form   = $this->createForm(EditTicketType::class, $ticket);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
 
             $ticket->setUpdateDate(new \DateTime('NOW'));
 
-            $status = $ticket->getStatus();
-            $endDate = $ticket->getEndDate();
+            $status     = $ticket->getStatus();
+            $endDate    = $ticket->getEndDate();
 
             // To make the endDate impossible to change when you already have one with either "Fermé" status or "Résolu" status
             if(!($endDate != null and ($status == 'Fermé' or  $status == 'Résolu'))){
@@ -148,11 +149,12 @@ class TicketController extends Controller
                 }
             }
             $em->flush();
-            return $this->redirectToRoute('index_ticket');
+            return $this->redirectToRoute('ticket_index');
         }
         return $this->render('@App/Pages/Ticket/editTicket.html.twig',[
-            'informations' => $informations,
-            'form' => $form->createView(),
+            'ticket'        => $ticket,
+            'comments'      => $comments,
+            'form'          => $form->createView(),
         ]);
     }
 
@@ -161,24 +163,24 @@ class TicketController extends Controller
      * @param Request $request
      * @param Ticket $ticket
      * @return RedirectResponse|Response
-     * @Route("/update/{ticket}", name="update_ticket")
+     * @Route("/update/{ticket}", name="ticket_update")
      */
     public function updateAction(Request $request, Ticket $ticket)
     {
         $em     = $this->getDoctrine()->getManager();
         $form   = $this->createForm(UpdateTicketType::class, $ticket);
 
-        $informations = $em->getRepository('AppBundle:Ticket')->find($ticket);
+        //$informations = $em->getRepository('AppBundle:Ticket')->find($ticket);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
-            return $this->redirectToRoute('index_ticket');
+            return $this->redirectToRoute('ticket_index');
         }
         return $this->render('@App/Pages/Ticket/updateTicket.html.twig',[
-            'informations' => $informations,
+            'ticket' => $ticket,
             'form' => $form->createView(),
         ]);
     }
@@ -187,14 +189,14 @@ class TicketController extends Controller
     /**
      * @param Ticket $ticket
      * @return RedirectResponse
-     * @Route("/delete/{ticket}", name="delete_ticket")
+     * @Route("/delete/{ticket}", name="ticket_delete")
      */
     public function deleteAction(Ticket $ticket)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($ticket);
         $em->flush();
-        return $this->redirectToRoute('index_ticket');
+        return $this->redirectToRoute('ticket_index');
     }
 }
 

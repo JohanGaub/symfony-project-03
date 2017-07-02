@@ -888,17 +888,15 @@ a {
   /**
    * Bootstrap rewrite
    */ }
-  .pagination li {
-    display: inline; }
-    .pagination li .current-page {
+  .pagination .current-page {
+    background-color: #fce6dd;
+    font-weight: 700; }
+  .pagination a {
+    color: #dd5116;
+    transition: 0.4s ease; }
+    .pagination a:hover {
       background-color: #fce6dd;
-      font-weight: 700; }
-    .pagination li a {
-      color: #dd5116;
-      transition: 0.4s ease; }
-      .pagination li a:hover {
-        background-color: #fce6dd;
-        color: #af4011; }
+      color: #af4011; }
   .pagination .pagination > li:first-child > a, .pagination .pagination > li:first-child > span {
     border-radius: 0 !important; }
   .pagination .pagination > li:last-child > a, .pagination .pagination > li:last-child > span {
@@ -993,3 +991,9 @@ a {
         background-size: 2rem; }
         #ticket .block-ticket .ticket a:hover {
           color: #9ac00a; }
+
+.comment {
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border: solid #dd5116 0.2rem;
+  background-color: whitesmoke;
+  margin: 2rem 0; }

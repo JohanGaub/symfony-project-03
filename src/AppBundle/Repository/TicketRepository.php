@@ -22,7 +22,7 @@ class TicketRepository extends EntityRepository
     public function getList($page = 1, $maxTickets = 10)
     {
         $q = $this->createQueryBuilder('t')
-            ->orderBy('t.emergency','ASC')
+            ->orderBy('t.emergency', 'ASC')
             ->addOrderBy('t.id', 'DESC')
             ->setFirstResult(($page - 1) * $maxTickets)
             ->setMaxResults($maxTickets)
@@ -39,8 +39,7 @@ class TicketRepository extends EntityRepository
     {
         $q = $this->createQueryBuilder('t')
             ->select('COUNT(t)')
-            ->getQuery()->getSingleScalarResult()
-        ;
+            ->getQuery()->getSingleScalarResult();
         return $q;
     }
 

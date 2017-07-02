@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getComment($ticket) {
+        return $this->createQueryBuilder('c')
+            ->select('c.comment as comment', 'up.firstname', 'up.lastname', 'c.creationDate', 'c.updateDate')
+            ->join('c.ticket', 't')
+            ->join('c.user', 'u')
+            ->join('u.userProfile','up')
+            ->where('c.ticket = :ticket')
+            ->orderBy('c.creationDate', 'DESC')
+            ->setParameter('ticket', $ticket)
+            ->getQuery()
+            ->getResult();
+    }
 }

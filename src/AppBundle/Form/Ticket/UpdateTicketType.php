@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Ticket;
 
 use AppBundle\Entity\Ticket;
+use AppBundle\Repository\CategoryRepository;
 use AppBundle\Repository\DictionaryRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -45,16 +46,41 @@ class UpdateTicketType extends AbstractType
                 'label' => 'Produit',
                 'required' => true,
             ])
-            ->add('category', EntityType::class, [
-                'class' => 'AppBundle\Entity\Category',
-                'query_builder' => function (EntityRepository $entityRepository) {
-                    return $entityRepository->createQueryBuilder('c')
-                        ->orderBy('c.title', 'ASC');
+
+            /*            ->add('category_type', EntityType::class, [
+                            'class' => 'AppBundle\Entity\Dictionary',
+                            'query_builder' => function (DictionaryRepository $dictionaryRepository) {
+                                return $dictionaryRepository->getItemListByType('category_type');
+                            },
+                            'choice_label' => 'type',
+                            'label' => 'Type de catégorie',
+                            'required' => true,
+                        ])*/
+
+        /*    ->add('category_type', EntityType::class, [
+                'label'         => 'Type de catégorie',
+                //'placeholder' => 'Sélectionnez le type de catégorie',
+                'class'             => 'AppBundle\Entity\Dictionary',
+                'required'      => true,
+                'mapped'        => true,
+                'query_builder' => function(DictionaryRepository $dictionaryRepository) {
+                    return $dictionaryRepository->getItemListByType('category_type');
                 },
-                'choice_label' => 'title',
-                'label' => 'Catégorie',
-                'required' => true,
             ])
+
+            /*           ->add('category_title', EntityType::class, [
+                           'label'         => 'Titre de catégorie',
+                           'class'         => 'AppBundle\Entity\Category',
+                           'required'      => true,
+                           'mapped'        => true,
+                           'query_builder' => function (CategoryRepository $categoryRepository) {
+                               return $categoryRepository->getCategoryByType('category_title');
+                           },
+                           //'choice_label' => 'title',
+                       ])*/
+
+
+
             ->add('subject', TextType::class, ['label' => 'Sujet du ticket'])
             ->add('content', TextareaType::class, ['label' =>  'Explications'])
 
@@ -65,7 +91,6 @@ class UpdateTicketType extends AbstractType
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
                     return $dictionaryRepository->getItemListByType('origin');
                 },
-                //'preferred_choices' => ,
             ])
 
             ->add('type', EntityType::class, [
@@ -76,7 +101,6 @@ class UpdateTicketType extends AbstractType
                     return $dictionaryRepository->getItemListByType('ticket_type');
                 }
             ])
-
             ->add('emergency', ChoiceType::class, [
                 'label' => 'Urgence',
                 'choices'  => [
@@ -118,6 +142,6 @@ class UpdateTicketType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle_update_ticket_type';
+        return 'app_bundle';
     }
 }

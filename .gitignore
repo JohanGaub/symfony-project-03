@@ -20,3 +20,4 @@
 /src/AppBundle/Command/Test*.php
 /web/assets/upload/
 /src/AppBundle/Entity/*.php~
+**/Entity/*~

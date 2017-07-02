@@ -93,10 +93,6 @@ a {
  * Pagination
  */
 .pagination {
-  // TODO => Center pagination
-
-  li {
-    display: inline;
 
     .current-page {
       background-color: lighten($secondary-color, 45%);
@@ -112,7 +108,8 @@ a {
         color: darken($secondary-color, 10%);
       }
     }
-  }
+
+
 
   /**
    * Bootstrap rewrite

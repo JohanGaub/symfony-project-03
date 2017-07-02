@@ -12,7 +12,8 @@
                         <th>Société</th>
                         <th>Utilisateur</th>
                         <th>Produit</th>
-                        <th>Catégorie</th>
+                        <th>Type de catégorie</th>
+                        <th>Titre de catégorie</th>
                         <th>Sujet</th>
                         <th>Explication</th>
                     </tr>
@@ -20,13 +21,14 @@
 
                     <tbody class="table-striped">
                     <tr>
-                        <td>{{ informations.id }}</td>
-                        <td>{{ informations.user.company.name }}</td>
-                        <td>{{ informations.user.userprofile.lastname }}</td>
-                        <td>{{ informations.product.name }}</td>
-                        <td>{{ informations.category.title }}</td>
-                        <td>{{ informations.subject }}</td>
-                        <td>{{ informations.content }}</td>
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.user.company.name }}</td>
+                        <td>{{ ticket.user.userprofile.lastname }}</td>
+                        <td>{{ ticket.product.name }}</td>
+                        <td>{{ ticket.category.type.id }}</td>
+                        <td>{{ ticket.category.title }}</td>
+                        <td>{{ ticket.subject }}</td>
+                        <td>{{ ticket.content }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -45,14 +47,14 @@
 
                     <tbody class="table-striped">
                     <tr>
-                        <td>{{ informations.origin }}</td>
-                        <td>{{ informations.type }}</td>
+                        <td>{{ ticket.origin }}</td>
+                        <td>{{ ticket.type }}</td>
                         <td><button type="button" data-toggle="modal" data-target="#myModal">
-                                <img src="{{ asset('assets/upload/' ~ informations.upload) }}" width = "150px"/>
+                                <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width = "150px"/>
                             </button></td>
-                        <td>{{ informations.creationdate|date("d/m/Y") }}</td>
-                        <td>{{ informations.updatedate|date("d/m/Y") }}</td>
-                        <td>{{ informations.creationdate|date("d/m/Y") }}</td>
+                        <td>{{ ticket.creationdate|date("d/m/Y") }}</td>
+                        <td>{{ ticket.updatedate|date("d/m/Y") }}</td>
+                        <td>{{ ticket.creationdate|date("d/m/Y") }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -67,7 +69,7 @@
                             <h4 class="modal-title" id="myModalLabel">Fichier uploadé</h4>
                         </div>
                         <div class="modal-body">
-                            <img src="{{ asset('assets/upload/' ~ informations.upload) }}" width="100%"/>
+                            <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width="100%"/>
                         </div>
                     </div>
                 </div>
@@ -75,7 +77,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 {{ form_start(form) }}
                 {{ form_row(form.emergency) }}
                 {{ form_row(form._token) }} {#necessary to get session#}
@@ -83,9 +85,47 @@
                 {{ form_row(form.isArchive) }}
                 {{ form_row(form.submit) }}
                 {{ form_end(form) }}
-                <a href="{{ path('index_ticket') }}">Retour à la liste des tickets</a>
+                <a href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
+                {{ dump(ticket) }}
+                {{ dump(comments) }}
+
             </div>
         </div>
+
+        {%  for comment in comments %}
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+                <div class="comment">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-6">
+                            <p>Prénom {{ comment.firstname }}</p>
+                            <p>Nom {{ comment.lastname  }}</p>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <p>Date de création {{ comment.creationDate|date("d/m/Y") }}</p>
+                            {% if comment.updateDate is not null %}
+                                <p>Date d'actualisation  {{ comment.updateDate|date("d/m/Y") }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-12">
+                            <p>Commentaires {{ comment.comment }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        {#        <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+                        {% include 'addComment.html.twig' %}
+                    </div>
+                </div>#}
+
+
 
     </section>
 {% endblock %}
