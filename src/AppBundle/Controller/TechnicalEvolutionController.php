@@ -150,7 +150,7 @@ class TechnicalEvolutionController extends Controller
         $this->get('app.email.sending')->sendEmail(
             'Votre évolution vient d\'être modifié',
             'contact@ashara.fr',
-            $users = $this->get('app.getter_user_admin')->getAdmin(),
+            [$this->getUser()],
             $this->render('@App/Email/email.updateEvolution.html.twig', [
                 'url' => $this->generateUrl('evolutionUnit', [
                     'technicalEvolution' => $technicalEvolution->getId()

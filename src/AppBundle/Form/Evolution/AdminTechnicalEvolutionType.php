@@ -6,6 +6,7 @@ use AppBundle\Repository\CategoryRepository;
 use AppBundle\Entity\TechnicalEvolution;
 use AppBundle\Repository\DictionaryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -31,11 +32,8 @@ class AdminTechnicalEvolutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
-            ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
-            ->add('content', TextareaType::class, ['label' => 'Contenu'])
-            ->add('reason', TextType::class, [
-                'label'         => 'Raison',
+            ->add('isArchivate', CheckboxType::class, [
+                'label'         => 'Archivage de l\'évolution (cocher cette case archivera l\'évolution'
             ])
             ->add('status', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
@@ -45,6 +43,12 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'label'         => 'Status de la demande',
                 'placeholder'   => 'Status cette évolution',
                 'multiple'      => false
+            ])
+            ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
+            ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
+            ->add('content', TextareaType::class, ['label' => 'Contenu'])
+            ->add('reason', TextType::class, [
+                'label'         => 'Raison',
             ])
             ->add('origin', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
