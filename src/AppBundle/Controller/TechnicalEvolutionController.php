@@ -142,7 +142,7 @@ class TechnicalEvolutionController extends Controller
             $technicalEvolution->setUpdateDate(new \DateTime('now'));
             $em->persist($technicalEvolution);
             $em->flush();
-            $this->redirectToRoute('evolutionHome');
+            return $this->redirectToRoute('evolutionHome');
         }
         /**
          * Mailling part (service)

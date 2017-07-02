@@ -1,0 +1,21 @@
+<div class="buttons-content">
+    <div class="buttons-block large-screen hidden-sm hidden-xs">
+        <a href="{{ path('categoryAdd') }}"
+           class="simple-btn-1">Nouvelle catégorie</a>
+
+        <a href="{{ path('categoryHome') }}"
+           class="simple-btn-1">Liste des catégories</a>
+    </div>
+    <div class="buttons-block dropdown small-screen hidden-md hidden-lg">
+        <a href="" class="dropdown-toggle simple-btn-1" data-toggle="dropdown" role="button"
+           aria-haspopup="true" aria-expanded="false">
+             Action<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="{{ path('categoryAdd') }}}">
+                    Nouvelle catégorie</a></li>
+            <li><a href="{{ path('categoryHome') }}">
+                    Liste des catégories</a></li>
+        </ul>
+    </div>
+</div>

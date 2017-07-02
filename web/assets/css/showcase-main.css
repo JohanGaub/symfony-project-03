@@ -24,6 +24,11 @@
   .invalid:hover {
     color: #b82222; }
 
+.neutral {
+  color: #403d40; }
+  .neutral:hover {
+    color: #0c0b0c; }
+
 /************
  Mixin
 ************/

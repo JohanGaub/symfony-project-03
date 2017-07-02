@@ -13,6 +13,19 @@ use Doctrine\ORM\QueryBuilder;
 class CategoryRepository extends EntityRepository
 {
     /**
+     * @return array
+     */
+    public function getCategorys()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c', 't')
+            ->join('c.type', 't', 'c.type = t.id')
+            ->orderBy('c.type')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param $categoryType
      * @return QueryBuilder
      */
