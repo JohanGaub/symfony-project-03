@@ -6,8 +6,8 @@ $(document).ready( function () {
     loaderDom += '<div class="inner one"></div>'
     loaderDom += '<div class="inner two"></div>'
     loaderDom += '</div>'
-    let loader = '.loader-wcs'
     let status = false;
+    let loader = '.loader-wcs'
     $(loader).append(loaderDom);
 
     /**
@@ -34,11 +34,15 @@ $(document).ready( function () {
                         $(data).each(function (key, values) {
                             let uteId   = values['id']
                             let user    = values['user']['userProfile']['firstname']
-                            user    += ' ' + values['user']['userProfile']['lastname']
+                            user        += ' ' + values['user']['userProfile']['lastname']
                             let date    = (new Date(values['date']['date']))
                             let comment = values['comment']
                             $('.comment-list').append(createComment(uteId, user, date, comment))
 
+                            /**
+                             * Verification about nb result request return
+                             * stop watcher if he is under than 10
+                             */
                             if (data.length < 10){
                                 $(loader).hide(function () {
                                     clearInterval(interval)

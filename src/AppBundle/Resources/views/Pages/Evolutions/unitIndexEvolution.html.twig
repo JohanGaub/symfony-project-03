@@ -45,22 +45,22 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-lg-12 no-padding">
-                {% if evolution.status != 'En attente' %}
-                    <div class="add-new-comment">
-                        {{ form_start(addForm, {'attr': {
-                            'id': 'app_bundle_comment_userTechnicalEvolution',
-                            'data-index-number': evolution.id
-                        }}) }}
-                        {{ form_end(addForm) }}
+        {% if evolution.status != 'En attente' %}
+            <div class="row">
+                <div class="col-lg-12 no-padding">
+                        <div class="add-new-comment">
+                            {{ form_start(addForm, {'attr': {
+                                'id': 'app_bundle_comment_userTechnicalEvolution',
+                                'data-index-number': evolution.id
+                            }}) }}
+                            {{ form_end(addForm) }}
+                        </div>
+                    <div class="comment-list">
                     </div>
-                {% endif %}
-                <div class="comment-list">
                 </div>
             </div>
-        </div>
-        <div class="loader-wcs" data-index-number="{{ evolution.id }}"></div>
+            <div class="loader-wcs" data-index-number="{{ evolution.id }}"></div>
+        {% endif %}
     </div>
 
     {# comment delete modal #}

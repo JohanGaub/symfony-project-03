@@ -2,8 +2,8 @@
 
 namespace AppBundle\Service;
 
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Swift_Mailer;
+use Swift_Message;
 
 /**
  * Class MaillerService
@@ -12,12 +12,12 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class MaillerService
 {
     /**
-     * @var Container
+     * @var \Swift_Mailer
      */
-    private $container;
+    private $swiftMailer;
 
     /**
-     * @var \Swift_Message
+     * @var Swift_Message
      */
     private $swiftMessage;
 
@@ -43,13 +43,12 @@ class MaillerService
 
     /**
      * MaillerService constructor.
-     * @param Container $container
-     * @param \Swift_Message $swiftMessage
+     * @param Swift_Mailer $swiftMailer
      */
-    public function __construct(Container $container, \Swift_Message $swiftMessage)
+    public function __construct(Swift_Mailer $swiftMailer)
     {
-        $this->container = $container;
-        $this->swiftMessage = $swiftMessage::newInstance();
+        $this->swiftMailer = $swiftMailer;
+        $this->swiftMessage = Swift_Message::newInstance();
     }
 
     /**
@@ -61,7 +60,7 @@ class MaillerService
      * @param mixed $body
      * @return array
      */
-    public function emailSend(string $subject, string $sender, array $recipients, $body)
+    public function sendEmail(string $subject, string $sender, array $recipients, $body)
     {
         $this->subject      = $subject;
         $this->sender       = $sender;
@@ -76,20 +75,13 @@ class MaillerService
         foreach ($this->recipients as $user) {
             $email = $user->getEmail();
             $this->swiftMessage
-                ->setSubject($this->subject)
-                ->setFrom($this->sender)
-                ->setTo($email)
-                ->setBody($this->body, 'text/html');
-            $validity = $this->container->get('mailer')->send($this->swiftMessage);
-
-            if (!isset($data['users']) && !$validity) {
-                $data['info']       = false;
-                $data['message']    = 'Il y a eu un problème pendant l\'envois de certains emails';
-            }
-            if (!$validity) {
-                $data['users'][] = $email;
-            }
+                    ->setSubject($this->subject)
+                    ->setFrom($this->sender)
+                    ->setTo($email)
+                    ->setBody($body, 'text/html');
+            $this->swiftMailer->send($this->swiftMessage);
         }
         return $data;
     }
+
 }

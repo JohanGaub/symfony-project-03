@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class TechnicalEvolutionController
@@ -23,6 +24,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class TechnicalEvolutionController extends Controller
 {
+    // TODO => Do a isArchivate boolean position
     /**
      * List all evolution with filter
      *
@@ -72,32 +74,40 @@ class TechnicalEvolutionController extends Controller
         $te = new TechnicalEvolution();
         $form = $this->createForm(TechnicalEvolutionType::class, $te);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $doctrine = $this->getDoctrine();
-            $dictionaryStatus = $doctrine->getRepository('AppBundle:Dictionary')
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $dictionaryStatus = $em->getRepository('AppBundle:Dictionary')
                 ->findOneBy(['type' => 'status', 'value' => 'En attente']);
+
             $te->setCreationDate(new \DateTime('now'));
             $te->setStatus($dictionaryStatus);
             $te->setUser($this->getUser());
             $te->setCategory($form->getData()->getCategory());
-            $em = $this->getDoctrine()->getManager();
+            $te->setIsArchivate(false);
+
             $em->persist($te);
             $em->flush();
-            $this->addFlash('notice', 'Votre demande d\'évolution à bien été prise en compte !');
+
             /**
              * Mailling part (service)
              */
-            $this->get('app.email.sending')->emailSend(
+            $this->get('app.email.sending')->sendEmail(
                 'Une nouvelle évolution technique vient d\'arrivée',
                 'contact@ashara.fr',
-                [],
-                ''
+                $this->get('app.getter_user_admin')->getAdmin(),
+                $this->render('@App/Email/email.newEvolution.html.twig', [
+                    'url' => $this->generateUrl('evolutionUnit', [
+                        'technicalEvolution' => $te->getId()
+                    ], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'evolution' => $te
+                ])
             );
             return $this->redirectToRoute('evolutionUser');
         }
         return $this->render('@App/Pages/Evolutions/basicFormEvolution.html.twig', [
             'form'      => $form->createView(),
-            'titlePage' => 'Nouvelle évolution'
+            'titlePage' => 'Nouvelle évolution',
         ]);
     }
 
@@ -134,6 +144,20 @@ class TechnicalEvolutionController extends Controller
             $em->flush();
             $this->redirectToRoute('evolutionHome');
         }
+        /**
+         * Mailling part (service)
+         */
+        $this->get('app.email.sending')->sendEmail(
+            'Votre évolution vient d\'être modifié',
+            'contact@ashara.fr',
+            $users = $this->get('app.getter_user_admin')->getAdmin(),
+            $this->render('@App/Email/email.updateEvolution.html.twig', [
+                'url' => $this->generateUrl('evolutionUnit', [
+                    'technicalEvolution' => $technicalEvolution->getId()
+                ], UrlGeneratorInterface::ABSOLUTE_URL),
+                'evolution' => $technicalEvolution
+            ])
+        );
         return $this->render($view, [
             'form'          => $form->createView(),
             'categoryId'    => $category->getId(),
@@ -154,6 +178,9 @@ class TechnicalEvolutionController extends Controller
      */
     public function unitIndexAction(TechnicalEvolution $technicalEvolution)
     {
+        // TODO => Find why isn't working ???? Need protect by 'En attente'
+        $this->redirectToRoute('evolutionHome');
+
         $uteRepository  = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');
         $teId           = $technicalEvolution->getId();
         $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
@@ -195,9 +222,7 @@ class TechnicalEvolutionController extends Controller
      */
     public function adminListWaitingAction()
     {
-        $params = [
-            'dtes.value' => 'En attente'
-        ];
+        $params = ['dtes.value' => 'En attente'];
         $paramsTranformers = $this->get('app.sql.search_params_getter');
         $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
         $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
@@ -231,12 +256,27 @@ class TechnicalEvolutionController extends Controller
         }
         $em     = $this->getDoctrine()->getManager();
         $status = $em->getRepository('AppBundle:Dictionary')->findOneBy([
-            'type'  => 'technical_evolution_status',
+            'type'  => 'status',
             'value' => $newStatus
         ]);
         $technicalEvolution->setStatus($status);
         $em->persist($technicalEvolution);
         $em->flush();
+
+        /**
+         * Mailling part (service)
+         */
+        $this->get('app.email.sending')->sendEmail(
+            'Votre évolution vient de changer de status',
+            'contact@ashara.fr',
+            $users = $this->get('app.getter_user_admin')->getAdmin(),
+            $this->render('@App/Email/email.changeStatusEvolution.html.twig', [
+                'url' => $this->generateUrl('evolutionUnit', [
+                    'technicalEvolution' => $technicalEvolution->getId()
+                ], UrlGeneratorInterface::ABSOLUTE_URL),
+                'evolution' => $technicalEvolution
+            ])
+        );
         return new JsonResponse($data);
     }
 }

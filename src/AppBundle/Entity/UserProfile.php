@@ -49,8 +49,6 @@ class UserProfile
      */
     private $phone2;
 
-
-
     /**
      * Get id
      *
@@ -155,5 +153,21 @@ class UserProfile
     public function getPhone2()
     {
         return $this->phone2;
+    }
+
+    /**
+     * GetFullName (get full user name)
+     * Ordered firstname / lastname => true
+     * Ordered lastname / firstname => false
+     *
+     * @param bool $order
+     * @return string
+     */
+    public function getFullName(bool $order = true)
+    {
+        if ($order)
+            return $this->firstname . ' ' . $this->lastname;
+        else
+            return $this->lastname . ' ' . $this->firstname;
     }
 }

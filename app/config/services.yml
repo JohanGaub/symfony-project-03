@@ -14,4 +14,8 @@ services:
 
     app.email.sending:
         class: AppBundle\Service\MaillerService
-        arguments: ['@service_container', '@swiftmailer.mailer']
+        arguments: ['@swiftmailer.mailer']
+
+    app.getter_user_admin:
+        class: AppBundle\Service\GetterUserAdmin
+        arguments: ['@doctrine.orm.entity_manager']

@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,7 +19,6 @@ class TechnicalEvolution
 {
     /**
      * @var integer
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -26,7 +27,6 @@ class TechnicalEvolution
 
     /**
      * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @Assert\Length(
      *      min = 8,
@@ -39,7 +39,6 @@ class TechnicalEvolution
 
     /**
      * @var string
-     *
      * @ORM\Column(name="sum_up", type="text", nullable=false)
      * @Assert\Length(
      *      min = 8,
@@ -52,7 +51,6 @@ class TechnicalEvolution
 
     /**
      * @var string
-     *
      * @ORM\Column(name="content", type="text", nullable=false)
      * @Assert\Length(
      *      min = 120,
@@ -65,11 +63,10 @@ class TechnicalEvolution
 
     /**
      * @var string
-     *
      * @ORM\Column(name="reason", type="string", length=255, nullable=false)
      * @Assert\Length(
      *      min = 4,
-     *      max = 540,
+     *      max = 255,
      *      minMessage = "Votre raison doit faire au minimum {{ limit }} caractères ",
      *      maxMessage = "Votre raison doit faire au maximum {{ limit }} caractères "
      * )
@@ -89,22 +86,19 @@ class TechnicalEvolution
     private $origin;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
      * @ORM\Column(name="expected_delay", type="datetime", nullable=false)
      */
     private $expectedDelay;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
      * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
@@ -129,6 +123,12 @@ class TechnicalEvolution
      * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution", cascade={"persist"})
      */
     private $userTechnicalEvolutions;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="is_archivate", type="boolean")
+     */
+    private $isArchivate;
 
     /**
      * Get id
@@ -243,7 +243,7 @@ class TechnicalEvolution
     /**
      * Get status
      *
-     * @return \AppBundle\Entity\Dictionary
+     * @return Dictionary
      */
     public function getStatus()
     {
@@ -253,7 +253,7 @@ class TechnicalEvolution
     /**
      * Get origin
      *
-     * @return \AppBundle\Entity\Dictionary
+     * @return Dictionary
      */
     public function getOrigin()
     {
@@ -275,7 +275,7 @@ class TechnicalEvolution
     /**
      * Set expectedDelay
      *
-     * @param \DateTime $expectedDelay
+     * @param DateTime $expectedDelay
      * @return TechnicalEvolution
      */
     public function setExpectedDelay($expectedDelay)
@@ -287,7 +287,7 @@ class TechnicalEvolution
     /**
      * Get expectedDelay
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getExpectedDelay()
     {
@@ -297,7 +297,7 @@ class TechnicalEvolution
     /**
      * Set creationDate
      *
-     * @param \DateTime $creationDate
+     * @param DateTime $creationDate
      * @return TechnicalEvolution
      */
     public function setCreationDate($creationDate)
@@ -309,7 +309,7 @@ class TechnicalEvolution
     /**
      * Get creationDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCreationDate()
     {
@@ -319,7 +319,7 @@ class TechnicalEvolution
     /**
      * Set updateDate
      *
-     * @param \DateTime $updateDate
+     * @param DateTime $updateDate
      * @return TechnicalEvolution
      */
     public function setUpdateDate($updateDate)
@@ -331,7 +331,7 @@ class TechnicalEvolution
     /**
      * Get updateDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdateDate()
     {
@@ -437,10 +437,32 @@ class TechnicalEvolution
     /**
      * Get userTechnicalEvolutions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getUserTechnicalEvolutions()
     {
         return $this->userTechnicalEvolutions;
+    }
+
+    /**
+     * Getter isArchivate
+     *
+     * @return boolean
+     */
+    public function getisArchivate()
+    {
+        return $this->isArchivate;
+    }
+
+    /**
+     * Setter isArchivate
+     *
+     * @param boolean $isArchivate
+     * @return TechnicalEvolution
+     */
+    public function setIsArchivate($isArchivate)
+    {
+        $this->isArchivate = $isArchivate;
+        return $this;
     }
 }

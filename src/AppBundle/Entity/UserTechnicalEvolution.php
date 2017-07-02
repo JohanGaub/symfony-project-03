@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\User;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,7 +15,6 @@ class UserTechnicalEvolution
 {
     /**
      * @var integer
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -26,35 +23,30 @@ class UserTechnicalEvolution
 
     /**
      * @var integer
-     *
      * @ORM\Column(name="note", type="integer", nullable=true)
      */
     private $note;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
      * @var DateTime
-     *
      * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
     /**
      * @var DateTime
-     *
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
@@ -71,6 +63,7 @@ class UserTechnicalEvolution
 
     /**
      * UserTechnicalEvolution constructor.
+     *
      * @param $type
      */
     public function __construct($type = 'undefined')

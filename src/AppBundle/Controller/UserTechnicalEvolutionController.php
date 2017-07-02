@@ -38,7 +38,8 @@ class UserTechnicalEvolutionController extends Controller
         $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
         $form->handleRequest($request);
         $data = [];
-        if ($form->isValid()) {
+
+        if ($form->isValid() && $technicalEvolution->getStatus()->getValue() != 'En attente') {
             $user = $this->getUser();
             $currentDate = new \DateTime('now');
             $comment->setUser($user);
@@ -50,7 +51,7 @@ class UserTechnicalEvolutionController extends Controller
             $userProfile = $user->getUserProfile();
             $data = [
                 'id'      => $comment->getId(),
-                'user'    => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
+                'user'    => $userProfile->getFullName(),
                 'date'    => $currentDate,
                 'comment' => $comment->getComment()
             ];
