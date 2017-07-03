@@ -1132,6 +1132,10 @@ button[type='submit'] {
   .unit-evolution .evolution-sum-up {
     text-align: center; }
 
+.delete-value {
+  color: #dd5116;
+  font-weight: 700; }
+
 /**
  * Comments Parts
  */

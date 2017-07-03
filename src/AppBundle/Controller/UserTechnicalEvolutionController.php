@@ -123,16 +123,15 @@ class UserTechnicalEvolutionController extends Controller
     }
 
     /**
-     * TODO => Can't find this route ???
      * Delete comments for TechnicalEvolutions
      *
      * @Route("/commentaires/suppression/{userTechnicalEvolutionId}", name="evolutionCommentsDelete")
      * @param Request $request
-     * @param int $userTechnicalEvolutionId
+     * @param mixed $userTechnicalEvolutionId
      * @return JsonResponse
      * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
-    public function deleteCommentsAction(Request $request, int $userTechnicalEvolutionId)
+    public function deleteCommentsAction(Request $request, $userTechnicalEvolutionId)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');

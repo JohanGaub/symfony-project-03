@@ -97,11 +97,11 @@ $(document).ready( function () {
     let commentId       = ''
     let commentValue    = ''
 
-    $(document).on('click', '.modal-delete', function (e) {
+    $(document).on('click', '.modal-delete', function () {
         let $this           = $(this)
-        commentFullId       = $this.parent().attr('id')
-        commentId           = commentFullId.replace('ute_id_', '')
-        commentValue        = $this.parent().children($('.comment-value'))[2]['outerText']
+        commentFullId       = $this.parent().attr('class')
+        commentId           = $this.attr('data-index-number')
+        commentValue        = $('#comment-value-id-' + commentId).text()
         $('.delete-value').replaceWith('<p class="delete-value">' + commentValue + '</p>')
     })
 
@@ -111,11 +111,11 @@ $(document).ready( function () {
             type: 'GET',
             url: '/evolution-technique/commentaires/suppression/' + commentId,
             timeout: 3000,
-            success: function(){
+            success: function() {
                 let elementList = '<div class="unit-comment">'
-                elementList += '<h5>Commentaire supprimé<h5>'
-                elementList += '</div>'
-                $('#' + commentFullId).replaceWith(elementList)
+                    elementList += '<h5>Commentaire supprimé<h5>'
+                    elementList += '</div>'
+                $('#ute_id_' + commentId).replaceWith(elementList)
             },
         })
     })
@@ -133,11 +133,10 @@ $(document).ready( function () {
 
     $(document).on('click', '.modal-update', function () {
         let $this       = $(this)
-        commentFullId   = $this.parent().attr('id')
+        commentFullId   = $this.parent().parent().attr('id')
         commentId       = commentFullId.replace('ute_id_', '')
         commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
         $(commentField).val(commentValue)
-        console.log()
     })
 
     $(commentForm).submit( function (e) {
@@ -193,19 +192,19 @@ function isScrolledIntoView(elem)
 function createComment(uteId, user, date, comment)
 {
     let elementList = '<div id="ute_id_' + uteId + '" class="unit-comment">'
-    elementList += '<h5>Par <span class="strong-green">' + user + '</span></h5>'
-    elementList += '<i>Le ' + date + '</i>'
-    elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
-    elementList += '<div class="be-flex space-between">'
-    elementList += '<a class="modal-update" href="" data-toggle="modal" '
-    elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
-    elementList += 'Modifier le commentaire'
-    elementList += '</a>'
-    elementList += '<a class="modal-delete" href="" data-toggle="modal" '
-    elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
-    elementList += 'Supprimer le commentaire'
-    elementList += '</a>'
-    elementList += '</div>'
-    elementList += '</div>'
+        elementList += '<h5>Par <span class="strong-green">' + user + '</span></h5>'
+        elementList += '<i>Le ' + date + '</i>'
+        elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
+        elementList += '<div class="be-flex space-between">'
+        elementList += '<a class="modal-update" href="" data-toggle="modal" '
+        elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
+        elementList += 'Modifier le commentaire'
+        elementList += '</a>'
+        elementList += '<a class="modal-delete" href="" data-toggle="modal" '
+        elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
+        elementList += 'Supprimer le commentaire'
+        elementList += '</a>'
+        elementList += '</div>'
+        elementList += '</div>'
     return elementList;
 }

@@ -112,9 +112,11 @@
   .evolution-sum-up {
     text-align: center;
   }
-
 }
-
+.delete-value {
+  color: $secondary-color;
+  font-weight: 700;
+}
 /**
  * Comments Parts
  */

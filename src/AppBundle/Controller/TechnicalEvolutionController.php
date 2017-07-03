@@ -24,17 +24,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class TechnicalEvolutionController extends Controller
 {
-    // TODO => Do a isArchivate boolean position
     /**
      * List all evolution with filter
      *
      * @Route("/liste/{page}", name="evolutionHome")
-     * @param Request $request
      * @param int $page
      * @return Response
      * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
-    public function indexAction(Request $request, int $page = 1)
+    public function indexAction(int $page = 1)
     {
         // TODO => Don't forget to change that 0 = 0
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
@@ -62,7 +60,6 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Add new evolution
-     * TODO -> mail & admin confirmation (service)
      *
      * @Route("/nouveau", name="evolutionAdd")
      * @param Request $request
@@ -113,7 +110,7 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Update evolution (Admin && Basic users)
-     * TODO => Fix preselect category & category_type
+     * TODO => Fix select categoryType update category
      *
      * @Route("/modification/{technicalEvolution}", name="evolutionUpdate")
      * @param Request $request
@@ -130,9 +127,10 @@ class TechnicalEvolutionController extends Controller
             $view = '@App/Pages/Evolutions/adminFormEvolution.html.twig';
         }
         $form->handleRequest($request);
-        $em = $this->getDoctrine()->getManager();
-        $category = $technicalEvolution->getCategory();
-        $categoryType = $category->getType();
+        $em             = $this->getDoctrine()->getManager();
+        $category       = $technicalEvolution->getCategory();
+        $categoryType   = $category->getType();
+
         $categorys = $em->getRepository('AppBundle:Category')
             ->getCategoryByType($categoryType)->getQuery()->getResult();
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
@@ -178,9 +176,10 @@ class TechnicalEvolutionController extends Controller
      */
     public function unitIndexAction(TechnicalEvolution $technicalEvolution)
     {
-        // TODO => Find why isn't working ???? Need protect by 'En attente'
-        $this->redirectToRoute('evolutionHome');
-
+        if (($technicalEvolution->getStatus()->getValue() == 'En attente' && !$this->isGranted('ROLE_ADMIN'))
+            || ($technicalEvolution->getUser() == $this->getUser())) {
+            return $this->redirectToRoute('evolutionHome');
+        }
         $uteRepository  = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');
         $teId           = $technicalEvolution->getId();
         $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
@@ -247,9 +246,9 @@ class TechnicalEvolutionController extends Controller
             throw new HttpException('500', 'Invalid call');
         }
         $data   = $request->request->get('data');
-        if ($data === 'true') {
+        if ($data == 'true') {
             $newStatus = 'En cours';
-        } else if ($data === 'false') {
+        } else if ($data == 'false') {
             $newStatus = 'Refusé';
         } else {
             throw new Exception('Une erreur est survenue, veuillez réessayer plus tard');
