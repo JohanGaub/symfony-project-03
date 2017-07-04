@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Form\Evolution\TechnicalEvolutionFilterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
@@ -27,34 +28,26 @@ class TechnicalEvolutionController extends Controller
     /**
      * List all evolution with filter
      *
-     * @Route("/liste/{page}", name="evolutionHome")
-     * @param int $page
+     * @Route("/liste", name="evolutionHome")
      * @return Response
      * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
-    public function indexAction(int $page = 1)
+    public function indexAction()
     {
-        // TODO => Don't forget to change that 0 = 0
-        $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
-        $evoByPage  = 8;
-        $evoTotal   = $repo->getNbEvolution('0 = 0');
-        $pagination = [
-            'page'          => $page,
-            'route'         => 'evolutionHome',
-            'pages_count'   => ceil($evoTotal / $evoByPage),
-            'route_params'  => array(),
-        ];
-        $evolutions = $repo->getEvolutions('0 = 0', $page, $evoByPage);
+        $navigator = $this->get("app.navigator");
+        $filter = $navigator->getEntityFilter();
+        $form = $this->createForm(TechnicalEvolutionFilterType::class, $filter);
 
-        // TODO => Find a better solution for rounding (implement ROUND to DQL)
-        foreach ($evolutions as $key => $value) {
-            if (strlen($value['avg_notes']) > 3) {
-                $evolutions[$key]['avg_notes'] = substr($value['avg_notes'], 0, 3);
-            }
-        }
-        return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
-            'evolutions' => $evolutions,
-            'pagination' => $pagination,
+        /**
+         * Next you need to render view with this element :
+         * You can replace "$this->get("app.navigator")" by "$navigator"
+         */
+        return $this->render('@App/Pages/Evolutions/indexEvolution.html.twig', [
+            'filter'        => $filter,
+            'filterURL'     => http_build_query($filter),
+            'data'          => $this->get("app.navigator"),
+            'documentType'  => "Evolutions",
+            'form'          => $form->createView(),
         ]);
     }
 

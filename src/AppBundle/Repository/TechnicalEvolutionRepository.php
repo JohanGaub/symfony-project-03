@@ -11,6 +11,50 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class TechnicalEvolutionRepository extends EntityRepository
 {
+    const MAX_RESULT = 10;
+
+    /**
+     * @param $page
+     * @param $filter
+     * @return \Doctrine\ORM\Query
+     */
+    public function getRowsByPage($page, $filter)
+    {
+        $alias = 'te';
+
+        $query = $this->createQueryBuilder($alias)
+            ->select('te.id', 'te.title', 'te.sumUp', 'te.creationDate', 'te.updateDate', 'te.reason', 'te.expectedDelay')
+            ->addSelect('dtes.value as status')
+            ->addSelect('dteo.value as origin')
+            ->addSelect('c.title as category_title')
+            ->addSelect('ct.value as category_type')
+            ->addSelect('u.id as user_id')
+            ->addSelect('COUNT(ute.note) as nb_notes')
+            ->addSelect('COUNT(ute.comment) as nb_comments')
+            ->addSelect('AVG(ute.note) as avg_notes')
+            ->join('te.status', 'dtes', 'te.status = dtes.id')
+            ->join('te.origin', 'dteo', 'te.origin = dteo.id')
+            ->join('te.category', 'c', 'te.category = c.id')
+            ->join('te.user', 'u', 'te.user = u.id')
+            ->join('c.type', 'ct', 'c.type = ct.id')
+            ->join('te.userTechnicalEvolutions', 'ute', 'te.id = ute.technicalEvolution')
+            ->orderBy('te.id')
+            ->groupBy('te.id')
+            ->setFirstResult(($page - 1) * self::MAX_RESULT)
+            ->setMaxResults(self::MAX_RESULT);
+        if (!is_null($filter)) {
+            foreach ($filter as $field => $value) {
+                if ($value !== '') {
+                    if (strpos($field, '_') !== 0) {
+                        $search = "$alias.$field like '$value%'";
+                        $query->andWhere($search);
+                    }
+                }
+            }
+        }
+        return $query->getQuery();
+    }
+
     /**
      * Get evolution with a bit informations
      *

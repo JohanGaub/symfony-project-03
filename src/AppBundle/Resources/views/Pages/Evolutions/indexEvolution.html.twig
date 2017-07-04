@@ -14,17 +14,17 @@
             </div>
 
             <div class="row list-evolution">
-                {% for evolution in evolutions %}
+                {% for evolution in data %}
                     <div class="col-xs-12 col-md-12 col-lg-6">
                         <div class="bo-evolution">
                             <div class="bo-top-evolution">
                                 <div class="be-flex space-between">
                                     <div class="evolution-notes">
-                                        <p class="avg-note">{{ evolution.avg_notes }}</p>
-                                        <p class="nb-notes"><span>{{ evolution.nb_notes }}</span> notes</p>
+                                        {#<p class="avg-note">{{ evolution.avg_notes }}</p>#}
+                                        {#<p class="nb-notes"><span>{{ evolution.nb_notes }}</span> notes</p>#}
                                     </div>
                                     <div class="evolution-titles">
-                                        <h2>{{ evolution.title }}</h2>
+                                        <h2>{{ evolution.title }} - {{ evolution.id }}</h2>
                                     </div>
                                 </div>
                                 <div class="evolution-status">
@@ -32,26 +32,26 @@
                                 </div>
                                 <div class="evolution-category">
                                     <div class="evoltuion-category-type">
-                                        <p>Type de catégorie : {{ evolution.category_type }}</p>
+                                        {#<p>Type de catégorie : {{ evolution.category_type }}</p>#}
                                     </div>
                                     <div class="evoltuion-categroy-name">
-                                        <p>Nom de catégorie : {{ evolution.category_title }}</p>
+                                        {#<p>Nom de catégorie : {{ evolution.category_title }}</p>#}
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="bo-middle-evolution">
-                                <ul>
-                                    <li>{{ evolution.sumUp }}</li>
-                                    {% if evolution.updateDate is defined %}
-                                    <li>Date de modification : {{ evolution.updateDate|date("d/m/Y") }}</li>
-                                    {% else %}
-                                    <li>Date de création : {{ evolution.creationDate|date("d/m/Y") }}</li>
-                                    {% endif %}
-                                    <li>Date de fin : {{ evolution.expectedDelay|date("d/m/Y", "Europe/Paris") }}</li>
-                                    <li>Evolution demandé par un {{ evolution.origin }}</li>
-                                </ul>
-                            </div>
+                            {#<div class="bo-middle-evolution">#}
+                                {#<ul>#}
+                                    {#<li>{{ evolution.sumUp }}</li>#}
+                                    {#{% if evolution.updateDate is defined %}#}
+                                    {#<li>Date de modification : {{ evolution.updateDate|date("d/m/Y") }}</li>#}
+                                    {#{% else %}#}
+                                    {#<li>Date de création : {{ evolution.creationDate|date("d/m/Y") }}</li>#}
+                                    {#{% endif %}#}
+                                    {#<li>Date de fin : {{ evolution.expectedDelay|date("d/m/Y", "Europe/Paris") }}</li>#}
+                                    {#<li>Evolution demandé par un {{ evolution.origin }}</li>#}
+                                {#</ul>#}
+                            {#</div>#}
 
                             <div class="bo-bottom-evolution">
                                 <a href="{{ path('evolutionUnit', {'technicalEvolution': evolution.id}) }}">En savoir plus</a>
@@ -67,7 +67,7 @@
             </div>
 
             <div class="col-lg-12">
-                {% include '@App/Elements/include.pagination.html.twig' %}
+                {% include '@App/Elements/include.pagination-filter.html.twig' %}
             </div>
         </div>
     </div>
