@@ -110,7 +110,6 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Update evolution (Admin && Basic users)
-     * TODO => Fix select categoryType update category
      *
      * @Route("/modification/{technicalEvolution}", name="evolutionUpdate")
      * @param Request $request
@@ -119,6 +118,7 @@ class TechnicalEvolutionController extends Controller
      */
     public function updateAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
+        /** Verification about user, if he is admin or not */
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $form = $this->createForm(TechnicalEvolutionType::class, $technicalEvolution);
             $view = '@App/Pages/Evolutions/basicFormEvolution.html.twig';
@@ -127,42 +127,47 @@ class TechnicalEvolutionController extends Controller
             $view = '@App/Pages/Evolutions/adminFormEvolution.html.twig';
         }
         $form->handleRequest($request);
+
         $em             = $this->getDoctrine()->getManager();
         $category       = $technicalEvolution->getCategory();
-        $categoryType   = $category->getType();
+        $categoryType   = isset($category) ? $category->getType() : null;
 
         $categorys = $em->getRepository('AppBundle:Category')
             ->getCategoryByType($categoryType)->getQuery()->getResult();
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
             ->getItemListByType('category_type')->getQuery()->getResult();
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $technicalEvolution->setUpdateDate(new \DateTime('now'));
             $em->persist($technicalEvolution);
             $em->flush();
-            return $this->redirectToRoute('evolutionHome');
+
+            /**
+             * Mailling part (service)
+             */
+            $this->get('app.email.sending')->sendEmail(
+                'Votre évolution vient d\'être modifié',
+                'contact@ashara.fr',
+                [$this->getUser()],
+                $this->render('@App/Email/email.updateEvolution.html.twig', [
+                    'url' => $this->generateUrl('evolutionUnit', [
+                        'technicalEvolution' => $technicalEvolution->getId()
+                    ], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'evolution' => $technicalEvolution
+                ])
+            );
+            return $this->redirectToRoute('evolutionUnit', [
+                'technicalEvolution' => $technicalEvolution->getId()
+            ]);
         }
-        /**
-         * Mailling part (service)
-         */
-        $this->get('app.email.sending')->sendEmail(
-            'Votre évolution vient d\'être modifié',
-            'contact@ashara.fr',
-            [$this->getUser()],
-            $this->render('@App/Email/email.updateEvolution.html.twig', [
-                'url' => $this->generateUrl('evolutionUnit', [
-                    'technicalEvolution' => $technicalEvolution->getId()
-                ], UrlGeneratorInterface::ABSOLUTE_URL),
-                'evolution' => $technicalEvolution
-            ])
-        );
         return $this->render($view, [
             'form'          => $form->createView(),
-            'categoryId'    => $category->getId(),
-            'categoryType'  => $categoryType->getId(),
+            'categoryId'    => isset($category) ? $category->getId() : null,
+            'categoryType'  => isset($categoryType) ? $categoryType->getId() : null,
             'categorys'     => $categorys,
             'categoryTypes' => $categoryTypes,
-            'titlePage'     => 'Modification d\'évolution'
+            'titlePage'     => 'Modification d\'évolution',
+            'isUpdate'      => true,
         ]);
     }
 
@@ -177,7 +182,7 @@ class TechnicalEvolutionController extends Controller
     public function unitIndexAction(TechnicalEvolution $technicalEvolution)
     {
         if (($technicalEvolution->getStatus()->getValue() == 'En attente' && !$this->isGranted('ROLE_ADMIN'))
-            || ($technicalEvolution->getUser() == $this->getUser())) {
+            || ($technicalEvolution->getUser() == !$this->getUser())) {
             return $this->redirectToRoute('evolutionHome');
         }
         $uteRepository  = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');

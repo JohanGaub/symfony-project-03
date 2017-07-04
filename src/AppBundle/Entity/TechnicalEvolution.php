@@ -234,7 +234,7 @@ class TechnicalEvolution
      * @param Dictionary $status
      * @return TechnicalEvolution
      */
-    public function setStatus(Dictionary $status)
+    public function setStatus(Dictionary $status = null)
     {
         $this->status = $status;
         return $this;

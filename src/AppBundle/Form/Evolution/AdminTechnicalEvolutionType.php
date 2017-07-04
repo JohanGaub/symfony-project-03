@@ -2,8 +2,8 @@
 
 namespace AppBundle\Form\Evolution;
 
-use AppBundle\Repository\CategoryRepository;
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Repository\CategoryRepository;
 use AppBundle\Repository\DictionaryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -33,7 +33,8 @@ class AdminTechnicalEvolutionType extends AbstractType
     {
         $builder
             ->add('isArchivate', CheckboxType::class, [
-                'label'         => 'Archivage de l\'évolution (cocher cette case archivera l\'évolution'
+                'label'         => 'Archivage de l\'évolution (cocher cette case archivera l\'évolution',
+                'required'      => false
             ])
             ->add('status', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
@@ -44,9 +45,15 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'placeholder'   => 'Status cette évolution',
                 'multiple'      => false
             ])
-            ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
-            ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
-            ->add('content', TextareaType::class, ['label' => 'Contenu'])
+            ->add('title', TextType::class, [
+                'label' => 'Nom de l\'évolution'
+            ])
+            ->add('sum_up', TextareaType::class, [
+                'label' => 'Résumé'
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu'
+            ])
             ->add('reason', TextType::class, [
                 'label'         => 'Raison',
             ])
@@ -89,7 +96,7 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'placeholder'   => 'Séléctionnez votre catégorie',
             ])
             ->add('submit', SubmitType::class, [
-                'label' =>  'Soumettre la demande'
+                'label' =>  'Enregistrer'
             ])
         ;
 
@@ -101,7 +108,6 @@ class AdminTechnicalEvolutionType extends AbstractType
             }
         );
     }
-
 
     /**
      * @param FormInterface $form
@@ -134,9 +140,9 @@ class AdminTechnicalEvolutionType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => TechnicalEvolution::class
-        ));
+        ]);
     }
 
     /**

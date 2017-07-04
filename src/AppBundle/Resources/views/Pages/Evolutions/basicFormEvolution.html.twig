@@ -33,11 +33,28 @@
                 {{ form_end(form) }}
             </div>
         </div>
-
     </div>
+    {% if isUpdate is defined %}
+        {# Hidden parts for form select inject  #}
+        <select id="hidden-select-inject-category_type" name="app_bundle[category_type]" required="required" class="form-control hidden">
+            <option value="">Sélectionnez votre type catégorie</option>
+            {% for type in categoryTypes %}
+                <option value="{{ type.id }}" {% if (type.id == categoryType) %}selected="selected"{% endif %}>{{ type.value }}</option>
+            {% endfor %}
+        </select>
 
+        <select id="hidden-select-inject-category" name="app_bundle[category]" required="required" class="form-control hidden">
+            <option value="">Sélectionnez votre catégorie</option>
+            {% for category in categorys %}
+                <option value="{{ category.id }}" {% if (category.id == categoryId) %}selected="selected"{% endif %}>{{ category.title }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
+    {% if isUpdate is defined %}
+        <script src="{{ asset('assets/js/form.update-category-title.js') }}"></script>
+    {% endif %}
 {% endblock %}

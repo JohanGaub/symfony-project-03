@@ -101,6 +101,7 @@ class UserTechnicalEvolutionController extends Controller
         $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
         $form->handleRequest($request);
         $data = [];
+
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
             || $this->getUser()->getId() == $comment->getUser()->getId()) {
             if ($form->isValid()) {
@@ -139,6 +140,7 @@ class UserTechnicalEvolutionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $comment = $em->getRepository('AppBundle:UserTechnicalEvolution')
             ->findOneBy(['id' => $userTechnicalEvolutionId]);
+
         /**
          * Here we do delete only if user is admin or if
          * userTechnicalEvolution->user_id is current user id
