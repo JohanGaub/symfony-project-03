@@ -3,11 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Comment;
-use AppBundle\Form\CommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -17,31 +14,26 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CommentController extends Controller
 {
-
     /**
-     * @param Request $request
-     * @return Response
-     * @Route("/add", name="comment_add")
+     * @param Comment $comment
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param Request $request
+     * @internal param Comment $deleteComment
+     * @Route("/delete/{comment}", name="comment_delete")
      */
-    public function addCommentAction(Request $request) {
-        $user = $this->getUser();
-        $newComment = new Comment();
+    public function deleteCommentAction(Comment $comment) {
+
+        $ticket = $comment->getTicket()->getId();
         $em = $this->getDoctrine()->getManager();
+        $em->remove($comment);
+        $em->flush();
 
-        $form = $this->createForm(CommentType::class, $newComment);
-        $form->handleRequest($request);
-        if($form->isSubmitted() and $form->isValid()) {
-            $newComment->setUser($user);
-
-            $em->persist($newComment);
-            $em->flush();
-        }
-        return $this->render('@App/Pages/Ticket/addComment.html.twig', [
-            'new_comment'   => $newComment,
-            'form_comment'  => $form->createView(),
-        ]);
-
+      return $this->redirectToRoute('ticket_edit', [
+          'ticket' => $ticket,
+      ]);
     }
+
+
 
 
 }

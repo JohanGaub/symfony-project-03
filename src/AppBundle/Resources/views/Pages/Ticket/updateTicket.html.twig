@@ -42,20 +42,20 @@
         <div class="row">
 
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
-                {{ form_start(form) }}
-                {{ form_row(form.product) }}
-                {#  {{ form_row(form.category_type) }}
-               {{ form_row(form.category_title) }}#}
-                {{ form_row(form.subject) }}
-                {{ form_row(form.content) }}
-                {{ form_row(form.origin) }}
-                {{ form_row(form.type) }}
-                {{ form_row(form.emergency) }}
-                {{ form_row(form._token) }} {#necessary to get session#}
-                {{ form_row(form.status) }}
-                {{ form_row(form.isArchive) }}
-                {{ form_row(form.submit) }}
-                {{ form_end(form) }}
+                {{ form_start(updateTicketForm) }}
+                {{ form_row(updateTicketForm.product) }}
+                {#  {{ form_row(updateTicketForm.category_type) }}
+               {{ form_row(updateTicketForm.category_title) }}#}
+                {{ form_row(updateTicketForm.subject) }}
+                {{ form_row(updateTicketForm.content) }}
+                {{ form_row(updateTicketForm.origin) }}
+                {{ form_row(updateTicketForm.type) }}
+                {{ form_row(updateTicketForm.emergency) }}
+                {{ form_row(updateTicketForm._token) }} {#necessary to get session#}
+                {{ form_row(updateTicketForm.status) }}
+                {{ form_row(updateTicketForm.isArchive) }}
+                {{ form_row(updateTicketForm.submit) }}
+                {{ form_end(updateTicketForm) }}
                 <a href="{{ path('ticket_index') }}" class="btn active back-button" role="button">Retour</a>
             </div>
 

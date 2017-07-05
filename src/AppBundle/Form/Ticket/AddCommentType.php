@@ -1,17 +1,15 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Ticket;
 
 use AppBundle\Entity\Comment;
-use AppBundle\Repository\CommentRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CommentType extends AbstractType
+class AddCommentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -25,7 +23,7 @@ class CommentType extends AbstractType
                 'required' => true,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Valider le commentaire',
+                'label' => 'Ajouter le commentaire',
             ]);
     }
 

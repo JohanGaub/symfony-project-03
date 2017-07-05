@@ -4,8 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Ticket;
-use AppBundle\Form\CommentType;
 use AppBundle\Form\SearchTicketType;
+use AppBundle\Form\Ticket\AddCommentType;
 use AppBundle\Form\Ticket\UpdateTicketType;
 use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
@@ -85,9 +85,9 @@ class TicketController extends Controller
         $ticket     = new Ticket();
         $em         = $this->getDoctrine()->getManager();
 
-        $form       = $this->createForm(AddTicketType::class, $ticket);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        $addTicketForm       = $this->createForm(AddTicketType::class, $ticket);
+        $addTicketForm->handleRequest($request);
+        if($addTicketForm->isSubmitted() && $addTicketForm->isValid()) {
             // $file stores the uploaded files
             /** @var File $file */
             $file = $ticket->getUpload();
@@ -115,7 +115,7 @@ class TicketController extends Controller
             return $this->redirectToRoute('ticket_index');
         }
         return $this->render('@App/Pages/Ticket/addTicket.html.twig',[
-            'form' => $form->createView(),
+            'addTicketForm' => $addTicketForm->createView(),
         ]);
     }
 
@@ -128,12 +128,13 @@ class TicketController extends Controller
      */
     public function editAction(Request $request, Ticket $ticket)
     {
-        $em       = $this->getDoctrine()->getManager();
-        $comments = $em->getRepository('AppBundle:Comment')->getComment($ticket);
+        /*** Edit ticket part ***/
 
-        $form   = $this->createForm(EditTicketType::class, $ticket);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        $em             = $this->getDoctrine()->getManager();
+
+        $editTicketForm = $this->createForm(EditTicketType::class, $ticket);
+        $editTicketForm->handleRequest($request);
+        if($editTicketForm->isSubmitted() && $editTicketForm->isValid()) {
 
             $ticket->setUpdateDate(new \DateTime('NOW'));
 
@@ -151,10 +152,33 @@ class TicketController extends Controller
             $em->flush();
             return $this->redirectToRoute('ticket_index');
         }
+
+        /** TODO : refactoring for dry convention */
+        /*** Add comment part ***/
+        $user               = $this->getUser();
+        $addComment         = new Comment();
+        $addCommentForm     = $this->createForm(AddCommentType::class, $addComment);
+        $addCommentForm->handleRequest($request);
+        if($addCommentForm->isSubmitted() and $addCommentForm->isValid()) {
+            $addComment->setUser($user);
+            $addComment->setTicket($ticket);
+            $addComment->setCreationDate( new \DateTime('NOW'));
+
+            $em->persist($addComment);
+            $em->flush();
+            $addComment     = new Comment();
+            $addCommentForm = $this->createForm(AddCommentType::class, $addComment);
+        }
+
+        $comments = $em->getRepository('AppBundle:Comment')->getComment($ticket);
         return $this->render('@App/Pages/Ticket/editTicket.html.twig',[
-            'ticket'        => $ticket,
-            'comments'      => $comments,
-            'form'          => $form->createView(),
+            /*** Edit ticket fields ***/
+            'ticket'            => $ticket,
+            'comments'          => $comments,
+            'editTicketForm'    => $editTicketForm->createView(),
+
+            /*** Add comment fields ***/
+            'addCommentForm'    => $addCommentForm->createView(),
         ]);
     }
 
@@ -167,21 +191,19 @@ class TicketController extends Controller
      */
     public function updateAction(Request $request, Ticket $ticket)
     {
-        $em     = $this->getDoctrine()->getManager();
-        $form   = $this->createForm(UpdateTicketType::class, $ticket);
+        $em                 = $this->getDoctrine()->getManager();
+        $updateTicketForm   = $this->createForm(UpdateTicketType::class, $ticket);
 
-        //$informations = $em->getRepository('AppBundle:Ticket')->find($ticket);
+        $updateTicketForm->handleRequest($request);
 
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
+        if($updateTicketForm->isSubmitted() && $updateTicketForm->isValid()) {
             $em->flush();
 
             return $this->redirectToRoute('ticket_index');
         }
         return $this->render('@App/Pages/Ticket/updateTicket.html.twig',[
-            'ticket' => $ticket,
-            'form' => $form->createView(),
+            'ticket'            => $ticket,
+            'updateTicketForm'  => $updateTicketForm->createView(),
         ]);
     }
 
