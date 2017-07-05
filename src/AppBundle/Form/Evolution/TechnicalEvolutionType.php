@@ -89,7 +89,6 @@ class TechnicalEvolutionType extends AbstractType
         );
     }
 
-
     /**
      * @param FormInterface $form
      * @param $categoryType
@@ -121,9 +120,9 @@ class TechnicalEvolutionType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => TechnicalEvolution::class
-        ));
+        ]);
     }
 
     /**

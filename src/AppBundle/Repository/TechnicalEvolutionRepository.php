@@ -11,7 +11,7 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class TechnicalEvolutionRepository extends EntityRepository
 {
-    const MAX_RESULT = 10;
+    const MAX_RESULT = 8;
 
     /**
      * @param $page

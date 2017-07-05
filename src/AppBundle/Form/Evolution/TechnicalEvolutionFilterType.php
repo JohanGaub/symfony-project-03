@@ -23,7 +23,7 @@ class TechnicalEvolutionFilterType extends AbstractType
     {
         $builder
             ->add('title', TextareaType::class, [
-                'label' => 'Votre commentaire',
+                'label' => 'Titre',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer mon commentaire'
