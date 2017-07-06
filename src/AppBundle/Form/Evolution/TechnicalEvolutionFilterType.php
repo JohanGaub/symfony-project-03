@@ -3,8 +3,8 @@
 namespace AppBundle\Form\Evolution;
 
 use AppBundle\Entity\TechnicalEvolutionFilter;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,9 +22,9 @@ class TechnicalEvolutionFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('te.title', TextareaType::class, [
-                'label' => 'Titre',
-                'mapped' => false,
+            ->add('title', TextType::class, [
+                'label'     => 'Titre',
+                'mapped'    => false,
                 'required'  => false,
             ])
             ->add('submit', SubmitType::class, [

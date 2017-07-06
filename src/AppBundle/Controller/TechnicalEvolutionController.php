@@ -34,9 +34,9 @@ class TechnicalEvolutionController extends Controller
      */
     public function indexAction()
     {
-        $navigator = $this->get("app.navigator");
-        $filter = $navigator->getEntityFilter();
-        $form = $this->createForm(TechnicalEvolutionFilterType::class, $filter);
+        $navigator  = $this->get("app.navigator");
+        $filter     = $navigator->getEntityFilter();
+        $form       = $this->createForm(TechnicalEvolutionFilterType::class, $filter);
 
         /**
          * Next you need to render view with this element :
@@ -67,8 +67,10 @@ class TechnicalEvolutionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $dictionaryStatus = $em->getRepository('AppBundle:Dictionary')
-                ->findOneBy(['type' => 'status', 'value' => 'En attente']);
+            $dictionaryStatus = $em->getRepository('AppBundle:Dictionary')->findOneBy([
+                    'type' => 'status',
+                    'value' => 'En attente'
+            ]);
 
             $te->setCreationDate(new \DateTime('now'));
             $te->setStatus($dictionaryStatus);

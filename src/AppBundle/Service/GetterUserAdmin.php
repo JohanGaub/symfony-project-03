@@ -62,7 +62,7 @@ class GetterUserAdmin
         return $this->em->createQuery("
             SELECT u 
             FROM 'AppBundle\Entity\User' u
-            WHERE u.roles LIKE :roles AND WHERE u.company = :company
+            WHERE u.roles LIKE :roles
         ")->setParameter('roles', $search)->getResult();
     }
 }

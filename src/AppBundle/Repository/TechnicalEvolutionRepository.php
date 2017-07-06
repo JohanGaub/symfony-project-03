@@ -44,7 +44,23 @@ class TechnicalEvolutionRepository extends EntityRepository
             foreach ($filter as $field => $value) {
                 if ($value !== '') {
                     if (strpos($field, '_') !== 0) {
-                        $search = "$field like '$value%'";
+                        switch ($field) {
+                            case 'status':
+                                $alias = 'dtes';
+                                break;
+                            case 'origin':
+                                $alias = 'dteo';
+                                break;
+                            case 'category_type':
+                                $alias = 'ct';
+                                break;
+                            case 'category':
+                                $alias = 'c';
+                                break;
+                            default:
+                                $alias = 'te';
+                        }
+                        $search = "$alias.$field like '$value%'";
                         $query->andWhere($search);
                     }
                 }
