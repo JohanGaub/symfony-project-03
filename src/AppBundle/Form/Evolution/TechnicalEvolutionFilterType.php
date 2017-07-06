@@ -22,8 +22,10 @@ class TechnicalEvolutionFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextareaType::class, [
+            ->add('te.title', TextareaType::class, [
                 'label' => 'Titre',
+                'mapped' => false,
+                'required'  => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer mon commentaire'

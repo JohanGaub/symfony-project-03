@@ -20,9 +20,7 @@ class TechnicalEvolutionRepository extends EntityRepository
      */
     public function getRowsByPage($page, $filter)
     {
-        $alias = 'te';
-
-        $query = $this->createQueryBuilder($alias)
+        $query = $this->createQueryBuilder('te')
             ->select('te.id', 'te.title', 'te.sumUp', 'te.creationDate', 'te.updateDate', 'te.reason', 'te.expectedDelay')
             ->addSelect('dtes.value as status')
             ->addSelect('dteo.value as origin')
@@ -46,7 +44,7 @@ class TechnicalEvolutionRepository extends EntityRepository
             foreach ($filter as $field => $value) {
                 if ($value !== '') {
                     if (strpos($field, '_') !== 0) {
-                        $search = "$alias.$field like '$value%'";
+                        $search = "$field like '$value%'";
                         $query->andWhere($search);
                     }
                 }
