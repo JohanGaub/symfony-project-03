@@ -11,59 +11,46 @@ use Swift_Message;
  */
 class MaillerService
 {
-    /**
-     * @var \Swift_Mailer
-     */
+    /** @var \Swift_Mailer */
     private $swiftMailer;
 
-    /**
-     * @var Swift_Message
-     */
+    /** @var Swift_Message */
     private $swiftMessage;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $subject;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $sender;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $recipients = [];
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     private $body;
 
     /**
      * MaillerService constructor.
      * @param Swift_Mailer $swiftMailer
+     * @param string $mailer
      */
-    public function __construct(Swift_Mailer $swiftMailer)
+    public function __construct(Swift_Mailer $swiftMailer, string $mailer)
     {
-        $this->swiftMailer = $swiftMailer;
+        $this->swiftMailer  = $swiftMailer;
         $this->swiftMessage = Swift_Message::newInstance();
+        $this->sender       = $mailer;
     }
 
     /**
      * Config email && Send it
-     *
      * @param string $subject
-     * @param string $sender
      * @param array $recipients
      * @param mixed $body
      * @return array
      */
-    public function sendEmail(string $subject, string $sender, array $recipients, $body)
+    public function sendEmail(string $subject, array $recipients, $body)
     {
         $this->subject      = $subject;
-        $this->sender       = $sender;
         $this->recipients   = $recipients;
         $this->body         = $body;
 
@@ -83,5 +70,4 @@ class MaillerService
         }
         return $data;
     }
-
 }

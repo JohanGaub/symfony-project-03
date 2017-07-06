@@ -15,6 +15,7 @@ parameters:
     mailer_port: ~
     mailer_user: ~
     mailer_password: ~
+    mailer_send_address: ~
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
