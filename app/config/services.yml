@@ -14,7 +14,7 @@ services:
 
     app.email.sending:
         class: AppBundle\Service\MaillerService
-        arguments: ['@swiftmailer.mailer']
+        arguments: ['@swiftmailer.mailer', '%mailer_send_address%']
 
     app.getter_user_admin:
         class: AppBundle\Service\GetterUserAdmin
