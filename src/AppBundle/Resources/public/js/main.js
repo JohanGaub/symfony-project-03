@@ -99,3 +99,10 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
+
+
+//Date Picker
+$( function() {
+    $( "#datepicker" ).datepicker();
+
+} );

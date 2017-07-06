@@ -87,3 +87,8 @@ $(document).ready(function () {
     $("#wrapper").toggleClass("toggled");
 });
 
+//Date Picker
+$( function() {
+    $( "#datepicker" ).datepicker();
+
+} );

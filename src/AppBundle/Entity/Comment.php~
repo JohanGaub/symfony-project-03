@@ -187,9 +187,7 @@ class Comment
         return $this->ticket;
     }
 
-    public function __construct() {
-        $this->creationDate = new \DateTime('NOW');
-    }
+
 
 
 }

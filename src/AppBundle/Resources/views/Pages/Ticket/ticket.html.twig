@@ -7,7 +7,36 @@
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 <h2>Liste des tickets</h2>
 
+                <div class="row">
+                    {{ form_start(searchForm) }}
+                    <div class="col-xs-2">{{ form_label(searchForm.id) }}{{ form_widget(searchForm.id, {"value": filter.id } ) }}</div>
+                    <div class="col-xs-2">{{ form_label(searchForm.company) }}{{ form_widget(searchForm.company, {"value": filter.company } ) }}</div>
+                    <div class="col-xs-2">{{ form_label(searchForm.emergency) }}{{ form_widget(searchForm.emergency, {"value": filter.emergency } ) }}</div>
+                    <div class="col-xs-2">{{ form_label(searchForm.subject) }}{{ form_widget(searchForm.subject, {"value": filter.subject } ) }}</div>
+                    <div class="col-xs-2">{{ form_label(searchForm.status) }}{{ form_widget(searchForm.status, {"value": filter.status } ) }}</div>
+                    <div class="col-xs-2">{{ form_label(searchForm.creationDate) }}{{ form_widget(searchForm.creationDate, {"value": filter.creationDate } ) }}</div>
+                    <div class="col-xs-2">{{ form_label(searchForm.endDate) }}{{ form_widget(searchForm.endDate, {"value": filter.endDate } ) }}</div>
+                    <div class="col-xs-2">{{ form_label(searchForm.submit) }}{{ form_widget(searchForm.submit, {"value": filter } ) }}</div>
 
+                    {#<div><button class="btn waves-effect waves-light" type="submit" name="action">Filtrer</button></div>#}
+
+
+
+                </div>{{ form_end(searchForm) }}</div>
+
+            <div class="form-group">
+                <div class="input-group date" id="datepicker">
+                    <input type="text" class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 <table id="filter" class="table table-responsive table-bordered table-condensed">
                     <thead >
                     <tr class="text-center">
@@ -23,60 +52,43 @@
 
                     <tbody class="table-striped">
 
-
-                    {%  for ticket in tickets %}
+                    {%  for d in data %}
                         <tr>
-                            <td><a href="{{ path('ticket_edit', {"ticket": ticket.id }) }}">{{ ticket.id }}</a></td>
-                            <td><a href="{{ path('ticket_edit', {"ticket": ticket.id}) }}">{{ ticket.user.company.name }}</a></td>
-                            <td><a href="{{ path('ticket_edit', {"ticket": ticket.id}) }}">{{ ticket.emergency }}</a></td>
-                            <td><a href="{{ path('ticket_edit', {"ticket": ticket.id}) }}">{{ ticket.subject }}</a></td>
-                            <td><a href="{{ path('ticket_edit', {"ticket": ticket.id}) }}">{{ ticket.status }}</a></td>
-                            <td><a href="{{ path('ticket_edit', {"ticket": ticket.id}) }}">{{ ticket.creationdate|date("d/m/Y") }}</a></td>
-                            <td><a href="{{ path('ticket_edit', {"ticket": ticket.id}) }}">{{ ticket.Enddate|date("d/m/Y") }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id }) }}">{{ d.id }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.user.company.name }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.emergency }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.subject }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.status }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.creationdate|date("d/m/Y") }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.Enddate|date("d/m/Y") }}</a></td>
                         </tr>
                     {% endfor %}
 
                     </tbody>
                 </table>
+            </div>
+        </div>
 
-
+        <div class="row text-center">
+            <div class="col-xs-8 col-xs-offset-2">
+                {% include('@App/Elements/paginator.html.twig') %}
             </div>
         </div>
 
 
-                <div class="row">
-                    <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2 text-center">
-
-                        <div class="pagination">
-                            <div class="pagination-buttons">
-                                {% if pagination.page > 1 %}
-                                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}"><<</a>
-                                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}"><</a>
-                                {% endif %}
-
-                                {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
-                                {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
-                                    <a{% if p == pagination.page %} class="current-page" {% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a>
-                                {% endfor %}
-
-                                {% if pagination.page<pagination.pages_count %}
-                                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page+1})) }}">></a>
-                                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">>></a>
-                                {% endif %}
-                            </div>
-                        </div>
-
-                    </div>
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+                <div>
+                    <a href="{{ path('ticket_add') }}">Ajouter un ticket</a>
                 </div>
-
-                <div class="row">
-                    <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
-                        <div>
-                            <a href="{{ path('ticket_add') }}">Ajouter un ticket</a>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
 
 
     </section>
+
+
+
+
 {% endblock %}
+

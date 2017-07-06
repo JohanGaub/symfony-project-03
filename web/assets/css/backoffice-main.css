@@ -929,7 +929,7 @@ a {
     color: #fff;
     background-color: #b6cc64;
     border: 1px solid #c1f00d;
-    box-shadow: 1px #c1f00d; }
+    box-shadow: 1px; }
 
 .dictionary-list {
   border: 1px solid #9ac00a;
@@ -967,10 +967,8 @@ a {
     width: 70%;
     min-width: 30rem;
     margin: 16.2rem auto 7rem auto;
-    background-image: url("../../img/commun-partie2.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover; }
+      background: no-repeat center;
+      background-size: cover; }
   #ticket .block-ticket {
     width: 70%;
     min-width: 20rem;
@@ -985,10 +983,8 @@ a {
         text-align: justify;
         line-height: 2.2rem;
         padding: 0 0 1rem 4rem;
-        background-image: url("../../img/green-flea3.svg");
-        background-repeat: no-repeat;
-        background-position: 1rem 0.4rem;
-        background-size: 2rem; }
+          background: no-repeat 1rem 0.4rem;
+          background-size: 2rem; }
         #ticket .block-ticket .ticket a:hover {
           color: #9ac00a; }
 

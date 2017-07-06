@@ -6,9 +6,11 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\Ticket;
 use AppBundle\Form\SearchTicketType;
 use AppBundle\Form\Ticket\AddCommentType;
+use AppBundle\Form\Ticket\TicketFilterType;
 use AppBundle\Form\Ticket\UpdateTicketType;
 use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,14 +27,20 @@ class TicketController extends Controller
 {
 
     /**
-     * @param int $page
      * @return Response
-     * @internal param $page
-     * @Route("/index/{page}", name="ticket_index")
+     * @Route("/index", name="ticket_index", requirements={"page" : "\d+"})
+     * @Method({"post", "get"})
+     * @internal param Request $request
      */
-    public function indexAction($page = 1)
+    public function indexAction()
     {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Ticket');
+        $navigator      = $this->get("communit.navigator");
+
+        $filter         = $navigator->getEntityFilter();
+
+        $searchForm     = $this->createForm(TicketFilterType::class, $filter);
+
+/*        $repo = $this->getDoctrine()->getRepository('AppBundle:Ticket');
         $maxTickets = 10;
         $tickets_count = $repo->countTicketTotal();
 
@@ -43,11 +51,20 @@ class TicketController extends Controller
             'route_params' => [],
         ];
 
-        $tickets = $repo->getList($page, $maxTickets);
+        $tickets = $repo->getList($page, $maxTickets);*/
 
         return $this->render('@App/Pages/Ticket/ticket.html.twig',[
-            'tickets' => $tickets,
-            'pagination' => $pagination,
+            /*** Ticket search ***/
+            'data'           => $this->get("communit.navigator"),
+            'filter'        => $filter,
+            'filterURL'     =>http_build_query($filter),
+            'documentType'  => "Ticket",
+       //     'deletionURL'   => $this->generateUrl("ticket_delete", ['ticket' => 0]),
+            'searchForm'    => $searchForm->createView(),
+
+            /*** Ticket list ***/
+/*            'tickets' => $tickets,
+            'pagination' => $pagination,*/
         ]);
     }
 
