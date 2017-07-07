@@ -22,8 +22,8 @@ class CompanyType extends AbstractType
             ->add('address', TextType::class, ['label' => 'Adresse'])
             ->add('town', TextType::class, ['label' => 'Ville'])
             ->add('postCode', TextType::class, ['label' => 'Code postale'])
-            ->add('phone', IntegerType::class,  ['label' => 'Téléphone fixe'])
-            ->add('siret', IntegerType::class,  ['label' => 'N° Siret'])
+            ->add('phone', TextType::class,  ['label' => 'Téléphone fixe'])
+            ->add('siret', TextType::class,  ['label' => 'N° Siret'])
             ->add('email', TextType::class,  ['label' => 'Email de votre socièté']);
     }
     public function configureOptions(OptionsResolver $resolver)

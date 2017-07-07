@@ -21,7 +21,7 @@ class User_profileType extends AbstractType
         $builder
             ->add('firstname', TextType::class, ['label' => 'Prénom'])
             ->add('lastname', TextType::class, ['label' => 'Nom'])
-            ->add('phone', IntegerType::class, ['label' => 'Mobile']);
+            ->add('phone', TextType::class, ['label' => 'Mobile']);
 
     }
 

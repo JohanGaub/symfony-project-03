@@ -121,26 +121,23 @@ class UserController extends controller
      * @return Response|\Symfony\Component\HttpFoundation\Response
      * Lists all User entities.
      * @Security("has_role ('ROLE_PROJECT_RESP')")
-     * @param $user
      * @Route("/", name="validation_associate")
      */
     public function showAssociate($page = 1)
     {
-        $maxUsers = 4;
+        $maxUsers = 10;
         $company = $this->getUser()->getCompany();
         $em = $this->getDoctrine()->getManager();
-        $userProfile = $em->getRepository('AppBundle:User')->findBy( array(
+        /*$userProfile = $em->getRepository('AppBundle:User')->findBy( array(
             'company' => ($company)
-        ));
+        ));*/
 
-       $users_count = count($userProfile);
-
-       /* $userProfile = $em->getCoco($page, $maxUsers, $company);*/
-
+        $userProfile = $em->getRepository('AppBundle:User')->getList($page, $maxUsers, $company);
+        $users_count = count($userProfile);
         $pagination = [
             'page' => $page,
             'route' => 'validation_associate',
-            'pages_count' => ceil(($users_count) / $maxUsers),
+            'pages_count' => ceil(ceil($users_count) / $maxUsers),
             'route_params' => [],
         ];
 
@@ -183,7 +180,7 @@ class UserController extends controller
             $capacity = $user->getRoles();
             if(count($result) == 2 && ($capacity[0] === "ROLE_PROJECT_RESP")){
                 $this->addFlash("notice", "Validation impossible. Vous pouvez créer deux comptes responsable projet par société.");
-                return $this->redirectToRoute('associate_edit');
+                return $this->redirectToRoute('validation_associate');
             }
 
             $em = $this->getDoctrine()->getManager();
