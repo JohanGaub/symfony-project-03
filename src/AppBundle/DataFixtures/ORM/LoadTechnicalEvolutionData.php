@@ -24,17 +24,19 @@ class LoadTechnicalEvolutionData extends AbstractFixture implements OrderedFixtu
 
         for($i = 0; $i < DataParameters::NB_TECHNICAL_EVOLUTION; $i++){
 
-            $randomUser = DataParameters::getRandomUser();
+            $randomUser     = DataParameters::getRandomUser();
             $randomCategory = 'category_id_' . mt_rand(0, DataParameters::NB_CATEGORY - 1);
-            $randomProduct = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
+            $randomProduct  = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
+            $randomStatus   = 'status_id_' . mt_rand(0, 4 - 1);
+            $randomOrigin   = 'origin_id_' . mt_rand(0, 3 - 1);
 
             $te= new TechnicalEvolution();
-            $te->setTitle($faker->title);
+            $te->setTitle($faker->words(4, true));
             $te->setSumUp($faker->sentence(6));
             $te->setContent($faker->paragraph(7));
             $te->setReason($faker->word);
-            $te->setStatus($faker->word);
-            $te->setOrigin($faker->jobTitle);
+            $te->setStatus($this->getReference($randomStatus));
+            $te->setOrigin($this->getReference($randomOrigin));
             $te->setExpectedDelay($faker->dateTime);
             $te->setCreationDate($faker->dateTime);
             $te->setUpdateDate($faker->dateTime);

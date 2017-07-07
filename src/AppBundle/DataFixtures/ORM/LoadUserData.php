@@ -9,39 +9,30 @@ use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\DataFixtures\DataParameters;
 use AppBundle\Entity\User;
 use Faker;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class LoadUserData
  * @package AppBundle\DataFixtures\ORM
  */
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
-    /**
-     * @var Container
-     */
-    private $container;
-
     /**
      * @var Faker\Factory
      */
     private $faker;
 
     /**
-     *
      * @return UserProfile
+     * @internal param $faker
      */
     private function setUserProfile()
     {
-        $this->faker = Faker\Factory::create('fr_FR');
         // -> Profile
         $profile = new UserProfile();
         $profile->setFirstname($this->faker->word);
         $profile->setLastname($this->faker->word);
-        $profile->setPhone1($this->faker->phoneNumber);
-        $profile->setPhone2($this->faker->phoneNumber);
+        $profile->setPhone($this->faker->phoneNumber);
+
 
         return $profile;
     }
@@ -54,6 +45,24 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $this->faker = Faker\Factory::create('fr_FR');
 
         /**
+         * Laurent BigBossAccount
+         * ........Only for client join project
+         */
+        $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
+        $user = new User();
+        $user->setEmail('laurent');
+        $user->setPassword(password_hash("admin", PASSWORD_BCRYPT));
+        $user->setRoles(['ROLE_ADMIN']);
+        $user->setIsActive(1);
+        $user->setIsActiveByAdmin(1);
+        $profile = $this->setUserProfile();
+        $user->setUserProfile($profile);
+        $user->setCompany($this->getReference($randomCompany));
+        $this->setReference('laurent_boss', $user);
+        $em->persist($user);
+        $em->persist($profile);
+
+        /**
          * SuperAdmin
          */
         for ($i = 0; $i < DataParameters::NB_SUPER_ADMIN; $i++){
@@ -63,6 +72,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_SUPER_ADMIN']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -81,6 +91,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_ADMIN']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -90,7 +101,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         }
 
         /**
-         * ProjetctResp
+         * ProjectResp
          */
         for ($i = 0; $i < DataParameters::NB_PROJECT_RESP; $i++){
             $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
@@ -99,6 +110,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_PROJECT_RESP']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -117,6 +129,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_TECHNICIAN']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -135,6 +148,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_COMMERCIAL']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -153,6 +167,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_USER']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -171,13 +186,5 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     {
         return 6;
     }
-    /**
-     * Sets the container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance of null
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
+
 }

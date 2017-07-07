@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: topikana
- * Date: 21/06/17
- * Time: 16:26
- */
+
 
 namespace AppBundle\Repository;
 
@@ -19,7 +14,7 @@ class UserRepository extends EntityRepository
     /**
      * @param int $page
      * @param int $maxUsers
-     * @return Paginator
+     * @return \AppBundle\Repository\Paginator|Paginator
      */
     public function getListing($page = 1, $maxUsers = 10)
     {
@@ -28,6 +23,23 @@ class UserRepository extends EntityRepository
             ->orderBy('c.name', 'ASC')
             ->setFirstResult(($page - 1) * $maxUsers)
             ->setMaxResults($maxUsers);
+
+        return new Paginator($qb, $fetchJoinCollection = false);
+    }
+
+    /**
+     * @param int $page
+     * @param int $maxUsers
+     * @param int $company
+     * @return \AppBundle\Repository\Paginator|Paginator
+     */
+    public function getCoco($page = 1, $maxUsers = 10, $company)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.company = :company')
+            ->setFirstResult(($page - 1) * $maxUsers)
+            ->setMaxResults($maxUsers)
+            ->setParameter('company', $company);
 
         return new Paginator($qb, $fetchJoinCollection = false);
     }
@@ -44,12 +56,20 @@ class UserRepository extends EntityRepository
         return $q;
     }
 
-    public function getProjectResponsable()
+    public function getProjectResponsable( $roles, $company)
     {
-        $qb = $this->createQueryBuilder('u')
-            ->where('u.company', 'id')
-            ->select('COUNT(u.roles)', 'ROLE_PROJECT_RESP');
+            $qb = $this->createQueryBuilder('u')
+                ->select('COUNT(u)')
+                ->where('u.roles, :role')
+                ->andWhere('u.company = :company')
+                ->setParameter('role', $roles)
+                ->setParameter('company', $company)
+                ->getQuery()->getResult();
 
             return $qb;
-    }
+        }
+
+
 }
+
+

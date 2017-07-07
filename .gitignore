@@ -18,3 +18,5 @@
 /.sass-cache/
 /node_modules/
 \/Entity/*~
+/web/assets/upload/
+/src/AppBundle/Entity/*.php~

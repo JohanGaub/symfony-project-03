@@ -42,6 +42,7 @@ class UserAssociateType extends AbstractType
                     'Commercial' => 'ROLE_COMMERCIAL',
                     'Technicien' => 'ROLE_TECHNICIAN',
                     'Commercial et Technicien' => ('ROLE_TECHNICIAN' && 'ROLE_COMMERCIAL'),
+                    'Responsable Projet' => ('ROLE_PROJECT_RESP'),
                 ]
             ])
             ->add('userProfile', User_profileType::class, array(

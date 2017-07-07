@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Entity\User;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -54,7 +56,7 @@ class Company
 
     /**
      * @var string
-     * @Assert\Regex("^[1-9]([-. ]?[0-9]{2}){4}$")
+     * @Assert\Regex("^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$")
      * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
     private $phone;
@@ -222,28 +224,26 @@ class Company
         return $this->siret;
     }
 
-
     /**
      * Add user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      *
      * @return Company
      */
-    public function addUser(\AppBundle\Entity\User $user)
+    public function addUser(User $user)
     {
         $this->users[] = $user;
 
         return $this;
     }
 
-
     /**
      * Remove user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param User $user
      */
-    public function removeUser(\AppBundle\Entity\User $user)
+    public function removeUser(User $user)
     {
         $this->users->removeElement($user);
     }
@@ -251,7 +251,7 @@ class Company
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getUsers()
     {
@@ -261,7 +261,7 @@ class Company
     /**
      * Set adress
      *
-     * @param string $adress
+     * @param string $address
      *
      * @return Company
      */
@@ -273,7 +273,7 @@ class Company
     }
 
     /**
-     * Get adress
+     * Get address
      *
      * @return string
      */

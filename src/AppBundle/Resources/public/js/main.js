@@ -32,19 +32,12 @@ $(document).ready(function () {
     });
 });
 
-
-
-
-
 $(document).ready(function () {
-        if ($(window).width() <= 767) {
-            $("#arrowbox").addClass("arrow-bottom-center");
-        } else {
-            $("#arrowbox").addClass("arrow-right-center");
-        }
-
-
-
+    if ($(window).width() <= 767) {
+        $("#arrowbox").addClass("arrow-bottom-center");
+    } else {
+        $("#arrowbox").addClass("arrow-right-center");
+    }
 
 // Change class name in "html.twig" file in order to use a specific scss mixin
     $(window).on('resize', function() {
@@ -56,10 +49,9 @@ $(document).ready(function () {
     });
 });
 
-
 // Swiper Slider
 $(document).ready(function () {
-    var swiper = new Swiper('.swiper-container', {
+    let swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
@@ -71,8 +63,6 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
-
-
 
 // Modal
 $(document).ready(function () {
@@ -88,7 +78,7 @@ $(document).ready(function () {
 
 // Swiper Slider
 $(document).ready(function () {
-    var swiper = new Swiper('.swiper-container', {
+    let swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
@@ -100,10 +90,4 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
-
-$(document).ready(function() {
-    $('#register').DataTable( {
-        colReoder: true
-    } );
-} );
 

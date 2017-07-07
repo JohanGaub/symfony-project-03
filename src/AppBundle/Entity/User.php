@@ -2,10 +2,14 @@
 
 namespace AppBundle\Entity;
 
+
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Serializable;
 
 /**
  * User
@@ -69,14 +73,13 @@ class User implements UserInterface, Serializable
     private $token;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="token_limit_date", type="datetime", nullable=true)
      */
     private $tokenLimitDate;
 
     /**
-     * @var array
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="users", cascade={"persist"})
      */
     private $company;
@@ -101,6 +104,16 @@ class User implements UserInterface, Serializable
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="user")
+     */
+    private $tickets;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+     */
+    private $comments;
 
     /**
      * Get id
@@ -137,6 +150,30 @@ class User implements UserInterface, Serializable
     }
 
     /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
      * Get roles
      *
      * @return array The user roles
@@ -150,7 +187,6 @@ class User implements UserInterface, Serializable
      * Set roles
      *
      * @param array $roles
-     *
      * @return User
      */
     public function setRoles($roles)
@@ -210,7 +246,7 @@ class User implements UserInterface, Serializable
     /**
      * Set tokenLimitDate
      *
-     * @param \DateTime $tokenLimitDate
+     * @param DateTime $tokenLimitDate
      *
      * @return User
      */
@@ -224,7 +260,7 @@ class User implements UserInterface, Serializable
     /**
      * Get tokenLimitDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTokenLimitDate()
     {
@@ -235,18 +271,19 @@ class User implements UserInterface, Serializable
      */
     public function __construct()
     {
-        $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->technicalEvolutions = new ArrayCollection();
+
         $this->isActive = true;
     }
 
     /**
      * Set company
      *
-     * @param \AppBundle\Entity\Company $company
+     * @param Company $company
      *
      * @return User
      */
-    public function setCompany(\AppBundle\Entity\Company $company = null)
+    public function setCompany(Company $company = null)
     {
         $this->company = $company;
 
@@ -256,7 +293,7 @@ class User implements UserInterface, Serializable
     /**
      * Get company
      *
-     * @return array
+     * @return Company
      */
     public function getCompany()
     {
@@ -264,13 +301,47 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * Set userProfile
+     * Add technicalEvolution
      *
-     * @param \AppBundle\Entity\UserProfile $userProfile
+     * @param TechnicalEvolution $technicalEvolution
      *
      * @return User
      */
-    public function setUserProfile(\AppBundle\Entity\UserProfile $userProfile = null)
+    public function addTechnicalEvolution(TechnicalEvolution $technicalEvolution)
+    {
+        $this->technicalEvolutions[] = $technicalEvolution;
+
+        return $this;
+    }
+
+    /**
+     * Remove technicalEvolution
+     *
+     * @param TechnicalEvolution $technicalEvolution
+     */
+    public function removeTechnicalEvolution(TechnicalEvolution $technicalEvolution)
+    {
+        $this->technicalEvolutions->removeElement($technicalEvolution);
+    }
+
+    /**
+     * Get technicalEvolutions
+     *
+     * @return Collection
+     */
+    public function getTechnicalEvolutions()
+    {
+        return $this->technicalEvolutions;
+    }
+
+    /**
+     * Set userProfile
+     *
+     * @param UserProfile $userProfile
+     *
+     * @return User
+     */
+    public function setUserProfile(UserProfile $userProfile = null)
     {
         $this->userProfile = $userProfile;
 
@@ -280,7 +351,7 @@ class User implements UserInterface, Serializable
     /**
      * Get userProfile
      *
-     * @return \AppBundle\Entity\UserProfile
+     * @return UserProfile
      */
     public function getUserProfile()
     {
@@ -290,25 +361,25 @@ class User implements UserInterface, Serializable
     /**
      * Set password
      *
-     * @param string $password
+     * @param userTechnicalEvolution $userTechnicalEvolution
      *
      * @return User
      */
-    public function setPassword($password)
+    public function addUserTechnicalEvolution(userTechnicalEvolution $userTechnicalEvolution)
     {
-        $this->password = $password;
+        $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
 
         return $this;
     }
 
     /**
-     * Get password
+     * Remove userTechnicalEvolution
      *
-     * @return string
+     * @param userTechnicalEvolution $userTechnicalEvolution
      */
-    public function getPassword()
+    public function removeUserTechnicalEvolution(userTechnicalEvolution $userTechnicalEvolution)
     {
-        return $this->password;
+        $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
     }
 
     /**
@@ -334,15 +405,73 @@ class User implements UserInterface, Serializable
         return null;
     }
 
+
     /**
-     * Removes sensitive data from the user.
+     * Add ticket
      *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
+     * @param Ticket $ticket
+     *
+     * @return User
      */
-    public function eraseCredentials()
+    public function addTicket(Ticket $ticket)
     {
-        // TODO: Implement eraseCredentials() method.
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param Ticket $ticket
+     */
+    public function removeTicket(Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param Comment $comment
+     *
+     * @return User
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
     public function generateToken()
@@ -361,6 +490,17 @@ class User implements UserInterface, Serializable
     public function getUsername()
     {
         return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+
     }
 
     /**
@@ -420,65 +560,6 @@ class User implements UserInterface, Serializable
     public function getIsActiveByAdmin()
     {
         return $this->isActiveByAdmin;
-    }
-
-
-    /**
-     * Add technicalEvolution
-     *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
-     *
-     * @return User
-     */
-    public function addTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
-    {
-        $this->technicalEvolutions[] = $technicalEvolution;
-
-        return $this;
-    }
-
-    /**
-     * Remove technicalEvolution
-     *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
-     */
-    public function removeTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
-    {
-        $this->technicalEvolutions->removeElement($technicalEvolution);
-    }
-
-    /**
-     * Get technicalEvolutions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTechnicalEvolutions()
-    {
-        return $this->technicalEvolutions;
-    }
-
-    /**
-     * Add userTechnicalEvolution
-     *
-     * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
-     *
-     * @return User
-     */
-    public function addUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
-    {
-        $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
-
-        return $this;
-    }
-
-    /**
-     * Remove userTechnicalEvolution
-     *
-     * @param \AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution
-     */
-    public function removeUserTechnicalEvolution(\AppBundle\Entity\UserTechnicalEvolution $userTechnicalEvolution)
-    {
-        $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
     }
 
     /**

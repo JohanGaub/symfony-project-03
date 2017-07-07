@@ -2,6 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Documentation;
+use AppBundle\Entity\Faq;
+use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Entity\Ticket;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +55,11 @@ class Product
      * @ORM\OneToMany(targetEntity="Documentation", mappedBy="product")
      */
     private $documentations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="product")
+     */
+    private $tickets;
 
 
     /**
@@ -113,19 +124,19 @@ class Product
      */
     public function __construct()
     {
-        $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->technicalEvolutions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->documentations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->faqs = new ArrayCollection();
+        $this->technicalEvolutions = new ArrayCollection();
+        $this->documentations = new ArrayCollection();
     }
 
     /**
      * Add faq
      *
-     * @param \AppBundle\Entity\Faq $faq
+     * @param Faq $faq
      *
      * @return Product
      */
-    public function addFaq(\AppBundle\Entity\Faq $faq)
+    public function addFaq(Faq $faq)
     {
         $this->faqs[] = $faq;
 
@@ -135,9 +146,9 @@ class Product
     /**
      * Remove faq
      *
-     * @param \AppBundle\Entity\Faq $faq
+     * @param Faq $faq
      */
-    public function removeFaq(\AppBundle\Entity\Faq $faq)
+    public function removeFaq(Faq $faq)
     {
         $this->faqs->removeElement($faq);
     }
@@ -145,7 +156,7 @@ class Product
     /**
      * Get faqs
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getFaqs()
     {
@@ -155,11 +166,11 @@ class Product
     /**
      * Add technicalEvolution
      *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     * @param TechnicalEvolution $technicalEvolution
      *
      * @return Product
      */
-    public function addTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
+    public function addTechnicalEvolution(TechnicalEvolution $technicalEvolution)
     {
         $this->technicalEvolutions[] = $technicalEvolution;
 
@@ -169,9 +180,9 @@ class Product
     /**
      * Remove technicalEvolution
      *
-     * @param \AppBundle\Entity\TechnicalEvolution $technicalEvolution
+     * @param TechnicalEvolution $technicalEvolution
      */
-    public function removeTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $technicalEvolution)
+    public function removeTechnicalEvolution(TechnicalEvolution $technicalEvolution)
     {
         $this->technicalEvolutions->removeElement($technicalEvolution);
     }
@@ -179,7 +190,7 @@ class Product
     /**
      * Get technicalEvolutions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getTechnicalEvolutions()
     {
@@ -189,11 +200,11 @@ class Product
     /**
      * Add documentation
      *
-     * @param \AppBundle\Entity\Documentation $documentation
+     * @param Documentation $documentation
      *
      * @return Product
      */
-    public function addDocumentation(\AppBundle\Entity\Documentation $documentation)
+    public function addDocumentation(Documentation $documentation)
     {
         $this->documentations[] = $documentation;
 
@@ -203,9 +214,9 @@ class Product
     /**
      * Remove documentation
      *
-     * @param \AppBundle\Entity\Documentation $documentation
+     * @param Documentation $documentation
      */
-    public function removeDocumentation(\AppBundle\Entity\Documentation $documentation)
+    public function removeDocumentation(Documentation $documentation)
     {
         $this->documentations->removeElement($documentation);
     }
@@ -213,7 +224,7 @@ class Product
     /**
      * Get documentations
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getDocumentations()
     {
@@ -223,5 +234,39 @@ class Product
     public function __toString()
     {
         return $this->getDescription();
+    }
+
+    /**
+     * Add ticket
+     *
+     * @param Ticket $ticket
+     *
+     * @return Product
+     */
+    public function addTicket(Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param Ticket $ticket
+     */
+    public function removeTicket(Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 }

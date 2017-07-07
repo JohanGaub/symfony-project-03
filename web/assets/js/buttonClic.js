@@ -1,9 +1,11 @@
+
 $(document).ready( function () {
+    //language=JQuery-CSS
     /**
-     * Click for validate or closest
+     *
      */
-    $('.link-action').click( function (e) {
-        e.preventDefault()
+    $('.link-action').click( function (u) {
+        u.preventDefault()
         let $this       = $(this)
         let data        = $this.attr('data-info')
         let userId = $this.attr('data-id')
@@ -17,11 +19,11 @@ $(document).ready( function () {
             },
             dataType: 'json',
             timeout: 3000,
-            down: function(datas){
+             success:function(datas){
                 // change content of span who have current value
-
-                if(datas === 'down'){
+                 if(datas === 'success'){
                     if(data === '1'){
+                        icon = $(this)
                         icon.replaceWith('<i class="fa  fa-ban fa-2x" aria-hidden="true"></i>')
                     } else {
                         icon.replaceWith('<i class="fa fa-check-square fa-ban fa-2x" aria-hidden="true"></i>')

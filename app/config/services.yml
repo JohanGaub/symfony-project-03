@@ -4,3 +4,11 @@ parameters:
     #parameter_name: value
 
 services:
+    app.sql.search_params_getter:
+        class: AppBundle\Service\SqlWhereParamsSetter
+        arguments: []
+
+    app.dictionary_verification:
+        class: AppBundle\Service\DictionaryVerification
+        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: []
