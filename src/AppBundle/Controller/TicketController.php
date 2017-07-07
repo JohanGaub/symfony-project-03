@@ -204,9 +204,9 @@ class TicketController extends Controller
             $categoryType = null;
         };
 
-        $categories = $em->getRepository(Category::class)
+        $categories = $em->getRepository('AppBundle:Category')
             ->getCategoryByType($categoryType)->getQuery()->getResult();
-        $categoryTypes = $em->getRepository(Dictionary::class)
+        $categoryTypes = $em->getRepository('AppBundle:Dictionary')
             ->getItemListByType('category_type')->getQuery()->getResult();
 
 

@@ -43,34 +43,41 @@
 
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 {{ form_start(updateTicketForm) }}
-                {{ form_row(updateTicketForm.product) }}
+                <div>{{ form_row(updateTicketForm.product) }}</div>
+                <div>{{ form_row(updateTicketForm.category_type) }}</div>
+                <div>{{ form_row(updateTicketForm.category) }}</div>
+                <div>{{ form_row(updateTicketForm.subject) }}</div>
+                <div>{{ form_row(updateTicketForm.content) }}</div>
+                <div>{{ form_row(updateTicketForm.origin) }}</div>
+                <div>{{ form_row(updateTicketForm.type) }}</div>
+                <div>{{ form_row(updateTicketForm.emergency) }}</div>
+                <div>{{ form_row(updateTicketForm._token) }}</div> {#necessary to get session#}
+                <div>{{ form_row(updateTicketForm.status) }}</div>
+                <div>{{ form_row(updateTicketForm.isArchive) }}</div>
+                <div>{{ form_row(updateTicketForm.submit) }}</div>
+                {{ form_end(updateTicketForm) }}
+
+                <a class="btn btn-default btn-lg active" href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
+
+
 
                 {# Hidden parts for form select inject (CategoryType from Dictionary and categoryTitle from Category) #}
-                <select id="hidden-select-inject-category_type" name="app_bundle[category_type]" required="required" class="form-control hidden">
-                    <option value="">Sélectionnez votre type catégorie</option>
-                    {% for type in categoryTypes %}
-                        <option value="{{ type.id }}" {% if (type.id == categoryType) %}selected="selected"{% endif %}>{{ type.value }}</option>
-                    {% endfor %}
-                </select>
-
-                <select id="hidden-select-inject-category" name="app_bundle[category]" required="required" class="form-control hidden">
-                    <option value="">Sélectionnez votre catégorie</option>
-                    {% for category in categories %}
-                        <option value="{{ category.id }}" {% if (category.id == categoryId) %}selected="selected"{% endif %}>{{ category.title }}</option>
-                    {% endfor %}
-                </select>
-
-                {{ form_row(updateTicketForm.subject) }}
-                {{ form_row(updateTicketForm.content) }}
-                {{ form_row(updateTicketForm.origin) }}
-                {{ form_row(updateTicketForm.type) }}
-                {{ form_row(updateTicketForm.emergency) }}
-                {{ form_row(updateTicketForm._token) }} {#necessary to get session#}
-                {{ form_row(updateTicketForm.status) }}
-                {{ form_row(updateTicketForm.isArchive) }}
-                {{ form_row(updateTicketForm.submit) }}
-                {{ form_end(updateTicketForm) }}
-                <a href="{{ path('ticket_index') }}" class="btn active back-button" role="button">Retour</a>
+                <div>
+                    <select id="hidden-select-inject-category_type" name="app_bundle[category_type]" required="required" class="form-control hidden">
+                        <option value="">Sélectionnez votre type catégorie</option>
+                        {% for type in categoryTypes %}
+                            <option value="{{ type.id }}" {% if (type.id == categoryType) %}selected="selected"{% endif %}>{{ type.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <select id="hidden-select-inject-category" name="app_bundle[category]" required="required" class="form-control hidden">
+                        <option value="">Sélectionnez votre catégorie</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if (category.id == categoryId) %}selected="selected"{% endif %}>{{ category.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
