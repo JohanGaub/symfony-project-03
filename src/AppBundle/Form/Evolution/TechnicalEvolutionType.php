@@ -58,6 +58,9 @@ class TechnicalEvolutionType extends AbstractType
                 'placeholder'   => 'Séléctionnez votre produit',
                 'multiple'      => false,
                 'required'      => 'true',
+                'attr'          => [
+                    'class' => 'datepicker'
+                ]
             ])
             ->add('category_type', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',

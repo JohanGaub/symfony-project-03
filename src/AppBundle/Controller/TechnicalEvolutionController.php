@@ -24,6 +24,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class TechnicalEvolutionController extends Controller
 {
+    const MAX_BY_PAGE = 8;
     /**
      * List all evolution with filter
      *
@@ -35,16 +36,15 @@ class TechnicalEvolutionController extends Controller
     public function indexAction(int $page = 1)
     {
         // TODO => Don't forget to change that 0 = 0
-        $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
-        $evoByPage  = 8;
+        $repo       = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
         $evoTotal   = $repo->getNbEvolution('0 = 0');
         $pagination = [
             'page'          => $page,
             'route'         => 'evolutionHome',
-            'pages_count'   => ceil($evoTotal / $evoByPage),
+            'pages_count'   => ceil($evoTotal / self::MAX_BY_PAGE),
             'route_params'  => array(),
         ];
-        $evolutions = $repo->getEvolutions('0 = 0', $page, $evoByPage);
+        $evolutions = $repo->getEvolutions('0 = 0', $page, self::MAX_BY_PAGE);
 
         // TODO => Find a better solution for rounding (implement ROUND to DQL)
         foreach ($evolutions as $key => $value) {
@@ -146,7 +146,6 @@ class TechnicalEvolutionController extends Controller
              */
             $this->get('app.email.sending')->sendEmail(
                 'Votre évolution vient d\'être modifié',
-                'contact@ashara.fr',
                 [$this->getUser()],
                 $this->render('@App/Email/email.updateEvolution.html.twig', [
                     'url' => $this->generateUrl('evolutionUnit', [
@@ -184,18 +183,14 @@ class TechnicalEvolutionController extends Controller
             || ($technicalEvolution->getUser() == !$this->getUser())) {
             return $this->redirectToRoute('evolutionHome');
         }
-        $uteRepository  = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');
-        $teId           = $technicalEvolution->getId();
-        $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
 
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution' => $technicalEvolution,
-            'notes'     => $notes,
             'addForm'   => $formComment->createView(),
-            'updateForm'=> $formUpdate->createView(),
+            'updateForm'=> $formUpdate->createView()
         ]);
     }
 
@@ -207,11 +202,9 @@ class TechnicalEvolutionController extends Controller
      */
     public function userListAction()
     {
-        $params = ['u.id' => $this->getUser()->getId()];
-        $paramsTranformers = $this->get('app.sql.search_params_getter');
-        $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
         $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
-            ->getSimpleEvolutions($allowParamsFormat);
+            ->getSimpleEvolutions(['u.id' => $this->getUser()->getId()]);
+
         return $this->render('@App/Pages/Evolutions/waitingUserEvolution.html.twig', [
             'evolutions' => $evolutions,
         ]);
@@ -225,11 +218,9 @@ class TechnicalEvolutionController extends Controller
      */
     public function adminListWaitingAction()
     {
-        $params = ['dtes.value' => 'En attente'];
-        $paramsTranformers = $this->get('app.sql.search_params_getter');
-        $allowParamsFormat = $paramsTranformers->setParams($params)->getParams();
         $evolutions = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')
-            ->getSimpleEvolutions($allowParamsFormat);
+            ->getSimpleEvolutions(['dtes.value' => 'En attente']);
+
         return $this->render('@App/Pages/Evolutions/waitingEvolution.html.twig', [
             'evolutions' => $evolutions,
         ]);
@@ -271,7 +262,6 @@ class TechnicalEvolutionController extends Controller
          */
         $this->get('app.email.sending')->sendEmail(
             'Votre évolution vient de changer de status',
-            'contact@ashara.fr',
             $users = $this->get('app.getter_user_admin')->getAdmin(),
             $this->render('@App/Email/email.changeStatusEvolution.html.twig', [
                 'url' => $this->generateUrl('evolutionUnit', [

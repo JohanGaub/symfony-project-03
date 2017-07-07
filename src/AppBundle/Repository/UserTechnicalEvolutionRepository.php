@@ -90,7 +90,7 @@ class UserTechnicalEvolutionRepository extends EntityRepository
             INNER JOIN user_profile up ON up.id = u.user_profile_id
             WHERE ute.type = '{$type}' AND ute.technical_evolution_id = {$evolution}
             ORDER BY ute.date DESC
-            LIMIT {$limit} 
+            LIMIT {$limit}
         ", $rsm);
         return $query;
     }

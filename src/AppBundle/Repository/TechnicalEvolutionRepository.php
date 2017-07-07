@@ -31,8 +31,12 @@ class TechnicalEvolutionRepository extends EntityRepository
             ->join('te.category', 'c', 'te.category = c.id')
             ->join('te.user', 'u', 'te.user = u.id')
             ->join('c.type', 'ct', 'c.type = ct.id')
-            ->where('1 = 1 AND ' . $params)
             ->orderBy('te.id');
+        if (!is_null($params)) {
+            foreach ($params as $key => $val) {
+                $qb->andWhere("$key = '$val'");
+            }
+        }
         return $qb->getQuery()->getResult();
     }
 
@@ -123,7 +127,7 @@ class TechnicalEvolutionRepository extends EntityRepository
         $rsm->addFieldResult('ct', 'dictionary_ct_value', 'value');
         # set entity name
         $table = $this->getClassMetadata()->getTableName();
-        # make a query
+
         /** @noinspection SqlResolve */
         $query = $this->getEntityManager()->createNativeQuery("
             SELECT te.id,
@@ -160,6 +164,7 @@ class TechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
+     * TODO => Don't forget to delete (filter-search)
      * @param string $params
      * @return \Doctrine\ORM\Query
      */
@@ -174,8 +179,7 @@ class TechnicalEvolutionRepository extends EntityRepository
             JOIN 'AppBundle\Entity\Dictionary' dteo WITH te.origin = dteo.id
             JOIN 'AppBundle\Entity\Category' c WITH te.category = c.id
             JOIN 'AppBundle\Entity\Dictionary' ct WITH c.type = ct.id
-            WHERE 1=1 AND {$params}
-                
+            WHERE 1=1 AND {$params} 
         ");
         return $query;
     }

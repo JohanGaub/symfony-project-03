@@ -18,9 +18,9 @@ $(document).ready( function () {
      */
     let interval = setInterval(function(){
         if (isScrolledIntoView($(loader)) && !status) {
-            status = true;
-            let id = $(loader).attr('data-index-number')
-            let nbElements = $('.unit-comment').length;
+            status          = true;
+            let id          = $(loader).attr('data-index-number')
+            let nbElements  = $('.unit-comment').length;
 
             $.ajax({
                 type: 'POST',
