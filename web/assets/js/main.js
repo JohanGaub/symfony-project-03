@@ -87,3 +87,9 @@ $(document).ready(function () {
     $("#wrapper").toggleClass("toggled");
 });
 
+
+$( function() {
+    $( ".datepicker" ).datepicker({
+        altFormat: "dd-mm-yyyy"
+    });
+} );

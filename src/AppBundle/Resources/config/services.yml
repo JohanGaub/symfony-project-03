@@ -2,3 +2,13 @@ services:
 #    app.example:
 #        class: AppBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    communit.navigator.factory:
+        class: AppBundle\Service\NavigatorFactory
+        arguments:
+            - "@request_stack"
+            - "@doctrine.orm.entity_manager"
+
+    communit.navigator:
+        class: AppBundle\Service\Navigator
+        factory: "communit.navigator.factory:get"

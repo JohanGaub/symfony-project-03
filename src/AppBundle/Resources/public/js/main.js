@@ -99,3 +99,10 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
+
+
+$( function() {
+    $( ".datepicker" ).datepicker({
+        altFormat: "dd-mm-yyyy"
+    });
+} );
