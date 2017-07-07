@@ -35,7 +35,7 @@ class Navigator extends Paginator
         parent::__construct($repository->getRowsByPage($page, $filter));
         $this->context = $context;
         $this->filter = $filter;
-        $this->maxPage =  floor($this->count() / constant(get_class($repository) . "::MAX_RESULT"));
+        $this->maxPage =  ceil($this->count() / constant(get_class($repository) . "::MAX_RESULT"));
         if ($this->maxPage == 0){
             $this->maxPage = 1;
         }

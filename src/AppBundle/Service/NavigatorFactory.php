@@ -30,19 +30,21 @@ class NavigatorFactory
      */
     public function __construct($requestStack, $doctrine)
     {
-        $request = $requestStack->getCurrentRequest();
-        $controller = $request->get('_controller');
-        $this->page = $request->get("page", 1);
-        $this->filter = $request->get("app_bundle_filter_type");
+        $request        = $requestStack->getCurrentRequest();
+        $controller     = $request->get('_controller');
+        $this->page     = $request->get("page", 1);
+        $this->filter   = $request->get("app_bundle_filter_type");
+
         if (is_null($this->filter)){
+            // (GET) Continual navigation with same params than POST
             $this->filter = $this->transform($request->get("filter"));
         } else {
-            // reset page number when submit
+            // (POST) reset page number when submit
             $this->page = 1;
         }
-        $controller = explode('::', $controller);
-        $controller = explode('\\', $controller[0]);
-        $this->context = preg_replace('/Controller/', '', $controller[count($controller) - 1]);
+        $controller     = explode('::', $controller);
+        $controller     = explode('\\', $controller[0]);
+        $this->context  = preg_replace('/Controller/', '', $controller[count($controller) - 1]);
         $this->doctrine = $doctrine;
     }
 
