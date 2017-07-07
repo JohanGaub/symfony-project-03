@@ -87,8 +87,9 @@ $(document).ready(function () {
     $("#wrapper").toggleClass("toggled");
 });
 
-//Date Picker
-$( function() {
-    $( "#datepicker" ).datepicker();
 
+$( function() {
+    $( ".datepicker" ).datepicker({
+        altFormat: "dd-mm-yyyy"
+    });
 } );

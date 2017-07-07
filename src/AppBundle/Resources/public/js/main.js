@@ -101,8 +101,8 @@ $(document).ready(function () {
 });
 
 
-//Date Picker
 $( function() {
-    $( "#datepicker" ).datepicker();
-
+    $( ".datepicker" ).datepicker({
+        altFormat: "dd-mm-yyyy"
+    });
 } );

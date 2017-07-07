@@ -44,8 +44,22 @@
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
                 {{ form_start(updateTicketForm) }}
                 {{ form_row(updateTicketForm.product) }}
-                {#  {{ form_row(updateTicketForm.category_type) }}
-               {{ form_row(updateTicketForm.category_title) }}#}
+
+                {# Hidden parts for form select inject (CategoryType from Dictionary and categoryTitle from Category) #}
+                <select id="hidden-select-inject-category_type" name="app_bundle[category_type]" required="required" class="form-control hidden">
+                    <option value="">Sélectionnez votre type catégorie</option>
+                    {% for type in categoryTypes %}
+                        <option value="{{ type.id }}" {% if (type.id == categoryType) %}selected="selected"{% endif %}>{{ type.value }}</option>
+                    {% endfor %}
+                </select>
+
+                <select id="hidden-select-inject-category" name="app_bundle[category]" required="required" class="form-control hidden">
+                    <option value="">Sélectionnez votre catégorie</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if (category.id == categoryId) %}selected="selected"{% endif %}>{{ category.title }}</option>
+                    {% endfor %}
+                </select>
+
                 {{ form_row(updateTicketForm.subject) }}
                 {{ form_row(updateTicketForm.content) }}
                 {{ form_row(updateTicketForm.origin) }}
@@ -75,4 +89,9 @@
 
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
+    <script src="{{ asset('assets/js/form.update-category-title.js') }}"></script>
 {% endblock %}

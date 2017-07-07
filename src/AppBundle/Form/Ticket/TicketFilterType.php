@@ -37,6 +37,10 @@ class TicketFilterType extends AbstractType
                 'required' => false,
                 'expanded' => false,
                 'multiple' => true,
+                'choices'  => [
+                    'Normale'   => 'Normale',
+                    'Haute'     => 'Haute',
+                ],
             ])
             ->add('subject', TextType::class, [
                 'label' => 'Sujet du ticket',
@@ -52,20 +56,27 @@ class TicketFilterType extends AbstractType
             ->add('creationDate', DateType::class, [
                 'label'     => 'Date de création',
                 'widget'    => 'single_text',
+                'required' => false,
                 'attr'      => [
                     'placeholder'   => 'jj-mm-aaaa',
                     'format'        => 'dd-MM-yyyy',
+                    'class'         => 'datepicker',
                 ],
             ])
             ->add('endDate', DateType::class, [
                 'label'     => 'Date de clôture',
                 'widget'    => 'single_text',
+                'required' => false,
                 'attr'      => [
                     'placeholder'   => 'jj-mm-aaaa',
                     'format'        => 'dd-MM-yyyy',
+                    'class'         => 'datepicker',
                 ],
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Filtrer'])
+            ->add('submit', SubmitType::class, [
+                    'label' => 'Filtrer',
+                ]
+            )
         ;
     }
 

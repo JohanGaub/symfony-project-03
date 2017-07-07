@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\Dictionary;
 use AppBundle\Entity\Ticket;
 use AppBundle\Form\SearchTicketType;
 use AppBundle\Form\Ticket\AddCommentType;
@@ -40,31 +42,13 @@ class TicketController extends Controller
 
         $searchForm     = $this->createForm(TicketFilterType::class, $filter);
 
-/*        $repo = $this->getDoctrine()->getRepository('AppBundle:Ticket');
-        $maxTickets = 10;
-        $tickets_count = $repo->countTicketTotal();
-
-        $pagination = [
-            'page' => $page,
-            'route' => 'ticket_index',
-            'pages_count' => ceil($tickets_count / $maxTickets),
-            'route_params' => [],
-        ];
-
-        $tickets = $repo->getList($page, $maxTickets);*/
-
         return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             /*** Ticket search ***/
             'data'           => $this->get("communit.navigator"),
             'filter'        => $filter,
             'filterURL'     =>http_build_query($filter),
             'documentType'  => "Ticket",
-       //     'deletionURL'   => $this->generateUrl("ticket_delete", ['ticket' => 0]),
             'searchForm'    => $searchForm->createView(),
-
-            /*** Ticket list ***/
-/*            'tickets' => $tickets,
-            'pagination' => $pagination,*/
         ]);
     }
 
@@ -213,6 +197,19 @@ class TicketController extends Controller
 
         $updateTicketForm->handleRequest($request);
 
+        $category           = $ticket->getCategory();
+        if(isset($category)) {
+            $categoryType = $category->getType();
+        } else {
+            $categoryType = null;
+        };
+
+        $categories = $em->getRepository(Category::class)
+            ->getCategoryByType($categoryType)->getQuery()->getResult();
+        $categoryTypes = $em->getRepository(Dictionary::class)
+            ->getItemListByType('category_type')->getQuery()->getResult();
+
+
         if($updateTicketForm->isSubmitted() && $updateTicketForm->isValid()) {
             $em->flush();
 
@@ -221,6 +218,10 @@ class TicketController extends Controller
         return $this->render('@App/Pages/Ticket/updateTicket.html.twig',[
             'ticket'            => $ticket,
             'updateTicketForm'  => $updateTicketForm->createView(),
+            'categories'        => $categories,
+            'categoryTypes'     => $categoryTypes,
+            'categoryId'        => isset($category) ? $category->getId() : null,
+            'categoryType'      => isset($categoryType) ? $categoryType->getId() : null,
         ]);
     }
 
