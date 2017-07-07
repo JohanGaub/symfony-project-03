@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Service;
+
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -24,7 +25,7 @@ class DictionaryVerification
     }
 
     /**
-     * Function return array of elelement was same field => id
+     * Function return array of element was same field => id
      * @param string $type
      * @param int $id
      * @return array

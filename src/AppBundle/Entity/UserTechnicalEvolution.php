@@ -2,21 +2,19 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\User;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * UserTechnicalEvolution
  *
  * @ORM\Table(name="user_technical_evolution")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserTechnicalEvolutionRepository")
  */
 class UserTechnicalEvolution
 {
     /**
      * @var integer
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -25,35 +23,30 @@ class UserTechnicalEvolution
 
     /**
      * @var integer
-     *
      * @ORM\Column(name="note", type="integer", nullable=true)
      */
     private $note;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
      * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
@@ -64,12 +57,13 @@ class UserTechnicalEvolution
     private $technicalEvolution;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions")
      */
     private $user;
 
     /**
      * UserTechnicalEvolution constructor.
+     *
      * @param $type
      */
     public function __construct($type = 'undefined')
@@ -97,7 +91,6 @@ class UserTechnicalEvolution
     public function setNote($note)
     {
         $this->note = $note;
-
         return $this;
     }
 
@@ -121,7 +114,6 @@ class UserTechnicalEvolution
     public function setComment($comment)
     {
         $this->comment = $comment;
-
         return $this;
     }
 
@@ -145,7 +137,6 @@ class UserTechnicalEvolution
     public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -162,7 +153,7 @@ class UserTechnicalEvolution
     /**
      * Get date
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDate()
     {
@@ -172,34 +163,34 @@ class UserTechnicalEvolution
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      * @return UserTechnicalEvolution
      */
-    public function setDate(\DateTime $date)
+    public function setDate(DateTime $date)
     {
         $this->date = $date;
         return $this;
     }
 
     /**
-     * Get updateDate
+     * Get UpdateDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdateDate()
     {
-        return $this->date;
+        return $this->updateDate;
     }
 
     /**
-     * Set date
+     * Set UpdateDate
      *
-     * @param \DateTime $updateDate
+     * @param DateTime $updateDate
      * @return UserTechnicalEvolution
      */
-    public function setUpdateDate(\DateTime $updateDate)
+    public function setUpdateDate(DateTime $updateDate)
     {
-        $this->date = $updateDate;
+        $this->updateDate = $updateDate;
         return $this;
     }
 
@@ -213,7 +204,6 @@ class UserTechnicalEvolution
     public function setTechnicalEvolution(TechnicalEvolution $technicalEvolution = null)
     {
         $this->technicalEvolution = $technicalEvolution;
-
         return $this;
     }
 
@@ -237,7 +227,6 @@ class UserTechnicalEvolution
     public function setUser(User $user = null)
     {
         $this->user = $user;
-
         return $this;
     }
 

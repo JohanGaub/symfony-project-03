@@ -1,0 +1,92 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}
+    Liste des catégories
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            {% include '@App/Pages/Category/buttonBarCategory.html.twig' %}
+
+            <div class="bo-title-page col-lg-12">
+                <h1>Liste des catégories</h1>
+            </div>
+
+            <div class="col-lg-12">
+                {% include '@App/Elements/include.flashBagMessage.html.twig' %}
+            </div>
+
+            <div class="col-lg-12">
+                <table class="table waiting-list">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categorys %}
+                        <tr>
+                            <th>{{ category.title }}</th>
+                            <th>{{ category.type.value }}</th>
+                            <th>{{ category.description }}</th>
+                            <th>
+                                <a href="{{ path('categoryUpdate', {'category': category.id}) }}" class="neutral">
+                                    <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </th>
+                            <th>
+                                <a class="modal-link invalid" href="" data-toggle="modal" data-index="{{ category.id }}"
+                                   data-target="#modal-delete">
+                                    <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div id="modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Suppression d'une catégorie</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Si vous confimez la suppression la catégorie sera supprimé !</p>
+                                <a class="category-delete-link" href="" >
+                                    Je confirme vouloir supprimer cette catégorie !
+                                </a>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {# TODO => Call if need to do file for this js ?? #}
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.modal-link', function () {
+                let $this   = $(this)
+                let data    = $this.attr('data-index')
+                let link    = '<a href="/categorie/suppression/' + data + '">'
+                    link    += 'Je confirme vouloir supprimer cette catégorie !</a>'
+                $('.category-delete-link').replaceWith(link);
+            })
+        })
+    </script>
+{% endblock %}

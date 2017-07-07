@@ -30,9 +30,9 @@ $(document).ready( function () {
                     domSend += '<span id="li-value-' + elementId + '">' + elementValue + '</span>'
                     domSend += '<span class="badge">'
                     domSend += '<a class="modal-update" href="" data-toggle="modal" data-target="#dictionary-modal-update">'
-                    domSend += '<i class="fa fa-cog" aria-hidden="true"></i></a><span> </span>'
+                    domSend += '<i class="fa fa-cog fa-2x" aria-hidden="true"></i></a><span> </span>'
                     domSend += '<a class="modal-delete" href="" data-toggle="modal" data-target="#dictionary-modal-delete">'
-                    domSend += '<i class="fa fa-close" aria-hidden="true"></i></a>'
+                    domSend += '<i class="fa fa-close fa-2x" aria-hidden="true"></i></a>'
                     domSend += '</span></li>'
                     $('#' + formType).append(domSend)
                     $('#form_' + formType).val('')

@@ -16,6 +16,7 @@ class DictionaryRepository extends EntityRepository
      * FormQueryBuilder to get all type of dictionary
      *
      * @param $type
+     * @param $type
      * @return QueryBuilder
      */
     public function getItemListByType($type)
