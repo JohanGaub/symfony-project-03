@@ -44,7 +44,7 @@ class TicketController extends Controller
 
         return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             /*** Ticket search ***/
-            'data'           => $this->get("communit.navigator"),
+            'data'          => $this->get("communit.navigator"),
             'filter'        => $filter,
             'filterURL'     =>http_build_query($filter),
             'documentType'  => "Ticket",
@@ -204,10 +204,10 @@ class TicketController extends Controller
             $categoryType = null;
         };
 
-        $categories = $em->getRepository('AppBundle:Category')
-            ->getCategoryByType($categoryType)->getQuery()->getResult();
+         $categories = $em->getRepository('AppBundle:Category')
+            ->getCategoryByTypeResult($categoryType);
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
-            ->getItemListByType('category_type')->getQuery()->getResult();
+            ->getItemListByTypeResult('category_type');
 
 
         if($updateTicketForm->isSubmitted() && $updateTicketForm->isValid()) {

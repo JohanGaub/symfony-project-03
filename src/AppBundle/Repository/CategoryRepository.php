@@ -14,7 +14,7 @@ class CategoryRepository extends EntityRepository
     /**
      * @return array
      */
-    public function getCategorys()
+    public function getCategories()
     {
         return $this->createQueryBuilder('c')
             ->select('c', 't')
@@ -22,6 +22,16 @@ class CategoryRepository extends EntityRepository
             ->orderBy('c.type')
             ->getQuery()
             ->getResult();
+    }
+
+
+    /**
+     * @param $type
+     * @return array
+     */
+    public function getCategoryByTypeResult($type)
+    {
+        return $this->getCategoryByType($type)->getQuery()->getResult();
     }
 
     /**
@@ -33,5 +43,7 @@ class CategoryRepository extends EntityRepository
         return $this->createQueryBuilder('c')
             ->where('c.type = :category_type')
             ->setParameter('category_type', $categoryType);
+
+
     }
 }
