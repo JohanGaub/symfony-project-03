@@ -14,6 +14,21 @@
 .text-color-3 {
   color: #E6397E; }
 
+.valid {
+  color: #81cd58; }
+  .valid:hover {
+    color: #50932c; }
+
+.invalid {
+  color: #e15f5f; }
+  .invalid:hover {
+    color: #b82222; }
+
+.neutral {
+  color: #403d40; }
+  .neutral:hover {
+    color: #0c0b0c; }
+
 /************
  Mixin
 ************/
@@ -583,8 +598,15 @@ a {
 .be-strong {
   font-weight: 700; }
 
+.no-padding {
+  padding: 0 !important; }
+
 .transition-2s-ease {
   transition: 2s ease; }
+
+.strong-green {
+  font-weight: 700;
+  color: #9ac00a; }
 
 .form-all {
   margin: 4rem 0 0 0;

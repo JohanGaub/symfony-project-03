@@ -1,0 +1,29 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}
+    Modificiation d'une catégorie
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="bo-title-page col-lg-12">
+                <h2>Modification d'une catégorie</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                {{ form_start(form) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.type) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
