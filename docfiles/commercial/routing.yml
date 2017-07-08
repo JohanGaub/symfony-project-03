@@ -1,0 +1,10 @@
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+web:
+    resource: "@WebBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

@@ -19,3 +19,7 @@ services:
     app.getter_user_admin:
         class: AppBundle\Service\GetterUserAdmin
         arguments: ['@doctrine.orm.entity_manager']
+
+    app.read_docfiles:
+        class: AppBundle\Service\ReadDocfiles
+        arguments: ['@security.authorization_checker', '@security.token_storage', '%docfiles_directory%']

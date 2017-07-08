@@ -29,14 +29,25 @@ class DefaultController extends Controller
     }
 
     /**
-     * This function is temporary to check if default path after login works well to be deleted and placed somewhere else
-     *
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/dashboard", name="dashboard")
+     * @Route("/telechargements", name="download")
      */
-    public function dashboardAction()
+    public function DownloadIndexAction()
     {
-        return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
+        return $this->render('@App/Pages/Others/bo-download.html.twig', [
+            'dirs' => $this->get('app.read_docfiles')->getDirContent()
+        ]);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/tableau-de-bord", name="dashboard")
+     */
+    public function dashboardIndexAction()
+    {
+        return $this->render('@App/Pages/Others/bo-dashboard.html.twig', [
+
+        ]);
     }
 
 }

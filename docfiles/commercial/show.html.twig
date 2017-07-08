@@ -1,0 +1,44 @@
+
+
+{% block body %}
+    <h1>Log</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ log.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ log.email }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ log.password }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ log.username }}</td>
+            </tr>
+            <tr>
+                <th>Iduserinfo</th>
+                <td>{{ log.idUserInfo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('log_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('log_edit', { 'id': log.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
