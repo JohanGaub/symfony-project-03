@@ -26,3 +26,9 @@
 @import "backoffice/bo-ticket";
 @import "backoffice/bo-evolution";
 @import "backoffice/bo-download";
+
+html {
+  height: 0!important;
+  padding: 0!important;
+  margin: 0!important;
+}
