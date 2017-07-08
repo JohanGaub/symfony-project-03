@@ -18,8 +18,11 @@
   padding: 0!important;
 }
 
-.transition-2s-ease {
+.transition-05s-ease {
   transition: 2s ease;
+}
+.transition-1s-ease {
+  transition: 0.5s ease;
 }
 
 .strong-green {

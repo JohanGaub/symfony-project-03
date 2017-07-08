@@ -82,8 +82,4 @@ $(document).ready(function () {
     });
 });
 
-// Side bar back office
-$(document).ready(function () {
-    $("#wrapper").toggleClass("toggled");
-});
 

@@ -3,14 +3,12 @@
 <head>
     {% include '@App/Partials/bo-head.html.twig' %}
 </head>
-<body id="wrapper">
-    <header id="sidebar-wrapper" class="sidebar-communit">
+<body>
+    <header>
         {% include '@App/Partials/bo-sideBar.html.twig' %}
     </header>
 
-    {% include '@App/Partials/bo-topBar.html.twig' %}
-
-    <main id="page-content-wrapper">
+    <main class="main">
         {% block body %}{% endblock %}
     </main>
 
