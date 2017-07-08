@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Swift_Attachment;
 use Swift_Mailer;
 use Swift_MailTransport;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,6 +42,7 @@ class SecurityController extends Controller
             'last_username' => $lastUsername
         ]);
     }
+
     /**
     * @param Request $request
     * @return Response

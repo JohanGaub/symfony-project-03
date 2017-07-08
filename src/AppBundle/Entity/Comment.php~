@@ -186,4 +186,11 @@ class Comment
     {
         return $this->ticket;
     }
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
 }

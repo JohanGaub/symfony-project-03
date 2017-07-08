@@ -1,8 +1,8 @@
 <?php
 
 namespace AppBundle\Service;
+
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class DictionaryVerification
@@ -38,10 +38,10 @@ class DictionaryVerification
         if ($type == 'category_type') {
             $entity = 'AppBundle:Category';
             $field  = 'type';
-        } else if ($type == 'origin') {
+        } else if ($type == 'technical_evolution_origin') {
             $entity = 'AppBundle:TechnicalEvolution';
             $field  = 'origin';
-        } else if ($type == 'status') {
+        } else if ($type == 'technical_evolution_status') {
             $entity = 'AppBundle:TechnicalEvolution';
             $field  = 'status';
         }

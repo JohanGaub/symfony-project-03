@@ -225,7 +225,6 @@ class User implements UserInterface, Serializable
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
-
         return $this;
     }
 
@@ -240,6 +239,29 @@ class User implements UserInterface, Serializable
     }
 
     /**
+     * Set isActiveByAdmin
+     *
+     * @param boolean $isActiveByAdmin
+     *
+     * @return User
+     */
+    public function setIsActiveByAdmin($isActiveByAdmin)
+    {
+        $this->isActiveByAdmin = $isActiveByAdmin;
+        return $this;
+    }
+
+    /**
+     * Get isActiveByAdmin
+     *
+     * @return boolean
+     */
+    public function getIsActiveByAdmin()
+    {
+        return $this->isActiveByAdmin;
+    }
+
+    /**
      * Set token
      *
      * @param string $token
@@ -249,7 +271,6 @@ class User implements UserInterface, Serializable
     public function setToken($token)
     {
         $this->token = $token;
-
         return $this;
     }
 
@@ -355,6 +376,40 @@ class User implements UserInterface, Serializable
     }
 
     /**
+     * Add userTechnicalEvolution
+     *
+     * @param UserTechnicalEvolution $userTechnicalEvolution
+     *
+     * @return User
+     */
+    public function addUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
+    {
+        $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
+
+        return $this;
+    }
+
+    /**
+     * Remove userTechnicalEvolution
+     *
+     * @param UserTechnicalEvolution $userTechnicalEvolution
+     */
+    public function removeUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
+    {
+        $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
+    }
+
+    /**
+     * Get userTechnicalEvolutions
+     *
+     * @return Collection
+     */
+    public function getUserTechnicalEvolutions()
+    {
+        return $this->userTechnicalEvolutions;
+    }
+
+    /**
      * Set userProfile
      *
      * @param UserProfile $userProfile
@@ -364,7 +419,6 @@ class User implements UserInterface, Serializable
     public function setUserProfile(UserProfile $userProfile = null)
     {
         $this->userProfile = $userProfile;
-
         return $this;
     }
 
@@ -376,22 +430,6 @@ class User implements UserInterface, Serializable
     public function getUserProfile()
     {
         return $this->userProfile;
-    }
-
-    public function getSalt()
-    {
-        return null;
-    }
-
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     */
-    public function eraseCredentials()
-    {
-
     }
 
     /**
@@ -462,6 +500,7 @@ class User implements UserInterface, Serializable
         return $this->comments;
     }
 
+
     public function generateToken()
     {
         $today = new \DateTime("now");
@@ -515,61 +554,22 @@ class User implements UserInterface, Serializable
             ) = unserialize($serialized);
     }
 
-    /**
-     * Set isActiveByAdmin
-     *
-     * @param boolean $isActiveByAdmin
-     *
-     * @return User
-     */
-    public function setIsActiveByAdmin($isActiveByAdmin)
+    public function getSalt()
     {
-        $this->isActiveByAdmin = $isActiveByAdmin;
-
-        return $this;
+        return null;
     }
 
     /**
-     * Get isActiveByAdmin
+     * Removes sensitive data from the user.
      *
-     * @return boolean
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
      */
-    public function getIsActiveByAdmin()
+    public function eraseCredentials()
     {
-        return $this->isActiveByAdmin;
+
     }
 
-    /**
-     * Add userTechnicalEvolution
-     *
-     * @param \AppBundle\Entity\TechnicalEvolution $userTechnicalEvolution
-     *
-     * @return User
-     */
-    public function addUserTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $userTechnicalEvolution)
-    {
-        $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
 
-        return $this;
-    }
 
-    /**
-     * Remove userTechnicalEvolution
-     *
-     * @param \AppBundle\Entity\TechnicalEvolution $userTechnicalEvolution
-     */
-    public function removeUserTechnicalEvolution(\AppBundle\Entity\TechnicalEvolution $userTechnicalEvolution)
-    {
-        $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
-    }
-
-    /**
-     * Get userTechnicalEvolutions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserTechnicalEvolutions()
-    {
-        return $this->userTechnicalEvolutions;
-    }
 }

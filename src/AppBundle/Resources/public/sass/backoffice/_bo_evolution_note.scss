@@ -8,7 +8,7 @@
   height: 1.6rem;
   display: inline-block;
   text-indent: -999.9rem; /* hide the label text off screen */
-  background: url("../img/rating_stars.png") -15.5rem -3.2rem;
+  background: url("http://designmoo.com/wp-content/uploads/2011/01/rating_stars.png") -15.5rem -3.2rem;
 }
 
 .starRating label.on {
@@ -20,7 +20,7 @@
   justify-content: space-around;
   transition: 1s ease-in-out;
 
-  /****** Counter *******/
+/****** Counter *******/
   .rating-counter {
     padding: 1rem 0 0 0;
     .rating-counter-value {

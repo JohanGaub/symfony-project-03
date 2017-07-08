@@ -2,10 +2,13 @@
 
 namespace AppBundle\Entity;
 
+<<<<<<< HEAD
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\User;
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -137,6 +140,11 @@ class Ticket
      */
     private $comments;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
     /**
      * Get id
      *

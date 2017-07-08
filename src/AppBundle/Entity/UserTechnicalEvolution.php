@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use AppBundle\Entity\TechnicalEvolution;
 use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +17,6 @@ class UserTechnicalEvolution
 {
     /**
      * @var integer
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -25,35 +25,30 @@ class UserTechnicalEvolution
 
     /**
      * @var integer
-     *
      * @ORM\Column(name="note", type="integer", nullable=true)
      */
     private $note;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
      * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
     /**
-     * @var \DateTime
-     *
+     * @var DateTime
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
@@ -70,6 +65,7 @@ class UserTechnicalEvolution
 
     /**
      * UserTechnicalEvolution constructor.
+     *
      * @param $type
      */
     public function __construct($type = 'undefined')
@@ -97,7 +93,6 @@ class UserTechnicalEvolution
     public function setNote($note)
     {
         $this->note = $note;
-
         return $this;
     }
 
@@ -121,7 +116,6 @@ class UserTechnicalEvolution
     public function setComment($comment)
     {
         $this->comment = $comment;
-
         return $this;
     }
 
@@ -145,7 +139,6 @@ class UserTechnicalEvolution
     public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -160,23 +153,9 @@ class UserTechnicalEvolution
     }
 
     /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return UserTechnicalEvolution
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
      * Get date
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDate()
     {
@@ -184,29 +163,38 @@ class UserTechnicalEvolution
     }
 
     /**
-     * Set updateDate
+     * Set date
      *
-     * @param \DateTime $updateDate
-     *
+     * @param DateTime $date
      * @return UserTechnicalEvolution
      */
-    public function setUpdateDate($updateDate)
+    public function setDate(DateTime $date)
     {
-        $this->updateDate = $updateDate;
-
+        $this->date = $date;
         return $this;
     }
 
     /**
-     * Get updateDate
+     * Get UpdateDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdateDate()
     {
         return $this->updateDate;
     }
 
+    /**
+     * Set UpdateDate
+     *
+     * @param DateTime $updateDate
+     * @return UserTechnicalEvolution
+     */
+    public function setUpdateDate(DateTime $updateDate)
+    {
+        $this->updateDate = $updateDate;
+        return $this;
+    }
 
     /**
      * Set technicalEvolution
@@ -218,7 +206,6 @@ class UserTechnicalEvolution
     public function setTechnicalEvolution(TechnicalEvolution $technicalEvolution = null)
     {
         $this->technicalEvolution = $technicalEvolution;
-
         return $this;
     }
 
@@ -242,7 +229,6 @@ class UserTechnicalEvolution
     public function setUser(User $user = null)
     {
         $this->user = $user;
-
         return $this;
     }
 

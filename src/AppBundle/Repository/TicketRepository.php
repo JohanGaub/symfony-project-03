@@ -14,6 +14,9 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class TicketRepository extends EntityRepository
 {
+    const MAX_RESULT = 10;
+
+
     /**
      * @param int $page
      * @param int $maxTickets
@@ -22,7 +25,7 @@ class TicketRepository extends EntityRepository
     public function getList($page = 1, $maxTickets = 10)
     {
         $q = $this->createQueryBuilder('t')
-            ->orderBy('t.emergency','ASC')
+            ->orderBy('t.emergency', 'ASC')
             ->addOrderBy('t.id', 'DESC')
             ->setFirstResult(($page - 1) * $maxTickets)
             ->setMaxResults($maxTickets)
@@ -39,9 +42,32 @@ class TicketRepository extends EntityRepository
     {
         $q = $this->createQueryBuilder('t')
             ->select('COUNT(t)')
-            ->getQuery()->getSingleScalarResult()
-        ;
+            ->getQuery()->getSingleScalarResult();
         return $q;
     }
+
+    public function getRowsByPage($page, $filter)
+    {
+        $alias  = "t";
+        $query  = $this->createQueryBuilder($alias)
+            ->select($alias)
+            ->setFirstResult(($page - 1) * self::MAX_RESULT)
+            ->setMaxResults(self::MAX_RESULT);
+        if(!is_null($filter)) {
+            foreach ($filter as $field => $value) {
+                if ($value !== "") {
+                    if (strpos($field, "_") !== 0) {
+                        $search = "$alias.$field like '%$value%'";
+                        $query->andWhere($search);
+                    }
+                }
+            }
+        }
+        return $query->getQuery();
+    }
+
+
+
+
 
 }

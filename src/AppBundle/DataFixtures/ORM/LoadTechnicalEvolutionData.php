@@ -43,6 +43,7 @@ class LoadTechnicalEvolutionData extends AbstractFixture implements OrderedFixtu
             $te->setUser($this->getReference($randomUser));
             $te->setCategory($this->getReference($randomCategory));
             $te->setProduct($this->getReference($randomProduct));
+            $te->setIsArchivate(false);
             $em->persist($te);
 
             $this->setReference('technical_evolution_id_' . $i, $te);

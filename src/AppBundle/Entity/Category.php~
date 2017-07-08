@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 =======
@@ -11,11 +12,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\JoinColumn;
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\JoinColumn;
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
@@ -25,6 +32,9 @@ use Doctrine\ORM\Mapping\JoinColumn;
 =======
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
  */
 class Category
 {
@@ -49,6 +59,7 @@ class Category
      *
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      * @ORM\Column(name="tag", type="string", length=255, nullable=false)
      */
@@ -60,11 +71,20 @@ class Category
 >>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
 =======
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     private $description;
 
+    /*/**
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="type", referencedColumnName="id")
+     */
+   // private $type;*/
+
     /**
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -75,8 +95,14 @@ class Category
      * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
      * @JoinColumn(name="type", referencedColumnName="id")
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+     * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="categories", cascade={"persist"})
+     * @JoinColumn(name="type", referencedColumnName="id")
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
      */
     private $type;
+
+
 
     /**
 >>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
@@ -96,6 +122,7 @@ class Category
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      * @ORM\OneToOne(targetEntity="Dictionary")
      * @JoinColumn(name="type_id", referencedColumnName="id")
@@ -105,11 +132,16 @@ class Category
 =======
 >>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
 =======
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="category")
      */
     private $tickets;
+<<<<<<< HEAD
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
 
     /**
      * Get id
@@ -172,8 +204,11 @@ class Category
     /**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
      * Constructor
      */
     public function __construct()
@@ -184,7 +219,10 @@ class Category
     }
 
     /**
+<<<<<<< HEAD
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
      * Set type
      *
      * @param Dictionary $type
@@ -208,6 +246,7 @@ class Category
         return $this->type;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
 >>>>>>> 973f69a36d835bdc0395afd4c53528243b3f8368
      * Constructor
@@ -221,6 +260,8 @@ class Category
     }
 =======
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
 
     /**
      * Add technicalEvolution
@@ -326,6 +367,7 @@ class Category
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @return string
      */
     public function __toString()
@@ -356,6 +398,8 @@ class Category
     {
         return $this->type;
 =======
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
      * Add ticket
      *
      * @param Ticket $ticket
@@ -395,6 +439,9 @@ class Category
     public function __toString()
     {
         return $this->title;
+<<<<<<< HEAD
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
     }
 }

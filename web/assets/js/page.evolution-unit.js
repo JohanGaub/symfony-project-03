@@ -76,7 +76,6 @@ $(document).ready(function() {
 });
 
 
-
 /**
  * Listen user screen to load new comments
  */
@@ -85,8 +84,8 @@ $(document).ready( function () {
     loaderDom += '<div class="inner one"></div>'
     loaderDom += '<div class="inner two"></div>'
     loaderDom += '</div>'
-    let loader = '.loader-wcs'
     let status = false;
+    let loader = '.loader-wcs'
     $(loader).append(loaderDom);
 
     /**
@@ -97,9 +96,9 @@ $(document).ready( function () {
      */
     let interval = setInterval(function(){
         if (isScrolledIntoView($(loader)) && !status) {
-            status = true;
-            let id = $(loader).attr('data-index-number')
-            let nbElements = $('.unit-comment').length;
+            status          = true;
+            let id          = $(loader).attr('data-index-number')
+            let nbElements  = $('.unit-comment').length;
 
             $.ajax({
                 type: 'POST',
@@ -113,11 +112,15 @@ $(document).ready( function () {
                         $(data).each(function (key, values) {
                             let uteId   = values['id']
                             let user    = values['user']['userProfile']['firstname']
-                            user    += ' ' + values['user']['userProfile']['lastname']
+                            user        += ' ' + values['user']['userProfile']['lastname']
                             let date    = (new Date(values['date']['date']))
                             let comment = values['comment']
                             $('.comment-list').append(createComment(uteId, user, date, comment))
 
+                            /**
+                             * Verification about nb result request return
+                             * stop watcher if he is under than 10
+                             */
                             if (data.length < 10){
                                 $(loader).hide(function () {
                                     clearInterval(interval)
@@ -125,8 +128,13 @@ $(document).ready( function () {
                             }
                             status = false;
                         })
-                    } ,2000)
+                    } ,150)
                 },
+                error: function () {
+                    $(loader).hide(function () {
+                        clearInterval(interval)
+                    })
+                }
             })
         }
     }, 500)
@@ -134,7 +142,6 @@ $(document).ready( function () {
 
 /**
  * Add new comment
- * TODO => Fix date echo need good format
  */
 $(document).ready( function () {
     let formId  = '#app_bundle_comment_userTechnicalEvolution'
@@ -168,11 +175,11 @@ $(document).ready( function () {
     let commentId       = ''
     let commentValue    = ''
 
-    $('.modal-delete').click( function () {
+    $(document).on('click', '.modal-delete', function () {
         let $this           = $(this)
-        commentFullId       = $this.parent().attr('id')
-        commentId           = commentFullId.replace('ute_id_', '')
-        commentValue        = $this.parent().children($('.comment-value'))[2]['outerText']
+        commentFullId       = $this.parent().attr('class')
+        commentId           = $this.attr('data-index-number')
+        commentValue        = $('#comment-value-id-' + commentId).text()
         $('.delete-value').replaceWith('<p class="delete-value">' + commentValue + '</p>')
     })
 
@@ -182,11 +189,11 @@ $(document).ready( function () {
             type: 'GET',
             url: '/evolution-technique/commentaires/suppression/' + commentId,
             timeout: 3000,
-            success: function(){
+            success: function() {
                 let elementList = '<div class="unit-comment">'
                 elementList += '<h5>Commentaire supprimé<h5>'
                 elementList += '</div>'
-                $('#' + commentFullId).replaceWith(elementList)
+                $('#ute_id_' + commentId).replaceWith(elementList)
             },
         })
     })
@@ -202,13 +209,12 @@ $(document).ready( function () {
     let commentId       = ''
     let commentValue    = ''
 
-    $('.modal-update').click( function () {
+    $(document).on('click', '.modal-update', function () {
         let $this       = $(this)
-        commentFullId   = $this.parent().attr('id')
+        commentFullId   = $this.parent().parent().attr('id')
         commentId       = commentFullId.replace('ute_id_', '')
         commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
         $(commentField).val(commentValue)
-        console.log()
     })
 
     $(commentForm).submit( function (e) {
@@ -261,21 +267,21 @@ function isScrolledIntoView(elem)
  * @param comment
  * @returns {string}
  */
-function createComment(uteId, user, date, comment)
-{
+function createComment(uteId, user, date, comment) {
     let elementList = '<div id="ute_id_' + uteId + '" class="unit-comment">'
-    elementList += '<h5>' + user + '</h5>'
+    elementList += '<h5>Par <span class="strong-green">' + user + '</span></h5>'
     elementList += '<i>Le ' + date + '</i>'
     elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
+    elementList += '<div class="be-flex space-between">'
     elementList += '<a class="modal-update" href="" data-toggle="modal" '
     elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
-    elementList += '<i class="fa fa-cog" aria-hidden="true"></i>'
+    elementList += 'Modifier le commentaire'
     elementList += '</a>'
-    elementList += '<span> </span>'
     elementList += '<a class="modal-delete" href="" data-toggle="modal" '
     elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
-    elementList += '<i class="fa fa-close" aria-hidden="true"></i>'
+    elementList += 'Supprimer le commentaire'
     elementList += '</a>'
+    elementList += '</div>'
     elementList += '</div>'
     return elementList;
 }

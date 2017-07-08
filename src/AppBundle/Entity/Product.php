@@ -61,7 +61,6 @@ class Product
      */
     private $tickets;
 
-
     /**
      * Get id
      *

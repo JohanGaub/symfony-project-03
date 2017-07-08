@@ -40,8 +40,8 @@ class TechnicalEvolutionType extends AbstractType
             ->add('origin', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
-                    #Find all status in dictionary
-                    return $repo->getEvolutionOriginTypeList();
+                    #Find all origin in dictionary
+                    return $repo->getItemListByType('origin');
                 },
                 'label'         => 'Origine de la demande',
                 'placeholder'   => 'Qui est à la base de cette évolution ?',
@@ -58,12 +58,15 @@ class TechnicalEvolutionType extends AbstractType
                 'placeholder'   => 'Séléctionnez votre produit',
                 'multiple'      => false,
                 'required'      => 'true',
+                'attr'          => [
+                    'class' => 'datepicker'
+                ]
             ])
             ->add('category_type', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     # Find all category_type for select list
-                    return $repo->getCategoryTypeList();
+                    return $repo->getItemListByType('category_type');
                 },
                 'label'         => 'Type de catégorie',
                 'placeholder'   => 'Sélectionnez votre type de catégorie',
@@ -83,21 +86,18 @@ class TechnicalEvolutionType extends AbstractType
         $builder->get('category_type')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
-                $categoryType = $event->getForm()->getData();
                 $form = $event->getForm();
-                $this->addCategoryNameField($form->getParent(), $categoryType);
+                $this->addCategoryTitleField($form->getParent(), $form->getData());
             }
         );
     }
 
+
     /**
-     * Add Category name field to form
-     *
      * @param FormInterface $form
      * @param $categoryType
-     * @internal param Dictionary $dictionary
      */
-    private function addCategoryNameField(FormInterface $form, $categoryType)
+    private function addCategoryTitleField(FormInterface $form, $categoryType)
     {
         $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
             'category',
@@ -107,7 +107,7 @@ class TechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Category',
                 'query_builder' => function(CategoryRepository $repo) use ($categoryType) {
                     # find category name by select type
-                    return $repo->getCategoryNameList($categoryType);
+                    return $repo->getCategoryByType($categoryType);
                 },
                 'label'         => 'Catégorie',
                 'placeholder'   => 'Séléctionnez votre catégorie',
@@ -134,7 +134,7 @@ class TechnicalEvolutionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle_technicalEvolution';
+        return 'app_bundle';
     }
 
 }

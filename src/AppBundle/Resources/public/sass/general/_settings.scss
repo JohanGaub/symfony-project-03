@@ -25,4 +25,8 @@ linear-gradient(0deg, transparent 0px, rgb(154, 192, 10) 0) bottom left;
 .text-color-2 { color: $secondary-color; }
 .text-color-3 { color: $it-color; }
 
+.valid { color: #81cd58; &:hover { color: darken(#81cd58, 20%)}}
+.invalid { color: #e15f5f; &:hover { color: darken(#e15f5f, 20%)}}
+.neutral { color: #403d40; &:hover { color: darken(#403d40, 20%)}}
+
 

@@ -1,0 +1,51 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}
+    Evolutions techniques
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include '@App/Pages/Evolutions/buttonBarEvolutions.html.twig' %}
+            {% include '@App/Elements/include.flashBagMessage.html.twig' %}
+
+            <div class="bo-title-page col-lg-12">
+                <h2>Mes évolutions techniques</h2>
+            </div>
+
+            {% if evolutions|length > 0 %}
+                <table class="table waiting-list">
+                    <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Nom de l'évolution</th>
+                        <th class="hidden-xs hidden-sm">Type de catégorie</th>
+                        <th class="hidden-xs hidden-sm hidden-md">Catégorie</th>
+                        <th class="hidden-xs hidden-sm hidden-md">Date de création</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for evolution in evolutions %}
+                        <tr id="tr_element_{{ evolution.id }}" class="transition-2s-ease">
+                            <th>{{ evolution.status }}</th>
+                            <th><a href="{{ path('evolutionUnit', {
+                                    'technicalEvolution': evolution.id}) }}">{{ evolution.title }}</a>
+                            </th>
+                            <th class="hidden-xs hidden-sm">{{ evolution.category_type }}</th>
+                            <th class="hidden-xs hidden-sm hidden-md">{{ evolution.category_title }}</th>
+                            <th class="hidden-xs hidden-sm hidden-md">{{ evolution.creationDate|date('d/m/Y') }}</th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Vous n'avez jamais fais de demande d'évolution !</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/page.evolution-waiting.js') }}"></script>
+{% endblock %}

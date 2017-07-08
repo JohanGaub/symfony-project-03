@@ -29,6 +29,14 @@ class Dictionary
     private $type;
 
     /**
+<<<<<<< HEAD
+=======
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Category", mappedBy="type")
+     */
+    private $categories;
+
+    /**
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
      * @var string
      *
      * @ORM\Column(name="value", type="string", length=255)
@@ -36,6 +44,7 @@ class Dictionary
     private $value;
 
     /**
+<<<<<<< HEAD
 <<<<<<< HEAD
      * @ORM\OneToMany(targetEntity="Category", mappedBy="types")
      */
@@ -45,6 +54,8 @@ class Dictionary
     /**
 =======
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
      * Get id
      *
      * @return int
@@ -110,7 +121,52 @@ class Dictionary
         return $this->value;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> c685096c4124c847bebc471e82fc6b70fd7a5a78
+=======
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add category
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Dictionary
+     */
+    public function addCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \AppBundle\Entity\Category $category
+     */
+    public function removeCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+>>>>>>> 88ead9c99cd6837266b8d74cfa589fc6148b1d11
 }

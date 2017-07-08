@@ -42,21 +42,19 @@ class UserTechnicalEvolutionController extends Controller
         $form->handleRequest($request);
         $data = [];
 
-        if ($form->isValid()) {
+        if ($form->isValid() && $technicalEvolution->getStatus()->getValue() != 'En attente') {
             $user = $this->getUser();
             $currentDate = new \DateTime('now');
             $comment->setUser($user);
             $comment->setTechnicalEvolution($technicalEvolution);
             $comment->setDate($currentDate);
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-
             $userProfile = $user->getUserProfile();
             $data = [
                 'id'      => $comment->getId(),
-                'user'    => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
+                'user'    => $userProfile->getFullName(),
                 'date'    => $currentDate,
                 'comment' => $comment->getComment()
             ];
@@ -80,10 +78,11 @@ class UserTechnicalEvolutionController extends Controller
         }
         // data is nb element page already get
         $data = $request->request->get('data');
-
         $comments = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution')
             ->getUserTechnicalEvolutionArray($technicalEvolutionId, 'comment', "$data, 10");
-
+        if (count($comments) == 0) {
+            throw new Exception('No comment are find !');
+        }
         return new JsonResponse($comments);
     }
 
@@ -108,7 +107,6 @@ class UserTechnicalEvolutionController extends Controller
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
             || $this->getUser()->getId() == $comment->getUser()->getId()) {
-
             if ($form->isValid()) {
                 $user = $this->getUser();
                 $currentDate = new \DateTime('now');
@@ -128,17 +126,16 @@ class UserTechnicalEvolutionController extends Controller
         throw $this->createAccessDeniedException();
     }
 
-
     /**
      * Delete comments for TechnicalEvolutions
      *
      * @Route("/commentaires/suppression/{userTechnicalEvolutionId}", name="evolutionCommentsDelete")
      * @param Request $request
-     * @param int $userTechnicalEvolutionId
+     * @param mixed $userTechnicalEvolutionId
      * @return JsonResponse
      * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
-    public function deleteCommentsAction(Request $request, int $userTechnicalEvolutionId)
+    public function deleteCommentsAction(Request $request, $userTechnicalEvolutionId)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');

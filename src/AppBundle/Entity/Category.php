@@ -38,8 +38,9 @@ class Category
      */
     private $description;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="categories", cascade={"persist"})
      * @JoinColumn(name="type", referencedColumnName="id")
      */
     private $type;
@@ -129,7 +130,7 @@ class Category
     {
         $this->technicalEvolutions = new ArrayCollection();
         $this->faqs = new ArrayCollection();
-        $this->documentations = new ArrayCollection();
+        $this->downloads = new ArrayCollection();
     }
 
     /**
@@ -259,14 +260,6 @@ class Category
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->title;
-    }
-
-    /**
      * Add ticket
      *
      * @param Ticket $ticket
@@ -298,5 +291,14 @@ class Category
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
     }
 }

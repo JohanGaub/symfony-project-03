@@ -1,19 +1,28 @@
+.dictionarys-list {
+  display: flex;
+}
 .dictionary-list {
   border: 1px solid $primary-color;
   margin: 2rem 0;
-  padding: 2rem 2rem;
+  padding: 0 2rem 2rem 2rem;
 
   .list-group-item {
     border-radius: 2px;
     transition: 1s ease;
+    display: block;
+    padding: 1.2rem;
 
     .badge {
-      background-color: $primary-color;
+      background-color: transparent;
       border-radius: 2px;
+      position: relative;
+      bottom: 5px;
 
       a {
+        color: #444444;
+        margin: 0 0.33rem;
         i {
-          transition: 0.4s ease;
+          transition: 0.2s ease;
         }
         &:hover > i {
           color: $secondary-color;
@@ -21,11 +30,25 @@
       }
     }
 
-    input[type='text'] {
-      &:focus {
-        outline: 1px solid $primary-color;
+    .modal-delete {
+      color: #ff4f59!important;
+
+      &:hover > i {
+        color: darken(#ff4f59, 25%)!important;
+        transform: rotate(90deg);
       }
     }
+    .modal-update {
+      color: #454245!important;
+
+      i { transition: 0.3s ease-in-out; }
+
+      &:hover > i{
+        color: darken(#454245, 25%)!important;
+        transform: rotate(90deg);
+      }
+    }
+
   }
 
   a {
@@ -34,8 +57,8 @@
 }
 
 .msg-return {
-  display: block!important;
-  background-color: $secondary-color!important;
+  display: block !important;
+  background-color: $secondary-color !important;
   border-radius: 2px;
   color: #fff;
   transition: 1s ease;
@@ -43,4 +66,14 @@
   margin: 1rem 0;
   padding: 1rem;
   width: 100%;
+}
+
+.form-control {
+  border-radius: 0;
+  font-weight: 700;
+}
+button[type='submit'] {
+  border-radius: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
 }

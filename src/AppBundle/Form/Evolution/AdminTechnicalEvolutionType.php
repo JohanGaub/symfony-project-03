@@ -2,10 +2,11 @@
 
 namespace AppBundle\Form\Evolution;
 
-use AppBundle\Repository\CategoryRepository;
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Repository\CategoryRepository;
 use AppBundle\Repository\DictionaryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -31,18 +32,27 @@ class AdminTechnicalEvolutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
-            ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
-            ->add('content', TextareaType::class, ['label' => 'Contenu'])
+            ->add('isArchivate', CheckboxType::class, [
+                'label'         => 'Archivage de l\'évolution (cocher cette case archivera l\'évolution',
+                'required'      => false
+            ])
             ->add('status', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
-                    #Find all status in dictionary
-                    return $repo->getEvolutionStatusTypeList();
+                    return $repo->getItemListByType('status');
                 },
                 'label'         => 'Status de la demande',
-                'placeholder'   => 'Séléctionnez un status',
-                'multiple'      => false,
+                'placeholder'   => 'Status cette évolution',
+                'multiple'      => false
+            ])
+            ->add('title', TextType::class, [
+                'label' => 'Nom de l\'évolution'
+            ])
+            ->add('sum_up', TextareaType::class, [
+                'label' => 'Résumé'
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu'
             ])
             ->add('reason', TextType::class, [
                 'label'         => 'Raison',
@@ -50,8 +60,8 @@ class AdminTechnicalEvolutionType extends AbstractType
             ->add('origin', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
-                    #Find all status in dictionary
-                    return $repo->getEvolutionOriginTypeList();
+                    #Find all origin in dictionary
+                    return $repo->getItemListByType('origin');
                 },
                 'label'         => 'Origine de la demande',
                 'placeholder'   => 'Qui est à la base de cette évolution ?',
@@ -73,7 +83,7 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     # Find all category_type for select list
-                    return $repo->getCategoryTypeList();
+                    return $repo->getItemListByType('category_type');
                 },
                 'label'         => 'Type de catégorie',
                 'placeholder'   => 'Sélectionnez votre type de catégorie',
@@ -86,28 +96,24 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'placeholder'   => 'Séléctionnez votre catégorie',
             ])
             ->add('submit', SubmitType::class, [
-                'label' =>  'Soumettre la demande'
+                'label' =>  'Enregistrer'
             ])
         ;
 
         $builder->get('category_type')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
-                $categoryType = $event->getForm()->getData();
                 $form = $event->getForm();
-                $this->addCategoryNameField($form->getParent(), $categoryType);
+                $this->addCategoryTitleField($form->getParent(), $form->getData());
             }
         );
     }
 
     /**
-     * Add Category name field to form
-     *
      * @param FormInterface $form
      * @param $categoryType
-     * @internal param Dictionary $dictionary
      */
-    private function addCategoryNameField(FormInterface $form, $categoryType)
+    private function addCategoryTitleField(FormInterface $form, $categoryType)
     {
         $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
             'category',
@@ -117,7 +123,7 @@ class AdminTechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Category',
                 'query_builder' => function(CategoryRepository $repo) use ($categoryType) {
                     # find category name by select type
-                    return $repo->getCategoryNameList($categoryType);
+                    return $repo->getCategoryByType($categoryType);
                 },
                 'label'         => 'Catégorie',
                 'placeholder'   => 'Séléctionnez votre catégorie',
@@ -134,9 +140,9 @@ class AdminTechnicalEvolutionType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => TechnicalEvolution::class
-        ));
+        ]);
     }
 
     /**
@@ -144,7 +150,6 @@ class AdminTechnicalEvolutionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle_technicalEvolution';
+        return 'app_bundle';
     }
-
 }

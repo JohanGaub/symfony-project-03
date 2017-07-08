@@ -149,7 +149,7 @@ class DictionaryController extends Controller
         if (count($nbElements) > 0) {
             $data = [
                 'status'    => 'error',
-                'element'   => 'Vous ne pouvez pas modifier cette entrée, des éléments y sont associés !'
+                'element'   => 'Vous ne pouvez pas supprimer cette entrée, des éléments y sont associés !'
             ];
             return new JsonResponse($data);
         }
