@@ -1088,6 +1088,34 @@ header .sidebar-logo {
   height: 4rem;
   padding: 0 0 0 0; }
 
+.dashboard .dashbord-list {
+  border: 2px solid #9ac00a;
+  margin: 3rem 0; }
+  .dashboard .dashbord-list .news-list-element {
+    border-top: 2px solid #9ac00a;
+    padding: 1rem; }
+    .dashboard .dashbord-list .news-list-element .top-element {
+      display: flex;
+      justify-content: space-between; }
+      .dashboard .dashbord-list .news-list-element .top-element .title-news {
+        color: #394704 !important; }
+
+.news-unit {
+  padding: 1rem; }
+  .news-unit .link-group {
+    display: flex;
+    justify-content: space-between; }
+  .news-unit * {
+    word-break: break-all; }
+  .news-unit .news-information {
+    font-weight: 700;
+    font-size: 1.5rem; }
+  .news-unit table th {
+    text-align: center; }
+  .news-unit .article {
+    border: 2px solid #ccc;
+    padding: 2rem; }
+
 .dictionarys-list {
   display: flex; }
 

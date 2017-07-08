@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -34,19 +35,28 @@ class DefaultController extends Controller
      */
     public function DownloadIndexAction()
     {
-        return $this->render('@App/Pages/Others/bo-download.html.twig', [
-            'dirs' => $this->get('app.read_docfiles')->getDirContent()
-        ]);
+        if($this->isGranted('ROLE_TECHNICIAN') || $this->isGranted('ROLE_COMMERCIAL')) {
+            return $this->render('@App/Pages/Others/bo-download.html.twig', [
+                'dirs' => $this->get('app.read_docfiles')->getDirContent()
+            ]);
+        } else {
+            return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
+        }
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/tableau-de-bord", name="dashboard")
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
     public function dashboardIndexAction()
     {
-        return $this->render('@App/Pages/Others/bo-dashboard.html.twig', [
+        $repo = $this->getDoctrine()->getRepository('AppBundle:News');
 
+        return $this->render('@App/Pages/Others/bo-dashboard.html.twig', [
+            'commercialNews'    => $repo->getNewsByType('Commerciale'),
+            'technicalNews'     => $repo->getNewsByType('Technique'),
+            'otherNews'         => $repo->getNewsByType('Autre')
         ]);
     }
 

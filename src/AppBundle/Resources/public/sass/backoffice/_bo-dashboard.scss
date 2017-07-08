@@ -1,0 +1,23 @@
+$border: 2px solid $primary-color;
+
+.dashboard {
+
+  .dashbord-list {
+    border: $border;
+    margin: 3rem 0;
+
+    .news-list-element {
+      border-top: $border;
+      padding: 1rem;
+
+      .top-element {
+        display: flex;
+        justify-content: space-between;
+
+        .title-news {
+          color: darken($primary-color, 25%)!important;
+        }
+      }
+    }
+  }
+}

@@ -114,6 +114,7 @@ class TechnicalEvolutionController extends Controller
      * @param Request $request
      * @param TechnicalEvolution $technicalEvolution
      * @return Response
+     * @Security("has_role('ROLE_PROJECT_RESP')")
      */
     public function updateAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
@@ -132,9 +133,9 @@ class TechnicalEvolutionController extends Controller
         $categoryType   = isset($category) ? $category->getType() : null;
 
         $categorys = $em->getRepository('AppBundle:Category')
-            ->getCategoryByType($categoryType)->getQuery()->getResult();
+            ->getCategoryByTypeResult($categoryType);
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
-            ->getItemListByType('category_type')->getQuery()->getResult();
+            ->getItemListByTypeResult('category_type');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $technicalEvolution->setUpdateDate(new \DateTime('now'));
@@ -199,6 +200,7 @@ class TechnicalEvolutionController extends Controller
      *
      * @Route("/utilisateur/liste", name="evolutionUser")
      * @return Response
+     * @Security("has_role('ROLE_PROJECT_RESP')")
      */
     public function userListAction()
     {
@@ -215,6 +217,7 @@ class TechnicalEvolutionController extends Controller
      *
      * @Route("/admin/en-attente/liste", name="evolutionWaiting")
      * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function adminListWaitingAction()
     {
@@ -234,6 +237,7 @@ class TechnicalEvolutionController extends Controller
      * @param Request $request
      * @param TechnicalEvolution $technicalEvolution
      * @return JsonResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function adminWaitingWorksAction(Request $request, TechnicalEvolution $technicalEvolution)
     {

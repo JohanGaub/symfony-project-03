@@ -27,6 +27,15 @@ class CategoryRepository extends EntityRepository
 
     /**
      * @param $categoryType
+     * @return array
+     */
+    public function getCategoryByTypeResult($categoryType)
+    {
+        return $this->getCategoryByType($categoryType)->getQuery()->getResult();
+    }
+
+    /**
+     * @param $categoryType
      * @return QueryBuilder
      */
     public function getCategoryByType($categoryType)

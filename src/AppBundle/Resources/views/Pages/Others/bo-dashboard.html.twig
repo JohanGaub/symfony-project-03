@@ -1,7 +1,14 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block body %}
-    <h1>Tableau de bord</h1>
+    <div class="dashboard">
+        <h1>Tableau de bord</h1>
 
+        {% import 'AppBundle:Elements:macro.dashboardList.html.twig' as list %}
 
+        {{ list.getNews('Divers', otherNews) }}
+        {{ list.getNews('Technique', technicalNews) }}
+        {{ list.getNews('Commerciale', commercialNews) }}
+
+    </div>
 {% endblock %}

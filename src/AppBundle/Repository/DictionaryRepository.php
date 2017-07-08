@@ -12,6 +12,15 @@ use Doctrine\ORM\Query\ResultSetMapping;
 class DictionaryRepository extends EntityRepository
 {
     /**
+     * @param $type
+     * @return array
+     */
+    public function getItemListByTypeResult($type)
+    {
+        return $this->getItemListByType($type)->getQuery()->getResult();
+    }
+
+    /**
      * FormQueryBuilder to get all type of dictionary
      *
      * @param $type

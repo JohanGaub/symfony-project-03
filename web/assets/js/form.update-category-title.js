@@ -9,4 +9,5 @@ $(document).ready(function () {
     }
     selectTransformer('category')
     selectTransformer('category_type')
+    selectTransformer('type')
 })
