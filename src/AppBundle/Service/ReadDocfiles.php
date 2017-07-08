@@ -72,7 +72,7 @@ class ReadDocfiles
      */
     private function checkAuthorization()
     {
-        if ($this->security->isGranted('ROLE_ADMIN')) {
+        if ($this->security->isGranted('ROLE_PROJECT_RESP')) {
             $this->dirPaths[] = $this->docfiles . '/commercial/';
             $this->dirPaths[] = $this->docfiles . '/technical/';
         } else if ($this->security->isGranted('ROLE_COMMERCIAL')) {
