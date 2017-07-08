@@ -977,6 +977,9 @@ a {
     width: 100%;
     font-weight: 700; }
 
+header {
+  margin-bottom: 0 !important; }
+
 header nav.sidebar.navbar {
   background-color: #fff;
   border-radius: 0;
@@ -1308,3 +1311,8 @@ button[type='submit'] {
   font-size: 2.5rem;
   text-align: center;
   padding: 0.5rem 1rem; }
+
+html {
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important; }
