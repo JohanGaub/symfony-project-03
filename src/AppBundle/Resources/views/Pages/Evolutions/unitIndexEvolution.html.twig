@@ -1,4 +1,4 @@
-{% extends '@App/backoffice-base.html.twig' %}
+{% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block title %}
     {{ evolution.title }}
@@ -10,12 +10,18 @@
         <div class="row">
             <div class="col-lg-12 unit-evolution">
                 <div class="et-title"><h2>{{ evolution.title }}</h2></div>
+                <div class="et-note-box">
+                    <h4>Note globale: <b>{{ total }}/{{ count }}</b> avis</h4>
+                    <h4>Note moyenne: <b>{{ score }}</b></h4>
+                </div>
+
                 <div class="et-sum-up"><h4>{{ evolution.sumUp }}</h4></div>
                 <div class="et-status"><p>{{ evolution.status }}</p></div>
                 <div class="et-category">
                     <div class="et-category-type"><p>Type de la catégorie : {{ evolution.category.type }}</p></div>
                     <div class="et-category-name"><p>Nom de la catégorie : {{ evolution.category.title }}</p></div>
                 </div>
+
                 <div class="et-content"><p>{{ evolution.content }}</p></div>
             </div>
         </div>
@@ -23,58 +29,45 @@
 
         <div class="row">
             {% if is_granted('ROLE_PROJECT_RESP') %}
-                <div class="col-lg-12">
-                    <h4 class="vote-title">Votez pour cette évolution technique ! </h4>
-                    {{ form_start(noteForm, {'attr': {
-                        'id': 'app_bundle_note_userTechnicalEvolution'
-                    }}) }}
+                {% if teStatus == true  %}
 
-                    {% for message in app.session.flashBag.get('info') %}
-                        <div class="alert alert-info"> {{ message }}</div>
-                    {% endfor %}
+                    <div class="col-lg-12">
+                    {% if validity == 2 %}
+                        <h4 class="vote-title add-note">Votez pour cette évolution ! </h4>
+                    {% endif %}
+                    {% if validity == 1 %}
+                        <h4 class="vote-title">Vous avez déja voté  pour cette évolution.<br></h4>
+                        <h4 class="vote-title">Vous pouvez modifier votre note. Elle est de <b>{{ noteUser }}/10</b>.
+                        </h4>
+                    {% endif %}
+                    {% if validity == 0 %}
+                        <h4 class="vote-title">Votre entreprise à déja vote pour cette évolution.<br>
+                            La note est de <b>{{ noteAnotherUser }}/10</b>.
+                        </h4>
+                    {% endif %}
+                    {% if validity == 1 or validity == 2 %}
+                        {{ form_start(noteForm, {'attr': {
+                            'id': 'app_bundle_note_userTechnicalEvolution'
+                        }}) }}
+                        <p><i>* un seul click sur l'etoile va envoyer votre note</i></p>
+                        <div class="error-box"></div>
+                        {% spaceless %}
+                            <div class="form-group controls rating" data-index-number="{{ evolution.id }}">
+                                {% for i in 0..9 %}
+                                    <label class="label-star-link" data-index-number="{{ i + 1 }}">
+                                        {{ form_widget(noteForm.note[i], {'attr': {'class': 'star-link' }}) }}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        {% endspaceless %}
 
-
-                    <div class="error-box"></div>
-                    {% spaceless %}
-                    <div class="form-group controls rating" data-index-number="{{ evolution.id }}">
-                        {% for i in 0..9 %}
-                            <label class="label-star-link" data-index-number="{{ i + 1 }}">
-                                {{ form_widget(noteForm.note[i], {'attr': {'class': 'star-link' }}) }}
-                            </label>
-                        {% endfor %}
-                    </div>
-                    {% endspaceless %}
-                   {# <div class="form-group star-rating" data-index-number="{{ evolution.id }}">
-                        <fieldset class="rating" data-index-number="">
-                            <input class="star-link" type="radio" id="star10" name="rating" value="10"/>
-                            <label class="full label-star-link label-star-link" for="star10" data-index-number="10"></label>
-                            <input class="star-link" type="radio" id="star9" name="rating" value="9"/>
-                            <label class="full label-star-link" for="star9" id="label-star9" data-index-number="9"></label>
-                            <input class="star-link" type="radio" id="star8" name="rating" value="8"/>
-                            <label class="full label-star-link" for="star8" id="label-star8" data-index-number="8"></label>
-                            <input class="star-link" type="radio" id="star7" name="rating" value="7"/>
-                            <label class="full label-star-link" for="star7" id="label-star7" data-index-number="7"></label>
-                            <input class="star-link" type="radio" id="star6" name="rating" value="6"/>
-                            <label class="full label-star-link" for="star6" id="label-star6" data-index-number="6"></label>
-                            <input class="star-link" type="radio" id="star5" name="rating" value="5"/>
-                            <label class="full label-star-link" for="star5" id="label-star5" data-index-number="5"></label>
-                            <input class="star-link" type="radio" id="star4" name="rating" value="4"/>
-                            <label class="full label-star-link" for="star4" id="label-star4" data-index-number="4"></label>
-                            <input class="star-link" type="radio" id="star3" name="rating" value="3"/>
-                            <label class="full label-star-link" for="star3" id="label-star3" data-index-number="3"></label>
-                            <input class="star-link" type="radio" id="star2" name="rating" value="2"/>
-                            <label class="full label-star-link" for="star2" id="label-star2" data-index-number="2"></label>
-                            <input class="star-link" type="radio" id="star1" name="rating" value="1"/>
-                            <label class="full label-star-link" for="star1" id="label-star1" data-index-number="1"></label>
-                        </fieldset>
-
-                    </div>#}
-
-                    {{ form_end(noteForm) }}
-                    <div class="rating-counter">
-                        <p class="rating-counter-value"><span class="rating-value"></span> / 10</p>
-                    </div>
-                </div>
+                        {{ form_end(noteForm) }}
+                        <div class="rating-counter">
+                            <p class="rating-counter-value"><span class="rating-value"></span> / 10</p>
+                        </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
             {% endif %}
         </div>
 

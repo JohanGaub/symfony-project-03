@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '@App/Partials/bo-head.html.twig' %}
+    <title>{% block title %}Commun'It{% endblock %}</title>
+</head>
+<body id="wrapper">
+    <header id="sidebar-wrapper" class="sidebar-communit">
+        {% include '@App/Partials/bo-sideBar.html.twig' %}
+    </header>
+
+    {% include '@App/Partials/bo-topBar.html.twig' %}
+
+    <main id="page-content-wrapper">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer>
+    </footer>
+
+    {% include '@App/Partials/bo-foot.html.twig' %}
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

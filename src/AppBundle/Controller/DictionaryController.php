@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+
 /**
  * Class DictionaryController
  * @package AppBundle\Controller
@@ -28,33 +29,44 @@ class DictionaryController extends Controller
     public function indexAction()
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Dictionary');
-        $typeTitle      = 'category_type';
-        $statusTitle    = 'technical_evolution_status';
-        $originTitle    = 'technical_evolution_origin';
+
+        $typeTitle       = 'category_type';
+        $statusTitle     = 'status';
+        $originTitle     = 'origin';
+        $ticketTypeTitle = 'ticket_type';
+
         $typeList   = $repo->getItemListByType($typeTitle)->getQuery()->getResult();
         $statusList = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
         $originList = $repo->getItemListByType($originTitle)->getQuery()->getResult();
-        $dictionary = new Dictionary();
-        $typeForm = $this->createForm(DictionaryType::class, $dictionary);
-        $statusForm = $this->createForm(DictionaryType::class, $dictionary);
-        $originForm = $this->createForm(DictionaryType::class, $dictionary);
-        $generalUpdateForm = $this->createForm(DictionaryType::class, $dictionary);
+        $ticketTypeList = $repo->getItemListByType($ticketTypeTitle)->getQuery()->getResult();
+
+        $dictionary         = new Dictionary();
+        $typeForm           = $this->createForm(DictionaryType::class, $dictionary);
+        $statusForm         = $this->createForm(DictionaryType::class, $dictionary);
+        $originForm         = $this->createForm(DictionaryType::class, $dictionary);
+        $ticketTypeForm     = $this->createForm(DictionaryType::class, $dictionary);
+        $generalUpdateForm  = $this->createForm(DictionaryType::class, $dictionary);
+
         return $this->render('@App/Pages/Dictionary/indexDictionary.html.twig', [
             /** Here get my title "type" */
-            'typeTitle'     => $typeTitle,
-            'statusTitle'   => $statusTitle,
-            'originTitle'   => $originTitle,
+            'typeTitle'         => $typeTitle,
+            'statusTitle'       => $statusTitle,
+            'originTitle'       => $originTitle,
+            'ticketTypeTitle'   => $ticketTypeTitle,
             /** Here get my dictionary's data */
-            'typeList'      => $typeList,
-            'statusList'    => $statusList,
-            'originList'     => $originList,
+            'typeList'          => $typeList,
+            'statusList'        => $statusList,
+            'originList'        => $originList,
+            'ticketTypeList'    => $ticketTypeList,
             /** Here get my form */
-            'typeForm'      => $typeForm->createView(),
-            'statusForm'    => $statusForm->createView(),
-            'originForm'    => $originForm->createView(),
-            'genUpdateForm' => $generalUpdateForm->createView()
+            'typeForm'          => $typeForm->createView(),
+            'statusForm'        => $statusForm->createView(),
+            'originForm'        => $originForm->createView(),
+            'ticketTypeForm'    => $ticketTypeForm->createView(),
+            'genUpdateForm'     => $generalUpdateForm->createView()
         ]);
     }
+
     /**
      * Add dictionary
      *
@@ -76,10 +88,12 @@ class DictionaryController extends Controller
         $dictionary = new Dictionary();
         $form = $this->createForm(DictionaryType::class, $dictionary);
         $form->handleRequest($request);
+
         $em = $this->getDoctrine()->getManager();
         $dictionary->setValue(htmlspecialchars_decode($dictionary->getValue(), ENT_QUOTES));
         $verification = $em->getRepository('AppBundle:Dictionary')
             ->findBy(['type' => $type, 'value' => $dictionary->getValue()]);
+
         if (count($verification) > 0) {
             $data = [
                 'status'    => 'error',
@@ -91,6 +105,7 @@ class DictionaryController extends Controller
             $dictionary->setType($type);
             $em->persist($dictionary);
             $em->flush();
+
             $data = [
                 'status'    => 'succes',
                 'element'   => $dictionary->getId(),
@@ -103,6 +118,7 @@ class DictionaryController extends Controller
             'element'   => 'Une erreur est survenue ! Veuillez réessayer !'
         ]);
     }
+
     /**
      * Update dicionary
      *
@@ -119,21 +135,25 @@ class DictionaryController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
         $repoDictionary = $em->getRepository('AppBundle:Dictionary');
+
         $dictionary = $repoDictionary->find($dictionaryId);
         $form = $this->createForm(DictionaryType::class, $dictionary);
         $form->handleRequest($request);
+
         /**
          * Verification if input have already liaison
          */
         $nbElements = $this->get('app.dictionary_verification')
             ->getAllowedAction($dictionary->getType(), $dictionaryId);
+
         if (count($nbElements) > 0) {
             $data = [
                 'status'    => 'error',
-                'element'   => 'Vous ne pouvez pas supprimer cette entrée, des éléments y sont associés !'
+                'element'   => 'Vous ne pouvez pas modifier cette entrée, des éléments y sont associés !'
             ];
             return new JsonResponse($data);
         }
+
         /**
          * Verification if any input already have sending name
          */
@@ -155,6 +175,7 @@ class DictionaryController extends Controller
             return new JsonResponse($data);
         }
     }
+
     /**
      * Delete dictionary
      *
@@ -177,6 +198,7 @@ class DictionaryController extends Controller
             ->find($dictionaryId);
         $nbElements = $this->get('app.dictionary_verification')
             ->getAllowedAction($dictionary->getType(), $dictionaryId);
+
         if (count($nbElements) > 0) {
             $data = [
                 'status' => 'error',
@@ -184,6 +206,7 @@ class DictionaryController extends Controller
             ];
             return new JsonResponse($data);
         }
+
         $em->remove($dictionary);
         $em->flush();
         return new JsonResponse(['status' => 'succes']);

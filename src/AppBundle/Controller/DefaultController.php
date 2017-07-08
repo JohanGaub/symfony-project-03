@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -17,7 +18,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:Default:index.html.twig');
+        return $this->render('@App/Pages/Index/index.html.twig');
     }
 
     /**
@@ -25,7 +26,7 @@ class DefaultController extends Controller
      */
     public function viewHistoriqueAction()
     {
-        return $this->render('AppBundle:Pages:historique.html.twig');
+        return $this->render('@App/Pages/Others/show-historique.html.twig');
     }
 
     /**
@@ -36,7 +37,8 @@ class DefaultController extends Controller
      */
     public function dashboardAction()
     {
-        return $this->render('AppBundle:Partials:dashboard.html.twig');
+        return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
     }
+
 
 }

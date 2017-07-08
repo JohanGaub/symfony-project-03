@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jakubec-berenguel
- * Date: 10/06/17
- * Time: 11:33
- */
 
 namespace AppBundle\Repository;
-
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class UserRepository extends EntityRepository implements UserLoaderInterface
 {
@@ -32,6 +26,34 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @param int $page
+     * @param int $maxUsers
+     * @return Paginator
+     */
+    public function getListing($page = 1, $maxUsers = 10)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->join('u.company', 'c')
+            ->orderBy('c.name', 'ASC')
+            ->setFirstResult(($page - 1) * $maxUsers)
+            ->setMaxResults($maxUsers);
+
+        return new Paginator($qb, $fetchJoinCollection = false);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function countUserTotal()
+    {
+        $q = $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->getQuery()->getSingleScalarResult();
+
+        return $q;
     }
 
 }

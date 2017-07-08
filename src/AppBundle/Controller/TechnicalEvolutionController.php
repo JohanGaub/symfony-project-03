@@ -139,23 +139,114 @@ class TechnicalEvolutionController extends Controller
      */
     public function unitIndexAction(TechnicalEvolution $technicalEvolution)
     {
-        $uteRepository  = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');
-        $teId           = $technicalEvolution->getId();
+
+        $noteUser = '';
+        $noteAnotherUser = '';
+        $validity = '';
+
+        $user    = $this->getUser();
+        $userId  = $user->getId();
+        $company = $user->getCompany();
+        $teId    = $technicalEvolution->getId();
+
+        $userRepository = $this->getDoctrine()->getRepository('AppBundle:User')->findBy([
+            'company' => $company,
+        ]);
+        $teUnitRepository = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')->find($teId);
+        $teRepository     = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
+        $uteRepository    = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');
+
+        $data  = $teRepository->getScoreForTechnicalEvolution($teId);
+        $count = intval(($data[0])[2]); // total number of notes
+        $total = intval(($data[0])[1]);//sum of notes
+        $score = round(($data[0])[3], 1);//average of notes
+
+        // Here we check if Technical Evolution is ON-GOING (ID = 5 !!!!), via id of status, as only in that case voting will be possible
+        $teStatusId       = $teUnitRepository->getStatus()->getId();
+
+        if ($teStatusId == 5){
+            $teStatus = true;
+        } else {
+            $teStatus = false;
+        }
+
+        // Here we check if there is another Project Responsible in the company. Only one vote per company is possible and only by Project Responsible
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_PROJECT_RESP')) {
+            $result = [];
+
+            for ($i = 0; $i < count($userRepository); $i++) {
+                $role = $userRepository[$i]->getRoles();
+                if ($role[0] === "ROLE_PROJECT_RESP" && $userRepository[$i]->getId() != $userId) {
+                    $result[] = $userRepository[$i]->getId();
+                }
+            }
+
+            if (count($result)> 0) {
+                $anotherUserId = $result[0];
+            } else {
+                $anotherUserId = null;
+            }
+
+            $dataUser        = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $userId);
+            $dataAnotherUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $anotherUserId);
+
+            if ($anotherUserId === null) {
+                if ($dataUser == []) {
+                    // can be voted => add note in the database
+                    $validity = 2;
+
+                } else {
+                    // Note can be modified ;
+                    $noteUser = $dataUser[0]["note"];
+                    $validity = 1;
+                }
+            } else {
+
+
+
+                if ($dataAnotherUser == [] && $dataUser == []) {
+                    // can be voted => add note in the database
+                    $validity = 2;
+
+                } elseif ($dataAnotherUser == [] && $dataUser != []) {
+                    // Note can be modified ;
+
+                    $noteUser = $dataUser[0]["note"];
+                    $validity = 1;
+
+                } else {
+                    // It can not be voted as there are already votes from the same company;
+                    $noteAnotherUser = $dataAnotherUser[0]["note"];
+                    $validity = 0;
+                }
+            }
+        }
+
         $comments       = $uteRepository->getUserTechnicalEvolution($teId, 'comment', 10);
         $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
-        $uteNote        = new UserTechnicalEvolution();
-        $formNote       = $this->createForm(NoteUserTechnicalEvolutionType::class, $uteNote);
+        $note           = new UserTechnicalEvolution('note');
+        $formNote       = $this->createForm(NoteUserTechnicalEvolutionType::class, $note);
 
+
+        /** @var $noteAnotherUser */
+        /** @var $noteUser */
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
-            'evolution' => $technicalEvolution,
-            'comments'  => $comments,
-            'notes'     => $notes,
-            'addForm'   => $formComment->createView(),
-            'updateForm'=> $formUpdate->createView(),
-            'noteForm'  => $formNote->createView()
+            'evolution'       => $technicalEvolution,
+            'comments'        => $comments,
+            'notes'           => $notes,
+            'addForm'         => $formComment->createView(),
+            'updateForm'      => $formUpdate->createView(),
+            'noteForm'        => $formNote->createView(),
+            'validity'        => $validity,
+            'teStatus'        => $teStatus,
+            'noteAnotherUser' => $noteAnotherUser,
+            'noteUser'        => $noteUser,
+            'count'           => $count,
+            'total'           => $total,
+            'score'           => $score
         ]);
     }
 
@@ -363,5 +454,7 @@ class TechnicalEvolutionController extends Controller
 
         return new JsonResponse('Valid XmlHttp request !');
     }
+
+
 
 }

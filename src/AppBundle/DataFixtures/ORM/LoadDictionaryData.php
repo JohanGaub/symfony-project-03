@@ -19,23 +19,26 @@ class LoadDictionaryData extends AbstractFixture implements OrderedFixtureInterf
     public function load(ObjectManager $em)
     {
         $categoryType = [
-            'technical',
-            'commercial',
-            'other'
+            'Technique',
+            'Commerciale',
+            'Autre'
         ];
-
-        $teStatus = [
-            'En cours',
+        $status = [
             'En attente',
-            'Fermé',
-            'Annulé',
-            'Refusé'
+            'En cours',
+            'Résolu',
+            'Fermé'
         ];
-
-        $teOrigin = [
+        $origin = [
+            'Super administrateur',
+            'Administrateur',
             'Responsable projet',
             'Technicien',
             'Commercial'
+        ];
+        $ticketType = [
+            'Résolution de bug',
+            'Autre'
         ];
 
         for ($i = 0; $i < count($categoryType); ++$i){
@@ -45,21 +48,26 @@ class LoadDictionaryData extends AbstractFixture implements OrderedFixtureInterf
             $em->persist($dictionary);
             $this->setReference('category_type_id_' . $i, $dictionary);
         }
-
-        for ($i = 0; $i < count($teStatus); ++$i){
+        for ($i = 0; $i < count($status); ++$i){
             $dictionary = new Dictionary();
-            $dictionary->setType('technical_evolution_status');
-            $dictionary->setValue($teStatus[$i]);
+            $dictionary->setType('status');
+            $dictionary->setValue($status[$i]);
             $em->persist($dictionary);
-            $this->setReference('technical_evolution_status_id_' . $i, $dictionary);
+            $this->setReference('status_id_' . $i, $dictionary);
         }
-
-        for ($i = 0; $i < count($teOrigin); ++$i){
+        for ($i = 0; $i < count($origin); ++$i){
             $dictionary = new Dictionary();
-            $dictionary->setType('technical_evolution_origin');
-            $dictionary->setValue($teOrigin[$i]);
+            $dictionary->setType('origin');
+            $dictionary->setValue($origin[$i]);
             $em->persist($dictionary);
-            $this->setReference('technical_evolution_origin_id_' . $i, $dictionary);
+            $this->setReference('origin_id_' . $i, $dictionary);
+        }
+        for ($i = 0; $i < count($ticketType); ++$i){
+            $dictionary = new Dictionary();
+            $dictionary->setType('ticket_type');
+            $dictionary->setValue($ticketType[$i]);
+            $em->persist($dictionary);
+            $this->setReference('ticket_type_id_' . $i, $dictionary);
         }
 
         $em->flush();

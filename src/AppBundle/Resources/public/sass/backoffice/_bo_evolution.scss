@@ -1,0 +1,49 @@
+/**
+ * Evolutions Parts
+ */
+.bo-evolution {
+
+  .panel-top-line {
+    display: flex;
+
+    .evolution-status {
+      display: inline-block;
+      border: 1px solid #1d1d1d;
+      border-radius: 3px;
+      padding: 0.25rem 0.75rem;
+      margin: auto 0.5rem auto 0;
+    }
+  }
+
+  .panel-footer {
+    .bottom-footer {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.unit-evolution {
+
+}
+
+/**
+ * Comments Parts
+ */
+.add-new-comment {
+  border: 1px solid $secondary-color;
+  border-radius: 3px;
+  margin: 2rem 0;
+  padding: 1rem 2rem 0 2rem;
+}
+.comment-list {
+  .unit-comment {
+    border: 1px solid $primary-color;
+    border-radius: 3px;
+    margin: 2rem 0;
+    padding: 1rem;
+  }
+}
+
+
+

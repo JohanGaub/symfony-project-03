@@ -1,0 +1,25 @@
+/**
+ * Back office scss import
+ */
+// --- General --->
+@import "general/settings";
+@import "general/general-tools";
+@import "general/general-style";
+@import "general/more";
+@import "general/form";
+@import "general/table";
+
+@import "general/form-showcase";
+
+// --- Partials --->
+@import "partials/bo-simple-sidebar";
+@import "partials/bo-top-bar";
+@import "partials/bo-header";
+@import "partials/bo-footer";
+
+// --- Backoffice --->
+@import "backoffice/bo-general";
+@import "backoffice/bo_evolution";
+@import "backoffice/bo_evolution_note";
+@import "backoffice/bo-dictionary";
+@import "backoffice/bo-ticket";

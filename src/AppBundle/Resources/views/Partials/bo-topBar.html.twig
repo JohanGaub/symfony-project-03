@@ -1,0 +1,14 @@
+<div class="bo-top-bar">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <p>Connecté en tant que {{ app.user.userProfile.firstname }} {{ app.user.userProfile.lastname }}
+            <a href="{{ path('logout') }}" class="btn btn-link">
+            <i class="glyphicon glyphicon-log-out"></i>
+        </a>
+        <a href="{{ path('change_password') }}" class="btn btn-link">
+            <i class="fa fa-key" aria-hidden="true"></i>
+        </a>
+            </p>
+    {% endif %}
+
+
+</div>

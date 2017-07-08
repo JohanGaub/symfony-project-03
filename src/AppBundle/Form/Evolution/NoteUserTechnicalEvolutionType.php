@@ -27,12 +27,6 @@ class NoteUserTechnicalEvolutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-/*            ->add('note', HiddenType::class, [
-               'attr' => [
-                   'min' => 1,
-                   'max' => 10
-               ]
-            ])*/
             ->add('note', ChoiceType::class, [
                 'choices' => [ '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, '10' => 10],
                 'expanded' => true,

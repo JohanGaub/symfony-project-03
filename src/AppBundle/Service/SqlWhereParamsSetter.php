@@ -30,15 +30,19 @@ class SqlWhereParamsSetter
         $params         = $this->params;
         $totalSearches  = count($params);
         $searches       = [];
+
         foreach ($params as $key => $value)
             $searches[] = $key . " LIKE " . "'" . $value . "%'";
+
         if (1 < $totalSearches)
             $searches = implode(' AND ', $searches);
         elseif (1 == $totalSearches)
             $searches = $searches[0];
         else
             $searches = '0=0';
+
         $this->allowParamsFormat = (string) $searches;
+
         return $this;
     }
 
@@ -51,6 +55,7 @@ class SqlWhereParamsSetter
     public function setParams(array $params)
     {
         $this->params = $params;
+
         return $this;
     }
 
@@ -60,6 +65,8 @@ class SqlWhereParamsSetter
     public function getParams()
     {
         $this->getAllowedParameters();
+
         return $this->allowParamsFormat;
     }
+
 }

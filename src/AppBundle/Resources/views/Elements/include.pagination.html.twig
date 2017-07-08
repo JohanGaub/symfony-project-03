@@ -4,12 +4,12 @@
             {% if pagination.page > 1 and pagination.pages_count > 1 %}
                 <li>
                     <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}">
-                        <i class="material-icons">Début</i>
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 </li>
                 <li>
                     <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page - 1})) }}">
-                        <i class="material-icons">Précédent</i>
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
                     </a>
                 </li>
             {% endif %}
@@ -26,12 +26,12 @@
             {% if pagination.page < pagination.pages_count %}
                 <li>
                     <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page + 1})) }}">
-                        <i class="material-icons">Suivant</i>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
                     </a>
                 </li>
                 <li class="waves-effect">
                     <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">
-                        <i class="material-icons">Fin</i>
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </a>
                 </li>
             {% endif %}

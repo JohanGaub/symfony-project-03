@@ -4,17 +4,16 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class TestController extends Controller
 {
-
     /**
      * Calculation of Technical Evolution Score
      *
      * @internal  param $name
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @Route("/score",  name="score")
      */
     public function scoreAction()
@@ -38,11 +37,9 @@ class TestController extends Controller
     }
 
     /**
-     * Gives id's of Project Responsible users that belong to the same Company,
-     * as the connected user
      *
      * @internal  param $name
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @Route("/note",  name="note")
      */
     public function noteAction()
@@ -74,15 +71,10 @@ class TestController extends Controller
         dump($userId);
         dump($anotherUserId);
 
-        // if there is no another user; for user that is connected: check if he has already voted or not, by searching for the note
-        // if he did not vote, give him the possibility to vote
-        // if he has already voted, give him the possibility to modify his note
-
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
         $dataUser = $repo->getNoteByUserPerTechnicalEvolution(12, $userId);
 
         if ($anotherUserId === null) {
-            $validity = true;
             if ($dataUser == []) {
 
                 return new Response('you can vote now');// you can vote now ; there are no constraints  !!!! pay attention on null results
@@ -97,7 +89,6 @@ class TestController extends Controller
             }
         } else {
             $dataAnotherUser = $repo->getNoteByUserPerTechnicalEvolution(12, $anotherUserId);
-            $validity = true;
             if ($dataAnotherUser == [] && $dataUser == []) {
                 // you can vote now; here all the part for creation
 
@@ -113,7 +104,6 @@ class TestController extends Controller
 
             } else {
                 // sorry, but there are already votes from your company;  value/10
-                $validity = false;
                 $noteAnotherUser = $dataAnotherUser[0]["note"];
                 dump($noteAnotherUser);
 
@@ -128,14 +118,11 @@ class TestController extends Controller
      * Get
      *
      * @internal  param $name
-     * @param Request $request
      * @return Response
      * @Route("/test",  name="test")
      */
-    public function testAction(Request $request)
+    public function testAction()
     {
-        $session = $request->getSession();
-        $session->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
         $data = $repo->getNoteByUserPerTechnicalEvolution(12, 8);
 // $userId = 9
@@ -177,5 +164,58 @@ class TestController extends Controller
         dump($data);
 
         return new Response('Count notes by company');
+    }
+
+
+    /**
+     * Get
+     *
+     * @internal  param $name
+     * @return Response
+     * @Route("/list",  name="list")
+     */
+    public function listAction()
+    {
+        $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
+        $notes = $repo->getUserEvaluationsByTechnicalEvolution(51);
+        $category = $repo->getCategoryByTechnicalEvolution(51);
+
+        $category_title = $category[0]['title'];
+        $category_type = $category[0]['value'];
+
+        dump($notes);
+        dump($category);
+        dump($category_title);
+        dump($category_type);
+
+        return new Response('Count notes by company');
+
+    }
+
+
+    /**
+     * @internal  param $name
+     * @return Response
+     * @Route("/status", name="status")
+     *
+     */
+    public function categoryAction()
+    {
+        $user           = $this->getUser();
+        $em             = $this->getDoctrine()->getManager();
+        $teRepository         = $em->getRepository('AppBundle:TechnicalEvolution')->find(10);
+        $technicalEvolutionStatus = $teRepository->getStatus()->getId();
+        // Here we check if Technical Evolution is on-going, via id of status
+        if ($technicalEvolutionStatus == 5){
+            $status = true;
+        } else {
+            $status = false;
+        }
+
+        dump($user);
+        dump($technicalEvolutionStatus);
+        dump($status);
+
+        return new Response('Status of Technical evolution is: ' . $technicalEvolutionStatus );
     }
 }

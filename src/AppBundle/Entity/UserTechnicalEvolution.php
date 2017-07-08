@@ -64,7 +64,7 @@ class UserTechnicalEvolution
     private $technicalEvolution;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions", cascade={"persist"})
      */
     private $user;
 
@@ -160,6 +160,20 @@ class UserTechnicalEvolution
     }
 
     /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return UserTechnicalEvolution
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
      * Get date
      *
      * @return \DateTime
@@ -170,14 +184,16 @@ class UserTechnicalEvolution
     }
 
     /**
-     * Set date
+     * Set updateDate
      *
-     * @param \DateTime $date
+     * @param \DateTime $updateDate
+     *
      * @return UserTechnicalEvolution
      */
-    public function setDate(\DateTime $date)
+    public function setUpdateDate($updateDate)
     {
-        $this->date = $date;
+        $this->updateDate = $updateDate;
+
         return $this;
     }
 
@@ -188,20 +204,9 @@ class UserTechnicalEvolution
      */
     public function getUpdateDate()
     {
-        return $this->date;
+        return $this->updateDate;
     }
 
-    /**
-     * Set date
-     *
-     * @param \DateTime $updateDate
-     * @return UserTechnicalEvolution
-     */
-    public function setUpdateDate(\DateTime $updateDate)
-    {
-        $this->date = $updateDate;
-        return $this;
-    }
 
     /**
      * Set technicalEvolution

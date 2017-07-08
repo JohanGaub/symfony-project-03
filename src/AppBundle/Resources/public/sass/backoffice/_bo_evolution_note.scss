@@ -1,0 +1,47 @@
+/**
+ * Star rating system
+ */
+.starRating input { display:none; }
+
+.starRating label {
+  width: 1.8rem;
+  height: 1.6rem;
+  display: inline-block;
+  text-indent: -999.9rem; /* hide the label text off screen */
+  background: url("../img/rating_stars.png") -15.5rem -3.2rem;
+}
+
+.starRating label.on {
+  background-position: -15.5rem -7.6rem;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: space-around;
+  transition: 1s ease-in-out;
+
+  /****** Counter *******/
+  .rating-counter {
+    padding: 1rem 0 0 0;
+    .rating-counter-value {
+      font-size: 3rem;
+      font-weight: 700;
+
+    }
+  }
+  .star-link {
+    display: block;
+  }
+
+}
+/****** Hide radio buttons *******/
+label.label-star-link {
+  color:white;
+
+  input[type='radio'],
+  input[type='radio']:after,
+  input[type='radio']:checked:after{
+    visibility: hidden;
+  }
+
+}

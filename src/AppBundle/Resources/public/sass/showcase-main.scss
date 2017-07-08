@@ -1,0 +1,29 @@
+/**
+ * Showcase scss import
+ */
+// --- General --->
+@import "general/settings";
+@import "general/general-tools";
+@import "general/general-style";
+@import "general/more";
+@import "general/form";
+@import "general/table";
+@import "general/ancre";
+
+@import "general/form-showcase";
+
+// --- Partials --->
+@import "partials/show-header";
+@import "partials/show-footer";
+
+
+// --- Showcase --->
+@import "showcase/show-historique";
+@import "showcase/show-index-communit";
+@import "showcase/show-index-home";
+@import "showcase/show-index-itneo";
+@import "showcase/show-index-itneo-slider";
+@import "showcase/show-mentions-legales";
+@import "showcase/show-swiper-slider";
+
+

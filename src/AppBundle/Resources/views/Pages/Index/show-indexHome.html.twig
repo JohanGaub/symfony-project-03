@@ -1,0 +1,59 @@
+<section class="container-fluid index-home">
+
+    <div class="container form">
+        <div class="message-register row">
+            <div class="col-md-12">
+                {% for flash_message in app.session.flashBag.get('notice') %}
+                    <div class="alert alert-info">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="background-home text-center col-xs-12 col-sm-10 col-sm-offset-1">
+        <div class="col-xs-12">
+            <div>
+                <h1>Intégrez la communauté de</br> revendeurs téléphonie ip</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 index-button text-center">
+                {% import '@App/Elements/macro.svgButton.html.twig' as button %}
+                <div class="join">
+                    {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+                </div>
+                <div class="discover">
+                    <a href="#ancre_communit">
+                        {{ button.svgButton("#9AC00A", "Découvrez notre offre !") }}</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid index-comment">
+            <div class="col-xs-3 col-sm-12 col-md-4 text-center background-comment">
+                <h3>OFFRE GLOBALE</h3>
+                <p>bénéficiez du réseau national d’intégrateurs qualifiés, participez à l’amélioration de l’offre,
+                    vendez en marque blanche</p>
+                <a href="#ancre_communit" class="plus-info">Plus d'info</a>
+            </div>
+
+            <div class="col-xs-3 col-sm-12 col-md-4   text-center background-comment">
+                <h3>MUTUALISATION</h3>
+                <p class="fd">partagez les ressources et compétences Optimisez vos achats de matériel, innovez en mode collaboratif</p>
+                <a href="#ancre_communit" class="plus-info">Plus d'info</a>
+            </div>
+
+            <div class="col-xs-3 col-sm-12 col-md-4  text-center background-comment">
+                <h3>ACCOMPAGNEMENT</h3>
+                <p class="fd">profitez du support technique du service Avant-vente, de conseil & audit, et de formation</p>
+                <a href="#ancre_communit" class="plus-info">Plus d'info</a>
+            </div>
+        </div>
+        </div>
+
+
+</section>
+

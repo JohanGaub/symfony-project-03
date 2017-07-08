@@ -1,0 +1,46 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{# This is a temporary file for the test purpose - to be deleted !  #}
+
+{% block body %}
+
+    <div class="container form text-center" style="margin-top: 10rem;">
+        <div class="row">
+            <div class="col-md-12">
+                {% for flash_message in app.session.flashBag.get('notice') %}
+                    <div class="alert alert-info">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-wrap text-center">
+                    <hr>
+                    <h3>Utilisateur</h3>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        Connecté en tant que {{ app.user.username }}
+                        <br>
+                        <a href="{{ path('logout') }}" class="btn btn-link">
+                            <i class="glyphicon glyphicon-log-out"></i>
+                            Déconnexion
+                        </a>
+                        <hr>
+                        <h3>Changement de mot de passe</h3>
+                        <br>
+                        <a href="{{ path('change_password') }}" class="btn btn-link">
+                            <i class="glyphicon glyphicon-log-out"></i>
+                            Changer
+                        </a>
+                        <hr>
+                    {% endif %}
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

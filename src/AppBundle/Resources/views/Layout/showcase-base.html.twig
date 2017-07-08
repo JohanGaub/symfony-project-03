@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include '@App/Partials/show-head.html.twig' %}
+        <title>{% block title %}Commun'It{% endblock %}</title>
+    </head>
+    <body>
+        <header id="communit-base">
+            {% include '@App/Partials/show-header.html.twig' %}
+        </header>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer>
+            {% include '@App/Partials/show-footer.html.twig' %}
+        </footer>
+
+        {% include '@App/Partials/show-foot.html.twig' %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

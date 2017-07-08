@@ -2,12 +2,15 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Product;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Documentation
  *
- * @ORM\Table(name="documentation")
+ * @ORM\Table(name="download")
  * @ORM\Entity
  */
 class Download
@@ -43,26 +46,26 @@ class Download
     private $content;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="update_date", type="datetime", nullable=true)
      */
     private $updateDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="documentations")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="downloads", cascade={"persist"})
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="documentations")
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="downloads", cascade={"persist"})
      */
     private $product;
 
@@ -151,7 +154,7 @@ class Download
     /**
      * Set creationDate
      *
-     * @param \DateTime $creationDate
+     * @param DateTime $creationDate
      *
      * @return Download
      */
@@ -165,7 +168,7 @@ class Download
     /**
      * Get creationDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCreationDate()
     {
@@ -175,7 +178,7 @@ class Download
     /**
      * Set updateDate
      *
-     * @param \DateTime $updateDate
+     * @param DateTime $updateDate
      *
      * @return Download
      */
@@ -189,7 +192,7 @@ class Download
     /**
      * Get updateDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdateDate()
     {
@@ -199,11 +202,11 @@ class Download
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category
      *
      * @return Download
      */
-    public function setCategory(\AppBundle\Entity\Category $category = null)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 
@@ -213,7 +216,7 @@ class Download
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category
+     * @return Category
      */
     public function getCategory()
     {
@@ -223,11 +226,11 @@ class Download
     /**
      * Set product
      *
-     * @param \AppBundle\Entity\Product $product
+     * @param Product $product
      *
      * @return Download
      */
-    public function setProduct(\AppBundle\Entity\Product $product = null)
+    public function setProduct(Product $product = null)
     {
         $this->product = $product;
 
@@ -237,7 +240,7 @@ class Download
     /**
      * Get product
      *
-     * @return \AppBundle\Entity\Product
+     * @return Product
      */
     public function getProduct()
     {

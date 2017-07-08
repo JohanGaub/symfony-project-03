@@ -1,8 +1,8 @@
 <?php
 
 namespace AppBundle\Service;
-
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class DictionaryVerification
@@ -14,6 +14,7 @@ class DictionaryVerification
      * @var EntityManager
      */
     private $em;
+
     /**
      * DictionaryVerification constructor.
      * @param EntityManager $em
@@ -22,6 +23,7 @@ class DictionaryVerification
     {
         $this->em = $em;
     }
+
     /**
      * Function return array of element was same field => id
      * @param string $type
@@ -32,13 +34,14 @@ class DictionaryVerification
     {
         $entity = '';
         $field  = '';
+
         if ($type == 'category_type') {
             $entity = 'AppBundle:Category';
             $field  = 'type';
-        } else if ($type == 'technical_evolution_origin') {
+        } else if ($type == 'origin') {
             $entity = 'AppBundle:TechnicalEvolution';
             $field  = 'origin';
-        } else if ($type == 'technical_evolution_status') {
+        } else if ($type == 'status') {
             $entity = 'AppBundle:TechnicalEvolution';
             $field  = 'status';
         }

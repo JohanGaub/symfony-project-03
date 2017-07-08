@@ -6,6 +6,7 @@ use AppBundle\Entity\User;
 use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\ForgetPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Swift_Attachment;
 use Swift_Mailer;
 use Swift_MailTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,9 +15,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+
+/**
+ * Class SecurityController
+ * @package AppBundle\Controller
+ */
 class SecurityController extends Controller
 {
-
     /**
      * @param Request $request
      * @return RedirectResponse|Response
@@ -69,7 +74,7 @@ class SecurityController extends Controller
                     ->setFrom($this->getParameter('mail_sender_address'))
                     ->setTo($newUser->getEmail())
                     ->setBody(
-                        $this->renderView('AppBundle:Email:forgetpassword.html.twig', [
+                        $this->renderView('AppBundle:Email:forgetPassword.html.twig', [
                             'firstName' => $newUser->getUserProfile()->getFirstname(),
                             'lastName' => $newUser->getUserProfile()->getLastname(),
                             'resetPasswordLink' => $this->generateUrl("reset", [
@@ -80,8 +85,6 @@ class SecurityController extends Controller
                         'text/html'
                     );
 
-                $this->get('app.mailer_logger');
-                $this->get('mailer')->send($email);
                 if (!$mailer->send($email)) {
                     $this->addFlash("notice", " Nous sommes désolés, mais le service est actuellement indisponible. Merci de réessayer ultérieurement. Un mail a été envoyé au service technique afin de corriger le problème au plus vite. ");
                     return $this->redirectToRoute('forgotten');

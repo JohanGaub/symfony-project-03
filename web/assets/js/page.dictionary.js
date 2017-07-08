@@ -156,9 +156,9 @@ $(document).ready( function () {
                     $(target).text('Entrée supprimée')
                     setTimeout( function () {
                         $(target).css('transition', '2s ease-out').css('opacity', 0)
-                        setTimeout( function () {
-                            $(target).parent().remove()
-                        }, 2000)
+                            setTimeout( function () {
+                                $(target).parent().remove()
+                            }, 2000)
                     }, 3000)
                 } else if (data.status === 'error') {
                     $('#' + listElementId + ' span').css('display', 'none')

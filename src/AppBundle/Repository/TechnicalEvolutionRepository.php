@@ -2,9 +2,7 @@
 
 namespace AppBundle\Repository;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
@@ -13,6 +11,7 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class TechnicalEvolutionRepository extends EntityRepository
 {
+
     /**
      * @param string $params
      * @param int $page
@@ -276,26 +275,10 @@ class TechnicalEvolutionRepository extends EntityRepository
         return $query;
     }
 
-    public function getCompaniesByTechnicalEvolution($technicalEvolutionId, $userId)
-    {
-        $qb = $this->createQueryBuilder('te')
-            //->select("te.id as technicalEvolution, c.name as company, u.id as user")
-            ->join("te.userTechnicalEvolutions", "ute")
-            ->where("ute.note")
-            ->join("ute.user", "u")
-            ->join("u.company", "c")
-            ->where("te.id = $technicalEvolutionId")
-            ->andWhere("ute.user = $userId")
-            //->groupBy('c.name')
-                ->select("te.id", "ute.note", "u.email", "c.name")
-            //->addSelect("te.id")
-            //->addSelect("ute.note")
-            //->addSelect("u.email")
-            //->addSelect("c.name")
-            ->getQuery();
-        return $qb->getResult();
-    }
-
+    /**
+     * @param $technicalEvolutionId
+     * @return array
+     */
     public function getScoreForTechnicalEvolution($technicalEvolutionId)
     {
         $qb = $this->createQueryBuilder('te')
@@ -307,7 +290,11 @@ class TechnicalEvolutionRepository extends EntityRepository
         return $qb->getResult();
     }
 
-
+    /**
+     * @param $technicalEvolutionId
+     * @param $userId
+     * @return array
+     */
     public function getNoteByUserPerTechnicalEvolution($technicalEvolutionId, $userId)
     {
         $qb = $this->createQueryBuilder('te')

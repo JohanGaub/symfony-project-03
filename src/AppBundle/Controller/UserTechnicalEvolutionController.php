@@ -171,9 +171,6 @@ class UserTechnicalEvolutionController extends Controller
      */
     public function addNoteAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
-        $session = $request->getSession();
-        $session->getFlashBag()->add('info', "Votez pour cette evolution.");
-
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
@@ -181,62 +178,45 @@ class UserTechnicalEvolutionController extends Controller
         $note = new UserTechnicalEvolution('note');
         $form = $this->createForm(NoteUserTechnicalEvolutionType::class, $note);
         $form->handleRequest($request);
-        $data = [];
 
-        $user           = $this->getUser();
-        $em             = $this->getDoctrine()->getManager();
-        $uteRepository  = $em->getRepository('AppBundle:UserTechnicalEvolution');
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $uteRepository = $em->getRepository('AppBundle:UserTechnicalEvolution');
 
-        /**
-         * Verif is user has already vote for update her
-         */
-        $userVote = $uteRepository->findOneBy([
-            'user' => $user,
-            'technicalEvolution' => $technicalEvolution
-        ]);
-
-        if ($userVote) {
-            $userVote->setNote($form['note']->getData());
-            $em->persist($userVote);
-            $em->flush();
-            return new JsonResponse('msg_update_vote');
-        }
-
-        /**
-         * Verif if company have under than 2 vote if is ok we works has form
-         * TODO => Do a notes average we dynamic refresh after vote
-         */
         $nbNotes = $uteRepository->countNotesByCompany(
             $technicalEvolution->getId(),
             $this->getUser()->getCompany()->getId()
         );
 
-        if ($nbNotes < 1) {
+        if ($nbNotes == 0) {
             if ($form->isValid()) {
                 $currentDate = new \DateTime('now');
+                $note->setNote($form['note']->getData());
                 $note->setUser($user);
                 $note->setTechnicalEvolution($technicalEvolution);
                 $note->setDate($currentDate);
-
                 $em->persist($note);
                 $em->flush();
-
-                $userProfile = $user->getUserProfile();
-                $data = [
-                    'id'        => $note->getId(),
-                    'user'      => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
-                    'date'      => $currentDate,
-                    'note'      => $note->getNote()
-                ];
             }
-
-            return new JsonResponse($data);
-        } else {
-            return new JsonResponse('msg_max_vote_allowed');
+            return new JsonResponse();
         }
 
-    }
 
+        $userVote = $uteRepository->findOneBy([
+            'user'               => $user,
+            'technicalEvolution' => $technicalEvolution,
+            'type'               => 'note'
+        ]);
 
+            if ($userVote) {
+                $userVote->setNote($form['note']->getData());
+                $updateDate = new\DateTime('now');
+                $userVote->setUpdateDate($updateDate);
+                $em->persist($userVote);
+                $em->flush();
+
+            }
+            return new JsonResponse();
+        }
 
 }
