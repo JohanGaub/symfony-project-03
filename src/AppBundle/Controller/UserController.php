@@ -76,13 +76,13 @@ class UserController extends controller
 
             $capacity = $user->getRoles();
             if(count($result) == 1 && ($capacity[0] === "ROLE_PROJECT_RESP")){
-                 $this->addFlash("notice", "Validation impossible. Vous pouvez créer deux comptes responsable projet par société.");
-                 return $this->redirectToRoute('add_associate');
-             }
+                $this->addFlash("notice", "Validation impossible. Vous pouvez créer deux comptes responsable projet par société.");
+                return $this->redirectToRoute('add_associate');
+            }
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
             $mailer = \Swift_Mailer::newInstance($this->get('mailer')->getTransport());
 
@@ -106,14 +106,14 @@ class UserController extends controller
                 return $this->redirectToRoute('add_associate');
 
             }
-                $this->addFlash("notice", "Votre inscription a bien été prise en compte. Un e-mail vous a été envoyé pour valider votre inscription.");
-                return $this->redirectToRoute('validation_associate');
-            }
-            return $this->render(
-                '@App/Pages/User/add_associate_user.html.twig',
-                array('form_associate' => $form->createView(),
-                ));
+            $this->addFlash("notice", "Votre inscription a bien été prise en compte. Un e-mail vous a été envoyé pour valider votre inscription.");
+            return $this->redirectToRoute('validation_associate');
         }
+        return $this->render(
+            '@App/Pages/User/add_associate_user.html.twig',
+            array('form_associate' => $form->createView(),
+            ));
+    }
 
 
 

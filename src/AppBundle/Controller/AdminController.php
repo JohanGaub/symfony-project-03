@@ -12,15 +12,12 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
-use AppBundle\Form\UserAssociateType;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -31,7 +28,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class AdminController extends Controller
 {
-
     /**
      * @Route("/register", name="user_registration")
      * @param Request $request
