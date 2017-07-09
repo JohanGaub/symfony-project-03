@@ -1,18 +1,19 @@
 <?php
 
-namespace AppBundle\Form\Dictionary;
+namespace AppBundle\Form;
 
-use AppBundle\Entity\Dictionary;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use AppBundle\Entity\DynamicContent;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class DictionaryType
- * @package AppBundle\Form\Evolution
+ * Class DynamicContentType
+ * @package AppBundle\Form
  */
-class DictionaryType extends AbstractType
+class DynamicContentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,11 +22,11 @@ class DictionaryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('value', TextType::class, [
-                'label' => false,
-                'attr' => array(
-                    'placeholder' => 'Appuyez sur ENTRER',
-                )
+            ->add('content', TextareaType::class, [
+                'label' => 'Votre Contenu'
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Mettre à jour !'
             ]);
 
     }
@@ -36,7 +37,7 @@ class DictionaryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Dictionary::class
+            'data_class' => DynamicContent::class
         ));
     }
 
@@ -45,7 +46,7 @@ class DictionaryType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle_technicalEvolution';
+        return 'app_bundle';
     }
 
 }

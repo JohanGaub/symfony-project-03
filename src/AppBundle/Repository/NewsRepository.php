@@ -22,7 +22,6 @@ class NewsRepository extends EntityRepository
             ->where('t.value = :type')
             ->andWhere('n.isVisible = true')
             ->setParameter('type', $type)
-            ->setMaxResults(3)
             ->orderBy('n.creationDate', 'DESC')
             ->getQuery()
             ->getResult();

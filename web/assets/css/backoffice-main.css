@@ -840,6 +840,27 @@ body {
   .bo-top-bar p {
     text-align: center; }
 
+footer {
+  border-top: 1px solid #CCC;
+  padding: 0;
+  margin: 0; }
+  footer .footer {
+    padding: 3rem 0; }
+    footer .footer .link-group {
+      list-style-type: none;
+      display: flex;
+      margin: 0 auto;
+      justify-content: center; }
+      footer .footer .link-group li.divider-li {
+        color: #9ac00a;
+        font-size: 1.5rem;
+        font-weight: 600; }
+      footer .footer .link-group li {
+        padding: 0.5rem 1rem; }
+        footer .footer .link-group li a {
+          font-size: 1.5rem;
+          font-weight: 600; }
+
 .bo-title-page h2 {
   padding: 2rem 0; }
 
@@ -977,6 +998,12 @@ a {
     width: 100%;
     font-weight: 700; }
 
+/**
+ * Jquery Text Editor
+ */
+.jqte_editor {
+  height: 60rem; }
+
 header {
   margin-bottom: 0 !important; }
 
@@ -994,7 +1021,7 @@ header nav.sidebar, .main {
   transition: margin 200ms ease-out; }
 
 .main {
-  padding: 10px 10px 0 10px; }
+  padding: 10px 0 0 0; }
 
 @media (min-width: 768px) {
   header nav.sidebar.navbar {
@@ -1091,17 +1118,19 @@ header .sidebar-logo {
   height: 4rem;
   padding: 0 0 0 0; }
 
-.dashboard .dashbord-list {
-  border: 2px solid #ccc;
-  margin: 3rem 0; }
-  .dashboard .dashbord-list .news-list-element {
-    border-top: 2px solid #ccc;
-    padding: 1rem; }
-    .dashboard .dashbord-list .news-list-element .top-element {
-      display: flex;
-      justify-content: space-between; }
-      .dashboard .dashbord-list .news-list-element .top-element .title-news {
-        color: #394704 !important; }
+.dashboard {
+  padding: 0 2rem; }
+  .dashboard .dashbord-block {
+    border: 1px solid #ccc;
+    margin: 3rem 0; }
+    .dashboard .dashbord-block .news-list-element {
+      border-top: 1px solid #ccc;
+      padding: 0.25rem; }
+      .dashboard .dashbord-block .news-list-element .top-element {
+        display: flex;
+        justify-content: space-between; }
+        .dashboard .dashbord-block .news-list-element .top-element .title-news {
+          color: #394704 !important; }
 
 .news-unit {
   padding: 1rem; }

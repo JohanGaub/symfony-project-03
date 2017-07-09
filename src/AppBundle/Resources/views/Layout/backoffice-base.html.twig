@@ -9,12 +9,15 @@
         {% include '@App/Partials/bo-sideBar.html.twig' %}
     </header>
 
-    <main class="main">
-        {% block body %}{% endblock %}
-    </main>
+    <section class="main">
+        <main>
+            {% block body %}{% endblock %}
+        </main>
 
-    <footer>
-    </footer>
+        <footer>
+            {% include '@App/Partials/bo-footer.html.twig' %}
+        </footer>
+    </section>
 
     {% include '@App/Partials/bo-foot.html.twig' %}
     {% block javascripts %}{% endblock %}

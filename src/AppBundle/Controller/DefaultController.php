@@ -18,7 +18,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@App/Pages/Index/index.html.twig');
+        $mentions = $this->getDoctrine()->getRepository('AppBundle:DynamicContent')
+            ->findOneBy(['type' => 'mentionslegales']);
+
+        return $this->render('@App/Pages/Index/index.html.twig', [
+            'mentions' => $mentions
+        ]);
     }
 
     /**
@@ -59,5 +64,4 @@ class DefaultController extends Controller
             'otherNews'         => $repo->getNewsByType('Autre')
         ]);
     }
-
 }

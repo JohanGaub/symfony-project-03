@@ -1,14 +1,15 @@
-$border: 2px solid #ccc;
+$border: 1px solid #ccc;
 
 .dashboard {
+  padding: 0 2rem;
 
-  .dashbord-list {
+  .dashbord-block {
     border: $border;
     margin: 3rem 0;
 
     .news-list-element {
       border-top: $border;
-      padding: 1rem;
+      padding: 0.25rem;
 
       .top-element {
         display: flex;
