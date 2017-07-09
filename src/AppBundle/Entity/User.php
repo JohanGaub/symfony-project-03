@@ -493,7 +493,7 @@ class User implements UserInterface, Serializable
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getComments()
     {

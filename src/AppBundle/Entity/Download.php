@@ -60,12 +60,12 @@ class Download
     private $updateDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="documentations", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="downloads", cascade={"persist"})
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="documentations", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="downloads", cascade={"persist"})
      */
     private $product;
 

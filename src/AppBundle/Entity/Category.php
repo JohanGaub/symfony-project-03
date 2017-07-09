@@ -56,7 +56,7 @@ class Category
     private $faqs;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Download", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Download", mappedBy="category")
      */
     private $downloads;
 

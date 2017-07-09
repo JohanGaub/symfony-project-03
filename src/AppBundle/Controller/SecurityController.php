@@ -73,7 +73,7 @@ class SecurityController extends Controller
 
                 $email = \Swift_Message::newInstance()
                     ->setSubject('CommunIt : Réinitialisation du mot de passe')
-                    ->setFrom($this->getParameter('mail_sender_address'))
+                    ->setFrom($this->getParameter('mailer_sender_address'))
                     ->setTo($newUser->getEmail())
                     ->setBody(
                         $this->renderView('AppBundle:Email:forgetPassword.html.twig', [

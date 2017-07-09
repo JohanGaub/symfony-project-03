@@ -124,11 +124,11 @@ class TechnicalEvolution
      */
     private $userTechnicalEvolutions;
 
-/*    /**
+    /**
      * @var boolean
      * @ORM\Column(name="is_archivate", type="boolean")
-
-    private $isArchivate;*/
+     */
+    private $isArchivate;
 
     /**
      * Get id
@@ -444,11 +444,11 @@ class TechnicalEvolution
         return $this->userTechnicalEvolutions;
     }
 
-/*    /**
+    /**
      * Getter isArchivate
      *
      * @return boolean
-     *
+     */
     public function getIsArchivate()
     {
         return $this->isArchivate;
@@ -459,10 +459,10 @@ class TechnicalEvolution
      *
      * @param boolean $isArchivate
      * @return TechnicalEvolution
-     *
+     */
     public function setIsArchivate($isArchivate)
     {
         $this->isArchivate = $isArchivate;
         return $this;
-    }*/
+    }
 }

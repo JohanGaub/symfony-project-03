@@ -16,7 +16,11 @@
 /.sass-cache/
 /vendor/
 /web/bundles/
-/web/assets/upload/
+/web/assets/upload/*.*
 !/web/assets/upload/.gitkeep
 /node_modules/
+/src/AppBundle/Command/Test*.php
+/web/assets/upload/
+/src/AppBundle/Entity/*.php~
+**/Entity/*~
 /src/AppBundle/Controller/TestController.php

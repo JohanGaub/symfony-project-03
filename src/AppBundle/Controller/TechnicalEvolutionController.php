@@ -215,9 +215,11 @@ class TechnicalEvolutionController extends Controller
         } else {
             $teStatus = false;
         }
-
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') or $this->isGranted('ROLE_SUPER_ADMIN')) {
+            $validity = 3;
+        }
         // Here we check if there is another Project Responsible in the company. Only one vote per company is possible and only by Project Responsible
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_PROJECT_RESP')) {
+        elseif ($this->get('security.authorization_checker')->isGranted('ROLE_PROJECT_RESP')) {
             $result = [];
 
             for ($i = 0; $i < count($userRepository); $i++) {
@@ -247,8 +249,6 @@ class TechnicalEvolutionController extends Controller
                     $validity = 1;
                 }
             } else {
-
-
 
                 if ($dataAnotherUser == [] && $dataUser == []) {
                     // can be voted => add note in the database
@@ -290,7 +290,7 @@ class TechnicalEvolutionController extends Controller
             'validity'        => $validity,
             'teStatus'        => $teStatus,
             'noteAnotherUser' => $noteAnotherUser,
-            'noteUser'        => $noteUser,
+            'noteUser'        => isset($noteUser) ? $noteUser : null,
             'count'           => $count,
             'total'           => $total,
             'score'           => $score

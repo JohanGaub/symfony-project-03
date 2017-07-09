@@ -124,7 +124,7 @@ class TestController extends Controller
     public function testAction()
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
-        $data = $repo->getNoteByUserPerTechnicalEvolution(12, 8);
+        $data = $repo->getNoteByUserPerTechnicalEvolution(17, 2);
 // $userId = 9
 // $anotherUserId = 11
         $count = count($data);

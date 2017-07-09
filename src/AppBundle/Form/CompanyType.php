@@ -2,7 +2,6 @@
 namespace AppBundle\Form;
 use AppBundle\Entity\Company;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,8 +21,8 @@ class CompanyType extends AbstractType
             ->add('address', TextType::class, ['label' => 'Adresse'])
             ->add('town', TextType::class, ['label' => 'Ville'])
             ->add('postCode', TextType::class, ['label' => 'Code postale'])
-            ->add('phone', IntegerType::class,  ['label' => 'Téléphone fixe'])
-            ->add('siret', IntegerType::class,  ['label' => 'N° Siret'])
+            ->add('phone', TextType::class,  ['label' => 'Téléphone fixe'])
+            ->add('siret', TextType::class,  ['label' => 'N° Siret'])
             ->add('email', TextType::class,  ['label' => 'Email de votre socièté']);
     }
     public function configureOptions(OptionsResolver $resolver)
