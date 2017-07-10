@@ -123,7 +123,7 @@ class UserController extends controller
      */
     public function showAssociate($page = 1)
     {
-        $maxUsers = 2;
+        $maxUsers = 10;
         $company = $this->getUser()->getCompany();
         $em = $this->getDoctrine()->getManager();
 
