@@ -48,6 +48,7 @@ class Comment
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $user;
 

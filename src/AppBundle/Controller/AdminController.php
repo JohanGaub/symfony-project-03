@@ -75,7 +75,7 @@ class AdminController extends Controller
             );
 
             if (count($siret) >= 1) {
-                $this->addFlash("notice", "Votre numéro siret a déjà été enregistrer sur notre plateforme. Il est impossible d'avoir deux comptes par socièté. Pour plus d'informations veuillez contacter notre socièté.");
+                $this->addFlash("notice", "Votre numéro siret a déjà été enregistré sur notre plateforme. Seulement deux comptes sont autorisés par société. Pour plus d'informations, veuillez contacter notre société.");
                 return $this->redirectToRoute('user_registration');
             }
 
@@ -197,7 +197,7 @@ class AdminController extends Controller
         $status = $user->getIsActiveByAdmin();
         if ($status === false) {
             $user->setIsActiveByAdmin(true);
-        } elseif ($status === true) {
+        } else {
             $user->setIsActiveByAdmin(false);
         }
         $em->flush();
@@ -224,7 +224,7 @@ class AdminController extends Controller
             $user->setTokenLimitDate(null);
             $em->persist($user);
             $em->flush();
-            $this->addFlash("notice", "Votre avez confirmé votre mail, un administrateur va valider votre inscription !");
+            $this->addFlash("notice", "Merci d'avoir confirmé votre mail. Un administrateur va valider votre inscription.");
         } else {
             $this->addFlash("notice", "Désolé, nous n'avons pas pu traiter votre demande !");
         }
