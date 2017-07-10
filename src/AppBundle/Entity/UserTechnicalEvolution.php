@@ -241,4 +241,9 @@ class UserTechnicalEvolution
     {
         return $this->user;
     }
+
+
+
+
+
 }

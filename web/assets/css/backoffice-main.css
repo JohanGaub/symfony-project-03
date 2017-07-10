@@ -1164,7 +1164,7 @@ a {
   display: inline-block;
   text-indent: -999.9rem;
   /* hide the label text off screen */
-  background: url("http://designmoo.com/wp-content/uploads/2011/01/rating_stars.png") -15.5rem -3.2rem; }
+  background: url("../img/rating_stars.png") -15.5rem -3.2rem; }
 
 .starRating label.on {
   background-position: -15.5rem -7.6rem; }

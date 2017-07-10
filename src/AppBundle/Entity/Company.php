@@ -90,8 +90,6 @@ class Company
         $this->users = new ArrayCollection();
     }
 
-
-
     /**
      * Get id
      *
