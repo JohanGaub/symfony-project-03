@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,7 +35,6 @@ class UserProfile
      * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
      */
     private $lastname;
-
 
     /**
      * @var string
@@ -127,5 +125,19 @@ class UserProfile
         return $this->phone;
     }
 
-
+    /**
+     * GetFullName (get full user name)
+     * Ordered firstname / lastname => true
+     * Ordered lastname / firstname => false
+     *
+     * @param bool $order
+     * @return string
+     */
+    public function getFullName(bool $order = true)
+    {
+        if ($order)
+            return $this->firstname . ' ' . $this->lastname;
+        else
+            return $this->lastname . ' ' . $this->firstname;
+    }
 }

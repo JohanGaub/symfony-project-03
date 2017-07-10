@@ -2,10 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Comment;
-use AppBundle\Entity\Product;
-use AppBundle\Entity\User;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -136,6 +132,8 @@ class Ticket
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="ticket")
      */
     private $comments;
+
+
 
     /**
      * Get id

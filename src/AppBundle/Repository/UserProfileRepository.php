@@ -10,4 +10,7 @@ namespace AppBundle\Entity;
  */
 class UserProfileRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
 }
+

@@ -1,0 +1,141 @@
+/**
+ * Evolutions Parts
+ */
+.list-evolution {
+
+  .bo-evolution {
+    border: 1px solid $primary-color;
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+    width: 100%;
+    float: left;
+
+    a {
+      color: $primary-color;
+      transition: 0.4s ease;
+
+      &:hover {
+        color: darken($primary-color, 10%);
+      }
+    }
+
+    .bo-top-evolution {
+      justify-content: space-between;
+
+      .evolution-notes {
+        padding: 1rem 0 0 0;
+
+        .avg-note {
+          font-size: 3rem;
+          font-weight: 700;
+          color: $primary-color;
+          padding: 0;
+          line-height: 0.6rem;
+        }
+
+        .nb-notes {
+          display: block;
+          width: 7rem;
+
+          span {
+            font-weight: 700;
+            color: $secondary-color;
+          }
+        }
+      }
+
+      .evolution-titles {
+        text-align: right;
+
+        h2 {
+          display: block;
+          font-size: 1.75rem;
+          padding: 1rem;
+          overflow: hidden;
+          text-align: right;
+        }
+        p {
+
+        }
+      }
+    }
+
+    .bo-middle-evolution {
+      .evolution-sumup {
+        height: 4rem;
+        overflow: hidden;
+      }
+    }
+
+    .bo-bottom-evolution {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+/**
+ * Unit evolution part
+ */
+.unit-evolution {
+  border: 1px solid $primary-color;
+  padding: 2rem 0;
+
+  .evolution-sum-up {
+    padding: 1rem 0;
+  }
+
+  .evo-cols {
+    padding: 0;
+
+    .evo-list-infos {
+      list-style-type: none;
+
+      .info-evo {
+        display: inline-block;
+      }
+    }
+
+    .evolution-content-block {
+      .evolution-content {
+        word-break: break-all;
+      }
+    }
+  }
+
+  .evo-label {
+    display: inline-block;
+    font-weight: 700;
+    width: 22rem;
+  }
+
+  .evolution-sum-up {
+    text-align: center;
+  }
+}
+.delete-value {
+  color: $secondary-color;
+  font-weight: 700;
+}
+/**
+ * Comments Parts
+ */
+.add-new-comment {
+  border: 1px solid $secondary-color;
+  border-radius: 1px;
+  margin: 2rem 0;
+  padding: 1rem 2rem 0 2rem;
+}
+.comment-list {
+  .unit-comment {
+    border: 1px solid $primary-color;
+    border-radius: 1px;
+    margin: 2rem 0;
+    padding: 1rem;
+
+    .comment-value {
+      padding: 1rem;
+    }
+  }
+}
+

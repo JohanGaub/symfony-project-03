@@ -88,4 +88,10 @@ $(document).ready(function () {
 });
 
 
+$( function() {
+    $( ".datepicker" ).datepicker({
+        altFormat: "dd-mm-yyyy"
+    });
+} );
+
 

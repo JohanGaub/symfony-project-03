@@ -1,3 +1,4 @@
+*~
 /app/config/parameters.yml
 /build/
 /phpunit.xml
@@ -15,8 +16,10 @@
 /.sass-cache/
 /vendor/
 /web/bundles/
-/.sass-cache/
+/web/assets/upload/*.*
+!/web/assets/upload/.gitkeep
 /node_modules/
 \/Entity/*~
 /web/assets/upload/
 /src/AppBundle/Entity/*.php~
+**/Entity/*~

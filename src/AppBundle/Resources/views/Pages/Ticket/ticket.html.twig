@@ -2,18 +2,36 @@
 
 {% block body %}
     <section class="form-all">
-        <form>
-            <input>recherche</input>
-        </form>
+
         <div class="row">
-            <form class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
                 <h2>Liste des tickets</h2>
 
+               {# <div class="row">
+                    {{ form_start(searchForm) }}
+                    <div class="col-xs-3">{{ form_row(searchForm.id) }}</div>
+                    <div class="col-xs-3">{{ form_row(searchForm.company) }}</div>
+                    <div class="col-xs-3">{{ form_row(searchForm.emergency) }}</div>
+                    <div class="col-xs-3">{{ form_row(searchForm.subject) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-3">{{ form_row(searchForm.status) }}</div>
+                    <div class="col-xs-3">{{ form_row(searchForm.creationDate) }}</div>
+                    <div class="col-xs-3">{{ form_row(searchForm.endDate) }}</div>
+                    <div class="col-xs-3">{{ form_row(searchForm.submit) }}</div>
+                    {{ form_end(searchForm) }}#}
+                </div>
+
+            </div>
+        </div>
 
 
+
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
 
                 <table id="filter" class="table table-responsive table-bordered table-condensed">
-                    {# table-responsive table-bordered table-condensed#}
                     <thead >
                     <tr class="text-center">
                         <th>N° de ticket</th>
@@ -27,48 +45,46 @@
                     </thead>
 
                     <tbody class="table-striped">
-                    {%  for ticket in tickets %}
+
+                    {%  for d in data %}
                         <tr>
-                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.id }}</a></td>
-                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.user.company.name }}</a></td>
-                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.emergency }}</a></td>
-                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.subject }}</a></td>
-                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.status }}</a></td>
-                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.creationdate|date("d/m/Y") }}</a></td>
-                            <td><a href="{{ path('edit_ticket', {"ticket": ticket.id}) }}">{{ ticket.Enddate|date("d/m/Y") }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id }) }}">{{ d.id }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.user.company.name }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.emergency }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.subject }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.status }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.creationdate|date("d/m/Y") }}</a></td>
+                            <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.Enddate|date("d/m/Y") }}</a></td>
                         </tr>
                     {% endfor %}
+
                     </tbody>
                 </table>
-
-                <div class="pagination">
-                    <div class="pagination-buttons">
-                        {% if pagination.page > 1 %}
-                            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}"><<</a>
-                            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}"><</a>
-                        {% endif %}
-
-                        {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
-                        {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
-                            <a{% if p == pagination.page %} class="current-page" {% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a>
-                        {% endfor %}
-
-                        {% if pagination.page<pagination.pages_count %}
-                            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page+1})) }}">></a>
-                            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">>></a>
-                        {% endif %}
-                    </div>
-                </div>
             </div>
         </div>
+
+
+        <div class="row text-center">
+            <div class="col-xs-8 col-xs-offset-2">
+                {% include('@App/Elements/paginator.html.twig') %}
+            </div>
+        </div>
+
 
         <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
                 <div>
-                    <a href="{{ path('add_ticket') }}">Ajouter un ticket</a>
+                    <a href="{{ path('ticket_add') }}">Ajouter un ticket</a>
                 </div>
             </div>
         </div>
 
+
+
     </section>
+
+
+
+
 {% endblock %}
+

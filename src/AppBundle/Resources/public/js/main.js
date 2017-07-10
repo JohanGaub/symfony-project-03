@@ -32,12 +32,18 @@ $(document).ready(function () {
     });
 });
 
+
+
+
 $(document).ready(function () {
     if ($(window).width() <= 767) {
         $("#arrowbox").addClass("arrow-bottom-center");
     } else {
         $("#arrowbox").addClass("arrow-right-center");
     }
+
+
+
 
 // Change class name in "html.twig" file in order to use a specific scss mixin
     $(window).on('resize', function() {
@@ -48,6 +54,7 @@ $(document).ready(function () {
         }
     });
 });
+
 
 // Swiper Slider
 $(document).ready(function () {
@@ -63,6 +70,8 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
+
+
 
 // Modal
 $(document).ready(function () {
@@ -90,4 +99,11 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
+
+
+$( function() {
+    $( ".datepicker" ).datepicker({
+        altFormat: "dd-mm-yyyy"
+    });
+} );
 

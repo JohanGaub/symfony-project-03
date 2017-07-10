@@ -2,7 +2,6 @@
 
 namespace AppBundle\Form\Ticket;
 
-use AppBundle\Entity\Category;
 use AppBundle\Entity\Dictionary;
 use AppBundle\Entity\Ticket;
 use AppBundle\Repository\CategoryRepository;
@@ -46,30 +45,33 @@ class AddTicketType extends AbstractType
             ])
 
             ->add('category_type', EntityType::class, [
-                'label' => 'Type de catégorie',
-                'placeholder' => 'Sélectionnez le type de catégorie',
+                'label'         => 'Type de catégorie',
+                'placeholder'   => 'Sélectionnez le type de catégorie',
                 'class' => 'AppBundle\Entity\Dictionary',
-                'required' => true,
-                'mapped' => false,
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
                     return $dictionaryRepository->getItemListByType('category_type');
                 },
+                'required'      => true,
+                'mapped'        => false,
+                //'multiple'      => false,
             ])
             ->add('category', ChoiceType::class, [
                 'label' => 'Titre de catégorie',
                 'placeholder' => 'Sélectionnez le titre de catégorie',
                 'required' => true,
+                'multiple'      => false,
             ])
             ->add('subject', TextType::class, ['label' => 'Sujet du ticket'])
             ->add('content', TextareaType::class, ['label' =>  'Explications'])
             ->add('origin', EntityType::class, [
-                'label' => 'Origine',
-                'class' => 'AppBundle\Entity\Dictionary',
-                'required' => true,
+                'label'         => 'Origine',
+                'class'         => 'AppBundle\Entity\Dictionary',
+                'required'      => true,
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
                     return $dictionaryRepository->getItemListByType('origin');
                 },
                 //'preferred_choices' => ,
+                //'mapped'        => true,
             ])
             ->add('type', EntityType::class, [
                 'label' => 'Type',
@@ -104,7 +106,7 @@ class AddTicketType extends AbstractType
             function (FormEvent $event) {
                 // Create the form
                 $form = $event->getForm();
-                $this->addcategoryTitleField($form->getParent(), $form->getData());
+                $this->addCategoryTitleField($form->getParent(), $form->getData());
             }
         );
     }
@@ -114,7 +116,7 @@ class AddTicketType extends AbstractType
      * @param Dictionary $searchType
      * @internal param Dictionary $categoryType
      */
-    public function addcategoryTitleField(FormInterface $form, $searchType) {
+    public function addCategoryTitleField(FormInterface $form, $searchType) {
         $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
             'category',
             EntityType::class,

@@ -63,8 +63,6 @@ class User implements UserInterface, Serializable
      */
     private $isActiveByAdmin;
 
-
-
     /**
      * @var string
      *
@@ -85,12 +83,12 @@ class User implements UserInterface, Serializable
     private $company;
 
     /**
-     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user",cascade={"persist"})
      */
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user",cascade={"persist"})
      */
     private $userTechnicalEvolutions;
 

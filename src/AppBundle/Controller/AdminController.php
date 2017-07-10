@@ -87,7 +87,7 @@ class AdminController extends Controller
 
             $email = \Swift_Message::newInstance()
                 ->setSubject('CommunIt : Confirmation de inscription')
-                ->setFrom('f.letellier0@gmail.com')
+                ->setFrom($this->getParameter('mailer_sender_address'))
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView('@App/Email/confirm.html.twig', [

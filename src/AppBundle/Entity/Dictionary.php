@@ -29,6 +29,11 @@ class Dictionary
     private $type;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Category", mappedBy="type")
+     */
+    private $categories;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="value", type="string", length=255)
@@ -101,4 +106,45 @@ class Dictionary
         return $this->value;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add category
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Dictionary
+     */
+    public function addCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \AppBundle\Entity\Category $category
+     */
+    public function removeCategory(\AppBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 }
