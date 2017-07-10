@@ -1,14 +1,15 @@
 security:
 
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
     providers:
         dbal:
             entity:
                 class: AppBundle:User
                 property: email
-
-    encoders:
-        AppBundle\Entity\User:
-            algorithm: bcrypt
 
     role_hierarchy:
         ROLE_COMMERCIAL: [ROLE_FINAL_CLIENT]
@@ -24,6 +25,8 @@ security:
             security: false
 
         main:
+            pattern: ^/
+            user_checker: app.user_checker
             remember_me:
                 secret: '%secret%'
                 lifetime: 604800

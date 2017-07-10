@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * UserProfile
@@ -37,17 +38,10 @@ class UserProfile
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="phone1", type="string", length=255, nullable=false)
+     * @Assert\Regex("^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$")
+     * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
-    private $phone1;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="phone2", type="string", length=255, nullable=true)
-     */
-    private $phone2;
+    private $phone;
 
     /**
      * Get id
@@ -110,49 +104,25 @@ class UserProfile
     /**
      * Set phone1
      *
-     * @param string $phone1
+     * @param string $phone
      *
      * @return UserProfile
      */
-    public function setPhone1($phone1)
+    public function setPhone($phone)
     {
-        $this->phone1 = $phone1;
+        $this->phone = $phone;
 
         return $this;
     }
 
     /**
-     * Get phone1
+     * Get phone
      *
      * @return string
      */
-    public function getPhone1()
+    public function getPhone()
     {
-        return $this->phone1;
-    }
-
-    /**
-     * Set phone2
-     *
-     * @param string $phone2
-     *
-     * @return UserProfile
-     */
-    public function setPhone2($phone2)
-    {
-        $this->phone2 = $phone2;
-
-        return $this;
-    }
-
-    /**
-     * Get phone2
-     *
-     * @return string
-     */
-    public function getPhone2()
-    {
-        return $this->phone2;
+        return $this->phone;
     }
 
     /**

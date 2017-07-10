@@ -11,4 +11,10 @@
         <li><a href="{{ path('dictionaryHome') }}">Dictionnaire</a></li>
         <li><a href="{{ path('categoryHome') }}">Catégories</a></li>
     {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path('validation_register') }}">Gestionnaire de compte</a></li>
+    {% endif %}
+    {% if is_granted('ROLE_PROJECT_RESP') %}
+        <li><a href="{{ path('validation_associate') }}">Gestionnaire associés</a></li>
+    {% endif %}
 </ul>

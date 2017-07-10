@@ -1,18 +1,29 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: topikana
+ * Date: 24/05/17
+ * Time: 15:56
+ */
 
 namespace AppBundle\Controller;
+
 
 use AppBundle\Entity\User;
 use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\ForgetPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+
+/**
+ * Class SecurityController
+ * @package AppBundle\Controller
+ */
 class SecurityController extends Controller
 {
     /**
@@ -21,7 +32,8 @@ class SecurityController extends Controller
      */
     public function loginAction()
     {
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
+        {
             return $this->redirectToRoute('dashboard');
         }
 
@@ -65,7 +77,7 @@ class SecurityController extends Controller
 
                 $email = \Swift_Message::newInstance()
                     ->setSubject('CommunIt : Réinitialisation du mot de passe')
-                    ->setFrom('irena.jakubec@gmail.com')
+                    ->setFrom($this->getParameter('mailer_sender_address'))
                     ->setTo($newUser->getEmail())
                     ->setBody(
                         $this->renderView('forgetPassword.html.twig', [
