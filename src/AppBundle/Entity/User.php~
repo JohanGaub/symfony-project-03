@@ -83,12 +83,12 @@ class User implements UserInterface, Serializable
     private $company;
 
     /**
-     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user")
      */
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="user",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="user", cascade={"remove", "persist"})
      */
     private $userTechnicalEvolutions;
 
@@ -359,11 +359,11 @@ class User implements UserInterface, Serializable
     /**
      * Set password
      *
-     * @param userTechnicalEvolution $userTechnicalEvolution
+     * @param UserTechnicalEvolution $userTechnicalEvolution
      *
      * @return User
      */
-    public function addUserTechnicalEvolution(userTechnicalEvolution $userTechnicalEvolution)
+    public function addUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
 
@@ -373,9 +373,9 @@ class User implements UserInterface, Serializable
     /**
      * Remove userTechnicalEvolution
      *
-     * @param userTechnicalEvolution $userTechnicalEvolution
+     * @param UserTechnicalEvolution $userTechnicalEvolution
      */
-    public function removeUserTechnicalEvolution(userTechnicalEvolution $userTechnicalEvolution)
+    public function removeUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
     }
