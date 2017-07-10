@@ -3,11 +3,13 @@
 {% block body %}
     <section class="form-all">
 
-        <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
-                <a class="btn btn-default btn-lg" href="{{ path('ticket_update', {'ticket' :ticket.id}) }}">Modifier tout le ticket</a>
+        {% if ticket.user == is_granted('ROLE_PROJECT_RESP')%}
+            <div class="row">
+                <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+                    <a class="btn btn-default btn-lg fa fa-pencil-square-o" aria-hidden="true" href="{{ path('ticket_update', {'ticket' :ticket.id}) }}"> Modifier tout le ticket</a>
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
@@ -85,49 +87,54 @@
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
                 {{ form_start(editTicketForm) }}
-                {{ form_row(editTicketForm.emergency) }}
-                {{ form_row(editTicketForm._token) }} {#necessary to get session#}
-                {{ form_row(editTicketForm.status) }}
-                {{ form_row(editTicketForm.isArchive) }}
-                {{ form_row(editTicketForm.submit) }}
+                <div>{{ form_row(editTicketForm.emergency) }}</div>
+                <div>{{ form_row(editTicketForm._token) }}</div> {#necessary to get session#}
+                <div>{{ form_row(editTicketForm.status) }}</div>
+                <div>{{ form_row(editTicketForm.isArchive) }}</div>
+                <div>{{ form_row(editTicketForm.submit) }}</div>
                 {{ form_end(editTicketForm) }}
-                <a class="btn btn-default btn-lg" href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
+                <a class="btn btn-default btn-lg fa fa-caret-square-o-left" aria-hidden="true" href="{{ path('ticket_index') }}"> Retour à la liste des tickets</a>
             </div>
         </div>
 
 
-        <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
-                <h2>Commentaires</h2>
+        <div class="row ticket-comments-block">
+            <div class="col-xs-12 ">
+                <h3>Commentaires</h3>
                 {%  for comment in comments %}
                     <div class="row">
-                        <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+                        <div class="col-xs-10 col-xs-offset-1">
 
 
-                            <div class="comment">
+                            <div class="ticket-comment">
 
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-4">
-                                        <p>Prénom {{ comment.firstname }}</p>
-                                        <p>Nom {{ comment.lastname }}</p>
+                                <div class="row ticket-comment-up">
+                                    <div class="col-xs-12 col-lg-4 ">
+                                        {{ comment.firstname}}{{ " " }}{{ comment.lastname }}
 
                                     </div>
                                     <div class="col-xs-12 col-lg-4">
-                                        <p>Date de création {{ comment.creationDate|date("d/m/Y") }}</p>
-                                        {% if comment.updateDate is not null %}
+                                        Date de création {{ comment.creationDate|date("d/m/Y") }}
+                                        {#{% if comment.updateDate is not null %}
                                             <p>Date d'actualisation  {{ comment.updateDate|date("d/m/Y") }}</p>
-                                        {% endif %}
+                                        {% endif %}#}
                                     </div>
 
                                     <div class="col-xs-12 col-lg-4">
                                         {% if comment.user_id == app.user.id or is_granted('ROLE_PROJECT_RESP')%}
+                                            {#{% if comment.updateDate is not null %}
+                                              <p>Date d'actualisation  {{ comment.updateDate|date("d/m/Y") }}</p>
+                                          {% endif %}#}
                                             <div class="text-center">
-                                                <a href="{{ path('comment_delete', {"comment" : comment.id}) }}" type="button" class="btn btn-lg"><i class="fa fa-trash" aria-hidden="true"></i><p>Supprimer</p></a>
+                                                <a href="{{ path('comment_delete', {"comment" : comment.id}) }}" type="button" class="btn btn-lg fa fa-trash" aria-hidden="true"> Supprimer</a>
                                             </div>
                                         {% endif %}
                                     </div>
 
-                                    <div class="col-xs-12">
+                                </div>
+
+                                <div class="row ticket-comment-down">
+                                    <div class="col-xs-12 text-justify">
                                         <div>{{ comment.comment }}</div>
                                     </div>
                                 </div>
@@ -141,9 +148,7 @@
                     <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
 
                         <div>
-                            <button class="btn btn-lg" type="button" data-toggle="collapse" data-target="#add-comment" aria-expanded="false" aria-controls="add-comment">
-                                <i class="fa fa-plus-square" aria-hidden="false"></i><p>Ajouter</p>
-                            </button>
+                            <button class="btn btn-lg fa fa-plus-square" aria-hidden="false" type="button" data-toggle="collapse" data-target="#add-comment" aria-expanded="false" aria-controls="add-comment"> Ajouter</button>
                         </div>
 
                         <div id="add-comment" class="collapse comment">

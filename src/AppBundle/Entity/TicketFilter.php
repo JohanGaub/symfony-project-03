@@ -61,11 +61,6 @@ class TicketFilter
      */
     private $creationDate;
 
-    /**
-     * @var DateTime
-     *
-     */
-    private $updateDate;
 
     /**
      * @var DateTime
@@ -98,6 +93,21 @@ class TicketFilter
     {
         return $this->id;
     }
+
+    /**
+     * Set id in order to filter by $id
+     *
+     * @param int $id
+     *
+     * @return TicketFilter
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
 
     /**
      * Set subject
@@ -243,19 +253,6 @@ class TicketFilter
         return $this->creationDate;
     }
 
-    /**
-     * Set updateDate
-     *
-     * @param DateTime $updateDate
-     *
-     * @return TicketFilter
-     */
-    public function setUpdateDate($updateDate)
-    {
-        $this->updateDate = $updateDate;
-
-        return $this;
-    }
 
     /**
      * Get endDate
@@ -265,6 +262,20 @@ class TicketFilter
     public function getEndDate()
     {
         return $this->endDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param DateTime $endDate
+     *
+     * @return TicketFilter
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
     }
 
     /**
@@ -358,3 +369,5 @@ class TicketFilter
     }
 
 }
+
+

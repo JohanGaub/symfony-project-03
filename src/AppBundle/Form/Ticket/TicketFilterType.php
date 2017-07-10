@@ -5,10 +5,14 @@ namespace AppBundle\Form\Ticket;
 use AppBundle\Entity\TicketFilter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -36,7 +40,7 @@ class TicketFilterType extends AbstractType
                 'label' => 'Urgence',
                 'required' => false,
                 'expanded' => false,
-                'multiple' => true,
+                'multiple' => false,
                 'choices'  => [
                     'Normale'   => 'Normale',
                     'Haute'     => 'Haute',
@@ -50,16 +54,20 @@ class TicketFilterType extends AbstractType
                 'label' => 'Statut',
                 'required' => false,
                 'expanded' => false,
-                'multiple' => true,
-                'data' => ['En attente', 'En cours'],
+                'multiple' => false,
+                //'data' => ['En attente', 'En cours'],
+                'choices'  => [
+                    'En attente'   => 'En attente',
+                    'En cours'     => 'En cours',
+                ],
             ])
-            ->add('creationDate', DateType::class, [
+            ->add('creationDate', DateIntervalType::class, [
                 'label'     => 'Date de création',
                 'widget'    => 'single_text',
                 'required' => false,
                 'attr'      => [
-                    'placeholder'   => 'jj-mm-aaaa',
-                    'format'        => 'dd-MM-yyyy',
+                    'placeholder'   => 'jj/mm/aaaa',
+                    'format'        => 'dd/MM/yyyy',
                     'class'         => 'datepicker',
                 ],
             ])
@@ -68,8 +76,8 @@ class TicketFilterType extends AbstractType
                 'widget'    => 'single_text',
                 'required' => false,
                 'attr'      => [
-                    'placeholder'   => 'jj-mm-aaaa',
-                    'format'        => 'dd-MM-yyyy',
+                    'placeholder'   => 'jj/mm/aaaa',
+                    'format'        => 'dd/MM/yyyy',
                     'class'         => 'datepicker',
                 ],
             ])

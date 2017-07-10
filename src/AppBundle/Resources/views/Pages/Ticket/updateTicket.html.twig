@@ -57,9 +57,7 @@
                 <div>{{ form_row(updateTicketForm.submit) }}</div>
                 {{ form_end(updateTicketForm) }}
 
-                <a class="btn btn-default btn-lg active" href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
-
-
+                <a class="btn btn-default btn-lg fa fa-caret-square-o-left" aria-hidden="true" href="{{ path('ticket_index') }}"> Retour à la liste des tickets</a>
 
                 {# Hidden parts for form select inject (CategoryType from Dictionary and categoryTitle from Category) #}
                 <div>

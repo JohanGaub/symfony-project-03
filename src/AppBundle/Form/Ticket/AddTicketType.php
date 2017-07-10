@@ -96,7 +96,13 @@ class AddTicketType extends AbstractType
                 'label' => 'Fichier à uploader',
                 'required' => false,
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
+            ->add('submit', SubmitType::class, [
+                'label' => ' Valider',
+                'attr'  => [
+                    'class'         => 'btn btn-default btn-lg fa fa-check-square-o',
+                    'aria-hidden'   => 'true',
+                ]
+            ])
         ;
         // To listen to the "category_type" field
         $builder->get('category_type')->addEventListener(
