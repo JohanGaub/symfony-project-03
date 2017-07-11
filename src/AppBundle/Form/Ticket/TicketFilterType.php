@@ -82,10 +82,12 @@ class TicketFilterType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                    'label' => 'Filtrer',
+                'label' => 'Filtrer',
+                'attr'  => [
+                    'class'         => 'btn btn-model-small',
+                    'aria-hidden'   => 'true',
                 ]
-            )
-        ;
+            ]);
     }
 
     /**

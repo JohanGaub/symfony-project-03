@@ -104,9 +104,9 @@ class UpdateTicketType extends AbstractType
                 'required'      => false,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => ' Valider',
+                'label' => 'Enregistrer',
                 'attr'  => [
-                    'class'         => 'btn btn-default btn-lg fa fa-check-square-o',
+                    'class'         => 'btn btn-model-small',
                     'aria-hidden'   => 'true',
                 ],
             ])

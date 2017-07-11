@@ -4,9 +4,23 @@
     <section class="form-all">
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
-                {{ form(addTicketForm) }}
-                <a class="btn btn-default btn-lg fa fa-caret-square-o-left" aria-hidden="true" href="{{ path('ticket_index', {'page': 1}) }}"> Retour à la liste des tickets</a>
+                {{ form_start(addTicketForm) }}
+                <div>{{ form_row(addTicketForm.product) }}</div>
+                <div>{{ form_row(addTicketForm.category_type) }}</div>
+                <div>{{ form_row(addTicketForm.category) }}</div>
+                <div>{{ form_row(addTicketForm.subject) }}</div>
+                <div>{{ form_row(addTicketForm.content) }}</div>
+                <div>{{ form_row(addTicketForm.origin) }}</div>
+                <div>{{ form_row(addTicketForm.type) }}</div>
+                <div>{{ form_row(addTicketForm.emergency) }}</div>
+                <div>{{ form_row(addTicketForm.upload) }}</div>
+                <div>{{ form_row(addTicketForm.submit) }}
 
+                    {{ form_row(addTicketForm._token) }}
+                    {{ form_end(addTicketForm) }}
+
+                    <a class="btn btn-model-small" aria-hidden="true" href="{{ path('ticket_index', {'page': 1}) }}">Retour à la liste des tickets</a>
+                </div>
             </div>
         </div>
     </section>

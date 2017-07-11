@@ -28,7 +28,11 @@ class EditCommentType extends AbstractType
                 }
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Valider la modification',
+                'label' => 'Enregistrer',
+                'attr'  => [
+                    'class'         => 'btn btn-model-small',
+                    'aria-hidden'   => 'true',
+                ]
             ]);
     }
 
