@@ -1,0 +1,58 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}
+    {{ titlePage }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="bo-title-page col-lg-12">
+                <h2>{{ titlePage }}</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                {{ form_start(form) }}
+                    {{ form_row(form.isArchivate) }}
+                    {{ form_row(form.status) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.sum_up) }}
+                    {{ form_row(form.content) }}
+                    {{ form_row(form.reason) }}
+                    {{ form_row(form.origin) }}
+                    {{ form_row(form.expectedDelay) }}
+                    {{ form_row(form.product) }}
+                    {{ form_row(form.category_type) }}
+                    {% if form.category is defined %}
+                        {{ form_row(form.category) }}
+                    {% endif %}
+                    {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    {# Hidden parts for form select inject  #}
+    <select id="hidden-select-inject-category_type" name="app_bundle[category_type]" required="required" class="form-control hidden">
+        <option value="">Sélectionnez votre type catégorie</option>
+        {% for type in categoryTypes %}
+            <option value="{{ type.id }}" {% if (type.id == categoryType) %}selected="selected"{% endif %}>{{ type.value }}</option>
+        {% endfor %}
+    </select>
+
+    <select id="hidden-select-inject-category" name="app_bundle[category]" required="required" class="form-control hidden">
+        <option value="">Sélectionnez votre catégorie</option>
+        {% for category in categorys %}
+            <option value="{{ category.id }}" {% if (category.id == categoryId) %}selected="selected"{% endif %}>{{ category.title }}</option>
+        {% endfor %}
+    </select>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
+    <script src="{{ asset('assets/js/form.update-category-title.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends ('@App/Layout/backoffice-base.html.twig') %}
+
+{% block body %}
+    <section class="form-all">
+
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+                <a class="btn btn-default btn-lg" href="{{ path('ticket_update', {'ticket' :ticket.id}) }}">Modifier tout le ticket</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+                <table class="table table-responsive table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>N° de ticket</th>
+                        <th>Société</th>
+                        <th>Utilisateur</th>
+                        <th>Produit</th>
+                        <th>Type de catégorie</th>
+                        <th>Titre de catégorie</th>
+                        <th>Sujet</th>
+                        <th>Explication</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="table-striped">
+                    <tr>
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.user.company.name }}</td>
+                        <td>{{ ticket.user.userprofile.lastname }}</td>
+                        <td>{{ ticket.product.name }}</td>
+                        <td>{{ ticket.category.type }}</td>
+                        <td>{{ ticket.category.title }}</td>
+                        <td>{{ ticket.subject }}</td>
+                        <td>{{ ticket.content }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-responsive table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Origine</th>
+                        <th>Type</th>
+                        <th>Fichier uploadé</th>
+                        <th>Date de création</th>
+                        <th>Date d'actualisation</th>
+                        <th>Date de clôture</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="table-striped">
+                    <tr>
+                        <td>{{ ticket.origin }}</td>
+                        <td>{{ ticket.type }}</td>
+                        <td><button type="button" data-toggle="modal" data-target="#myModal">
+                                <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width = "150px"/>
+                            </button></td>
+                        <td>{{ ticket.creationdate|date("d/m/Y") }}</td>
+                        <td>{{ ticket.updatedate|date("d/m/Y") }}</td>
+                        <td>{{ ticket.creationdate|date("d/m/Y") }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Fichier uploadé</h4>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width="100%"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+                {{ form_start(editTicketForm) }}
+                {{ form_row(editTicketForm.emergency) }}
+                {{ form_row(editTicketForm._token) }} {#necessary to get session#}
+                {{ form_row(editTicketForm.status) }}
+                {{ form_row(editTicketForm.isArchive) }}
+                {{ form_row(editTicketForm.submit) }}
+                {{ form_end(editTicketForm) }}
+                <a class="btn btn-default btn-lg" href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+                <h2>Commentaires</h2>
+                {%  for comment in comments %}
+                    <div class="row">
+                        <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+
+
+                            <div class="comment">
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-4">
+                                        <p>Prénom {{ comment.firstname }}</p>
+                                        <p>Nom {{ comment.lastname }}</p>
+
+                                    </div>
+                                    <div class="col-xs-12 col-lg-4">
+                                        <p>Date de création {{ comment.creationDate|date("d/m/Y") }}</p>
+                                        {% if comment.updateDate is not null %}
+                                            <p>Date d'actualisation  {{ comment.updateDate|date("d/m/Y") }}</p>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="col-xs-12 col-lg-4">
+                                        {% if comment.user_id == app.user.id or is_granted('ROLE_PROJECT_RESP')%}
+                                            <div class="text-center">
+                                                <a href="{{ path('comment_delete', {"comment" : comment.id}) }}" type="button" class="btn btn-lg"><i class="fa fa-trash" aria-hidden="true"></i><p>Supprimer</p></a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div>{{ comment.comment }}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+
+                        <div>
+                            <button class="btn btn-lg" type="button" data-toggle="collapse" data-target="#add-comment" aria-expanded="false" aria-controls="add-comment">
+                                <i class="fa fa-plus-square" aria-hidden="false"></i><p>Ajouter</p>
+                            </button>
+                        </div>
+
+                        <div id="add-comment" class="collapse comment">
+
+                            <div class="row">
+
+                                <div class="col-xs-12">
+                                    {{ form_start(addCommentForm) }}
+                                    {{ form_row(addCommentForm.comment) }}
+                                    {{ form_row(addCommentForm._token) }}
+                                    {{ form_row(addCommentForm.submit) }}
+                                    {{ form_end(addCommentForm) }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}
+    Evolutions techniques
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include '@App/Pages/Evolutions/buttonBarEvolutions.html.twig' %}
+
+            <div class="bo-title-page col-lg-12">
+                <h2>Evolutions en attente</h2>
+            </div>
+
+            {% if evolutions|length > 0 %}
+                <table class="table waiting-list">
+                    <thead>
+                    <tr>
+                        <th>Nom de l'évolution</th>
+                        <th class="hidden-sm hidden-xs">Type de catégorie</th>
+                        <th class="hidden-sm hidden-xs">Catégorie</th>
+                        <th class="hidden-xs">Date de création</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for evolution in evolutions %}
+                        <tr id="tr_element_{{ evolution.id }}" class="transition-2s-ease">
+                            <th><a href="{{ path('evolutionUnit', {
+                                    'technicalEvolution': evolution.id}) }}">
+                                    {{ evolution.title }}
+                                </a>
+                            </th>
+                            <th class="hidden-sm hidden-xs">{{ evolution.category_type }}</th>
+                            <th class="hidden-sm hidden-xs">{{ evolution.category_title }}</th>
+                            <th class="hidden-xs">{{ evolution.creationDate|date('d/m/Y') }}</th>
+                            <th class="table-cell-action" data-index-number="{{ evolution.id }}">
+                                <a class="link-action invalid" data-info="false" href="">
+                                    <i class="fa fa-ban fa-2x" aria-hidden="true"></i></a>
+                                <a class="link-action valid" data-info="true" href="">
+                                    <i class="fa fa-check fa-2x" aria-hidden="true"></i></a>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Il n'y a aucune demande d'évolutions en attente !</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/page.evolution-waiting.js') }}"></script>
+{% endblock %}

@@ -4,7 +4,13 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
+
+/**
+ * Class DefaultController
+ * @package AppBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -12,7 +18,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:Default:index.html.twig');
+        return $this->render('@App/Pages/Index/index.html.twig');
     }
 
     /**
@@ -20,6 +26,19 @@ class DefaultController extends Controller
      */
     public function viewHistoriqueAction()
     {
-        return $this->render('AppBundle:Pages:historique.html.twig');
+        return $this->render('@App/Pages/Others/show-historique.html.twig');
     }
+
+    /**
+     * This function is temporary to check if default path after login works well to be deleted and placed somewhere else
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/dashboard", name="dashboard")
+     */
+    public function dashboardAction()
+    {
+        return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
+    }
+
+
 }

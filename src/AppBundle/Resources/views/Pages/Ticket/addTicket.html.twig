@@ -1,0 +1,18 @@
+{% extends ('@App/Layout/backoffice-base.html.twig') %}
+
+{% block body %}
+    <section class="form-all">
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+                {{ form(addTicketForm) }}
+                <a href="{{ path('ticket_index', {'page': 1}) }}">Retour à la liste des tickets</a>
+
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
+{% endblock %}

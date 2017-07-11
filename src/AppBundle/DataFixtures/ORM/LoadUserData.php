@@ -22,8 +22,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     private $faker;
 
     /**
-     * @param $faker
      * @return UserProfile
+     * @internal param $faker
      */
     private function setUserProfile()
     {
@@ -31,8 +31,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $profile = new UserProfile();
         $profile->setFirstname($this->faker->word);
         $profile->setLastname($this->faker->word);
-        $profile->setPhone1($this->faker->phoneNumber);
-        $profile->setPhone2($this->faker->phoneNumber);
+        $profile->setPhone(mt_rand(0000000000,9999999999));
+
 
         return $profile;
     }
@@ -45,6 +45,24 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $this->faker = Faker\Factory::create('fr_FR');
 
         /**
+         * Laurent BigBossAccount
+         * ........Only for client join project
+         */
+        $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
+        $user = new User();
+        $user->setEmail('laurent');
+        $user->setPassword(password_hash("admin", PASSWORD_BCRYPT));
+        $user->setRoles(['ROLE_ADMIN']);
+        $user->setIsActive(1);
+        $user->setIsActiveByAdmin(1);
+        $profile = $this->setUserProfile();
+        $user->setUserProfile($profile);
+        $user->setCompany($this->getReference($randomCompany));
+        $this->setReference('laurent_boss', $user);
+        $em->persist($user);
+        $em->persist($profile);
+
+        /**
          * SuperAdmin
          */
         for ($i = 0; $i < DataParameters::NB_SUPER_ADMIN; $i++){
@@ -54,6 +72,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_SUPER_ADMIN']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -72,6 +91,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_ADMIN']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -81,19 +101,20 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         }
 
         /**
-         * ProjetctResp
+         * ProjectResp
          */
         for ($i = 0; $i < DataParameters::NB_PROJECT_RESP; $i++){
             $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
             $user = new User();
             $user->setEmail('projresp' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
-            $user->setRoles(['ROLE_PROJET_RESP']);
+            $user->setRoles(['ROLE_PROJECT_RESP']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
-            $this->setReference('user_projet_resp_id_' . $i, $user);
+            $this->setReference('user_project_resp_id_' . $i, $user);
             $em->persist($user);
             $em->persist($profile);
         }
@@ -108,6 +129,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_TECHNICIAN']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -126,6 +148,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_COMMERCIAL']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));
@@ -144,6 +167,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_USER']);
             $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));

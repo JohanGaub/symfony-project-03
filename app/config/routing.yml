@@ -3,4 +3,9 @@ app:
     type:     annotation
     prefix:   /
 
+logout:
+    path: /logout
 
+
+default_security_target:
+    path: /dashboard

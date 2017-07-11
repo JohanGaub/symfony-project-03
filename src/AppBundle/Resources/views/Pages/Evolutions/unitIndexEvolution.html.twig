@@ -1,0 +1,121 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}
+    {{ evolution.title }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        {% include '@App/Pages/Evolutions/buttonBarEvolutions.html.twig' %}
+
+        <div class="row unit-evolution">
+            <div class="col-lg-12">
+                <div class="evolution-title"><h2>{{ evolution.title }}</h2></div>
+                <div class="evolution-sum-up"><h4>{{ evolution.sumUp }}</h4></div>
+                <div class="row evo-cols">
+                    <ul class="col-xs-12 col-lg-6 evo-list-infos">
+                        <li><p><span class="evo-label">Status de l'évolution : </span>
+                                <span class="info-evo">{{ evolution.status }}</span></p></li>
+                        <li><p><span class="evo-label">Type de la catégorie : </span>
+                                <span class="info-evo">{{ evolution.category.type }}</span></p></li>
+                        <li><p><span class="evo-label">Nom de la catégorie : </span>
+                                <span class="info-evo">{{ evolution.category.title }}</span></p></li>
+                        <li><p><span class="evo-label">Origine de la demande : </span>
+                                <span class="info-evo">{{ evolution.origin }}</span></p></li>
+                        <li><p><span class="evo-label">Date de création : </span>
+                                <span class="info-evo">{{ evolution.creationDate|date("d/m/Y") }}</span></p></li>
+                        {% if evolution.updateDate is defined %}
+                            <li><p><span class="evo-label">Date d'édition : </span>
+                                    <span class="info-evo">{{ evolution.updateDate|date("d/m/Y") }}</span></p></li>
+                        {% endif %}
+                        <li><p><span class="evo-label">Date de fin : </span>
+                                <span class="info-evo">{{ evolution.expectedDelay|date("d/m/Y") }}</span></p></li>
+                    </ul>
+                    <div class="col-xs-12 col-lg-6 evolution-content-block">
+                        <h4>Détails : </h4>
+                        <p class="evolution-content">{{ evolution.content }}</p>
+                    </div>
+                </div>
+                {% if is_granted('ROLE_ADMIN') or app.user.id == evolution.user %}
+                    <a href="{{ path('evolutionUpdate', {
+                        'technicalEvolution': evolution.id
+                    }) }}">Modifier l'évolution</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if evolution.status != 'En attente' %}
+            <div class="row">
+                <div class="col-lg-12 no-padding">
+                        <div class="add-new-comment">
+                            {{ form_start(addForm, {'attr': {
+                                'id': 'app_bundle_comment_userTechnicalEvolution',
+                                'data-index-number': evolution.id
+                            }}) }}
+                            {{ form_end(addForm) }}
+                        </div>
+                    <div class="comment-list">
+                    </div>
+                </div>
+            </div>
+            <div class="loader-wcs" data-index-number="{{ evolution.id }}"></div>
+        {% endif %}
+    </div>
+
+    {# comment delete modal #}
+    <div id="comment-modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Suppression d'un commentaire</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes vous sur de vouloir supprimer ce commentaire ?</p>
+                    <p class="delete-value"></p>
+                    <a id="comment-link-delete" href="" class="text-color-1" data-dismiss="modal">
+                        Je confirmer vouloir supprimer ce commentaire
+                    </a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# comment update modal #}
+    <div id="comment-modal-update" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Modification d'un commentaire</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(updateForm, {
+                        'attr': {'id': 'app_bundle_comment_userTechnicalEvolution_update'}
+                    }) }}
+                    {{ form_label(updateForm.comment) }}
+                    {{ form_widget(updateForm.comment, {
+                        'attr': {'class': 'app_bundle_comment_userTechnicalEvolution_updateField'}
+                    }) }}
+                    {{ form_end(updateForm) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/page.evolution-unit.js') }}"></script>
+{% endblock %}

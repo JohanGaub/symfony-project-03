@@ -1,0 +1,104 @@
+{% extends ('@App/Layout/backoffice-base.html.twig') %}
+
+{% block body %}
+    <section class="form-all">
+        <div class="row">
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+
+                <table class="table table-responsive table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>N° de ticket</th>
+                        <th>Société</th>
+                        <th>Utilisateur</th>
+                        <th>Fichier uploadé</th>
+                        <th>Date de création</th>
+                        <th>Date d'actualisation</th>
+                        <th>Date de clôture</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-striped">
+                    <tr>
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.user.company.name }}</td>
+                        <td>{{ ticket.user.userprofile.lastname }}</td>
+                        <td><button type="button" data-toggle="modal" data-target="#myModal">
+                                <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width = "150px"/>
+                            </button></td>
+                        <td>{{ ticket.creationDate|date(null, "Europe/Paris") }}</td>
+                        {% if ticket.updateDate is not null %}
+                            <td>{{ ticket.updateDate|date(null, "Europe/Paris") }}</td>
+                        {% endif %}
+                        {% if ticket.endDate is not null %}
+                            <td>{{ ticket.endDate|date(null, "Europe/Paris") }}</td>
+                        {% endif %}
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+                {{ form_start(updateTicketForm) }}
+                <div>{{ form_row(updateTicketForm.product) }}</div>
+                <div>{{ form_row(updateTicketForm.category_type) }}</div>
+                <div>{{ form_row(updateTicketForm.category) }}</div>
+                <div>{{ form_row(updateTicketForm.subject) }}</div>
+                <div>{{ form_row(updateTicketForm.content) }}</div>
+                <div>{{ form_row(updateTicketForm.origin) }}</div>
+                <div>{{ form_row(updateTicketForm.type) }}</div>
+                <div>{{ form_row(updateTicketForm.emergency) }}</div>
+                <div>{{ form_row(updateTicketForm._token) }}</div> {#necessary to get session#}
+                <div>{{ form_row(updateTicketForm.status) }}</div>
+                <div>{{ form_row(updateTicketForm.isArchive) }}</div>
+                <div>{{ form_row(updateTicketForm.submit) }}</div>
+                {{ form_end(updateTicketForm) }}
+
+                <a class="btn btn-default btn-lg active" href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
+
+
+
+                {# Hidden parts for form select inject (CategoryType from Dictionary and categoryTitle from Category) #}
+                <div>
+                    <select id="hidden-select-inject-category_type" name="app_bundle[category_type]" required="required" class="form-control hidden">
+                        <option value="">Sélectionnez votre type catégorie</option>
+                        {% for type in categoryTypes %}
+                            <option value="{{ type.id }}" {% if (type.id == categoryType) %}selected="selected"{% endif %}>{{ type.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <select id="hidden-select-inject-category" name="app_bundle[category]" required="required" class="form-control hidden">
+                        <option value="">Sélectionnez votre catégorie</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if (category.id == categoryId) %}selected="selected"{% endif %}>{{ category.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Fichier uploadé</h4>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width="100%"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
+    <script src="{{ asset('assets/js/form.update-category-title.js') }}"></script>
+{% endblock %}
