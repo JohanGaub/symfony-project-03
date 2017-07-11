@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -56,7 +55,7 @@ class Company
 
     /**
      * @var string
-     * @Assert\Regex("^[1-9]([-. ]?[0-9]{2}){4}$")
+     * @Assert\Regex("^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$")
      * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
     private $phone;
@@ -123,8 +122,6 @@ class Company
     {
         return $this->name;
     }
-
-
 
     /**
      * Set town
@@ -222,7 +219,6 @@ class Company
         return $this->siret;
     }
 
-
     /**
      * Add user
      *
@@ -281,8 +277,6 @@ class Company
         return $this->address;
     }
 
-
-
     /**
      * Set postCode
      *
@@ -306,4 +300,5 @@ class Company
     {
         return $this->postCode;
     }
+
 }

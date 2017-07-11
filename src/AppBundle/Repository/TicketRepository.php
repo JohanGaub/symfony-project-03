@@ -5,7 +5,6 @@ namespace AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-
 /**
  * TicketRepository
  *
@@ -65,9 +64,5 @@ class TicketRepository extends EntityRepository
         }
         return $query->getQuery();
     }
-
-
-
-
 
 }

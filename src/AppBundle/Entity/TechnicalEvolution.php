@@ -115,12 +115,13 @@ class TechnicalEvolution
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="technicalEvolutions", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="technicalEvolutions")
+     * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="technicalEvolution")
      */
     private $userTechnicalEvolutions;
 

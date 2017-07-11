@@ -19,7 +19,7 @@
 /web/assets/upload/*.*
 !/web/assets/upload/.gitkeep
 /node_modules/
-/src/AppBundle/Command/Test*.php
+\/Entity/*~
 /web/assets/upload/
 /src/AppBundle/Entity/*.php~
 **/Entity/*~

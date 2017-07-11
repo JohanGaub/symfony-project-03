@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Ticket;
-use AppBundle\Entity\User;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -48,6 +46,7 @@ class Comment
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $user;
 
@@ -186,8 +185,5 @@ class Comment
     {
         return $this->ticket;
     }
-
-
-
 
 }

@@ -6,16 +6,11 @@ use AppBundle\Entity\User;
 use AppBundle\Form\ChangePasswordType;
 use AppBundle\Form\ForgetPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Swift_Attachment;
-use Swift_Mailer;
-use Swift_MailTransport;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 
 /**
  * Class SecurityController
@@ -24,11 +19,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class SecurityController extends Controller
 {
     /**
-     * @param Request $request
      * @return RedirectResponse|Response
      * @Route("/login", name="login")
      */
-    public function loginAction(Request $request)
+    public function loginAction()
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('dashboard');
@@ -88,7 +82,7 @@ class SecurityController extends Controller
                     );
 
                 if (!$mailer->send($email)) {
-                    $this->addFlash("notice", " Nous sommes désolés, mais le service est actuellement indisponible. Merci de réessayer ultérieurement. Un mail a été envoyé au service technique afin de corriger le problème au plus vite. ");
+                    $this->addFlash("notice", " Nous sommes désolés, mais le service est actuellement indisponible. Merci de réessayer ultérieurement. Notre service technique s'engage de corriger le problème au plus vite. ");
                     return $this->redirectToRoute('forgotten');
                 }
                 $this->addFlash("notice", "Un e-mail vous a été envoyé.");

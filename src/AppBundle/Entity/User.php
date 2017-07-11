@@ -2,12 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Comment;
-use AppBundle\Entity\Company;
-use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\Ticket;
-use AppBundle\Entity\UserProfile;
-use AppBundle\Entity\userTechnicalEvolution;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -49,7 +43,6 @@ class User implements UserInterface, Serializable
     private $password;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
@@ -99,7 +92,7 @@ class User implements UserInterface, Serializable
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="user", cascade={"remove", "persist"})
      */
     private $userTechnicalEvolutions;
 
@@ -569,7 +562,5 @@ class User implements UserInterface, Serializable
     {
 
     }
-
-
 
 }

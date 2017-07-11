@@ -31,7 +31,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $profile = new UserProfile();
         $profile->setFirstname($this->faker->word);
         $profile->setLastname($this->faker->word);
-        $profile->setPhone(mt_rand(0000000000, 9999999999));
+        $profile->setPhone(mt_rand(0000000000,9999999999));
+
 
         return $profile;
     }
@@ -165,8 +166,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user->setEmail('finalclient' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
             $user->setRoles(['ROLE_USER']);
-            $user->setIsActive(0);
-            $user->setIsActiveByAdmin(0);
+            $user->setIsActive(1);
+            $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
             $user->setUserProfile($profile);
             $user->setCompany($this->getReference($randomCompany));

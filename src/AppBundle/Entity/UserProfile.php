@@ -125,8 +125,6 @@ class UserProfile
         return $this->phone;
     }
 
-
-
     /**
      * GetFullName (get full user name)
      * Ordered firstname / lastname => true

@@ -2,7 +2,7 @@
 
     <div class="container form">
         <div class="message-register row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 {% for flash_message in app.session.flashBag.get('notice') %}
                     <div class="alert alert-info">
                         {{ flash_message }}

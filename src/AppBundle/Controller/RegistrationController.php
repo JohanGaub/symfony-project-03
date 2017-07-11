@@ -2,13 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\AppBundle;
 use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
 use AppBundle\Form\UserAssociateType;
 use AppBundle\Form\UserType;
-use AppBundle\Repository\CompanyRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;

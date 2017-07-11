@@ -2,10 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Documentation;
-use AppBundle\Entity\Faq;
-use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\Ticket;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

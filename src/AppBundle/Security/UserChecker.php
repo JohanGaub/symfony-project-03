@@ -30,12 +30,8 @@ class UserChecker implements UserCheckerInterface
         if (!$user instanceof User) {
             return;
         }
-        if(!$user->getIsActive()){
-            throw new AccountExpiredException('Votre compte est désactivé');
-        }
-        if(!$user->getIsActiveByAdmin()){
+        if(($user->getIsActive() === false) or ($user->getIsActiveByAdmin() === false)) {
             throw new AccountExpiredException('Votre compte est désactivé');
         }
     }
-
 }

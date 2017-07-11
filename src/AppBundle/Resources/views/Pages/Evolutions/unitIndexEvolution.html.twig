@@ -23,6 +23,9 @@
                                     </div>
 
                                     <div class="evolution-note-titles">
+                                        {% if validity == 3 %}
+                                            <h2 class="vote-title">L'évaluation de cette évolution est en cours ! </h2>
+                                        {% endif %}
                                         {% if validity == 2 %}
                                             <h2 class="vote-title">Votez pour cette évolution ! </h2>
                                         {% endif %}

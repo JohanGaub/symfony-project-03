@@ -1,16 +1,11 @@
 <?php
+
 namespace AppBundle\Form;
 
-
-use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
-use AppBundle\Entity\UserProfile;
-use Doctrine\ORM\Mapping\Entity;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -42,6 +37,7 @@ class UserAssociateType extends AbstractType
                     'Commercial' => 'ROLE_COMMERCIAL',
                     'Technicien' => 'ROLE_TECHNICIAN',
                     'Commercial et Technicien' => ('ROLE_TECHNICIAN' && 'ROLE_COMMERCIAL'),
+                    'Responsable Projet' => ('ROLE_PROJECT_RESP'),
                 ]
             ])
             ->add('userProfile', User_profileType::class, array(

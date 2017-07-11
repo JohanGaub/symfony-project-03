@@ -132,7 +132,7 @@ class TechnicalEvolutionController extends Controller
         $category       = $technicalEvolution->getCategory();
         $categoryType   = isset($category) ? $category->getType() : null;
 
-        $categorys = $em->getRepository('AppBundle:Category')
+        $categories = $em->getRepository('AppBundle:Category')
             ->getCategoryByType($categoryType)->getQuery()->getResult();
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
             ->getItemListByType('category_type')->getQuery()->getResult();
@@ -163,7 +163,7 @@ class TechnicalEvolutionController extends Controller
             'form'          => $form->createView(),
             'categoryId'    => isset($category) ? $category->getId() : null,
             'categoryType'  => isset($categoryType) ? $categoryType->getId() : null,
-            'categorys'     => $categorys,
+            'categories'     => $categories,
             'categoryTypes' => $categoryTypes,
             'titlePage'     => 'Modification d\'évolution',
             'isUpdate'      => true,
@@ -442,29 +442,6 @@ class TechnicalEvolutionController extends Controller
         throw $this->createAccessDeniedException();
     }
 
-    /**
-     * Add new note for TechnicalEvolutions
-     *
-     * @Route("/notes/ajout/{userTechnicalEvolutionId}", name="evolutionCommentsUpdate")
-     * @param Request $request
-     * @param int $userTechnicalEvolutionId
-     * @return JsonResponse
-     */
-    public function addNoteAction(Request $request, int $userTechnicalEvolutionId)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('500', 'Invalid call');
-        }
-        $em = $this->getDoctrine()->getManager();
-        $note = $request->request->get('data');
-        $user = $this->getUser();
-        $company = $user->getCompany();
-        $users = $em->getRepository('AppBundle:User')->find($company);
-        // => TODO Work at rank action
-
-
-        return new JsonResponse($users);
-    }
 
     /**
      * Get full evolution have status

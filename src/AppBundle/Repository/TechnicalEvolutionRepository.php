@@ -215,7 +215,6 @@ class TechnicalEvolutionRepository extends EntityRepository
             ->andWhere("ute.note IS NOT NULL")
             ->getQuery();
         return $qb->getResult();
-
     }
 
 }

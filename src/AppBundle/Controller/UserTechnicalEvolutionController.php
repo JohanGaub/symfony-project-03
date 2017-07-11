@@ -207,8 +207,8 @@ class UserTechnicalEvolutionController extends Controller
 
             if ($userVote) {
                 $userVote->setNote($form['note']->getData());
-                $updateDate = new\DateTime('now');
-                $userVote->setUpdateDate($updateDate);
+                $currentDate = new\DateTime('now');
+                $userVote->setUpdateDate($currentDate);
                 $em->persist($userVote);
                 $em->flush();
 

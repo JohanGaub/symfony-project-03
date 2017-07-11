@@ -2,9 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Category;
 use AppBundle\Entity\Comment;
-use AppBundle\Entity\Dictionary;
 use AppBundle\Entity\Ticket;
 use AppBundle\Form\SearchTicketType;
 use AppBundle\Form\Ticket\AddCommentType;

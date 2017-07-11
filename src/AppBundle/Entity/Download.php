@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Product;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -246,4 +244,5 @@ class Download
     {
         return $this->product;
     }
+
 }
