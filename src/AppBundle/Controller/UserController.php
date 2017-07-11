@@ -194,7 +194,7 @@ class UserController extends controller
     /**
      * @param User $user
      * @Security("has_role ('ROLE_PROJECT_RESP')")
-     * @Route("/associate_validation/activate/{id}", name="activate_associate")
+     * @Route("/activate/{id}", name="activate_associate")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function validateAssociate(User $user)
