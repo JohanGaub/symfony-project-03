@@ -2,24 +2,21 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Comment;
-use AppBundle\Entity\Company;
-use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\Ticket;
-use AppBundle\Entity\UserProfile;
-use AppBundle\Entity\userTechnicalEvolution;
+
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
  *
+ * @property array userProfiles
  * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User implements UserInterface, Serializable
 {
@@ -34,7 +31,7 @@ class User implements UserInterface, Serializable
 
     /**
      * @var string
-     *
+     * @Assert\Email()
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
@@ -42,12 +39,14 @@ class User implements UserInterface, Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(name="password", type="string", length=64, nullable=false)
      */
     private $password;
 
     /**
-     * @ORM\Column(name="roles", type="array")
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="array", nullable=false)
      */
     private $roles = array();
 
@@ -57,6 +56,12 @@ class User implements UserInterface, Serializable
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
     private $isActive;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="is_active_by_admin", type="boolean", nullable=false)
+     */
+    private $isActiveByAdmin;
 
     /**
      * @var string
@@ -83,14 +88,20 @@ class User implements UserInterface, Serializable
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserTechnicalEvolution", mappedBy="user", cascade={"remove", "persist"})
      */
     private $userTechnicalEvolutions;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist", "remove"})
      */
     private $userProfile;
+
+    /**
+     *
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="user")
@@ -346,13 +357,13 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * Add userTechnicalEvolution
+     * Set password
      *
-     * @param userTechnicalEvolution $userTechnicalEvolution
+     * @param UserTechnicalEvolution $userTechnicalEvolution
      *
      * @return User
      */
-    public function addUserTechnicalEvolution(userTechnicalEvolution $userTechnicalEvolution)
+    public function addUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions[] = $userTechnicalEvolution;
 
@@ -362,22 +373,36 @@ class User implements UserInterface, Serializable
     /**
      * Remove userTechnicalEvolution
      *
-     * @param userTechnicalEvolution $userTechnicalEvolution
+     * @param UserTechnicalEvolution $userTechnicalEvolution
      */
-    public function removeUserTechnicalEvolution(userTechnicalEvolution $userTechnicalEvolution)
+    public function removeUserTechnicalEvolution(UserTechnicalEvolution $userTechnicalEvolution)
     {
         $this->userTechnicalEvolutions->removeElement($userTechnicalEvolution);
     }
 
     /**
-     * Get userTechnicalEvolutions
-     *
-     * @return Collection
+     * @param $password
      */
-    public function getUserTechnicalEvolutions()
+    public function setPlainPassword($password)
     {
-        return $this->userTechnicalEvolutions;
+        $this->plainPassword = $password;
     }
+
+    /**
+     * Get plainPassword
+     *
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
 
     /**
      * Add ticket
@@ -456,18 +481,6 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * This can return null if the password was not encoded using a salt.
-     *
-     * @return string|null The salt
-     */
-    public function getSalt()
-    {
-        return null;
-    }
-
-    /**
      * Returns the username used to authenticate the user.
      *
      * @return string The username
@@ -500,6 +513,7 @@ class User implements UserInterface, Serializable
             $this->id,
             $this->email,
             $this->password,
+            $this->roles,
         ]);
     }
 
@@ -518,6 +532,42 @@ class User implements UserInterface, Serializable
             $this->id,
             $this->email,
             $this->password,
+            $this->roles,
             ) = unserialize($serialized);
     }
+
+    /**
+     * Set isActiveByAdmin
+     *
+     * @param boolean $isActiveByAdmin
+     *
+     * @return User
+     */
+    public function setIsActiveByAdmin($isActiveByAdmin)
+    {
+        $this->isActiveByAdmin = $isActiveByAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get isActiveByAdmin
+     *
+     * @return boolean
+     */
+    public function getIsActiveByAdmin()
+    {
+        return $this->isActiveByAdmin;
+    }
+
+    /**
+     * Get userTechnicalEvolutions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserTechnicalEvolutions()
+    {
+        return $this->userTechnicalEvolutions;
+    }
+
 }

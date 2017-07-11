@@ -38,12 +38,6 @@ class Category
      */
     private $description;
 
-    /*/**
-     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
-     * @JoinColumn(name="type", referencedColumnName="id")
-     */
-   // private $type;*/
-
     /**
      * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="categories", cascade={"persist"})
      * @JoinColumn(name="type", referencedColumnName="id")

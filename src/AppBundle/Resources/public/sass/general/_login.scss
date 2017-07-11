@@ -1,11 +1,10 @@
-#login, #password-reset, #password-process, #password-change {
+#login, #password-reset, #password-process, #password-change, #registration {
   padding-top: 4rem;
   color: $paragraph-color;
   min-height: 100%;
   font-family: $secondary-font;
-}
-#login {
-    /* Set up width of form */
+
+  /* Set up width of form */
   .form-wrap {
     width: 40%;
     margin: 0 auto;
@@ -16,7 +15,7 @@
   /* Set up style of checkbox */
   .form-group {
     margin-bottom: 2rem;
-    font-size: 1.9rem;
+    font-size: 1.7rem;
   }
   .form-group:hover {
     color: $secondary-color;
@@ -60,9 +59,9 @@
   .form-control {
     color: #212121;
     border-radius: 0 !important;
-    height: 5.8rem !important;
-    line-height: 3rem;
-    font-size: 2rem;
+    height: 4.6rem !important;
+    line-height: 2rem;
+    font-size: 1.7rem;
   }
   .btn-custom {
     color: #fff;

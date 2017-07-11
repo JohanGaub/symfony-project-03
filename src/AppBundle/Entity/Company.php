@@ -2,16 +2,17 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Company
  *
  * @ORM\Table(name="company")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CompanyRepository")
+ *
  */
 class Company
 {
@@ -47,29 +48,48 @@ class Company
 
     /**
      * @var string
-     *
+     * @Assert\Email()
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
      * @var string
-     *
+     * @Assert\Regex("^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$")
      * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
     private $phone;
 
     /**
      * @var string
+     * @Assert\Regex("/[0-9]{3}[ \.\-]?[0-9]{3}[ \.\-]?[0-9]{3}[ \.\-]?[0-9]{5}/")
      *
      * @ORM\Column(name="siret", type="string", length=255, nullable=false)
      */
     private $siret;
 
     /**
+     * @var string
+     * @Assert\Regex("/[0-9]{5}/")
+     *
+     * @ORM\Column(name="postcode", type="string", length=5)
+     */
+    private $postCode;
+
+    /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="company")
      */
     private $users;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
+
 
     /**
      * Get id
@@ -202,13 +222,6 @@ class Company
     {
         return $this->siret;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
 
     /**
      * Add user
@@ -245,7 +258,7 @@ class Company
     }
 
     /**
-     * Set address
+     * Set adress
      *
      * @param string $address
      *
@@ -266,5 +279,31 @@ class Company
     public function getAddress()
     {
         return $this->address;
+    }
+
+
+
+    /**
+     * Set postCode
+     *
+     * @param string $postCode
+     *
+     * @return Company
+     */
+    public function setPostCode($postCode)
+    {
+        $this->postCode = $postCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postCode
+     *
+     * @return string
+     */
+    public function getPostCode()
+    {
+        return $this->postCode;
     }
 }

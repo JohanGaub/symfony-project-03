@@ -21,10 +21,10 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-        $categorys = $this->getDoctrine()->getRepository('AppBundle:Category')
-            ->getCategorys();
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')
+            ->getCategories();
         return $this->render('@App/Pages/Category/indexCategory.html.twig', [
-            'categorys' => $categorys
+            'categories' => $categories
         ]);
     }
 
