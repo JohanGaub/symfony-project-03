@@ -1,22 +1,24 @@
-$border: 1px solid #ccc;
-
 .dashboard {
-  padding: 0 2rem;
-
   .dashbord-block {
-    border: $border;
-    margin: 3rem 0;
+    margin: 4rem 0;
+    padding: 0 0 2rem 0;
+    border: 1px solid #ccc;
 
     .news-list-element {
-      border-top: $border;
-      padding: 0.25rem;
+      padding: 1rem 0;
 
       .top-element {
-        display: flex;
-        justify-content: space-between;
+        text-align: center;
 
         .title-news {
           color: darken($primary-color, 25%)!important;
+          word-break: keep-all;
+
+          .new-date {
+            font-style: italic;
+            font-weight: 100;
+            font-size: 1.45rem;
+          }
         }
       }
     }

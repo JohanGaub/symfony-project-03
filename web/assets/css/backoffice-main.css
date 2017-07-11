@@ -1118,19 +1118,21 @@ header .sidebar-logo {
   height: 4rem;
   padding: 0 0 0 0; }
 
-.dashboard {
-  padding: 0 2rem; }
-  .dashboard .dashbord-block {
-    border: 1px solid #ccc;
-    margin: 3rem 0; }
-    .dashboard .dashbord-block .news-list-element {
-      border-top: 1px solid #ccc;
-      padding: 0.25rem; }
-      .dashboard .dashbord-block .news-list-element .top-element {
-        display: flex;
-        justify-content: space-between; }
-        .dashboard .dashbord-block .news-list-element .top-element .title-news {
-          color: #394704 !important; }
+.dashboard .dashbord-block {
+  margin: 4rem 0;
+  padding: 0 0 2rem 0;
+  border: 1px solid #ccc; }
+  .dashboard .dashbord-block .news-list-element {
+    padding: 1rem 0; }
+    .dashboard .dashbord-block .news-list-element .top-element {
+      text-align: center; }
+      .dashboard .dashbord-block .news-list-element .top-element .title-news {
+        color: #394704 !important;
+        word-break: keep-all; }
+        .dashboard .dashbord-block .news-list-element .top-element .title-news .new-date {
+          font-style: italic;
+          font-weight: 100;
+          font-size: 1.45rem; }
 
 .news-unit {
   padding: 1rem; }
