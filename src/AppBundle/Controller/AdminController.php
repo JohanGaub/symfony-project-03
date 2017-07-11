@@ -120,7 +120,7 @@ class AdminController extends Controller
 
     /**
      * @return Response
-     * @Route("/{page}", name="validation_register")
+     * @Route("/liste/{page}", name="validation_register", )
      * @Security("has_role ('ROLE_ADMIN')")
      */
     public function showRegister($page = 1)
