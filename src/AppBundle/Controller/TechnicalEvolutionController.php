@@ -215,6 +215,7 @@ class TechnicalEvolutionController extends Controller
         } else {
             $teStatus = false;
         }
+
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') or $this->isGranted('ROLE_SUPER_ADMIN')) {
             $validity = 3;
         }

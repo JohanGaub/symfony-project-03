@@ -195,9 +195,8 @@ class UserTechnicalEvolutionController extends Controller
                 $em->persist($note);
                 $em->flush();
             }
-            return new JsonResponse();
+            return new JsonResponse('valid request');
         }
-
 
         $userVote = $uteRepository->findOneBy([
             'user'               => $user,
@@ -205,15 +204,15 @@ class UserTechnicalEvolutionController extends Controller
             'type'               => 'note'
         ]);
 
-            if ($userVote) {
-                $userVote->setNote($form['note']->getData());
-                $currentDate = new\DateTime('now');
-                $userVote->setUpdateDate($currentDate);
-                $em->persist($userVote);
-                $em->flush();
+        if ($userVote) {
+            $userVote->setNote($form['note']->getData());
+            $currentDate = new\DateTime('now');
+            $userVote->setUpdateDate($currentDate);
+            $em->persist($userVote);
+            $em->flush();
 
-            }
-            return new JsonResponse();
         }
+        return new JsonResponse('valid request');
+    }
 
 }

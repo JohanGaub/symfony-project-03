@@ -69,7 +69,7 @@ $(document).ready(function() {
             data: form,
             dataType: 'json',
             timeout: 3000,
-            success: function(data){
+            success: function(){
             },
         })
     });
