@@ -594,6 +594,16 @@ a {
 .modal {
   border-radius: 1px; }
 
+.btn-model-small {
+  color: #fff !important;
+  background-color: #9ac00a;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle; }
+
+.btn-model-small:hover {
+  background-color: #dd5116; }
+
 .be-flex {
   display: flex; }
 

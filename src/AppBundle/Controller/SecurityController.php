@@ -82,7 +82,7 @@ class SecurityController extends Controller
                     );
 
                 if (!$mailer->send($email)) {
-                    $this->addFlash("notice", " Nous sommes désolés, mais le service est actuellement indisponible. Merci de réessayer ultérieurement. Notre service technique s'engage de corriger le problème au plus vite. ");
+                    $this->addFlash("notice", " Nous sommes désolés, mais le service d'envoi de mail pour réinitialiser mot de passe est actuellement indisponible. Merci de réessayer ultérieurement. Notre service technique s'engage de corriger le problème au plus vite. ");
                     return $this->redirectToRoute('forgotten');
                 }
                 $this->addFlash("notice", "Un e-mail vous a été envoyé.");

@@ -94,7 +94,7 @@ class AdminController extends Controller
                 );
 
             if (!$mailer->send($email)) {
-                $this->addFlash("notice", "Nous sommes désolés, mais le service est actuellement indisponible. Merci de réessayer ultérieurement. Un mail a été envoyé au service technique afin de corriger le problème au plus vite.");
+                $this->addFlash("notice", "Merci, nous avons bien enregistré votre inscription. Si vous n'avez pas reçu de mail de confirmation, veuillez contacter l'un de nos administrateur.");
 
                 return $this->redirectToRoute('user_registration');
 
