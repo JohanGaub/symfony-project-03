@@ -185,10 +185,8 @@ class TechnicalEvolutionController extends Controller
             return $this->redirectToRoute('evolutionHome');
         }
 
-
         $noteUser = '';
         $noteAnotherUser = '';
-        $validity = '';
 
         $user    = $this->getUser();
         $userId  = $user->getId();
@@ -236,8 +234,7 @@ class TechnicalEvolutionController extends Controller
                 $anotherUserId = null;
             }
 
-            $dataUser        = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $userId);
-            $dataAnotherUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $anotherUserId);
+            $dataUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $userId);
 
             if ($anotherUserId === null) {
                 if ($dataUser == []) {
@@ -250,6 +247,7 @@ class TechnicalEvolutionController extends Controller
                     $validity = 1;
                 }
             } else {
+                $dataAnotherUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $anotherUserId);
 
                 if ($dataAnotherUser == [] && $dataUser == []) {
                     // can be voted => add note in the database
@@ -267,18 +265,16 @@ class TechnicalEvolutionController extends Controller
                     $validity = 0;
                 }
             }
+        } else {
+            $validity = 4;
         }
 
-
         $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
-
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
-
         $note           = new UserTechnicalEvolution('note');
         $formNote       = $this->createForm(NoteUserTechnicalEvolutionType::class, $note);
-
 
         /** @var $noteAnotherUser */
         /** @var $noteUser */
@@ -291,7 +287,7 @@ class TechnicalEvolutionController extends Controller
             'validity'        => $validity,
             'teStatus'        => $teStatus,
             'noteAnotherUser' => $noteAnotherUser,
-            'noteUser'        => isset($noteUser) ? $noteUser : null,
+            'noteUser'        => $noteUser,
             'count'           => $count,
             'total'           => $total,
             'score'           => $score
