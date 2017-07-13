@@ -3,8 +3,6 @@
 namespace AppBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\Collection;
-
 
 /**
  * Class TicketFilter

@@ -37,7 +37,8 @@ html, body {
 }
 
 header {
-  margin-bottom: 13rem;
+  margin-bottom: 12rem;
+  padding-bottom: 0;
 }
 footer {
   margin-top: 5rem!important;
@@ -129,4 +130,15 @@ a {
  */
 .modal {
   border-radius: 1px;
+}
+
+.btn-model-small {
+  color: #fff !important;
+  background-color: $primary-color;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.btn-model-small:hover {
+  background-color: $secondary-color;
 }

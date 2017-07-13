@@ -1,16 +1,11 @@
 <?php
+
 namespace AppBundle\Form;
 
-
-use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
-use AppBundle\Entity\UserProfile;
-use Doctrine\ORM\Mapping\Entity;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;

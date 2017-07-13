@@ -4,9 +4,6 @@
 .be-inline {
   display: inline-block;
 }
-.space-between {
-  justify-content: space-between;
-}
 .mrg-top-1 {
   margin-top : 8rem;
 }
@@ -14,16 +11,7 @@
   font-weight: 700;
 }
 
-.no-padding {
-  padding: 0!important;
-}
-
 .transition-2s-ease {
   transition: 2s ease;
-}
-
-.strong-green {
-  font-weight: 700;
-  color: $primary-color;
 }
 

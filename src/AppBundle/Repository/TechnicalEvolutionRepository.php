@@ -183,4 +183,38 @@ class TechnicalEvolutionRepository extends EntityRepository
         ");
         return $query;
     }
+
+    /**
+     * @param $technicalEvolutionId
+     * @return array
+     */
+    public function getScoreForTechnicalEvolution($technicalEvolutionId)
+    {
+        $qb = $this->createQueryBuilder('te')
+            ->join("te.userTechnicalEvolutions", "ute")
+            ->where("te.id = $technicalEvolutionId")
+            ->andWhere("ute.note IS NOT NULL")
+            ->select('SUM(ute.note)', 'count(ute.note)', 'AVG(ute.note)')
+            ->getQuery();
+        return $qb->getResult();
+    }
+
+    /**
+     * @param $technicalEvolutionId
+     * @param $userId
+     * @return array
+     */
+    public function getNoteByUserPerTechnicalEvolution($technicalEvolutionId, $userId)
+    {
+        $qb = $this->createQueryBuilder('te')
+            ->select("ute.note")
+            ->join("te.userTechnicalEvolutions", "ute")
+            ->join("ute.user", "u")
+            ->where("te.id = $technicalEvolutionId")
+            ->andWhere("u.id = $userId")
+            ->andWhere("ute.note IS NOT NULL")
+            ->getQuery();
+        return $qb->getResult();
+    }
+
 }

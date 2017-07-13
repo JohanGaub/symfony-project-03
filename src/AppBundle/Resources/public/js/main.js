@@ -99,6 +99,12 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
+//DataTables plugin
+$(document).ready(function() {
+    $('#register').DataTable( {
+        colReoder: true
+    } );
+} );
 
 
 $( function() {

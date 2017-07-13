@@ -5,6 +5,10 @@ services:
     app.user_checker:
         class: AppBundle\Security\UserChecker
 
+
+    app.user_checker:
+        class: AppBundle\Security\UserChecker
+
     communit.navigator.factory:
         class: AppBundle\Service\NavigatorFactory
         arguments:

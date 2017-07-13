@@ -504,7 +504,8 @@ html, body {
   margin-top: 5em; }
 
 header {
-  margin-bottom: 13rem; }
+  margin-bottom: 12rem;
+  padding-bottom: 0; }
 
 footer {
   margin-top: 5rem !important; }
@@ -593,14 +594,21 @@ a {
 .modal {
   border-radius: 1px; }
 
+.btn-model-small {
+  color: #fff !important;
+  background-color: #9ac00a;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle; }
+
+.btn-model-small:hover {
+  background-color: #dd5116; }
+
 .be-flex {
   display: flex; }
 
 .be-inline {
   display: inline-block; }
-
-.space-between {
-  justify-content: space-between; }
 
 .mrg-top-1 {
   margin-top: 8rem; }
@@ -608,61 +616,15 @@ a {
 .be-strong {
   font-weight: 700; }
 
-.no-padding {
-  padding: 0 !important; }
-
 .transition-2s-ease {
   transition: 2s ease; }
-
-.strong-green {
-  font-weight: 700;
-  color: #9ac00a; }
-
-.form-all {
-  margin: 4rem 0 0 0;
-  color: #545454;
-  min-height: 100%;
-  font-family: Arial, sans-serif; }
-
-.close {
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-  -webkit-transition: -webkit-transform .2s ease-in-out;
-  transition: transform .5s ease-in-out; }
-  .close:hover {
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-    filter: brightness(10%); }
-
-.back-button {
-  text-decoration: none;
-  border-radius: 0 !important;
-  background-color: #9ac00a;
-  font-size: 2rem;
-  text-align: center;
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-  color: whitesmoke;
-  padding: 3rem 5rem;
-  width: 40%;
-  margin: 0 auto; }
-  .back-button a {
-    color: whitesmoke; }
-  .back-button a:hover {
-    text-decoration: none; }
-
-.table-cell-action {
-  display: flex;
-  justify-content: space-between; }
-  .table-cell-action a {
-    padding: 0 0.5rem; }
 
 #login, #password-reset, #password-process, #password-change, #registration {
   padding-top: 4rem;
   color: #545454;
   min-height: 100%;
   font-family: Arial, sans-serif;
+  /* Set up width of form */
   /* Set up width of form */
   /* Set up style of checkbox */
   /* style of input fields */
@@ -695,6 +657,8 @@ a {
       color: #6d6d6d;
       font-size: 1.5rem;
       font-weight: normal; }
+    #login .checkbox label.checkbox-inline, #password-reset .checkbox label.checkbox-inline, #password-process .checkbox label.checkbox-inline, #password-change .checkbox label.checkbox-inline, #registration .checkbox label.checkbox-inline {
+      font-size: 1rem; }
   #login .form-paragraph, #password-reset .form-paragraph, #password-process .form-paragraph, #password-change .form-paragraph, #registration .form-paragraph {
     color: #9ac00a;
     font-size: 2.3rem;
@@ -723,7 +687,106 @@ a {
     border-radius: 0;
     font-size: 1.9rem;
     font-weight: bold;
-    height: 6rem;
+    height: 5rem;
+    vertical-align: middle; }
+  #login .form-submit-button:hover, #password-reset .form-submit-button:hover, #password-process .form-submit-button:hover, #password-change .form-submit-button:hover, #registration .form-submit-button:hover {
+    background-color: #dd5116; }
+  #login .forget-link, #password-reset .forget-link, #password-process .forget-link, #password-change .forget-link, #registration .forget-link {
+    font-size: 1.8rem;
+    color: #dd5116;
+    text-align: center;
+    display: block; }
+  #login .forget-link:hover, #password-reset .forget-link:hover, #password-process .forget-link:hover, #password-change .forget-link:hover, #registration .forget-link:hover {
+    color: #9ac00a; }
+  @media screen and (max-width: 1024px) {
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
+      width: 60%; } }
+  @media screen and (max-width: 768px) {
+    #login #login, #login #password-reset, #password-reset #login, #password-reset #password-reset, #password-process #login, #password-process #password-reset, #password-change #login, #password-change #password-reset, #registration #login, #registration #password-reset {
+      padding-top: 1rem; }
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
+      width: 80%; } }
+  @media screen and (max-width: 440px) {
+    #login #login, #login #password-reset, #password-reset #login, #password-reset #password-reset, #password-process #login, #password-process #password-reset, #password-change #login, #password-change #password-reset, #registration #login, #registration #password-reset {
+      padding-top: 0; }
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
+      width: 100%; } }
+
+.table-cell-action {
+  display: flex;
+  justify-content: space-between; }
+  .table-cell-action a {
+    padding: 0 0.5rem; }
+
+#login, #password-reset, #password-process, #password-change, #registration {
+  padding-top: 4rem;
+  color: #545454;
+  min-height: 100%;
+  font-family: Arial, sans-serif;
+  /* Set up width of form */
+  /* Set up width of form */
+  /* Set up style of checkbox */
+  /* style of input fields */
+  /* style of submit button*/ }
+  #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
+    width: 40%;
+    margin: 0 auto; }
+  #login .form-comment-paragraph, #password-reset .form-comment-paragraph, #password-process .form-comment-paragraph, #password-change .form-comment-paragraph, #registration .form-comment-paragraph {
+    text-align: center; }
+  #login .form-group, #password-reset .form-group, #password-process .form-group, #password-change .form-group, #registration .form-group {
+    margin-bottom: 2rem;
+    font-size: 1.7rem; }
+  #login .form-group:hover, #password-reset .form-group:hover, #password-process .form-group:hover, #password-change .form-group:hover, #registration .form-group:hover {
+    color: #dd5116; }
+  #login .checkbox, #password-reset .checkbox, #password-process .checkbox, #password-change .checkbox, #registration .checkbox {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    #login .checkbox .login-checkbox, #password-reset .checkbox .login-checkbox, #password-process .checkbox .login-checkbox, #password-change .checkbox .login-checkbox, #registration .checkbox .login-checkbox {
+      width: 3rem;
+      height: 3rem;
+      cursor: pointer;
+      border-radius: 0 !important;
+      border: 1px solid #ccc;
+      vertical-align: middle;
+      display: inline-block; }
+    #login .checkbox .label, #password-reset .checkbox .label, #password-process .checkbox .label, #password-change .checkbox .label, #registration .checkbox .label {
+      color: #6d6d6d;
+      font-size: 1.5rem;
+      font-weight: normal; }
+    #login .checkbox label.checkbox-inline, #password-reset .checkbox label.checkbox-inline, #password-process .checkbox label.checkbox-inline, #password-change .checkbox label.checkbox-inline, #registration .checkbox label.checkbox-inline {
+      font-size: 1rem; }
+  #login .form-paragraph, #password-reset .form-paragraph, #password-process .form-paragraph, #password-change .form-paragraph, #registration .form-paragraph {
+    color: #9ac00a;
+    font-size: 2.3rem;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 2rem; }
+  #login .btn.btn-custom, #password-reset .btn.btn-custom, #password-process .btn.btn-custom, #password-change .btn.btn-custom, #registration .btn.btn-custom {
+    margin-bottom: 2rem; }
+  #login .form-control, #password-reset .form-control, #password-process .form-control, #password-change .form-control, #registration .form-control {
+    color: #212121;
+    border-radius: 0 !important;
+    height: 4.6rem !important;
+    line-height: 2rem;
+    font-size: 1.7rem; }
+  #login .btn-custom, #password-reset .btn-custom, #password-process .btn-custom, #password-change .btn-custom, #registration .btn-custom {
+    color: #fff;
+    background-color: #9ac00a; }
+  #login .btn-custom:hover,
+  #login .btn-custom:focus, #password-reset .btn-custom:hover,
+  #password-reset .btn-custom:focus, #password-process .btn-custom:hover,
+  #password-process .btn-custom:focus, #password-change .btn-custom:hover,
+  #password-change .btn-custom:focus, #registration .btn-custom:hover,
+  #registration .btn-custom:focus {
+    color: #fff; }
+  #login .form-submit-button, #password-reset .form-submit-button, #password-process .form-submit-button, #password-change .form-submit-button, #registration .form-submit-button {
+    border-radius: 0;
+    font-size: 1.9rem;
+    font-weight: bold;
+    height: 5rem;
     vertical-align: middle; }
   #login .form-submit-button:hover, #password-reset .form-submit-button:hover, #password-process .form-submit-button:hover, #password-change .form-submit-button:hover, #registration .form-submit-button:hover {
     background-color: #dd5116; }
@@ -845,9 +908,45 @@ body {
 .bo-top-bar {
   border-bottom: 2px solid #9ac00a;
   padding: 1rem 0 0 0.5rem;
-  width: 100%; }
+  width: 100%;
+  height: 6.3rem; }
   .bo-top-bar p {
     text-align: center; }
+  .bo-top-bar .dropbtn {
+    background-color: white;
+    color: #9ac00a;
+    padding: 0.5rem;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    margin-right: 3rem; }
+  .bo-top-bar .dropdown {
+    position: relative;
+    display: inline-block;
+    float: right; }
+  .bo-top-bar .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white !important;
+    min-width: 16rem;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1; }
+  .bo-top-bar .dropdown-content a {
+    color: #545454;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block; }
+  .bo-top-bar .dropdown-content a:hover {
+    background-color: #fdf0eb; }
+    .bo-top-bar .dropdown-content a:hover i {
+      color: #dd5116;
+      font-weight: 300; }
+  .bo-top-bar .dropdown:hover .dropdown-content {
+    display: block; }
+  .bo-top-bar .dropdown:hover .dropbtn {
+    background: #ffffff;
+    color: #dd5116; }
 
 .bo-title-page h2 {
   padding: 2rem 0; }
@@ -986,98 +1085,6 @@ a {
     width: 100%;
     font-weight: 700; }
 
-.dictionarys-list {
-  display: flex; }
-
-.dictionary-list {
-  border: 1px solid #9ac00a;
-  margin: 2rem 0;
-  padding: 0 2rem 2rem 2rem; }
-  .dictionary-list .list-group-item {
-    border-radius: 2px;
-    transition: 1s ease;
-    display: block;
-    padding: 1.2rem; }
-    .dictionary-list .list-group-item .badge {
-      background-color: transparent;
-      border-radius: 2px;
-      position: relative;
-      bottom: 5px; }
-      .dictionary-list .list-group-item .badge a {
-        color: #444444;
-        margin: 0 0.33rem; }
-        .dictionary-list .list-group-item .badge a i {
-          transition: 0.2s ease; }
-        .dictionary-list .list-group-item .badge a:hover > i {
-          color: #dd5116; }
-    .dictionary-list .list-group-item .modal-delete {
-      color: #ff4f59 !important; }
-      .dictionary-list .list-group-item .modal-delete:hover > i {
-        color: #cf000c !important;
-        transform: rotate(90deg); }
-    .dictionary-list .list-group-item .modal-update {
-      color: #454245 !important; }
-      .dictionary-list .list-group-item .modal-update i {
-        transition: 0.3s ease-in-out; }
-      .dictionary-list .list-group-item .modal-update:hover > i {
-        color: #040404 !important;
-        transform: rotate(90deg); }
-  .dictionary-list a {
-    color: #fff; }
-
-.msg-return {
-  display: block !important;
-  background-color: #dd5116 !important;
-  border-radius: 2px;
-  color: #fff;
-  transition: 1s ease;
-  text-align: center;
-  margin: 1rem 0;
-  padding: 1rem;
-  width: 100%; }
-
-.form-control {
-  border-radius: 0;
-  font-weight: 700; }
-
-button[type='submit'] {
-  border-radius: 0;
-  font-weight: 700;
-  font-size: 1.5rem; }
-
-#ticket {
-  background-color: #fdf0eb; }
-  #ticket .background-ticket {
-    width: 70%;
-    min-width: 30rem;
-    margin: 16.2rem auto 7rem auto;
-      background: no-repeat center;
-      background-size: cover; }
-  #ticket .block-ticket {
-    width: 70%;
-    min-width: 20rem;
-    padding: 5rem 0;
-    margin: 0 auto; }
-    #ticket .block-ticket .ticket {
-      padding: 1rem 0 5rem 0;
-      background: rgba(255, 255, 255, 0.6); }
-      #ticket .block-ticket .ticket a {
-        color: #dd5116;
-        font-weight: bold;
-        text-align: justify;
-        line-height: 2.2rem;
-        padding: 0 0 1rem 4rem;
-          background: no-repeat 1rem 0.4rem;
-          background-size: 2rem; }
-        #ticket .block-ticket .ticket a:hover {
-          color: #9ac00a; }
-
-.comment {
-  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  border: solid #dd5116 0.2rem;
-  background-color: whitesmoke;
-  margin: 2rem 0; }
-
 /**
  * Evolutions Parts
  */
@@ -1166,3 +1173,172 @@ button[type='submit'] {
   padding: 1rem; }
   .comment-list .unit-comment .comment-value {
     padding: 1rem; }
+
+/**
+ * Evolutions Parts - VOTING
+ */
+.note-evolution .bo-evolution {
+  border: 1px solid #dd5116;
+  border-radius: 1px;
+  margin: 2rem 0;
+  padding: 1rem 2rem 0 2rem;
+  width: 100%;
+  /****** Counter *******/ }
+  .note-evolution .bo-evolution .controls.rating, .note-evolution .bo-evolution .rating-counter, .note-evolution .bo-evolution .remarque-small {
+    margin-left: 7rem; }
+  .note-evolution .bo-evolution .rating-counter {
+    padding: 0 0 0 0; }
+    .note-evolution .bo-evolution .rating-counter .rating-counter-value {
+      font-size: 2rem;
+      font-weight: 700; }
+  .note-evolution .bo-evolution .remarque-small {
+    font-size: 1.5rem; }
+  .note-evolution .bo-evolution .bo-top-evolution {
+    justify-content: space-between;
+    align-items: stretch; }
+    .note-evolution .bo-evolution .bo-top-evolution .evolution-notes {
+      padding: 1rem 0 0 0; }
+      .note-evolution .bo-evolution .bo-top-evolution .evolution-notes .avg-note {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #9ac00a;
+        line-height: 0.6rem; }
+      .note-evolution .bo-evolution .bo-top-evolution .evolution-notes .nb-notes {
+        display: block;
+        width: 7rem; }
+        .note-evolution .bo-evolution .bo-top-evolution .evolution-notes .nb-notes span {
+          font-weight: 700;
+          color: #dd5116; }
+    .note-evolution .bo-evolution .bo-top-evolution .evolution-note-titles {
+      text-align: right; }
+      .note-evolution .bo-evolution .bo-top-evolution .evolution-note-titles h2.vote-title > span {
+        font-weight: 900;
+        font-size: 2rem;
+        color: #545454; }
+      .note-evolution .bo-evolution .bo-top-evolution .evolution-note-titles h2 {
+        display: block;
+        font-size: 1.75rem;
+        padding: 1rem;
+        overflow: hidden;
+        text-align: right; }
+
+/**
+ * Star rating system
+ */
+.starRating input {
+  display: none; }
+
+.starRating label {
+  width: 1.8rem;
+  height: 1.6rem;
+  display: inline-block;
+  text-indent: -999.9rem;
+  /* hide the label text off screen */
+  background: url("../img/rating_stars.png") -15.5rem -3.2rem; }
+
+.starRating label.on {
+  background-position: -15.5rem -7.6rem; }
+
+/****** Hide radio buttons *******/
+label.label-star-link {
+  color: white; }
+  label.label-star-link input[type='radio'],
+  label.label-star-link input[type='radio']:after,
+  label.label-star-link input[type='radio']:checked:after {
+    visibility: hidden; }
+
+.dictionarys-list {
+  display: flex; }
+
+.dictionary-list {
+  border: 1px solid #9ac00a;
+  margin: 2rem 0;
+  padding: 0 2rem 2rem 2rem; }
+  .dictionary-list .list-group-item {
+    border-radius: 2px;
+    transition: 1s ease;
+    display: block;
+    padding: 1.2rem; }
+    .dictionary-list .list-group-item .badge {
+      background-color: transparent;
+      border-radius: 2px;
+      position: relative;
+      bottom: 5px; }
+      .dictionary-list .list-group-item .badge a {
+        color: #444444;
+        margin: 0 0.33rem; }
+        .dictionary-list .list-group-item .badge a i {
+          transition: 0.2s ease; }
+        .dictionary-list .list-group-item .badge a:hover > i {
+          color: #dd5116; }
+    .dictionary-list .list-group-item .modal-delete {
+      color: #ff4f59 !important; }
+      .dictionary-list .list-group-item .modal-delete:hover > i {
+        color: #cf000c !important;
+        transform: rotate(90deg); }
+    .dictionary-list .list-group-item .modal-update {
+      color: #454245 !important; }
+      .dictionary-list .list-group-item .modal-update i {
+        transition: 0.3s ease-in-out; }
+      .dictionary-list .list-group-item .modal-update:hover > i {
+        color: #040404 !important;
+        transform: rotate(90deg); }
+  .dictionary-list a {
+    color: #fff; }
+
+.msg-return {
+  display: block !important;
+  background-color: #dd5116 !important;
+  border-radius: 2px;
+  color: #fff;
+  transition: 1s ease;
+  text-align: center;
+  margin: 1rem 0;
+  padding: 1rem;
+  width: 100%; }
+
+.form-control {
+  border-radius: 0;
+  font-weight: 700; }
+
+button[type='submit'] {
+  border-radius: 0;
+  font-weight: 700;
+  font-size: 1.5rem; }
+
+#ticket {
+  background-color: #fdf0eb; }
+  #ticket .background-ticket {
+    width: 70%;
+    min-width: 30rem;
+    margin: 16.2rem auto 7rem auto;
+    background-image: url("../../img/commun-partie2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; }
+  #ticket .block-ticket {
+    width: 70%;
+    min-width: 20rem;
+    padding: 5rem 0;
+    margin: 0 auto; }
+    #ticket .block-ticket .ticket {
+      padding: 1rem 0 5rem 0;
+      background: rgba(255, 255, 255, 0.6); }
+      #ticket .block-ticket .ticket a {
+        color: #dd5116;
+        font-weight: bold;
+        text-align: justify;
+        line-height: 2.2rem;
+        padding: 0 0 1rem 4rem;
+        background-image: url("../../img/green-flea3.svg");
+        background-repeat: no-repeat;
+        background-position: 1rem 0.4rem;
+        background-size: 2rem; }
+        #ticket .block-ticket .ticket a:hover {
+          color: #9ac00a; }
+
+.comment {
+  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border: solid #dd5116 0.2rem;
+  background-color: whitesmoke;
+  margin: 2rem 0; }

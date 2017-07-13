@@ -30,7 +30,7 @@ class MaillerService
     private $body;
 
     /**
-     * MaillerService constructor.
+     * MailerService constructor.
      * @param Swift_Mailer $swiftMailer
      * @param string $mailer
      */

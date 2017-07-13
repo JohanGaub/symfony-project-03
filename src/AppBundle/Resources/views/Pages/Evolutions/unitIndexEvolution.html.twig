@@ -9,6 +9,66 @@
     <div class="container-fluid">
         {% include '@App/Pages/Evolutions/buttonBarEvolutions.html.twig' %}
 
+        <div class="row note-evolution">
+            {% if is_granted('ROLE_PROJECT_RESP') %}
+                {% if teStatus == true  %}
+                    <div class="col-lg-12">
+                        <div class="bo-evolution">
+                            <div class="bo-top-evolution">
+                                <div class="be-flex space-between">
+
+                                    <div class="evolution-notes">
+                                        <p class="avg-note">{{ score }}</p>
+                                        <p class="nb-notes"><span>{{ count }}</span> notes</p>
+                                    </div>
+
+                                    <div class="evolution-note-titles">
+                                        {% if validity == 3 %}
+                                            <h2 class="vote-title">L'évaluation de cette évolution est en cours  </h2>
+                                        {% endif %}
+                                        {% if validity == 2 %}
+                                            <h2 class="vote-title">Votez pour cette évolution ! </h2>
+                                        {% endif %}
+                                        {% if validity == 1 %}
+                                            <h2 class="vote-title">Vous avez déja voté  pour cette évolution.</h2>
+                                            <h2 class="vote-title">Vous pouvez modifier votre note. Elle est de <span>{{ noteUser }}/10</span>.</h2>
+                                        {% endif %}
+                                        {% if validity == 0 %}
+                                            <h2 class="vote-title">Votre entreprise à déja vote pour cette évolution.<br>
+                                                La note est de <span>{{ noteAnotherUser }}</span>/10.
+                                            </h2>
+                                        {% endif %}
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if validity == 1 or validity == 2 %}
+                                {{ form_start(noteForm, {'attr': {
+                                    'id': 'app_bundle_note_userTechnicalEvolution'
+                                }}) }}
+                                <p class="remarque-small"><i>* un seul click sur l'etoile va enregistrer votre note</i></p>
+                                <div class="error-box"></div>
+                                {% spaceless %}
+                                    <div class="form-group controls rating" data-index-number="{{ evolution.id }}">
+                                        {% for i in 0..9 %}
+                                            <label class="label-star-link" data-index-number="{{ i + 1 }}">
+                                                {{ form_widget(noteForm.note[i], {'attr': {'class': 'star-link' }}) }}
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                {% endspaceless %}
+                                {{ form_end(noteForm) }}
+                                <div class="rating-counter">
+                                    <p class="rating-counter-value"><span class="rating-value"></span> / 10</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+
         <div class="row unit-evolution">
             <div class="col-lg-12">
                 <div class="evolution-title"><h2>{{ evolution.title }}</h2></div>
@@ -37,7 +97,7 @@
                         <p class="evolution-content">{{ evolution.content }}</p>
                     </div>
                 </div>
-                {% if is_granted('ROLE_ADMIN') or app.user.id == evolution.user %}
+                {% if is_granted('ROLE_ADMIN') or app.user.id == evolution.user.id %}
                     <a href="{{ path('evolutionUpdate', {
                         'technicalEvolution': evolution.id
                     }) }}">Modifier l'évolution</a>
@@ -46,15 +106,16 @@
         </div>
 
         {% if evolution.status != 'En attente' %}
+
             <div class="row">
                 <div class="col-lg-12 no-padding">
-                        <div class="add-new-comment">
-                            {{ form_start(addForm, {'attr': {
-                                'id': 'app_bundle_comment_userTechnicalEvolution',
-                                'data-index-number': evolution.id
-                            }}) }}
-                            {{ form_end(addForm) }}
-                        </div>
+                    <div class="add-new-comment">
+                        {{ form_start(addForm, {'attr': {
+                            'id': 'app_bundle_comment_userTechnicalEvolution',
+                            'data-index-number': evolution.id
+                        }}) }}
+                        {{ form_end(addForm) }}
+                    </div>
                     <div class="comment-list">
                     </div>
                 </div>

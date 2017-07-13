@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: topikana
- * Date: 03/07/17
- * Time: 21:10
- */
-
 namespace AppBundle\Controller;
-
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
