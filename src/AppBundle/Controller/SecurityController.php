@@ -80,7 +80,7 @@ class SecurityController extends Controller
                     ->setFrom($this->getParameter('mailer_sender_address'))
                     ->setTo($newUser->getEmail())
                     ->setBody(
-                        $this->renderView('forgetPassword.html.twig', [
+                        $this->renderView('@App/Email/forgetPassword.html.twig', [
                             'name' => $newUser->getUserProfile()->getFirstname(),
                             'resetPasswordLink' => $this->generateUrl("reset", [
                                 'token' => $newUser->getToken(),

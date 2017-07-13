@@ -1,0 +1,66 @@
+{% extends '@App/Email/email.base.html.twig' %}
+
+{% block title %}
+    Nouveau ticket en attente !
+{% endblock %}
+
+{% block main %}
+    <h1 class="color1" style="color: #9ac00a">Nouveau ticket en attente !</h1>
+
+    <p>Bonjour,</p>
+    <p>
+        Un nouveau ticket a été rédigé !<br>
+        Pour le consulter rendez-vous sur ce lien :<br>
+        <a href="{{ url }}">{{ url }}</a>
+    </p>
+
+    <hr>
+
+    <div class="information">
+        <h3>Récapitulatif du ticket</h3>
+        <table style="border-collapse: collapse; min-width: 80%;">
+            <thead>
+            <tr style="color: #DD5115">
+                <th style="border: 1px solid #000; padding: 0.5rem;">N° de ticket</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Société</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Utilisateur</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Produit</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Type de catégorie</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Titre de catégorie</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.id }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.user.company.name }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.user.userprofile.lastname  }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.product.name }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.category.type }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.category.title }}</th>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <table style="border-collapse: collapse; min-width: 80%;">
+            <thead>
+            <tr style="color: #DD5115">
+                <th style="border: 1px solid #000; padding: 0.5rem;">Sujet</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Explication</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Origine</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Type</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">Urgence</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.subject }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.content }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.origin }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.type }}</th>
+                <th style="border: 1px solid #000; padding: 0.5rem;">{{ ticket.emergency }}</th>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

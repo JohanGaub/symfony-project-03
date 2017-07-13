@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class TicketController
@@ -113,7 +114,22 @@ class TicketController extends Controller
             $em->persist($ticket);
             $em->flush();
 
+
+            /**
+             * Mailing part (service)
+             */
+            $this->get('app.email.sending')->sendEmail('Un nouveau ticket a été créé',
+                $this->get('app.getter_user_admin')->getAllAdmin(),
+                $this->render('@App/Email/email.newTicket.html.twig', [
+                    'url' => $this->generateUrl('ticket_edit', [
+                        'ticket' => $ticket->getId()
+                    ], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'ticket' => $ticket
+                ])
+            );
+            $this->addFlash("notice", "Un email de notification a été envoyé à l'administrateur");
             return $this->redirectToRoute('ticket_index');
+
         }
         return $this->render('@App/Pages/Ticket/addTicket.html.twig',[
             'addTicketForm' => $addTicketForm->createView(),
@@ -204,7 +220,7 @@ class TicketController extends Controller
             $categoryType = null;
         };
 
-         $categories = $em->getRepository('AppBundle:Category')
+        $categories = $em->getRepository('AppBundle:Category')
             ->getCategoryByTypeResult($categoryType);
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
             ->getItemListByTypeResult('category_type');

@@ -56,9 +56,9 @@ class AddTicketType extends AbstractType
                 //'multiple'      => false,
             ])
             ->add('category', ChoiceType::class, [
-                'label' => 'Titre de catégorie',
-                'placeholder' => 'Sélectionnez le titre de catégorie',
-                'required' => true,
+                'label'         => 'Titre de catégorie',
+                'placeholder'   => 'Sélectionnez le titre de catégorie',
+                'required'      => true,
                 'multiple'      => false,
             ])
             ->add('subject', TextType::class, ['label' => 'Sujet du ticket'])
