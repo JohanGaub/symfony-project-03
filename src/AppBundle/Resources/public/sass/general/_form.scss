@@ -1,5 +1,5 @@
 #login, #password-reset, #password-process, #password-change, #registration {
-  padding-top: 4rem;
+  padding-top: 5rem;
   color: $paragraph-color;
   min-height: 100%;
   font-family: $secondary-font;
@@ -105,7 +105,7 @@
     }
   }
   @media screen and (max-width: 768px) {
-    #login, #password-reset {
+    #login, #password-reset, #password-process, #password-change, #registration {
       padding-top: 1rem;
     }
     .form-wrap {
@@ -113,7 +113,7 @@
     }
   }
   @media screen and (max-width: 440px) {
-    #login, #password-reset {
+    #login, #password-reset, #password-process, #password-change, #registration {
       padding-top: 0;
     }
     .form-wrap {

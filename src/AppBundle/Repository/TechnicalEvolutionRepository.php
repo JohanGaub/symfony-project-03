@@ -191,10 +191,10 @@ class TechnicalEvolutionRepository extends EntityRepository
     public function getScoreForTechnicalEvolution($technicalEvolutionId)
     {
         $qb = $this->createQueryBuilder('te')
+            ->select('SUM(ute.note)', 'count(ute.note)', 'AVG(ute.note)')
             ->join("te.userTechnicalEvolutions", "ute")
             ->where("te.id = $technicalEvolutionId")
             ->andWhere("ute.note IS NOT NULL")
-            ->select('SUM(ute.note)', 'count(ute.note)', 'AVG(ute.note)')
             ->getQuery();
         return $qb->getResult();
     }

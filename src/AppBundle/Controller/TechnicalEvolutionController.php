@@ -267,6 +267,8 @@ class TechnicalEvolutionController extends Controller
                     $validity = 0;
                 }
             }
+        } else {
+            $validity = 4;
         }
 
 
