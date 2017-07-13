@@ -236,8 +236,7 @@ class TechnicalEvolutionController extends Controller
                 $anotherUserId = null;
             }
 
-            $dataUser        = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $userId);
-            $dataAnotherUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $anotherUserId);
+            $dataUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $userId);
 
             if ($anotherUserId === null) {
                 if ($dataUser == []) {
@@ -250,6 +249,7 @@ class TechnicalEvolutionController extends Controller
                     $validity = 1;
                 }
             } else {
+                $dataAnotherUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $anotherUserId);
 
                 if ($dataAnotherUser == [] && $dataUser == []) {
                     // can be voted => add note in the database
@@ -257,7 +257,6 @@ class TechnicalEvolutionController extends Controller
 
                 } elseif ($dataAnotherUser == [] && $dataUser != []) {
                     // Note can be modified ;
-
                     $noteUser = $dataUser[0]["note"];
                     $validity = 1;
 
@@ -270,7 +269,6 @@ class TechnicalEvolutionController extends Controller
         } else {
             $validity = 4;
         }
-
 
         $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
 
@@ -293,7 +291,7 @@ class TechnicalEvolutionController extends Controller
             'validity'        => $validity,
             'teStatus'        => $teStatus,
             'noteAnotherUser' => $noteAnotherUser,
-            'noteUser'        => isset($noteUser) ? $noteUser : null,
+            'noteUser'        => $noteUser,
             'count'           => $count,
             'total'           => $total,
             'score'           => $score

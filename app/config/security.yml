@@ -1,6 +1,7 @@
 security:
 
     encoders:
+        #Symfony\Component\Security\Core\User\User: plaintext
         AppBundle\Entity\User:
             algorithm: bcrypt
 
@@ -8,6 +9,7 @@ security:
         dbal:
             entity:
                 class: AppBundle:User
+                #property: email
 
     role_hierarchy:
         ROLE_COMMERCIAL: [ROLE_FINAL_CLIENT]
@@ -35,6 +37,12 @@ security:
                 login_path: login
                 check_path: login
                 default_target_path: default_security_target
+                #failure_path: login_failure
+
+                #csrf token options
+                #csrf_parameter: _csrf_token
+                #csrf_token_id: authenticate
+                #csrf_token_generator: security.csrf.token_manager
             logout:
                 path: /logout
                 target: /
@@ -43,3 +51,4 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/reset, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/dashboard, roles: IS_AUTHENTICATED_REMEMBERED}
+        #- { path: ^/, roles: ROLE_ADMIN }
