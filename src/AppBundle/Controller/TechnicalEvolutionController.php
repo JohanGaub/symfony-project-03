@@ -185,10 +185,8 @@ class TechnicalEvolutionController extends Controller
             return $this->redirectToRoute('evolutionHome');
         }
 
-
         $noteUser = '';
         $noteAnotherUser = '';
-        $validity = '';
 
         $user    = $this->getUser();
         $userId  = $user->getId();
@@ -271,14 +269,11 @@ class TechnicalEvolutionController extends Controller
         }
 
         $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
-
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
-
         $note           = new UserTechnicalEvolution('note');
         $formNote       = $this->createForm(NoteUserTechnicalEvolutionType::class, $note);
-
 
         /** @var $noteAnotherUser */
         /** @var $noteUser */
