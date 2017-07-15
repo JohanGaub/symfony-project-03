@@ -89,8 +89,9 @@ $(document).ready(function () {
 
 
 $( function() {
-    $( ".datepicker" ).datepicker({
-        altFormat: "dd-mm-yyyy"
+    $( ".datepicker" ).datepicker( {
+        altFormat: "dd-mm-yyyy",
+        dateFormat: 'dd-mm-yyyy'
     });
 } );
 

@@ -103,7 +103,8 @@ $(document).ready(function () {
 
 $( function() {
     $( ".datepicker" ).datepicker({
-        altFormat: "dd-mm-yyyy"
+        altFormat: "dd-mm-yyyy",
+        dateFormat: 'dd-mm-yyyy'
     });
 } );
 

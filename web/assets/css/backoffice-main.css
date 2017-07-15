@@ -1055,51 +1055,55 @@ button[type='submit'] {
   font-weight: 700;
   font-size: 1.5rem; }
 
-#ticket {
-  background-color: #fdf0eb; }
-  #ticket .ticket-background {
-    width: 70%;
-    min-width: 30rem;
-    margin: 16.2rem auto 7rem auto;
-    background: url("../../img/commun-partie2.jpg") no-repeat center;
-    background-size: cover; }
-  #ticket .ticket-block {
-    width: 70%;
-    min-width: 20rem;
-    padding: 5rem 0;
-    margin: 0 auto; }
-    #ticket .ticket-block .ticket {
-      padding: 1rem 0 5rem 0;
-      background: rgba(255, 255, 255, 0.6); }
-      #ticket .ticket-block .ticket a {
-        color: #dd5116;
-        font-weight: bold;
-        text-align: justify;
-        line-height: 2.2rem;
-        padding: 0 0 1rem 4rem;
-        background: url("../../img/green-flea3.svg") no-repeat 1rem 0.4rem;
-        background-size: 2rem; }
-        #ticket .ticket-block .ticket a:hover {
-          color: #9ac00a; }
+.ticket-filter-block {
+  border: solid #dd5116 0.1rem;
+  padding: 2rem 0 1rem 0;
+  margin: 2rem 0 5rem 0; }
 
-.ticket-comments-block {
-  border: solid #9ac00a 0.3rem;
-  background-color: white;
-  margin: 2rem 0; }
-  .ticket-comments-block .ticket-comment {
-    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-    border: solid #dd5116 0.2rem;
-    background-color: whitesmoke;
-    margin: 2rem 0; }
-    .ticket-comments-block .ticket-comment .ticket-comment-up {
-      font-weight: bold;
-      font-family: dinregular, sans-serif;
-      font-size: 1.5rem;
-      vertical-align: middle; }
-    .ticket-comments-block .ticket-comment .ticket-comment-down {
-      font-family: Arial, sans-serif;
-      font-size: 1.4rem;
-      border-top: dotted #f5b397 0.1rem; }
+.ticket-table-block {
+  border: solid #9ac00a 0.1rem;
+  padding: 0; }
+
+.ticket-edit-margin {
+  margin-top: 2rem; }
+
+.ticket-table-no-margin {
+  margin: 0; }
+
+.ticket-subject {
+  text-align: justify;
+  font-size: 1.6rem;
+  font-weight: bold; }
+  .ticket-subject a {
+    color: #739007; }
+    .ticket-subject a:hover {
+      color: #dd5116; }
+
+.btn-back {
+  background-color: grey;
+  color: white;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle; }
+  .btn-back:hover {
+    background-color: #b3b3b3; }
+
+.comment-border {
+  border-top: solid #9ac00a 0.1rem;
+  margin-top: 2rem; }
+
+.comment-unit {
+  border: 0.1rem solid #9ac00a;
+  border-radius: 0;
+  margin: 2rem 0;
+  padding: 1rem; }
+
+.comment-content1 {
+  font-size: 1.6rem;
+  font-weight: bold; }
+
+.comment-content2 {
+  border: 0.1rem solid lightgrey; }
 
 /**
  * Evolutions Parts
@@ -1177,14 +1181,14 @@ button[type='submit'] {
  * Comments Parts
  */
 .add-new-comment {
-  border: 1px solid #dd5116;
-  border-radius: 1px;
+  border: 0.1rem solid #dd5116;
+  border-radius: 0;
   margin: 2rem 0;
   padding: 1rem 2rem 0 2rem; }
 
 .comment-list .unit-comment {
-  border: 1px solid #9ac00a;
-  border-radius: 1px;
+  border: 0.1rem solid #9ac00a;
+  border-radius: 0;
   margin: 2rem 0;
   padding: 1rem; }
   .comment-list .unit-comment .comment-value {

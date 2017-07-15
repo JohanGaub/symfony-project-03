@@ -6,6 +6,7 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Dictionary;
 use AppBundle\Entity\Ticket;
+use AppBundle\Entity\User;
 use AppBundle\Form\SearchTicketType;
 use AppBundle\Form\Ticket\AddCommentType;
 use AppBundle\Form\Ticket\TicketFilterType;
@@ -14,6 +15,7 @@ use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +33,7 @@ class TicketController extends Controller
 
     /**
      * @return Response
+     * @internal param User $user
      * @Route("/index", name="ticket_index", requirements={"page" : "\d+"})
      * @Method({"post", "get"})
      * @internal param Request $request
@@ -50,6 +53,7 @@ class TicketController extends Controller
             'filterURL'     =>http_build_query($filter),
             'documentType'  => "Ticket",
             'searchForm'    => $searchForm->createView(),
+
         ]);
     }
 
@@ -57,27 +61,7 @@ class TicketController extends Controller
     /**
      * @param Request $request
      * @return RedirectResponse|Response
-     */
-    public function searchAction(Request $request)
-    {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Ticket');
-        $search = $repo->getSearch();
-
-        $form       = $this->createForm(SearchTicketType::class, $search);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('ticket_index');
-        }
-
-        return $this->render('@App/Pages/Ticket/ticket.html.twig',[
-            'form' => $form->createview(),
-        ]);
-    }
-
-
-    /**
-     * @param Request $request
-     * @return RedirectResponse|Response
+     * @internal param Ticket $ticket
      * @Route("/add", name="ticket_add")
      */
     public function addAction(Request $request)
@@ -125,7 +109,9 @@ class TicketController extends Controller
                         'ticket' => $ticket->getId()
                     ], UrlGeneratorInterface::ABSOLUTE_URL),
                     'ticket' => $ticket
-                ])
+                ]
+
+                )
             );
             $this->addFlash("notice", "Un email de notification a été envoyé à l'administrateur");
             return $this->redirectToRoute('ticket_index');
@@ -205,6 +191,7 @@ class TicketController extends Controller
      * @param Ticket $ticket
      * @return RedirectResponse|Response
      * @Route("/update/{ticket}", name="ticket_update")
+     * @Security("has_role ('ROLE_ADMIN')")
      */
     public function updateAction(Request $request, Ticket $ticket)
     {

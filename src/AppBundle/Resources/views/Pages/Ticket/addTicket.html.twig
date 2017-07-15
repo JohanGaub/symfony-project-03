@@ -3,7 +3,7 @@
 {% block body %}
     <section class="form-all">
         <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
                 {{ form_start(addTicketForm) }}
                 <div>{{ form_row(addTicketForm.product) }}</div>
                 <div>{{ form_row(addTicketForm.category_type) }}</div>
@@ -14,12 +14,12 @@
                 <div>{{ form_row(addTicketForm.type) }}</div>
                 <div>{{ form_row(addTicketForm.emergency) }}</div>
                 <div>{{ form_row(addTicketForm.upload) }}</div>
-                <div>{{ form_row(addTicketForm.submit) }}
-
+                <div class="text-center">{{ form_row(addTicketForm.submit) }}
                     {{ form_row(addTicketForm._token) }}
-                    {{ form_end(addTicketForm) }}
-
-                    <a class="btn btn-model-small" aria-hidden="true" href="{{ path('ticket_index', {'page': 1}) }}">Retour à la liste des tickets</a>
+                </div>
+                {{ form_end(addTicketForm) }}
+                <div class="text-center">
+                    <a class="btn btn-back" aria-hidden="true" href="{{ path('ticket_index', {'page': 1}) }}">Retour à la liste des tickets</a>
                 </div>
             </div>
         </div>
