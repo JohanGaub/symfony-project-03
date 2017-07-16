@@ -1,0 +1,172 @@
+header nav.sidebar.navbar {
+  background-color: #fff;
+  border-radius: 0;
+  position: static;
+  top: 0;
+  border-bottom: 2px solid $primary-color;
+}
+
+header nav.sidebar, .main{
+  -webkit-transition: margin 200ms ease-out;
+  -moz-transition: margin 200ms ease-out;
+  -o-transition: margin 200ms ease-out;
+  transition: margin 200ms ease-out;
+}
+
+.main{
+  padding: 10px 10px 0 10px;
+}
+
+@media (min-width: 768px) {
+
+  header nav.sidebar.navbar {
+    position: fixed;
+  }
+
+  .main{
+    position: absolute;
+    width: calc(100% - 40px);
+    margin-left: 40px;
+    float: right;
+  }
+
+  header nav.sidebar:hover + .main{
+    margin-left: 200px;
+  }
+
+  header nav.sidebar.navbar.sidebar>.container .navbar-brand, header .navbar>.container-fluid .navbar-brand {
+    margin-left: 0;
+  }
+
+  header nav.sidebar .navbar-brand, header nav.sidebar .navbar-header{
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  header nav.sidebar a{
+    padding-right: 13px;
+  }
+
+  header nav.sidebar .navbar-nav > li:first-child{
+    border-top: 1px #ccc solid;
+  }
+
+  header nav.sidebar .navbar-nav > li{
+    border-bottom: 1px #ccc solid;
+  }
+
+  header nav.sidebar {
+    border-right: 1px #ccc solid;
+  }
+
+  header nav.sidebar .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  header nav.sidebar .navbar-collapse, nav.sidebar .container-fluid{
+    padding: 0;
+  }
+
+  header .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+    color: #777;
+  }
+
+  header nav.sidebar{
+    width: 200px;
+    height: 100%;
+    margin-left: -160px;
+    float: left;
+    z-index: 8000;
+    margin-bottom: 0;
+  }
+
+  header nav.sidebar li {
+    width: 100%;
+  }
+
+  header nav.sidebar:hover{
+    margin-left: 0;
+  }
+
+  .forAnimate{
+    opacity: 0;
+  }
+}
+
+@media (min-width: 1330px) {
+
+  .main{
+    width: calc(100% - 200px);
+    margin-left: 200px;
+  }
+
+  header nav.sidebar{
+    margin-left: 0px;
+    float: left;
+  }
+
+  header nav.sidebar .forAnimate{
+    opacity: 1;
+  }
+}
+
+header nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
+  color: #CCC;
+  background-color: transparent;
+}
+
+header nav:hover .forAnimate{
+  opacity: 1;
+}
+
+section{
+  padding-left: 15px;
+}
+
+header {
+  button.navbar-toggle {
+    color: $primary-color;
+    margin: 0.55rem 0.5rem 0 0;
+
+  }
+
+  .navbar-under-title {
+    padding: 0 0 0 2rem;
+    margin: 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: darken($primary-color, 25%);
+  }
+
+  .dropdown {
+    .dropdown-menu {
+      li {
+        a {
+          color: darken($primary-color, 25%) !important;
+
+          &:hover {
+            color: $primary-color!important;
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar-logo {
+    position: relative;
+    top: -0.75rem;
+    right: -1.5rem;
+    width: 4rem;
+    height: 4rem;
+    padding: 0 0 0 0;
+  }
+
+}

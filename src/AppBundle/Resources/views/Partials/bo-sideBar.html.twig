@@ -1,19 +1,68 @@
-<ul class="sidebar-nav">
-    <li class="sidebar-brand">
-        <a href="{{ path('home') }}">
-            CommunIt
-        </a>
-    </li>
-    <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
-    <li><a href="{{ path('ticket_index', {'page': 1}) }}">Tickets</a></li>
-    <li><a href="{{ path('evolutionHome') }}">Evolutions techniques</a></li>
-    {% if is_granted('ROLE_ADMIN') %}
-        <li><a href="{{ path('dictionaryHome') }}">Dictionnaire</a></li>
-        <li><a href="{{ path('categoryHome') }}">Catégories</a></li>
-        <li><a href="{{ path('validation_register', {'page' : 1}) }}">Validation register</a></li>
-    {% endif %}
-    {% if is_granted('ROLE_PROJECT_RESP') %}
-        <li><a href="{{ path('validation_associate') }}">Associate</a></li>
-    {% endif %}
-
-</ul>
+<nav class="navbar sidebar hidden-xs" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <a class="navbar-brand" href="{{ path('home') }}">CommunIt
+                <span class="pull-right hidden-xs showopacity">
+                    <img  class="sidebar-logo" src="{{ asset('assets/img/flavicon.png') }}" alt="Logo communIt">
+                </span>
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{{ path('dashboard') }}">Accueuil
+                        <span class="pull-right hidden-xs showopacity">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Les évolutions
+                        <span class="caret"></span>
+                        <span class="pull-right hidden-xs showopacity">
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="{{ path('evolutionHome') }}">Liste des évolutions</a></li>
+                        <li><a href="{{ path('evolutionAdd') }}">Nouvelle évolution</a></li>
+                        <li><a href="{{ path('evolutionUser') }}">Mes évolutions</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="divider"></li>
+                            <li><p class="navbar-under-title">Administration</p></li>
+                            <li><a href="{{ path('evolutionWaiting') }}">Evolutions en attente</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                {#              <li>
+                                  <a href="{{ path('download') }}">Les téléchargements
+                                      <span class="pull-right hidden-xs showopacity">
+                                          <i class="fa fa-download" aria-hidden="true"></i>
+                                      </span>
+                                  </a>
+                              </li>#}
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Les tickets
+                        <span class="caret"></span>
+                        <span class="pull-right hidden-xs showopacity">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="{{ path('ticket_add') }}">Nouveau ticket</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="divider"></li>
+                            <li><p class="navbar-under-title">Administration</p></li>
+                            <li><a href="{{ path('ticket_index') }}">Liste des tickets</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

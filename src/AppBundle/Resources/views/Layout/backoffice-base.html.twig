@@ -3,21 +3,20 @@
 <head>
     {% include '@App/Partials/bo-head.html.twig' %}
 </head>
-<body id="wrapper">
-    <header id="sidebar-wrapper" class="sidebar-communit">
-        {% include '@App/Partials/bo-sideBar.html.twig' %}
-    </header>
+<body>
 
-    {% include '@App/Partials/bo-topBar.html.twig' %}
+<header>
+    {% include '@App/Partials/bo-sideBar.html.twig' %}
+    {% include '@App/Partials/bo-header.html.twig' %}
+</header>
+{% include '@App/Partials/bo-topBar.html.twig' %}
+<main id="bo-main-content">
+    {% block body %}{% endblock %}
+</main>
 
-    <main id="page-content-wrapper">
-        {% block body %}{% endblock %}
-    </main>
-
-    <footer>
-    </footer>
-
-    {% include '@App/Partials/bo-foot.html.twig' %}
-    {% block javascripts %}{% endblock %}
+<footer>
+</footer>
+{% include '@App/Partials/bo-foot.html.twig' %}
+{% block javascripts %}{% endblock %}
 </body>
 </html>
