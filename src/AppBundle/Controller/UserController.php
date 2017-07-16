@@ -119,7 +119,7 @@ class UserController extends controller
      * @return Response|\Symfony\Component\HttpFoundation\Response
      * Lists all User entities.
      * @Security("has_role ('ROLE_PROJECT_RESP')")
-     * @Route("/", name="validation_associate")
+     * @Route("register_validation/liste/{page}", name="validation_associate")
      */
     public function showAssociate($page = 1)
     {

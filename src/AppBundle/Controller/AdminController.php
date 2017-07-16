@@ -12,7 +12,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
+use AppBundle\Entity\UserProfileFilter;
 use AppBundle\Form\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -109,6 +111,21 @@ class AdminController extends Controller
 
             $this->addFlash("notice", "Votre inscription a bien été prise en compte. Un e-mail vous a été envoyé pour valider votre inscription.");
 
+            /**
+             * Mailling part (service)
+             */
+            $this->get('app.email.sending')->sendEmail(
+                'Un nouvel utilisateur vient de s\'inscrire',
+                $this->get('app.getter_user_admin')->getAllAdmin(),
+                $this->render('@App/Email/email.newUser.html.twig', [
+                    'url' => $this->generateUrl('validation_register', [
+                        'newuser' => $user->getId()
+                    ], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'user' => $user
+                ])
+            );
+
+
             return $this->redirectToRoute('home');
 
         }
@@ -120,27 +137,37 @@ class AdminController extends Controller
 
     /**
      * @return Response
-     * @Route("/liste/{page}", name="validation_register", )
+     * @Route("/liste", name="validation_register", requirements={"page" : "\d+"})
+     * @Method({"post", "get"})
      * @Security("has_role ('ROLE_ADMIN')")
      */
-    public function showRegister($page = 1)
+    public function showRegister(Request $request)
     {
+        $navigator = $this->get("communit.navigator");
+        $filter = $navigator->getEntityFilter();
 
-        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
-        $maxUsers = 10;
-        $users_count = $repo->countUserTotal();
-        $users = $repo->getListing($page, $maxUsers);
+        $searchForm = $this->createForm(UserProfileFilter::class, $filter);
 
-        $pagination = [
+        $users = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
+        /*$maxUsers = 10;
+        $users_count = $repo->countUserTotal();*/
+       /* $users = $repo->getListing($page, $maxUsers);*/
+
+        /*$pagination = [
             'page' => $page,
             'route' => 'validation_register',
             'pages_count' => ceil(ceil($users_count) / $maxUsers),
             'route_params' => [],
-        ];
+        ];*/
 
         return $this->render('@App/Pages/Admin/validationRegister.html.twig', array(
             'User' => $users,
-            'pagination' => $pagination,
+            /*'pagination' => $pagination,*/
+            'data'  => $this->get("communit.navigator"),
+            'filter'  => $filter,
+            'filterURL'  => http_build_query($filter),
+            'documentType'  => 'userProfiler',
+            'searchForm'  => $searchForm->createView(),
         ));
     }
 

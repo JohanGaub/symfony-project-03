@@ -7,6 +7,7 @@
     <li><a href="#">Board</a></li>
     <li><a href="{{ path('ticket_index', {'page': 1}) }}">Tickets</a></li>
     <li><a href="{{ path('evolutionHome') }}">Evolutions techniques</a></li>
+    <li><a href="{{ path('account_result') }}">Compte</a></li>
     {% if is_granted('ROLE_ADMIN') %}
         <li><a href="{{ path('dictionaryHome') }}">Dictionnaire</a></li>
         <li><a href="{{ path('categoryHome') }}">Catégories</a></li>

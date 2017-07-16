@@ -19,9 +19,12 @@ class User_profileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class, ['label' => 'Prénom'])
-            ->add('lastname', TextType::class, ['label' => 'Nom'])
-            ->add('phone', TextType::class, ['label' => 'Mobile']);
+            ->add('firstname', TextType::class, ['label' => 'Prénom',
+            'required' => false])
+            ->add('lastname', TextType::class, ['label' => 'Nom',
+            'required' => false])
+            ->add('phone', TextType::class, ['label' => 'Mobile',
+            'required' => false]);
 
     }
 
@@ -29,6 +32,13 @@ class User_profileType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => UserProfile::class,
+            'validation_groups' => false,
+            'csrf_protection' => false,
         ));
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'app_bundle_filter_type';
     }
 }

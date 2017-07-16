@@ -658,6 +658,19 @@ a {
   .table-cell-action a {
     padding: 0 0.5rem; }
 
+.account-title {
+  margin-top: 2.5rem;
+  margin-bottom: 4.5rem; }
+
+.account-button {
+  margin-top: 2.5rem; }
+
+.field {
+  font-weight: bold; }
+
+.info-user {
+  border: 2px solid #dd5116; }
+
 #login, #password-reset, #password-process, #password-change, #registration {
   padding-top: 4rem;
   color: #545454;
@@ -1051,8 +1064,10 @@ button[type='submit'] {
     width: 70%;
     min-width: 30rem;
     margin: 16.2rem auto 7rem auto;
-      background: no-repeat center;
-      background-size: cover; }
+    background-image: url("../../img/commun-partie2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; }
   #ticket .block-ticket {
     width: 70%;
     min-width: 20rem;
@@ -1067,8 +1082,10 @@ button[type='submit'] {
         text-align: justify;
         line-height: 2.2rem;
         padding: 0 0 1rem 4rem;
-          background: no-repeat 1rem 0.4rem;
-          background-size: 2rem; }
+        background-image: url("../../img/green-flea3.svg");
+        background-repeat: no-repeat;
+        background-position: 1rem 0.4rem;
+        background-size: 2rem; }
         #ticket .block-ticket .ticket a:hover {
           color: #9ac00a; }
 
