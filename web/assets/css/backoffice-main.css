@@ -1067,8 +1067,12 @@ button[type='submit'] {
 .ticket-edit-margin {
   margin-top: 2rem; }
 
-.ticket-table-no-margin {
-  margin: 0; }
+.no-margin-no-padding {
+  margin: 0;
+  padding: 0; }
+
+.ticket-title {
+  padding-bottom: 2rem; }
 
 .ticket-subject {
   text-align: justify;
@@ -1104,6 +1108,10 @@ button[type='submit'] {
 
 .comment-content2 {
   border: 0.1rem solid lightgrey; }
+
+.ticket-explanation-size {
+  height: 600px;
+  background-color: red; }
 
 /**
  * Evolutions Parts

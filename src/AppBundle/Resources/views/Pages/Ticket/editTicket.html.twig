@@ -3,10 +3,13 @@
 {% block body %}
     <section class="form-all">
 
-        <h2>Ticket n°{{ ticket.id }} - société {{ ticket.user.company.name }}</h2>
+        <h2>Editer</h2>
+
+        <h3>Ticket n°{{ ticket.id }} - société {{ ticket.user.company.name }}</h3>
+
         {% if ticket.user == is_granted('ROLE_PROJECT_RESP')%}
             <div class="row ticket-edit-margin">
-                <div class="col-xs-12">
+                <div class="col-xs-12 no-margin-no-padding">
                     <a class="btn btn-model-small" aria-hidden="true" href="{{ path('ticket_update', {'ticket' :ticket.id}) }}">Modifier tout le ticket</a>
                 </div>
             </div>

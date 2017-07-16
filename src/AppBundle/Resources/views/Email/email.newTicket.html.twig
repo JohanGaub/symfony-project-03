@@ -1,15 +1,14 @@
 {% extends '@App/Email/email.base.html.twig' %}
 
 {% block title %}
-    Nouveau ticket en attente !
+    Nouveau ticket en attente
 {% endblock %}
 
 {% block main %}
-    <h1 class="color1" style="color: #9ac00a">Nouveau ticket en attente !</h1>
+    <h1 class="color1" style="color: #9ac00a; text-align: center;">Nouveau ticket en attente<br>société {{ ticket.user.company.name }}</h1>
 
-    <p>Bonjour,</p>
+    <p style="text-align: justify;">Bonjour,</p>
     <p>
-        Un nouveau ticket a été rédigé !<br>
         Pour le consulter rendez-vous sur ce lien :<br>
         <a href="{{ url }}">{{ url }}</a>
     </p>

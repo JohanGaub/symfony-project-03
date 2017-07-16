@@ -7,7 +7,6 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\Dictionary;
 use AppBundle\Entity\Ticket;
 use AppBundle\Entity\User;
-use AppBundle\Form\SearchTicketType;
 use AppBundle\Form\Ticket\AddCommentType;
 use AppBundle\Form\Ticket\TicketFilterType;
 use AppBundle\Form\Ticket\UpdateTicketType;
@@ -169,6 +168,28 @@ class TicketController extends Controller
 
             $em->persist($addComment);
             $em->flush();
+
+            /**
+             * Mailing part (service)
+             */
+            $this->get('app.email.sending')->sendEmail('Un nouveau commentaire a été rédigé',
+                $this->get('app.getter_user_admin')->getAllAdmin(),
+                $this->render('@App/Email/email.newComment.html.twig', [
+                        'url' => $this->generateUrl('ticket_edit', [
+                            'ticket' => $ticket->getId()
+                        ], UrlGeneratorInterface::ABSOLUTE_URL),
+                        'ticket'    => $ticket,
+                        'comment'   => $addComment,
+                    ]
+
+                )
+            );
+            $this->addFlash("notice", "Un email de notification a été envoyé à l'administrateur");
+            return $this->redirectToRoute('ticket_index');
+
+
+
+
             $addComment     = new Comment();
             $addCommentForm = $this->createForm(AddCommentType::class, $addComment);
         }

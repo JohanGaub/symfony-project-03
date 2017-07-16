@@ -19,7 +19,9 @@
                     <div class="col-xs-3">{{ form_row(searchForm.status) }}</div>
                     <div class="col-xs-3">{{ form_row(searchForm.creationDate) }}</div>
                     <div class="col-xs-3">{{ form_row(searchForm.endDate) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.isArchive) }}</div>
+                    {% if app.user == is_granted('ROLE_PROJECT_RESP')%}
+                        <div class="col-xs-3">{{ form_row(searchForm.isArchive) }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="row text-center">
@@ -35,7 +37,7 @@
         <div class="row">
             <div class="col-xs-12 ticket-table-block">
 
-                <table id="filter" class="table table-responsive table-bordered table-condensed ticket-table-no-margin">
+                <table id="filter" class="table table-responsive table-bordered table-condensed no-margin-no-padding">
                     <thead>
                     <tr>
                         <th class="text-center">N° de ticket</th>
@@ -45,9 +47,9 @@
                         <th class="text-center">Statut</th>
                         <th class="text-center">Date de création</th>
                         <th class="text-center">Date de clôture</th>
-
-                        <th>Archivé</th>
-
+                        {% if app.user == is_granted('ROLE_PROJECT_RESP')%}
+                            <th>Archivé</th>
+                        {% endif %}
 
                     </tr>
                     </thead>
@@ -66,9 +68,9 @@
                             {# <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d._token }}</a></td>#}
 
                             {#{% if try.role == app.user.role and is_granted('ROLE_ADMIN') %}#}
-
-                            <td class="text-center"><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.isArchive }}</p></td>
-                            {#{% endif %}#}
+                            {% if app.user == is_granted('ROLE_PROJECT_RESP')%}
+                                <td class="text-center"><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.isArchive }}</p></td>
+                            {% endif %}
 
                         </tr>
                     {% endfor %}
@@ -89,7 +91,7 @@
         <div class="row text-center">
             <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
                 <div>
-                    <a class="btn btn-model-small" href="{{ path('ticket_add') }}">Ajouter un ticket</a>
+                    <a class="btn btn-model-small" href="{{ path('ticket_add') }}">Créer un ticket</a>
                 </div>
             </div>
         </div>

@@ -13,9 +13,13 @@
   margin-top: 2rem;
 }
 
-
-.ticket-table-no-margin {
+.no-margin-no-padding {
   margin: 0;
+  padding: 0;
+}
+
+.ticket-title {
+  padding-bottom: 2rem;
 }
 
 .ticket-subject {
@@ -62,7 +66,11 @@
   border: 0.1rem solid lightgrey;
 }
 
+.ticket-explanation-size {
+  height: 600px;
+  background-color: red;
 
+}
 
 
 
