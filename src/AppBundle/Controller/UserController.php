@@ -29,7 +29,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class UserController extends controller
 {
     /**
-     * @Route("/register_associate", name="add_associate")
+     * @Route("/register_associate/add", name="add_associate")
      * @param Request $request
      * @return Response|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @internal param UserPasswordEncoderInterface $passwordEncoder
@@ -119,7 +119,7 @@ class UserController extends controller
      * @return Response|\Symfony\Component\HttpFoundation\Response
      * Lists all User entities.
      * @Security("has_role ('ROLE_PROJECT_RESP')")
-     * @Route("register_validation/liste/{page}", name="validation_associate")
+     * @Route("/liste/{page}", name="validation_associate")
      */
     public function showAssociate($page = 1)
     {

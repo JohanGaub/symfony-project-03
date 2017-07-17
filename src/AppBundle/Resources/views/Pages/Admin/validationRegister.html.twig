@@ -1,6 +1,5 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
-
 {% block body %}
     <div class="validate">
         <div class="row validation-user">
@@ -17,7 +16,7 @@
                         <th>Status</th>
                     </tr>
                     </thead>
-                    {#{% for user in User %}
+                    {% for user in User %}
                         <tbody class="table-striped" id="register">
                         <tr>
                             <td>{{ user.company.name }}</td>
@@ -66,16 +65,14 @@
                         </tr>
                         </tbody>
                     {% endfor %}
-                </table>#}
-                {#<nav aria-label="Page navigation">
+                </table>
+                <nav aria-label="Page navigation">
                     <ul class="pagination">
-
                         {% if pagination.page > 1 %}
                             <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}">Début</a></li>
                             <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}">Précédent</a></li>
                         {% endif %}
-
-                        #}{#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}{#
+                        {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
                         {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
                             <li class="page-item"><a{% if p == pagination.page %} class="current-page page-link" {% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a></li>
                         {% endfor %}
@@ -85,25 +82,25 @@
                             <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">Fin</a></li>
                         {% endif %}
                     </ul>
-                </nav>#}
-                <tbody class="table-striped">
-                {%  for d in data %}
+                </nav>
+                {# <tbody class="table-striped">
+                 {%  for d in data %}
 
-                    <tr>
-                        <td><a href="{{ path('validation_register', {"user": d.id }) }}">{{ d.user.company.name }}</a></td>
-                        <td><a href="{{ path('validation_register', {"userProfile": d.id}) }}">{{ d.user.email }}</a></td>
-                        <td><a href="{{ path('validation_register', {"userProfile": d.id}) }}">{{ d.user.userProfile.firstname }}</a></td>
-                        <td><a href="{{ path('validation_register', {"userProfile": d.id}) }}">{{ d.user.userProfile.lastname }}</a></td>
-                        <td><a href="{{ path('validation_register', {"userProfile": d.id}) }}">{{ d.user.roles }}</a></td>
-                        <td><a href="{{ path('validation_register', {"userProfile": d.id}) }}">{{ d.user.isActiveByAdmin}}</a></td>
-                        <td><a href="{{ path('validation_register', {"userProfile": d.id}) }}">{{ d.user.isActiveByAdmin}}</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
+                     <tr>
+                         <td><a href="{{ path('validation_register', {"user": d.id }) }}">{{ d.user.company.name }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.email }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.userProfile.firstname }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.userProfile.lastname }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.roles }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.isActiveByAdmin}}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.roles}}</a></td>
+
+                     </tr>
+                 {% endfor %}
+                 </tbody>#}
             </div>
         </div>
     </div>
-
 {% endblock %}
 {% block javascripts %}
 

@@ -55,23 +55,32 @@ class Company
 
     /**
      * @var string
-     * @Assert\Regex("^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$")
+     *  * @Assert\Regex(
+     *     pattern="/^\d{10}$/",
+     *     match=true,
+     *     message="Votre numéro de téléphone est incomplet"
+     * )
      * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
     private $phone;
 
     /**
-     * @var string
-     * @Assert\Regex("/[0-9]{3}[ \.\-]?[0-9]{3}[ \.\-]?[0-9]{3}[ \.\-]?[0-9]{5}/")
-     *
-     * @ORM\Column(name="siret", type="string", length=255, nullable=false)
+     * @Assert\Regex(
+     *     pattern="/^\d{14}$/",
+     *     match=true,
+     *     message="Votre numéro Siret est incomplet"
+     * )
+     * @ORM\Column(name="siret", type="string", nullable=false)
      */
     private $siret;
 
     /**
      * @var string
-     * @Assert\Regex("/[0-9]{5}/")
-     *
+     * @Assert\Regex(
+     *     pattern="/^\d{5}$/",
+     *     match=true,
+     *     message="Votre code postale est incomplet"
+     * )
      * @ORM\Column(name="postcode", type="string", length=5)
      */
     private $postCode;

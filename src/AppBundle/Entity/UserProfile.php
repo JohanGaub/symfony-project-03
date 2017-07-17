@@ -38,7 +38,11 @@ class UserProfile
 
     /**
      * @var string
-     * @Assert\Regex("^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$")
+     * @Assert\Regex(
+     *     pattern="/^\d{14}$/",
+     *     match=true,
+     *     message="Votre numéro de téléphone est incomplet"
+     * )
      * @ORM\Column(name="phone", type="string", length=255, nullable=false)
      */
     private $phone;

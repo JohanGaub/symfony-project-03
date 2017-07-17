@@ -12,9 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
-use AppBundle\Entity\UserProfileFilter;
 use AppBundle\Form\UserType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,7 +24,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * Class AdminController
  * @package AppBundle\Controller
- * @Route("/register_validation", name="admin")
+ * @Route("/", name="admin")
  */
 class AdminController extends Controller
 {
@@ -70,7 +68,6 @@ class AdminController extends Controller
             $userProfile->setPhone($form['userProfile']['phone']->getData());
 
             $siretUser = ($form['company']['siret']->getData());
-
 
             $siret = $this->getDoctrine()->getRepository('AppBundle:Company')->findBy(
                 array('siret' => $siretUser)
@@ -137,37 +134,36 @@ class AdminController extends Controller
 
     /**
      * @return Response
-     * @Route("/liste", name="validation_register", requirements={"page" : "\d+"})
-     * @Method({"post", "get"})
+     * @Route("register_validation/{page}", name="validation_register")
      * @Security("has_role ('ROLE_ADMIN')")
      */
-    public function showRegister(Request $request)
+    public function showRegister($page = 1)
     {
-        $navigator = $this->get("communit.navigator");
-        $filter = $navigator->getEntityFilter();
+        /*$navigator = $this->get("communit.navigator");
+        $filter = $navigator->getEntityFilter();*/
 
-        $searchForm = $this->createForm(UserProfileFilter::class, $filter);
+        /*$searchForm = $this->createForm(UserFilterType::class, $filter);*/
 
-        $users = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
-        /*$maxUsers = 10;
-        $users_count = $repo->countUserTotal();*/
-       /* $users = $repo->getListing($page, $maxUsers);*/
+        $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
+        $maxUsers = 10;
+        $users_count = $repo->countUserTotal();
+        $users = $repo->getListing($page, $maxUsers);
 
-        /*$pagination = [
+        $pagination = [
             'page' => $page,
             'route' => 'validation_register',
             'pages_count' => ceil(ceil($users_count) / $maxUsers),
             'route_params' => [],
-        ];*/
+        ];
 
         return $this->render('@App/Pages/Admin/validationRegister.html.twig', array(
             'User' => $users,
-            /*'pagination' => $pagination,*/
-            'data'  => $this->get("communit.navigator"),
+            'pagination' => $pagination,
+            /*'data'  => $this->get("communit.navigator"),
             'filter'  => $filter,
             'filterURL'  => http_build_query($filter),
             'documentType'  => 'userProfiler',
-            'searchForm'  => $searchForm->createView(),
+            'searchForm'  => $searchForm->createView(),*/
         ));
     }
 

@@ -8,12 +8,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
- *
+ * @UniqueEntity("email",
+ * message="Cette email existe déjà")
  * @property array userProfiles
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
@@ -78,6 +80,8 @@ class User implements UserInterface, Serializable
     private $tokenLimitDate;
 
     /**
+     * @Assert\Type(type="AppBundle\Entity\Company")
+     * @Assert\Valid()
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="users", cascade={"persist"})
      */
     private $company;
@@ -93,6 +97,8 @@ class User implements UserInterface, Serializable
     private $userTechnicalEvolutions;
 
     /**
+     * @Assert\Type(type="AppBundle\Entity\UserProfile")
+     * @Assert\Valid()
      * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist", "remove"})
      */
     private $userProfile;

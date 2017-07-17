@@ -3,7 +3,6 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\UserProfile;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,6 +33,7 @@ class User_profileType extends AbstractType
             'data_class' => UserProfile::class,
             'validation_groups' => false,
             'csrf_protection' => false,
+            'cascade_validation' => true,
         ));
     }
 

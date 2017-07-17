@@ -30,7 +30,8 @@ class AccountController extends Controller
      * @param Request $request
      * @param User $user
      */
-    public function indexAction() {
+    public function indexAction()
+    {
 
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -50,11 +51,14 @@ class AccountController extends Controller
      * @param User $user
      * @return Response|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function modifyAction(Request $request, User $user) {
-
-        $editForm = $this->createForm('AppBundle\Form\AccountModifyType', $user);
+    public function modifyAction(Request $request, User $user)
+    {
+        if ($this->isGranted('ROLE_PROJECT_RESP')) {
+            $editForm = $this->createForm('AppBundle\Form\AccountModifyRespType', $user);
+        } else {
+            $editForm = $this->createForm('AppBundle\Form\AccountModifyUserType', $user);
+        }
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $user = $this->getUser();
 
@@ -69,7 +73,5 @@ class AccountController extends Controller
             'user' => $user,
             'form' => $editForm->createView(),
         ));
-
-
     }
 }
