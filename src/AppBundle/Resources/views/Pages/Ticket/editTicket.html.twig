@@ -7,6 +7,8 @@
 
         <h3>Ticket n°{{ ticket.id }} - société {{ ticket.user.company.name }}</h3>
 
+        {% include ('@App/Elements/include.flashBagMessage.html.twig') %}
+
         {% if ticket.user == is_granted('ROLE_PROJECT_RESP')%}
             <div class="row ticket-edit-margin">
                 <div class="col-xs-12 no-margin-no-padding">

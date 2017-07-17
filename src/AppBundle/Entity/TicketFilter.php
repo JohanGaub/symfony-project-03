@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints\Date;
 
 
 /**
@@ -56,14 +57,14 @@ class TicketFilter
 
 
     /**
-     * @var DateTime
+     * @var Date
      *
      */
     private $creationDate;
 
 
     /**
-     * @var DateTime
+     * @var Date
      *
      */
     private $endDate;
@@ -246,7 +247,7 @@ class TicketFilter
     /**
      * Get creationDate
      *
-     * @return DateTime
+     * @return Date
      */
     public function getCreationDate()
     {
@@ -257,7 +258,7 @@ class TicketFilter
     /**
      * Get endDate
      *
-     * @return DateTime
+     * @return Date
      */
     public function getEndDate()
     {

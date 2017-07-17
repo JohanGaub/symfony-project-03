@@ -8,7 +8,8 @@ use AppBundle\Entity\Dictionary;
 use AppBundle\Entity\Ticket;
 use AppBundle\Entity\User;
 use AppBundle\Form\Ticket\AddCommentType;
-use AppBundle\Form\Ticket\TicketFilterType;
+use AppBundle\Form\Ticket\TicketFilterAdminType;
+use AppBundle\Form\Ticket\TicketFilterUserType;
 use AppBundle\Form\Ticket\UpdateTicketType;
 use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
@@ -43,7 +44,11 @@ class TicketController extends Controller
 
         $filter         = $navigator->getEntityFilter();
 
-        $searchForm     = $this->createForm(TicketFilterType::class, $filter);
+        if($this->isGranted('ROLE_ADMIN')){
+            $searchForm     = $this->createForm(TicketFilterAdminType::class, $filter);
+        } else {
+            $searchForm     = $this->createForm(TicketFilterUserType::class, $filter);
+        }
 
         return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             /*** Ticket search ***/
@@ -104,11 +109,11 @@ class TicketController extends Controller
             $this->get('app.email.sending')->sendEmail('Un nouveau ticket a été créé',
                 $this->get('app.getter_user_admin')->getAllAdmin(),
                 $this->render('@App/Email/email.newTicket.html.twig', [
-                    'url' => $this->generateUrl('ticket_edit', [
-                        'ticket' => $ticket->getId()
-                    ], UrlGeneratorInterface::ABSOLUTE_URL),
-                    'ticket' => $ticket
-                ]
+                        'url' => $this->generateUrl('ticket_edit', [
+                            'ticket' => $ticket->getId()
+                        ], UrlGeneratorInterface::ABSOLUTE_URL),
+                        'ticket' => $ticket
+                    ]
 
                 )
             );

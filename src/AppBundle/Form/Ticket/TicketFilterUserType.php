@@ -3,26 +3,19 @@
 namespace AppBundle\Form\Ticket;
 
 use AppBundle\Entity\TicketFilter;
-use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\DataTransformer\BooleanToStringTransformer;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TicketFilterType
+ * Class TicketFilterAdminType
  * @package AppBundle\Form\Ticket
  */
-class TicketFilterType extends AbstractType
+class TicketFilterUserType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -66,33 +59,23 @@ class TicketFilterType extends AbstractType
             ->add('creationDate', DateType::class, [
                 'label'     => 'Date de création',
                 'widget'    => 'single_text',
-                //'required' => false,
-                //'html5' => false,
+                'required' => false,
+                'html5' => false,
                 'attr'      => [
                     'placeholder'   => 'jj/mm/aaaa',
                     'format'        => 'dd/MM/yyyy',
-                    //'class'         => 'datepicker',
+                    'class'         => 'js-datepicker',
                 ],
             ])
             ->add('endDate', DateType::class, [
                 'label'     => 'Date de clôture',
                 'widget'    => 'single_text',
-                //'required'  => false,
-                //'html5' => false,
+                'required'  => false,
+                'html5' => false,
                 'attr'      => [
                     'placeholder'   => 'jj/mm/aaaa',
                     'format'        => 'dd/MM/yyyy',
-                    //'class'         => 'datepicker',
-                ],
-            ])
-            ->add('isArchive', ChoiceType::class, [
-                'label'     => 'Tickets archivés',
-                'required'  => false,
-                'expanded'  => false,
-                'multiple'  => false,
-                'choices'   => [
-                    'Archivé'       => '1',
-                    'Non archivé'   => '0',
+                    'class'         => 'js-datepicker',
                 ],
             ])
             ->add('submit', SubmitType::class, [
@@ -123,4 +106,5 @@ class TicketFilterType extends AbstractType
     {
         return 'app_bundle_filter_type';
     }
+
 }
