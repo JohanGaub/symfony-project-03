@@ -1,21 +1,21 @@
-<div class="bo-top-bar">
+<div class="bo-top-bar hidden-xs">
 
     <div class="dropdown">
         <a href="#" class="dropbtn"><i class="fa fa-user-circle fa-2x"></i></a>
         <div class="dropdown-content">
             <a href="#"><i class="fa fa-cog" aria-hidden="true"></i>
-                 Mon compte
+                Mon compte
             </a>
             <a href="{{ path('change_password') }}"><i class="fa fa-key" aria-hidden="true"></i>
-                 Mot de passe
+                Mot de passe
             </a>
             <a href="{{ path('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                 Deconnexion
+                Deconnexion
             </a>
         </div>
     </div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <p>Connecté en tant que {{ app.user.userProfile.firstname }} {{ app.user.userProfile.lastname }}
+        <p> Connecté en tant que {{ app.user.userProfile.firstname }} {{ app.user.userProfile.lastname }}
         </p>
     {% endif %}
 </div>

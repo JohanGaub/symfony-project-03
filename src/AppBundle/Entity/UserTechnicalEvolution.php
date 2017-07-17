@@ -53,13 +53,13 @@ class UserTechnicalEvolution
 
     /**
      * @ORM\ManyToOne(targetEntity="TechnicalEvolution", inversedBy="userTechnicalEvolutions", cascade={"persist"})
-     * @ORM\joinColumn(onDelete="SET NULL")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $technicalEvolution;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userTechnicalEvolutions",cascade={"persist"})
-     * @ORM\joinColumn(onDelete="SET NULL")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $user;
 
