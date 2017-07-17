@@ -9,7 +9,7 @@
 
         {% include ('@App/Elements/include.flashBagMessage.html.twig') %}
 
-        {% if ticket.user == is_granted('ROLE_PROJECT_RESP')%}
+        {% if is_granted('ROLE_PROJECT_RESP')%}
             <div class="row ticket-edit-margin">
                 <div class="col-xs-12 no-margin-no-padding">
                     <a class="btn btn-model-small" aria-hidden="true" href="{{ path('ticket_update', {'ticket' :ticket.id}) }}">Modifier tout le ticket</a>

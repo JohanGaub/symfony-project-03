@@ -31,7 +31,6 @@ class TicketController extends Controller
 
     /**
      * @return Response
-     * @internal param User $user
      * @Route("/index", name="ticket_index", requirements={"page" : "\d+"})
      * @Method({"post", "get"})
      * @internal param Request $request
