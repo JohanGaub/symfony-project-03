@@ -495,16 +495,31 @@ html, body {
 
 main {
   min-height: 88%;
-  padding-top: 10%; }
+  margin-top: 15rem; }
+
+main#bo-main-content {
+  margin-top: 0 !important;
+  padding-left: 20rem; }
+
+@media screen and (max-width: 1278px) {
+  main#bo-main-content {
+    padding-left: 5rem !important; } }
+
+@media screen and (max-width: 1024px) {
+  main {
+    margin-top: 10rem; }
+  main#bo-main-content {
+    padding-left: 5rem !important; } }
+
+@media screen and (max-width: 768px) {
+  main#bo-main-content {
+    padding-left: 0 !important; } }
 
 /* Block page "validation register"*/
 .validate {
   margin-top: 15em; }
 
 .register-title {
-  margin-top: 5em; }
-
-.message-register {
   margin-top: 5em; }
 
 header {
@@ -597,6 +612,9 @@ a {
 .modal {
   border-radius: 1px; }
 
+/**
+ * Button small green - back office
+ */
 .btn-model-small {
   color: #fff !important;
   background-color: #9ac00a;
@@ -623,10 +641,8 @@ a {
   transition: 2s ease; }
 
 #login, #password-reset, #password-process, #password-change, #registration {
-  margin-top: 13%;
-  padding-top: 5rem;
+  padding-top: 1rem;
   color: #545454;
-  min-height: 100%;
   font-family: Arial, sans-serif;
   /* Set up width of form */
   /* Set up width of form */
@@ -737,10 +753,8 @@ a {
     margin-top: -3em; } }
 
 #login, #password-reset, #password-process, #password-change, #registration {
-  margin-top: 13%;
-  padding-top: 5rem;
+  padding-top: 1rem;
   color: #545454;
-  min-height: 100%;
   font-family: Arial, sans-serif;
   /* Set up width of form */
   /* Set up width of form */

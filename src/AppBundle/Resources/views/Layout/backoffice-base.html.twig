@@ -4,18 +4,21 @@
     {% include '@App/Partials/bo-head.html.twig' %}
 </head>
 <body>
-
 <header>
     {% include '@App/Partials/bo-sideBar.html.twig' %}
-    {% include '@App/Partials/bo-header.html.twig' %}
+
 </header>
+{% include '@App/Partials/bo-header.html.twig' %}
 {% include '@App/Partials/bo-topBar.html.twig' %}
-<main id="bo-main-content">
+<main id="bo-main-content" class="">
+
     {% block body %}{% endblock %}
+
 </main>
 
 <footer>
 </footer>
+
 {% include '@App/Partials/bo-foot.html.twig' %}
 {% block javascripts %}{% endblock %}
 </body>
