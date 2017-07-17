@@ -65,7 +65,7 @@
   .navbar-default .navbar-nav > li > a:focus,
   .navbar-default .navbar-nav > li > a:hover,
   .navbar-default .navbar-nav > li > a {
-    color: #9AC00A;
+    color: $primary-color;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.4em;
@@ -74,7 +74,7 @@
   }
   .navbar-default .navbar-nav > li > a:focus,
   .navbar-default .navbar-nav > li > a:hover {
-    color: #DD5116;
+    color: $secondary-color;
   }
   a.link {
     display: block !important;

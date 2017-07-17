@@ -255,7 +255,6 @@ class TechnicalEvolutionController extends Controller
 
                 } elseif ($dataAnotherUser == [] && $dataUser != []) {
                     // Note can be modified ;
-
                     $noteUser = $dataUser[0]["note"];
                     $validity = 1;
 

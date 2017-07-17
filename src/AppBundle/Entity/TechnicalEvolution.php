@@ -116,7 +116,7 @@ class TechnicalEvolution
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="technicalEvolutions")
-     * @ORM\joinColumn(onDelete="SET NULL")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $user;
 
