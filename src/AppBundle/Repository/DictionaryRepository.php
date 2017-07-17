@@ -24,4 +24,18 @@ class DictionaryRepository extends EntityRepository
             ->setParameter('type', $type);
     }
 
+    /**
+     * FormQueryBuilder to get all type of dictionary (name)
+     *
+     * @param $type
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getItemNameByType($type)
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d.title')
+            ->where('d.type = :type')
+            ->setParameter('type', $type);
+    }
+
 }

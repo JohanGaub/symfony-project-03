@@ -23,7 +23,6 @@ class TechnicalEvolutionRepository extends EntityRepository
         $query = $this->createQueryBuilder('te')
             ->select('dtes', 'dteo', 'c', 'ct', 'u', 'ute', 'te', 'te.id')
             ->addSelect('COUNT(ute.note) as nb_notes')
-            ->addSelect('COUNT(ute.comment) as nb_comments')
             ->addSelect('AVG(ute.note) as avg_notes')
             ->join('te.status', 'dtes', 'te.status = dtes.id')
             ->join('te.origin', 'dteo', 'te.origin = dteo.id')
@@ -43,10 +42,7 @@ class TechnicalEvolutionRepository extends EntityRepository
                             case 'status':
                                 $alias = 'dtes';
                                 break;
-                            case 'origin':
-                                $alias = 'dteo';
-                                break;
-                            case 'category_type':
+                            case 'categoryType':
                                 $alias = 'ct';
                                 break;
                             case 'category':
@@ -55,7 +51,14 @@ class TechnicalEvolutionRepository extends EntityRepository
                             default:
                                 $alias = 'te';
                         }
-                        $search = "$alias.$field like '$value%'";
+
+                        if ($alias == 'te') {
+                            $search = "$alias.$field like '$value%'";
+                        } else {
+                            $field = 'id';
+                            $search = "$alias.$field = '$value'";
+                        }
+
                         $query->andWhere($search);
                     }
                 }
@@ -63,76 +66,6 @@ class TechnicalEvolutionRepository extends EntityRepository
         }
         return $query->getQuery();
     }
-
-//    /**
-//     * @param $page
-//     * @param $filter
-//     * @return \Doctrine\ORM\Query
-//     */
-//    public function getRowsByPage($page, $filter)
-//    {
-//        # create rsm object
-//        $rsm = new ResultSetMapping();
-//        $rsm->addEntityResult($this->getEntityName(), 'te');
-//        $rsm->addFieldResult('te', 'id', 'id');
-//        $rsm->addFieldResult('te', 'title', 'title');
-//        $rsm->addFieldResult('te', 'sum_up', 'sumUp');
-//        $rsm->addFieldResult('te', 'expected_delay', 'expectedDelay');
-//        $rsm->addFieldResult('te', 'creation_date', 'creationDate');
-//        $rsm->addFieldResult('te', 'update_date', 'updateDate');
-//        $rsm->addJoinedEntityResult('AppBundle\Entity\Dictionary', 'dtes', 'te', 'status');
-//        $rsm->addFieldResult('dtes', 'dictionary_tes_id', 'id');
-//        $rsm->addFieldResult('dtes', 'dictionary_tes_type', 'type');
-//        $rsm->addFieldResult('dtes', 'dictionary_tes_value', 'value');
-//        $rsm->addJoinedEntityResult('AppBundle\Entity\Dictionary', 'dteo', 'te', 'origin');
-//        $rsm->addFieldResult('dteo', 'dictionary_teo_id', 'id');
-//        $rsm->addFieldResult('dteo', 'dictionary_teo_type', 'type');
-//        $rsm->addFieldResult('dteo', 'dictionary_teo_value', 'value');
-//        $rsm->addJoinedEntityResult('AppBundle\Entity\Category', 'c', 'te', 'category');
-//        $rsm->addFieldResult('c', 'category_id', 'id');
-//        $rsm->addFieldResult('c', 'category_title', 'title');
-//        $rsm->addJoinedEntityResult('AppBundle\Entity\Dictionary', 'ct', 'c', 'type');
-//        $rsm->addFieldResult('ct', 'dictionary_ct_id', 'id');
-//        $rsm->addFieldResult('ct', 'dictionary_ct_type', 'type');
-//        $rsm->addFieldResult('ct', 'dictionary_ct_value', 'value');
-//        # set entity name
-//        $table = $this->getClassMetadata()->getTableName();
-//        # make a query
-//        /** @noinspection SqlResolve */
-//        $query = $this->getEntityManager()->createQuery("
-//            SELECT te.id,
-//                te.title,
-//                te.sum_up,
-//                te.status,
-//                te.origin,
-//                te.expected_delay,
-//                te.creation_date,
-//                te.update_date,
-//                dtes.id AS dictionary_tes_id,
-//                dtes.type AS dictionary_tes_type,
-//                dtes.value AS dictionary_tes_value,
-//                dteo.id AS dictionary_teo_id,
-//                dteo.type AS dictionary_teo_type,
-//                dteo.value AS dictionary_teo_value,
-//                c.id AS category_id,
-//                c.title AS category_title,
-//                c.type AS category_type,
-//                ct.id AS dictionary_ct_id,
-//                ct.type AS dictionary_ct_type,
-//                ct.value AS dictionary_ct_value,
-//                COUNT(ute.note) as nb_notes,
-//                COUNT(ute.comment) as nb_comments,
-//                AVG(ute.note) as avg_notes
-//            FROM {$table} te
-//            INNER JOIN category c ON te.category_id = c.id
-//            INNER JOIN dictionary ct ON c.type = ct.id
-//            INNER JOIN dictionary dtes ON te.status = dtes.id
-//            INNER JOIN dictionary dteo ON te.origin = dteo.id
-//            INNER JOIN user_technical_evolution ute ON ute.technical_evolution_id = te.id
-//        ");
-//
-//        return $query;
-//    }
 
     /**
      * Get evolution with a bit informations

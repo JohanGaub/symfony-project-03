@@ -68,7 +68,7 @@ class TechnicalEvolutionType extends AbstractType
                 'label'         => 'Type de catégorie',
                 'placeholder'   => 'Sélectionnez votre type de catégorie',
                 'mapped'        => false,
-                'required'      => true,
+                'required'      => true ,
                 'multiple'      => false,
             ])
             ->add('category', ChoiceType::class, [

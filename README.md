@@ -5,6 +5,16 @@ Lyon-0217-communit
 
 Do an intranet for clickDev !
 
+## Important
+Since MYSQL 5.7, GROUP BY management have changed please add : 
+```
+sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+```
+in : 
+```
+/etc/mysql/mysql.conf.d
+```
+
 ## Getting Started
 
 ```bash

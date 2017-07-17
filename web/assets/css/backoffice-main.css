@@ -1071,6 +1071,7 @@ button[type='submit'] {
   border: 1px solid #9ac00a;
   margin: 1rem 0.5rem;
   padding: 1rem;
+  height: 34rem;
   width: 100%;
   float: left; }
   .list-evolution .bo-evolution a {
