@@ -121,15 +121,15 @@
  * Comments Parts
  */
 .add-new-comment {
-  border: 1px solid $secondary-color;
-  border-radius: 1px;
+  border: 0.1rem solid $secondary-color;
+  border-radius: 0;
   margin: 2rem 0;
   padding: 1rem 2rem 0 2rem;
 }
 .comment-list {
   .unit-comment {
-    border: 1px solid $primary-color;
-    border-radius: 1px;
+    border: 0.1rem solid $primary-color;
+    border-radius: 0;
     margin: 2rem 0;
     padding: 1rem;
 

@@ -481,8 +481,8 @@
 
 @font-face {
   font-family: 'dinregular';
-  src: url("../fonts/dinregular.eot");
-  src: url("../fonts/dinregular.eot?#iefix") format("embedded-opentype"), url("../fonts/dinregular.woff2") format("woff2"), url("../fonts/dinregular.woff") format("woff"), url("../fonts/dinregular.ttf") format("truetype"), url("../fonts/dinregular.svg#webfontregular") format("svg");
+  src: url("/web/assets/fonts/dinregular.eot");
+  src: url("/web/assets/fonts/dinregular.eot?#iefix") format("embedded-opentype"), url("/web/assets/fonts/dinregular.woff2") format("woff2"), url("/web/assets/fonts/dinregular.woff") format("woff"), url("/web/assets/fonts/dinregular.ttf") format("truetype"), url("/web/assets/fonts/dinregular.svg#webfontregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -1165,14 +1165,14 @@ a {
  * Comments Parts
  */
 .add-new-comment {
-  border: 1px solid #dd5116;
-  border-radius: 1px;
+  border: 0.1rem solid #dd5116;
+  border-radius: 0;
   margin: 2rem 0;
   padding: 1rem 2rem 0 2rem; }
 
 .comment-list .unit-comment {
-  border: 1px solid #9ac00a;
-  border-radius: 1px;
+  border: 0.1rem solid #9ac00a;
+  border-radius: 0;
   margin: 2rem 0;
   padding: 1rem; }
   .comment-list .unit-comment .comment-value {
@@ -1310,39 +1310,60 @@ button[type='submit'] {
   font-weight: 700;
   font-size: 1.5rem; }
 
-#ticket {
-  background-color: #fdf0eb; }
-  #ticket .background-ticket {
-    width: 70%;
-    min-width: 30rem;
-    margin: 16.2rem auto 7rem auto;
-    background-image: url("../../img/commun-partie2.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover; }
-  #ticket .block-ticket {
-    width: 70%;
-    min-width: 20rem;
-    padding: 5rem 0;
-    margin: 0 auto; }
-    #ticket .block-ticket .ticket {
-      padding: 1rem 0 5rem 0;
-      background: rgba(255, 255, 255, 0.6); }
-      #ticket .block-ticket .ticket a {
-        color: #dd5116;
-        font-weight: bold;
-        text-align: justify;
-        line-height: 2.2rem;
-        padding: 0 0 1rem 4rem;
-        background-image: url("../../img/green-flea3.svg");
-        background-repeat: no-repeat;
-        background-position: 1rem 0.4rem;
-        background-size: 2rem; }
-        #ticket .block-ticket .ticket a:hover {
-          color: #9ac00a; }
+.ticket-filter-block {
+  border: solid #dd5116 0.1rem;
+  padding: 2rem 0 1rem 0;
+  margin: 2rem 0 5rem 0; }
 
-.comment {
-  border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  border: solid #dd5116 0.2rem;
-  background-color: whitesmoke;
-  margin: 2rem 0; }
+.ticket-table-block {
+  border: solid #9ac00a 0.1rem;
+  padding: 0; }
+
+.ticket-edit-margin {
+  margin-top: 2rem; }
+
+.no-margin-no-padding {
+  margin: 0;
+  padding: 0; }
+
+.ticket-title {
+  padding-bottom: 2rem; }
+
+.ticket-subject {
+  text-align: justify;
+  font-size: 1.6rem;
+  font-weight: bold; }
+  .ticket-subject a {
+    color: #739007; }
+    .ticket-subject a:hover {
+      color: #dd5116; }
+
+.btn-back {
+  background-color: grey;
+  color: white;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle; }
+  .btn-back:hover {
+    background-color: #b3b3b3; }
+
+.comment-border {
+  border-top: solid #9ac00a 0.1rem;
+  margin-top: 2rem; }
+
+.comment-unit {
+  border: 0.1rem solid #9ac00a;
+  border-radius: 0;
+  margin: 2rem 0;
+  padding: 1rem; }
+
+.comment-content1 {
+  font-size: 1.6rem;
+  font-weight: bold; }
+
+.comment-content2 {
+  border: 0.1rem solid lightgrey; }
+
+.ticket-explanation-size {
+  height: 600px;
+  background-color: red; }

@@ -481,8 +481,8 @@
 
 @font-face {
   font-family: 'dinregular';
-  src: url("../fonts/dinregular.eot");
-  src: url("../fonts/dinregular.eot?#iefix") format("embedded-opentype"), url("../fonts/dinregular.woff2") format("woff2"), url("../fonts/dinregular.woff") format("woff"), url("../fonts/dinregular.ttf") format("truetype"), url("../fonts/dinregular.svg#webfontregular") format("svg");
+  src: url("/web/assets/fonts/dinregular.eot");
+  src: url("/web/assets/fonts/dinregular.eot?#iefix") format("embedded-opentype"), url("/web/assets/fonts/dinregular.woff2") format("woff2"), url("/web/assets/fonts/dinregular.woff") format("woff"), url("/web/assets/fonts/dinregular.ttf") format("truetype"), url("/web/assets/fonts/dinregular.svg#webfontregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -1059,7 +1059,7 @@ footer {
         color: #dd5116;
         font-family: dinregular, sans-serif;
         font-weight: bold;
-        font-size: 2rem; }
+        font-size: 1.8rem; }
       footer #footer-right #footer-right-contact a:hover {
         color: #9ac00a; }
     footer #footer-right #footer-right-triangle-img {

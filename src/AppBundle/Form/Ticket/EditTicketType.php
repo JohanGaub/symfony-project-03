@@ -31,28 +31,34 @@ class EditTicketType extends AbstractType
                 $event->stopPropagation();
             },900) // To disable Symfony to check if uploaded file is too large or if non-existing fields were submitted.
             ->add('emergency', ChoiceType::class, [
-                'label' => 'Urgence',
-                'choices'  => [
-                    'Normale' => 'Normale',
-                    'Haute' => 'Haute',
+                'label'         => 'Urgence',
+                'choices'       => [
+                    'Normale'   => 'Normale',
+                    'Haute'     => 'Haute',
                 ],
                 'required' => true,
                 'expanded' => true,
                 'multiple' => false,
             ])
             ->add('status', EntityType::class, [
-                'label' => 'Statut',
-                'class' => 'AppBundle\Entity\Dictionary',
-                'required' => true,
+                'label'         => 'Statut',
+                'class'         => 'AppBundle\Entity\Dictionary',
+                'required'      => true,
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
                     return $dictionaryRepository->getItemListByType('status');
                 }
             ])
             ->add('isArchive', CheckboxType::class, [
-                'label' => 'Archivage',
-                'required' => false,
+                'label'         => 'Archivage',
+                'required'      => false,
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Enregistrer',
+                'attr'  => [
+                    'class'         => 'btn btn-model-small',
+                    'aria-hidden'   => 'true',
+                ],
+            ])
         ;
     }
 

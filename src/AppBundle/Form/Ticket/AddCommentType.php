@@ -19,11 +19,15 @@ class AddCommentType extends AbstractType
     {
         $builder
             ->add('comment', TextareaType::class, [
-                'label' =>  'Commentaire',
+                'label' =>  'Nouveau commentaire',
                 'required' => true,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter le commentaire',
+                'label' => 'Enregistrer',
+                'attr'  => [
+                    'class'         => 'btn btn-model-small',
+                    'aria-hidden'   => 'true',
+                ]
             ]);
     }
 

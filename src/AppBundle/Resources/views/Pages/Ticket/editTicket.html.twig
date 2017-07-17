@@ -3,38 +3,42 @@
 {% block body %}
     <section class="form-all">
 
-        <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
-                <a class="btn btn-default btn-lg" href="{{ path('ticket_update', {'ticket' :ticket.id}) }}">Modifier tout le ticket</a>
-            </div>
-        </div>
+        <h2>Editer</h2>
 
-        <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+        <h3>Ticket n°{{ ticket.id }} - société {{ ticket.user.company.name }}</h3>
+
+        {% include ('@App/Elements/include.flashBagMessage.html.twig') %}
+
+        {% if is_granted('ROLE_PROJECT_RESP')%}
+            <div class="row ticket-edit-margin">
+                <div class="col-xs-12 no-margin-no-padding">
+                    <a class="btn btn-model-small" aria-hidden="true" href="{{ path('ticket_update', {'ticket' :ticket.id}) }}">Modifier tout le ticket</a>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row ticket-edit-margin">
+            <div class="col-xs-12 ticket-table-block">
                 <table class="table table-responsive table-bordered table-condensed">
                     <thead>
                     <tr>
-                        <th>N° de ticket</th>
-                        <th>Société</th>
                         <th>Utilisateur</th>
                         <th>Produit</th>
                         <th>Type de catégorie</th>
                         <th>Titre de catégorie</th>
-                        <th>Sujet</th>
-                        <th>Explication</th>
+                        <th>Origine</th>
+                        <th>Type</th>
                     </tr>
                     </thead>
 
                     <tbody class="table-striped">
                     <tr>
-                        <td>{{ ticket.id }}</td>
-                        <td>{{ ticket.user.company.name }}</td>
                         <td>{{ ticket.user.userprofile.lastname }}</td>
                         <td>{{ ticket.product.name }}</td>
                         <td>{{ ticket.category.type }}</td>
                         <td>{{ ticket.category.title }}</td>
-                        <td>{{ ticket.subject }}</td>
-                        <td>{{ ticket.content }}</td>
+                        <td>{{ ticket.origin }}</td>
+                        <td>{{ ticket.type }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -42,8 +46,23 @@
                 <table class="table table-responsive table-bordered table-condensed">
                     <thead>
                     <tr>
-                        <th>Origine</th>
-                        <th>Type</th>
+                        <th>Sujet</th>
+                        <th>Explication</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="table-striped">
+                    <tr>
+                        <td>{{ ticket.subject }}</td>
+                        <td class="text-justify">{{ ticket.content }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <table class="table table-responsive table-bordered table-condensed ticket-table-no-margin">
+                    <thead>
+                    <tr>
                         <th>Fichier uploadé</th>
                         <th>Date de création</th>
                         <th>Date d'actualisation</th>
@@ -53,8 +72,7 @@
 
                     <tbody class="table-striped">
                     <tr>
-                        <td>{{ ticket.origin }}</td>
-                        <td>{{ ticket.type }}</td>
+
                         <td><button type="button" data-toggle="modal" data-target="#myModal">
                                 <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width = "150px"/>
                             </button></td>
@@ -82,79 +100,44 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+        <div class="row ticket-edit-margin">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
                 {{ form_start(editTicketForm) }}
-                {{ form_row(editTicketForm.emergency) }}
-                {{ form_row(editTicketForm._token) }} {#necessary to get session#}
-                {{ form_row(editTicketForm.status) }}
-                {{ form_row(editTicketForm.isArchive) }}
-                {{ form_row(editTicketForm.submit) }}
+                <div>{{ form_row(editTicketForm.emergency) }}</div>
+                <div>{{ form_row(editTicketForm._token) }}</div> {#necessary to get session#}
+                <div>{{ form_row(editTicketForm.status) }}</div>
+                <div>{{ form_row(editTicketForm.isArchive) }}</div>
+                <div class="text-center">{{ form_row(editTicketForm.submit) }}</div>
                 {{ form_end(editTicketForm) }}
-                <a class="btn btn-default btn-lg" href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
+
+                <div class="text-center">
+                    <a class="btn btn-back" aria-hidden="true" href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
+                </div>
             </div>
         </div>
 
 
-        <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
-                <h2>Commentaires</h2>
-                {%  for comment in comments %}
-                    <div class="row">
-                        <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
 
-
-                            <div class="comment">
-
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-4">
-                                        <p>Prénom {{ comment.firstname }}</p>
-                                        <p>Nom {{ comment.lastname }}</p>
-
-                                    </div>
-                                    <div class="col-xs-12 col-lg-4">
-                                        <p>Date de création {{ comment.creationDate|date("d/m/Y") }}</p>
-                                        {% if comment.updateDate is not null %}
-                                            <p>Date d'actualisation  {{ comment.updateDate|date("d/m/Y") }}</p>
-                                        {% endif %}
-                                    </div>
-
-                                    <div class="col-xs-12 col-lg-4">
-                                        {% if comment.user_id == app.user.id or is_granted('ROLE_PROJECT_RESP')%}
-                                            <div class="text-center">
-                                                <a href="{{ path('comment_delete', {"comment" : comment.id}) }}" type="button" class="btn btn-lg"><i class="fa fa-trash" aria-hidden="true"></i><p>Supprimer</p></a>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-
-                                    <div class="col-xs-12">
-                                        <div>{{ comment.comment }}</div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+        <div class="row comment-border">
+            <div class="col-xs-12">
+                <h3>Commentaires</h3>
 
                 <div class="row">
                     <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
 
-                        <div>
-                            <button class="btn btn-lg" type="button" data-toggle="collapse" data-target="#add-comment" aria-expanded="false" aria-controls="add-comment">
-                                <i class="fa fa-plus-square" aria-hidden="false"></i><p>Ajouter</p>
-                            </button>
+                        <div class="text-center">
+                            <button class="btn btn-model-small" aria-hidden="false" type="button" data-toggle="collapse" data-target="#add-comment" aria-expanded="false" aria-controls="add-comment">Ajouter</button>
                         </div>
 
-                        <div id="add-comment" class="collapse comment">
+                        <div id="add-comment" class="collapse add-new-comment">
 
                             <div class="row">
 
                                 <div class="col-xs-12">
                                     {{ form_start(addCommentForm) }}
-                                    {{ form_row(addCommentForm.comment) }}
+                                    <div>{{ form_row(addCommentForm.comment) }}</div>
                                     {{ form_row(addCommentForm._token) }}
-                                    {{ form_row(addCommentForm.submit) }}
+                                    <div class="text-center">{{ form_row(addCommentForm.submit) }}</div>
                                     {{ form_end(addCommentForm) }}
                                 </div>
                             </div>
@@ -163,6 +146,52 @@
 
                     </div>
                 </div>
+
+
+
+                {%  for comment in comments %}
+                    <div class="row ">
+                        <div class="col-xs-10 col-xs-offset-1">
+
+
+                            <div class="comment-unit">
+
+                                <div class="row comment-content1">
+                                    <div class="col-xs-12 col-lg-4">
+                                        {{ comment.firstname }}{{ " " }}{{ comment.lastname }}
+
+                                    </div>
+                                    <div class="col-xs-12 col-lg-4">
+                                        Date de création {{ comment.creationDate|date("d/m/Y") }}
+                                        {#{% if comment.updateDate is not null %}
+                                            <p>Date d'actualisation  {{ comment.updateDate|date("d/m/Y") }}</p>
+                                        {% endif %}#}
+                                    </div>
+
+                                    <div class="col-xs-12 col-lg-4">
+                                        {% if comment.user_id == app.user.id or is_granted('ROLE_PROJECT_RESP')%}
+
+                                            <div class="text-right">
+                                                <a href="{{ path('comment_delete', {"comment" : comment.id}) }}" type="button" class="fa fa-trash-o" aria-hidden="true"></a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+
+                                <div class="row comment-content2">
+                                    <div class="col-xs-12 text-justify">
+                                        <div>{{ comment.comment }}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+
 
 
             </div>

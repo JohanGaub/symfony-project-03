@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints\Date;
+
 
 /**
  * Class TicketFilter
@@ -54,19 +57,14 @@ class TicketFilter
 
 
     /**
-     * @var DateTime
+     * @var Date
      *
      */
     private $creationDate;
 
-    /**
-     * @var DateTime
-     *
-     */
-    private $updateDate;
 
     /**
-     * @var DateTime
+     * @var Date
      *
      */
     private $endDate;
@@ -96,6 +94,21 @@ class TicketFilter
     {
         return $this->id;
     }
+
+    /**
+     * Set id in order to filter by $id
+     *
+     * @param int $id
+     *
+     * @return TicketFilter
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
 
     /**
      * Set subject
@@ -234,35 +247,36 @@ class TicketFilter
     /**
      * Get creationDate
      *
-     * @return DateTime
+     * @return Date
      */
     public function getCreationDate()
     {
         return $this->creationDate;
     }
 
-    /**
-     * Set updateDate
-     *
-     * @param DateTime $updateDate
-     *
-     * @return TicketFilter
-     */
-    public function setUpdateDate($updateDate)
-    {
-        $this->updateDate = $updateDate;
-
-        return $this;
-    }
 
     /**
      * Get endDate
      *
-     * @return DateTime
+     * @return Date
      */
     public function getEndDate()
     {
         return $this->endDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param DateTime $endDate
+     *
+     * @return TicketFilter
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
     }
 
     /**
@@ -356,3 +370,5 @@ class TicketFilter
     }
 
 }
+
+

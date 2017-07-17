@@ -12,10 +12,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TicketFilterType
+ * Class TicketFilterAdminType
  * @package AppBundle\Form\Ticket
  */
-class TicketFilterType extends AbstractType
+class TicketFilterUserType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -25,7 +25,7 @@ class TicketFilterType extends AbstractType
     {
         $builder
             ->add('id', TextType::class, [
-                'label' => 'N° de ticket',
+                'label' => "N° de ticket",
                 'required' => false,
             ])
             ->add('company', TextType::class, [
@@ -36,7 +36,7 @@ class TicketFilterType extends AbstractType
                 'label' => 'Urgence',
                 'required' => false,
                 'expanded' => false,
-                'multiple' => true,
+                'multiple' => false,
                 'choices'  => [
                     'Normale'   => 'Normale',
                     'Haute'     => 'Haute',
@@ -50,34 +50,41 @@ class TicketFilterType extends AbstractType
                 'label' => 'Statut',
                 'required' => false,
                 'expanded' => false,
-                'multiple' => true,
-                'data' => ['En attente', 'En cours'],
+                'multiple' => false,
+                'choices'  => [
+                    'En attente'   => 'En attente',
+                    'En cours'     => 'En cours',
+                ],
             ])
             ->add('creationDate', DateType::class, [
                 'label'     => 'Date de création',
                 'widget'    => 'single_text',
                 'required' => false,
+                'html5' => false,
                 'attr'      => [
-                    'placeholder'   => 'jj-mm-aaaa',
-                    'format'        => 'dd-MM-yyyy',
-                    'class'         => 'datepicker',
+                    'placeholder'   => 'jj/mm/aaaa',
+                    'format'        => 'dd/MM/yyyy',
+                    'class'         => 'js-datepicker',
                 ],
             ])
             ->add('endDate', DateType::class, [
                 'label'     => 'Date de clôture',
                 'widget'    => 'single_text',
-                'required' => false,
+                'required'  => false,
+                'html5' => false,
                 'attr'      => [
-                    'placeholder'   => 'jj-mm-aaaa',
-                    'format'        => 'dd-MM-yyyy',
-                    'class'         => 'datepicker',
+                    'placeholder'   => 'jj/mm/aaaa',
+                    'format'        => 'dd/MM/yyyy',
+                    'class'         => 'js-datepicker',
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                    'label' => 'Filtrer',
+                'label' => 'Filtrer',
+                'attr'  => [
+                    'class'         => 'btn btn-model-small',
+                    'aria-hidden'   => 'true',
                 ]
-            )
-        ;
+            ]);
     }
 
     /**
@@ -99,4 +106,5 @@ class TicketFilterType extends AbstractType
     {
         return 'app_bundle_filter_type';
     }
+
 }
