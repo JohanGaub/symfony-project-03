@@ -30,8 +30,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * This function is temporary to check if default path after login works well to be deleted and placed somewhere else
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/dashboard", name="dashboard")
      */
@@ -39,6 +37,5 @@ class DefaultController extends Controller
     {
         return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
     }
-
 
 }

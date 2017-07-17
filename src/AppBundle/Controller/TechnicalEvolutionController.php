@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Form\Evolution\NoteUserTechnicalEvolutionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
@@ -131,7 +132,7 @@ class TechnicalEvolutionController extends Controller
         $category       = $technicalEvolution->getCategory();
         $categoryType   = isset($category) ? $category->getType() : null;
 
-        $categorys = $em->getRepository('AppBundle:Category')
+        $categories = $em->getRepository('AppBundle:Category')
             ->getCategoryByType($categoryType)->getQuery()->getResult();
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
             ->getItemListByType('category_type')->getQuery()->getResult();
@@ -162,7 +163,7 @@ class TechnicalEvolutionController extends Controller
             'form'          => $form->createView(),
             'categoryId'    => isset($category) ? $category->getId() : null,
             'categoryType'  => isset($categoryType) ? $categoryType->getId() : null,
-            'categorys'     => $categorys,
+            'categories'     => $categories,
             'categoryTypes' => $categoryTypes,
             'titlePage'     => 'Modification d\'évolution',
             'isUpdate'      => true,
@@ -183,15 +184,155 @@ class TechnicalEvolutionController extends Controller
             || ($technicalEvolution->getUser() == !$this->getUser())) {
             return $this->redirectToRoute('evolutionHome');
         }
+
+        $noteUser = '';
+        $noteAnotherUser = '';
+
+        $user    = $this->getUser();
+        $userId  = $user->getId();
+        $company = $user->getCompany();
+        $teId    = $technicalEvolution->getId();
+
+        $userRepository = $this->getDoctrine()->getRepository('AppBundle:User')->findBy([
+            'company' => $company,
+        ]);
+        $teUnitRepository = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution')->find($teId);
+        $teRepository     = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
+        $uteRepository    = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution');
+
+        $data  = $teRepository->getScoreForTechnicalEvolution($teId);
+        $count = intval(($data[0])[2]); // total number of notes
+        $total = intval(($data[0])[1]);//sum of notes
+        $score = round(($data[0])[3], 1);//average of notes
+
+        // Here we check if Technical Evolution is ON-GOING (ID = 5 !!!!), via id of status, as only in that case voting will be possible
+        $teStatusId       = $teUnitRepository->getStatus()->getId();
+
+        if ($teStatusId == 5){
+            $teStatus = true;
+        } else {
+            $teStatus = false;
+        }
+
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') or $this->isGranted('ROLE_SUPER_ADMIN')) {
+            $validity = 3;
+        }
+        // Here we check if there is another Project Responsible in the company. Only one vote per company is possible and only by Project Responsible
+        elseif ($this->get('security.authorization_checker')->isGranted('ROLE_PROJECT_RESP')) {
+            $result = [];
+
+            for ($i = 0; $i < count($userRepository); $i++) {
+                $role = $userRepository[$i]->getRoles();
+                if ($role[0] === "ROLE_PROJECT_RESP" && $userRepository[$i]->getId() != $userId) {
+                    $result[] = $userRepository[$i]->getId();
+                }
+            }
+
+            if (count($result)> 0) {
+                $anotherUserId = $result[0];
+            } else {
+                $anotherUserId = null;
+            }
+
+            $dataUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $userId);
+
+            if ($anotherUserId === null) {
+                if ($dataUser == []) {
+                    // can be voted => add note in the database
+                    $validity = 2;
+
+                } else {
+                    // Note can be modified ;
+                    $noteUser = $dataUser[0]["note"];
+                    $validity = 1;
+                }
+            } else {
+                $dataAnotherUser = $teRepository->getNoteByUserPerTechnicalEvolution($teId, $anotherUserId);
+
+                if ($dataAnotherUser == [] && $dataUser == []) {
+                    // can be voted => add note in the database
+                    $validity = 2;
+
+                } elseif ($dataAnotherUser == [] && $dataUser != []) {
+                    // Note can be modified ;
+
+                    $noteUser = $dataUser[0]["note"];
+                    $validity = 1;
+
+                } else {
+                    // It can not be voted as there are already votes from the same company;
+                    $noteAnotherUser = $dataAnotherUser[0]["note"];
+                    $validity = 0;
+                }
+            }
+        } else {
+            $validity = 4;
+        }
+
+        $notes          = $uteRepository->getUserTechnicalEvolution($teId, 'note', 999999999);
         $uteComment     = new UserTechnicalEvolution();
         $formComment    = $this->createForm(CommentUserTechnicalEvolutionType::class, $uteComment);
         $formUpdate     = $this->createForm(CommentUserTechnicalEvolutionType::class, null);
+        $note           = new UserTechnicalEvolution('note');
+        $formNote       = $this->createForm(NoteUserTechnicalEvolutionType::class, $note);
 
+        /** @var $noteAnotherUser */
+        /** @var $noteUser */
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
-            'evolution' => $technicalEvolution,
-            'addForm'   => $formComment->createView(),
-            'updateForm'=> $formUpdate->createView()
+            'evolution'       => $technicalEvolution,
+            'notes'           => $notes,
+            'addForm'         => $formComment->createView(),
+            'updateForm'      => $formUpdate->createView(),
+            'noteForm'        => $formNote->createView(),
+            'validity'        => $validity,
+            'teStatus'        => $teStatus,
+            'noteAnotherUser' => $noteAnotherUser,
+            'noteUser'        => $noteUser,
+            'count'           => $count,
+            'total'           => $total,
+            'score'           => $score
         ]);
+    }
+
+    /**
+     * Add new comment for TechnicalEvolutions
+     *
+     * @Route("/commentaires/ajout/{technicalEvolution}", name="evolutionCommentsAdd")
+     * @param Request $request
+     * @param TechnicalEvolution $technicalEvolution
+     * @return JsonResponse
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
+     */
+    public function addCommentsAction(Request $request, TechnicalEvolution $technicalEvolution)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+        $comment = new UserTechnicalEvolution('comment');
+        $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
+        $form->handleRequest($request);
+        $data = [];
+
+        if ($form->isValid()) {
+            $user = $this->getUser();
+            $currentDate = new \DateTime('now');
+            $comment->setUser($user);
+            $comment->setTechnicalEvolution($technicalEvolution);
+            $comment->setDate($currentDate);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            $userProfile = $user->getUserProfile();
+            $data = [
+                'id'      => $comment->getId(),
+                'user'    => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
+                'date'    => $currentDate,
+                'comment' => $comment->getComment()
+            ];
+        }
+        return new JsonResponse($data);
     }
 
     /**
@@ -209,6 +350,95 @@ class TechnicalEvolutionController extends Controller
             'evolutions' => $evolutions,
         ]);
     }
+
+    /**
+     * Load more comments for TechnicalEvolutions
+     *
+     * @Route("/commentaires/chargement/{technicalEvolutionId}", name="evolutionCommentsLoading")
+     * @param Request $request
+     * @param int $technicalEvolutionId
+     * @return JsonResponse
+     */
+    public function loadMoreCommentsAction(Request $request, int $technicalEvolutionId)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+        // data is nb element page already get
+        $data = $request->request->get('data');
+
+        $comments = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution')
+            ->getUserTechnicalEvolutionArray($technicalEvolutionId, 'comment', "$data, 10");
+
+        return new JsonResponse($comments);
+    }
+
+    /**
+     * Update comments for TechnicalEvolutions
+     * // TODO => Fix no route find
+     * @Route("/commentaires/modification/{userTechnicalEvolution}", name="evolutionCommentsUpdate")
+     * @param Request $request
+     * @param UserTechnicalEvolution $userTechnicalEvolution
+     * @return JsonResponse
+     */
+    public function updateCommentsAction(Request $request, UserTechnicalEvolution $userTechnicalEvolution)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+        $comment = $userTechnicalEvolution;
+        $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
+        $form->handleRequest($request);
+        $data = [];
+
+        if ($form->isValid()) {
+            $user = $this->getUser();
+            $currentDate = new \DateTime('now');
+            $comment->setUpdateDate($currentDate);
+            $userProfile = $user->getUserProfile();
+            $data = [
+                'user'    => $userProfile->getFirstname() . ' ' . $userProfile->getLastname(),
+                'date'    => $currentDate,
+                'comment' => $comment->getComment()
+            ];
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+        }
+        return new JsonResponse($data);
+    }
+
+
+    /**
+     * Delete comments for TechnicalEvolutions
+     *
+     * @Route("/commentaires/suppression/{userTechnicalEvolutionId}", name="evolutionCommentsDelete")
+     * @param Request $request
+     * @param int $userTechnicalEvolutionId
+     * @return JsonResponse
+     */
+    public function deleteCommentsAction(Request $request, int $userTechnicalEvolutionId)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+        $em = $this->getDoctrine()->getManager();
+        $comment = $em->getRepository('AppBundle:UserTechnicalEvolution')
+            ->findOneBy(['id' => $userTechnicalEvolutionId]);
+
+        /**
+         * Here we do delete only if user is admin or if
+         * userTechnicalEvolution->user_id is current user id
+         */
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            || $this->getUser()->getId() == $comment->getUser()->getId()) {
+            $em->remove($comment);
+            $em->flush();
+            return new JsonResponse('Suppression reussie !');
+        }
+        throw $this->createAccessDeniedException();
+    }
+
 
     /**
      * Get full evolution have status

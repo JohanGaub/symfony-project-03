@@ -2,9 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Category;
 use AppBundle\Entity\Comment;
-use AppBundle\Entity\Dictionary;
 use AppBundle\Entity\Ticket;
 use AppBundle\Entity\User;
 use AppBundle\Form\Ticket\AddCommentType;
@@ -54,7 +52,7 @@ class TicketController extends Controller
             /*** Ticket search ***/
             'data'          => $this->get("communit.navigator"),
             'filter'        => $filter,
-            'filterURL'     =>http_build_query($filter),
+            'filterURL'     => http_build_query($filter),
             'documentType'  => "Ticket",
             'searchForm'    => $searchForm->createView(),
 
@@ -143,7 +141,7 @@ class TicketController extends Controller
         $editTicketForm->handleRequest($request);
         if($editTicketForm->isSubmitted() && $editTicketForm->isValid()) {
 
-            $ticket->setUpdateDate(new \DateTime('NOW'));
+            $ticket->setUpdateDate(new \DateTime('now'));
 
             $status     = $ticket->getStatus();
             $endDate    = $ticket->getEndDate();
@@ -151,7 +149,7 @@ class TicketController extends Controller
             // To make the endDate impossible to change when you already have one with either "Fermé" status or "Résolu" status
             if(!($endDate != null and ($status == 'Fermé' or  $status == 'Résolu'))){
                 if($status == 'Fermé' or $status == 'Résolu'){
-                    $ticket->setEndDate(new \DateTime('NOW'));
+                    $ticket->setEndDate(new \DateTime('now'));
                 } else {
                     $ticket->setEndDate(null);
                 }
@@ -169,7 +167,7 @@ class TicketController extends Controller
         if($addCommentForm->isSubmitted() and $addCommentForm->isValid()) {
             $addComment->setUser($user);
             $addComment->setTicket($ticket);
-            $addComment->setCreationDate( new \DateTime('NOW'));
+            $addComment->setCreationDate( new \DateTime('now'));
 
             $em->persist($addComment);
             $em->flush();

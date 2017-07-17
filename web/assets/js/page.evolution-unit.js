@@ -1,4 +1,82 @@
 /**
+ * Star rating system
+ */
+$(document).ready(function () {
+    $(init);
+    function init() {
+        $('.star-link').unwrap().unwrap() // delete div and label that are created by symfony around input when using bootstrap template
+    }
+});
+
+let DisplayRating = function($el) {
+    $el.addClass('on').prevAll().addClass('on');
+    $el.nextAll().removeClass('on');
+};
+
+$('.controls.rating')
+    .addClass('starRating')
+    .on('mouseenter', 'label', function() {
+        if($(this).parent().is('div'))
+            DisplayRating($(this));
+    })
+    .on('mouseleave', function() {
+        let $this = $(this);
+        $selectedRating = $this.find('input:checked');
+
+        if ($selectedRating.length === 1) {
+            if ($selectedRating.parent().is('div'))
+                DisplayRating($selectedRating.parent());
+
+        } else {
+            $this.find('on').removeClass('on');
+        }
+    })
+
+
+$(document).ready(function() {
+    $('.label-star-link').hover(function () {
+        $('.rating-value').text($(this).attr('data-index-number'))
+    });
+    let form = $('#app_bundle_note_userTechnicalEvolution');
+    $('.star-link').click(function () {
+        let $this = $(this);
+            $this.find('input:checked').val();
+
+        if ($(this).is(':checked')) {
+            $(form).submit();
+        }
+    })
+
+    $(form).submit(function(){
+        let evoId       = $('.controls.rating').attr('data-index-number')
+        let form        = $('#app_bundle_note_userTechnicalEvolution').serialize()
+
+        let viewTemplate   = '<p class="valid-message">'
+        viewTemplate       += 'Votre vote à bien été enregistrée !'
+        viewTemplate       += '</p>'
+        $('.error-box').append(viewTemplate)
+        setTimeout( function () {
+            let target = '.valid-message'
+            $(target).css('opacity', '0')
+            setTimeout( function () {
+                $(target).hide()
+            }, 30000)
+        }, 50000)
+
+        $.ajax({
+            type: 'POST',
+            url: '/evolution-technique/notes/ajout/' + evoId,
+            data: form,
+            dataType: 'json',
+            timeout: 3000,
+            success: function(){
+            },
+        })
+    });
+});
+
+
+/**
  * Listen user screen to load new comments
  */
 $(document).ready( function () {
@@ -113,8 +191,8 @@ $(document).ready( function () {
             timeout: 3000,
             success: function() {
                 let elementList = '<div class="unit-comment">'
-                    elementList += '<h5>Commentaire supprimé<h5>'
-                    elementList += '</div>'
+                elementList += '<h5>Commentaire supprimé<h5>'
+                elementList += '</div>'
                 $('#ute_id_' + commentId).replaceWith(elementList)
             },
         })
@@ -189,22 +267,21 @@ function isScrolledIntoView(elem)
  * @param comment
  * @returns {string}
  */
-function createComment(uteId, user, date, comment)
-{
+function createComment(uteId, user, date, comment) {
     let elementList = '<div id="ute_id_' + uteId + '" class="unit-comment">'
-        elementList += '<h5>Par <span class="strong-green">' + user + '</span></h5>'
-        elementList += '<i>Le ' + date + '</i>'
-        elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
-        elementList += '<div class="be-flex space-between">'
-        elementList += '<a class="modal-update" href="" data-toggle="modal" '
-        elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
-        elementList += 'Modifier le commentaire'
-        elementList += '</a>'
-        elementList += '<a class="modal-delete" href="" data-toggle="modal" '
-        elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
-        elementList += 'Supprimer le commentaire'
-        elementList += '</a>'
-        elementList += '</div>'
-        elementList += '</div>'
+    elementList += '<h5>Par <span class="strong-green">' + user + '</span></h5>'
+    elementList += '<i>Le ' + date + '</i>'
+    elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
+    elementList += '<div class="be-flex space-between">'
+    elementList += '<a class="modal-update" href="" data-toggle="modal" '
+    elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
+    elementList += 'Modifier le commentaire'
+    elementList += '</a>'
+    elementList += '<a class="modal-delete" href="" data-toggle="modal" '
+    elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
+    elementList += 'Supprimer le commentaire'
+    elementList += '</a>'
+    elementList += '</div>'
+    elementList += '</div>'
     return elementList;
 }

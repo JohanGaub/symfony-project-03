@@ -37,7 +37,7 @@ html, body {
 }
 
 header {
-  margin-bottom: 13rem;
+  padding-bottom: 0;
 }
 footer {
   margin-top: 5rem!important;
@@ -133,10 +133,12 @@ a {
 
 .btn-model-small {
   color: #fff !important;
-  background-color: $primary-color; border-radius: 0;
+  background-color: $primary-color;
+  border-radius: 0;
   font-weight: bold;
   vertical-align: middle;
 }
+
 .btn-model-small:hover {
   background-color: $secondary-color;
 }

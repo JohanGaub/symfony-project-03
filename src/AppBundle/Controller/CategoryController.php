@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CategoryController extends Controller
 {
     /**
-     * Index all categorys
+     * Index all categories
      * @Route("/liste", name="categoryHome")
      */
     public function indexAction()
@@ -29,10 +29,10 @@ class CategoryController extends Controller
     }
 
     /**
-     * Add new cateogry
+     * Add new category
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Route("nouvelle", name="categoryAdd")
+     * @Route("/nouvelle", name="categoryAdd")
      */
     public function addAction(Request $request)
     {

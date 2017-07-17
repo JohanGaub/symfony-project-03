@@ -38,13 +38,12 @@ class Category
      */
     private $description;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="Dictionary", inversedBy="categories", cascade={"persist"})
      * @JoinColumn(name="type", referencedColumnName="id")
      */
     private $type;
-
-
 
     /**
      * @ORM\OneToMany(targetEntity="TechnicalEvolution", mappedBy="category")
@@ -57,9 +56,9 @@ class Category
     private $faqs;
 
     /**
-     * @ORM\OneToMany(targetEntity="Documentation", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Download", mappedBy="category")
      */
-    private $documentations;
+    private $downloads;
 
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="category")
@@ -131,7 +130,7 @@ class Category
     {
         $this->technicalEvolutions = new ArrayCollection();
         $this->faqs = new ArrayCollection();
-        $this->documentations = new ArrayCollection();
+        $this->downloads = new ArrayCollection();
     }
 
     /**
@@ -227,37 +226,37 @@ class Category
     }
 
     /**
-     * Add documentation
+     * Add download
      *
-     * @param Documentation $documentation
+     * @param Download $download
      *
      * @return Category
      */
-    public function addDocumentation(Documentation $documentation)
+    public function addDownload(Download $download)
     {
-        $this->documentations[] = $documentation;
+        $this->downloads[] = $download;
 
         return $this;
     }
 
     /**
-     * Remove documentation
+     * Remove download
      *
-     * @param Documentation $documentation
+     * @param Download $download
      */
-    public function removeDocumentation(Documentation $documentation)
+    public function removeDownload(Download $download)
     {
-        $this->documentations->removeElement($documentation);
+        $this->downloads->removeElement($download);
     }
 
     /**
-     * Get documentations
+     * Get downloads
      *
      * @return Collection
      */
-    public function getDocumentations()
+    public function getDownloads()
     {
-        return $this->documentations;
+        return $this->downloads;
     }
 
     /**
@@ -293,6 +292,7 @@ class Category
     {
         return $this->tickets;
     }
+
 
     /**
      * @return string

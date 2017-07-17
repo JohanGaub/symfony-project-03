@@ -1,14 +1,9 @@
 <?php
+
 namespace AppBundle\Form;
 
-
-use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
-use AppBundle\Entity\UserProfile;
-use Doctrine\ORM\Mapping\Entity;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -16,12 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Created by PhpStorm.
- * User: topikana
- * Date: 24/05/17
- * Time: 16:04
- */
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

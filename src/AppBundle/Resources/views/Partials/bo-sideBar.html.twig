@@ -4,17 +4,16 @@
             CommunIt
         </a>
     </li>
-    <li><a href="#">Board</a></li>
+    <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
     <li><a href="{{ path('ticket_index', {'page': 1}) }}">Tickets</a></li>
     <li><a href="{{ path('evolutionHome') }}">Evolutions techniques</a></li>
     {% if is_granted('ROLE_ADMIN') %}
         <li><a href="{{ path('dictionaryHome') }}">Dictionnaire</a></li>
         <li><a href="{{ path('categoryHome') }}">Catégories</a></li>
-    {% endif %}
-    {% if is_granted('ROLE_ADMIN') %}
-        <li><a href="{{ path('validation_register') }}">Gestionnaire de compte</a></li>
+        <li><a href="{{ path('validation_register', {'page' : 1}) }}">Validation register</a></li>
     {% endif %}
     {% if is_granted('ROLE_PROJECT_RESP') %}
-        <li><a href="{{ path('validation_associate') }}">Gestionnaire associés</a></li>
+        <li><a href="{{ path('validation_associate') }}">Associate</a></li>
     {% endif %}
+
 </ul>

@@ -2,18 +2,16 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Product;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Documentation
  *
- * @ORM\Table(name="documentation")
+ * @ORM\Table(name="download")
  * @ORM\Entity
  */
-class Documentation
+class Download
 {
     /**
      * @var integer
@@ -60,12 +58,12 @@ class Documentation
     private $updateDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="documentations", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="downloads", cascade={"persist"})
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="documentations", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="downloads", cascade={"persist"})
      */
     private $product;
 
@@ -84,7 +82,7 @@ class Documentation
      *
      * @param string $title
      *
-     * @return Documentation
+     * @return Download
      */
     public function setTitle($title)
     {
@@ -108,7 +106,7 @@ class Documentation
      *
      * @param string $sumUp
      *
-     * @return Documentation
+     * @return Download
      */
     public function setSumUp($sumUp)
     {
@@ -132,7 +130,7 @@ class Documentation
      *
      * @param string $content
      *
-     * @return Documentation
+     * @return Download
      */
     public function setContent($content)
     {
@@ -156,7 +154,7 @@ class Documentation
      *
      * @param DateTime $creationDate
      *
-     * @return Documentation
+     * @return Download
      */
     public function setCreationDate($creationDate)
     {
@@ -180,7 +178,7 @@ class Documentation
      *
      * @param DateTime $updateDate
      *
-     * @return Documentation
+     * @return Download
      */
     public function setUpdateDate($updateDate)
     {
@@ -204,7 +202,7 @@ class Documentation
      *
      * @param Category $category
      *
-     * @return Documentation
+     * @return Download
      */
     public function setCategory(Category $category = null)
     {
@@ -228,7 +226,7 @@ class Documentation
      *
      * @param Product $product
      *
-     * @return Documentation
+     * @return Download
      */
     public function setProduct(Product $product = null)
     {
@@ -246,4 +244,5 @@ class Documentation
     {
         return $this->product;
     }
+
 }
