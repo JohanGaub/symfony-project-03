@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -34,7 +33,7 @@ class User implements UserInterface, Serializable
     /**
      * @var string
      * @Assert\Email()
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false, unique=true)
      */
     private $email;
 
@@ -44,6 +43,11 @@ class User implements UserInterface, Serializable
      * @ORM\Column(name="password", type="string", length=64, nullable=false)
      */
     private $password;
+
+    /**
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @var array
@@ -102,12 +106,6 @@ class User implements UserInterface, Serializable
      * @ORM\OneToOne(targetEntity="UserProfile", cascade={"persist", "remove"})
      */
     private $userProfile;
-
-    /**
-     *
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
 
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="user")
@@ -178,6 +176,23 @@ class User implements UserInterface, Serializable
     }
 
     /**
+     * @param $password
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
+    /**
+     * Get plainPassword
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
      * Get roles
      *
      * @return array The user roles
@@ -209,7 +224,6 @@ class User implements UserInterface, Serializable
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
-
         return $this;
     }
 
@@ -224,6 +238,29 @@ class User implements UserInterface, Serializable
     }
 
     /**
+     * Set isActiveByAdmin
+     *
+     * @param boolean $isActiveByAdmin
+     *
+     * @return User
+     */
+    public function setIsActiveByAdmin($isActiveByAdmin)
+    {
+        $this->isActiveByAdmin = $isActiveByAdmin;
+        return $this;
+    }
+
+    /**
+     * Get isActiveByAdmin
+     *
+     * @return boolean
+     */
+    public function getIsActiveByAdmin()
+    {
+        return $this->isActiveByAdmin;
+    }
+
+    /**
      * Set token
      *
      * @param string $token
@@ -233,7 +270,6 @@ class User implements UserInterface, Serializable
     public function setToken($token)
     {
         $this->token = $token;
-
         return $this;
     }
 
@@ -339,31 +375,7 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * Set userProfile
-     *
-     * @param UserProfile $userProfile
-     *
-     * @return User
-     */
-    public function setUserProfile(UserProfile $userProfile = null)
-    {
-        $this->userProfile = $userProfile;
-
-        return $this;
-    }
-
-    /**
-     * Get userProfile
-     *
-     * @return UserProfile
-     */
-    public function getUserProfile()
-    {
-        return $this->userProfile;
-    }
-
-    /**
-     * Set password
+     * Add userTechnicalEvolution
      *
      * @param UserTechnicalEvolution $userTechnicalEvolution
      *
@@ -387,28 +399,37 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * @param $password
+     * Get userTechnicalEvolutions
+     *
+     * @return Collection
      */
-    public function setPlainPassword($password)
+    public function getUserTechnicalEvolutions()
     {
-        $this->plainPassword = $password;
+        return $this->userTechnicalEvolutions;
     }
 
     /**
-     * Get plainPassword
+     * Set userProfile
      *
-     * @return string
+     * @param UserProfile $userProfile
+     *
+     * @return User
      */
-    public function getPlainPassword()
+    public function setUserProfile(UserProfile $userProfile = null)
     {
-        return $this->plainPassword;
+        $this->userProfile = $userProfile;
+        return $this;
     }
 
-    public function getSalt()
+    /**
+     * Get userProfile
+     *
+     * @return UserProfile
+     */
+    public function getUserProfile()
     {
-        return null;
+        return $this->userProfile;
     }
-
 
     /**
      * Add ticket
@@ -471,12 +492,13 @@ class User implements UserInterface, Serializable
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getComments()
     {
         return $this->comments;
     }
+
 
     public function generateToken()
     {
@@ -494,17 +516,6 @@ class User implements UserInterface, Serializable
     public function getUsername()
     {
         return $this->email;
-    }
-
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     */
-    public function eraseCredentials()
-    {
-
     }
 
     /**
@@ -542,38 +553,20 @@ class User implements UserInterface, Serializable
             ) = unserialize($serialized);
     }
 
-    /**
-     * Set isActiveByAdmin
-     *
-     * @param boolean $isActiveByAdmin
-     *
-     * @return User
-     */
-    public function setIsActiveByAdmin($isActiveByAdmin)
+    public function getSalt()
     {
-        $this->isActiveByAdmin = $isActiveByAdmin;
-
-        return $this;
+        return null;
     }
 
     /**
-     * Get isActiveByAdmin
+     * Removes sensitive data from the user.
      *
-     * @return boolean
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
      */
-    public function getIsActiveByAdmin()
+    public function eraseCredentials()
     {
-        return $this->isActiveByAdmin;
-    }
 
-    /**
-     * Get userTechnicalEvolutions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserTechnicalEvolutions()
-    {
-        return $this->userTechnicalEvolutions;
     }
 
 }

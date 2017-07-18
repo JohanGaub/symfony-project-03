@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Entity\User;
+use AppBundle\Form\Evolution\NoteUserTechnicalEvolutionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\CommentUserTechnicalEvolutionType;
@@ -11,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -153,4 +156,63 @@ class UserTechnicalEvolutionController extends Controller
         }
         throw $this->createAccessDeniedException();
     }
+
+    /**
+     * Add new note for TechnicalEvolutions
+     *
+     * @Route("/notes/ajout/{technicalEvolution}", name="evolutionNoteAdd")
+     * @param Request $request
+     * @param TechnicalEvolution $technicalEvolution
+     * @return JsonResponse
+     * @Security("has_role('ROLE_PROJECT_RESP')")
+     */
+    public function addNoteAction(Request $request, TechnicalEvolution $technicalEvolution)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new HttpException('500', 'Invalid call');
+        }
+
+        $note = new UserTechnicalEvolution('note');
+        $form = $this->createForm(NoteUserTechnicalEvolutionType::class, $note);
+        $form->handleRequest($request);
+
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $uteRepository = $em->getRepository('AppBundle:UserTechnicalEvolution');
+
+        $nbNotes = $uteRepository->countNotesByCompany(
+            $technicalEvolution->getId(),
+            $this->getUser()->getCompany()->getId()
+        );
+
+        if ($nbNotes == 0) {
+            if ($form->isValid()) {
+                $currentDate = new \DateTime('now');
+                $note->setNote($form['note']->getData());
+                $note->setUser($user);
+                $note->setTechnicalEvolution($technicalEvolution);
+                $note->setDate($currentDate);
+                $em->persist($note);
+                $em->flush();
+            }
+            return new JsonResponse('valid request');
+        }
+
+        $userVote = $uteRepository->findOneBy([
+            'user'               => $user,
+            'technicalEvolution' => $technicalEvolution,
+            'type'               => 'note'
+        ]);
+
+        if ($userVote) {
+            $userVote->setNote($form['note']->getData());
+            $currentDate = new\DateTime('now');
+            $userVote->setUpdateDate($currentDate);
+            $em->persist($userVote);
+            $em->flush();
+
+        }
+        return new JsonResponse('valid request');
+    }
+
 }

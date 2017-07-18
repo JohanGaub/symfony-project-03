@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Form;
 
 
@@ -12,12 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Created by PhpStorm.
- * User: topikana
- * Date: 24/05/17
- * Time: 16:04
- */
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

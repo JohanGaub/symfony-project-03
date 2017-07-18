@@ -98,8 +98,6 @@ class Company
         $this->users = new ArrayCollection();
     }
 
-
-
     /**
      * Get id
      *
@@ -133,8 +131,6 @@ class Company
     {
         return $this->name;
     }
-
-
 
     /**
      * Set town
@@ -267,7 +263,7 @@ class Company
     }
 
     /**
-     * Set adress
+     * Set address
      *
      * @param string $address
      *
@@ -289,8 +285,6 @@ class Company
     {
         return $this->address;
     }
-
-
 
     /**
      * Set postCode
@@ -315,4 +309,5 @@ class Company
     {
         return $this->postCode;
     }
+
 }

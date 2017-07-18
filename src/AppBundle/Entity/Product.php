@@ -2,10 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Documentation;
-use AppBundle\Entity\Faq;
-use AppBundle\Entity\TechnicalEvolution;
-use AppBundle\Entity\Ticket;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -52,15 +48,14 @@ class Product
     private $technicalEvolutions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Documentation", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Download", mappedBy="product")
      */
-    private $documentations;
+    private $downloads;
 
     /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="product")
      */
     private $tickets;
-
 
     /**
      * Get id
@@ -126,7 +121,7 @@ class Product
     {
         $this->faqs = new ArrayCollection();
         $this->technicalEvolutions = new ArrayCollection();
-        $this->documentations = new ArrayCollection();
+        $this->downloads = new ArrayCollection();
     }
 
     /**
@@ -198,37 +193,37 @@ class Product
     }
 
     /**
-     * Add documentation
+     * Add download
      *
-     * @param Documentation $documentation
+     * @param Download $download
      *
      * @return Product
      */
-    public function addDocumentation(Documentation $documentation)
+    public function addDownload(Download $download)
     {
-        $this->documentations[] = $documentation;
+        $this->downloads[] = $download;
 
         return $this;
     }
 
     /**
-     * Remove documentation
+     * Remove download
      *
-     * @param Documentation $documentation
+     * @param Download $download
      */
-    public function removeDocumentation(Documentation $documentation)
+    public function removeDownload(Download $download)
     {
-        $this->documentations->removeElement($documentation);
+        $this->downloads->removeElement($download);
     }
 
     /**
-     * Get documentations
+     * Get downloads
      *
      * @return Collection
      */
-    public function getDocumentations()
+    public function getDownloads()
     {
-        return $this->documentations;
+        return $this->downloads;
     }
 
     public function __toString()

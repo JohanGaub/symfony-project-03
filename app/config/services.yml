@@ -19,3 +19,10 @@ services:
     app.getter_user_admin:
         class: AppBundle\Service\GetterUserAdmin
         arguments: ['@doctrine.orm.entity_manager']
+
+    app.form.type.task:
+        class: AppBundle\Form\Ticket\TicketFilterType
+        arguments: ["@security.authorization_checker"]
+        tags:
+            - { name: form.type }
+

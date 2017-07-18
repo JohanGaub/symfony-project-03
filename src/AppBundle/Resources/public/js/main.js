@@ -99,11 +99,18 @@ $(document).ready(function () {
         autoplayDisableOnInteraction: false
     });
 });
+//DataTables plugin
+$(document).ready(function() {
+    $('#register').DataTable( {
+        colReoder: true
+    } );
+} );
 
 
 $( function() {
-    $( ".datepicker" ).datepicker({
-        altFormat: "dd-mm-yyyy"
+    $( ".js-datepicker" ).datepicker({
+        format: 'yyyy-mm-dd'
+
     });
 } );
 

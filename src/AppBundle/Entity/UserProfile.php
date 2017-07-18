@@ -39,11 +39,11 @@ class UserProfile
     /**
      * @var string
      * @Assert\Regex(
-     *     pattern="/^\d{14}$/",
+     *     pattern="/^\d{10}$/",
      *     match=true,
      *     message="Votre numéro de téléphone est incomplet"
      * )
-     * @ORM\Column(name="phone", type="string", length=255, nullable=false)
+     * @ORM\Column(name="phone", type="string", length=10, nullable=false)
      */
     private $phone;
 

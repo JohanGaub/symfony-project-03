@@ -2,7 +2,7 @@
  * Function to do dynamic topbar with scroll event
  */
 $(document).ready(function () {
-    // animate navbar on scroll
+
     $(window).scroll(function () {
 
         if ($(document).scrollTop() > 100) {
@@ -10,7 +10,6 @@ $(document).ready(function () {
         } else {
             $('.navbar, .navbar-default .navbar-brand, .navbar-brand img, .navbar-collapse').removeClass('scroll');
         }
-
     });
 
     $(window).scroll(function () {
@@ -87,11 +86,10 @@ $(document).ready(function () {
     $("#wrapper").toggleClass("toggled");
 });
 
-
 $( function() {
-    $( ".datepicker" ).datepicker({
-        altFormat: "dd-mm-yyyy"
+    $( ".js-datepicker" ).datepicker( {
+        format: 'yyyy-mm-dd'
+
     });
 } );
-
 

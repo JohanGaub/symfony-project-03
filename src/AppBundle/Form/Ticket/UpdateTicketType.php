@@ -62,7 +62,10 @@ class UpdateTicketType extends AbstractType
                 'multiple'      => false,
             ])
             ->add('subject', TextType::class, ['label' => 'Sujet du ticket'])
-            ->add('content', TextareaType::class, ['label' =>  'Explications'])
+            ->add('content', TextareaType::class, [
+                'label' =>  'Explications',
+                //'attr' => ['class' => 'ticket-explanation-size'],
+            ])
             ->add('origin', EntityType::class, [
                 'label'         => 'Origine',
                 'class'         => 'AppBundle\Entity\Dictionary',
@@ -103,7 +106,13 @@ class UpdateTicketType extends AbstractType
                 'label'         => 'Archivage',
                 'required'      => false,
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Enregistrer',
+                'attr'  => [
+                    'class'         => 'btn btn-model-small',
+                    'aria-hidden'   => 'true',
+                ],
+            ])
         ;
         // To listen to the "category_type" field
         $builder->get('category_type')->addEventListener(

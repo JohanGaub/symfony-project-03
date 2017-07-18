@@ -1,10 +1,8 @@
 <?php
+
 namespace AppBundle\Form;
 
-
-
 use AppBundle\Entity\User;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -13,12 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Created by PhpStorm.
- * User: topikana
- * Date: 24/05/17
- * Time: 16:04
- */
 class ModifyAssociateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

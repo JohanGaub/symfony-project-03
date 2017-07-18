@@ -2,23 +2,24 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Category;
 use AppBundle\Entity\Comment;
-use AppBundle\Entity\Dictionary;
 use AppBundle\Entity\Ticket;
-use AppBundle\Form\SearchTicketType;
+use AppBundle\Entity\User;
 use AppBundle\Form\Ticket\AddCommentType;
-use AppBundle\Form\Ticket\TicketFilterType;
+use AppBundle\Form\Ticket\TicketFilterAdminType;
+use AppBundle\Form\Ticket\TicketFilterUserType;
 use AppBundle\Form\Ticket\UpdateTicketType;
 use AppBundle\Form\Ticket\EditTicketType;
 use AppBundle\Form\Ticket\AddTicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class TicketController
@@ -40,15 +41,20 @@ class TicketController extends Controller
 
         $filter         = $navigator->getEntityFilter();
 
-        $searchForm     = $this->createForm(TicketFilterType::class, $filter);
+        if($this->isGranted('ROLE_ADMIN')){
+            $searchForm     = $this->createForm(TicketFilterAdminType::class, $filter);
+        } else {
+            $searchForm     = $this->createForm(TicketFilterUserType::class, $filter);
+        }
 
         return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             /*** Ticket search ***/
             'data'          => $this->get("communit.navigator"),
             'filter'        => $filter,
-            'filterURL'     =>http_build_query($filter),
+            'filterURL'     => http_build_query($filter),
             'documentType'  => "Ticket",
             'searchForm'    => $searchForm->createView(),
+
         ]);
     }
 
@@ -56,27 +62,7 @@ class TicketController extends Controller
     /**
      * @param Request $request
      * @return RedirectResponse|Response
-     */
-    public function searchAction(Request $request)
-    {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Ticket');
-        $search = $repo->getSearch();
-
-        $form       = $this->createForm(SearchTicketType::class, $search);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('ticket_index');
-        }
-
-        return $this->render('@App/Pages/Ticket/ticket.html.twig',[
-            'form' => $form->createview(),
-        ]);
-    }
-
-
-    /**
-     * @param Request $request
-     * @return RedirectResponse|Response
+     * @internal param Ticket $ticket
      * @Route("/add", name="ticket_add")
      */
     public function addAction(Request $request)
@@ -113,7 +99,24 @@ class TicketController extends Controller
             $em->persist($ticket);
             $em->flush();
 
+
+            /**
+             * Mailing part (service)
+             */
+            $this->get('app.email.sending')->sendEmail('Un nouveau ticket a été créé',
+                $this->get('app.getter_user_admin')->getAllAdmin(),
+                $this->render('@App/Email/email.newTicket.html.twig', [
+                        'url' => $this->generateUrl('ticket_edit', [
+                            'ticket' => $ticket->getId()
+                        ], UrlGeneratorInterface::ABSOLUTE_URL),
+                        'ticket' => $ticket
+                    ]
+
+                )
+            );
+            $this->addFlash("notice", "Un email de notification a été envoyé à l'administrateur");
             return $this->redirectToRoute('ticket_index');
+
         }
         return $this->render('@App/Pages/Ticket/addTicket.html.twig',[
             'addTicketForm' => $addTicketForm->createView(),
@@ -137,7 +140,7 @@ class TicketController extends Controller
         $editTicketForm->handleRequest($request);
         if($editTicketForm->isSubmitted() && $editTicketForm->isValid()) {
 
-            $ticket->setUpdateDate(new \DateTime('NOW'));
+            $ticket->setUpdateDate(new \DateTime('now'));
 
             $status     = $ticket->getStatus();
             $endDate    = $ticket->getEndDate();
@@ -145,7 +148,7 @@ class TicketController extends Controller
             // To make the endDate impossible to change when you already have one with either "Fermé" status or "Résolu" status
             if(!($endDate != null and ($status == 'Fermé' or  $status == 'Résolu'))){
                 if($status == 'Fermé' or $status == 'Résolu'){
-                    $ticket->setEndDate(new \DateTime('NOW'));
+                    $ticket->setEndDate(new \DateTime('now'));
                 } else {
                     $ticket->setEndDate(null);
                 }
@@ -163,10 +166,32 @@ class TicketController extends Controller
         if($addCommentForm->isSubmitted() and $addCommentForm->isValid()) {
             $addComment->setUser($user);
             $addComment->setTicket($ticket);
-            $addComment->setCreationDate( new \DateTime('NOW'));
+            $addComment->setCreationDate( new \DateTime('now'));
 
             $em->persist($addComment);
             $em->flush();
+
+            /**
+             * Mailing part (service)
+             */
+            $this->get('app.email.sending')->sendEmail('Un nouveau commentaire a été rédigé',
+                $this->get('app.getter_user_admin')->getAllAdmin(),
+                $this->render('@App/Email/email.newComment.html.twig', [
+                        'url' => $this->generateUrl('ticket_edit', [
+                            'ticket' => $ticket->getId()
+                        ], UrlGeneratorInterface::ABSOLUTE_URL),
+                        'ticket'    => $ticket,
+                        'comment'   => $addComment,
+                    ]
+
+                )
+            );
+            $this->addFlash("notice", "Un email de notification a été envoyé à l'administrateur");
+            return $this->redirectToRoute('ticket_index');
+
+
+
+
             $addComment     = new Comment();
             $addCommentForm = $this->createForm(AddCommentType::class, $addComment);
         }
@@ -189,6 +214,7 @@ class TicketController extends Controller
      * @param Ticket $ticket
      * @return RedirectResponse|Response
      * @Route("/update/{ticket}", name="ticket_update")
+     * @Security("has_role ('ROLE_ADMIN')")
      */
     public function updateAction(Request $request, Ticket $ticket)
     {
@@ -204,7 +230,7 @@ class TicketController extends Controller
             $categoryType = null;
         };
 
-         $categories = $em->getRepository('AppBundle:Category')
+        $categories = $em->getRepository('AppBundle:Category')
             ->getCategoryByTypeResult($categoryType);
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
             ->getItemListByTypeResult('category_type');

@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Ticket;
-use AppBundle\Entity\User;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -187,8 +185,5 @@ class Comment
     {
         return $this->ticket;
     }
-
-
-
 
 }

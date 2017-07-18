@@ -7,11 +7,11 @@
  *      scss  -> Trasnpil scss to css
  */
 
-var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
+let gulp        = require('gulp');
+let browserSync = require('browser-sync').create();
 
 // --- Component required -->
-var sass = require('gulp-sass');
+let sass = require('gulp-sass');
 
 // --- Gulp Watchers -->
 gulp.task('mywatch', function(){

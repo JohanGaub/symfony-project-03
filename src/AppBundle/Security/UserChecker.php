@@ -1,11 +1,5 @@
 <?php
 namespace AppBundle\Security;
-/**
- * Created by PhpStorm.
- * User: topikana
- * Date: 19/06/17
- * Time: 17:28
- */
 
 use AppBundle\Entity\User;
 use Symfony\Component\Security\Core\Exception\AccountExpiredException;

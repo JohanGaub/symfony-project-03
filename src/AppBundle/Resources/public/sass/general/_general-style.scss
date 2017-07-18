@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'dinregular';
-    src: url('../fonts/dinregular.eot');
-    src: url('../fonts/dinregular.eot?#iefix') format('embedded-opentype'),
-      url('../fonts/dinregular.woff2') format('woff2'),
-      url('../fonts/dinregular.woff') format('woff'),
-      url('../fonts/dinregular.ttf') format('truetype'),
-      url('../fonts/dinregular.svg#webfontregular') format('svg');
+    src: url('/web/assets/fonts/dinregular.eot');
+    src: url('/web/assets/fonts/dinregular.eot?#iefix') format('embedded-opentype'),
+      url('/web/assets/fonts/dinregular.woff2') format('woff2'),
+      url('/web/assets/fonts/dinregular.woff') format('woff'),
+      url('/web/assets/fonts/dinregular.ttf') format('truetype'),
+      url('/web/assets/fonts/dinregular.svg#webfontregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,28 +16,47 @@ html, body {
   width:100%;
   height: 100%;
 }
+main {
+  min-height: 88%;
+  margin-top: 15rem;
+}
+main#bo-main-content {
+  margin-top: 0 !important;
+  padding-left: 20rem;
+}
+@media screen and (max-width: 1278px) {
+  main#bo-main-content {
+    padding-left: 5rem !important;
+  }
+}
+@media screen and (max-width: 1024px) {
+  main {
+    margin-top: 10rem;
+  }
+  main#bo-main-content {
+    padding-left: 5rem !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  main#bo-main-content {
+    padding-left: 0 !important;
+  }
+}
+
+
 
 /* Block page "validation register"*/
 .validate{
   margin-top: 15em;
-
 }
-
-.validation-user{
-
-}
-
-
 .register-title{
   margin-top: 5em;
 }
-
 .message-register{
-  margin-top: 5em;
+  //margin-top: 5em;
 }
-
 header {
-  margin-bottom: 13rem;
+  padding-bottom: 0;
 }
 footer {
   margin-top: 5rem!important;
@@ -129,4 +148,20 @@ a {
  */
 .modal {
   border-radius: 1px;
+}
+
+/**
+ * Button small green - back office
+ */
+
+.btn-model-small {
+  color: #fff !important;
+  background-color: $primary-color;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.btn-model-small:hover {
+  background-color: $secondary-color;
 }

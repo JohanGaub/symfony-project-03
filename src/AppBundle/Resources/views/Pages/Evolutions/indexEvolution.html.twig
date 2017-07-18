@@ -54,10 +54,10 @@
                             </div>
 
                             <div class="bo-bottom-evolution">
-                                <a href="{{ path('evolutionUnit', {'technicalEvolution': evolution.id}) }}">En savoir plus</a>
+                                <a href="{{ path('evolutionUnit', {'technicalEvolution': evolution.id}) }}" class="btn btn-model-small">En savoir plus</a>
 
                                 {% if is_granted('ROLE_ADMIN') or app.user.id == evolution.user_id %}
-                                    <a href="{{ path('evolutionUpdate', {'technicalEvolution': evolution.id}) }}">Modifier l'évolution</a>
+                                    <a href="{{ path('evolutionUpdate', {'technicalEvolution': evolution.id}) }}" class="btn btn-model-small">Modifier l'évolution</a>
                                 {% endif %}
                             </div>
                         </div>
