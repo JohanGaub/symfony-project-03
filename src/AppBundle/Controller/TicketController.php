@@ -37,11 +37,14 @@ class TicketController extends Controller
      */
     public function indexAction()
     {
-        $navigator      = $this->get("communit.navigator");
+        $navigator  = $this->get("communit.navigator");
+        $filter     = $navigator->getEntityFilter();
 
-        $filter         = $navigator->getEntityFilter();
+        if (!is_null($filter->getCreationDate())) {
+            $filter->setCreationDate(new \DateTime(date("d-m-Y", strtotime($filter->getCreationDate()))));
+        }
 
-        if($this->isGranted('ROLE_ADMIN')){
+        if ($this->isGranted('ROLE_ADMIN')){
             $searchForm     = $this->createForm(TicketFilterAdminType::class, $filter);
         } else {
             $searchForm     = $this->createForm(TicketFilterUserType::class, $filter);
@@ -74,7 +77,7 @@ class TicketController extends Controller
 
         $addTicketForm       = $this->createForm(AddTicketType::class, $ticket);
         $addTicketForm->handleRequest($request);
-        if($addTicketForm->isSubmitted() && $addTicketForm->isValid()) {
+        if ($addTicketForm->isSubmitted() && $addTicketForm->isValid()) {
             // $file stores the uploaded files
             /** @var File $file */
             $file = $ticket->getUpload();

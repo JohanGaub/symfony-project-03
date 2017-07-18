@@ -74,7 +74,7 @@ class UpdateTicketType extends AbstractType
                     return $dictionaryRepository->getItemListByType('origin');
                 },
             ])
-            ->add('type', EntityType::class, [
+            ->add('ticket_type', EntityType::class, [
                 'label'         => 'Type',
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'required'      => true,

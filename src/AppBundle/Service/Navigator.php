@@ -32,7 +32,7 @@ class Navigator extends Paginator
 
     /**
      * Navigator constructor.
-     * @internal param Paginator $paginator
+     * @param \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder $context
      * @param EntityRepository $repository
      * @param int $page
      * @param array $filter

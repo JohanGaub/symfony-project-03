@@ -2,10 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Repository\DictionaryRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -40,19 +42,19 @@ class Ticket
      */
     private $content;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="origin", type="string", length=255)
-     */
-    private $origin;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
-     */
-    private $type;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="origin", type="string", length=255)
+//     */
+//    private $origin;
+//
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="type", type="string", length=255)
+//     */
+//    private $type;
 
     /**
      * @var string
@@ -61,12 +63,12 @@ class Ticket
      */
     private $emergency;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=255)
-     */
-    private $status;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="status", type="string", length=255)
+//     */
+//    private $status;
 
     /**
      * @var string
@@ -137,6 +139,44 @@ class Ticket
 
 
     /**
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="status", referencedColumnName="id")
+     */
+    private $status;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="origin", referencedColumnName="id")
+     */
+    private $origin;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dictionary", cascade={"persist"})
+     * @JoinColumn(name="ticket_type", referencedColumnName="id")
+     */
+    private $ticketType;
+
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments     = new ArrayCollection();
+        $this->creationDate = new \DateTime('NOW');
+        //$this->status     = 'En attente';
+        $this->isArchive    = false;
+
+
+    }
+
+
+
+    /**
      * Get id
      *
      * @return int
@@ -194,29 +234,29 @@ class Ticket
         return $this->content;
     }
 
-    /**
-     * Set origin
-     *
-     * @param string $origin
-     *
-     * @return Ticket
-     */
-    public function setOrigin($origin)
-    {
-        $this->origin = $origin;
-
-        return $this;
-    }
-
-    /**
-     * Get origin
-     *
-     * @return string
-     */
-    public function getOrigin()
-    {
-        return $this->origin;
-    }
+//    /**
+//     * Set origin
+//     *
+//     * @param string $origin
+//     *
+//     * @return Ticket
+//     */
+//    public function setOrigin($origin)
+//    {
+//        $this->origin = $origin;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get origin
+//     *
+//     * @return string
+//     */
+//    public function getOrigin()
+//    {
+//        return $this->origin;
+//    }
 
     /**
      * Set emergency
@@ -242,29 +282,29 @@ class Ticket
         return $this->emergency;
     }
 
-    /**
-     * Set status
-     *
-     * @param string $status
-     *
-     * @return Ticket
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
+//    /**
+//     * Set status
+//     *
+//     * @param string $status
+//     *
+//     * @return Ticket
+//     */
+//    public function setStatus($status)
+//    {
+//        $this->status = $status;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get status
+//     *
+//     * @return string
+//     */
+//    public function getStatus()
+//    {
+//        return $this->status;
+//    }
 
     /**
      * Set upload
@@ -433,16 +473,7 @@ class Ticket
     {
         return $this->product;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->comments = new ArrayCollection();
-        $this->creationDate = new \DateTime('NOW');
-        $this->status = 'En attente';
-        $this->isArchive = false;
-    }
+
 
     /**
      * Add comment
@@ -505,27 +536,99 @@ class Ticket
 
 
 
+//    /**
+//     * Set type
+//     *
+//     * @param string $type
+//     *
+//     * @return Ticket
+//     */
+//    public function setType($type)
+//    {
+//        $this->type = $type;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get type
+//     *
+//     * @return string
+//     */
+//    public function getType()
+//    {
+//        return $this->type;
+//    }
+
     /**
-     * Set type
+     * Set status
      *
-     * @param string $type
+     * @param Dictionary $status
      *
      * @return Ticket
      */
-    public function setType($type)
+    public function setStatus(Dictionary $status = null)
     {
-        $this->type = $type;
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get status
      *
-     * @return string
+     * @return Dictionary|string
      */
-    public function getType()
+    public function getStatus()
     {
-        return $this->type;
+        return $this->status;
+    }
+
+    /**
+     * Set origin
+     *
+     * @param mixed $origin
+     *
+     * @return Ticket
+     */
+    public function setOrigin(Dictionary $origin = null)
+    {
+        $this->origin = $origin;
+
+        return $this;
+    }
+
+    /**
+     * Get origin
+     *
+     * @return Dictionary
+     */
+    public function getOrigin()
+    {
+        return $this->origin;
+    }
+
+    /**
+     * Set ticketType
+     *
+     * @param Dictionary $ticketType
+     *
+     * @return Ticket
+     */
+    public function setTicketType(Dictionary $ticketType = null)
+    {
+        $this->ticketType = $ticketType;
+
+        return $this;
+    }
+
+    /**
+     * Get ticketType
+     *
+     * @return Dictionary
+     */
+    public function getTicketType()
+    {
+        return $this->ticketType;
     }
 }

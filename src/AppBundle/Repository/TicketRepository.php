@@ -45,9 +45,14 @@ class TicketRepository extends EntityRepository
         return $q;
     }
 
+    /**
+     * @param $page
+     * @param $filter
+     * @return \Doctrine\ORM\Query
+     */
     public function getRowsByPage($page, $filter)
     {
-        $alias  = "t";
+        /*$alias  = "t";
         $query  = $this->createQueryBuilder($alias)
             ->select($alias)
             ->setFirstResult(($page - 1) * self::MAX_RESULT)
@@ -58,6 +63,59 @@ class TicketRepository extends EntityRepository
                     if (strpos($field, "_") !== 0) {
                         $search = "$alias.$field like '%$value%'";
                         $query->andWhere($search);
+                    }
+                }
+            }
+        }
+        return $query->getQuery();*/
+
+
+        $query = $this->createQueryBuilder('t')
+            ->select('dts', 'c', 'ct', 'u', 't', 'cp', 'o')
+            ->join('t.status','dts', 't.status = dts.id')
+            ->join('t.category','c','t.category = c.id')
+            ->join('t.user','u','t.user = u.id')
+            ->join('c.type', 'ct', 'c.type = ct.id')
+            ->join('u.company', 'cp', 'u.company = cp.id')
+            ->join('t.origin', 'o', 't.origin = o.id')
+            ->orderBy('t.id', 'DESC')
+            ->setFirstResult(($page - 1) * self::MAX_RESULT)
+            ->setMaxResults(self::MAX_RESULT);
+        if(!is_null($filter)) {
+            foreach ($filter as $field => $value) {
+                if($value !== '') {
+                    if(strpos($field, '_') !== 0) {
+                        switch($field) {
+                            case 'status':
+                                $alias = 'dts';
+                                $field = 'id';
+                                break;
+                            case 'categoryType':
+                                $alias = 'ct';
+                                $field = 'id';
+                                break;
+                            case 'category':
+                                $alias = 'c';
+                                $field = 'id';
+                                break;
+                            case 'company':
+                                $alias = 'cp';
+                                $field = 'name';
+                                break;
+                            case 'origin':
+                                $alias = 'o';
+                                $field = 'id';
+                                break;
+                            default:
+                                $alias = 't';
+                        }
+                        if ($alias == 't' or $alias == 'cp') {
+                            $search = "$alias.$field like '%$value%'";
+                        } else {
+                            $search ="$alias.$field = '$value'";
+                        }
+                        $query->andWhere($search);
+
                     }
                 }
             }

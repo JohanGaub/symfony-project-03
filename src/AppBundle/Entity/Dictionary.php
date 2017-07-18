@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Category;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -111,17 +114,17 @@ class Dictionary
      */
     public function __construct()
     {
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
      * Add category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category
      *
      * @return Dictionary
      */
-    public function addCategory(\AppBundle\Entity\Category $category)
+    public function addCategory(Category $category)
     {
         $this->categories[] = $category;
 
@@ -131,9 +134,9 @@ class Dictionary
     /**
      * Remove category
      *
-     * @param \AppBundle\Entity\Category $category
+     * @param Category $category
      */
-    public function removeCategory(\AppBundle\Entity\Category $category)
+    public function removeCategory(Category $category)
     {
         $this->categories->removeElement($category);
     }
@@ -141,7 +144,7 @@ class Dictionary
     /**
      * Get categories
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getCategories()
     {

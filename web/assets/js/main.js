@@ -86,10 +86,16 @@ $(document).ready(function () {
     $("#wrapper").toggleClass("toggled");
 });
 
-$( function() {
-    $( ".js-datepicker" ).datepicker( {
-        format: 'yyyy-mm-dd'
 
+$( function() {
+    $( ".datepicker1" ).datepicker( {
+        dateFormat: 'dd-mm-yy',
+    });
+} );
+
+$( function() {
+    $( ".datepicker2" ).datepicker( {
+        dateFormat: 'dd-mm-yy',
     });
 } );
 

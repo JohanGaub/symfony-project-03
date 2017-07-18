@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -73,13 +74,14 @@ class AddTicketType extends AbstractType
                 //'preferred_choices' => ,
                 //'mapped'        => true,
             ])
-            ->add('type', EntityType::class, [
+            ->add('ticket_type', EntityType::class, [
                 'label' => 'Type',
                 'class' => 'AppBundle\Entity\Dictionary',
                 'required' => true,
+                //'mapped'    => false,
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
                     return $dictionaryRepository->getItemListByType('ticket_type');
-                }
+                },
             ])
             ->add('emergency', ChoiceType::class, [
                 'label' => 'Urgence',
@@ -96,6 +98,18 @@ class AddTicketType extends AbstractType
                 'label' => 'Fichier à uploader',
                 'required' => false,
             ])
+
+            ->add('status', HiddenType::class, [
+                'data'          => 'En attente',
+                'label'         => 'Statut',
+                'property_path' => 'status',
+                'mapped'        => true,
+            ])
+
+
+
+
+
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr'  => [
