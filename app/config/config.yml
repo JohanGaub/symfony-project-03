@@ -65,6 +65,10 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+        dql:
+            numeric_functions:
+                Round: AppBundle\Doctrine2\Round
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'

@@ -23,7 +23,7 @@ class TechnicalEvolutionRepository extends EntityRepository
         $query = $this->createQueryBuilder('te')
             ->select('dtes', 'dteo', 'c', 'ct', 'u', 'ute', 'te', 'te.id')
             ->addSelect('COUNT(ute.note) as nb_notes')
-            ->addSelect('AVG(ute.note) as avg_notes')
+            ->addSelect('ROUND(AVG(ute.note), 1) as avg_notes')
             ->join('te.status', 'dtes', 'te.status = dtes.id')
             ->join('te.origin', 'dteo', 'te.origin = dteo.id')
             ->join('te.category', 'c', 'te.category = c.id')
