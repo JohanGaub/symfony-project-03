@@ -11,6 +11,62 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class TechnicalEvolutionRepository extends EntityRepository
 {
+    const MAX_RESULT = 8;
+
+    /**
+     * @param $page
+     * @param $filter
+     * @return \Doctrine\ORM\Query
+     */
+    public function getRowsByPage($page, $filter)
+    {
+        $query = $this->createQueryBuilder('te')
+            ->select('dtes', 'dteo', 'c', 'ct', 'u', 'ute', 'te', 'te.id')
+            ->addSelect('COUNT(ute.note) as nb_notes')
+            ->addSelect('ROUND(AVG(ute.note), 1) as avg_notes')
+            ->join('te.status', 'dtes', 'te.status = dtes.id')
+            ->join('te.origin', 'dteo', 'te.origin = dteo.id')
+            ->join('te.category', 'c', 'te.category = c.id')
+            ->join('te.user', 'u', 'te.user = u.id')
+            ->join('c.type', 'ct', 'c.type = ct.id')
+            ->join('te.userTechnicalEvolutions', 'ute', 'te.id = ute.technicalEvolution')
+            ->orderBy('dtes.id', 'ASC')
+            ->groupBy('te.id')
+            ->setFirstResult(($page - 1) * self::MAX_RESULT)
+            ->setMaxResults(self::MAX_RESULT);
+        if (!is_null($filter)) {
+            foreach ($filter as $field => $value) {
+                if ($value !== '') {
+                    if (strpos($field, '_') !== 0) {
+                        switch ($field) {
+                            case 'status':
+                                $alias = 'dtes';
+                                break;
+                            case 'categoryType':
+                                $alias = 'ct';
+                                break;
+                            case 'category':
+                                $alias = 'c';
+                                break;
+                            default:
+                                $alias = 'te';
+                        }
+
+                        if ($alias == 'te') {
+                            $search = "$alias.$field like '$value%'";
+                        } else {
+                            $field = 'id';
+                            $search = "$alias.$field = '$value'";
+                        }
+
+                        $query->andWhere($search);
+                    }
+                }
+            }
+        }
+        return $query->getQuery();
+    }
+
     /**
      * Get evolution with a bit informations
      *
@@ -84,15 +140,6 @@ class TechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
-     * @param string $params
-     * @return array
-     */
-    public function getNbEvolution(string $params = '')
-    {
-        return $this->getNbEvolutionQuery($params)->getSingleScalarResult();
-    }
-
-    /**
      * getUnitEvolutionNativeQuery
      * get evolutions unit by id
      *
@@ -160,27 +207,6 @@ class TechnicalEvolutionRepository extends EntityRepository
             LIMIT 1
             
         ", $rsm);
-        return $query;
-    }
-
-    /**
-     * TODO => Don't forget to delete (filter-search)
-     * @param string $params
-     * @return \Doctrine\ORM\Query
-     */
-    private function getNbEvolutionQuery(string $params)
-    {
-        # make a query
-        /** @noinspection SqlResolve */
-        $query = $this->getEntityManager()->createQuery("
-            SELECT COUNT(te)
-            FROM 'AppBundle\Entity\TechnicalEvolution' te 
-            JOIN 'AppBundle\Entity\Dictionary' dtes WITH te.status = dtes.id
-            JOIN 'AppBundle\Entity\Dictionary' dteo WITH te.origin = dteo.id
-            JOIN 'AppBundle\Entity\Category' c WITH te.category = c.id
-            JOIN 'AppBundle\Entity\Dictionary' ct WITH c.type = ct.id
-            WHERE 1=1 AND {$params} 
-        ");
         return $query;
     }
 }

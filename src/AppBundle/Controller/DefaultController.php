@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * TODO => FIX that .... wysiwyg case size
  * Class DefaultController
  * @package AppBundle\Controller
  */

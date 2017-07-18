@@ -1004,6 +1004,13 @@ a {
 .jqte_editor {
   height: 60rem; }
 
+.jqte_tool_label {
+  height: 2rem !important;
+  display: block; }
+
+.jqte_tool_text {
+  display: block; }
+
 header {
   margin-bottom: 0 !important; }
 
@@ -1246,7 +1253,7 @@ button[type='submit'] {
 .list-evolution .bo-evolution {
   border: 1px solid #9ac00a;
   margin: 1rem 0.5rem;
-  padding: 1rem;
+  padding: 2rem;
   width: 100%;
   float: left; }
   .list-evolution .bo-evolution a {
@@ -1278,12 +1285,11 @@ button[type='submit'] {
         padding: 1rem;
         overflow: hidden;
         text-align: right; }
-  .list-evolution .bo-evolution .bo-middle-evolution .evolution-sumup {
-    height: 4rem;
-    overflow: hidden; }
   .list-evolution .bo-evolution .bo-bottom-evolution {
     display: flex;
     justify-content: space-between; }
+  .list-evolution .bo-evolution .label-evo {
+    font-weight: 700; }
 
 /**
  * Unit evolution part

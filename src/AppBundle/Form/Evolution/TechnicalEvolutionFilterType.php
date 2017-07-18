@@ -2,15 +2,12 @@
 
 namespace AppBundle\Form\Evolution;
 
+use AppBundle\Entity\TechnicalEvolutionFilter;
 use AppBundle\Repository\CategoryRepository;
-use AppBundle\Entity\TechnicalEvolution;
 use AppBundle\Repository\DictionaryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -19,10 +16,10 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TechnicalEvolutionType
+ * Class TechnicalEvolutionFilterType
  * @package AppBundle\Form\Evolution
  */
-class TechnicalEvolutionType extends AbstractType
+class TechnicalEvolutionFilterType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -31,35 +28,24 @@ class TechnicalEvolutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'Nom de l\'évolution'])
-            ->add('sum_up', TextareaType::class, ['label' => 'Résumé'])
-            ->add('content', TextareaType::class, ['label' => 'Contenu'])
-            ->add('reason', TextType::class, [
-                'label'         => 'Raison',
+            ->add('title', TextType::class, [
+                'label'     => 'Titre',
+                'mapped'    => false,
+                'required'  => false,
             ])
-            ->add('origin', EntityType::class, [
+            ->add('status', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
-                    #Find all origin in dictionary
-                    return $repo->getItemListByType('origin');
+                    # Find all category_type for select list
+                    return $repo->getItemListByType('status');
                 },
-                'label'         => 'Origine de la demande',
-                'placeholder'   => 'Qui est à la base de cette évolution ?',
+                'label'         => 'Status',
+                'placeholder'   => 'Sélectionnez votre status',
+                'mapped'        => true,
+                'required'      => false,
                 'multiple'      => false,
             ])
-            ->add('expectedDelay', DateType::class, [
-                'label'         => 'Délais souhaité',
-                'format'        => 'dd-MM-yyyy',
-            ])
-            ->add('product', EntityType::class, [
-                'class'         => 'AppBundle\Entity\Product',
-                'choice_label'  => 'name',
-                'label'         => 'Produit',
-                'placeholder'   => 'Séléctionnez votre produit',
-                'multiple'      => false,
-                'required'      => 'true',
-            ])
-            ->add('category_type', EntityType::class, [
+            ->add('categoryType', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     # Find all category_type for select list
@@ -67,20 +53,22 @@ class TechnicalEvolutionType extends AbstractType
                 },
                 'label'         => 'Type de catégorie',
                 'placeholder'   => 'Sélectionnez votre type de catégorie',
-                'mapped'        => false,
-                'required'      => true ,
+                'mapped'        => true,
+                'required'      => false,
                 'multiple'      => false,
             ])
-            ->add('category', ChoiceType::class, [
+            ->add('category', EntityType::class, [
+                'class'         => 'AppBundle\Entity\Category',
+                'choice_label'  => 'title',
                 'label'         => 'Catégorie',
                 'placeholder'   => 'Séléctionnez votre catégorie',
+                'required'      => false,
             ])
             ->add('submit', SubmitType::class, [
-                'label' =>  'Soumettre la demande'
-            ])
-        ;
+                'label' => 'Filtrer'
+            ]);
 
-        $builder->get('category_type')->addEventListener(
+        $builder->get('categoryType')->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
                 $form = $event->getForm();
@@ -108,7 +96,7 @@ class TechnicalEvolutionType extends AbstractType
                 'label'         => 'Catégorie',
                 'placeholder'   => 'Séléctionnez votre catégorie',
                 'mapped'        => true,
-                'required'      => true,
+                'required'      => false,
                 'auto_initialize' => false,
             ]
         );
@@ -121,7 +109,9 @@ class TechnicalEvolutionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => TechnicalEvolution::class
+            'data_class' => TechnicalEvolutionFilter::class,
+            'validation_groups' => false,
+            'csrf_protection'   => false,
         ]);
     }
 
@@ -130,7 +120,6 @@ class TechnicalEvolutionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_bundle';
+        return 'app_bundle_filter_type';
     }
-
 }

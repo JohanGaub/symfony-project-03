@@ -24,9 +24,9 @@ class LoadDictionaryData extends AbstractFixture implements OrderedFixtureInterf
             'Autre'
         ];
         $status = [
-            'En attente',
             'En cours',
             'Résolu',
+            'En attente',
             'Fermé'
         ];
         $origin = [

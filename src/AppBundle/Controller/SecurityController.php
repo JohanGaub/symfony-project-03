@@ -28,9 +28,14 @@ class SecurityController extends Controller
         $authUtils = $this->get('security.authentication_utils');
         $error = $authUtils->getLastAuthenticationError();
         $lastUsername = $authUtils->getLastUsername();
+
+        $mentions = $this->getDoctrine()->getRepository('AppBundle:DynamicContent')
+            ->findOneBy(['type' => 'mentionslegales']);
+
         return $this->render('AppBundle:Security:login.html.twig', [
             'error' => $error,
-            'last_username' => $lastUsername
+            'last_username' => $lastUsername,
+            'mentions' => $mentions
         ]);
     }
 

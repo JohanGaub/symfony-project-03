@@ -6,7 +6,7 @@
   .bo-evolution {
     border: 1px solid $primary-color;
     margin: 1rem 0.5rem;
-    padding: 1rem;
+    padding: 2rem;
     width: 100%;
     float: left;
 
@@ -61,15 +61,16 @@
     }
 
     .bo-middle-evolution {
-      .evolution-sumup {
-        height: 4rem;
-        overflow: hidden;
-      }
+
     }
 
     .bo-bottom-evolution {
       display: flex;
       justify-content: space-between;
+    }
+
+    .label-evo {
+      font-weight: 700;
     }
   }
 }

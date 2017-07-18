@@ -32,7 +32,7 @@ class LoadTechnicalEvolutionData extends AbstractFixture implements OrderedFixtu
 
             $te= new TechnicalEvolution();
             $te->setTitle($faker->words(4, true));
-            $te->setSumUp($faker->sentence(6));
+            $te->setSumUp($faker->sentence(120));
             $te->setContent($faker->paragraph(7));
             $te->setReason($faker->word);
             $te->setStatus($this->getReference($randomStatus));
