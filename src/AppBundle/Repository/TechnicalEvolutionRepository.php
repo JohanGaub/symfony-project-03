@@ -14,6 +14,9 @@ class TechnicalEvolutionRepository extends EntityRepository
     const MAX_RESULT = 8;
 
     /**
+     * Function to use with Navigator service
+     * list all filter's evolutions
+     *
      * @param $page
      * @param $filter
      * @return \Doctrine\ORM\Query
@@ -58,7 +61,6 @@ class TechnicalEvolutionRepository extends EntityRepository
                             $field = 'id';
                             $search = "$alias.$field = '$value'";
                         }
-
                         $query->andWhere($search);
                     }
                 }
@@ -131,6 +133,8 @@ class TechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
+     * Get unit evolution native query result
+     *
      * @param int $technicalEvolutionId
      * @return array
      */

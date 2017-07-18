@@ -35,9 +35,9 @@ class DictionaryController extends Controller
         $originTitle     = 'origin';
         $ticketTypeTitle = 'ticket_type';
 
-        $typeList   = $repo->getItemListByType($typeTitle)->getQuery()->getResult();
-        $statusList = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
-        $originList = $repo->getItemListByType($originTitle)->getQuery()->getResult();
+        $typeList       = $repo->getItemListByType($typeTitle)->getQuery()->getResult();
+        $statusList     = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
+        $originList     = $repo->getItemListByType($originTitle)->getQuery()->getResult();
         $ticketTypeList = $repo->getItemListByType($ticketTypeTitle)->getQuery()->getResult();
 
         $dictionary         = new Dictionary();
@@ -81,6 +81,7 @@ class DictionaryController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
+
         /**
          * Get result from ajax call
          * delete 'dictionary_form_' from id to get category type
@@ -88,11 +89,13 @@ class DictionaryController extends Controller
         $dictionary = new Dictionary();
         $form = $this->createForm(DictionaryType::class, $dictionary);
         $form->handleRequest($request);
-
         $em = $this->getDoctrine()->getManager();
         $dictionary->setValue(htmlspecialchars_decode($dictionary->getValue(), ENT_QUOTES));
-        $verification = $em->getRepository('AppBundle:Dictionary')
-            ->findBy(['type' => $type, 'value' => $dictionary->getValue()]);
+
+        $verification = $em->getRepository('AppBundle:Dictionary')->findBy([
+                'type' => $type,
+                'value' => $dictionary->getValue()
+        ]);
 
         if (count($verification) > 0) {
             $data = [
@@ -101,6 +104,7 @@ class DictionaryController extends Controller
             ];
             return new JsonResponse($data);
         }
+
         if ($form->isValid()) {
             $dictionary->setType($type);
             $em->persist($dictionary);
@@ -113,6 +117,7 @@ class DictionaryController extends Controller
             ];
             return new JsonResponse($data);
         }
+
         return new JsonResponse([
             'status'    => 'error',
             'element'   => 'Une erreur est survenue ! Veuillez réessayer !'
@@ -133,6 +138,7 @@ class DictionaryController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
+
         $em = $this->getDoctrine()->getManager();
         $repoDictionary = $em->getRepository('AppBundle:Dictionary');
 
@@ -161,6 +167,7 @@ class DictionaryController extends Controller
             'type'  => $dictionary->getType(),
             'value' => $dictionary->getValue()
         ]);
+
         if (count($verification) > 0) {
             $data = [
                 'status'    => 'error',
@@ -168,6 +175,7 @@ class DictionaryController extends Controller
             ];
             return new JsonResponse($data);
         }
+
         if ($form->isValid()) {
             $em->persist($dictionary);
             $em->flush();
@@ -190,7 +198,9 @@ class DictionaryController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
+
         $em = $this->getDoctrine()->getManager();
+
         /**
          * Verification if input have already liaison
          */

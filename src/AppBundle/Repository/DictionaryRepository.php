@@ -3,7 +3,6 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * Class DictionaryRepository
@@ -12,6 +11,8 @@ use Doctrine\ORM\Query\ResultSetMapping;
 class DictionaryRepository extends EntityRepository
 {
     /**
+     * getItemListByType query builder result
+     *
      * @param $type
      * @return array
      */

@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Class NewsController
  * @package AppBundle\Controller
@@ -18,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 class NewsController extends Controller
 {
     /**
+     * Index news
+     *
      * @Route("/", name="newsHome")
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -32,6 +33,8 @@ class NewsController extends Controller
     }
 
     /**
+     * Add news
+     *
      * @Route("/nouvelle", name="newsAdd")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -60,6 +63,8 @@ class NewsController extends Controller
     }
 
     /**
+     * Admin view for news
+     *
      * @param News $new
      * @Route("/admin/{new}", name="newsUnit")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -73,6 +78,8 @@ class NewsController extends Controller
     }
 
     /**
+     * Update news by admin
+     *
      * @param Request $request
      * @param News $new
      * @return \Symfony\Component\HttpFoundation\Response
@@ -83,7 +90,6 @@ class NewsController extends Controller
     {
         $form = $this->createForm(NewsType::class, $new);
         $form->handleRequest($request);
-
         $em     = $this->getDoctrine()->getManager();
         $types  = $em->getRepository('AppBundle:Dictionary')->getItemListByTypeResult('category_type');
 
@@ -104,6 +110,8 @@ class NewsController extends Controller
     }
 
     /**
+     * Delete news (admin)
+     *
      * @param News $new
      * @Route("/suppression/{new}", name="newsDelete")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -119,6 +127,8 @@ class NewsController extends Controller
     }
 
     /**
+     * User view for news
+     *
      * @param News $new
      * @Route("/lire/{new}", name="newsUserUnit")
      * @return \Symfony\Component\HttpFoundation\Response

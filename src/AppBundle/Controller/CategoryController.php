@@ -17,12 +17,14 @@ class CategoryController extends Controller
 {
     /**
      * Index all categorys
+     *
      * @Route("/liste", name="categoryHome")
      */
     public function indexAction()
     {
         $categorys = $this->getDoctrine()->getRepository('AppBundle:Category')
             ->getCategorys();
+
         return $this->render('@App/Pages/Category/indexCategory.html.twig', [
             'categorys' => $categorys
         ]);
@@ -30,6 +32,7 @@ class CategoryController extends Controller
 
     /**
      * Add new cateogry
+     *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("nouvelle", name="categoryAdd")
@@ -47,6 +50,7 @@ class CategoryController extends Controller
             $this->addFlash('notice', 'Votre nouvelle catégorie a été ajouté à la liste.');
             return $this->redirectToRoute('categoryHome');
         }
+
         return $this->render('@App/Pages/Category/formBasicCategory.html.twig', [
             'form' => $form->createView()
         ]);
@@ -54,6 +58,7 @@ class CategoryController extends Controller
 
     /**
      * Update one category
+     *
      * @Route("/modification/{category}", name="categoryUpdate")
      * @param Request $request
      * @param Category $category
@@ -71,6 +76,7 @@ class CategoryController extends Controller
             $this->addFlash('notice', 'Votre modification a bien été prise en compte !');
             return $this->redirectToRoute('categoryHome');
         }
+
         return $this->render('@App/Pages/Category/formBasicCategory.html.twig', [
             'form' => $form->createView()
         ]);
@@ -78,6 +84,7 @@ class CategoryController extends Controller
 
     /**
      * Delete one category
+     *
      * @param Category $category
      * @Route("/suppression/{category}", name="categoryDelete")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -92,6 +99,7 @@ class CategoryController extends Controller
         } catch(\Exception $exception) {
             $this->addFlash('notice', 'Vous ne pouvez pas supprimer cette catégorie tant que des éléments y sont attachés !');
         }
+
         return $this->redirectToRoute('categoryHome');
     }
 }

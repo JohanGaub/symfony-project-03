@@ -11,6 +11,8 @@ use Doctrine\ORM\EntityRepository;
 class NewsRepository extends EntityRepository
 {
     /**
+     * Function to get news by type (commercial / technical)
+     *
      * @param $type
      * @return array
      */

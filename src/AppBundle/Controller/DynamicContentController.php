@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Class DynamicContentController
  * @package AppBundle\Controller
@@ -16,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 class DynamicContentController extends Controller
 {
     /**
+     * Charte view
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/charte", name="charteIndex")
      * @Security("has_role('ROLE_FINAL_CLIENT')")
@@ -32,6 +33,8 @@ class DynamicContentController extends Controller
     }
 
     /**
+     * Charte update
+     *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("/charte/modification", name="charteUpdate")
@@ -61,6 +64,8 @@ class DynamicContentController extends Controller
     }
 
     /**
+     * "Mentions légales" view
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/mentions-legales", name="mentionsIndex")
      * @Security("has_role('ROLE_FINAL_CLIENT')")
@@ -77,6 +82,8 @@ class DynamicContentController extends Controller
     }
 
     /**
+     * "Mentions légales" update
+     *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("/mentions-legales/modification", name="mentionsUpdate")

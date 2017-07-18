@@ -154,6 +154,7 @@ class TechnicalEvolutionController extends Controller
                 'technicalEvolution' => $technicalEvolution->getId()
             ]);
         }
+
         return $this->render($view, [
             'form'          => $form->createView(),
             'categoryId'    => isset($category) ? $category->getId() : null,
@@ -239,19 +240,22 @@ class TechnicalEvolutionController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-        $data   = $request->request->get('data');
-        if ($data == 'true') {
+
+        $data = $request->request->get('data');
+
+        if ($data == 'true')
             $newStatus = 'En cours';
-        } else if ($data == 'false') {
+        else if ($data == 'false')
             $newStatus = 'Refusé';
-        } else {
+        else
             throw new Exception('Une erreur est survenue, veuillez réessayer plus tard');
-        }
-        $em     = $this->getDoctrine()->getManager();
+
+        $em = $this->getDoctrine()->getManager();
         $status = $em->getRepository('AppBundle:Dictionary')->findOneBy([
             'type'  => 'status',
             'value' => $newStatus
         ]);
+
         $technicalEvolution->setStatus($status);
         $em->persist($technicalEvolution);
         $em->flush();

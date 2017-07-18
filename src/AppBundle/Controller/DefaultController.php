@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\File\File;
 class DefaultController extends Controller
 {
     /**
+     * Home of project (site vitrine)
+     *
      * @Route("/", name="home")
      */
     public function indexAction()
@@ -27,6 +29,8 @@ class DefaultController extends Controller
     }
 
     /**
+     * Historic page view
+     *
      * @Route("/historique", name="historique")
      */
     public function viewHistoriqueAction()
@@ -36,6 +40,7 @@ class DefaultController extends Controller
 
     /**
      * In this function just send links
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/telechargements", name="download")
      */
@@ -51,6 +56,8 @@ class DefaultController extends Controller
     }
 
     /**
+     * Download link function to get files
+     *
      * @param $type
      * @param $name
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|File|\Symfony\Component\HttpFoundation\Response
@@ -59,14 +66,16 @@ class DefaultController extends Controller
      */
     public function DownloadAction($type, $name)
     {
-        if($this->isGranted('ROLE_TECHNICIAN') || $this->isGranted('ROLE_COMMERCIAL')) {
+        if($this->isGranted('ROLE_TECHNICIAN') || $this->isGranted('ROLE_COMMERCIAL'))
             return $this->file($this->get('app.read_docfiles')->downloadFile($type, $name));
-        } else {
+        else
             return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
-        }
+
     }
 
     /**
+     * Home of backoffice (dashbord)
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/tableau-de-bord", name="dashboard")
      * @Security("has_role('ROLE_FINAL_CLIENT')")

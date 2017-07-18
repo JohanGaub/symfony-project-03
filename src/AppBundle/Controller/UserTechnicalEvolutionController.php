@@ -22,7 +22,6 @@ class UserTechnicalEvolutionController extends Controller
 {
     /**
      * Add new comment for TechnicalEvolutions
-     *
      * @Route("/commentaires/ajout/{technicalEvolution}", name="evolutionCommentsAdd")
      * @param Request $request
      * @param TechnicalEvolution $technicalEvolution
@@ -34,6 +33,7 @@ class UserTechnicalEvolutionController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
+
         $comment = new UserTechnicalEvolution('comment');
         $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
         $form->handleRequest($request);
@@ -49,6 +49,7 @@ class UserTechnicalEvolutionController extends Controller
             $em->persist($comment);
             $em->flush();
             $userProfile = $user->getUserProfile();
+
             $data = [
                 'id'      => $comment->getId(),
                 'user'    => $userProfile->getFullName(),
@@ -73,10 +74,12 @@ class UserTechnicalEvolutionController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
+
         // data is nb element page already get
         $data = $request->request->get('data');
         $comments = $this->getDoctrine()->getRepository('AppBundle:UserTechnicalEvolution')
             ->getUserTechnicalEvolutionArray($technicalEvolutionId, 'comment', "$data, 10");
+
         if (count($comments) == 0) {
             throw new Exception('No comment are find !');
         }
@@ -97,13 +100,14 @@ class UserTechnicalEvolutionController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
+
         $comment = $userTechnicalEvolution;
         $form = $this->createForm(CommentUserTechnicalEvolutionType::class, $comment);
         $form->handleRequest($request);
         $data = [];
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
-            || $this->getUser()->getId() == $comment->getUser()->getId()) {
+        || $this->getUser()->getId() == $comment->getUser()->getId()) {
             if ($form->isValid()) {
                 $user = $this->getUser();
                 $currentDate = new \DateTime('now');
@@ -137,6 +141,7 @@ class UserTechnicalEvolutionController extends Controller
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
+
         $em = $this->getDoctrine()->getManager();
         $comment = $em->getRepository('AppBundle:UserTechnicalEvolution')
             ->findOneBy(['id' => $userTechnicalEvolutionId]);
