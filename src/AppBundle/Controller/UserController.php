@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class UserController extends controller
 {
     /**
-     * @Route("/register_associate", name="add_associate")
+     * @Route("/register_associate/add", name="add_associate")
      * @param Request $request
      * @return Response|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @internal param UserPasswordEncoderInterface $passwordEncoder
@@ -111,7 +111,7 @@ class UserController extends controller
      * @return Response|\Symfony\Component\HttpFoundation\Response
      * Lists all User entities.
      * @Security("has_role ('ROLE_PROJECT_RESP')")
-     * @Route("/", name="validation_associate")
+     * @Route("/liste/{page}", name="validation_associate")
      */
     public function showAssociate($page = 1)
     {
@@ -186,7 +186,7 @@ class UserController extends controller
     /**
      * @param User $user
      * @Security("has_role ('ROLE_PROJECT_RESP')")
-     * @Route("/associate_validation/activate/{id}", name="activate_associate")
+     * @Route("/activate/{id}", name="activate_associate")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function validateAssociate(User $user)

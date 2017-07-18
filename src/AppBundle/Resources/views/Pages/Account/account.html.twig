@@ -1,0 +1,97 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block body %}
+    <section>
+    <div class="container">
+
+    <div class="row col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+    <h1 class="account-title">Votre compte</h1>
+    <table class="table table-user-information info-user ">
+
+    {% for user in User %}
+
+        <tr>
+            <td class="field">Prénom</td>
+            <td>{{ user.userProfile.firstname }}</td>
+        </tr>
+        <tr>
+            <td class="field">Nom</td>
+            <td>{{ user.userProfile.lastname }}</td>
+        </tr>
+        <tr>
+            <td class="field">Mobile</td>
+            <td>{{ user.userProfile.phone }}</td>
+        </tr>
+        <tr>
+        <tr>
+            <td class="field">Société</td>
+            <td>{{ user.company.name }}</td>
+        </tr>
+        <tr>
+            <td class="field">Login</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td class="field">Role</td>
+            <td>{% for role in user.roles %}
+                    {% if(role == "ROLE_ADMIN") %}
+                        Administrateur
+                    {% elseif(role == "ROLE_COMMERCIAL") %}
+                        Commercial
+                    {% elseif(role == "ROLE_TECHNICIAN") %}
+                        Technique
+                    {% elseif(role == "ROLE_PROJECT_RESP") %}
+                        Responsable Projet
+                    {% elseif(role == ("ROLE_TECHNICIAN" and "ROLE_COMMERCIAL")) %}
+                        Commercial et Technique
+                    {% endif %}
+                {% endfor %}</td>
+        </tr>
+        <tr>
+            <td class="field">Adresse</td>
+            <td>{{ user.company.address }}</td>
+        </tr>
+        <tr>
+            <td class="field">Ville</td>
+            <td>{{ user.company.town }}</td>
+        </tr>
+        <tr>
+            <td class="field">Code Postale</td>
+            <td>{{ user.company.postCode }}</td>
+        </tr>
+        <tr>
+            <td class="field">Numéro société</td>
+            <td>{{ user.company.phone }}</td>
+        </tr>
+        <tr>
+            <td class="field">Siret</td>
+            <td>{{ user.company.siret }}</td>
+        </tr>
+        <tr>
+            <td class="field">Email</td>
+            <td>{{ user.company.email }}</td>
+        </tr>
+        </table>
+        <div>
+            <a href="{{ path('account_modify', { 'id': user.id }) }}"
+               class="simple-btn-2">Modifier</a>
+        </div>
+        </div>
+        </div>
+        {#<div class="col-xs-4 col-xs-offset-3 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-4">
+            <div class=" large-screen  hidden-xs hidden-sm account-button">
+                <a href="{{ path('account_modify', { 'id': user.id }) }}"
+                   class="simple-btn-1 text-center ">Modifier</a>
+            </div>
+            <div class="large-screen col-xs-4 col-xs-offset-4  hidden-md hidden-lg account-button">
+                <a href="{{ path('account_modify', { 'id': user.id }) }}">
+                    <i class="fa fa-pencil-square fa-4x" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>#}
+
+
+        </section>
+    {% endfor %}
+
+{% endblock %}

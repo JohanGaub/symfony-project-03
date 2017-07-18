@@ -1,11 +1,14 @@
 <?php
-
 namespace AppBundle\Form;
 
 
-
+use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserProfile;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -13,7 +16,13 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+/**
+ * Created by PhpStorm.
+ * User: topikana
+ * Date: 24/05/17
+ * Time: 16:04
+ */
+class UserFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -27,7 +36,6 @@ class UserType extends AbstractType
 
             ->add('company', CompanyType::class, array(
                 'label' => false,
-                'cascade_validation' => true,
             ))
             ->add('userProfile', User_profileType::class, array(
                 'label' => false,
@@ -39,8 +47,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => User::class,
-            'cascade_validation' => true,
+            'data_class' => User::class
         ));
     }
 }

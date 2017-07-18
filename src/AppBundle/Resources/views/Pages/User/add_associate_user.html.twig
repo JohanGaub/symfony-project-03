@@ -1,7 +1,7 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block body %}
-    <section id="register">
+    <section id="registration">
 
         <div class="register-title col-md-12">
             <h1>Ajout d'un collaborateur</h1>
@@ -17,8 +17,7 @@
         {{ form_start(form_associate) }}
         <div class="container form">
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-wrap">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
                         <hr>
                         <div class="form-group">
                             {{ form_label(form_associate.email) }}

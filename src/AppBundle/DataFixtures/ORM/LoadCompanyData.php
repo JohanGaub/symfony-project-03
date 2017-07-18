@@ -31,7 +31,7 @@ class LoadCompanyData extends AbstractFixture implements OrderedFixtureInterface
             $company->setPostCode(mt_rand(00000,99999));
             $company->setEmail($faker->email);
             $company->setPhone(mt_rand(0000000000,9999999999));
-            $company->setSiret($faker->siret);
+            $company->setSiret(mt_rand(00000000000000,99999999999999));
             $em->persist($company);
 
             $this->setReference('company_id_' . $i, $company);

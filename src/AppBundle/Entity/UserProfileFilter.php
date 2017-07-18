@@ -1,68 +1,42 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: topikana
+ * Date: 13/07/17
+ * Time: 14:13
+ */
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * UserProfile
- *
- * @ORM\Table(name="user_profile")
- * @ORM\Entity
- */
-class UserProfile
+class UserProfileFilter
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
      */
     private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
      */
     private $lastname;
 
     /**
      * @var string
-     * @Assert\Regex(
-     *     pattern="/^\d{10}$/",
-     *     match=true,
-     *     message="Votre numéro de téléphone est incomplet"
-     * )
-     * @ORM\Column(name="phone", type="string", length=10, nullable=false)
      */
     private $phone;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+
 
     /**
      * Set firstname
      *
      * @param string $firstname
      *
-     * @return UserProfile
+     * @return UserProfileFilter
      */
     public function setFirstname($firstname)
     {
@@ -86,7 +60,7 @@ class UserProfile
      *
      * @param string $lastname
      *
-     * @return UserProfile
+     * @return UserProfileFilter
      */
     public function setLastname($lastname)
     {
@@ -110,7 +84,7 @@ class UserProfile
      *
      * @param string $phone
      *
-     * @return UserProfile
+     * @return UserProfileFilter
      */
     public function setPhone($phone)
     {
