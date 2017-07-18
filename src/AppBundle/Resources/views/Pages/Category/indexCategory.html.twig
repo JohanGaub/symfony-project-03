@@ -24,7 +24,7 @@
                     <tr>
                         <th>Nom</th>
                         <th>Type</th>
-                        <th>Description</th>
+                        <th class="hidden-md">Description</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -34,7 +34,7 @@
                         <tr>
                             <th>{{ category.title }}</th>
                             <th>{{ category.type.value }}</th>
-                            <th>{{ category.description }}</th>
+                            <th class="hidden-md">{{ category.description }}</th>
                             <th>
                                 <a href="{{ path('categoryUpdate', {'category': category.id}) }}" class="neutral">
                                     <i class="fa fa-cog fa-2x" aria-hidden="true"></i>

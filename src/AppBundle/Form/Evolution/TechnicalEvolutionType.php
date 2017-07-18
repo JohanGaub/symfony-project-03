@@ -49,7 +49,11 @@ class TechnicalEvolutionType extends AbstractType
             ])
             ->add('expectedDelay', DateType::class, [
                 'label'         => 'Délais souhaité',
-                'format'        => 'dd MM yyyy'
+                'format'        => 'dd-MM-yyyy',
+                'widget'        => 'single_text',
+                'attr'          => [
+                    'class'     => 'datepicker'
+                ]
             ])
             ->add('product', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Product',

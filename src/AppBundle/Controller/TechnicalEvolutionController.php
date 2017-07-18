@@ -141,7 +141,6 @@ class TechnicalEvolutionController extends Controller
              */
             $this->get('app.email.sending')->sendEmail(
                 'Votre évolution vient d\'être modifié',
-                'contact@ashara.fr',
                 [$this->getUser()],
                 $this->render('@App/Email/email.updateEvolution.html.twig', [
                     'url' => $this->generateUrl('evolutionUnit', [
