@@ -34,7 +34,7 @@
                         {% for file in dir %}
                             <tr>
                                 <th>{{ file['name'] }}</th>
-                                <th><a href="{{ file['path'] }}" download>
+                                <th><a href="{{ path('downloadFile', {type: file['key'], name: file['name']}) }}">
                                         <i class="fa fa-download fa-2x" aria-hidden="true"></i>
                                     </a>
                                 </th>

@@ -5,8 +5,10 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
+ * TODO => FIX that .... wysiwyg case size
  * Class DefaultController
  * @package AppBundle\Controller
  */
@@ -34,6 +36,7 @@ class DefaultController extends Controller
     }
 
     /**
+     * In this function just send links
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/telechargements", name="download")
      */
@@ -43,6 +46,22 @@ class DefaultController extends Controller
             return $this->render('@App/Pages/Others/bo-download.html.twig', [
                 'dirs' => $this->get('app.read_docfiles')->getDirContent()
             ]);
+        } else {
+            return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
+        }
+    }
+
+    /**
+     * @param $type
+     * @param $name
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|File|\Symfony\Component\HttpFoundation\Response
+     * @Route("/telechargements/{type}/{name}", name="downloadFile")
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
+     */
+    public function DownloadAction($type, $name)
+    {
+        if($this->isGranted('ROLE_TECHNICIAN') || $this->isGranted('ROLE_COMMERCIAL')) {
+            return $this->file($this->get('app.read_docfiles')->downloadFile($type, $name));
         } else {
             return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
         }

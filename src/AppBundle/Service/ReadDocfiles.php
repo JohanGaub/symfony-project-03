@@ -3,6 +3,8 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\User;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -41,7 +43,6 @@ class ReadDocfiles
         $this->user     = $tokenStorage->getToken()->getUser();
         $this->security = $security;
         $this->docfiles = $docfiles;
-        $this->checkAuthorization();
     }
 
     /**
@@ -50,15 +51,20 @@ class ReadDocfiles
      */
     public function getDirContent()
     {
+        $this->getAllowDirPaths();
+
         foreach ($this->dirPaths as $dirPath) {
             if ($dir = opendir($dirPath)) {
                 while (false !== ($file = readdir($dir))) {
                     if ($file != '.' && $file != '..') {
                         $temp['name']   = $file;
-                        $temp['path']   = $dirPath . $file;
-                        $keyArray       = explode('/', $dirPath);
-                        $key            = $keyArray[count($keyArray) - 2];
-                        $this->files[$key][] = ['name' => $file, 'path' => $dirPath . $file];
+                        $pathArray      = explode('/', $dirPath);
+                        $key            = $pathArray[count($pathArray) - 2];
+
+                        $this->files[$key][] = [
+                            'name'  => $file,
+                            'key'   => $key
+                        ];
                     }
                 }
             }
@@ -67,10 +73,26 @@ class ReadDocfiles
     }
 
     /**
+     * Function to download  file (verification about download)
+     * @param $type
+     * @param $name
+     * @return File
+     */
+    public function downloadFile($type, $name)
+    {
+        if ($this->security->isGranted('ROLE_PROJECT_RESP')
+        || ($this->security->isGranted('ROLE_TECHNICIAN') && $type == 'technical')
+        || ($this->security->isGranted('ROLE_COMMERCIAL') && $type == 'commercial'))
+            return new File($this->docfiles . '/' . $type . '/' . $name);
+        else
+            throw new Exception('Le fichier n\'a pas été trouvé ou vous n\'avez pas accès à celui-ci merci de contacter un administrateur !');
+    }
+
+    /**
      * Check authorization for dynamic content
      * @return $this
      */
-    private function checkAuthorization()
+    private function getAllowDirPaths()
     {
         if ($this->security->isGranted('ROLE_PROJECT_RESP')) {
             $this->dirPaths[] = $this->docfiles . '/commercial/';
@@ -79,6 +101,8 @@ class ReadDocfiles
             $this->dirPaths[] = $this->docfiles . '/commercial/';
         } else if ($this->security->isGranted('ROLE_TECHNICIAN')) {
             $this->dirPaths[] = $this->docfiles . '/technical/';
+        } else {
+            throw new Exception('Vous n\'avez pas accès à cette partie pour le moment');
         }
         return $this;
     }
