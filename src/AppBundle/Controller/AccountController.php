@@ -20,13 +20,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * Class AccountController
  * @package AppBundle\Controller
- * @Route("/account", name="account", )
+ * @Route("/account", name="account")
  */
 class AccountController extends Controller
 {
     /**
      * @return mixed
-     * @Route("/", name="account_result", )
+     * @Route("/", name="account_result")
      * @param Request $request
      * @param User $user
      */
@@ -34,9 +34,8 @@ class AccountController extends Controller
     {
 
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
 
-        $userProfile = $em->getRepository('AppBundle:User')->findBy(array('id' => $user));
+        $userProfile = $this->getDoctrine()->getRepository('AppBundle:User')->findBy(array('id' => $user));
 
         return $this->render('@App/Pages/Account/account.html.twig', array(
             'User' => $userProfile,

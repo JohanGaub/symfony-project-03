@@ -14,11 +14,11 @@ class User_profileType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, ['label' => 'Prénom',
-            'required' => false])
+                'required' => false])
             ->add('lastname', TextType::class, ['label' => 'Nom',
-            'required' => false])
+                'required' => false])
             ->add('phone', TextType::class, ['label' => 'Mobile',
-            'required' => false]);
+                'required' => false]);
 
     }
 
