@@ -517,7 +517,7 @@ main#bo-main-content {
 
 /* Block page "validation register"*/
 .validate {
-  margin-top: 15em; }
+  margin-top: 5em; }
 
 .register-title {
   margin-top: 5em; }
@@ -750,6 +750,21 @@ a {
 
 .info-user {
   border: 2px solid #dd5116; }
+
+.simple-btn-2 {
+  border: 3px solid #9ac00a;
+  color: #9ac00a;
+  font-weight: 700;
+  display: block;
+  text-align: center;
+  transition: 0.3s ease-out;
+  padding: 1.25rem 0; }
+
+.title-account {
+  margin-bottom: 5rem; }
+
+.title-register {
+  margin-bottom: 6rem; }
 
 .bo-top-bar {
   border-bottom: 1px solid #9ac00a;

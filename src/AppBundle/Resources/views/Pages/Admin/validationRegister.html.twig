@@ -1,6 +1,9 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block body %}
+    <div class="title-register col-md-12 hidden-xs hidden-sm visible-md visible-lg">
+        <h1>Gestion des comptes</h1>
+    </div>
     <div class="validate">
         <div class="row validation-user">
             <div class="col-xs-12 col-xs-offset-0 col-lg-12 col-lg-offset-0">
@@ -8,23 +11,23 @@
                     <thead>
                     <tr>
                         <th>Entreprise</th>
-                        <th>Email/login</th>
-                        <th>Prénom</th>
+                        <th class="hidden-xs hidden-sm visible-md visible-lg">Email/login</th>
+                        <th class="hidden-xs visible-sm visible-md visible-lg">Prénom</th>
                         <th>Nom</th>
-                        <th>Mobile</th>
-                        <th>Roles</th>
+                        <th class="hidden-xs visible-sm visible-md visible-lg">Mobile</th>
+                        <th class="hidden-xs visible-sm visible-md visible-lg">Roles</th>
                         <th>Status</th>
                     </tr>
                     </thead>
                     {% for user in User %}
-                        <tbody class="table-striped" id="register">
+                        <tbody id="register">
                         <tr>
                             <td>{{ user.company.name }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.userProfile.firstname }}</td>
+                            <td class="hidden-xs hidden-sm visible-md visible-lg">{{ user.email }}</td>
+                            <td class="hidden-xs visible-sm visible-md visible-lg">{{ user.userProfile.firstname }}</td>
                             <td>{{ user.userProfile.lastname }}</td>
-                            <td>{{ user.userProfile.phone }}</td>
-                            <td>{% for role in user.roles %}
+                            <td class="hidden-xs visible-sm visible-md visible-lg">{{ user.userProfile.phone }}</td>
+                            <td class="hidden-xs visible-sm visible-md visible-lg">{% for role in user.roles %}
                                     {% if(role == "ROLE_ADMIN") %}
                                         Administrateur
                                     {% elseif(role == "ROLE_COMMERCIAL") %}
