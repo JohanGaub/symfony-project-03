@@ -6,7 +6,6 @@ use AppBundle\Entity\TechnicalEvolutionFilter;
 use AppBundle\Repository\CategoryRepository;
 use AppBundle\Repository\DictionaryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
@@ -58,7 +57,9 @@ class TechnicalEvolutionFilterType extends AbstractType
                 'required'      => false,
                 'multiple'      => false,
             ])
-            ->add('category', ChoiceType::class, [
+            ->add('category', EntityType::class, [
+                'class'         => 'AppBundle\Entity\Category',
+                'choice_label'  => 'title',
                 'label'         => 'Catégorie',
                 'placeholder'   => 'Séléctionnez votre catégorie',
                 'required'      => false,
