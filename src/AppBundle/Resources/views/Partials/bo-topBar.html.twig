@@ -15,7 +15,7 @@
         </div>
     </div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <p> Connecté en tant que {{ app.user.userProfile.firstname }} {{ app.user.userProfile.lastname }}
+        <p> {{ app.user.userProfile.fullName }}
         </p>
     {% endif %}
 </div>

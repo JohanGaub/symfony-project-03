@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'dinregular';
-    src: url('/web/assets/fonts/dinregular.eot');
-    src: url('/web/assets/fonts/dinregular.eot?#iefix') format('embedded-opentype'),
-      url('/web/assets/fonts/dinregular.woff2') format('woff2'),
-      url('/web/assets/fonts/dinregular.woff') format('woff'),
-      url('/web/assets/fonts/dinregular.ttf') format('truetype'),
-      url('/web/assets/fonts/dinregular.svg#webfontregular') format('svg');
+    src: url('../fonts/dinregular.eot');
+    src: url('../fonts/dinregular.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/dinregular.woff2') format('woff2'),
+      url('../fonts/dinregular.woff') format('woff'),
+      url('../fonts/dinregular.ttf') format('truetype'),
+      url('../fonts/dinregular.svg#webfontregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -22,27 +22,12 @@ main {
 }
 main#bo-main-content {
   margin-top: 0 !important;
-  padding-left: 20rem;
-}
-@media screen and (max-width: 1278px) {
-  main#bo-main-content {
-    padding-left: 5rem !important;
-  }
 }
 @media screen and (max-width: 1024px) {
   main {
     margin-top: 10rem;
   }
-  main#bo-main-content {
-    padding-left: 5rem !important;
-  }
 }
-@media screen and (max-width: 768px) {
-  main#bo-main-content {
-    padding-left: 0 !important;
-  }
-}
-
 
 
 /* Block page "validation register"*/
@@ -53,7 +38,7 @@ main#bo-main-content {
   margin-top: 5em;
 }
 .message-register{
-  //margin-top: 5em;
+  margin-top: 2em;
 }
 header {
   padding-bottom: 0;
