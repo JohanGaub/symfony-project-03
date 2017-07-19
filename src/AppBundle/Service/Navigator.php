@@ -129,7 +129,7 @@ class Navigator extends Paginator
     {
         $class = "\\AppBundle\\Entity\\" . $this->context . "Filter";
         $filter = new $class();
-        if (! is_null($this->filter)) {
+        if (!is_null($this->filter)) {
             foreach($this->filter as $field => $value) {
                 if ($value !== "") {
                     $accessor = "set" . ucwords($field);

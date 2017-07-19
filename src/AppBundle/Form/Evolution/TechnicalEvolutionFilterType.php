@@ -30,8 +30,7 @@ class TechnicalEvolutionFilterType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label'     => 'Titre',
-                'mapped'    => false,
-                'required'  => false,
+                'required'  => false
             ])
             ->add('status', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
@@ -41,9 +40,8 @@ class TechnicalEvolutionFilterType extends AbstractType
                 },
                 'label'         => 'Status',
                 'placeholder'   => 'Sélectionnez votre status',
-                'mapped'        => true,
                 'required'      => false,
-                'multiple'      => false,
+                'multiple'      => false
             ])
             ->add('categoryType', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
@@ -53,16 +51,15 @@ class TechnicalEvolutionFilterType extends AbstractType
                 },
                 'label'         => 'Type de catégorie',
                 'placeholder'   => 'Sélectionnez votre type de catégorie',
-                'mapped'        => true,
                 'required'      => false,
-                'multiple'      => false,
+                'multiple'      => false
             ])
             ->add('category', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Category',
                 'choice_label'  => 'title',
                 'label'         => 'Catégorie',
                 'placeholder'   => 'Séléctionnez votre catégorie',
-                'required'      => false,
+                'required'      => false
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Filtrer'

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
 use AppBundle\Form\Category\CategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +20,7 @@ class CategoryController extends Controller
      * Index all categorys
      *
      * @Route("/liste", name="categoryHome")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -36,6 +38,7 @@ class CategoryController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("nouvelle", name="categoryAdd")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)
     {
@@ -63,6 +66,7 @@ class CategoryController extends Controller
      * @param Request $request
      * @param Category $category
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function updateAction(Request $request, Category $category)
     {
@@ -88,6 +92,7 @@ class CategoryController extends Controller
      * @param Category $category
      * @Route("/suppression/{category}", name="categoryDelete")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Category $category)
     {

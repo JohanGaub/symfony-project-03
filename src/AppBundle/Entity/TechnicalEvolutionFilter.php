@@ -9,16 +9,16 @@ namespace AppBundle\Entity;
 class TechnicalEvolutionFilter
 {
     /** @var string */
-    private $title;
+    public $title;
 
     /** @var Dictionary */
-    private $status;
+    public $status;
 
     /** @var Dictionary */
-    private $categoryType;
+    public $categoryType;
 
     /** @var Category */
-    private $category;
+    public $category;
 
     /**
      * @return string
@@ -90,5 +90,19 @@ class TechnicalEvolutionFilter
     {
         $this->category = $category;
         return $this;
+    }
+
+    /**
+     * Transform object to array
+     * @return array
+     */
+    public function getArray()
+    {
+        return [
+            'title'         => $this->getTitle(),
+            'status'        => $this->getStatus(),
+            'category_type'  => $this->getCategoryType(),
+            'category'      => $this->getCategory()
+        ];
     }
 }

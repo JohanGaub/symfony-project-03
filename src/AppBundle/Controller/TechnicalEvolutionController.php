@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
 use AppBundle\Form\Evolution\TechnicalEvolutionFilterType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
 use AppBundle\Form\Evolution\AdminTechnicalEvolutionType;
@@ -29,8 +30,8 @@ class TechnicalEvolutionController extends Controller
      * List all evolution with filter
      *
      * @Route("/liste", name="evolutionHome")
-     * @return Response
      * @Security("has_role('ROLE_FINAL_CLIENT')")
+     * @Method({"get", "post"})
      */
     public function indexAction()
     {
@@ -38,13 +39,15 @@ class TechnicalEvolutionController extends Controller
         $filter     = $navigator->getEntityFilter();
         $form       = $this->createForm(TechnicalEvolutionFilterType::class, $filter);
 
+        dump($filter);
+        dump($filter->getArray());
         /**
          * Next you need to render view with this element :
          * You can replace "$this->get("app.navigator")" by "$navigator"
          */
         return $this->render('@App/Pages/Evolutions/indexEvolution.html.twig', [
             'filter'        => $filter,
-            'filterURL'     => http_build_query($filter),
+            'filterURL'     => http_build_query($filter->getArray()),
             'data'          => $this->get("app.navigator"),
             'documentType'  => "Evolutions",
             'form'          => $form->createView(),
@@ -68,8 +71,8 @@ class TechnicalEvolutionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $dictionaryStatus = $em->getRepository('AppBundle:Dictionary')->findOneBy([
-                    'type' => 'evolution_status',
-                    'value' => 'En attente'
+                'type' => 'evolution_status',
+                'value' => 'En attente'
             ]);
 
             $te->setCreationDate(new \DateTime('now'));

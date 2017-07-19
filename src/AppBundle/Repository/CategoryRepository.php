@@ -46,8 +46,9 @@ class CategoryRepository extends EntityRepository
      */
     public function getCategoryByType($categoryType)
     {
-        return $this->createQueryBuilder('c')
+        $query = $this->createQueryBuilder('c')
             ->where('c.type = :category_type')
             ->setParameter('category_type', $categoryType);
+        return $query;
     }
 }
