@@ -23,6 +23,12 @@ class LoadDictionaryData extends AbstractFixture implements OrderedFixtureInterf
             'Commerciale',
             'Autre'
         ];
+        $evolutionStatus = [
+            'En cours',
+            'Achevé',
+            'En attente',
+            'Fermé'
+        ];
         $status = [
             'En cours',
             'Résolu',
@@ -48,6 +54,13 @@ class LoadDictionaryData extends AbstractFixture implements OrderedFixtureInterf
             $em->persist($dictionary);
             $this->setReference('category_type_id_' . $i, $dictionary);
         }
+        for ($i = 0; $i < count($evolutionStatus); ++$i){
+            $dictionary = new Dictionary();
+            $dictionary->setType('evolution_status');
+            $dictionary->setValue($status[$i]);
+            $em->persist($dictionary);
+            $this->setReference('evolution_status_id_' . $i, $dictionary);
+        }
         for ($i = 0; $i < count($status); ++$i){
             $dictionary = new Dictionary();
             $dictionary->setType('status');
@@ -71,7 +84,6 @@ class LoadDictionaryData extends AbstractFixture implements OrderedFixtureInterf
         }
 
         $em->flush();
-
     }
 
     /**

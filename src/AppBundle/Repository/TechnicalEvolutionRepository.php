@@ -99,40 +99,6 @@ class TechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
-     * Get evolutions
-     *
-     * @param $params
-     * @param $page
-     * @param $maxByPage
-     * @return array
-     */
-    public function getEvolutions($params, $page, $maxByPage)
-    {
-        $qb = $this->createQueryBuilder('te')
-            ->select('te.id', 'te.title', 'te.sumUp', 'te.creationDate', 'te.updateDate', 'te.reason', 'te.expectedDelay')
-            ->addSelect('dtes.value as status')
-            ->addSelect('dteo.value as origin')
-            ->addSelect('c.title as category_title')
-            ->addSelect('ct.value as category_type')
-            ->addSelect('u.id as user_id')
-            ->addSelect('COUNT(ute.note) as nb_notes')
-            ->addSelect('COUNT(ute.comment) as nb_comments')
-            ->addSelect('AVG(ute.note) as avg_notes')
-            ->join('te.status', 'dtes', 'te.status = dtes.id')
-            ->join('te.origin', 'dteo', 'te.origin = dteo.id')
-            ->join('te.category', 'c', 'te.category = c.id')
-            ->join('te.user', 'u', 'te.user = u.id')
-            ->join('c.type', 'ct', 'c.type = ct.id')
-            ->join('te.userTechnicalEvolutions', 'ute', 'te.id = ute.technicalEvolution')
-            ->where('1 = 1 AND ' . $params)
-            ->orderBy('te.id')
-            ->groupBy('te.id')
-            ->setFirstResult(($page - 1) * $maxByPage)
-            ->setMaxResults($maxByPage);
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
      * Get unit evolution native query result
      *
      * @param int $technicalEvolutionId

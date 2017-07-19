@@ -68,7 +68,7 @@ class TechnicalEvolutionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $dictionaryStatus = $em->getRepository('AppBundle:Dictionary')->findOneBy([
-                    'type' => 'status',
+                    'type' => 'evolution_status',
                     'value' => 'En attente'
             ]);
 
@@ -252,7 +252,7 @@ class TechnicalEvolutionController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $status = $em->getRepository('AppBundle:Dictionary')->findOneBy([
-            'type'  => 'status',
+            'type'  => 'evolution_status',
             'value' => $newStatus
         ]);
 

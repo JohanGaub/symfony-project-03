@@ -44,6 +44,9 @@ class DictionaryVerification
         } else if ($type == 'status') {
             $entity = 'AppBundle:TechnicalEvolution';
             $field  = 'status';
+        } else if ($type == 'evolution_status') {
+            $entity = 'AppBundle:TechnicalEvolution';
+            $field  = 'evolution_status';
         } else if ($type == 'ticket') {
             $entity = 'AppBundle:Ticket';
             $field  = 'ticket';

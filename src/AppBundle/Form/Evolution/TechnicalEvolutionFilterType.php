@@ -37,7 +37,7 @@ class TechnicalEvolutionFilterType extends AbstractType
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
                     # Find all category_type for select list
-                    return $repo->getItemListByType('status');
+                    return $repo->getItemListByType('evolution_status');
                 },
                 'label'         => 'Status',
                 'placeholder'   => 'Sélectionnez votre status',

@@ -31,18 +31,21 @@ class DictionaryController extends Controller
         $repo = $this->getDoctrine()->getRepository('AppBundle:Dictionary');
 
         $typeTitle       = 'category_type';
+        $evoStatusTitle  = 'evolution_status';
         $statusTitle     = 'status';
         $originTitle     = 'origin';
         $ticketTypeTitle = 'ticket_type';
 
         $typeList       = $repo->getItemListByType($typeTitle)->getQuery()->getResult();
         $statusList     = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
+        $evoStatusList  = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
         $originList     = $repo->getItemListByType($originTitle)->getQuery()->getResult();
         $ticketTypeList = $repo->getItemListByType($ticketTypeTitle)->getQuery()->getResult();
 
         $dictionary         = new Dictionary();
         $typeForm           = $this->createForm(DictionaryType::class, $dictionary);
         $statusForm         = $this->createForm(DictionaryType::class, $dictionary);
+        $evoStatusForm      = $this->createForm(DictionaryType::class, $dictionary);
         $originForm         = $this->createForm(DictionaryType::class, $dictionary);
         $ticketTypeForm     = $this->createForm(DictionaryType::class, $dictionary);
         $generalUpdateForm  = $this->createForm(DictionaryType::class, $dictionary);
@@ -51,16 +54,19 @@ class DictionaryController extends Controller
             /** Here get my title "type" */
             'typeTitle'         => $typeTitle,
             'statusTitle'       => $statusTitle,
+            'evoStatusTitle'    => $evoStatusTitle,
             'originTitle'       => $originTitle,
             'ticketTypeTitle'   => $ticketTypeTitle,
             /** Here get my dictionary's data */
             'typeList'          => $typeList,
             'statusList'        => $statusList,
+            'evoStatusList'     => $evoStatusList,
             'originList'        => $originList,
             'ticketTypeList'    => $ticketTypeList,
             /** Here get my form */
             'typeForm'          => $typeForm->createView(),
             'statusForm'        => $statusForm->createView(),
+            'evoStatusForm'     => $evoStatusForm->createView(),
             'originForm'        => $originForm->createView(),
             'ticketTypeForm'    => $ticketTypeForm->createView(),
             'genUpdateForm'     => $generalUpdateForm->createView()
@@ -93,8 +99,8 @@ class DictionaryController extends Controller
         $dictionary->setValue(htmlspecialchars_decode($dictionary->getValue(), ENT_QUOTES));
 
         $verification = $em->getRepository('AppBundle:Dictionary')->findBy([
-                'type' => $type,
-                'value' => $dictionary->getValue()
+            'type' => $type,
+            'value' => $dictionary->getValue()
         ]);
 
         if (count($verification) > 0) {
