@@ -1459,7 +1459,8 @@ footer {
     width: 100%;
     margin-top: 2em;
     margin-bottom: 2em;
-    background: rgba(255, 255, 255, 0.6); }
+    background: rgba(255, 255, 255, 0.6);
+    padding-top: 2rem; }
     #communit .flex-container-2 a {
       color: #E6397E; }
       #communit .flex-container-2 a:hover {
