@@ -91,6 +91,10 @@ class UpdateTicketType extends AbstractType
                 'required'      => true,
                 'expanded'      => true,
                 'multiple'      => false,
+                'attr'  => [
+                    'class'  => 'checkbox-inline',
+                ],
+
             ])
             ->add('status', EntityType::class, [
                 'label'         => 'Statut',

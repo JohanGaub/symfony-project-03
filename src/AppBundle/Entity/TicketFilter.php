@@ -58,7 +58,6 @@ class TicketFilter
      */
     private $creationDate;
 
-
     /**
      * @var DateTime
      *
@@ -226,7 +225,6 @@ class TicketFilter
         return $this->status;
     }
 
-
     /**
      * Set ticket_type
      *
@@ -251,7 +249,6 @@ class TicketFilter
         return $this->ticketType;
     }
 
-
     /**
      * @return Dictionary
      */
@@ -259,6 +256,7 @@ class TicketFilter
     {
         return $this->categoryType;
     }
+
     /**
      * @param $categoryType
      * @return TicketFilter
@@ -268,6 +266,7 @@ class TicketFilter
         $this->categoryType = $categoryType;
         return $this;
     }
+
     /**
      * @return Category
      */
@@ -275,6 +274,7 @@ class TicketFilter
     {
         return $this->category;
     }
+
     /**
      * @param $category
      * @return TicketFilter
@@ -284,9 +284,6 @@ class TicketFilter
         $this->category = $category;
         return $this;
     }
-
-
-
 
     /**
      * Set creationDate
@@ -311,7 +308,6 @@ class TicketFilter
     {
         return $this->creationDate;
     }
-
 
     /**
      * Get endDate
@@ -385,7 +381,6 @@ class TicketFilter
         return $this->isArchive;
     }
 
-
     /**
      * @return Company
      */
@@ -404,6 +399,22 @@ class TicketFilter
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getArray()
+    {
+        return [
+            'id'              =>  $this->getId(),
+            'company'         =>  $this->getCompany(),
+            'emergency'       =>  $this->getEmergency(),
+            'origin'          =>  $this->getOrigin(),
+            'subject'         =>  $this->getSubject(),
+            'status'          =>  $this->getStatus(),
+            'creationDate'    =>  $this->getCreationDate(),
+            'endDate'         =>  $this->getEndDate(),
+        ];
+    }
 }
 
 

@@ -42,19 +42,6 @@ class Ticket
      */
     private $content;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="origin", type="string", length=255)
-//     */
-//    private $origin;
-//
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="type", type="string", length=255)
-//     */
-//    private $type;
 
     /**
      * @var string
@@ -63,12 +50,6 @@ class Ticket
      */
     private $emergency;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="status", type="string", length=255)
-//     */
-//    private $status;
 
     /**
      * @var string
@@ -83,6 +64,7 @@ class Ticket
      */
     private $upload;
 
+
     /**
      * @var DateTime
      *
@@ -91,6 +73,7 @@ class Ticket
      */
     private $creationDate;
 
+
     /**
      * @var DateTime
      *
@@ -98,6 +81,7 @@ class Ticket
      * @Assert\DateTime()
      */
     private $updateDate;
+
 
     /**
      * @var DateTime
@@ -115,10 +99,12 @@ class Ticket
      */
     private $isArchive;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="tickets", cascade={"persist"})
      */
     private $category;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="tickets", cascade={"persist"})
@@ -126,16 +112,17 @@ class Ticket
      */
     private $user;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="tickets", cascade={"persist"})
      */
     private $product;
 
+
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="ticket")
      */
     private $comments;
-
 
 
     /**
@@ -159,8 +146,6 @@ class Ticket
     private $ticketType;
 
 
-
-
     /**
      * Constructor
      */
@@ -168,12 +153,8 @@ class Ticket
     {
         $this->comments     = new ArrayCollection();
         $this->creationDate = new \DateTime('NOW');
-        //$this->status     = 'En attente';
         $this->isArchive    = false;
-
-
     }
-
 
 
     /**
@@ -185,6 +166,7 @@ class Ticket
     {
         return $this->id;
     }
+
 
     /**
      * Set subject
@@ -200,6 +182,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get subject
      *
@@ -209,6 +192,7 @@ class Ticket
     {
         return $this->subject;
     }
+
 
     /**
      * Set content
@@ -224,6 +208,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get content
      *
@@ -234,29 +219,6 @@ class Ticket
         return $this->content;
     }
 
-//    /**
-//     * Set origin
-//     *
-//     * @param string $origin
-//     *
-//     * @return Ticket
-//     */
-//    public function setOrigin($origin)
-//    {
-//        $this->origin = $origin;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get origin
-//     *
-//     * @return string
-//     */
-//    public function getOrigin()
-//    {
-//        return $this->origin;
-//    }
 
     /**
      * Set emergency
@@ -272,6 +234,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get emergency
      *
@@ -282,29 +245,6 @@ class Ticket
         return $this->emergency;
     }
 
-//    /**
-//     * Set status
-//     *
-//     * @param string $status
-//     *
-//     * @return Ticket
-//     */
-//    public function setStatus($status)
-//    {
-//        $this->status = $status;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get status
-//     *
-//     * @return string
-//     */
-//    public function getStatus()
-//    {
-//        return $this->status;
-//    }
 
     /**
      * Set upload
@@ -320,6 +260,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get upload
      *
@@ -329,6 +270,7 @@ class Ticket
     {
         return $this->upload;
     }
+
 
     /**
      * Set creationDate
@@ -344,6 +286,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get creationDate
      *
@@ -353,6 +296,7 @@ class Ticket
     {
         return $this->creationDate;
     }
+
 
     /**
      * Set updateDate
@@ -368,6 +312,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get updateDate
      *
@@ -377,6 +322,7 @@ class Ticket
     {
         return $this->updateDate;
     }
+
 
     /**
      * Set endDate
@@ -392,6 +338,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get endDate
      *
@@ -401,6 +348,7 @@ class Ticket
     {
         return $this->endDate;
     }
+
 
     /**
      * Set category
@@ -416,6 +364,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get category
      *
@@ -425,6 +374,7 @@ class Ticket
     {
         return $this->category;
     }
+
 
     /**
      * Set user
@@ -440,6 +390,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get user
      *
@@ -449,6 +400,7 @@ class Ticket
     {
         return $this->user;
     }
+
 
     /**
      * Set product
@@ -463,6 +415,7 @@ class Ticket
 
         return $this;
     }
+
 
     /**
      * Get product
@@ -489,6 +442,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Remove comment
      *
@@ -498,6 +452,7 @@ class Ticket
     {
         $this->comments->removeElement($comment);
     }
+
 
     /**
      * Get comments
@@ -524,6 +479,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get isArchive
      *
@@ -534,31 +490,6 @@ class Ticket
         return $this->isArchive;
     }
 
-
-
-//    /**
-//     * Set type
-//     *
-//     * @param string $type
-//     *
-//     * @return Ticket
-//     */
-//    public function setType($type)
-//    {
-//        $this->type = $type;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get type
-//     *
-//     * @return string
-//     */
-//    public function getType()
-//    {
-//        return $this->type;
-//    }
 
     /**
      * Set status
@@ -574,15 +505,17 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get status
      *
-     * @return Dictionary|string
+     * @return Dictionary
      */
     public function getStatus()
     {
         return $this->status;
     }
+
 
     /**
      * Set origin
@@ -598,6 +531,7 @@ class Ticket
         return $this;
     }
 
+
     /**
      * Get origin
      *
@@ -607,6 +541,7 @@ class Ticket
     {
         return $this->origin;
     }
+
 
     /**
      * Set ticketType
@@ -621,6 +556,7 @@ class Ticket
 
         return $this;
     }
+
 
     /**
      * Get ticketType

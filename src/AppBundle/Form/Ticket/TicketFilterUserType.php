@@ -99,9 +99,8 @@ class TicketFilterUserType extends AbstractType
                 'widget'    => 'single_text',
                 'required' => false,
                 'html5' => false,
-                'format'        => 'dd-MM-yyyy',
+                'format'        => 'dd/MM/yyyy',
                 'attr'      => [
-                    //'placeholder'   => 'jj/mm/aaaa',
                     'class'         => 'datepicker1',
                 ],
             ])
@@ -110,9 +109,8 @@ class TicketFilterUserType extends AbstractType
                 'widget'    => 'single_text',
                 'required'  => false,
                 'html5' => false,
-                'format'        => 'dd-MM-yyyy',
+                'format'        => 'dd/MM/yyyy',
                 'attr'      => [
-                    //'placeholder'   => 'jj/mm/aaaa',
                     'class'         => 'datepicker2',
                 ],
             ])

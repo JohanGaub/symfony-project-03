@@ -93,22 +93,16 @@ class AddTicketType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
                 'data' => 'Normale',
+                'attr'  => [
+                    'class'  => 'checkbox-inline',
+                ],
+
+
             ])
             ->add('upload', FileType::class, [
                 'label' => 'Fichier à uploader',
                 'required' => false,
             ])
-
-            ->add('status', HiddenType::class, [
-                'data'          => 'En attente',
-                'label'         => 'Statut',
-                'property_path' => 'status',
-                'mapped'        => true,
-            ])
-
-
-
-
 
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',

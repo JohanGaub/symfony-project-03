@@ -10,30 +10,27 @@
         <div class="row ticket-filter-block">
             <div class="col-xs-12">
 
-
                 <div class="row">
                     {{ form_start(searchForm) }}
-                    <div class="col-xs-3">{{ form_row(searchForm.id) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.company) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.emergency) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.origin) }}</div>
+                    <div class="col-xs-3">{{ form_label(searchForm.id) }}{{ form_widget(searchForm.id, {"value": searchForm.id } ) }}</div>
+                    <div class="col-xs-3">{{ form_label(searchForm.company) }}{{ form_widget(searchForm.company, {"value": searchForm.company } ) }}</div>
+                    <div class="col-xs-3">{{ form_label(searchForm.emergency) }}{{ form_widget(searchForm.emergency, {"value": searchForm.emergency } ) }}</div>
+                    <div class="col-xs-3">{{ form_label(searchForm.origin) }}{{ form_widget(searchForm.origin, {"value": searchForm.origin } ) }}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-3">{{ form_row(searchForm.subject) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.status) }}</div>
+                    <div class="col-xs-3">{{ form_label(searchForm.subject) }}{{ form_widget(searchForm.subject, {"value": searchForm.subject } ) }}</div>
+                    <div class="col-xs-3">{{ form_label(searchForm.status) }}{{ form_widget(searchForm.status, {"value": searchForm.status } ) }}</div>
                     {#<div class="col-xs-3">{{ form_row(searchForm.categoryType) }}</div>
-
                     {% if form.category is defined %}
                         <div class="col-xs-3">{{ form_row(searchForm.category) }}</div>
                     {% endif %}#}
-
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-4">{{ form_row(searchForm.creationDate) }}</div>
-                    <div class="col-xs-4">{{ form_row(searchForm.endDate) }}</div>
+                    <div class="col-xs-4">{{ form_label(searchForm.creationDate) }}{{ form_widget(searchForm.creationDate, {"value": searchForm.creationDate } ) }}</div>
+                    <div class="col-xs-4">{{ form_label(searchForm.endDate) }}{{ form_widget(searchForm.endDate, {"value": searchForm.endDate } ) }}</div>
                     {% if is_granted('ROLE_ADMIN')  %}
-                        <div class="col-xs-4">{{ form_row(searchForm.isArchive) }}</div>
+                        <div class="col-xs-4">{{ form_label(searchForm.isArchive) }}{{ form_widget(searchForm.isArchive, {"value": searchForm.isArchive } ) }}</div>
                     {% endif %}
                 </div>
 
@@ -71,20 +68,22 @@
 
                     {%  for d in data %}
                         <tr>
-                            <td class="text-center"><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.id }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.user.company.name }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.origin }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.emergency }}</p></td>
+                            <td class="text-center"><p>{{ d.id }}</p></td>
+                            <td><p>{{ d.user.company.name }}</p></td>
+                            <td><p>{{ d.origin }}</p></td>
+                            <td><p>{{ d.emergency }}</p></td>
                             <td class="ticket-subject"><a  href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.subject }}</a></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.status }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.creationdate|date("d/m/Y") }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.Enddate|date("d/m/Y") }}</p></td>
-                            {# <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d._token }}</a></td>#}
+                            <td><p>{{ d.status }}</p></td>
+                            <td><p>{{ d.creationDate|date("d/m/Y") }}</p></td>
+                            <td>
+                                {% if d.endDate is not null %}
+                                    <p>{{ d.endDate|date("d/m/Y") }}</p>
+                                {% endif %}
+                            </td>
 
                             {% if is_granted('ROLE_ADMIN') %}
-                                <td class="text-center"><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.isArchive }}</p></td>
+                                <td class="text-center"><p>{{ d.isArchive }}</p></td>
                             {% endif %}
-
                         </tr>
                     {% endfor %}
 

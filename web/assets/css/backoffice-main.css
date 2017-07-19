@@ -1364,6 +1364,5 @@ button[type='submit'] {
 .comment-content2 {
   border: 0.1rem solid lightgrey; }
 
-.ticket-explanation-size {
-  height: 600px;
+.ui-datepicker-title {
   background-color: red; }

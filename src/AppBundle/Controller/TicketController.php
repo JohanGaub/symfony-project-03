@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Ticket;
-use AppBundle\Entity\User;
 use AppBundle\Form\Ticket\AddCommentType;
 use AppBundle\Form\Ticket\TicketFilterAdminType;
 use AppBundle\Form\Ticket\TicketFilterUserType;
@@ -25,6 +24,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  * Class TicketController
  * @package AppBundle\Controller
  * @Route("/ticket", name="ticket")
+ * @Security("has_role('ROLE_FINAL_CLIENT')")
  */
 class TicketController extends Controller
 {
@@ -41,7 +41,15 @@ class TicketController extends Controller
         $filter     = $navigator->getEntityFilter();
 
         if (!is_null($filter->getCreationDate())) {
-            $filter->setCreationDate(new \DateTime(date("d-m-Y", strtotime($filter->getCreationDate()))));
+            $tabDate = explode('/' , $filter->getCreationDate());
+            $value  = $tabDate[2].'-'.$tabDate[1].'-'.$tabDate[0];
+            $filter->setCreationDate(new \DateTime(date("Y-m-d", strtotime($value))));
+        }
+
+        if (!is_null($filter->getEndDate())) {
+            $tabDate = explode('/' , $filter->getEndDate());
+            $value  = $tabDate[2].'-'.$tabDate[1].'-'.$tabDate[0];
+            $filter->setEndDate(new \DateTime(date("Y-m-d", strtotime($value))));
         }
 
         if ($this->isGranted('ROLE_ADMIN')){
@@ -50,14 +58,15 @@ class TicketController extends Controller
             $searchForm     = $this->createForm(TicketFilterUserType::class, $filter);
         }
 
+        dump($filter->getArray());
+
         return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             /*** Ticket search ***/
             'data'          => $this->get("communit.navigator"),
             'filter'        => $filter,
-            'filterURL'     => http_build_query($filter),
+            'filterURL'     => http_build_query($filter->getArray()),
             'documentType'  => "Ticket",
             'searchForm'    => $searchForm->createView(),
-
         ]);
     }
 
@@ -65,7 +74,6 @@ class TicketController extends Controller
     /**
      * @param Request $request
      * @return RedirectResponse|Response
-     * @internal param Ticket $ticket
      * @Route("/add", name="ticket_add")
      */
     public function addAction(Request $request)
@@ -74,6 +82,8 @@ class TicketController extends Controller
 
         $ticket     = new Ticket();
         $em         = $this->getDoctrine()->getManager();
+
+        $dictionaryRecord = $em->getRepository('AppBundle:Dictionary')->findOneBy(['value' => 'En attente']);
 
         $addTicketForm       = $this->createForm(AddTicketType::class, $ticket);
         $addTicketForm->handleRequest($request);
@@ -98,6 +108,7 @@ class TicketController extends Controller
             }
 
             $ticket->setUser($user);
+            $ticket->setStatus($dictionaryRecord);
 
             $em->persist($ticket);
             $em->flush();
@@ -111,7 +122,7 @@ class TicketController extends Controller
                 $this->render('@App/Email/email.newTicket.html.twig', [
                         'url' => $this->generateUrl('ticket_edit', [
                             'ticket' => $ticket->getId()
-                        ], UrlGeneratorInterface::ABSOLUTE_URL),
+                        ],UrlGeneratorInterface::ABSOLUTE_URL),
                         'ticket' => $ticket
                     ]
 
@@ -190,13 +201,10 @@ class TicketController extends Controller
                 )
             );
             $this->addFlash("notice", "Un email de notification a été envoyé à l'administrateur");
-            return $this->redirectToRoute('ticket_index');
+            return $this->redirectToRoute('ticket_edit', [
+                'ticket' => $ticket->getId(),
+            ]);
 
-
-
-
-            $addComment     = new Comment();
-            $addCommentForm = $this->createForm(AddCommentType::class, $addComment);
         }
 
         $comments = $em->getRepository('AppBundle:Comment')->getComment($ticket);
@@ -259,6 +267,7 @@ class TicketController extends Controller
      * @param Ticket $ticket
      * @return RedirectResponse
      * @Route("/delete/{ticket}", name="ticket_delete")
+     * @Security("has_role ('ROLE_ADMIN')")
      */
     public function deleteAction(Ticket $ticket)
     {

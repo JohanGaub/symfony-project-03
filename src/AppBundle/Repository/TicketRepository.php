@@ -52,24 +52,6 @@ class TicketRepository extends EntityRepository
      */
     public function getRowsByPage($page, $filter)
     {
-        /*$alias  = "t";
-        $query  = $this->createQueryBuilder($alias)
-            ->select($alias)
-            ->setFirstResult(($page - 1) * self::MAX_RESULT)
-            ->setMaxResults(self::MAX_RESULT);
-        if(!is_null($filter)) {
-            foreach ($filter as $field => $value) {
-                if ($value !== "") {
-                    if (strpos($field, "_") !== 0) {
-                        $search = "$alias.$field like '%$value%'";
-                        $query->andWhere($search);
-                    }
-                }
-            }
-        }
-        return $query->getQuery();*/
-
-
         $query = $this->createQueryBuilder('t')
             ->select('dts', 'c', 'ct', 'u', 't', 'cp', 'o')
             ->join('t.status','dts', 't.status = dts.id')
@@ -89,33 +71,47 @@ class TicketRepository extends EntityRepository
                             case 'status':
                                 $alias = 'dts';
                                 $field = 'id';
+                                $operator = "=";
                                 break;
                             case 'categoryType':
                                 $alias = 'ct';
                                 $field = 'id';
+                                $operator = "=";
                                 break;
                             case 'category':
                                 $alias = 'c';
                                 $field = 'id';
+                                $operator = "=";
                                 break;
                             case 'company':
                                 $alias = 'cp';
                                 $field = 'name';
+                                $operator = "like";
                                 break;
                             case 'origin':
                                 $alias = 'o';
                                 $field = 'id';
+                                $operator = "=";
                                 break;
                             default:
                                 $alias = 't';
+                                $operator = "like";
                         }
-                        if ($alias == 't' or $alias == 'cp') {
-                            $search = "$alias.$field like '%$value%'";
+                        if ($field == "creationDate" || $field == "endDate") {
+                            $tabDate = explode('/' , $value);
+                            $value  = $tabDate[2].'-'.$tabDate[1].'-'.$tabDate[0];
+                            $date = new \DateTime(date("Y-m-d", strtotime($value)));
+                            $search = "$alias.$field >= '" . $date->format("Y-m-d 00:00:00") . "'";
+                            $query->andWhere($search);
+                            $search = "$alias.$field <= '" . $date->format("Y-m-d 23:59:59") . "'";
+                            $query->andWhere($search);
+                        } elseif ($alias == 't' or $alias == 'cp') {
+                            $search = "$alias.$field $operator '%$value%'";
+                            $query->andWhere($search);
                         } else {
-                            $search ="$alias.$field = '$value'";
+                            $search = "$alias.$field = '$value'";
+                            $query->andWhere($search);
                         }
-                        $query->andWhere($search);
-
                     }
                 }
             }

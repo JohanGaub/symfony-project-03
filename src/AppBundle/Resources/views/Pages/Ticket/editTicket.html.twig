@@ -76,9 +76,13 @@
                         <td><button type="button" data-toggle="modal" data-target="#myModal">
                                 <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width = "150px"/>
                             </button></td>
-                        <td>{{ ticket.creationdate|date("d/m/Y") }}</td>
-                        <td>{{ ticket.updatedate|date("d/m/Y") }}</td>
-                        <td>{{ ticket.creationdate|date("d/m/Y") }}</td>
+                        <td>{{ ticket.creationDate|date("d/m/Y") }}</td>
+                        {% if ticket.updateDate is not null %}
+                            <td>{{ ticket.updateDate|date("d/m/Y") }}</td>
+                        {% endif %}
+                        {% if ticket.endDate is not null %}
+                            <td>{{ ticket.endDate|date("d/m/Y") }}</td>
+                        {% endif %}
                     </tr>
                     </tbody>
                 </table>
@@ -163,10 +167,9 @@
                                     </div>
                                     <div class="col-xs-12 col-lg-4">
                                         Date de création {{ comment.creationDate|date("d/m/Y") }}
-                                        {#{% if comment.updateDate is not null %}
-                                            <p>Date d'actualisation  {{ comment.updateDate|date("d/m/Y") }}</p>
-                                        {% endif %}#}
+
                                     </div>
+
 
                                     <div class="col-xs-12 col-lg-4">
                                         {% if comment.user_id == app.user.id or is_granted('ROLE_PROJECT_RESP')%}

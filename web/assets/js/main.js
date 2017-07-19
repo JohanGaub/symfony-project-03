@@ -89,13 +89,16 @@ $(document).ready(function () {
 
 $( function() {
     $( ".datepicker1" ).datepicker( {
-        dateFormat: 'dd-mm-yy',
+        dateFormat: 'dd/mm/yy',
     });
 } );
 
 $( function() {
     $( ".datepicker2" ).datepicker( {
-        dateFormat: 'dd-mm-yy',
+        dateFormat: 'dd/mm/yy',
     });
 } );
 
+
+
+$( "p.ESSAI" ).replaceWith( "<h2>New heading</h2>" );
