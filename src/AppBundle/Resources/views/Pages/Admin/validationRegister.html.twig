@@ -1,7 +1,9 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
-
 {% block body %}
+    <div class="title-register col-md-12 hidden-xs hidden-sm visible-md visible-lg">
+        <h1>Gestion des comptes</h1>
+    </div>
     <div class="validate">
         <div class="row validation-user">
             <div class="col-xs-12 col-xs-offset-0 col-lg-12 col-lg-offset-0">
@@ -9,23 +11,23 @@
                     <thead>
                     <tr>
                         <th>Entreprise</th>
-                        <th>Email/login</th>
-                        <th>Prénom</th>
+                        <th class="hidden-xs hidden-sm visible-md visible-lg">Email/login</th>
+                        <th class="hidden-xs visible-sm visible-md visible-lg">Prénom</th>
                         <th>Nom</th>
-                        <th>Mobile</th>
-                        <th>Roles</th>
+                        <th class="hidden-xs visible-sm visible-md visible-lg">Mobile</th>
+                        <th class="hidden-xs visible-sm visible-md visible-lg">Roles</th>
                         <th>Status</th>
                     </tr>
                     </thead>
                     {% for user in User %}
-                        <tbody class="table-striped" id="register">
+                        <tbody id="register">
                         <tr>
                             <td>{{ user.company.name }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.userProfile.firstname }}</td>
+                            <td class="hidden-xs hidden-sm visible-md visible-lg">{{ user.email }}</td>
+                            <td class="hidden-xs visible-sm visible-md visible-lg">{{ user.userProfile.firstname }}</td>
                             <td>{{ user.userProfile.lastname }}</td>
-                            <td>{{ user.userProfile.phone }}</td>
-                            <td>{% for role in user.roles %}
+                            <td class="hidden-xs visible-sm visible-md visible-lg">{{ user.userProfile.phone }}</td>
+                            <td class="hidden-xs visible-sm visible-md visible-lg">{% for role in user.roles %}
                                     {% if(role == "ROLE_ADMIN") %}
                                         Administrateur
                                     {% elseif(role == "ROLE_COMMERCIAL") %}
@@ -69,12 +71,10 @@
                 </table>
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-
                         {% if pagination.page > 1 %}
                             <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}">Début</a></li>
                             <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}">Précédent</a></li>
                         {% endif %}
-
                         {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
                         {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
                             <li class="page-item"><a{% if p == pagination.page %} class="current-page page-link" {% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a></li>
@@ -86,11 +86,24 @@
                         {% endif %}
                     </ul>
                 </nav>
+                {# <tbody class="table-striped">
+                 {%  for d in data %}
+
+                     <tr>
+                         <td><a href="{{ path('validation_register', {"user": d.id }) }}">{{ d.user.company.name }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.email }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.userProfile.firstname }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.userProfile.lastname }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.roles }}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.isActiveByAdmin}}</a></td>
+                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.roles}}</a></td>
+
+                     </tr>
+                 {% endfor %}
+                 </tbody>#}
             </div>
         </div>
     </div>
-    </div>
-
 {% endblock %}
 {% block javascripts %}
 
