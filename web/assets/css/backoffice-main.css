@@ -481,8 +481,8 @@
 
 @font-face {
   font-family: 'dinregular';
-  src: url("/web/assets/fonts/dinregular.eot");
-  src: url("/web/assets/fonts/dinregular.eot?#iefix") format("embedded-opentype"), url("/web/assets/fonts/dinregular.woff2") format("woff2"), url("/web/assets/fonts/dinregular.woff") format("woff"), url("/web/assets/fonts/dinregular.ttf") format("truetype"), url("/web/assets/fonts/dinregular.svg#webfontregular") format("svg");
+  src: url("../fonts/dinregular.eot");
+  src: url("../fonts/dinregular.eot?#iefix") format("embedded-opentype"), url("../fonts/dinregular.woff2") format("woff2"), url("../fonts/dinregular.woff") format("woff"), url("../fonts/dinregular.ttf") format("truetype"), url("../fonts/dinregular.svg#webfontregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -498,22 +498,11 @@ main {
   margin-top: 15rem; }
 
 main#bo-main-content {
-  margin-top: 0 !important;
-  padding-left: 20rem; }
-
-@media screen and (max-width: 1278px) {
-  main#bo-main-content {
-    padding-left: 5rem !important; } }
+  margin-top: 0 !important; }
 
 @media screen and (max-width: 1024px) {
   main {
-    margin-top: 10rem; }
-  main#bo-main-content {
-    padding-left: 5rem !important; } }
-
-@media screen and (max-width: 768px) {
-  main#bo-main-content {
-    padding-left: 0 !important; } }
+    margin-top: 10rem; } }
 
 /* Block page "validation register"*/
 .validate {
@@ -521,6 +510,9 @@ main#bo-main-content {
 
 .register-title {
   margin-top: 5em; }
+
+.message-register {
+  margin-top: 2em; }
 
 header {
   padding-bottom: 0; }
@@ -739,15 +731,20 @@ a {
     padding: 0 0.5rem; }
 
 .bo-top-bar {
-  border-bottom: 1px solid #9ac00a;
-  padding: 1rem 0 0 0.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 6.3rem;
-  margin-bottom: 3%; }
+  background: white;
+  border-bottom: 0.5px solid #cccccc;
+  padding: 0.5rem 0;
+  height: 5.2rem;
+  margin-bottom: 3%;
+  z-index: 1; }
   .bo-top-bar p {
     text-align: right;
     position: absolute;
-    top: 2.5%;
+    top: 1.5rem;
     right: 8rem; }
   .bo-top-bar .dropbtn {
     background-color: white;
@@ -794,18 +791,23 @@ a {
   .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle {
     float: left !important;
     margin: 1rem; }
-  .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle span {
-    background-color: #9ac00a !important; }
-  .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle:active span,
-  .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle:hover span,
-  .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle:focus span {
-    background-color: #dd5116 !important; }
+    .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle:hover, .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle:active, .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle:focus {
+      background-color: #fdf0eb; }
+  .navbar.navbar-default.inline-navbar.bo-header.visible-xs .open .navbar-toggle::before {
+    background-color: #fdf0eb; }
+  .navbar.navbar-default.inline-navbar.bo-header.visible-xs .dropdown-toggle:active, .navbar.navbar-default.inline-navbar.bo-header.visible-xs .open .dropdown-toggle {
+    background-color: #fdf0eb !important; }
   .navbar.navbar-default.inline-navbar.bo-header.visible-xs ul.nav.navbar-nav > li > a:hover {
     background-color: #fdf0eb; }
   .navbar.navbar-default.inline-navbar.bo-header.visible-xs .inline-navbar {
     display: inline; }
   .navbar.navbar-default.inline-navbar.bo-header.visible-xs i.fa.fa-user-circle.fa-2x {
     padding-top: 0.6rem; }
+  .navbar.navbar-default.inline-navbar.bo-header.visible-xs i.fa.fa-home.fa-2x {
+    font-size: 3.5rem;
+    padding: 0.8rem; }
+  .navbar.navbar-default.inline-navbar.bo-header.visible-xs button.navbar-toggle span {
+    background-color: #9ac00a !important; }
   .navbar.navbar-default.inline-navbar.bo-header.visible-xs .dropbtn {
     background-color: white;
     color: #9ac00a;
@@ -813,7 +815,7 @@ a {
     border: none;
     cursor: pointer;
     margin-right: 1rem; }
-  .navbar.navbar-default.inline-navbar.bo-header.visible-xs .dropdown {
+  .navbar.navbar-default.inline-navbar.bo-header.visible-xs .dropdown.visible-xs {
     position: relative;
     display: inline-block;
     float: right; }
@@ -856,6 +858,12 @@ header nav.sidebar, .main {
 
 .main {
   padding: 10px 10px 0 10px; }
+
+.dropdown-toggle:active, .open .dropdown-toggle {
+  background-color: #fdf0eb !important; }
+
+ul.nav.navbar-nav > li > a:hover {
+  background-color: #fdf0eb !important; }
 
 @media (min-width: 768px) {
   header nav.sidebar.navbar {

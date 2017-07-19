@@ -36,7 +36,7 @@ $(document).ready(function () {
  * Function to transform right to down arrow
  */
 $(document).ready(function () {
-    if ($(window).width() <= 767) {
+    if ($(window).width() <= 1298) {
         $("#arrowbox").addClass("arrow-bottom-center");
     } else {
         $("#arrowbox").addClass("arrow-right-center");
@@ -44,7 +44,7 @@ $(document).ready(function () {
 
 // Change class name in "html.twig" file in order to use a specific scss mixin
     $(window).on('resize', function() {
-        if ($(window).width() <= 767) {
+        if ($(window).width() <= 1298) {
             $("#arrowbox").removeClass("arrow-right-center").addClass("arrow-bottom-center");
         } else {
             $("#arrowbox").removeClass("arrow-bottom-center").addClass("arrow-right-center");
