@@ -4,6 +4,12 @@
   margin: 2rem 0 5rem 0;
 }
 
+.ticket-filter-field {
+  div {
+    padding-bottom: 2rem;
+  }
+}
+
 .ticket-table-block {
   border: solid $primary-color 0.1rem;
   padding: 0;
@@ -66,12 +72,11 @@
   border: 0.1rem solid lightgrey;
 }
 
+
 .ui-datepicker-title {
   background-color: red;
   font-weight: bold;
 }
-
-
 
 
 

@@ -3,7 +3,7 @@
     <div class="dropdown">
         <a href="#" class="dropbtn"><i class="fa fa-user-circle fa-2x"></i></a>
         <div class="dropdown-content">
-            <a href="#"><i class="fa fa-cog" aria-hidden="true"></i>
+            <a href="{{ path('account_result') }}"><i class="fa fa-cog" aria-hidden="true"></i>
                 Mon compte
             </a>
             <a href="{{ path('change_password') }}"><i class="fa fa-key" aria-hidden="true"></i>
@@ -15,7 +15,7 @@
         </div>
     </div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <p> Connecté en tant que {{ app.user.userProfile.firstname }} {{ app.user.userProfile.lastname }}
+        <p> {{ app.user.userProfile.fullName }}
         </p>
     {% endif %}
 </div>

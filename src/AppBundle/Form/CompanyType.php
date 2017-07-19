@@ -25,6 +25,9 @@ class CompanyType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => Company::class,
+            'cascade_validation' => true,
         ));
+
     }
+
 }

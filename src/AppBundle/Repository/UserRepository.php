@@ -48,7 +48,7 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
      * @param int $page
      * @param int $maxUsers
      * @param int $company
-     * @return Paginator
+     * @return \AppBundle\Repository\Paginator|Paginator
      */
     public function getList($page = 1, $maxUsers = 10, $company)
     {

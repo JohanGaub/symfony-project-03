@@ -2,21 +2,21 @@
   background-color: white;
   width: 100%;
 
+
   button.navbar-toggle {
     float: left !important;
     margin: 1rem;
+    &:hover, &:active, &:focus {
+      background-color: $background-color1;
+    }
+
+  }
+  .open .navbar-toggle::before {
+    background-color: $background-color1;
   }
 
-  button.navbar-toggle span {
-    background-color: $primary-color !important;
-  }
-  button.navbar-toggle:active,
-  button.navbar-toggle:hover,
-  button.navbar-toggle:focus
-  {
-    span {
-      background-color: $secondary-color !important;
-    }
+  .dropdown-toggle:active, .open .dropdown-toggle {
+    background-color: $background-color1 !important;
   }
 
   ul.nav.navbar-nav > li > a:hover {
@@ -29,6 +29,14 @@
 
   i.fa.fa-user-circle.fa-2x {
     padding-top: 0.6rem;
+  }
+  i.fa.fa-home.fa-2x {
+    font-size: 3.5rem;
+    padding: 0.8rem;
+  }
+
+  button.navbar-toggle span {
+    background-color: $primary-color !important;
   }
 
   /**
@@ -43,7 +51,7 @@
     margin-right: 1rem;
   }
 
-  .dropdown {
+  .dropdown.visible-xs {
     position: relative;
     display: inline-block;
     float: right;

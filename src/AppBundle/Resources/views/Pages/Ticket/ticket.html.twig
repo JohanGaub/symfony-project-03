@@ -10,27 +10,23 @@
         <div class="row ticket-filter-block">
             <div class="col-xs-12">
 
-                <div class="row">
+                <div class="row ticket-filter-field">
                     {{ form_start(searchForm) }}
-                    <div class="col-xs-3">{{ form_label(searchForm.id) }}{{ form_widget(searchForm.id, {"value": searchForm.id } ) }}</div>
-                    <div class="col-xs-3">{{ form_label(searchForm.company) }}{{ form_widget(searchForm.company, {"value": searchForm.company } ) }}</div>
-                    <div class="col-xs-3">{{ form_label(searchForm.emergency) }}{{ form_widget(searchForm.emergency, {"value": searchForm.emergency } ) }}</div>
-                    <div class="col-xs-3">{{ form_label(searchForm.origin) }}{{ form_widget(searchForm.origin, {"value": searchForm.origin } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.id) }}{{ form_widget(searchForm.id, {"value": searchForm.id } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.company) }}{{ form_widget(searchForm.company, {"value": searchForm.company } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.emergency) }}{{ form_widget(searchForm.emergency, {"value": searchForm.emergency } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.origin) }}{{ form_widget(searchForm.origin, {"value": searchForm.origin } ) }}</div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-3">{{ form_label(searchForm.subject) }}{{ form_widget(searchForm.subject, {"value": searchForm.subject } ) }}</div>
-                    <div class="col-xs-3">{{ form_label(searchForm.status) }}{{ form_widget(searchForm.status, {"value": searchForm.status } ) }}</div>
-                    {#<div class="col-xs-3">{{ form_row(searchForm.categoryType) }}</div>
-                    {% if form.category is defined %}
-                        <div class="col-xs-3">{{ form_row(searchForm.category) }}</div>
-                    {% endif %}#}
+                <div class="row ticket-filter-field">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.subject) }}{{ form_widget(searchForm.subject, {"value": searchForm.subject } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.status) }}{{ form_widget(searchForm.status, {"value": searchForm.status } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.creationDate) }}{{ form_widget(searchForm.creationDate, {"value": searchForm.creationDate } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.endDate) }}{{ form_widget(searchForm.endDate, {"value": searchForm.endDate } ) }}</div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-4">{{ form_label(searchForm.creationDate) }}{{ form_widget(searchForm.creationDate, {"value": searchForm.creationDate } ) }}</div>
-                    <div class="col-xs-4">{{ form_label(searchForm.endDate) }}{{ form_widget(searchForm.endDate, {"value": searchForm.endDate } ) }}</div>
+                <div class="row ticket-filter-field">
                     {% if is_granted('ROLE_ADMIN')  %}
-                        <div class="col-xs-4">{{ form_label(searchForm.isArchive) }}{{ form_widget(searchForm.isArchive, {"value": searchForm.isArchive } ) }}</div>
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-lg-2 col-lg-offset-5">{{ form_label(searchForm.isArchive) }}{{ form_widget(searchForm.isArchive, {"value": searchForm.isArchive } ) }}</div>
                     {% endif %}
                 </div>
 
@@ -45,7 +41,7 @@
         <div class="row">
             <div class="col-xs-12 ticket-table-block">
 
-                <table id="filter" class="table table-responsive table-bordered table-condensed no-margin-no-padding">
+                <table id="table-index" class="table table-responsive table-bordered table-condensed table-hover no-margin-no-padding">
                     <thead>
                     <tr>
                         <th class="text-center">N° de ticket</th>
@@ -59,15 +55,12 @@
                         {% if is_granted('ROLE_ADMIN') %}
                             <th>Archivé</th>
                         {% endif %}
-
                     </tr>
                     </thead>
 
                     <tbody class="table-striped">
-
-
                     {%  for d in data %}
-                        <tr>
+                        <tr class="highlight-index">
                             <td class="text-center"><p>{{ d.id }}</p></td>
                             <td><p>{{ d.user.company.name }}</p></td>
                             <td><p>{{ d.origin }}</p></td>

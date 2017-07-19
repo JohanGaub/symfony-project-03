@@ -17,6 +17,13 @@ header nav.sidebar, .main{
   padding: 10px 10px 0 10px;
 }
 
+.dropdown-toggle:active, .open .dropdown-toggle {
+  background-color: $background-color1 !important;
+}
+ul.nav.navbar-nav > li> a:hover {
+  background-color: $background-color1 !important;
+}
+
 @media (min-width: 768px) {
 
   header nav.sidebar.navbar {

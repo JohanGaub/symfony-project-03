@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * Class AdminController
  * @package AppBundle\Controller
- * @Route("/register_validation", name="admin")
+ * @Route("/", name="admin")
  */
 class AdminController extends Controller
 {
@@ -62,7 +62,6 @@ class AdminController extends Controller
 
             $siretUser = ($form['company']['siret']->getData());
 
-
             $siret = $this->getDoctrine()->getRepository('AppBundle:Company')->findBy(
                 array('siret' => $siretUser)
             );
@@ -102,6 +101,21 @@ class AdminController extends Controller
 
             $this->addFlash("notice", "Votre inscription a bien été prise en compte. Un e-mail vous a été envoyé pour valider votre inscription.");
 
+            /**
+             * Mailling part (service)
+             */
+            $this->get('app.email.sending')->sendEmail(
+                'Un nouvel utilisateur vient de s\'inscrire',
+                $this->get('app.getter_user_admin')->getAllAdmin(),
+                $this->render('@App/Email/email.newUser.html.twig', [
+                    'url' => $this->generateUrl('validation_register', [
+                        'newuser' => $user->getId()
+                    ], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'user' => $user
+                ])
+            );
+
+
             return $this->redirectToRoute('home');
 
         }
@@ -113,11 +127,15 @@ class AdminController extends Controller
 
     /**
      * @return Response
-     * @Route("/{page}", name="validation_register")
+     * @Route("register_validation/{page}", name="validation_register")
      * @Security("has_role ('ROLE_ADMIN')")
      */
     public function showRegister($page = 1)
     {
+        /*$navigator = $this->get("communit.navigator");
+        $filter = $navigator->getEntityFilter();*/
+
+        /*$searchForm = $this->createForm(UserFilterType::class, $filter);*/
 
         $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
         $maxUsers = 10;
@@ -134,6 +152,11 @@ class AdminController extends Controller
         return $this->render('@App/Pages/Admin/validationRegister.html.twig', array(
             'User' => $users,
             'pagination' => $pagination,
+            /*'data'  => $this->get("communit.navigator"),
+            'filter'  => $filter,
+            'filterURL'  => http_build_query($filter),
+            'documentType'  => 'userProfiler',
+            'searchForm'  => $searchForm->createView(),*/
         ));
     }
 
