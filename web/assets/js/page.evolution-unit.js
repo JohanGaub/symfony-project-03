@@ -1,11 +1,21 @@
 /**
+ * Calls
+ */
+$(document).ready(function () {
+    loadComments()
+    addComment()
+    updateComment()
+    deleteComment()
+})
+
+/**
  * Listen user screen to load new comments
  */
-$(document).ready( function () {
+function loadComments() {
     let loaderDom = '<div class="loader">'
-    loaderDom += '<div class="inner one"></div>'
-    loaderDom += '<div class="inner two"></div>'
-    loaderDom += '</div>'
+        loaderDom += '<div class="inner one"></div>'
+        loaderDom += '<div class="inner two"></div>'
+        loaderDom += '</div>'
     let status = false;
     let loader = '.loader-wcs'
     $(loader).append(loaderDom);
@@ -60,12 +70,12 @@ $(document).ready( function () {
             })
         }
     }, 500)
-})
+}
 
 /**
  * Add new comment
  */
-$(document).ready( function () {
+function addComment() {
     let formId  = '#app_bundle_comment_userTechnicalEvolution'
     let fieldId = '#app_bundle_comment_userTechnicalEvolution_comment'
     let id      = $(formId).attr('data-index-number')
@@ -87,12 +97,12 @@ $(document).ready( function () {
             },
         })
     })
-})
+}
 
 /**
  * Delete comment
  */
-$(document).ready( function () {
+function deleteComment() {
     let commentFullId   = ''
     let commentId       = ''
     let commentValue    = ''
@@ -119,12 +129,12 @@ $(document).ready( function () {
             },
         })
     })
-})
+}
 
 /**
  * Update action
  */
-$(document).ready( function () {
+function updateComment() {
     let commentField    = '.app_bundle_comment_userTechnicalEvolution_updateField'
     let commentForm     = '#app_bundle_comment_userTechnicalEvolution_update'
     let commentFullId   = ''
@@ -135,7 +145,7 @@ $(document).ready( function () {
         let $this       = $(this)
         commentFullId   = $this.parent().parent().attr('id')
         commentId       = commentFullId.replace('ute_id_', '')
-        commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
+        commentValue    = $('#' + commentFullId).find('.comment-value').text()
         $(commentField).val(commentValue)
     })
 
@@ -162,7 +172,7 @@ $(document).ready( function () {
             })
         }
     })
-})
+}
 
 /**
  * Know if loader is in view

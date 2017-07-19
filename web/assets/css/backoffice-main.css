@@ -1013,6 +1013,8 @@ a {
 
 header {
   margin-bottom: 0 !important; }
+  header a {
+    color: #739007; }
 
 header nav.sidebar.navbar {
   background-color: #fff;

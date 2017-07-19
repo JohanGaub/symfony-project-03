@@ -9,6 +9,7 @@ $(document).ready(function () {
     $(target).mouseenter(function () {
         $(this).addClass(cssClass)
     })
+
     $(focus).mouseleave(function () {
         $(target).removeClass(cssClass)
     })

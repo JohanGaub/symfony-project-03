@@ -1,5 +1,9 @@
 header {
   margin-bottom: 0!important;
+
+  a {
+    color: darken($primary-color, 10%);
+  }
 }
 header nav.sidebar.navbar {
   background-color: #fff;
