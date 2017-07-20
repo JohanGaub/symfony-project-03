@@ -1,5 +1,5 @@
 {% for flash_message in app.session.flashBag.get('notice') %}
-    <div class="notice card-panel notice-red">
+    <div class="notice card-panel alert alert-info">
         {{ flash_message }}
     </div>
 {% endfor %}

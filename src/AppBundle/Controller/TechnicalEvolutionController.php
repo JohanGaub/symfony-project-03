@@ -152,6 +152,9 @@ class TechnicalEvolutionController extends Controller
                     'evolution' => $technicalEvolution
                 ])
             );
+
+            $this->addFlash('notice', 'Votre modification a bien été prise en compte');
+
             return $this->redirectToRoute('evolutionUnit', [
                 'technicalEvolution' => $technicalEvolution->getId()
             ]);
