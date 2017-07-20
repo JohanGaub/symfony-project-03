@@ -16,7 +16,7 @@ class ModifyUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class,  ['label' => 'email'])
+            ->add('email', EmailType::class,  ['label' => 'Email'])
             ->add('company', CompanyType::class, array(
                 'label' => false,
             ))
