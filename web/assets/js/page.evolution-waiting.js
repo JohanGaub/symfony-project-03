@@ -20,13 +20,11 @@ $(document).ready( function () {
                 // change content of span who have current value
                 if (data === 'true'){
                     $('#tr_element_' + evolutionId).css({
-                        backgroundColor : '#bfd9b7',
-                        color : '#FFF'
+                        backgroundColor : '#d3eeca',
                     })
                 } else if (data === 'false'){
                     $('#tr_element_' + evolutionId).css({
-                        backgroundColor : '#e9bdb5',
-                        color : '#FFF'
+                        backgroundColor : '#f8c9c1',
                     })
                 }
             },

@@ -7,46 +7,9 @@
                     <span class="closed-cross" aria-hidden="true">&times;</span>
                     <span class="sr-only">Fermer</span>
                 </button>
-
-                <h4 class="modal-title" id="myModalLabel">Mentions légales</h4>
             </div>
             <div class="modal-body">
-                <div>
-                    <p class="title3">1 - Informations</p>
-                    <p class="paragraphe">Société par Actions Simplifiée (SAS) à capital variable de 7 000,00€</p>
-                    <p class="paragraphe"><span class="modal-info-label">TVA intracommunautaire</span><span class="modal-information">FR XX XXX XXX XXX</span></p>
-                    <p class="paragraphe"><span class="modal-info-label">SIRET</span><span class="modal-information">654.245.855.00024</span></p>
-                    <div class="modal-adress">
-                        <p><span class="modal-info-label">Siège social</span></p>
-                        <ul>
-                            <li><p class="modal-information">XXX XXX XXX RCS LYON METROPOLE.</p></li>
-                            <li><p class="modal-information">17 rue Delandine</p></li>
-                            <li><p class="modal-information">69002 LYON</p></li>
-                        </ul>
-                    </div>
-                    <br/>
-                    <p class="paragraphe"><span class="modal-info-label">Email</span><span class="modal-information">contact@communit.com</span></p>
-                    <p class="paragraphe"><span class="modal-info-label">Télèphone</span><span class="modal-information">06 77 00 20 00</span></p>
-                    <br/>
-                    <br/>
-                    <p class="title3">2 - Conditions d'accès au site</p>
-                    <p class="paragraphe">La connexion et l'accès au site www.communit.com implique votre acceptation intégrale et sans réserve des présentes conditions d'accès.</p>
-                    <br/>
-                    <p class="title3">3 - Évolutions</p>
-                    <p class="paragraphe">Ce site est destiné à vous informer sur les activités de communit.</p>
-                    <br/>
-                    <p class="paragraphe">La SAS Wild Communit se réserve le droit de modifier et de mettre à jour, sans préavis, tous les éléments, produits ou services présentés sur le site.</p>
-                    <br/>
-                    <p class="title3">4 - Responsabilité</p>
-                    <p class="paragraphe">Vous utilisez le site sous votre seule et entière responsabilité. La SAS Communit ne pourra être tenue pour responsable des dommages directs ou indirects, tels que, notamment, préjudice matériel, pertes de données ou de programme, préjudice financier, résultant de l'utilisation de ce site ou de sites qui lui sont liés (en raison notamment de leur contenu ou de virus).</p>
-                    <br/>
-                    <p class="title3">5 - Droits de propriété</p>
-                    <p class="paragraphe">Tous les éléments (textes, logos, images, éléments sonores, logiciels, icônes, mise en page, base de données,...) contenus dans le site et dans les sites associés sont protégés par le droit de la propriété intellectuelle. Ces éléments restent la propriété exclusive de La SAS Wild Restaurant et/ou de ses partenaires.</p>
-                    <p class="paragraphe">Conformément aux dispositions du Code de la propriété intellectuelle, seule est autorisée l'utilisation des éléments composant le site à des fins strictement personnelles. A ce titre, vous n'êtes notamment pas en droit d'effectuer de reproduction, représentation, adaptation, traduction et/ou transformation partielle ou intégrale, ou de transfert sur un autre site web, notamment, de tout élément figurant ou composant le site.</p>
-                    <p class="paragraphe">Le non-respect de cette interdiction peut constituer un acte de contrefaçon engageant vos responsabilités civile et pénale.</p>
-                    <p class="title3">6 - Compétence juridictionnelle et loi applicable</p>
-                    <p class="paragraphe">Le site est régi par la loi française. Toute difficulté d'interprétation ou d'exécution relèvera exclusivement des tribunaux compétents de Lyon.</p>
-                </div>
+               {{ mentions.content|raw }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default closed-text" data-dismiss="modal"><p>Fermer</p></button>

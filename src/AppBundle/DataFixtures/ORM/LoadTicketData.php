@@ -61,7 +61,7 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
             $ticket->setEmergency($emergency);
             $ticket->setStatus($this->getReference($randomStatus));
 
-            $ticket->setUpload($faker->file($root . '/../web/assets/img',$root . '/../web/assets/upload', false));
+            $ticket->setUpload($faker->file($root . '/../web/assets/img', $root . '/../web/assets/upload', false));
 
             $ticket->setCreationDate($faker->dateTime);
             $ticket->setUpdateDate($faker->dateTime);

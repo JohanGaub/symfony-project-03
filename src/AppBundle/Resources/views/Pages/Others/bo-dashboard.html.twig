@@ -1,27 +1,18 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
 
-{% extends 'AppBundle:Layout:backoffice-base.html.twig' %}
+{% block title %}Tableau de bord{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="container form">
-            <div class="message-register text-center">
-                <div class="col-md-12 text-center">
-                    {% for flash_message in app.session.flashBag.get('notice') %}
-                        <div class="alert alert-warning">
-                            {{ flash_message }}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+    {% include '@App/Elements/include.flashBagMessage.html.twig' %}
 
-        <div class="row">
-            <div class="col-xs-12  text-center">
-                    <hr>
-                        <h3> Cette page est en construction</h3>
-                    <hr>
-            </div>
-        </div>
+    <div class="dashboard col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+        <h1>Tableau de bord</h1>
+
+        {% import 'AppBundle:Elements:macro.dashboardList.html.twig' as list %}
+
+        {{ list.getNews('Divers', otherNews) }}
+        {{ list.getNews('Technique', technicalNews) }}
+        {{ list.getNews('Commerciale', commercialNews) }}
+
     </div>
-
 {% endblock %}

@@ -39,7 +39,7 @@ class AdminTechnicalEvolutionType extends AbstractType
             ->add('status', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function (DictionaryRepository $repo) {
-                    return $repo->getItemListByType('status');
+                    return $repo->getItemListByType('evolution_status');
                 },
                 'label'         => 'Status de la demande',
                 'placeholder'   => 'Status cette évolution',

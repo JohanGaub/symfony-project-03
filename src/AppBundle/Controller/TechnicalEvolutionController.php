@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\TechnicalEvolution;
+use AppBundle\Form\Evolution\TechnicalEvolutionFilterType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Form\Evolution\NoteUserTechnicalEvolutionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\UserTechnicalEvolution;
@@ -25,37 +27,29 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class TechnicalEvolutionController extends Controller
 {
-    const MAX_BY_PAGE = 8;
     /**
      * List all evolution with filter
      *
-     * @Route("/liste/{page}", name="evolutionHome")
-     * @param int $page
-     * @return Response
+     * @Route("/liste", name="evolutionHome")
      * @Security("has_role('ROLE_FINAL_CLIENT')")
+     * @Method({"get", "post"})
      */
-    public function indexAction(int $page = 1)
+    public function indexAction()
     {
-        // TODO => Don't forget to change that 0 = 0
-        $repo       = $this->getDoctrine()->getRepository('AppBundle:TechnicalEvolution');
-        $evoTotal   = $repo->getNbEvolution('0 = 0');
-        $pagination = [
-            'page'          => $page,
-            'route'         => 'evolutionHome',
-            'pages_count'   => ceil($evoTotal / self::MAX_BY_PAGE),
-            'route_params'  => array(),
-        ];
-        $evolutions = $repo->getEvolutions('0 = 0', $page, self::MAX_BY_PAGE);
+        $navigator  = $this->get("app.navigator");
+        $filter     = $navigator->getEntityFilter();
+        $form       = $this->createForm(TechnicalEvolutionFilterType::class, $filter);
 
-        // TODO => Find a better solution for rounding (implement ROUND to DQL)
-        foreach ($evolutions as $key => $value) {
-            if (strlen($value['avg_notes']) > 3) {
-                $evolutions[$key]['avg_notes'] = substr($value['avg_notes'], 0, 3);
-            }
-        }
-        return $this->render('AppBundle:Pages/Evolutions:indexEvolution.html.twig', [
-            'evolutions' => $evolutions,
-            'pagination' => $pagination,
+        /**
+         * Next you need to render view with this element :
+         * You can replace "$this->get("app.navigator")" by "$navigator"
+         */
+        return $this->render('@App/Pages/Evolutions/indexEvolution.html.twig', [
+            'filter'        => $filter,
+            'filterURL'     => http_build_query($filter->getArray()),
+            'data'          => $this->get("app.navigator"),
+            'documentType'  => "Evolutions",
+            'form'          => $form->createView(),
         ]);
     }
 
@@ -65,7 +59,7 @@ class TechnicalEvolutionController extends Controller
      * @Route("/nouveau", name="evolutionAdd")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
      */
     public function addAction(Request $request)
     {
@@ -75,8 +69,10 @@ class TechnicalEvolutionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $dictionaryStatus = $em->getRepository('AppBundle:Dictionary')
-                ->findOneBy(['type' => 'status', 'value' => 'En attente']);
+            $dictionaryStatus = $em->getRepository('AppBundle:Dictionary')->findOneBy([
+                'type' => 'evolution_status',
+                'value' => 'En attente'
+            ]);
 
             $te->setCreationDate(new \DateTime('now'));
             $te->setStatus($dictionaryStatus);
@@ -115,6 +111,7 @@ class TechnicalEvolutionController extends Controller
      * @param Request $request
      * @param TechnicalEvolution $technicalEvolution
      * @return Response
+     * @Security("has_role('ROLE_PROJECT_RESP')")
      */
     public function updateAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
@@ -133,9 +130,9 @@ class TechnicalEvolutionController extends Controller
         $categoryType   = isset($category) ? $category->getType() : null;
 
         $categories = $em->getRepository('AppBundle:Category')
-            ->getCategoryByType($categoryType)->getQuery()->getResult();
+            ->getCategoryByTypeResult($categoryType);
         $categoryTypes = $em->getRepository('AppBundle:Dictionary')
-            ->getItemListByType('category_type')->getQuery()->getResult();
+            ->getItemListByTypeResult('category_type');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $technicalEvolution->setUpdateDate(new \DateTime('now'));
@@ -159,6 +156,7 @@ class TechnicalEvolutionController extends Controller
                 'technicalEvolution' => $technicalEvolution->getId()
             ]);
         }
+
         return $this->render($view, [
             'form'          => $form->createView(),
             'categoryId'    => isset($category) ? $category->getId() : null,
@@ -275,8 +273,6 @@ class TechnicalEvolutionController extends Controller
         $note           = new UserTechnicalEvolution('note');
         $formNote       = $this->createForm(NoteUserTechnicalEvolutionType::class, $note);
 
-        /** @var $noteAnotherUser */
-        /** @var $noteUser */
         return $this->render('@App/Pages/Evolutions/unitIndexEvolution.html.twig', [
             'evolution'       => $technicalEvolution,
             'notes'           => $notes,
@@ -374,7 +370,6 @@ class TechnicalEvolutionController extends Controller
 
     /**
      * Update comments for TechnicalEvolutions
-     * // TODO => Fix no route find
      * @Route("/commentaires/modification/{userTechnicalEvolution}", name="evolutionCommentsUpdate")
      * @param Request $request
      * @param UserTechnicalEvolution $userTechnicalEvolution
@@ -444,6 +439,7 @@ class TechnicalEvolutionController extends Controller
      *
      * @Route("/admin/en-attente/liste", name="evolutionWaiting")
      * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function adminListWaitingAction()
     {
@@ -463,25 +459,29 @@ class TechnicalEvolutionController extends Controller
      * @param Request $request
      * @param TechnicalEvolution $technicalEvolution
      * @return JsonResponse
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function adminWaitingWorksAction(Request $request, TechnicalEvolution $technicalEvolution)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new HttpException('500', 'Invalid call');
         }
-        $data   = $request->request->get('data');
-        if ($data == 'true') {
+
+        $data = $request->request->get('data');
+
+        if ($data == 'true')
             $newStatus = 'En cours';
-        } else if ($data == 'false') {
+        else if ($data == 'false')
             $newStatus = 'Refusé';
-        } else {
+        else
             throw new Exception('Une erreur est survenue, veuillez réessayer plus tard');
-        }
-        $em     = $this->getDoctrine()->getManager();
+
+        $em = $this->getDoctrine()->getManager();
         $status = $em->getRepository('AppBundle:Dictionary')->findOneBy([
-            'type'  => 'status',
+            'type'  => 'evolution_status',
             'value' => $newStatus
         ]);
+
         $technicalEvolution->setStatus($status);
         $em->persist($technicalEvolution);
         $em->flush();

@@ -1,0 +1,49 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}Les news{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include '@App/Elements/include.flashBagMessage.html.twig' %}
+
+            <div class="bo-title-page col-lg-12">
+                <h2>Les news</h2>
+            </div>
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Type</th>
+                        <th>Visibilité</th>
+                        <th>Voir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for new in news %}
+                    <tr>
+                        <th>{{ new.title }}</th>
+                        <th>{{ new.type }}</th>
+                        <th>
+                            {% if new.visible == true %}
+                                <p>Visible</p>
+                            {% else %}
+                                <p>Caché</p>
+                            {% endif %}
+                        </th>
+                        <th>
+                            <a href="{{ path('newsUnit', {'new': new.id}) }}">
+                                <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </th>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

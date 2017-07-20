@@ -5,8 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Company;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
-use AppBundle\Form\UserFilterType;
-use AppBundle\Form\UserType;
+use AppBundle\Form\User\UserFilterType;
+use AppBundle\Form\User\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -118,13 +118,20 @@ class UserController extends Controller
             );
 
 
+
+
             return $this->redirectToRoute('home');
 
         }
+
+        $mentions = $this->getDoctrine()->getRepository('AppBundle:DynamicContent')
+            ->findOneBy(['type' => 'mentionslegales']);
+
         return $this->render(
-            '@App/Pages/Admin/register.html.twig',
-            array('form' => $form->createView(),
-            ));
+            '@App/Pages/Admin/register.html.twig',[
+                'form'      => $form->createView(),
+                'mentions'  => $mentions,
+            ]);
     }
 
     /**
@@ -159,7 +166,7 @@ class UserController extends Controller
      */
     public function editShow(Request $request, User $user)
     {
-        $editForm = $this->createForm('AppBundle\Form\ModifyUserType', $user);
+        $editForm = $this->createForm('AppBundle\Form\User\ModifyUserType', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

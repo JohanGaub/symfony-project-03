@@ -77,13 +77,23 @@ $(document).ready(function() {
 
 
 /**
+ * Calls
+ */
+$(document).ready(function () {
+    loadComments()
+    addComment()
+    updateComment()
+    deleteComment()
+})
+
+/**
  * Listen user screen to load new comments
  */
-$(document).ready( function () {
+function loadComments() {
     let loaderDom = '<div class="loader">'
-    loaderDom += '<div class="inner one"></div>'
-    loaderDom += '<div class="inner two"></div>'
-    loaderDom += '</div>'
+        loaderDom += '<div class="inner one"></div>'
+        loaderDom += '<div class="inner two"></div>'
+        loaderDom += '</div>'
     let status = false;
     let loader = '.loader-wcs'
     $(loader).append(loaderDom);
@@ -138,12 +148,12 @@ $(document).ready( function () {
             })
         }
     }, 500)
-})
+}
 
 /**
  * Add new comment
  */
-$(document).ready( function () {
+function addComment() {
     let formId  = '#app_bundle_comment_userTechnicalEvolution'
     let fieldId = '#app_bundle_comment_userTechnicalEvolution_comment'
     let id      = $(formId).attr('data-index-number')
@@ -165,12 +175,12 @@ $(document).ready( function () {
             },
         })
     })
-})
+}
 
 /**
  * Delete comment
  */
-$(document).ready( function () {
+function deleteComment() {
     let commentFullId   = ''
     let commentId       = ''
     let commentValue    = ''
@@ -191,18 +201,18 @@ $(document).ready( function () {
             timeout: 3000,
             success: function() {
                 let elementList = '<div class="unit-comment">'
-                elementList += '<h5>Commentaire supprimé<h5>'
-                elementList += '</div>'
+                    elementList += '<h5>Commentaire supprimé<h5>'
+                    elementList += '</div>'
                 $('#ute_id_' + commentId).replaceWith(elementList)
             },
         })
     })
-})
+}
 
 /**
  * Update action
  */
-$(document).ready( function () {
+function updateComment() {
     let commentField    = '.app_bundle_comment_userTechnicalEvolution_updateField'
     let commentForm     = '#app_bundle_comment_userTechnicalEvolution_update'
     let commentFullId   = ''
@@ -213,7 +223,7 @@ $(document).ready( function () {
         let $this       = $(this)
         commentFullId   = $this.parent().parent().attr('id')
         commentId       = commentFullId.replace('ute_id_', '')
-        commentValue    = $this.parent().children($('.comment-value'))[2]['outerText']
+        commentValue    = $('#' + commentFullId).find('.comment-value').text()
         $(commentField).val(commentValue)
     })
 
@@ -240,7 +250,7 @@ $(document).ready( function () {
             })
         }
     })
-})
+}
 
 /**
  * Know if loader is in view
@@ -267,21 +277,22 @@ function isScrolledIntoView(elem)
  * @param comment
  * @returns {string}
  */
-function createComment(uteId, user, date, comment) {
+function createComment(uteId, user, date, comment)
+{
     let elementList = '<div id="ute_id_' + uteId + '" class="unit-comment">'
-    elementList += '<h5>Par <span class="strong-green">' + user + '</span></h5>'
-    elementList += '<i>Le ' + date + '</i>'
-    elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
-    elementList += '<div class="be-flex space-between">'
-    elementList += '<a class="modal-update" href="" data-toggle="modal" '
-    elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
-    elementList += 'Modifier le commentaire'
-    elementList += '</a>'
-    elementList += '<a class="modal-delete" href="" data-toggle="modal" '
-    elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
-    elementList += 'Supprimer le commentaire'
-    elementList += '</a>'
-    elementList += '</div>'
-    elementList += '</div>'
+        elementList += '<h5>Par <span class="strong-green">' + user + '</span></h5>'
+        elementList += '<i>Le ' + date + '</i>'
+        elementList += '<p id="comment-value-id-' + uteId + '" class="comment-value">' + comment + '</p>'
+        elementList += '<div class="be-flex space-between">'
+        elementList += '<a class="modal-update" href="" data-toggle="modal" '
+        elementList += 'data-target="#comment-modal-update" data-index-number="' + uteId + '">'
+        elementList += 'Modifier le commentaire'
+        elementList += '</a>'
+        elementList += '<a class="modal-delete" href="" data-toggle="modal" '
+        elementList += 'data-target="#comment-modal-delete" data-index-number="' + uteId + '">'
+        elementList += 'Supprimer le commentaire'
+        elementList += '</a>'
+        elementList += '</div>'
+        elementList += '</div>'
     return elementList;
 }

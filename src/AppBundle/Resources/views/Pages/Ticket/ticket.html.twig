@@ -59,8 +59,7 @@
                     </thead>
 
                     <tbody class="table-striped">
-                    {%  for d in data %}
-
+                    {% for d in data %}
                         <tr class="highlight-index">
                             <td class="text-center"><p>{{ d.id }}</p></td>
                             <td><p>{{ d.user.company.name }}</p></td>
@@ -86,13 +85,11 @@
             </div>
         </div>
 
-
         <div class="row text-center">
             <div class="col-xs-8 col-xs-offset-2">
                 {% include('@App/Elements/paginator.html.twig') %}
             </div>
         </div>
-
 
         <div class="row text-center">
             <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
@@ -102,11 +99,6 @@
             </div>
         </div>
 
-
-
     </section>
-
-
-
 
 {% endblock %}

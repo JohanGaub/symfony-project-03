@@ -1,0 +1,31 @@
+footer {
+  border-top: 1px solid #CCC;
+  padding: 0;
+  margin: 0;
+
+  .footer {
+    padding: 3rem 0;
+
+    .link-group {
+      list-style-type: none;
+      display: flex;
+      margin: 0 auto;
+      justify-content: center;
+
+      li.divider-li {
+        color: $primary-color;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      li {
+        padding: 0.5rem 1rem;
+
+        a {
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

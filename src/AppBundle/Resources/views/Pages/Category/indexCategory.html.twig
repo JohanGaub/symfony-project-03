@@ -8,9 +8,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            {% include '@App/Pages/Category/buttonBarCategory.html.twig' %}
-
-            <div class="bo-title-page col-lg-12">
+           <div class="bo-title-page col-lg-12">
                 <h1>Liste des catégories</h1>
             </div>
 
@@ -24,7 +22,7 @@
                     <tr>
                         <th>Nom</th>
                         <th>Type</th>
-                        <th>Description</th>
+                        <th class="hidden-md">Description</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -34,7 +32,7 @@
                         <tr>
                             <th>{{ category.title }}</th>
                             <th>{{ category.type.value }}</th>
-                            <th>{{ category.description }}</th>
+                            <th class="hidden-md">{{ category.description }}</th>
                             <th>
                                 <a href="{{ path('categoryUpdate', {'category': category.id}) }}" class="neutral">
                                     <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
@@ -77,7 +75,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    {# TODO => Call if need to do file for this js ?? #}
     <script>
         $(document).ready(function () {
             $(document).on('click', '.modal-link', function () {

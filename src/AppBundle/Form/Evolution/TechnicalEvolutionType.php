@@ -49,7 +49,13 @@ class TechnicalEvolutionType extends AbstractType
             ])
             ->add('expectedDelay', DateType::class, [
                 'label'         => 'Délais souhaité',
-                'format'        => 'dd MM yyyy'
+                'widget'        => 'single_text',
+                'required'      => false,
+                'html5'         => false,
+                'format'        => 'dd/MM/yyyy',
+                'attr'          => [
+                    'class' => 'datepicker1',
+                ],
             ])
             ->add('product', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Product',
@@ -58,9 +64,6 @@ class TechnicalEvolutionType extends AbstractType
                 'placeholder'   => 'Séléctionnez votre produit',
                 'multiple'      => false,
                 'required'      => 'true',
-                'attr'          => [
-                    'class' => 'datepicker'
-                ]
             ])
             ->add('category_type', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Dictionary',
@@ -71,7 +74,7 @@ class TechnicalEvolutionType extends AbstractType
                 'label'         => 'Type de catégorie',
                 'placeholder'   => 'Sélectionnez votre type de catégorie',
                 'mapped'        => false,
-                'required'      => true,
+                'required'      => true ,
                 'multiple'      => false,
             ])
             ->add('category', ChoiceType::class, [
@@ -91,7 +94,6 @@ class TechnicalEvolutionType extends AbstractType
             }
         );
     }
-
 
     /**
      * @param FormInterface $form
@@ -124,9 +126,9 @@ class TechnicalEvolutionType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => TechnicalEvolution::class
-        ));
+        ]);
     }
 
     /**

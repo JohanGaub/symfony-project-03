@@ -7,15 +7,39 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            {% include '@App/Pages/Evolutions/buttonBarEvolutions.html.twig' %}
+            {% include '@App/Elements/include.flashBagMessage.html.twig' %}
 
             <div class="bo-title-page col-lg-12">
                 <h2>Evolutions techniques</h2>
             </div>
 
+            <div class="col-xs-12 col-md-12 col-lg-10 col-lg-offset-1">
+                {{ form_start(form) }}
+                    <div class="col-md-6">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title, {"value": filter.title } ) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_label(form.status) }}
+                        {{ form_widget(form.status, {"value": filter.status } ) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_label(form.categoryType) }}
+                        {{ form_widget(form.categoryType, {"value": filter.categoryType } ) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_label(form.category) }}
+                        {{ form_widget(form.category, {"value": filter.category } ) }}
+                    </div>
+                    <div class="col-xs-12">
+                        {{ form_row(form.submit) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+
             <div class="row list-evolution">
-                {% for evolution in evolutions %}
-                    <div class="col-xs-12 col-md-12 col-lg-6">
+                {% for evolution in data %}
+                    <div class="col-xs-12 col-md-12 col-lg-10 col-lg-offset-1">
                         <div class="bo-evolution">
                             <div class="bo-top-evolution">
                                 <div class="be-flex space-between">
@@ -24,40 +48,43 @@
                                         <p class="nb-notes"><span>{{ evolution.nb_notes }}</span> notes</p>
                                     </div>
                                     <div class="evolution-titles">
-                                        <h2>{{ evolution.title }}</h2>
+                                        <h2>{{ evolution[0].title }}</h2>
                                     </div>
                                 </div>
                                 <div class="evolution-status">
-                                    <p>Status : {{ evolution.status }}</p>
+                                    <p><span class="label-evo">Status</span> : {{ evolution[0].status.value }}</p>
                                 </div>
                                 <div class="evolution-category">
                                     <div class="evoltuion-category-type">
-                                        <p>Type de catégorie : {{ evolution.category_type }}</p>
+                                        <p><span class="label-evo">Type de catégorie</span> : {{ evolution[0].category.type.value }}</p>
                                     </div>
                                     <div class="evoltuion-categroy-name">
-                                        <p>Nom de catégorie : {{ evolution.category_title }}</p>
+                                        <p><span class="label-evo">Nom de catégorie</span> : {{ evolution[0].category.title }}</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="bo-middle-evolution">
+                                <p>
+                                    <span class="label-evo">Résumé</span><br>
+                                    {{ evolution[0].sumUp }}
+                                </p>
                                 <ul>
-                                    <li>{{ evolution.sumUp }}</li>
-                                    {% if evolution.updateDate is defined %}
-                                    <li>Date de modification : {{ evolution.updateDate|date("d/m/Y") }}</li>
+                                    {% if evolution[0].updateDate is defined %}
+                                    <li>Date de modification : {{ evolution[0].updateDate|date("d/m/Y") }}</li>
                                     {% else %}
-                                    <li>Date de création : {{ evolution.creationDate|date("d/m/Y") }}</li>
+                                    <li>Date de création : {{ evolution[0].creationDate|date("d/m/Y") }}</li>
                                     {% endif %}
-                                    <li>Date de fin : {{ evolution.expectedDelay|date("d/m/Y", "Europe/Paris") }}</li>
-                                    <li>Evolution demandé par un {{ evolution.origin }}</li>
+                                    <li>Date de fin : {{ evolution[0].expectedDelay|date("d/m/Y", "Europe/Paris") }}</li>
+                                    <li>Evolution demandé par un {{ evolution[0].origin }}</li>
                                 </ul>
                             </div>
 
                             <div class="bo-bottom-evolution">
-                                <a href="{{ path('evolutionUnit', {'technicalEvolution': evolution.id}) }}" class="btn btn-model-small">En savoir plus</a>
+                                <a href="{{ path('evolutionUnit', {'technicalEvolution': evolution[0].id}) }}">En savoir plus</a>
 
-                                {% if is_granted('ROLE_ADMIN') or app.user.id == evolution.user_id %}
-                                    <a href="{{ path('evolutionUpdate', {'technicalEvolution': evolution.id}) }}" class="btn btn-model-small">Modifier l'évolution</a>
+                                {% if is_granted('ROLE_ADMIN') or app.user.id == evolution[0].user.id %}
+                                    <a href="{{ path('evolutionUpdate', {'technicalEvolution': evolution[0].id}) }}">Modifier l'évolution</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -67,12 +94,12 @@
             </div>
 
             <div class="col-lg-12">
-                {% include '@App/Elements/include.pagination.html.twig' %}
+                {% include '@App/Elements/include.pagination-filter.html.twig' %}
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
+    <script src="{{ asset('assets/js/form.filter.add-category-title.js') }}"></script>
 {% endblock %}

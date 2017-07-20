@@ -2,28 +2,28 @@
     <div class="col-xs-10 col-xs-offset-1 text-center">
         <nav>
             <ul class="pagination">
-                <li class="{% if data.currentPage == 1 %}disabled{% else %}waves-effect{% endif %}">
-                    <a href="{{ path(app.request.get('_route'), { 'page': 1, 'filter': filterURL | raw  }) }}">
+                <li class="{% if data.currentPage == 1 %}disabled{% endif %}">
+                    <a href="{{ path(app.request.get('_route'), { 'page': 1, 'filter': filterURL | raw }) }}">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                 </li>
-                <li class="{% if data.currentPage == 1 %}disabled{% else %}waves-effect{% endif %}">
-                    <a href="{{ path(app.request.get('_route'), { 'page': data.prevPage, 'filter': filterURL | raw   }) }}">
+                <li class="{% if data.currentPage == 1 %}disabled{% endif %}">
+                    <a href="{{ path(app.request.get('_route'), { 'page': data.prevPage, 'filter': filterURL | raw }) }}">
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                     </a>
                 </li>
                 {% for page in data.firstPage .. data.lastPage() %}
-                    <li class="{% if page == data.currentPage %}disabled{% else %}waves-effect{% endif %}">
-                        <a href="{{ path(app.request.get('_route'), { 'page': page, 'filter': filterURL | raw   }) }}">{{ page }}</a>
+                    <li class="{% if page == data.currentPage %}disabled{% endif %}">
+                        <a href="{{ path(app.request.get('_route'), { 'page': page, 'filter': filterURL | raw }) }}">{{ page }}</a>
                     </li>
                 {% endfor %}
-                <li class="{% if data.currentPage == data.maxPage %}disabled{% else %}waves-effect{% endif %}">
-                    <a href="{{ path(app.request.get('_route'), { 'page': data.nextPage, 'filter': filterURL | raw   }) }}">
+                <li class="{% if data.currentPage == data.maxPage %}disabled{% endif %}">
+                    <a href="{{ path(app.request.get('_route'), { 'page': data.nextPage, 'filter': filterURL | raw }) }}">
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                     </a>
                 </li>
-                <li class="{% if data.currentPage == data.maxPage %}disabled{% else %}waves-effect{% endif %}">
-                    <a href="{{ path(app.request.get('_route'), { 'page': data.maxPage, 'filter': filterURL | raw   }) }}">
+                <li class="{% if data.currentPage == data.maxPage %}disabled{% endif %}">
+                    <a href="{{ path(app.request.get('_route'), { 'page': data.maxPage, 'filter': filterURL | raw }) }}">
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </a>
                 </li>
@@ -31,3 +31,4 @@
         </nav>
     </div>
 </div>
+
