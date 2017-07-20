@@ -16,7 +16,7 @@ class ModifyAssociateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class,  ['label' => 'email'])
+            ->add('email', EmailType::class,  ['label' => 'Email'])
             ->add('userProfile', User_profileType::class, array(
                 'label' => false,
             ))
