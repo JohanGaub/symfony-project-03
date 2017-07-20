@@ -45,19 +45,73 @@ class TicketRepository extends EntityRepository
         return $q;
     }
 
+    /**
+     * @param $page
+     * @param $filter
+     * @return \Doctrine\ORM\Query
+     */
     public function getRowsByPage($page, $filter)
     {
-        $alias  = "t";
-        $query  = $this->createQueryBuilder($alias)
-            ->select($alias)
+        $query = $this->createQueryBuilder('t')
+            ->select('dts', 'c', 'ct', 'u', 't', 'cp', 'o')
+            ->join('t.status','dts', 't.status = dts.id')
+            ->join('t.category','c','t.category = c.id')
+            ->join('t.user','u','t.user = u.id')
+            ->join('c.type', 'ct', 'c.type = ct.id')
+            ->join('u.company', 'cp', 'u.company = cp.id')
+            ->join('t.origin', 'o', 't.origin = o.id')
+            ->orderBy('t.id', 'DESC')
             ->setFirstResult(($page - 1) * self::MAX_RESULT)
             ->setMaxResults(self::MAX_RESULT);
         if(!is_null($filter)) {
             foreach ($filter as $field => $value) {
-                if ($value !== "") {
-                    if (strpos($field, "_") !== 0) {
-                        $search = "$alias.$field like '%$value%'";
-                        $query->andWhere($search);
+                if($value !== '') {
+                    if(strpos($field, '_') !== 0) {
+                        switch($field) {
+                            case 'status':
+                                $alias = 'dts';
+                                $field = 'id';
+                                $operator = "=";
+                                break;
+                            case 'categoryType':
+                                $alias = 'ct';
+                                $field = 'id';
+                                $operator = "=";
+                                break;
+                            case 'category':
+                                $alias = 'c';
+                                $field = 'id';
+                                $operator = "=";
+                                break;
+                            case 'company':
+                                $alias = 'cp';
+                                $field = 'name';
+                                $operator = "like";
+                                break;
+                            case 'origin':
+                                $alias = 'o';
+                                $field = 'id';
+                                $operator = "=";
+                                break;
+                            default:
+                                $alias = 't';
+                                $operator = "like";
+                        }
+                        if ($field == "creationDate" || $field == "endDate") {
+                            $tabDate = explode('/' , $value);
+                            $value  = $tabDate[2].'-'.$tabDate[1].'-'.$tabDate[0];
+                            $date = new \DateTime(date("Y-m-d", strtotime($value)));
+                            $search = "$alias.$field >= '" . $date->format("Y-m-d 00:00:00") . "'";
+                            $query->andWhere($search);
+                            $search = "$alias.$field <= '" . $date->format("Y-m-d 23:59:59") . "'";
+                            $query->andWhere($search);
+                        } elseif ($alias == 't' or $alias == 'cp') {
+                            $search = "$alias.$field $operator '%$value%'";
+                            $query->andWhere($search);
+                        } else {
+                            $search = "$alias.$field = '$value'";
+                            $query->andWhere($search);
+                        }
                     }
                 }
             }

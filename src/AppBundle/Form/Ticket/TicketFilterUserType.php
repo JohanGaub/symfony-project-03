@@ -3,12 +3,18 @@
 namespace AppBundle\Form\Ticket;
 
 use AppBundle\Entity\TicketFilter;
+use AppBundle\Repository\CategoryRepository;
+use AppBundle\Repository\DictionaryRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -32,6 +38,7 @@ class TicketFilterUserType extends AbstractType
                 'label' => 'Société',
                 'required' => false,
             ])
+
             ->add('emergency', ChoiceType::class, [
                 'label' => 'Urgence',
                 'required' => false,
@@ -46,25 +53,36 @@ class TicketFilterUserType extends AbstractType
                 'label' => 'Sujet du ticket',
                 'required' => false,
             ])
-            ->add('status', ChoiceType::class, [
-                'label' => 'Statut',
-                'required' => false,
-                'expanded' => false,
-                'multiple' => false,
-                'choices'  => [
-                    'En attente'   => 'En attente',
-                    'En cours'     => 'En cours',
-                ],
+           ->add('status', EntityType::class, [
+                'label'         => 'Statut',
+                'class'         => 'AppBundle\Entity\Dictionary',
+                'required'      => false,
+                'expanded'      => false,
+                'multiple'      => false,
+                'mapped'        => true,
+                'query_builder' => function(DictionaryRepository $dictionaryRepository) {
+                    return $dictionaryRepository->getItemListByType('status');
+                }
             ])
+            ->add('origin', EntityType::class, [
+                           'class'         => 'AppBundle\Entity\Dictionary',
+                           'query_builder' => function (DictionaryRepository $repo) {
+                               #Find all origin in dictionary
+                               return $repo->getItemListByType('origin');
+                           },
+                           'label'         => 'Origine',
+                           'multiple'      => false,
+                           'mapped'        => true,
+                           'required'      => false,
+                       ])
             ->add('creationDate', DateType::class, [
                 'label'     => 'Date de création',
                 'widget'    => 'single_text',
                 'required' => false,
                 'html5' => false,
+                'format'        => 'dd/MM/yyyy',
                 'attr'      => [
-                    'placeholder'   => 'jj/mm/aaaa',
-                    'format'        => 'dd/MM/yyyy',
-                    'class'         => 'js-datepicker',
+                    'class'         => 'datepicker1',
                 ],
             ])
             ->add('endDate', DateType::class, [
@@ -72,10 +90,9 @@ class TicketFilterUserType extends AbstractType
                 'widget'    => 'single_text',
                 'required'  => false,
                 'html5' => false,
+                'format'        => 'dd/MM/yyyy',
                 'attr'      => [
-                    'placeholder'   => 'jj/mm/aaaa',
-                    'format'        => 'dd/MM/yyyy',
-                    'class'         => 'js-datepicker',
+                    'class'         => 'datepicker2',
                 ],
             ])
             ->add('submit', SubmitType::class, [
@@ -86,6 +103,33 @@ class TicketFilterUserType extends AbstractType
                 ]
             ]);
     }
+
+    /**
+     * @param FormInterface $form
+     * @param $categoryType
+     */
+    private function addCategoryTitleField(FormInterface $form, $categoryType)
+    {
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'category',
+            EntityType::class,
+            null,
+            [
+                'class'         => 'AppBundle\Entity\Category',
+                'query_builder' => function(CategoryRepository $repo) use ($categoryType) {
+                    # find category name by select type
+                    return $repo->getCategoryByType($categoryType);
+                },
+                'label'         => 'Catégorie',
+                'placeholder'   => 'Sélectionnez un titre de catégorie',
+                'mapped'        => true,
+                'required'      => false,
+                'auto_initialize' => false,
+            ]
+        );
+        $form->add($builder->getForm());
+    }
+
 
     /**
      * @param OptionsResolver $resolver

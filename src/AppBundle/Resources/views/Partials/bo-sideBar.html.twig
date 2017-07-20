@@ -22,14 +22,14 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Les évolutions
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Evolutions
                         <span class="caret"></span>
                         <span class="pull-right hidden-xs showopacity">
                             <i class="fa fa-cogs" aria-hidden="true"></i>
                         </span>
                     </a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="{{ path('evolutionHome') }}">Liste des évolutions</a></li>
+                        <li><a href="{{ path('evolutionHome') }}">Liste des évoltuion</a></li>
                         <li><a href="{{ path('evolutionAdd') }}">Nouvelle évolution</a></li>
                         <li><a href="{{ path('evolutionUser') }}">Mes évolutions</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
@@ -39,47 +39,37 @@
                         {% endif %}
                     </ul>
                 </li>
-                {#              <li>
-                                  <a href="{{ path('download') }}">Les téléchargements
-                                      <span class="pull-right hidden-xs showopacity">
-                                          <i class="fa fa-download" aria-hidden="true"></i>
-                                      </span>
-                                  </a>
-                              </li>#}
+
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Les tickets
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Tickets
                         <span class="caret"></span>
                         <span class="pull-right hidden-xs showopacity">
                             <i class="fa fa-wrench" aria-hidden="true"></i>
                         </span>
                     </a>
                     <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="{{ path('ticket_index') }}">Liste des tickets</a></li>
                         <li><a href="{{ path('ticket_add') }}">Nouveau ticket</a></li>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="divider"></li>
-                            <li><p class="navbar-under-title">Administration</p></li>
-                            <li><a href="{{ path('ticket_index') }}">Liste des tickets</a></li>
-                        {% endif %}
                     </ul>
                 </li>
 
                 {% if is_granted('ROLE_PROJECT_RESP') %}
-                <li>
-                    <a href="{{ path('validation_associate') }}">Gestion collaborateurs
-                        <span class="pull-right hidden-xs showopacity">
+                    <li>
+                        <a href="{{ path('validation_associate') }}">Gestion collaborateurs
+                            <span class="pull-right hidden-xs showopacity">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
-                    </a>
-                </li>
+                        </a>
+                    </li>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
-                <li>
-                    <a href="{{ path('validation_register', {'page' : 1}) }}">Gestion utilisateurs
-                        <span class="pull-right hidden-xs showopacity">
+                    <li>
+                        <a href="{{ path('validation_register', {'page' : 1}) }}">Gestion utilisateurs
+                            <span class="pull-right hidden-xs showopacity">
                             <i class="fa fa-users" aria-hidden="true"></i>
                         </span>
-                    </a>
-                </li>
+                        </a>
+                    </li>
                 {% endif %}
 
             </ul>

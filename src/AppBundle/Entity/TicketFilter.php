@@ -31,17 +31,8 @@ class TicketFilter
      */
     private $content;
 
-    /**
-     * @var string
-     *
-     */
+    /** @var Dictionary */
     private $origin;
-
-    /**
-     * @var string
-     *
-     */
-    private $type;
 
     /**
      * @var string
@@ -49,22 +40,26 @@ class TicketFilter
      */
     private $emergency;
 
-    /**
-     * @var string
-     *
-     */
+    /** @var Dictionary */
     private $status;
 
+    /** @var Dictionary */
+    private $ticketType;
+
+    /** @var Dictionary */
+    private $categoryType;
+
+    /** @var Category */
+    private $category;
 
     /**
-     * @var Date
+     * @var DateTime
      *
      */
     private $creationDate;
 
-
     /**
-     * @var Date
+     * @var DateTime
      *
      */
     private $endDate;
@@ -161,7 +156,7 @@ class TicketFilter
     /**
      * Set origin
      *
-     * @param string $origin
+     * @param $origin
      *
      * @return TicketFilter
      */
@@ -175,7 +170,7 @@ class TicketFilter
     /**
      * Get origin
      *
-     * @return string
+     * @return Dictionary
      */
     public function getOrigin()
     {
@@ -223,11 +218,71 @@ class TicketFilter
     /**
      * Get status
      *
-     * @return string
+     * @return Dictionary
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set ticket_type
+     *
+     * @param string $ticketType
+     *
+     * @return TicketFilter
+     */
+    public function setTicketType($ticketType)
+    {
+        $this->ticketType = $ticketType;
+
+        return $this;
+    }
+
+    /**
+     * Get ticket_type
+     *
+     * @return Dictionary
+     */
+    public function getTicketType()
+    {
+        return $this->ticketType;
+    }
+
+    /**
+     * @return Dictionary
+     */
+    public function getCategoryType()
+    {
+        return $this->categoryType;
+    }
+
+    /**
+     * @param $categoryType
+     * @return TicketFilter
+     */
+    public function setCategoryType($categoryType)
+    {
+        $this->categoryType = $categoryType;
+        return $this;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param $category
+     * @return TicketFilter
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+        return $this;
     }
 
     /**
@@ -247,18 +302,17 @@ class TicketFilter
     /**
      * Get creationDate
      *
-     * @return Date
+     * @return DateTime|Date
      */
     public function getCreationDate()
     {
         return $this->creationDate;
     }
 
-
     /**
      * Get endDate
      *
-     * @return Date
+     * @return DateTime|Date
      */
     public function getEndDate()
     {
@@ -328,30 +382,6 @@ class TicketFilter
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return TicketFilter
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * @return Company
      */
     public function getCompany()
@@ -360,15 +390,31 @@ class TicketFilter
     }
 
     /**
-     * @param Company $company
+     * @param $company
      * @return TicketFilter
      */
-    public function setCompany(Company $company)
+    public function setCompany($company)
     {
         $this->company = $company;
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getArray()
+    {
+        return [
+            'id'              =>  $this->getId(),
+            'company'         =>  $this->getCompany(),
+            'emergency'       =>  $this->getEmergency(),
+            'origin'          =>  $this->getOrigin(),
+            'subject'         =>  $this->getSubject(),
+            'status'          =>  $this->getStatus(),
+            'creationDate'    =>  $this->getCreationDate(),
+            'endDate'         =>  $this->getEndDate(),
+        ];
+    }
 }
 
 

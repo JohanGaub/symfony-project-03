@@ -33,8 +33,8 @@ class DataParameters
     const NB_TECHNICAL_EVOLUTION        = 50;
     const NB_DOCUMENTATION              = 25;
     const NB_FAQ                        = 20;
-    const NB_TICKET                     = 10;
-    const NB_COMMENT                    = 1000;
+    const NB_TICKET                     = 100;
+    const NB_COMMENT                    = 500;
 
     /**
      * @return mixed
