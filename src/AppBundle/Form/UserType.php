@@ -43,4 +43,12 @@ class UserType extends AbstractType
             'cascade_validation' => true,
         ));
     }
+
+    /**
+     * @return string
+     */
+    public function getBlockPrefix()
+    {
+        return 'app_bundle_user';
+    }
 }

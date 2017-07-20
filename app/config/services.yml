@@ -20,4 +20,14 @@ services:
         class: AppBundle\Service\GetterUserAdmin
         arguments: ['@doctrine.orm.entity_manager']
 
+    # Navigator Factory
+    app.navigator.factory:
+        class: AppBundle\Service\NavigatorFactory
+        arguments:
+            - "@request_stack"
+            - "@doctrine.orm.entity_manager"
 
+    # Navigator Service (Search/Filter/Pagination)
+    app.navigator:
+        class: AppBundle\Service\Navigator
+        factory: "app.navigator.factory:get"
