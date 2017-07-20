@@ -29,7 +29,7 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="{{ path('evolutionHome') }}">Liste des évolutions</a></li>
+                        <li><a href="{{ path('evolutionHome') }}">Liste évolutions</a></li>
                         <li><a href="{{ path('evolutionAdd') }}">Nouvelle évolution</a></li>
                         <li><a href="{{ path('evolutionUser') }}">Mes évolutions</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
@@ -40,7 +40,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ path('download') }}">Les téléchargements
+                    <a href="{{ path('download') }}">Téléchargements
                         <span class="pull-right hidden-xs showopacity">
                             <i class="fa fa-download" aria-hidden="true"></i>
                         </span>
@@ -83,10 +83,10 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu forAnimate" role="menu">
-                            <li><a href="{{ path('categoryHome') }}">Les catégories</a></li>
+                            <li><a href="{{ path('categoryHome') }}">Catégories</a></li>
                             <li><a href="{{ path('categoryAdd') }}">Nouvelle catégorie</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{ path('dictionaryHome') }}">Les dictionnaires</a></li>
+                            <li><a href="{{ path('dictionaryHome') }}">Dictionnaires</a></li>
                         </ul>
                     </li>
                 {% endif %}
