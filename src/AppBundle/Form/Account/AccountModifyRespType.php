@@ -6,10 +6,12 @@
  * Time: 11:06
  */
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Account;
 
 
 use AppBundle\Entity\User;
+use AppBundle\Form\User\CompanyType;
+use AppBundle\Form\User\User_profileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
