@@ -94,4 +94,3 @@ class DynamicContent
         return $this->content;
     }
 }
-
