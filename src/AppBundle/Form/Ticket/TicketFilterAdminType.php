@@ -65,35 +65,34 @@ class TicketFilterAdminType extends AbstractType
                 }
             ])
             ->add('origin', EntityType::class, [
-                           'class'         => 'AppBundle\Entity\Dictionary',
-                           'query_builder' => function (DictionaryRepository $repo) {
-                               #Find all origin in dictionary
-                               return $repo->getItemListByType('origin');
-                           },
-                           'label'         => 'Origine',
-                           'multiple'      => false,
-                           'mapped'        => true,
-                           'required'      => false,
-                       ])
+                   'class'         => 'AppBundle\Entity\Dictionary',
+                   'query_builder' => function (DictionaryRepository $repo) {
+                       #Find all origin in dictionary
+                       return $repo->getItemListByType('origin');
+                   },
+                   'label'         => 'Origine',
+                   'multiple'      => false,
+                   'mapped'        => true,
+                   'required'      => false,
+            ])
             ->add('creationDate', DateType::class, [
                 'label'     => 'Date de création',
                 'widget'    => 'single_text',
-                'required' => false,
-                'html5' => false,
-                'format'        => 'dd/MM/yyyy',
+                'required'  => false,
+                'html5'     => false,
+                'format'    => 'dd/MM/yyyy',
                 'attr'      => [
-                    //'placeholder'   => 'jj/mm/aaaa',
-                    'class'         => 'datepicker1',
+                    'class' => 'datepicker1',
                 ],
             ])
             ->add('endDate', DateType::class, [
                 'label'     => 'Date de clôture',
                 'widget'    => 'single_text',
                 'required'  => false,
-                'html5' => false,
-                'format'        => 'dd/MM/yyyy',
+                'html5'     => false,
+                'format'    => 'dd/MM/yyyy',
                 'attr'      => [
-                    'class'         => 'datepicker2',
+                    'class' => 'datepicker2',
                 ],
             ])
             ->add('isArchive', ChoiceType::class, [
@@ -116,34 +115,6 @@ class TicketFilterAdminType extends AbstractType
                 ]
             ]);
     }
-
-
-    /**
-     * @param FormInterface $form
-     * @param $categoryType
-     */
-    private function addCategoryTitleField(FormInterface $form, $categoryType)
-    {
-        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
-            'category',
-            EntityType::class,
-            null,
-            [
-                'class'         => 'AppBundle\Entity\Category',
-                'query_builder' => function(CategoryRepository $repo) use ($categoryType) {
-                    # find category name by select type
-                    return $repo->getCategoryByType($categoryType);
-                },
-                'label'         => 'Catégorie',
-                'placeholder'   => 'Sélectionnez un titre de catégorie',
-                'mapped'        => true,
-                'required'      => false,
-                'auto_initialize' => false,
-            ]
-        );
-        $form->add($builder->getForm());
-    }
-
 
     /**
      * @param OptionsResolver $resolver

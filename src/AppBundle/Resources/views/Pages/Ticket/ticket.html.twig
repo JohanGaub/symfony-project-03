@@ -46,14 +46,14 @@
                     <tr>
                         <th class="text-center">N° de ticket</th>
                         <th class="text-center">Société</th>
-                        <th class="text-center hidden-sm hidden-xs visible-lg visible-md">Origine</th>
-                        <th class="text-center hidden-sm hidden-xs visible-lg visible-md">Urgence</th>
+                        <th class="text-center hidden-sm hidden-xs">Origine</th>
+                        <th class="text-center hidden-sm hidden-xs">Urgence</th>
                         <th class="text-center">Sujet</th>
                         <th class="text-center">Statut</th>
-                        <th class="text-center hidden-sm hidden-xs visible-lg visible-md">Date de création</th>
-                        <th class="text-center hidden-sm hidden-xs visible-lg visible-md">Date de clôture</th>
+                        <th class="text-center hidden-sm hidden-xs">Date de création</th>
+                        <th class="text-center hidden-sm hidden-xs">Date de clôture</th>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <th class="text-center">Archivé</th>
+                            <th class="text-center hidden-sm hidden-xs">Archivé</th>
                         {% endif %}
                     </tr>
                     </thead>
@@ -63,19 +63,19 @@
                         <tr class="highlight-index">
                             <td class="text-center"><p>{{ d.id }}</p></td>
                             <td><p>{{ d.user.company.name }}</p></td>
-                            <td class="hidden-sm hidden-xs visible-lg visible-md"><p>{{ d.origin }}</p></td>
-                            <td class="hidden-sm hidden-xs visible-lg visible-md"><p>{{ d.emergency }}</p></td>
+                            <td class="hidden-sm hidden-xs"><p>{{ d.origin }}</p></td>
+                            <td class="hidden-sm hidden-xs"><p>{{ d.emergency }}</p></td>
                             <td class="ticket-subject"><a  href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.subject }}</a></td>
                             <td><p>{{ d.status }}</p></td>
-                            <td class="hidden-sm hidden-xs visible-lg visible-md"><p>{{ d.creationDate|date("d/m/Y") }}</p></td>
-                            <td class="hidden-sm hidden-xs visible-lg visible-md">
+                            <td class="hidden-sm hidden-xs"><p>{{ d.creationDate|date("d/m/Y") }}</p></td>
+                            <td class="hidden-sm hidden-xs">
                                 {% if d.endDate is not null %}
                                     <p>{{ d.endDate|date("d/m/Y") }}</p>
                                 {% endif %}
                             </td>
 
                             {% if is_granted('ROLE_ADMIN') %}
-                                <td class="text-center hidden-sm hidden-xs visible-lg visible-md"><p>{{ d.isArchive }}</p></td>
+                                <td class="text-center hidden-sm hidden-xs"><p>{{ d.isArchive }}</p></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -85,13 +85,11 @@
             </div>
         </div>
 
-
         <div class="row text-center">
             <div class="col-xs-8 col-xs-offset-2">
                 {% include('@App/Elements/paginator.html.twig') %}
             </div>
         </div>
-
 
         <div class="row text-center">
             <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
@@ -101,11 +99,6 @@
             </div>
         </div>
 
-
-
     </section>
-
-
-
 
 {% endblock %}

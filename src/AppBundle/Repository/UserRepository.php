@@ -3,12 +3,14 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class UserRepository extends EntityRepository implements UserLoaderInterface
 {
+    const MAX_RESULT = 10;
 
     /**
      * Loads the user for the given username.
@@ -85,6 +87,55 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
 
         return $qb;
     }
+
+    /**
+     * @param $page
+     * @param $filter
+     * @return Query
+     */
+    public function getRowsByPage($page, $filter)
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('up','c', 'u')
+            ->join('u.company','c', 'u.company = c.id')
+            ->join('u.userProfile','up','u.userProfile = up.id')
+            ->orderBy('c.id', 'DESC')
+            ->setFirstResult(($page - 1) * self::MAX_RESULT)
+            ->setMaxResults(self::MAX_RESULT);
+        if(!is_null($filter)) {
+            foreach ($filter as $field => $value) {
+                if($value !== '') {
+                    if(strpos($field, '_') !== 0) {
+                        switch($field) {
+                            case 'name':
+                                $alias = 'c';
+                                break;
+                            case 'userProfile':
+                                $alias = 'up';
+                                break;
+                            case 'firstname':
+                                $alias = 'up';
+                                break;
+                            case 'lastname':
+                                $alias = 'up';
+                                break;
+                            default:
+                                $alias = 'u';
+                        }
+                        if ($alias == 'u' || $alias == 'c' || $alias == 'up') {
+                            $search = "$alias.$field like '%$value%'";
+                        } else {
+                            $field = 'id';
+                            $search ="$alias.$field = '$value'";
+                        }
+                        $query->andWhere($search);
+                    }
+                }
+            }
+        }
+        return $query->getQuery();
+    }
+
 }
 
 

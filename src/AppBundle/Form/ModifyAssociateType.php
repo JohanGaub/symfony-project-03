@@ -18,7 +18,7 @@ class ModifyAssociateType extends AbstractType
         $builder
             ->add('email', EmailType::class,  ['label' => 'email'])
             ->add('userProfile', User_profileType::class, array(
-                 'label' => false,
+                'label' => false,
             ))
             ->add('roles', ChoiceType::class, [
                 'choices'  => [
