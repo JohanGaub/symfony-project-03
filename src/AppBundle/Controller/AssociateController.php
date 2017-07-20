@@ -3,7 +3,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserProfile;
-use AppBundle\Form\UserAssociateType;
+
+use AppBundle\Form\User\UserAssociateType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Response;
@@ -144,7 +145,7 @@ class AssociateController extends controller
      */
     public function editAssociate(Request $request, User $user)
     {
-        $editForm = $this->createForm('AppBundle\Form\ModifyAssociateType', $user);
+        $editForm = $this->createForm('AppBundle\Form\User\ModifyAssociateType', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
