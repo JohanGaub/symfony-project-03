@@ -106,6 +106,7 @@
 
         <div class="row ticket-edit-margin">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+                <p class="notice-field text-center">* champs obligatoires</p>
                 {{ form_start(editTicketForm) }}
                 <div>{{ form_row(editTicketForm.emergency) }}</div>
                 <div>{{ form_row(editTicketForm._token) }}</div> {#necessary to get session#}

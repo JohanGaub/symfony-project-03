@@ -20,8 +20,8 @@
             <div id="dictionarys-list" class="row">
                 {% import 'AppBundle:Elements:macro.dictionaryList.html.twig' as list %}
                 {{ list.getDictionary(typeTitle, 'Type de catégories', typeList, typeForm) }}
-                {{ list.getDictionary(statusTitle, 'Status d\'une évolution', evoStatusList, evoStatusForm) }}
-                {{ list.getDictionary(statusTitle, 'Status d\'un element', statusList, statusForm) }}
+                {{ list.getDictionary(evoStatusTitle, 'Statut d\'une évolution', evoStatusList, evoStatusForm) }}
+                {{ list.getDictionary(ticketStatusTitle, 'Statut d\'un ticket', ticketStatusList, ticketStatusForm) }}
                 {{ list.getDictionary(originTitle, 'Origine d\'un élément', originList, originForm) }}
                 {{ list.getDictionary(ticketTypeTitle, 'Type d\'un ticket', ticketTypeList, ticketTypeForm) }}
             </div>

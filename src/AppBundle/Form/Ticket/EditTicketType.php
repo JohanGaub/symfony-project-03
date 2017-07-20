@@ -45,7 +45,7 @@ class EditTicketType extends AbstractType
 
             ])
             ->add('status', EntityType::class, [
-                'label'         => 'Statut',
+                'label'         => 'Statut *',
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'required'      => true,
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
