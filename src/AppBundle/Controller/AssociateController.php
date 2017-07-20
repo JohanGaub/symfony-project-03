@@ -108,8 +108,8 @@ class AssociateController extends controller
     }
 
     /**
-     * @return Response|\Symfony\Component\HttpFoundation\Response
      * Lists all User entities.
+     * @return Response|\Symfony\Component\HttpFoundation\Response
      * @Security("has_role ('ROLE_PROJECT_RESP')")
      * @Route("/liste/{page}", name="validation_associate")
      */
@@ -174,6 +174,7 @@ class AssociateController extends controller
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash("notice", "Le compte a bien été modifié.");
             return $this->redirectToRoute('validation_associate', array('id' => $user->getId()));
         }
 
@@ -199,6 +200,11 @@ class AssociateController extends controller
             $user->setIsActiveByAdmin(false);
         }
         $em->flush();
+        if($status === false) {
+            $this->addFlash("notice", "Le compte a bien été activé.");
+        } else {
+            $this->addFlash("notice", "Le compte a bien été désactivé.");
+        }
         return $this->redirectToRoute('validation_associate');
     }
 
@@ -213,6 +219,7 @@ class AssociateController extends controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
+        $this->addFlash("notice", "Le compte a bien été supprimé.");
         return $this->redirectToRoute('validation_associate');
     }
 

@@ -167,7 +167,7 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
+            $this->addFlash("notice", "Le compte a bien été modifié.");
             return $this->redirectToRoute('validation_register', array('id' => $user->getId()));
         }
 
@@ -187,6 +187,7 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
+        $this->addFlash("notice", "Le compte a bien été supprimé.");
         return $this->redirectToRoute('validation_register');
     }
 
@@ -206,6 +207,11 @@ class UserController extends Controller
             $user->setIsActiveByAdmin(false);
         }
         $em->flush();
+        if($status === false) {
+            $this->addFlash("notice", "Le compte a bien été activé.");
+        } else {
+            $this->addFlash("notice", "Le compte a bien été désactivé.");
+        }
         return $this->redirectToRoute('validation_register');
     }
 

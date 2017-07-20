@@ -2,6 +2,13 @@
 
 {% block body %}
     <div class="row ticket-filter-block">
+        <div class="col-md-12">
+            {% for flash_message in app.session.flashBag.get('notice') %}
+                <div class="alert alert-info">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        </div>
         <div class="col-xs-12 col-xs-offset-0 col-sm-12  col-lg-8 col-lg-offset-2">
             <div class="title-register col-md-12 hidden-xs hidden-sm visible-md visible-lg">
                 <h1>Gestion des comptes</h1>
