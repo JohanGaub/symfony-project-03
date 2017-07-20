@@ -41,12 +41,12 @@ class AddTicketType extends AbstractType
                         ->orderBy('p.name', 'ASC');
                 },
                 'choice_label' => 'name',
-                'label' => 'Produit',
+                'label' => 'Produit *',
                 'required' => true,
             ])
 
             ->add('category_type', EntityType::class, [
-                'label'         => 'Type de catégorie',
+                'label'         => 'Type de catégorie *',
                 'placeholder'   => 'Sélectionnez le type de catégorie',
                 'class' => 'AppBundle\Entity\Dictionary',
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
@@ -57,34 +57,31 @@ class AddTicketType extends AbstractType
                 //'multiple'      => false,
             ])
             ->add('category', ChoiceType::class, [
-                'label'         => 'Titre de catégorie',
+                'label'         => 'Titre de catégorie *',
                 'placeholder'   => 'Sélectionnez le titre de catégorie',
                 'required'      => true,
                 'multiple'      => false,
             ])
-            ->add('subject', TextType::class, ['label' => 'Sujet du ticket'])
-            ->add('content', TextareaType::class, ['label' =>  'Explications'])
+            ->add('subject', TextType::class, ['label' => 'Sujet du ticket *'])
+            ->add('content', TextareaType::class, ['label' =>  'Explications *'])
             ->add('origin', EntityType::class, [
-                'label'         => 'Origine',
+                'label'         => 'Origine *',
                 'class'         => 'AppBundle\Entity\Dictionary',
                 'required'      => true,
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
                     return $dictionaryRepository->getItemListByType('origin');
                 },
-                //'preferred_choices' => ,
-                //'mapped'        => true,
             ])
             ->add('ticket_type', EntityType::class, [
-                'label' => 'Type',
+                'label' => 'Type *',
                 'class' => 'AppBundle\Entity\Dictionary',
                 'required' => true,
-                //'mapped'    => false,
                 'query_builder' => function(DictionaryRepository $dictionaryRepository) {
                     return $dictionaryRepository->getItemListByType('ticket_type');
                 },
             ])
             ->add('emergency', ChoiceType::class, [
-                'label' => 'Urgence',
+                'label' => 'Urgence *',
                 'choices'  => [
                     'Normale' => 'Normale',
                     'Haute' => 'Haute',
@@ -136,7 +133,7 @@ class AddTicketType extends AbstractType
             EntityType::class,
             null,
             [
-                'label' => 'Titre de catégorie',
+                'label' => 'Titre de catégorie *',
                 'class' => 'AppBundle\Entity\Category',
                 'placeholder' => 'Sélectionnez le titre de catégorie',
                 'mapped' => true,
