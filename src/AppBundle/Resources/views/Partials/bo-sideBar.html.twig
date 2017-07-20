@@ -29,8 +29,8 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="{{ path('evolutionHome') }}">Liste</a></li>
-                        <li><a href="{{ path('evolutionAdd') }}">Nouvelle</a></li>
+                        <li><a href="{{ path('evolutionHome') }}">Liste des évoltuion</a></li>
+                        <li><a href="{{ path('evolutionAdd') }}">Nouvelle évolution</a></li>
                         <li><a href="{{ path('evolutionUser') }}">Mes évolutions</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="divider"></li>
@@ -54,8 +54,8 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="{{ path('ticket_index') }}">Liste</a></li>
-                        <li><a href="{{ path('ticket_add') }}">Nouveau</a></li>
+                        <li><a href="{{ path('ticket_index') }}">Liste des tickets</a></li>
+                        <li><a href="{{ path('ticket_add') }}">Nouveau ticket</a></li>
                         {# {% if is_granted('ROLE_ADMIN') %}#}
                             {#<li class="divider"></li>
                             <li><p class="navbar-under-title">Administration</p></li>#}
