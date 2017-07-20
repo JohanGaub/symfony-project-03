@@ -82,7 +82,6 @@ class TicketFilterAdminType extends AbstractType
                 'html5' => false,
                 'format'        => 'dd/MM/yyyy',
                 'attr'      => [
-                    //'placeholder'   => 'jj/mm/aaaa',
                     'class'         => 'datepicker1',
                 ],
             ])
