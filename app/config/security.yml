@@ -50,5 +50,5 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/reset, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/dashboard, roles: IS_AUTHENTICATED_REMEMBERED}
+        - { path: ^/tableau-de-bord, roles: IS_AUTHENTICATED_REMEMBERED}
         #- { path: ^/, roles: ROLE_ADMIN }

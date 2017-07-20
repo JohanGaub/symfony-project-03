@@ -53,9 +53,9 @@ class AccountController extends Controller
     public function modifyAction(Request $request, User $user)
     {
         if ($this->isGranted('ROLE_PROJECT_RESP')) {
-            $editForm = $this->createForm('AppBundle\Form\AccountModifyRespType', $user);
+            $editForm = $this->createForm('AppBundle\Form\Account\AccountModifyRespType', $user);
         } else {
-            $editForm = $this->createForm('AppBundle\Form\AccountModifyUserType', $user);
+            $editForm = $this->createForm('AppBundle\Form\Account\AccountModifyUserType', $user);
         }
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {

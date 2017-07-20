@@ -1,3 +1,7 @@
+#bo-main-content {
+  padding-top: 6rem!important;
+}
+
 .bo-title-page {
   h2 {
     padding: 2rem 0;
@@ -182,4 +186,18 @@ a {
     width: 100%;
     font-weight: 700;
   }
+}
+
+/**
+ * Jquery Text Editor
+ */
+.jqte_editor {
+  height: 60rem;
+}
+.jqte_tool_label {
+  height: 2rem!important;
+  display: block;
+}
+.jqte_tool_text {
+  display: block;
 }

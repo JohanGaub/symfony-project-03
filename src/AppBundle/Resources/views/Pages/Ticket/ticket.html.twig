@@ -8,22 +8,25 @@
         {% include ('@App/Elements/include.flashBagMessage.html.twig') %}
 
         <div class="row ticket-filter-block">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+            <div class="col-xs-12">
 
-                <div class="row">
+                <div class="row ticket-filter-field">
                     {{ form_start(searchForm) }}
-                    <div class="col-xs-3">{{ form_row(searchForm.id) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.company) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.emergency) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.subject) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.id) }}{{ form_widget(searchForm.id, {"value": searchForm.id } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.company) }}{{ form_widget(searchForm.company, {"value": searchForm.company } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.emergency) }}{{ form_widget(searchForm.emergency, {"value": searchForm.emergency } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.origin) }}{{ form_widget(searchForm.origin, {"value": searchForm.origin } ) }}</div>
+                </div>
+                <div class="row ticket-filter-field">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.subject) }}{{ form_widget(searchForm.subject, {"value": searchForm.subject } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.status) }}{{ form_widget(searchForm.status, {"value": searchForm.status } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.creationDate) }}{{ form_widget(searchForm.creationDate, {"value": searchForm.creationDate } ) }}</div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">{{ form_label(searchForm.endDate) }}{{ form_widget(searchForm.endDate, {"value": searchForm.endDate } ) }}</div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-3">{{ form_row(searchForm.status) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.creationDate) }}</div>
-                    <div class="col-xs-3">{{ form_row(searchForm.endDate) }}</div>
+                <div class="row ticket-filter-field">
                     {% if is_granted('ROLE_ADMIN')  %}
-                        <div class="col-xs-3">{{ form_row(searchForm.isArchive) }}</div>
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-lg-2 col-lg-offset-5">{{ form_label(searchForm.isArchive) }}{{ form_widget(searchForm.isArchive, {"value": searchForm.isArchive } ) }}</div>
                     {% endif %}
                 </div>
 
@@ -35,45 +38,45 @@
             </div>
         </div>
 
-
-
         <div class="row">
             <div class="col-xs-12 ticket-table-block">
 
-                <table id="filter" class="table table-responsive table-bordered table-condensed no-margin-no-padding">
+                <table id="table-index" class="table table-responsive table-bordered table-condensed table-hover no-margin-no-padding">
                     <thead>
                     <tr>
                         <th class="text-center">N° de ticket</th>
                         <th class="text-center">Société</th>
-                        <th class="text-center">Urgence</th>
+                        <th class="text-center hidden-sm hidden-xs">Origine</th>
+                        <th class="text-center hidden-sm hidden-xs">Urgence</th>
                         <th class="text-center">Sujet</th>
                         <th class="text-center">Statut</th>
-                        <th class="text-center">Date de création</th>
-                        <th class="text-center">Date de clôture</th>
+                        <th class="text-center hidden-sm hidden-xs">Date de création</th>
+                        <th class="text-center hidden-sm hidden-xs">Date de clôture</th>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <th>Archivé</th>
+                            <th class="text-center hidden-sm hidden-xs">Archivé</th>
                         {% endif %}
-
                     </tr>
                     </thead>
 
                     <tbody class="table-striped">
-
-                    {%  for d in data %}
-                        <tr>
-                            <td class="text-center"><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.id }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.user.company.name }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.emergency }}</p></td>
+                    {% for d in data %}
+                        <tr class="highlight-index">
+                            <td class="text-center"><p>{{ d.id }}</p></td>
+                            <td><p>{{ d.user.company.name }}</p></td>
+                            <td class="hidden-sm hidden-xs"><p>{{ d.origin }}</p></td>
+                            <td class="hidden-sm hidden-xs"><p>{{ d.emergency }}</p></td>
                             <td class="ticket-subject"><a  href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.subject }}</a></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.status }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.creationdate|date("d/m/Y") }}</p></td>
-                            <td><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.Enddate|date("d/m/Y") }}</p></td>
-                            {# <td><a href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d._token }}</a></td>#}
+                            <td><p>{{ d.status }}</p></td>
+                            <td class="hidden-sm hidden-xs"><p>{{ d.creationDate|date("d/m/Y") }}</p></td>
+                            <td class="hidden-sm hidden-xs">
+                                {% if d.endDate is not null %}
+                                    <p>{{ d.endDate|date("d/m/Y") }}</p>
+                                {% endif %}
+                            </td>
 
                             {% if is_granted('ROLE_ADMIN') %}
-                                <td class="text-center"><p href="{{ path('ticket_edit', {"ticket": d.id}) }}">{{ d.isArchive }}</p></td>
+                                <td class="text-center hidden-sm hidden-xs"><p>{{ d.isArchive }}</p></td>
                             {% endif %}
-
                         </tr>
                     {% endfor %}
 
@@ -82,13 +85,11 @@
             </div>
         </div>
 
-
         <div class="row text-center">
             <div class="col-xs-8 col-xs-offset-2">
                 {% include('@App/Elements/paginator.html.twig') %}
             </div>
         </div>
-
 
         <div class="row text-center">
             <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
@@ -98,12 +99,6 @@
             </div>
         </div>
 
-
-
     </section>
 
-
-
-
 {% endblock %}
-

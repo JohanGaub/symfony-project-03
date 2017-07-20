@@ -1,0 +1,18 @@
+{% macro getNews(title, news) %}
+    <div class="dashbord-block">
+        <h3>{{ title }}</h3>
+        <div class="dashbord-list">
+            {% for new in news %}
+                <div class="news-list-element">
+                    <div class="top-element">
+                        <p class="title-news">
+                            <a href="{{ path('newsUserUnit', {'new': new.id}) }}">{{ new.title }}</a>
+                            <span class="new-date hidden-xs">le {{ new.creationDate|date('d/m/Y') }}</span>
+                            <span class="new-date visible-xs col-xs-12">le {{ new.creationDate|date('d/m/Y') }}</span>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

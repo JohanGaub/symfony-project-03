@@ -80,16 +80,3 @@ $(document).ready(function () {
         $(modal).addClass("modal-backdrop-fullscreen");
     });
 });
-
-// Side bar back office
-$(document).ready(function () {
-    $("#wrapper").toggleClass("toggled");
-});
-
-$( function() {
-    $( ".js-datepicker" ).datepicker( {
-        format: 'yyyy-mm-dd'
-
-    });
-} );
-

@@ -12,6 +12,8 @@ use Doctrine\ORM\Query\ResultSetMapping;
 class UserTechnicalEvolutionRepository extends EntityRepository
 {
     /**
+     * getUserTechnicalEvolution native query result
+     *
      * @param int $evolution
      * @param string $type
      * @param mixed $limit
@@ -23,6 +25,8 @@ class UserTechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
+     * getUserTechnicalEvolution native query array result
+     *
      * @param int $evolution
      * @param string $type
      * @param mixed $limit
@@ -34,6 +38,8 @@ class UserTechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
+     * getUserTechnicalEvolution native query scalar result
+     *
      * @param int $evolution
      * @param string $type
      * @param $limit
@@ -45,6 +51,8 @@ class UserTechnicalEvolutionRepository extends EntityRepository
     }
 
     /**
+     * getUserTechnicalEvolution native query
+     *
      * @param int $evolution
      * @param $type
      * @param $limit

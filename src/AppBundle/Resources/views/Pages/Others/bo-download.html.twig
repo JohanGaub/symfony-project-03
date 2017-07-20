@@ -1,0 +1,52 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row downloads">
+            <div class="bo-title-page col-lg-12">
+                <h2>Les téléchargements</h2>
+            </div>
+
+            {# Here small verification about rights of user (dynamic view) #}
+            {% set offset = '' %}
+            {% if dirs|length <= 1 %}
+                {% set offset = 'col-md-offset-3' %}
+            {% endif %}
+
+            {% for title,dir in dirs %}
+                {% if title == 'commercial' %}
+                    {% set titleFr = 'Commerciale' %}
+                {% elseif title == 'technical' %}
+                    {% set titleFr = 'Technique' %}
+                {% endif %}
+
+            <div class="download-category col-md-6 {{ offset }}">
+                <h4>{{ titleFr }}</h4>
+
+                <div class="download-category-table">
+                    <table class="table waiting-list">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-10 col-md-8">Nom du fichier</th>
+                            <th class="col-xs-2 col-md-4">Téléchargement</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for file in dir %}
+                            <tr>
+                                <th>{{ file['name'] }}</th>
+                                <th><a href="{{ path('downloadFile', {type: file['key'], name: file['name']}) }}">
+                                        <i class="fa fa-download fa-2x" aria-hidden="true"></i>
+                                    </a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

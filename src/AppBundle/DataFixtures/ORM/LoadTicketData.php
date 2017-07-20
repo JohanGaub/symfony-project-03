@@ -33,51 +33,35 @@ class LoadTicketData extends AbstractFixture implements OrderedFixtureInterface,
     public function load(ObjectManager $em)
     {
         $faker                       = Faker\Factory::create('fr_FR');
-        $origins                     = [
-            0 => 'Super Administrateur',
-            1 => 'Administrateur',
-            2 => 'Responsable projet',
-            3 => 'Technicien',
-            4 => 'Commercial',
-            5 => 'Client final',
-        ];
+
         $emergencies                  = [
             0 => 'Normale',
             1 => 'Haute',
         ];
-        $status                       = [
-            0 => 'En attente',
-            1 => 'En cours',
-            2 => 'Résolu',
-            3 => 'Fermé',
-        ];
-        $types                       = [
-            0 => 'Résolution de bug',
-            1 => 'Autre',
-        ];
+
 
         for($i = 0 ; $i < DataParameters::NB_TICKET ; $i++)
         {
             $randomCategory             = 'category_id_' . mt_rand(0, DataParameters::NB_CATEGORY - 1);
             $randomProduct              = 'product_id_' . mt_rand(0, DataParameters::NB_PRODUCT - 1);
             $randomProjectResponsible   = 'user_project_resp_id_' . mt_rand(0, DataParameters::NB_PROJECT_RESP - 1);
+            $randomStatus               = 'status_id_' . mt_rand(0, 4 - 1);
+            $randomOrigin               = 'origin_id_' . mt_rand(0, 3 - 1);
+            $randomTicketType           = 'ticket_type_id_' . mt_rand(0, 2 - 1);
 
-            $origin                     = $origins[mt_rand(0, count($origins) - 1)];
             $emergency                  = $emergencies[mt_rand(0, count($emergencies) - 1)];
-            $oneStatus                  = $status[mt_rand(0, count($status) - 1)];
-            $type                       = $types[mt_rand(0, count($types) - 1)];
 
             $root                       = $this->container->get('kernel')->getRootDir(); // Necessary to upload a file
 
             $ticket                     = new Ticket();
             $ticket->setSubject($faker->sentence(4, true));
             $ticket->setContent($faker->sentences(mt_rand(1, 50), true));
-            $ticket->setOrigin($origin);
-            $ticket->setType($type);
+            $ticket->setOrigin($this->getReference($randomOrigin));
+            $ticket->setTicketType($this->getReference($randomTicketType));
             $ticket->setEmergency($emergency);
-            $ticket->setStatus($oneStatus);
+            $ticket->setStatus($this->getReference($randomStatus));
 
-            $ticket->setUpload($faker->file($root . '/../web/assets/img',$root . '/../web/assets/upload', false));
+            $ticket->setUpload($faker->file($root . '/../web/assets/img', $root . '/../web/assets/upload', false));
 
             $ticket->setCreationDate($faker->dateTime);
             $ticket->setUpdateDate($faker->dateTime);

@@ -4,25 +4,34 @@ parameters:
     #parameter_name: value
 
 services:
-    app.sql.search_params_getter:
-        class: AppBundle\Service\SqlWhereParamsSetter
-        arguments: []
-
+    # Specific dictionary action (verification)
     app.dictionary_verification:
         class: AppBundle\Service\DictionaryVerification
         arguments: ["@doctrine.orm.entity_manager"]
 
+    # Mailing service
     app.email.sending:
         class: AppBundle\Service\MaillerService
         arguments: ['@swiftmailer.mailer', '%mailer_sender_address%']
 
+    # Service to get user by roles
     app.getter_user_admin:
         class: AppBundle\Service\GetterUserAdmin
         arguments: ['@doctrine.orm.entity_manager']
 
-    app.form.type.task:
-        class: AppBundle\Form\Ticket\TicketFilterType
-        arguments: ["@security.authorization_checker"]
-        tags:
-            - { name: form.type }
+    # Navigator Factory
+    app.navigator.factory:
+        class: AppBundle\Service\NavigatorFactory
+        arguments:
+            - "@request_stack"
+            - "@doctrine.orm.entity_manager"
 
+    # Navigator Service (Search/Filter/Pagination)
+    app.navigator:
+        class: AppBundle\Service\Navigator
+        factory: "app.navigator.factory:get"
+
+    # Read Docfiles (download)
+    app.read_docfiles:
+        class: AppBundle\Service\ReadDocfiles
+        arguments: ['@security.authorization_checker', '@security.token_storage', '%docfiles_directory%']

@@ -12,6 +12,8 @@ use Doctrine\ORM\QueryBuilder;
 class CategoryRepository extends EntityRepository
 {
     /**
+     * Get category
+     *
      * @return array
      */
     public function getCategories()
@@ -24,25 +26,29 @@ class CategoryRepository extends EntityRepository
             ->getResult();
     }
 
-
     /**
-     * @param $type
+     * Get category query builder result
+     *
+     * @param $categoryType
      * @return array
      */
-    public function getCategoryByTypeResult($type)
+    public function getCategoryByTypeResult($categoryType)
     {
-        return $this->getCategoryByType($type)->getQuery()->getResult();
+        return $this->getCategoryByType($categoryType)->getQuery()->getResult();
     }
 
     /**
+     * Get category query builder (form)
+     *
      * @param $categoryType
      * @return QueryBuilder
      */
     public function getCategoryByType($categoryType)
     {
-        return $this->createQueryBuilder('c')
+        $query = $this->createQueryBuilder('c')
             ->where('c.type = :category_type')
             ->setParameter('category_type', $categoryType);
+        return $query;
     }
 
 }

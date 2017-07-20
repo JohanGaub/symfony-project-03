@@ -1,11 +1,20 @@
 /**
+ * Calls
+ */
+$(document).ready(function () {
+    addDictionary()
+    updateDictionary()
+    deleteDictionary()
+})
+/**
  * Add
  * Function to send new element in vue + db
  * View append many things in html
  * (Here idk why but i need to get temp storage of token
  * for rewrite him on token field)
  */
-$(document).ready( function () {
+function addDictionary()
+{
     $('.dictionary-form').submit( function (e) {
         e.preventDefault()
         let $this       = $(this)
@@ -49,7 +58,7 @@ $(document).ready( function () {
             },
         })
     })
-})
+}
 
 /**
  * Update
@@ -57,7 +66,7 @@ $(document).ready( function () {
  * After we can confirm the update with submit
  * && get new view
  */
-$(document).ready(function () {
+function updateDictionary() {
     let updateField = $('.dictionary-update-field')
     let listElementId = ''
     let currentValue = ''
@@ -107,14 +116,15 @@ $(document).ready(function () {
             })
         }
     })
-})
+}
 
 /**
  * Delete
  * Function to open a modal and send in informations
  * After can confirm delete action with click on link
  */
-$(document).ready( function () {
+function deleteDictionary()
+{
     let listElement = ''
     let listElementId = ''
     let listElementValue = ''
@@ -175,7 +185,7 @@ $(document).ready( function () {
             },
         })
     })
-})
+}
 
 /**
  * Add error message
@@ -189,9 +199,9 @@ $(document).ready( function () {
 function addMsgError(target, status, formType, value, id)
 {
     let domSend = '<li class="list-group-item list-group-item-' + status + '-' + formType + '" data-index-number="' + id + '">'
-    domSend += '<span>'
-    domSend += '<p class="msg-return msg-return-' + formType + '">' + value + '</p>'
-    domSend += '</span></li>'
+        domSend += '<span>'
+        domSend += '<p class="msg-return msg-return-' + formType + '">' + value + '</p>'
+        domSend += '</span></li>'
     $(target).append(domSend)
 }
 /**

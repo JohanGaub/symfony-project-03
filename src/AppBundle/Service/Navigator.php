@@ -2,37 +2,30 @@
 
 namespace AppBundle\Service;
 
-
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * Class Navigator
+ * @package AppBundle\Service
+ */
 class Navigator extends Paginator
 {
-    /**
-     * @var array
-     */
+    /** @var array  */
     private $filter;
 
-    /**
-     * @var int
-     */
+    /** @var  int */
     private $currentPage;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $maxPage;
 
-
-    /**
-     * @var string
-     */
+    /** @var string */
     private $context;
-
 
     /**
      * Navigator constructor.
-     * @internal param Paginator $paginator
+     * @param \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder $context
      * @param EntityRepository $repository
      * @param int $page
      * @param array $filter
@@ -40,10 +33,10 @@ class Navigator extends Paginator
     public function __construct($context, $repository, $page, $filter)
     {
         parent::__construct($repository->getRowsByPage($page, $filter));
-        $this->context  = $context;
-        $this->filter   = $filter;
-        $this->maxPage  = ceil($this->count() / constant(get_class($repository) . "::MAX_RESULT"));
-        if ($this->maxPage == 0) {
+        $this->context = $context;
+        $this->filter = $filter;
+        $this->maxPage =  ceil($this->count() / constant(get_class($repository) . "::MAX_RESULT"));
+        if ($this->maxPage == 0){
             $this->maxPage = 1;
         }
         $this->setCurrentPage($page);
@@ -101,7 +94,7 @@ class Navigator extends Paginator
      */
     public function getLastPage()
     {
-        if ($this->currentPage <= 4) {
+        if ($this->currentPage <= 4){
             $newPage = 10;
         } else {
             $newPage = $this->currentPage + 5;
@@ -134,19 +127,16 @@ class Navigator extends Paginator
      */
     public function getEntityFilter()
     {
-        $class  = "\\AppBundle\\Entity\\" . $this->context . "Filter";
+        $class = "\\AppBundle\\Entity\\" . $this->context . "Filter";
         $filter = new $class();
-    if (! is_null($this->filter)) {
-        foreach ($this->filter as $field => $value) {
-            if ($value !== "") {
-                $accessor = "set" . ucwords($field);
-                $filter->$accessor($value);
+        if (!is_null($this->filter)) {
+            foreach($this->filter as $field => $value) {
+                if ($value !== "") {
+                    $accessor = "set" . ucwords($field);
+                    $filter->$accessor($value);
+                }
             }
         }
+        return $filter;
     }
-    return $filter;
-}
-
-
-
 }

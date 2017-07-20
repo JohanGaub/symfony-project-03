@@ -10,7 +10,6 @@
 @import "general/table";
 @import "general/account";
 
-
 // --- Partials --->
 @import "partials/bo-top-bar";
 @import "partials/bo-header";
@@ -19,7 +18,11 @@
 
 // --- Backoffice --->
 @import "backoffice/bo-general";
-@import "backoffice/bo-evolution";
-@import "backoffice/bo_evolution_note";
+@import "backoffice/bo-sidebar";
+@import "backoffice/bo-dashboard";
+@import "backoffice/bo-news";
 @import "backoffice/bo-dictionary";
 @import "backoffice/bo-ticket";
+@import "backoffice/bo-evolution";
+@import "backoffice/bo-evolution-note";
+@import "backoffice/bo-download";

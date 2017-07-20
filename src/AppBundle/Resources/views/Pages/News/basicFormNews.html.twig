@@ -1,0 +1,41 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block title %}{{ titlePage }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/jQueryTe/jquery-te-1.4.0.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="bo-title-page col-lg-12">
+                <h2>{{ titlePage }}</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+
+    {% if isUpdate is defined %}
+        {# Hidden parts for form select inject  #}
+        <select id="hidden-select-inject-type" name="app_bundle[type]" required="required" class="form-control hidden">
+            <option value="">Sélectionnez votre type de news</option>
+            {% for typeElement in types %}
+                <option value="{{ typeElement.id }}" {% if (typeElement.id == type) %}selected="selected"{% endif %}>{{ typeElement.value }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if isUpdate is defined %}
+        <script src="{{ asset('assets/js/form.update-category-title.js') }}"></script>
+    {% endif %}
+    <script src="{{ asset('assets/vendor/jQueryTe/jquery-te-1.4.0.min.js') }}"></script>
+    <script>$("textarea").jqte();</script>
+{% endblock %}

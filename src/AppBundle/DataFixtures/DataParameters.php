@@ -25,7 +25,7 @@ class DataParameters
     /**
      * Others
      */
-    const NB_USER_TECHNICAL_EVOLUTION   = 250;
+    const NB_USER_TECHNICAL_EVOLUTION   = 2500;
 
     const NB_COMPANY                    = 30;
     const NB_PRODUCT                    = 2;
@@ -34,6 +34,7 @@ class DataParameters
     const NB_DOCUMENTATION              = 25;
     const NB_FAQ                        = 20;
     const NB_TICKET                     = 10;
+    const NB_NEWS                       = 20;
     const NB_COMMENT                    = 1000;
 
     /**

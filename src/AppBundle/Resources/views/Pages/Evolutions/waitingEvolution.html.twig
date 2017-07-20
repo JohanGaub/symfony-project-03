@@ -7,7 +7,6 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            {% include '@App/Pages/Evolutions/buttonBarEvolutions.html.twig' %}
 
             <div class="bo-title-page col-lg-12">
                 <h2>Evolutions en attente</h2>
@@ -26,7 +25,7 @@
                     </thead>
                     <tbody>
                     {% for evolution in evolutions %}
-                        <tr id="tr_element_{{ evolution.id }}" class="transition-2s-ease">
+                        <tr id="tr_element_{{ evolution.id }}" class="transition-05s-ease">
                             <th><a href="{{ path('evolutionUnit', {
                                     'technicalEvolution': evolution.id}) }}">
                                     {{ evolution.title }}

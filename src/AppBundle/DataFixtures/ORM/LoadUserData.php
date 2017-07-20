@@ -50,7 +50,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
          */
         $randomCompany = 'company_id_' . mt_rand(0, DataParameters::NB_COMPANY - 1);
         $user = new User();
-        $user->setEmail('laurent@laurent.fr');
+        $user->setEmail('laurent@test.fr');
         $user->setPassword(password_hash("admin", PASSWORD_BCRYPT));
         $user->setRoles(['ROLE_ADMIN']);
         $user->setIsActive(1);
@@ -165,7 +165,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $user = new User();
             $user->setEmail('finalclient' . $i . '@test.fr');
             $user->setPassword(password_hash("pass", PASSWORD_BCRYPT));
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_FINAL_CLIENT']);
             $user->setIsActive(1);
             $user->setIsActiveByAdmin(1);
             $profile = $this->setUserProfile();
