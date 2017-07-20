@@ -2,14 +2,16 @@
 
 {% block body %}
     <section class="form-all">
-        <div class="row">
-            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
 
+        <h2>Modifier par l'administrateur</h2>
+
+        <h3>Ticket n°{{ ticket.id }} - société {{ ticket.user.company.name }}</h3>
+
+        <div class="row ticket-edit-margin">
+            <div class="col-xs-12 ticket-table-block">
                 <table class="table table-responsive table-bordered table-condensed">
                     <thead>
                     <tr>
-                        <th>N° de ticket</th>
-                        <th>Société</th>
                         <th>Utilisateur</th>
                         <th>Fichier uploadé</th>
                         <th>Date de création</th>
@@ -19,18 +21,16 @@
                     </thead>
                     <tbody class="table-striped">
                     <tr>
-                        <td>{{ informations.id }}</td>
-                        <td>{{ informations.user.company.name }}</td>
-                        <td>{{ informations.user.userprofile.lastname }}</td>
+                        <td>{{ ticket.user.userprofile.lastname }}</td>
                         <td><button type="button" data-toggle="modal" data-target="#myModal">
-                                <img src="{{ asset('assets/upload/' ~ informations.upload) }}" width = "150px"/>
+                                <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width = "150px"/>
                             </button></td>
-                        <td>{{ informations.creationDate|date(null, "Europe/Paris") }}</td>
-                        {% if informations.updateDate is not null %}
-                            <td>{{ informations.updateDate|date(null, "Europe/Paris") }}</td>
+                        <td>{{ ticket.creationDate|date("d/m/Y") }}</td>
+                        {% if ticket.updateDate is not null %}
+                            <td>{{ ticket.updateDate|date("d/m/Y") }}</td>
                         {% endif %}
-                        {% if informations.endDate is not null %}
-                            <td>{{ informations.endDate|date(null, "Europe/Paris") }}</td>
+                        {% if ticket.endDate is not null %}
+                            <td>{{ ticket.endDate|date("d/m/Y") }}</td>
                         {% endif %}
                     </tr>
                     </tbody>
@@ -39,23 +39,45 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row ticket-edit-margin">
 
-            <div class="col-xs-12 col-xs-offset-0 col-lg-8 col-lg-offset-2">
-                {{ form_start(form) }}
-                {{ form_row(form.product) }}
-                {{ form_row(form.category) }}
-                {{ form_row(form.subject) }}
-                {{ form_row(form.content) }}
-                {{ form_row(form.origin) }}
-                {{ form_row(form.type) }}
-                {{ form_row(form.emergency) }}
-                {{ form_row(form._token) }} {#necessary to get session#}
-                {{ form_row(form.status) }}
-                {{ form_row(form.isArchive) }}
-                {{ form_row(form.submit) }}
-                {{ form_end(form) }}
-                <a href="{{ path('index_ticket') }}" class="btn active back-button" role="button">Retour</a>
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+                {{ form_start(updateTicketForm) }}
+                <div>{{ form_row(updateTicketForm.product) }}</div>
+                <div>{{ form_row(updateTicketForm.category_type) }}</div>
+                <div>{{ form_row(updateTicketForm.category) }}</div>
+                <div>{{ form_row(updateTicketForm.subject) }}</div>
+                <div>{{ form_row(updateTicketForm.content) }}</div>
+                <div>{{ form_row(updateTicketForm.origin) }}</div>
+                <div>{{ form_row(updateTicketForm.type) }}</div>
+                <div>{{ form_row(updateTicketForm.emergency) }}</div>
+                <div>{{ form_row(updateTicketForm._token) }}</div> {#necessary to get session#}
+                <div>{{ form_row(updateTicketForm.status) }}</div>
+                <div>{{ form_row(updateTicketForm.isArchive) }}</div>
+                <div class="text-center">{{ form_row(updateTicketForm.submit) }}</div>
+                {{ form_end(updateTicketForm) }}
+
+                <div class="text-center">
+                    <a class="btn btn-back" aria-hidden="true" href="{{ path('ticket_index') }}">Retour à la liste des tickets</a>
+                </div>
+
+                {# Hidden parts for form select inject (CategoryType from Dictionary and categoryTitle from Category) #}
+                <div>
+                    <select id="hidden-select-inject-category_type" name="app_bundle[category_type]" required="required" class="form-control hidden">
+                        <option value="">Sélectionnez votre type catégorie</option>
+                        {% for type in categoryTypes %}
+                            <option value="{{ type.id }}" {% if (type.id == categoryType) %}selected="selected"{% endif %}>{{ type.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <select id="hidden-select-inject-category" name="app_bundle[category]" required="required" class="form-control hidden">
+                        <option value="">Sélectionnez votre catégorie</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if (category.id == categoryId) %}selected="selected"{% endif %}>{{ category.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -66,7 +88,7 @@
                             <h4 class="modal-title" id="myModalLabel">Fichier uploadé</h4>
                         </div>
                         <div class="modal-body">
-                            <img src="{{ asset('assets/upload/' ~ informations.upload) }}" width="100%"/>
+                            <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width="100%"/>
                         </div>
                     </div>
                 </div>
@@ -74,4 +96,9 @@
 
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/form.add-category-title.js') }}"></script>
+    <script src="{{ asset('assets/js/form.update-category-title.js') }}"></script>
 {% endblock %}

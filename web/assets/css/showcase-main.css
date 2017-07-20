@@ -493,8 +493,30 @@ html, body {
   width: 100%;
   height: 100%; }
 
+main {
+  min-height: 88%;
+  margin-top: 15rem; }
+
+main#bo-main-content {
+  margin-top: 0 !important;
+  min-height: 100%; }
+
+@media screen and (max-width: 1024px) {
+  main {
+    margin-top: 10rem; } }
+
+/* Block page "validation register"*/
+.validate {
+  margin-top: 5em; }
+
+.register-title {
+  margin-top: 5em; }
+
+.message-register {
+  margin-top: 2em; }
+
 header {
-  margin-bottom: 13rem; }
+  padding-bottom: 0; }
 
 footer {
   margin-top: 5rem !important; }
@@ -583,6 +605,19 @@ a {
 .modal {
   border-radius: 1px; }
 
+/**
+ * Button small green - back office
+ */
+.btn-model-small {
+  color: #fff !important;
+  background-color: #9ac00a;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle; }
+
+.btn-model-small:hover {
+  background-color: #dd5116; }
+
 .be-flex {
   display: flex; }
 
@@ -601,49 +636,110 @@ a {
 .no-padding {
   padding: 0 !important; }
 
-.transition-05s-ease {
+.transition-2s-ease {
   transition: 2s ease; }
 
-.transition-1s-ease {
+.transition-05s-ease {
   transition: 0.5s ease; }
+
+.transition-1s-ease {
+  transition: 1s ease; }
 
 .strong-green {
   font-weight: 700;
   color: #9ac00a; }
 
-.form-all {
-  margin: 4rem 0 0 0;
+#login, #password-reset, #password-process, #password-change, #registration {
+  padding-top: 1rem;
   color: #545454;
-  min-height: 100%;
-  font-family: Arial, sans-serif; }
-
-.close {
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-  -webkit-transition: -webkit-transform .2s ease-in-out;
-  transition: transform .5s ease-in-out; }
-  .close:hover {
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-    filter: brightness(10%); }
-
-.back-button {
-  text-decoration: none;
-  border-radius: 0 !important;
-  background-color: #9ac00a;
-  font-size: 2rem;
-  text-align: center;
-  font-weight: bold;
   font-family: Arial, sans-serif;
-  color: whitesmoke;
-  padding: 3rem 5rem;
-  width: 40%;
-  margin: 0 auto; }
-  .back-button a {
-    color: whitesmoke; }
-  .back-button a:hover {
-    text-decoration: none; }
+  /* Set up width of form */
+  /* Set up width of form */
+  /* Set up style of checkbox */
+  /* style of input fields */
+  /* style of submit button*/ }
+  #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
+    width: 40%;
+    margin: 0 auto; }
+  #login .form-comment-paragraph, #password-reset .form-comment-paragraph, #password-process .form-comment-paragraph, #password-change .form-comment-paragraph, #registration .form-comment-paragraph {
+    text-align: center; }
+  #login .form-group, #password-reset .form-group, #password-process .form-group, #password-change .form-group, #registration .form-group {
+    margin-bottom: 2rem;
+    font-size: 1.7rem; }
+  #login .form-group:hover, #password-reset .form-group:hover, #password-process .form-group:hover, #password-change .form-group:hover, #registration .form-group:hover {
+    color: #dd5116; }
+  #login .checkbox, #password-reset .checkbox, #password-process .checkbox, #password-change .checkbox, #registration .checkbox {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    #login .checkbox .login-checkbox, #password-reset .checkbox .login-checkbox, #password-process .checkbox .login-checkbox, #password-change .checkbox .login-checkbox, #registration .checkbox .login-checkbox {
+      width: 3rem;
+      height: 3rem;
+      cursor: pointer;
+      border-radius: 0 !important;
+      border: 1px solid #ccc;
+      vertical-align: middle;
+      display: inline-block; }
+    #login .checkbox .label, #password-reset .checkbox .label, #password-process .checkbox .label, #password-change .checkbox .label, #registration .checkbox .label {
+      color: #6d6d6d;
+      font-size: 1.5rem;
+      font-weight: normal; }
+    #login .checkbox label.checkbox-inline, #password-reset .checkbox label.checkbox-inline, #password-process .checkbox label.checkbox-inline, #password-change .checkbox label.checkbox-inline, #registration .checkbox label.checkbox-inline {
+      font-size: 1rem; }
+  #login .form-paragraph, #password-reset .form-paragraph, #password-process .form-paragraph, #password-change .form-paragraph, #registration .form-paragraph {
+    color: #9ac00a;
+    font-size: 2.3rem;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 2rem; }
+  #login .btn.btn-custom, #password-reset .btn.btn-custom, #password-process .btn.btn-custom, #password-change .btn.btn-custom, #registration .btn.btn-custom {
+    margin-bottom: 2rem; }
+  #login .form-control, #password-reset .form-control, #password-process .form-control, #password-change .form-control, #registration .form-control {
+    color: #212121;
+    border-radius: 0 !important;
+    height: 4.6rem !important;
+    line-height: 2rem;
+    font-size: 1.7rem; }
+  #login .btn-custom, #password-reset .btn-custom, #password-process .btn-custom, #password-change .btn-custom, #registration .btn-custom {
+    color: #fff;
+    background-color: #9ac00a; }
+  #login .btn-custom:hover,
+  #login .btn-custom:focus, #password-reset .btn-custom:hover,
+  #password-reset .btn-custom:focus, #password-process .btn-custom:hover,
+  #password-process .btn-custom:focus, #password-change .btn-custom:hover,
+  #password-change .btn-custom:focus, #registration .btn-custom:hover,
+  #registration .btn-custom:focus {
+    color: #fff; }
+  #login .form-submit-button, #password-reset .form-submit-button, #password-process .form-submit-button, #password-change .form-submit-button, #registration .form-submit-button {
+    border-radius: 0;
+    font-size: 1.9rem;
+    font-weight: bold;
+    height: 5rem;
+    vertical-align: middle; }
+  #login .form-submit-button:hover, #password-reset .form-submit-button:hover, #password-process .form-submit-button:hover, #password-change .form-submit-button:hover, #registration .form-submit-button:hover {
+    background-color: #dd5116; }
+  #login .forget-link, #password-reset .forget-link, #password-process .forget-link, #password-change .forget-link, #registration .forget-link {
+    font-size: 1.8rem;
+    color: #dd5116;
+    text-align: center;
+    display: block; }
+  #login .forget-link:hover, #password-reset .forget-link:hover, #password-process .forget-link:hover, #password-change .forget-link:hover, #registration .forget-link:hover {
+    color: #9ac00a; }
+  @media screen and (max-width: 1024px) {
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
+      width: 60%; } }
+  @media screen and (max-width: 768px) {
+    #login #login, #login #password-reset, #login #password-process, #login #password-change, #login #registration, #password-reset #login, #password-reset #password-reset, #password-reset #password-process, #password-reset #password-change, #password-reset #registration, #password-process #login, #password-process #password-reset, #password-process #password-process, #password-process #password-change, #password-process #registration, #password-change #login, #password-change #password-reset, #password-change #password-process, #password-change #password-change, #password-change #registration, #registration #login, #registration #password-reset, #registration #password-process, #registration #password-change, #registration #registration {
+      padding-top: 1rem; }
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
+      width: 80%; } }
+  @media screen and (max-width: 440px) {
+    #login #login, #login #password-reset, #login #password-process, #login #password-change, #login #registration, #password-reset #login, #password-reset #password-reset, #password-reset #password-process, #password-reset #password-change, #password-reset #registration, #password-process #login, #password-process #password-reset, #password-process #password-process, #password-process #password-change, #password-process #registration, #password-change #login, #password-change #password-reset, #password-change #password-process, #password-change #password-change, #password-change #registration, #registration #login, #registration #password-reset, #registration #password-process, #registration #password-change, #registration #registration {
+      padding-top: 0; }
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
+      width: 100%; } }
 
 .table-cell-action {
   display: flex;
@@ -665,34 +761,32 @@ a {
     padding-top: 3em;
     margin-top: -3em; } }
 
-#login, #password-reset, #password-process, #password-change {
-  padding-top: 4rem;
+#login, #password-reset, #password-process, #password-change, #registration {
+  padding-top: 1rem;
   color: #545454;
-  min-height: 100%;
-  font-family: Arial, sans-serif; }
-
-#login {
+  font-family: Arial, sans-serif;
+  /* Set up width of form */
   /* Set up width of form */
   /* Set up style of checkbox */
   /* style of input fields */
   /* style of submit button*/ }
-  #login .form-wrap {
+  #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
     width: 40%;
     margin: 0 auto; }
-  #login .form-comment-paragraph {
+  #login .form-comment-paragraph, #password-reset .form-comment-paragraph, #password-process .form-comment-paragraph, #password-change .form-comment-paragraph, #registration .form-comment-paragraph {
     text-align: center; }
-  #login .form-group {
+  #login .form-group, #password-reset .form-group, #password-process .form-group, #password-change .form-group, #registration .form-group {
     margin-bottom: 2rem;
-    font-size: 1.9rem; }
-  #login .form-group:hover {
+    font-size: 1.7rem; }
+  #login .form-group:hover, #password-reset .form-group:hover, #password-process .form-group:hover, #password-change .form-group:hover, #registration .form-group:hover {
     color: #dd5116; }
-  #login .checkbox {
+  #login .checkbox, #password-reset .checkbox, #password-process .checkbox, #password-change .checkbox, #registration .checkbox {
     position: relative;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    #login .checkbox .login-checkbox {
+    #login .checkbox .login-checkbox, #password-reset .checkbox .login-checkbox, #password-process .checkbox .login-checkbox, #password-change .checkbox .login-checkbox, #registration .checkbox .login-checkbox {
       width: 3rem;
       height: 3rem;
       cursor: pointer;
@@ -700,58 +794,235 @@ a {
       border: 1px solid #ccc;
       vertical-align: middle;
       display: inline-block; }
-    #login .checkbox .label {
+    #login .checkbox .label, #password-reset .checkbox .label, #password-process .checkbox .label, #password-change .checkbox .label, #registration .checkbox .label {
       color: #6d6d6d;
       font-size: 1.5rem;
       font-weight: normal; }
-  #login .form-paragraph {
+    #login .checkbox label.checkbox-inline, #password-reset .checkbox label.checkbox-inline, #password-process .checkbox label.checkbox-inline, #password-change .checkbox label.checkbox-inline, #registration .checkbox label.checkbox-inline {
+      font-size: 1rem; }
+  #login .form-paragraph, #password-reset .form-paragraph, #password-process .form-paragraph, #password-change .form-paragraph, #registration .form-paragraph {
     color: #9ac00a;
     font-size: 2.3rem;
     text-align: center;
     font-weight: bold;
     padding-bottom: 2rem; }
-  #login .btn.btn-custom {
+  #login .btn.btn-custom, #password-reset .btn.btn-custom, #password-process .btn.btn-custom, #password-change .btn.btn-custom, #registration .btn.btn-custom {
     margin-bottom: 2rem; }
-  #login .form-control {
+  #login .form-control, #password-reset .form-control, #password-process .form-control, #password-change .form-control, #registration .form-control {
     color: #212121;
     border-radius: 0 !important;
-    height: 5.8rem !important;
-    line-height: 3rem;
-    font-size: 2rem; }
-  #login .btn-custom {
+    height: 4.6rem !important;
+    line-height: 2rem;
+    font-size: 1.7rem; }
+  #login .btn-custom, #password-reset .btn-custom, #password-process .btn-custom, #password-change .btn-custom, #registration .btn-custom {
     color: #fff;
     background-color: #9ac00a; }
   #login .btn-custom:hover,
-  #login .btn-custom:focus {
+  #login .btn-custom:focus, #password-reset .btn-custom:hover,
+  #password-reset .btn-custom:focus, #password-process .btn-custom:hover,
+  #password-process .btn-custom:focus, #password-change .btn-custom:hover,
+  #password-change .btn-custom:focus, #registration .btn-custom:hover,
+  #registration .btn-custom:focus {
     color: #fff; }
-  #login .form-submit-button {
+  #login .form-submit-button, #password-reset .form-submit-button, #password-process .form-submit-button, #password-change .form-submit-button, #registration .form-submit-button {
     border-radius: 0;
     font-size: 1.9rem;
     font-weight: bold;
-    height: 6rem;
+    height: 5rem;
     vertical-align: middle; }
-  #login .form-submit-button:hover {
+  #login .form-submit-button:hover, #password-reset .form-submit-button:hover, #password-process .form-submit-button:hover, #password-change .form-submit-button:hover, #registration .form-submit-button:hover {
     background-color: #dd5116; }
-  #login .forget-link {
+  #login .forget-link, #password-reset .forget-link, #password-process .forget-link, #password-change .forget-link, #registration .forget-link {
     font-size: 1.8rem;
     color: #dd5116;
     text-align: center;
     display: block; }
-  #login .forget-link:hover {
+  #login .forget-link:hover, #password-reset .forget-link:hover, #password-process .forget-link:hover, #password-change .forget-link:hover, #registration .forget-link:hover {
     color: #9ac00a; }
   @media screen and (max-width: 1024px) {
-    #login .form-wrap {
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
       width: 60%; } }
   @media screen and (max-width: 768px) {
-    #login #login, #login #password-reset {
+    #login #login, #login #password-reset, #login #password-process, #login #password-change, #login #registration, #password-reset #login, #password-reset #password-reset, #password-reset #password-process, #password-reset #password-change, #password-reset #registration, #password-process #login, #password-process #password-reset, #password-process #password-process, #password-process #password-change, #password-process #registration, #password-change #login, #password-change #password-reset, #password-change #password-process, #password-change #password-change, #password-change #registration, #registration #login, #registration #password-reset, #registration #password-process, #registration #password-change, #registration #registration {
       padding-top: 1rem; }
-    #login .form-wrap {
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
       width: 80%; } }
   @media screen and (max-width: 440px) {
-    #login #login, #login #password-reset {
+    #login #login, #login #password-reset, #login #password-process, #login #password-change, #login #registration, #password-reset #login, #password-reset #password-reset, #password-reset #password-process, #password-reset #password-change, #password-reset #registration, #password-process #login, #password-process #password-reset, #password-process #password-process, #password-process #password-change, #password-process #registration, #password-change #login, #password-change #password-reset, #password-change #password-process, #password-change #password-change, #password-change #registration, #registration #login, #registration #password-reset, #registration #password-process, #registration #password-change, #registration #registration {
       padding-top: 0; }
-    #login .form-wrap {
+    #login .form-wrap, #password-reset .form-wrap, #password-process .form-wrap, #password-change .form-wrap, #registration .form-wrap {
       width: 100%; } }
+
+/* HEADER : show-header.html.twig */
+#communit-base {
+  padding: 0 !important;
+  margin: 0 !important;
+  font-family: dinregular, Arial, sans-serif;
+  /* font to be set in the main css file*/
+  width: 100%;
+  /* removes dotted lines in Firefox browser when links are visited and another link is hovered */
+  /* height of the navbar is adjusted to the visible part of the logo image;
+  the height is reduced by scrolling;
+  the color of the bootstrap default navbar is changed to white*/
+  /* CommmunIt logo image settings */
+  /* setting links in the middle vertical position */
+  /* Navbar scroll settings for middle and small screens */
+  /* Navbar scroll settings for large screens */ }
+  #communit-base div.container-fluid.header {
+    padding-left: 0 !important; }
+  #communit-base :focus {
+    outline: none; }
+  #communit-base ::-moz-focus-inner {
+    border: 0; }
+  #communit-base .navbar {
+    height: 11.5em;
+    padding-bottom: 30px;
+    width: 100%;
+    background-color: white !important;
+    transition: padding, height .3s ease;
+    transition-duration: 0.3s; }
+  #communit-base .navbar-default.navbar-brand {
+    padding: 0 !important;
+    margin: 0 !important; }
+  #communit-base .navbar-brand img {
+    width: 22em;
+    height: auto;
+    transition: width .1s ease;
+    transition-duration: 0.3s; }
+  #communit-base a.navbar-brand {
+    margin: 0;
+    padding: 0; }
+  #communit-base .navbar-default.navbar-brand {
+    margin-right: 10px;
+    transition: margin .3s ease;
+    transition-duration: 0.3s; }
+  #communit-base nav.navbar.navbar-default.navbar-fixed-top.top-nav-collapse,
+  #communit-base nav.navbar.navbar-default.navbar-fixed-top {
+    background-color: white !important;
+    width: 100%; }
+  #communit-base div.navbar-header.header {
+    height: 100%;
+    position: relative; }
+  #communit-base ul.nav.navbar-nav.navbar-right {
+    position: absolute;
+    top: 25%;
+    right: 0;
+    padding-right: 3em;
+    /* pushes links to the left */ }
+  #communit-base button.navbar-toggle span {
+    background-color: #DD5116 !important; }
+  #communit-base .navbar-default .navbar-nav > li > a:focus,
+  #communit-base .navbar-default .navbar-nav > li > a:hover,
+  #communit-base .navbar-default .navbar-nav > li > a {
+    color: #9ac00a;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.4em;
+    padding-right: 1.5em;
+    padding-left: 1.5em; }
+  #communit-base .navbar-default .navbar-nav > li > a:focus,
+  #communit-base .navbar-default .navbar-nav > li > a:hover {
+    color: #dd5116; }
+  #communit-base a.link {
+    display: block !important;
+    text-align: center; }
+  @media screen and (max-width: 1024px) {
+    #communit-base .navbar {
+      height: 8em; }
+    #communit-base .navbar-brand img {
+      width: 16em; }
+    #communit-base .navbar-default .navbar-nav > li > a:focus,
+    #communit-base .navbar-default .navbar-nav > li > a:hover,
+    #communit-base .navbar-default .navbar-nav > li > a {
+      font-size: 1.2em;
+      padding-right: 0; }
+    #communit-base ul.nav.navbar-nav.navbar-right {
+      top: 15%; }
+    #communit-base #itneo-link {
+      padding-left: 0; } }
+  @media screen and (max-width: 768px) {
+    #communit-base {
+      /* height of div.navbar-header.header is equal to .navbar height */
+      /* Navbar scroll settings for very small screens*/ }
+      #communit-base .navbar {
+        height: 6.5em;
+        transition: height .3s ease;
+        transition-duration: 0.4s; }
+      #communit-base .navbar-brand img {
+        width: 12em; }
+      #communit-base div.navbar-header.header {
+        height: 6.5em;
+        transition: height .3s ease;
+        transition-duration: 0.4s;
+        margin-left: 0 !important; }
+      #communit-base .navbar.scroll-small {
+        height: 4.8em;
+        padding-bottom: 0;
+        transition: padding, height .3s ease;
+        transition-duration: 0.4s; }
+      #communit-base .navbar-brand .scroll-small {
+        width: 13em;
+        height: auto;
+        transition: width .3s ease;
+        transition-duration: 0.4s; }
+      #communit-base div.navbar-header.header.scroll-small {
+        height: 4.8em;
+        transition: height .3s ease;
+        transition-duration: 0.4s; }
+      #communit-base .navbar-default .navbar-brand.scroll-small {
+        margin-right: 0;
+        font-size: 1em;
+        transition: margin, font-size .3s ease;
+        transition-duration: 0.4s; }
+      #communit-base div.navbar-collapse.navbar-ex1-collapse.collapse.in {
+        background-color: white;
+        overflow: hidden;
+        border-bottom: solid 1px #e7e7e7;
+        border-top: none !important; }
+      #communit-base .nav > li > a {
+        padding: 1rem 0;
+        text-align: center; }
+      #communit-base ul.nav.navbar-nav.navbar-right {
+        position: relative;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-right: 2rem;
+        margin: 0 auto; }
+      #communit-base button.navbar-toggle {
+        position: absolute;
+        top: 10%;
+        right: 2%; } }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    #communit-base .navbar.scroll-midd {
+      height: 5em;
+      padding-bottom: 0;
+      transition: padding, height .3s ease;
+      transition-duration: 0.4s; }
+    #communit-base .navbar-brand .scroll-midd {
+      width: 14em;
+      height: auto;
+      transition: width, padding .2s ease;
+      transition-duration: 0.4s; }
+    #communit-base .navbar-default .navbar-brand.scroll-midd {
+      margin-right: 0;
+      font-size: 1em;
+      transition: margin, font-size .3s ease;
+      transition-duration: 0.4s; } }
+  @media screen and (min-width: 1024px) {
+    #communit-base .navbar.scroll {
+      height: 7em;
+      padding-bottom: 10px;
+      transition: padding, height .3s ease;
+      transition-duration: 0.3s; }
+    #communit-base .navbar-brand .scroll {
+      width: 15em;
+      height: auto;
+      transition: width, padding .2s ease;
+      transition-duration: 0.3s; }
+    #communit-base .navbar-default .navbar-brand.scroll {
+      margin-right: 0;
+      transition: margin .3s ease;
+      transition-duration: 0.3s; } }
 
 /* FOOTER */
 footer {
@@ -779,7 +1050,7 @@ footer {
         color: #9ac00a;
         text-decoration: none; }
   footer #footer-left-up ul {
-    list-style-image: url("../../img/puce_xxxs.png"); }
+    list-style-image: url("../img/puce_xxxs.png"); }
   footer #footer-left-down ul {
     padding: 0; }
   footer #footer-right {
@@ -797,7 +1068,7 @@ footer {
         color: #dd5116;
         font-family: dinregular, sans-serif;
         font-weight: bold;
-        font-size: 2rem; }
+        font-size: 1.8rem; }
       footer #footer-right #footer-right-contact a:hover {
         color: #9ac00a; }
     footer #footer-right #footer-right-triangle-img {
@@ -913,193 +1184,6 @@ footer {
       width: 15.5rem; }
     footer #footer-right p {
       display: none; } }
-
-/* HEADER */
-.header {
-  padding: 0 !important;
-  margin: 0 !important;
-  font-family: dinregular, Arial, sans-serif;
-  /* font to be set in the main css file*/ }
-
-/* removes dotted lines in Firefox browser when links are visited and another link is hovered */
-:focus {
-  outline: none; }
-
-::-moz-focus-inner {
-  border: 0; }
-
-/* height of the navbar is adjusted to the visible part of the logo image;
-the height is reduced by scrolling;
-the color of the bootstrap default navbar is changed to white*/
-.navbar {
-  height: 11.5em;
-  padding-bottom: 30px;
-  width: 100%;
-  background-color: white !important;
-  transition: padding, height .3s ease;
-  transition-duration: 0.3s; }
-
-.navbar-default.navbar-brand {
-  padding: 0 !important;
-  margin: 0 !important; }
-
-/* CommmunIt logo image settings */
-.navbar-brand img {
-  width: 22em;
-  height: auto;
-  padding-left: 0.6em;
-  transition: width .1s ease;
-  transition-duration: 0.3s; }
-
-a.navbar-brand {
-  margin: 0;
-  padding: 0; }
-
-.navbar-default.navbar-brand {
-  margin-right: 10px;
-  transition: margin .3s ease;
-  transition-duration: 0.3s; }
-
-nav.navbar.navbar-default.navbar-fixed-top.top-nav-collapse,
-nav.navbar.navbar-default.navbar-fixed-top {
-  background-color: white !important;
-  width: 100%; }
-
-/* setting links in the middle vertical position */
-div.navbar-header.header {
-  height: 100%;
-  position: relative; }
-
-ul.nav.navbar-nav.navbar-right {
-  position: absolute;
-  top: 25%;
-  right: 0;
-  padding-right: 3em;
-  /* pushes links to the left */ }
-
-button.navbar-toggle span {
-  background-color: #DD5116 !important; }
-
-.navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a {
-  color: #9AC00A;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1.4em;
-  padding-right: 1.5em;
-  padding-left: 1.5em; }
-
-.navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > li > a:hover {
-  color: #DD5116; }
-
-a.link {
-  display: block !important;
-  text-align: center; }
-
-@media screen and (max-width: 1024px) {
-  .navbar {
-    height: 8em; }
-  .navbar-brand img {
-    width: 16em; }
-  .navbar-default .navbar-nav > li > a:focus,
-  .navbar-default .navbar-nav > li > a:hover,
-  .navbar-default .navbar-nav > li > a {
-    font-size: 1.3em;
-    padding-right: 0; }
-  ul.nav.navbar-nav.navbar-right {
-    top: 15%; }
-  #itneo-link {
-    padding-left: 0; } }
-
-@media screen and (max-width: 768px) {
-  .navbar {
-    height: 6.5em;
-    transition: height .3s ease;
-    transition-duration: 0.4s; }
-  .navbar-brand img {
-    width: 13em;
-    padding-left: 0; }
-  /* height of div.navbar-header.header is equal to .navbar height */
-  div.navbar-header.header {
-    height: 6.5em;
-    transition: height .3s ease;
-    transition-duration: 0.4s; }
-  /* Navbar scroll settings for very small screens*/
-  .navbar.scroll-small {
-    height: 4.8em;
-    padding-bottom: 0;
-    transition: padding, height .3s ease;
-    transition-duration: 0.4s; }
-  .navbar-brand .scroll-small {
-    width: 13em;
-    height: auto;
-    transition: width .3s ease;
-    transition-duration: 0.4s; }
-  div.navbar-header.header.scroll-small {
-    height: 4.8em;
-    transition: height .3s ease;
-    transition-duration: 0.4s; }
-  .navbar-default .navbar-brand.scroll-small {
-    margin-right: 0;
-    font-size: 1em;
-    transition: margin, font-size .3s ease;
-    transition-duration: 0.4s; }
-  div.navbar-collapse.navbar-ex1-collapse.collapse.in {
-    background-color: white;
-    overflow: hidden;
-    border-bottom: solid 1px #e7e7e7;
-    border-top: none !important; }
-  .nav > li > a {
-    padding: 1rem 0;
-    text-align: center; }
-  ul.nav.navbar-nav.navbar-right {
-    position: relative;
-    padding: 1em 0;
-    padding-right: 2rem;
-    margin: 0 auto; }
-  button.navbar-toggle {
-    position: absolute;
-    top: 10%;
-    right: 2%; } }
-
-/* Navbar scroll settings for middle and small screens */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .navbar.scroll-midd {
-    height: 4.8em;
-    padding-bottom: 0;
-    transition: padding, height .3s ease;
-    transition-duration: 0.4s; }
-  .navbar-brand .scroll-midd {
-    width: 14em;
-    height: auto;
-    padding-left: 0.9em;
-    transition: width, padding .2s ease;
-    transition-duration: 0.4s; }
-  .navbar-default .navbar-brand.scroll-midd {
-    margin-right: 0;
-    font-size: 1em;
-    transition: margin, font-size .3s ease;
-    transition-duration: 0.4s; } }
-
-/* Navbar scroll settings for large screens */
-@media screen and (min-width: 1024px) {
-  .navbar.scroll {
-    height: 7em;
-    padding-bottom: 10px;
-    transition: padding, height .3s ease;
-    transition-duration: 0.3s; }
-  .navbar-brand .scroll {
-    width: 15em;
-    height: auto;
-    padding-left: 0.5em;
-    transition: width, padding .2s ease;
-    transition-duration: 0.3s; }
-  .navbar-default .navbar-brand.scroll {
-    margin-right: 0;
-    transition: margin .3s ease;
-    transition-duration: 0.3s; } }
 
 .historique-communit {
   margin-top: 21rem;
@@ -1381,7 +1465,7 @@ a.link {
     padding-top: 5rem;
     padding-bottom: 3rem;
     margin-bottom: 5rem;
-    background-image: url("../../img/commun-partie2.jpg");
+    background-image: url("../img/commun-partie2.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; }
@@ -1435,14 +1519,15 @@ a.link {
       #communit .block-questions .questions h4 {
         font-family: Arial, sans-serif;
         font-weight: bold;
-        color: #dd5116; }
+        color: #dd5116;
+        margin-top: 0 !important; }
       #communit .block-questions .questions p {
         color: #dd5116;
         font-weight: bold;
         text-align: justify;
         line-height: 2.2rem;
         padding: 0 0 1rem 4rem;
-        background-image: url("../../img/green-flea3.svg");
+        background-image: url("../img/green-flea3.svg");
         background-repeat: no-repeat;
         background-position: 1rem 0.4rem;
         background-size: 2rem; }
@@ -1468,20 +1553,13 @@ a.link {
       flex-direction: column;
       justify-content: center;
       padding: 0;
-      margin: 0; }
+      margin: 0;
+      margin-top: 1rem; }
       #communit .block-questions .questions {
         padding: 0 2rem 0 2rem; }
-        #communit .block-questions .questions h4 {
-          font-family: Arial, sans-serif;
-          font-weight: bold;
-          color: #dd5116; }
         #communit .block-questions .questions p {
-          color: #dd5116;
-          font-weight: bold;
-          text-align: justify;
-          line-height: 2.2rem;
           padding: 0 0 1rem 4rem;
-          background-image: url("../../img/green-flea3.svg");
+          background-image: url("../img/green-flea3.svg");
           background-repeat: no-repeat;
           background-position: 1rem 0.4rem;
           background-size: 2rem; }
@@ -1499,24 +1577,32 @@ a.link {
     #communit .box {
       margin-bottom: 5em; } }
   @media screen and (max-width: 1300px) {
+    #communit #arrowbox {
+      width: 100% !important; }
     #communit .block-questions {
       width: 100%;
-      min-width: 30rem;
-      display: inline-block;
       flex-direction: column;
       justify-content: center;
       padding: 0;
-      margin: 0; } }
-  @media screen and (max-width: 840px) {
-    #communit .questions-button {
-      padding-right: 0; }
+      margin: 0;
+      margin-top: 2rem !important; }
+    #communit .questions {
+      padding-left: 0 !important;
+      padding-right: 0 !important; }
+      #communit .questions p {
+        padding-left: 4rem !important;
+        padding-right: 2rem !important; }
+    #communit #arrowbox {
+      padding-right: 0 !important; }
+      #communit #arrowbox .cummunit-text, #communit #arrowbox .questions {
+        text-align: center !important; }
     #communit .box {
       margin-bottom: 5em; }
     #communit .svg-container-1 {
       min-width: 38rem !important;
       margin: 6rem 1rem !important; } }
 
-@media screen and (max-width: 840px) and (max-width: 400px) {
+@media screen and (max-width: 1300px) and (max-width: 400px) {
   #communit .flex-container-1 {
     flex-direction: column !important;
     align-items: center !important; }

@@ -101,7 +101,7 @@ class TechnicalEvolutionFilter
         return [
             'title'         => $this->getTitle(),
             'status'        => $this->getStatus(),
-            'category_type'  => $this->getCategoryType(),
+            'categoryType'  => $this->getCategoryType(),
             'category'      => $this->getCategory()
         ];
     }

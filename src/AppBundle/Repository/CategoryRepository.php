@@ -2,7 +2,6 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Dictionary;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -17,7 +16,7 @@ class CategoryRepository extends EntityRepository
      *
      * @return array
      */
-    public function getCategorys()
+    public function getCategories()
     {
         return $this->createQueryBuilder('c')
             ->select('c', 't')
@@ -51,4 +50,5 @@ class CategoryRepository extends EntityRepository
             ->setParameter('category_type', $categoryType);
         return $query;
     }
+
 }

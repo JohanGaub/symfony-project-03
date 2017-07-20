@@ -1,14 +1,15 @@
 security:
 
+    encoders:
+        #Symfony\Component\Security\Core\User\User: plaintext
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
     providers:
         dbal:
             entity:
                 class: AppBundle:User
-                property: email
-
-    encoders:
-        AppBundle\Entity\User:
-            algorithm: bcrypt
+                #property: email
 
     role_hierarchy:
         ROLE_COMMERCIAL: [ROLE_FINAL_CLIENT]
@@ -24,6 +25,8 @@ security:
             security: false
 
         main:
+            pattern: ^/
+            user_checker: app.user_checker
             remember_me:
                 secret: '%secret%'
                 lifetime: 604800
@@ -47,5 +50,5 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/reset, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/dashboard, roles: IS_AUTHENTICATED_REMEMBERED}
+        - { path: ^/tableau-de-bord, roles: IS_AUTHENTICATED_REMEMBERED}
         #- { path: ^/, roles: ROLE_ADMIN }

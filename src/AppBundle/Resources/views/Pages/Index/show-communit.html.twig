@@ -11,41 +11,44 @@
         {{ box.svgBox("90", "Pas de formations obligatoires, nous vous accompagnons sur le terrain aussi bien commercialement que techniquement. Des formations spécifiques peuvent être proposées ou demandées.") }}
     </div>
     {% import '@App/Elements/macro.svgButton.html.twig' as button %}
-    <div class="questions-button">
-        {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+    <div class="join">
+        <a href="{{ path('user_registration') }}">
+            {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+        </a>
     </div>
 
     <div class="background-commun text-center col-xs-12 col-sm-10 col-sm-offset-1">
-    <div><h2 class="commun-it-title">La COMMUN’it c’est :</h2></div>
-    <div class="flex-container-2">
+        <div><h2 class="commun-it-title">La COMMUN’it c’est :</h2></div>
+        <div class="flex-container-2">
 
-        <div id="arrowbox" class="box">
-            <div>
-                <ul>
-                    <li>100% de ventes indirectes</li>
-                    <li>La possibilité de revendre notre solution itnéo en marque blanche et de proposer à votre clientèle votre propre solution avec une interface à vos couleurs et avec votre logo</li>
-                    <li>Un tarif préférentiel sur la solution et services <a href="http://itneo.fr/solution-telephonie-ip/" target="_blank">itnéo</a></li>
-                    <li>Un support technique gratuit et illimité</li>
-                    <li>La possibilité de faire des propositions d’évolutions simples et complexes avec un cahier des charges et un système de vote</li>
-                    <li>La possibilité de développements spécifiques avec mutualisation des coûts</li>
-                </ul>
+            <div id="arrowbox" class="box">
+                <div class="communit-text">
+                    <ul>
+                        <li>100% de ventes indirectes</li>
+                        <li>La possibilité de revendre notre solution itnéo en marque blanche et de proposer à votre clientèle votre propre solution avec une interface à vos couleurs et avec votre logo</li>
+                        <li>Un tarif préférentiel sur la solution et services <a href="http://itneo.fr/solution-telephonie-ip/" target="_blank">itnéo</a></li>
+                        <li>Un support technique gratuit et illimité</li>
+                        <li>La possibilité de faire des propositions d’évolutions simples et complexes avec un cahier des charges et un système de vote</li>
+                        <li>La possibilité de développements spécifiques avec mutualisation des coûts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="block-questions">
+                <div class="questions">
+                    <h4>Vous souhaitez :</h4>
+                    <p>travailler avec une société Française à votre écoute&nbsp;?</p>
+                    <p>garantir à vos clients des investissements sur le long terme&nbsp;?</p>
+                    <p>partager vos idées d’évolutions et valoriser votre offre&nbsp;?</p>
+                    <p>travailler avec une équipe compétente et disponible&nbsp;?</p>
+                    <p>proposer une solution de téléphonie sur IP innovante sans système de licence à l’utilisateur&nbsp;?</p>
+                </div>
             </div>
         </div>
-
-        <div class="block-questions">
-            <div class="questions">
-                <h4>Vous souhaitez :</h4>
-                <p>travailler avec une société Française à votre écoute&nbsp;?</p>
-                <p>garantir à vos clients des investissements sur le long terme&nbsp;?</p>
-                <p>partager vos idées d’évolutions et valoriser votre offre&nbsp;?</p>
-                <p>travailler avec une équipe compétente et disponible&nbsp;?</p>
-                <p>proposer une solution de téléphonie sur IP innovante sans système de licence à l’utilisateur&nbsp;?</p>
-            </div>
+        <div class="join">
+            <a href="{{ path('user_registration') }}">
+                {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+            </a>
         </div>
-    </div>
-    <div class="questions-button">
-        {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
-    </div>
     </div>
 </section>
-

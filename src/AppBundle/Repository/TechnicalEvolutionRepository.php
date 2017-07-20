@@ -56,7 +56,7 @@ class TechnicalEvolutionRepository extends EntityRepository
                         }
 
                         if ($alias == 'te') {
-                            $search = "$alias.$field like '$value%'";
+                            $search = "$alias.$field like '%$value%'";
                         } else {
                             $field = 'id';
                             $search = "$alias.$field = '$value'";
@@ -179,4 +179,38 @@ class TechnicalEvolutionRepository extends EntityRepository
         ", $rsm);
         return $query;
     }
+
+    /**
+     * @param $technicalEvolutionId
+     * @return array
+     */
+    public function getScoreForTechnicalEvolution($technicalEvolutionId)
+    {
+        $qb = $this->createQueryBuilder('te')
+            ->select('SUM(ute.note)', 'count(ute.note)', 'AVG(ute.note)')
+            ->join("te.userTechnicalEvolutions", "ute")
+            ->where("te.id = $technicalEvolutionId")
+            ->andWhere("ute.note IS NOT NULL")
+            ->getQuery();
+        return $qb->getResult();
+    }
+
+    /**
+     * @param $technicalEvolutionId
+     * @param $userId
+     * @return array
+     */
+    public function getNoteByUserPerTechnicalEvolution($technicalEvolutionId, $userId)
+    {
+        $qb = $this->createQueryBuilder('te')
+            ->select("ute.note")
+            ->join("te.userTechnicalEvolutions", "ute")
+            ->join("ute.user", "u")
+            ->where("te.id = $technicalEvolutionId")
+            ->andWhere("u.id = $userId")
+            ->andWhere("ute.note IS NOT NULL")
+            ->getQuery();
+        return $qb->getResult();
+    }
+
 }

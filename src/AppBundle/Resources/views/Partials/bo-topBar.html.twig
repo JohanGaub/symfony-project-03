@@ -1,3 +1,21 @@
-<div class="bo-top-bar">
-    <p>Connecté en tant que {{ app.user.userProfile.firstname }} {{ app.user.userProfile.lastname }}</p>
+<div class="bo-top-bar hidden-xs">
+
+    <div class="dropdown">
+        <a href="#" class="dropbtn"><i class="fa fa-user-circle fa-2x"></i></a>
+        <div class="dropdown-content">
+            <a href="{{ path('account_result') }}"><i class="fa fa-cog" aria-hidden="true"></i>
+                Mon compte
+            </a>
+            <a href="{{ path('change_password') }}"><i class="fa fa-key" aria-hidden="true"></i>
+                Mot de passe
+            </a>
+            <a href="{{ path('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                Deconnexion
+            </a>
+        </div>
+    </div>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <p> {{ app.user.userProfile.fullName }}
+        </p>
+    {% endif %}
 </div>

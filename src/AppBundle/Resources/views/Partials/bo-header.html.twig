@@ -1,0 +1,76 @@
+<nav class="navbar navbar-default inline-navbar bo-header visible-xs " role="navigation">
+    <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" href="{{ path('home') }}">
+            <img  class="sidebar-logo" src="{{ asset('assets/img/flavicon.png') }}" alt="Logo communIt">
+        </a>
+
+        <div class="dropdown visible-xs">
+            <a href="#" class="dropbtn"><i class="fa fa-user-circle fa-2x"></i></a>
+            <div class="dropdown-content">
+                <a href="{{ path('account_result') }}"><i class="fa fa-cog" aria-hidden="true"></i>
+                    Mon compte
+                </a>
+                <a href="{{ path('change_password') }}"><i class="fa fa-key" aria-hidden="true"></i>
+                    Mot de passe
+                </a>
+                <a href="{{ path('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                    Deconnexion
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="">
+                <a href="{{ path('dashboard') }}">Tableau de bord
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Les évolutions<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('evolutionHome') }}">Liste des évolutions</a></li>
+                    <li><a href="{{ path('evolutionAdd') }}">Nouvelle évolution</a></li>
+                    <li><a href="{{ path('evolutionUser') }}">Mes évolutions</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="divider"></li>
+                        <li><p class="navbar-under-title">Administration</p></li>
+                        <li><a href="{{ path('evolutionWaiting') }}">Evolutions en attente</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Les tickets<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('ticket_add') }}">Nouveau ticket</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="divider"></li>
+                        <li><p class="navbar-under-title">Administration</p></li>
+                        <li><a href="{{ path('ticket_index') }}">Liste des tickets</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+
+            {% if is_granted('ROLE_PROJECT_RESP') %}
+                <li>
+                    <a href="{{ path('validation_associate') }}">Associate</a>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('validation_register', {'page' : 1}) }}">Validation register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

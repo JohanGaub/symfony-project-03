@@ -1,0 +1,99 @@
+/**
+ * Evolutions Parts - VOTING
+ */
+.note-evolution {
+
+  .bo-evolution {
+    border: 1px solid $secondary-color;
+    border-radius: 1px;
+    margin: 2rem 0;
+    padding: 1rem 2rem 0 2rem;
+    width: 100%;
+
+    /****** Counter *******/
+    .controls.rating, .rating-counter, .remarque-small{
+      margin-left: 7rem;
+    }
+    .rating-counter {
+      padding: 0 0 0 0;
+      .rating-counter-value {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+    }
+    .remarque-small {
+      font-size: 1.5rem;
+    }
+
+    .bo-top-evolution {
+      justify-content: space-between;
+      align-items: stretch;
+      .evolution-notes {
+        padding: 1rem 0 0 0;
+
+        .avg-note {
+          font-size: 3rem;
+          font-weight: 700;
+          color: $primary-color;
+          //padding: 0;
+          line-height: 0.6rem;
+        }
+
+        .nb-notes {
+          display: block;
+          width: 7rem;
+
+          span {
+            font-weight: 700;
+            color: $secondary-color;
+          }
+        }
+      }
+
+      .evolution-note-titles {
+        text-align: right;
+        h2.vote-title > span {
+          font-weight: 900;
+          font-size:2rem;
+          color: $paragraph-color;
+        }
+        h2 {
+          display: block;
+          font-size: 1.75rem;
+          padding: 1rem;
+          overflow: hidden;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Star rating system
+ */
+.starRating input { display:none; }
+
+.starRating label {
+  width: 1.8rem;
+  height: 1.6rem;
+  display: inline-block;
+  text-indent: -999.9rem; /* hide the label text off screen */
+  background: url("../img/rating_stars.png") -15.5rem -3.2rem;
+}
+
+.starRating label.on {
+  background-position: -15.5rem -7.6rem;
+}
+
+/****** Hide radio buttons *******/
+label.label-star-link {
+  color:white;
+
+  input[type='radio'],
+  input[type='radio']:after,
+  input[type='radio']:checked:after{
+    visibility: hidden;
+  }
+
+}

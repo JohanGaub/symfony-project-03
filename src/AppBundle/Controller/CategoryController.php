@@ -17,27 +17,26 @@ use Symfony\Component\HttpFoundation\Request;
 class CategoryController extends Controller
 {
     /**
-     * Index all categorys
+     * Index all categories
      *
      * @Route("/liste", name="categoryHome")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
-        $categorys = $this->getDoctrine()->getRepository('AppBundle:Category')
-            ->getCategorys();
-
+        $categories = $this->getDoctrine()->getRepository('AppBundle:Category')
+            ->getCategories();
         return $this->render('@App/Pages/Category/indexCategory.html.twig', [
-            'categorys' => $categorys
+            'categories' => $categories
         ]);
     }
 
     /**
-     * Add new cateogry
+     * Add new category
      *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Route("nouvelle", name="categoryAdd")
+     * @Route("/nouvelle", name="categoryAdd")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)

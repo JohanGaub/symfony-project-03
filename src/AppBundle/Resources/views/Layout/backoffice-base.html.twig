@@ -1,5 +1,5 @@
 {# put assets for dev && dist for prod #}
-{% set environnement = 'dist' %}
+{% set environnement = 'assets' %}
 
 <!DOCTYPE html>
 <html>
@@ -10,17 +10,17 @@
 <body>
     <header>
         {% include '@App/Partials/bo-sideBar.html.twig' %}
+        {% include '@App/Partials/bo-header.html.twig' %}
+        {% include '@App/Partials/bo-topBar.html.twig' %}
     </header>
 
-    <section class="main">
-        <main>
-            {% block body %}{% endblock %}
-        </main>
+    <main id="bo-main-content" class="main">
+        {% block body %}{% endblock %}
 
         <footer>
             {% include '@App/Partials/bo-footer.html.twig' %}
         </footer>
-    </section>
+    </main>
 
     {% include '@App/Partials/bo-foot.html.twig' %}
     {% block javascripts %}{% endblock %}

@@ -1,5 +1,17 @@
 <section class="container-fluid index-home">
 
+    <div class="container form">
+        <div class="message-register row">
+            <div class="col-md-12 text-center">
+                {% for flash_message in app.session.flashBag.get('notice') %}
+                    <div class="alert alert-info">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
     <div class="background-home text-center col-xs-12 col-sm-10 col-sm-offset-1">
         <div class="col-xs-12">
             <div>
@@ -10,11 +22,14 @@
             <div class="col-xs-12 col-sm-12 col-md-12 index-button text-center">
                 {% import '@App/Elements/macro.svgButton.html.twig' as button %}
                 <div class="join">
-                    {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+                    <a href="{{ path('user_registration') }}">
+                        {{ button.svgButton("#dd5116", "Rejoignez-nous !") }}
+                    </a>
                 </div>
                 <div class="discover">
                     <a href="#ancre_communit">
-                        {{ button.svgButton("#9AC00A", "Découvrez notre offre !") }}</a>
+                        {{ button.svgButton("#9AC00A", "Découvrez notre offre !") }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -40,8 +55,5 @@
                 <a href="#ancre_communit" class="plus-info">Plus d'info</a>
             </div>
         </div>
-        </div>
-
-
+    </div>
 </section>
-

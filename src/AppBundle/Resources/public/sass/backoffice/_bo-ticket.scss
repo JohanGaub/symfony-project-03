@@ -1,42 +1,78 @@
-#ticket {
-  background-color: $background-color1;
+.ticket-filter-block {
+  border: solid $secondary-color 0.1rem;
+  padding: 2rem 0 1rem 0;
+  margin: 2rem 0 5rem 0;
+}
 
-  .background-ticket {
-    width: 70%;
-    min-width: 30rem;
-    margin: 16.2rem auto 7rem auto;
-    background-image: url("../../img/commun-partie2.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    //border: solid blue 1px;
-  }
+.ticket-table-block {
+  border: solid $primary-color 0.1rem;
+  padding: 0;
+}
 
-  .block-ticket {
-    width: 70%;
-    min-width: 20rem;
-    padding: 5rem 0;
-    margin: 0 auto;
-    //border: solid deeppink 3px;
-    .ticket {
-      padding: 1rem 0 5rem 0;
-      background: rgba(255, 255, 255, 0.6);
-      //border: solid black 7px;
-      a {
-        color: $secondary-color;
-        font-weight: bold;
-        text-align: justify;
-        line-height: 2.2rem;
-        padding: 0 0 1rem 4rem; // 4.5rem : it makes the suitable indent for the text after each flea
-        // Fleas
-        background-image: url('../../img/green-flea3.svg');
-        background-repeat: no-repeat;
-        background-position: 1rem 0.4rem; // 1rem = flea position on the extrem left ; 0.4rem = vertical position
-        background-size: 2rem;
-        &:hover {
-          color: $primary-color;
-        }
-      }
+.ticket-edit-margin{
+  margin-top: 2rem;
+}
+
+.no-margin-no-padding {
+  margin: 0;
+  padding: 0;
+}
+
+.ticket-title {
+  padding-bottom: 2rem;
+}
+
+.ticket-subject {
+  text-align: justify;
+  font-size: 1.6rem;
+  font-weight: bold;
+  a {
+    color: darken($primary-color, 10%);
+    &:hover {
+      color: $secondary-color;
     }
   }
 }
+
+.btn-back {
+  background-color: grey;
+  color: white;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle;
+  &:hover {
+    background-color: lighten(grey, 20%);
+  }
+}
+
+.comment-border {
+  border-top: solid $primary-color 0.1rem;
+  margin-top: 2rem;
+}
+
+.comment-unit {
+  border: 0.1rem solid $primary-color;
+  border-radius: 0;
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.comment-content1 {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.comment-content2 {
+  border: 0.1rem solid lightgrey;
+}
+
+.ticket-explanation-size {
+  height: 600px;
+  background-color: red;
+
+}
+
+
+
+
+

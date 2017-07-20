@@ -9,7 +9,7 @@
 
             {# Here small verification about rights of user (dynamic view) #}
             {% set offset = '' %}
-            {% if dirs|length < 1 %}
+            {% if dirs|length <= 1 %}
                 {% set offset = 'col-md-offset-3' %}
             {% endif %}
 

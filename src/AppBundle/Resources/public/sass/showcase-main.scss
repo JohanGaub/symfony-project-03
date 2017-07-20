@@ -10,11 +10,12 @@
 @import "general/table";
 @import "general/ancre";
 
-@import "general/login";
+@import "general/form";
 
 // --- Partials --->
-@import "partials/show-footer";
 @import "partials/show-header";
+@import "partials/show-footer";
+
 
 // --- Showcase --->
 @import "showcase/show-historique";

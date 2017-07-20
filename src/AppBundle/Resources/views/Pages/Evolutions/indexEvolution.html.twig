@@ -7,9 +7,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-md-12 col-lg-10 col-lg-offset-1">
-                {% include '@App/Pages/Evolutions/buttonBarEvolutions.html.twig' %}
-            </div>
+            {% include '@App/Elements/include.flashBagMessage.html.twig' %}
 
             <div class="bo-title-page col-lg-12">
                 <h2>Evolutions techniques</h2>
@@ -85,7 +83,7 @@
                             <div class="bo-bottom-evolution">
                                 <a href="{{ path('evolutionUnit', {'technicalEvolution': evolution[0].id}) }}">En savoir plus</a>
 
-                                {% if is_granted('ROLE_ADMIN') or app.user.id == evolution[0].user_id %}
+                                {% if is_granted('ROLE_ADMIN') or app.user.id == evolution[0].user.id %}
                                     <a href="{{ path('evolutionUpdate', {'technicalEvolution': evolution[0].id}) }}">Modifier l'évolution</a>
                                 {% endif %}
                             </div>

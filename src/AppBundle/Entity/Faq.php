@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -247,4 +245,5 @@ class Faq
     {
         return $this->product;
     }
+
 }

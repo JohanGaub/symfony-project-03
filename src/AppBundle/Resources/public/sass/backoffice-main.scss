@@ -8,13 +8,12 @@
 @import "general/more";
 @import "general/form";
 @import "general/table";
-
-@import "general/login";
+@import "general/account";
 
 // --- Partials --->
-@import "partials/bo-simple-sidebar";
 @import "partials/bo-top-bar";
 @import "partials/bo-header";
+@import "partials/bo-sidebar";
 @import "partials/bo-footer";
 
 // --- Backoffice --->
@@ -25,10 +24,5 @@
 @import "backoffice/bo-dictionary";
 @import "backoffice/bo-ticket";
 @import "backoffice/bo-evolution";
+@import "backoffice/bo-evolution-note";
 @import "backoffice/bo-download";
-
-html {
-  height: 0!important;
-  padding: 0!important;
-  margin: 0!important;
-}

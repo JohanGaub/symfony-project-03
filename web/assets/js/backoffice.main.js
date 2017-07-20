@@ -10,6 +10,7 @@ $(document).ready(function () {
         $(this).addClass(cssClass)
     })
 
+
     $(focus).mouseleave(function () {
         $(target).removeClass(cssClass)
     })

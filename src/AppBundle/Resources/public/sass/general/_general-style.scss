@@ -16,8 +16,32 @@ html, body {
   width: 100%;
   height: 100%;
 }
+main {
+  min-height: 88%;
+  margin-top: 15rem;
+}
+main#bo-main-content {
+  margin-top: 0 !important;
+  min-height: 100%;
+}
+@media screen and (max-width: 1024px) {
+  main {
+    margin-top: 10rem;
+  }
+}
+
+/* Block page "validation register"*/
+.validate{
+  margin-top: 5em;
+}
+.register-title{
+  margin-top: 5em;
+}
+.message-register{
+  margin-top: 2em;
+}
 header {
-  margin-bottom: 13rem;
+  padding-bottom: 0;
 }
 footer {
   margin-top: 5rem!important;
@@ -103,10 +127,25 @@ a {
   text-decoration: none!important;
 }
 
-
 /**
  * Modal Parts
  */
 .modal {
   border-radius: 1px;
+}
+
+/**
+ * Button small green - back office
+ */
+
+.btn-model-small {
+  color: #fff !important;
+  background-color: $primary-color;
+  border-radius: 0;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.btn-model-small:hover {
+  background-color: $secondary-color;
 }
