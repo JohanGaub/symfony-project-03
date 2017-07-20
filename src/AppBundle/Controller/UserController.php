@@ -118,13 +118,20 @@ class UserController extends Controller
             );
 
 
+
+
             return $this->redirectToRoute('home');
 
         }
+
+        $mentions = $this->getDoctrine()->getRepository('AppBundle:DynamicContent')
+            ->findOneBy(['type' => 'mentionslegales']);
+
         return $this->render(
-            '@App/Pages/Admin/register.html.twig',
-            array('form' => $form->createView(),
-            ));
+            '@App/Pages/Admin/register.html.twig',[
+                'form'      => $form->createView(),
+                'mentions'  => $mentions,
+            ]);
     }
 
     /**

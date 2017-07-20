@@ -185,4 +185,14 @@ class News
         return $this;
     }
 
+
+    /**
+     * Get isVisible
+     *
+     * @return boolean
+     */
+    public function getIsVisible()
+    {
+        return $this->isVisible;
+    }
 }
