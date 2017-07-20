@@ -8,7 +8,7 @@
     <section id="login">
         <div class="container form form-wrap">
         {% if error %}
-            <div class="alert alert-danger text-center">
+            <div class="alert alert-danger text-center message-register">
                 {{ error.messageKey|trans(error.messageData, 'security') }}
             </div>
         {% endif %}

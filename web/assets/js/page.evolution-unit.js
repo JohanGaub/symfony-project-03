@@ -60,8 +60,8 @@ $(document).ready(function() {
             $(target).css('opacity', '0')
             setTimeout( function () {
                 $(target).hide()
-            }, 30000)
-        }, 50000)
+            }, 3000)
+        }, 5000)
 
         $.ajax({
             type: 'POST',

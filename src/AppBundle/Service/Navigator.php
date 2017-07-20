@@ -31,7 +31,7 @@ class Navigator extends Paginator
 
     /**
      * Navigator constructor.
-     * @internal param Paginator $paginator
+     * @param \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder $context
      * @param EntityRepository $repository
      * @param int $page
      * @param array $filter
@@ -135,16 +135,16 @@ class Navigator extends Paginator
     {
         $class  = "\\AppBundle\\Entity\\" . $this->context . "Filter";
         $filter = new $class();
-    if (! is_null($this->filter)) {
-        foreach ($this->filter as $field => $value) {
-            if ($value !== "") {
-                $accessor = "set" . ucwords($field);
-                $filter->$accessor($value);
+        if (! is_null($this->filter)) {
+            foreach ($this->filter as $field => $value) {
+                if ($value !== "") {
+                    $accessor = "set" . ucwords($field);
+                    $filter->$accessor($value);
+                }
             }
         }
+        return $filter;
     }
-    return $filter;
-}
 
 
 

@@ -83,7 +83,7 @@
  Use
 ************/
 .box {
-  &.arrow-top-left {@include arrow('top','left', 1rem, $secondary-color)}
+  &.arrow-top-left {@include arrow('top','left', 1rem, lighten($secondary-color, 40%))}
   &.arrow-top-right {@include arrow('top','right', 1rem, $secondary-color)}
   &.arrow-top-center {@include arrow('top','center', 1rem, $secondary-color)}
   &.arrow-bottom-left {@include arrow('bottom','left', 1rem, $secondary-color)}

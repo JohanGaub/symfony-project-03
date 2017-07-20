@@ -108,9 +108,13 @@ $(document).ready(function() {
 
 
 $( function() {
-    $( ".js-datepicker" ).datepicker({
-        format: 'yyyy-mm-dd'
-
+    $( ".datepicker1" ).datepicker( {
+        dateFormat: 'dd-mm-yy',
     });
 } );
 
+$( function() {
+    $( ".datepicker2" ).datepicker( {
+        dateFormat: 'dd-mm-yy',
+    });
+} );
