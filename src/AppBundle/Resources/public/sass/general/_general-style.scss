@@ -20,7 +20,7 @@ main {
   min-height: 88%;
   margin-top: 15rem;
 }
-main#bo-main-content {
+#bo-main-content {
   margin-top: 0 !important;
   min-height: 100%;
 }
@@ -63,7 +63,6 @@ h3 {
   text-transform: uppercase ;
   text-align: center;
   font-family: $primary-font;
-  //margin: 0;
 }
 /* Comment under parts */
 p {
@@ -144,6 +143,7 @@ a {
   border-radius: 0;
   font-weight: bold;
   vertical-align: middle;
+  margin-top: 1rem;
 }
 
 .btn-model-small:hover {
