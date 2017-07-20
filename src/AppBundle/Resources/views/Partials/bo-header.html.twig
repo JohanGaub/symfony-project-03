@@ -36,10 +36,11 @@
             {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('dictionaryHome') }}">Dictionnaire</a></li>
                 <li><a href="{{ path('categoryHome') }}">Catégories</a></li>
-                <li><a href="{{ path('validation_register', {'page' : 1}) }}">Validation register</a></li>
+                <li><a href="{{ path('account_result') }}">Votre compte</a></li>
+                <li><a href="{{ path('validation_register', {'page' : 1}) }}">Gestion administrateur</a></li>
             {% endif %}
             {% if is_granted('ROLE_PROJECT_RESP') %}
-                <li><a href="{{ path('validation_associate') }}">Associate</a></li>
+                <li><a href="{{ path('validation_associate') }}">Gestion collaborateurs</a></li>
             {% endif %}
         </ul>
 
