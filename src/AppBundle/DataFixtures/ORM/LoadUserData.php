@@ -31,7 +31,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $profile = new UserProfile();
         $profile->setFirstname($this->faker->firstName($gender = 0|'male'|'female'));
         $profile->setLastname($this->faker->lastName);
-        $profile->setPhone(mt_rand(0000000000,9999999999));
+        $profile->setPhone(mt_rand(1000000000,9999999999));
 
 
         return $profile;
