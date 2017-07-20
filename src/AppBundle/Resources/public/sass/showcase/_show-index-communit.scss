@@ -55,7 +55,6 @@
   }
 
   .flex-container-2 {
-    //border: solid purple 0.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; // it centers blocks horizontally if margin is not set to "auto"
@@ -63,6 +62,7 @@
     margin-top: 2em;
     margin-bottom: 2em;
     background: rgba(255, 255, 255, 0.6);
+    padding-top: 2rem;
 
     a { // itnéo link
       color: $it-color;

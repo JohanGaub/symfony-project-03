@@ -4,6 +4,12 @@
   margin: 2rem 0 5rem 0;
 }
 
+.ticket-filter-field {
+  div {
+    padding-bottom: 2rem;
+  }
+}
+
 .ticket-table-block {
   border: solid $primary-color 0.1rem;
   padding: 0;
@@ -66,13 +72,43 @@
   border: 0.1rem solid lightgrey;
 }
 
-.ticket-explanation-size {
-  height: 600px;
-  background-color: red;
 
+.ui-datepicker-title {
+  background-color: lighten($secondary-color, 20%);
+  font-weight: bold;
+  text-align: center;
 }
 
+.ui-datepicker-week-end {
+  background-color: lighten($secondary-color, 20%);
+  font-weight: bold;
+  text-align: center;
+}
 
+.ui-datepicker-calendar {
+  background-color: lighten($secondary-color, 20%);
+  font-weight: bold;
+  text-align: center;
+  color: $paragraph-color;
+  th {
+    padding: 0.3rem;
+  }
+}
 
+.ui-state-default {
+  color: black;
+}
 
+.ui-datepicker-header {
+  background-color: lighten($secondary-color, 20%);
+  text-align: center;
+}
 
+.ui-corner-all {
+  color: black;
+  font-weight: bold;
+}
+
+.ui-state-default {
+  padding: 0.3rem;
+}
