@@ -53,25 +53,6 @@ class TicketFilterUserType extends AbstractType
                 'label' => 'Sujet du ticket',
                 'required' => false,
             ])
-
-            /*->add('categoryType', EntityType::class, [
-                'label'         => 'Type de catégorie',
-                'class'         => 'AppBundle\Entity\Dictionary',
-                'required'      => false,
-                'expanded'      => false,
-                'multiple'      => false,
-                'mapped'        => true,
-                'placeholder'   => 'Sélectionnez un type de catégorie',
-                'query_builder' => function(DictionaryRepository $dictionaryRepository) {
-                    return $dictionaryRepository->getItemListByType('category_type');
-                }
-            ])
-            ->add('category', ChoiceType::class, [
-                'label'         => 'Titre de Catégorie',
-                'required'      => false,
-                'placeholder'   => 'Sélectionnez un titre de catégorie',
-            ])*/
-
            ->add('status', EntityType::class, [
                 'label'         => 'Statut',
                 'class'         => 'AppBundle\Entity\Dictionary',
@@ -121,13 +102,6 @@ class TicketFilterUserType extends AbstractType
                     'aria-hidden'   => 'true',
                 ]
             ]);
-       /* $builder->get('categoryType')->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) {
-                $form = $event->getForm();
-                $this->addCategoryTitleField($form->getParent(), $form->getData());
-            }
-        );*/
     }
 
     /**
@@ -155,7 +129,6 @@ class TicketFilterUserType extends AbstractType
         );
         $form->add($builder->getForm());
     }
-
 
 
     /**
