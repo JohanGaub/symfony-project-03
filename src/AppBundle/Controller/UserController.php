@@ -117,11 +117,7 @@ class UserController extends Controller
                 ])
             );
 
-
-
-
             return $this->redirectToRoute('home');
-
         }
 
         $mentions = $this->getDoctrine()->getRepository('AppBundle:DynamicContent')
