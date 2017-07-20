@@ -203,10 +203,10 @@ class TechnicalEvolutionController extends Controller
         $total = intval(($data[0])[1]);//sum of notes
         $score = round(($data[0])[3], 1);//average of notes
 
-        // Here we check if Technical Evolution is ON-GOING (ID = 5 !!!!), via id of status, as only in that case voting will be possible
-        $teStatusId       = $teUnitRepository->getStatus()->getId();
+        // Here we check if Technical Evolution is ON-GOING (ID = 4 !!!!), via id of status, as only in that case voting will be possible
+        $teStatusValue       = $teUnitRepository->getStatus()->getValue();
 
-        if ($teStatusId == 5){
+        if ($teStatusValue == 'En cours'){
             $teStatus = true;
         } else {
             $teStatus = false;

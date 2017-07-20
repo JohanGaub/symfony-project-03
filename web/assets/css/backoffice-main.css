@@ -497,7 +497,7 @@ main {
   min-height: 88%;
   margin-top: 15rem; }
 
-main#bo-main-content {
+#bo-main-content {
   margin-top: 0 !important;
   min-height: 100%; }
 
@@ -613,7 +613,8 @@ a {
   background-color: #9ac00a;
   border-radius: 0;
   font-weight: bold;
-  vertical-align: middle; }
+  vertical-align: middle;
+  margin-top: 1rem; }
 
 .btn-model-small:hover {
   background-color: #dd5116; }
@@ -1598,18 +1599,16 @@ button[type='submit'] {
         .note-evolution .bo-evolution .bo-top-evolution .evolution-notes .nb-notes span {
           font-weight: 700;
           color: #dd5116; }
-    .note-evolution .bo-evolution .bo-top-evolution .evolution-note-titles {
+    .note-evolution .bo-evolution .bo-top-evolution .evolution-note-titles h2.vote-title > span {
+      font-weight: 900;
+      font-size: 2rem;
+      color: #545454; }
+    .note-evolution .bo-evolution .bo-top-evolution .evolution-note-titles h2 {
+      display: block;
+      font-size: 1.75rem;
+      padding: 1rem;
+      overflow: hidden;
       text-align: right; }
-      .note-evolution .bo-evolution .bo-top-evolution .evolution-note-titles h2.vote-title > span {
-        font-weight: 900;
-        font-size: 2rem;
-        color: #545454; }
-      .note-evolution .bo-evolution .bo-top-evolution .evolution-note-titles h2 {
-        display: block;
-        font-size: 1.75rem;
-        padding: 1rem;
-        overflow: hidden;
-        text-align: right; }
 
 /**
  * Star rating system
