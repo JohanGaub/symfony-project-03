@@ -152,6 +152,9 @@ class TechnicalEvolutionController extends Controller
                     'evolution' => $technicalEvolution
                 ])
             );
+
+            $this->addFlash('notice', 'Votre modification a bien été prise en compte');
+
             return $this->redirectToRoute('evolutionUnit', [
                 'technicalEvolution' => $technicalEvolution->getId()
             ]);
@@ -206,7 +209,7 @@ class TechnicalEvolutionController extends Controller
         // Here we check if Technical Evolution is ON-GOING (ID = 5 !!!!), via id of status, as only in that case voting will be possible
         $teStatusId       = $teUnitRepository->getStatus()->getId();
 
-        if ($teStatusId == 5){
+        if ($teStatusId == 4){
             $teStatus = true;
         } else {
             $teStatus = false;
