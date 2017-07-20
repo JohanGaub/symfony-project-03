@@ -56,7 +56,8 @@ class ReadDocfiles
         foreach ($this->dirPaths as $dirPath) {
             if ($dir = opendir($dirPath)) {
                 while (false !== ($file = readdir($dir))) {
-                    if ($file != '.' && $file != '..') {
+                    if ($file != '.' && $file != '..' && substr($file, 0, 1) != '.') {
+                        dump(substr($file, 0, 1));
                         $temp['name']   = $file;
                         $pathArray      = explode('/', $dirPath);
                         $key            = $pathArray[count($pathArray) - 2];

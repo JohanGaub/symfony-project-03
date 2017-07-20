@@ -96,6 +96,7 @@ class TechnicalEvolutionController extends Controller
                     'evolution' => $te
                 ])
             );
+            $this->addFlash('notice', 'Votre évolution à bien été ajouté !');
             return $this->redirectToRoute('evolutionUser');
         }
         return $this->render('@App/Pages/Evolutions/basicFormEvolution.html.twig', [
@@ -152,6 +153,9 @@ class TechnicalEvolutionController extends Controller
                     'evolution' => $technicalEvolution
                 ])
             );
+
+            $this->addFlash('notice', 'Votre modification a bien été prise en compte');
+
             return $this->redirectToRoute('evolutionUnit', [
                 'technicalEvolution' => $technicalEvolution->getId()
             ]);
@@ -203,7 +207,7 @@ class TechnicalEvolutionController extends Controller
         $total = intval(($data[0])[1]);//sum of notes
         $score = round(($data[0])[3], 1);//average of notes
 
-        // Here we check if Technical Evolution is ON-GOING (ID = 4 !!!!), via id of status, as only in that case voting will be possible
+        // Here we check if Technical Evolution is ON-GOING ("En cours"), , as only in that case voting will be possible
         $teStatusValue       = $teUnitRepository->getStatus()->getValue();
 
         if ($teStatusValue == 'En cours'){
