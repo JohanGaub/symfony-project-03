@@ -37,7 +37,7 @@ class TicketController extends Controller
      */
     public function indexAction()
     {
-        $navigator  = $this->get("communit.navigator");
+        $navigator  = $this->get("app.navigator");
         $filter     = $navigator->getEntityFilter();
 
         if (!is_null($filter->getCreationDate())) {
@@ -60,7 +60,7 @@ class TicketController extends Controller
 
         return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             /*** Ticket search ***/
-            'data'          => $this->get("communit.navigator"),
+            'data'          => $this->get("app.navigator"),
             'filter'        => $filter,
             'filterURL'     => http_build_query($filter->getArray()),
             'documentType'  => "Ticket",
