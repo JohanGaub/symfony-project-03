@@ -96,6 +96,7 @@ class TechnicalEvolutionController extends Controller
                     'evolution' => $te
                 ])
             );
+            $this->addFlash('notice', 'Votre évolution à bien été ajouté !');
             return $this->redirectToRoute('evolutionUser');
         }
         return $this->render('@App/Pages/Evolutions/basicFormEvolution.html.twig', [
