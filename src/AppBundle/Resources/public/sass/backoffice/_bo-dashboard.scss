@@ -1,0 +1,27 @@
+.dashboard {
+
+  .dashbord-block {
+    margin: 4rem 0;
+    padding: 0 0 2rem 0;
+    border: 1px solid #ccc;
+
+    .news-list-element {
+      padding: 1rem 0;
+
+      .top-element {
+        text-align: center;
+
+        .title-news {
+          color: darken($primary-color, 25%)!important;
+          word-break: keep-all;
+
+          .new-date {
+            font-style: italic;
+            font-weight: 100;
+            font-size: 1.45rem;
+          }
+        }
+      }
+    }
+  }
+}

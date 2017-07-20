@@ -38,12 +38,18 @@ class DictionaryVerification
         if ($type == 'category_type') {
             $entity = 'AppBundle:Category';
             $field  = 'type';
-        } else if ($type == 'technical_evolution_origin') {
+        } else if ($type == 'origin') {
             $entity = 'AppBundle:TechnicalEvolution';
             $field  = 'origin';
-        } else if ($type == 'technical_evolution_status') {
+        } else if ($type == 'status') {
             $entity = 'AppBundle:TechnicalEvolution';
             $field  = 'status';
+        } else if ($type == 'evolution_status') {
+            $entity = 'AppBundle:TechnicalEvolution';
+            $field  = 'evolution_status';
+        } else if ($type == 'ticket') {
+            $entity = 'AppBundle:Ticket';
+            $field  = 'ticket';
         }
         return $this->em->getRepository($entity)->findBy([$field => $id]);
     }

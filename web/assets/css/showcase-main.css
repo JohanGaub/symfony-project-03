@@ -481,8 +481,8 @@
 
 @font-face {
   font-family: 'dinregular';
-  src: url("../fonts/dinregular.eot");
-  src: url("../fonts/dinregular.eot?#iefix") format("embedded-opentype"), url("../fonts/dinregular.woff2") format("woff2"), url("../fonts/dinregular.woff") format("woff"), url("../fonts/dinregular.ttf") format("truetype"), url("../fonts/dinregular.svg#webfontregular") format("svg");
+  src: url("../../assets/fonts/dinregular.eot");
+  src: url("../../assets/fonts/dinregular.eot?#iefix") format("embedded-opentype"), url("../../assets/fonts/dinregular.woff2") format("woff2"), url("../../assets/fonts/dinregular.woff") format("woff"), url("../../assets/fonts/dinregular.ttf") format("truetype"), url("../../assets/fonts/dinregular.svg#webfontregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -498,7 +498,8 @@ main {
   margin-top: 15rem; }
 
 main#bo-main-content {
-  margin-top: 0 !important; }
+  margin-top: 0 !important;
+  min-height: 100%; }
 
 @media screen and (max-width: 1024px) {
   main {
@@ -623,14 +624,30 @@ a {
 .be-inline {
   display: inline-block; }
 
+.space-between {
+  justify-content: space-between; }
+
 .mrg-top-1 {
   margin-top: 8rem; }
 
 .be-strong {
   font-weight: 700; }
 
+.no-padding {
+  padding: 0 !important; }
+
 .transition-2s-ease {
   transition: 2s ease; }
+
+.transition-05s-ease {
+  transition: 0.5s ease; }
+
+.transition-1s-ease {
+  transition: 1s ease; }
+
+.strong-green {
+  font-weight: 700;
+  color: #9ac00a; }
 
 #login, #password-reset, #password-process, #password-change, #registration {
   padding-top: 1rem;
@@ -2037,6 +2054,7 @@ footer {
 .swiper-container {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 1rem;
   position: relative;
   overflow: hidden;
   /* Fix of Webkit flickering */

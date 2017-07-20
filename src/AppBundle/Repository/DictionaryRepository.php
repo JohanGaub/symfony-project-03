@@ -3,7 +3,6 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
 
 /**
  * Class DictionaryRepository
@@ -12,6 +11,8 @@ use Doctrine\ORM\QueryBuilder;
 class DictionaryRepository extends EntityRepository
 {
     /**
+     * getItemListByType query builder result
+     *
      * @param $type
      * @return array
      */
@@ -24,11 +25,25 @@ class DictionaryRepository extends EntityRepository
      * FormQueryBuilder to get all type of dictionary
      *
      * @param $type
-     * @return QueryBuilder
+     * @return \Doctrine\ORM\QueryBuilder
      */
     public function getItemListByType($type)
     {
         return $this->createQueryBuilder('d')
+            ->where('d.type = :type')
+            ->setParameter('type', $type);
+    }
+
+    /**
+     * FormQueryBuilder to get all type of dictionary (name)
+     *
+     * @param $type
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getItemNameByType($type)
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d.title')
             ->where('d.type = :type')
             ->setParameter('type', $type);
     }

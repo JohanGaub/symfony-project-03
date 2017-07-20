@@ -2,10 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
-
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class DefaultController
@@ -14,14 +14,23 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
+     * Home of project (site vitrine)
+     *
      * @Route("/", name="home")
      */
     public function indexAction()
     {
-        return $this->render('@App/Pages/Index/index.html.twig');
+        $mentions = $this->getDoctrine()->getRepository('AppBundle:DynamicContent')
+            ->findOneBy(['type' => 'mentionslegales']);
+
+        return $this->render('@App/Pages/Index/index.html.twig', [
+            'mentions' => $mentions
+        ]);
     }
 
     /**
+     * Historic page view
+     *
      * @Route("/historique", name="historique")
      */
     public function viewHistoriqueAction()
@@ -30,12 +39,55 @@ class DefaultController extends Controller
     }
 
     /**
+     * In this function just send links
+     *
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/dashboard", name="dashboard")
+     * @Route("/telechargements", name="download")
      */
-    public function dashboardAction()
+    public function DownloadIndexAction()
     {
-        return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
+        if($this->isGranted('ROLE_TECHNICIAN') || $this->isGranted('ROLE_COMMERCIAL')) {
+            return $this->render('@App/Pages/Others/bo-download.html.twig', [
+                'dirs' => $this->get('app.read_docfiles')->getDirContent()
+            ]);
+        } else {
+            return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
+        }
     }
 
+    /**
+     * Download link function to get files
+     *
+     * @param $type
+     * @param $name
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|File|\Symfony\Component\HttpFoundation\Response
+     * @Route("/telechargements/{type}/{name}", name="downloadFile")
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
+     */
+    public function DownloadAction($type, $name)
+    {
+        if($this->isGranted('ROLE_TECHNICIAN') || $this->isGranted('ROLE_COMMERCIAL'))
+            return $this->file($this->get('app.read_docfiles')->downloadFile($type, $name));
+        else
+            return $this->render('@App/Pages/Others/bo-dashboard.html.twig');
+
+    }
+
+    /**
+     * Home of backoffice (dashbord)
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/tableau-de-bord", name="dashboard")
+     * @Security("has_role('ROLE_FINAL_CLIENT')")
+     */
+    public function dashboardIndexAction()
+    {
+        $repo = $this->getDoctrine()->getRepository('AppBundle:News');
+
+        return $this->render('@App/Pages/Others/bo-dashboard.html.twig', [
+            'commercialNews'    => $repo->getNewsByType('Commerciale'),
+            'technicalNews'     => $repo->getNewsByType('Technique'),
+            'otherNews'         => $repo->getNewsByType('Autre')
+        ]);
+    }
 }

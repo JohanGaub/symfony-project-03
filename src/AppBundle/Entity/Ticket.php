@@ -108,7 +108,7 @@ class Ticket
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="tickets", cascade={"persist"})
-     * @ORM\joinColumn(onDelete="SET NULL")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $user;
 

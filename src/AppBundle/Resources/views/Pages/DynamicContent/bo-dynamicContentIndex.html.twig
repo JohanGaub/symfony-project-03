@@ -1,0 +1,24 @@
+{% extends '@App/Layout/backoffice-base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                {{ data.content|raw }}
+            </div>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col-xs-12 col-md-10 col-md-offset-1 border-top">
+                    {% if (type == 'charte') %}
+                        <a href="{{ path('charteUpdate') }}">Modifier votre charte</a>
+                    {% elseif (type == 'mentions') %}
+                        <a href="{{ path('mentionsUpdate') }}">Modifier vos mentions légales</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}
