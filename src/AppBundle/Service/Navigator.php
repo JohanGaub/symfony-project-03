@@ -29,7 +29,6 @@ class Navigator extends Paginator
      */
     private $context;
 
-
     /**
      * Navigator constructor.
      * @internal param Paginator $paginator

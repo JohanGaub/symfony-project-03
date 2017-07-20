@@ -1,9 +1,25 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block body %}
-    <div class="title-register col-md-12 hidden-xs hidden-sm visible-md visible-lg">
-        <h1>Gestion des comptes</h1>
-    </div>
+    <div class="row ticket-filter-block">
+        <div class="col-xs-12 col-xs-offset-0 col-sm-12  col-lg-8 col-lg-offset-2">
+            <div class="title-register col-md-12 hidden-xs hidden-sm visible-md visible-lg">
+                <h1>Gestion des comptes</h1>
+            </div>
+            <div class="row">
+                {{ form_start(form) }}
+                <div class="col-xs-3 col-xs-offset-1 col-md-2 col-md-offset-1  hidden-xs hidden-sm visible-md visible-lg">{{ form_row(form.firstname) }}</div>
+                <div class="col-xs-3 col-md-2 hidden-xs hidden-sm visible-md visible-lg">{{ form_row(form.email) }}</div>
+                <div class="col-xs-3  col-md-2  hidden-xs visible-sm visible-md visible-lg">{{ form_row(form.lastname) }}</div>
+                <div class="col-xs-3  col-md-2">{{ form_row(form.isActiveByAdmin) }}</div>
+                <div class="col-xs-3  col-md-2">{{ form_row(form.name) }}</div>
+            </div>
+            <div class="form-group text-center">
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-model-small'}}) }}
+            </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
     <div class="validate">
         <div class="row validation-user">
             <div class="col-xs-12 col-xs-offset-0 col-lg-12 col-lg-offset-0">
@@ -16,10 +32,10 @@
                         <th>Nom</th>
                         <th class="hidden-xs visible-sm visible-md visible-lg">Mobile</th>
                         <th class="hidden-xs visible-sm visible-md visible-lg">Roles</th>
-                        <th>Status</th>
+                        <th>Statut</th>
                     </tr>
                     </thead>
-                    {% for user in User %}
+                    {% for user in data %}
                         <tbody id="register">
                         <tr>
                             <td>{{ user.company.name }}</td>
@@ -40,13 +56,12 @@
                                         Commercial et Technique
                                     {% endif %}
                                 {% endfor %}
+                                {% if user.isActiveByAdmin == true %}
+                            <td>
+                                <a  href="{{ path('activate_register', {'id': user.id }) }}">
+                                    <i class="fa fa-check-square fa-2x" aria-hidden="true"></i>
+                                </a>
                             </td>
-                            {% if user.isActiveByAdmin == true %}
-                                <td>
-                                    <a  href="{{ path('activate_register', {'id': user.id }) }}">
-                                        <i class="fa fa-check-square fa-2x" aria-hidden="true"></i>
-                                    </a>
-                                </td>
                             {% elseif user.isActiveByAdmin == false %}
                                 <td>
                                     <a  href="{{ path('activate_register', {'id': user.id }) }}">
@@ -69,42 +84,10 @@
                         </tbody>
                     {% endfor %}
                 </table>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        {% if pagination.page > 1 %}
-                            <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}">Début</a></li>
-                            <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}">Précédent</a></li>
-                        {% endif %}
-                        {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
-                        {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
-                            <li class="page-item"><a{% if p == pagination.page %} class="current-page page-link" {% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a></li>
-                        {% endfor %}
-
-                        {% if pagination.page<pagination.pages_count %}
-                            <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page+1})) }}">Suivant</a></li>
-                            <li class="page-item"><a class="page-link" href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">Fin</a></li>
-                        {% endif %}
-                    </ul>
-                </nav>
-                {# <tbody class="table-striped">
-                 {%  for d in data %}
-
-                     <tr>
-                         <td><a href="{{ path('validation_register', {"user": d.id }) }}">{{ d.user.company.name }}</a></td>
-                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.email }}</a></td>
-                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.userProfile.firstname }}</a></td>
-                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.userProfile.lastname }}</a></td>
-                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.roles }}</a></td>
-                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.isActiveByAdmin}}</a></td>
-                         <td><a href="{{ path('validation_register', {"user": d.id}) }}">{{ d.user.roles}}</a></td>
-
-                     </tr>
-                 {% endfor %}
-                 </tbody>#}
+                <div class="col-lg-12">
+                    {% include '@App/Elements/include.pagination-filter.html.twig' %}
+                </div>
             </div>
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-
 {% endblock %}

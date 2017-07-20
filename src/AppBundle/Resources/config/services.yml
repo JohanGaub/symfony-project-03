@@ -5,12 +5,3 @@ services:
     app.user_checker:
         class: AppBundle\Security\UserChecker
 
-    communit.navigator.factory:
-        class: AppBundle\Service\NavigatorFactory
-        arguments:
-            - "@request_stack"
-            - "@doctrine.orm.entity_manager"
-
-    communit.navigator:
-        class: AppBundle\Service\Navigator
-        factory: "communit.navigator.factory:get"

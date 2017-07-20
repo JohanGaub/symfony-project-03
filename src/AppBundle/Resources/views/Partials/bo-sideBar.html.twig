@@ -72,6 +72,13 @@
                     </a>
                 </li>
                 {% endif %}
+                <li>
+                    <a href="{{ path('account_result') }}">Votre compte
+                        <span class="pull-right hidden-xs showopacity">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </li>
                 {% if is_granted('ROLE_ADMIN') %}
                 <li>
                     <a href="{{ path('validation_register', {'page' : 1}) }}">Gestion utilisateurs
