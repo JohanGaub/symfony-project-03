@@ -53,7 +53,7 @@
                         <th class="text-center hidden-sm hidden-xs visible-lg visible-md">Date de création</th>
                         <th class="text-center hidden-sm hidden-xs visible-lg visible-md">Date de clôture</th>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <th class="text-center"><p>{{ d.isArchive }}>Archivé</th>
+                            <th class="text-center hidden-sm hidden-xs visible-lg visible-md">Archivé</th>
                         {% endif %}
                     </tr>
                     </thead>
