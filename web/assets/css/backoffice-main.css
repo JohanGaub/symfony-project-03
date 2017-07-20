@@ -1404,5 +1404,33 @@ button[type='submit'] {
   border: 0.1rem solid lightgrey; }
 
 .ui-datepicker-title {
-  background-color: red;
+  background-color: #f09169;
+  font-weight: bold;
+  text-align: center; }
+
+.ui-datepicker-week-end {
+  background-color: #f09169;
+  font-weight: bold;
+  text-align: center; }
+
+.ui-datepicker-calendar {
+  background-color: #f09169;
+  font-weight: bold;
+  text-align: center;
+  color: #545454; }
+  .ui-datepicker-calendar th {
+    padding: 0.3rem; }
+
+.ui-state-default {
+  color: black; }
+
+.ui-datepicker-header {
+  background-color: #f09169;
+  text-align: center; }
+
+.ui-corner-all {
+  color: black;
   font-weight: bold; }
+
+.ui-state-default {
+  padding: 0.3rem; }

@@ -58,8 +58,6 @@ class TicketController extends Controller
             $searchForm     = $this->createForm(TicketFilterUserType::class, $filter);
         }
 
-        dump($filter->getArray());
-
         return $this->render('@App/Pages/Ticket/ticket.html.twig',[
             /*** Ticket search ***/
             'data'          => $this->get("communit.navigator"),

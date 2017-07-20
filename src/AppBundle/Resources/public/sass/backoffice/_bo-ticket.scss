@@ -74,9 +74,41 @@
 
 
 .ui-datepicker-title {
-  background-color: red;
+  background-color: lighten($secondary-color, 20%);
+  font-weight: bold;
+  text-align: center;
+}
+
+.ui-datepicker-week-end {
+  background-color: lighten($secondary-color, 20%);
+  font-weight: bold;
+  text-align: center;
+}
+
+.ui-datepicker-calendar {
+  background-color: lighten($secondary-color, 20%);
+  font-weight: bold;
+  text-align: center;
+  color: $paragraph-color;
+  th {
+    padding: 0.3rem;
+  }
+}
+
+.ui-state-default {
+  color: black;
+}
+
+.ui-datepicker-header {
+  background-color: lighten($secondary-color, 20%);
+  text-align: center;
+}
+
+.ui-corner-all {
+  color: black;
   font-weight: bold;
 }
 
-
-
+.ui-state-default {
+  padding: 0.3rem;
+}
