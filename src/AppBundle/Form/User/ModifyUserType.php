@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\User;
 
 use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -11,13 +11,13 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ModifyAssociateType extends AbstractType
+class ModifyUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('email', EmailType::class,  ['label' => 'email'])
-            ->add('userProfile', User_profileType::class, array(
+            ->add('company', CompanyType::class, array(
                 'label' => false,
             ))
             ->add('roles', ChoiceType::class, [
@@ -25,9 +25,13 @@ class ModifyAssociateType extends AbstractType
                     'Commercial' => 'ROLE_COMMERCIAL',
                     'Technicien' => 'ROLE_TECHNICIAN',
                     'Commercial et Technicien' => ('ROLE_TECHNICIAN' && 'ROLE_COMMERCIAL'),
-                    'Responsable Projet' => ('ROLE_PROJECT_RESP'),
+                    'Chef de Projet' => ('ROLE_PROJECT_RESP'),
+                    'Administrateur' => ('ROLE_ADMIN'),
                 ]
             ])
+            ->add('userProfile', User_profileType::class, array(
+                'label' => false,
+            ))
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer'
             ]);

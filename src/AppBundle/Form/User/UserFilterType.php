@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Form;
+namespace AppBundle\Form\User;
 
 use AppBundle\Entity\UserFilter;
 use Symfony\Component\Form\AbstractType;
