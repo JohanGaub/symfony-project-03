@@ -1,10 +1,12 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
+{% block title %}Modifier un utilisateur{% endblock %}
+
 {% block body %}
     <section id="register">
 
         <div class="register-title col-md-12">
-            <h1>Modification Utilisateur</h1>
+            <h1>Modifier un utilisateur</h1>
         </div>
         <div class="container form">
             <div class="message-register row">
@@ -23,6 +25,7 @@
                 <div class="col-xs-12">
                     <div class="form-wrap">
                         <hr>
+                        <p class="notice-field">Attention tous les champs sont obligatoires</p>
                         <div class="form-group">
                             {{ form_label(form.email) }}
                             {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}

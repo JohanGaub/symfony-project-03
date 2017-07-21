@@ -1,5 +1,10 @@
 {% extends '@App/Layout/showcase-base.html.twig' %}
 
+{% block title %}
+    Inscription
+{% endblock %}
+
+
 {% block body %}
     <section id="registration">
 
@@ -18,7 +23,8 @@
         <div class="container form">
             <div class="row">
                 <div class="row col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
-                        <hr>
+                    <hr>
+                    <p class="notice-field" style="color:red" >Attention tous les champs sont obligatoires</p>
                         <div class="form-group">
                             {{ form_label(form.email) }}
                             {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}

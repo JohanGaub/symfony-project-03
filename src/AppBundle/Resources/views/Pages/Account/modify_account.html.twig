@@ -1,16 +1,22 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
+
+{% block title %}
+    Modification de mon compte
+{% endblock %}
+
 {% block body %}
     <section id="registration">
 
         <div class="register-title col-md-12">
-            <h1>Modification de votre compte</h1>
+            <h1>Modification de mon compte</h1>
         </div>
         {{ form_start(form) }}
         <div class="container form">
             <div class="row">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
                     <hr>
+                    <p class="notice-field">Attention, tous les champs sont obligatoires</p>
                     <div class="form-group">
                         {{ form_label(form.email) }}
                         {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
