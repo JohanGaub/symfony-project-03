@@ -35,10 +35,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modificatation du dictionnaire</h4>
+                    <h4 class="modal-title" id="myModalLabel">Modifier le dictionnaire</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Vous pouvez directement modifier votre entrée ci-dessous.</p>
+                    <p>Vous pouvez directement modifier votre entrée, ci-dessous.</p>
                     <div id="modal-update-msg"></div>
                     {{ form_start(genUpdateForm, {'attr': {'class': 'dictionary-update-form'} }) }}
                     {{ form_row(genUpdateForm.value, {'attr': {'class': 'dictionary-update-field'} }) }}
@@ -62,13 +62,13 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Suppression d'une entrée du dictionnaire</h4>
+                    <h4 class="modal-title" id="myModalLabel">Supprimer une entrée du dictionnaire</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Êtes vous sur de vouloir supprimer l'entrée
-                        <span id="dictionary-delete-value" class="be-strong text-color-2"></span> du dictionnaire</p>
+                    <p>Êtes-vous sûr de vouloir supprimer l'entrée
+                        <span id="dictionary-delete-value" class="be-strong text-color-2"></span> du dictionnaire.</p>
                     <a id="dictionary-link-delete" href="" class="text-color-1"
-                       data-dismiss="modal">Je confirmer vouloir supprimer cette entrée</a>
+                       data-dismiss="modal">Je confirme vouloir supprimer cette entrée.</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

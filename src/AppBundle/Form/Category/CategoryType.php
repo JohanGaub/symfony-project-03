@@ -33,13 +33,13 @@ class CategoryType extends AbstractType
                 'query_builder' => function (DictionaryRepository $repo) {
                     return $repo->getItemListByType('category_type');
                 },
-                'label'         => 'Type de votre catégorie',
+                'label'         => 'Type de catégorie',
                 'multiple'      => false,
                 'required'      => true,
                 'placeholder'   => 'Sélectionnez votre type'
             ])
             ->add('description', TextareaType::class, [
-                'label'     => 'Desscription'
+                'label'     => 'Description'
             ])
             ->add('submit', SubmitType::class, [
                 'label'     => 'Enregistrer'

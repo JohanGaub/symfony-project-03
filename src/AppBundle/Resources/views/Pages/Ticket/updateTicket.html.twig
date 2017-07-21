@@ -75,7 +75,7 @@
                 </div>
                 <div>
                     <select id="hidden-select-inject-category" name="app_bundle[category]" required="required" class="form-control hidden">
-                        <option value="">Sélectionnez votre catégorie</option>
+                        <option value="">Sélectionnez votre nom de catégorie</option>
                         {% for category in categories %}
                             <option value="{{ category.id }}" {% if (category.id == categoryId) %}selected="selected"{% endif %}>{{ category.title }}</option>
                         {% endfor %}

@@ -38,8 +38,8 @@ class TechnicalEvolutionFilterType extends AbstractType
                     # Find all category_type for select list
                     return $repo->getItemListByType('evolution_status');
                 },
-                'label'         => 'Status',
-                'placeholder'   => 'Sélectionnez votre status',
+                'label'         => 'Statut',
+                'placeholder'   => 'Sélectionnez votre statut',
                 'required'      => false,
                 'multiple'      => false
             ])
@@ -57,8 +57,8 @@ class TechnicalEvolutionFilterType extends AbstractType
             ->add('category', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Category',
                 'choice_label'  => 'title',
-                'label'         => 'Catégorie',
-                'placeholder'   => 'Séléctionnez votre catégorie',
+                'label'         => 'Nom de catégorie',
+                'placeholder'   => 'Séléctionnez votre nom de catégorie',
                 'required'      => false
             ])
             ->add('submit', SubmitType::class, [
@@ -90,8 +90,8 @@ class TechnicalEvolutionFilterType extends AbstractType
                     # find category name by select type
                     return $repo->getCategoryByType($categoryType);
                 },
-                'label'         => 'Catégorie',
-                'placeholder'   => 'Séléctionnez votre catégorie',
+                'label'         => 'Nom de catégorie',
+                'placeholder'   => 'Séléctionnez votre nom de catégorie',
                 'mapped'        => true,
                 'required'      => false,
                 'auto_initialize' => false,

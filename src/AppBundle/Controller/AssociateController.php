@@ -69,7 +69,7 @@ class AssociateController extends controller
 
             $capacity = $user->getRoles();
             if(count($result) == 1 && ($capacity[0] === "ROLE_PROJECT_RESP")){
-                $this->addFlash("notice", "Validation impossible. Vous pouvez créer deux comptes responsable projet par société.");
+                $this->addFlash("notice", "Validation impossible. Vous ne pouvez créer que deux comptes 'responsable projet' par société.");
                 return $this->redirectToRoute('add_associate');
             }
 
@@ -80,7 +80,7 @@ class AssociateController extends controller
             $mailer = \Swift_Mailer::newInstance($this->get('mailer')->getTransport());
 
             $email = \Swift_Message::newInstance()
-                ->setSubject('CommunIt : Confirmation de inscription')
+                ->setSubject('CommunIt : Confirmation d\'inscription')
                 ->setFrom($this->getParameter('mailer_sender_address'))
                 ->setTo($user->getEmail())
                 ->setBody(
@@ -95,7 +95,7 @@ class AssociateController extends controller
                 );
 
             if (!$mailer->send($email)) {
-                $this->addFlash("notice", "Merci, nous avons bien enregistré votre inscription. Si vous n'avez pas reçu de mail de confirmation, veuillez contacter l'un de nos administrateur.");
+                $this->addFlash("notice", "Merci. Nous avons bien enregistré votre inscription. Si vous n'avez pas reçu d'e-mail de confirmation, veuillez contacter l'un de nos administrateur.");
                 return $this->redirectToRoute('add_associate');
 
             }
@@ -167,7 +167,7 @@ class AssociateController extends controller
 
             $capacity = $user->getRoles();
             if(count($result) == 2 && ($capacity[0] === "ROLE_PROJECT_RESP")){
-                $this->addFlash("notice", "Validation impossible. Vous pouvez créer deux comptes responsable projet par société.");
+                $this->addFlash("notice", "Validation impossible. Vous ne pouvez créer que deux comptes 'responsable projet' par société.");
                 return $this->redirectToRoute('validation_associate');
             }
 

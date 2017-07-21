@@ -46,7 +46,7 @@
                                 {{ form_start(noteForm, {'attr': {
                                     'id': 'app_bundle_note_userTechnicalEvolution'
                                 }}) }}
-                                <p class="remarque-small"><i>* un seul click sur l'étoile va enregistrer votre note</i></p>
+                                <p class="remarque-small"><i>* un seul click sur l'étoile enregistrera votre note</i></p>
                                 <div class="error-box"></div>
                                 {% spaceless %}
                                     <div class="form-group controls rating" data-index-number="{{ evolution.id }}">
@@ -131,13 +131,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Suppression d'un commentaire</h4>
+                    <h4 class="modal-title" id="myModalLabel">Supprimer un commentaire</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Êtes vous sur de vouloir supprimer ce commentaire ?</p>
+                    <p>Êtes-vous sûr de vouloir supprimer ce commentaire ?</p>
                     <p class="delete-value"></p>
                     <a id="comment-link-delete" href="" class="text-color-1" data-dismiss="modal">
-                        Je confirmer vouloir supprimer ce commentaire
+                        Je confirme vouloir supprimer ce commentaire.
                     </a>
                 </div>
                 <div class="modal-footer">
@@ -155,7 +155,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Modification d'un commentaire</h4>
+                    <h4 class="modal-title" id="myModalLabel">Modifier un commentaire</h4>
                 </div>
                 <div class="modal-body">
                     {{ form_start(updateForm, {

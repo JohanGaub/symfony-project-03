@@ -56,7 +56,7 @@ class MaillerService
 
         $data = [
             'info'      => true,
-            'message'   => 'Le/les email(s) ont été envoyés avec succès'
+            'message'   => 'L\'/les email(s) a (ont) été envoyé(s) avec succès.'
         ];
 
         foreach ($this->recipients as $user) {
