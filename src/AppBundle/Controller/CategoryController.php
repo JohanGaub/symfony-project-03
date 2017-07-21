@@ -54,7 +54,8 @@ class CategoryController extends Controller
         }
 
         return $this->render('@App/Pages/Category/formBasicCategory.html.twig', [
-            'form' => $form->createView()
+            'form'      => $form->createView(),
+            'titlePage' => 'Nouvelle catégorie'
         ]);
     }
 
@@ -81,7 +82,8 @@ class CategoryController extends Controller
         }
 
         return $this->render('@App/Pages/Category/formBasicCategory.html.twig', [
-            'form' => $form->createView()
+            'form'      => $form->createView(),
+            'titlePage' => 'Modificiation d\'une catégorie'
         ]);
     }
 

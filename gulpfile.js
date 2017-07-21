@@ -6,7 +6,7 @@
  *  mywatch         -> Scss watcher
  *      scss -> Trasnpil scss to css
  *
- *  uglify:css   -> Get compressed css files
+ *  uglify:css      -> Get compressed css files
  */
 
 var gulp        = require('gulp');

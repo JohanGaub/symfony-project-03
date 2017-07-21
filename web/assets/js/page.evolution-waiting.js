@@ -22,7 +22,7 @@ $(document).ready( function () {
                     $('#tr_element_' + evolutionId).css({
                         backgroundColor : '#d3eeca',
                     })
-                } else if (data === 'false'){
+                } else {
                     $('#tr_element_' + evolutionId).css({
                         backgroundColor : '#f8c9c1',
                     })

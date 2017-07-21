@@ -57,7 +57,6 @@ class ReadDocfiles
             if ($dir = opendir($dirPath)) {
                 while (false !== ($file = readdir($dir))) {
                     if ($file != '.' && $file != '..' && substr($file, 0, 1) != '.') {
-                        dump(substr($file, 0, 1));
                         $temp['name']   = $file;
                         $pathArray      = explode('/', $dirPath);
                         $key            = $pathArray[count($pathArray) - 2];

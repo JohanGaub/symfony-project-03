@@ -23,7 +23,7 @@
                         <th class="hidden-xs visible-sm visible-md visible-lg">Email/login</th>
                         <th class="hidden-xs visible-sm visible-md visible-lg">Prénom</th>
                         <th>Nom</th>
-                        <th>Mobile</th>
+                        <th class="hidden-xs visible-sm visible-md visible-lg>Mobile</th>
                         <th>Rôle</th>
                         <th>Statut</th>
                         <th>
@@ -40,7 +40,7 @@
                             <td class="hidden-xs visible-sm visible-md visible-lg">{{ user.email }}</td>
                             <td class="hidden-xs visible-sm visible-md visible-lg">{{ user.userProfile.firstname }}</td>
                             <td>{{ user.userProfile.lastname }}</td>
-                            <td>{{ user.userProfile.phone }}</td>
+                            <td class="hidden-xs visible-sm visible-md visible-lg">{{ user.userProfile.phone }}</td>
                             <td>{% for role in user.roles %}
                                     {% if(role == "ROLE_ADMIN") %}
                                         Administrateur
