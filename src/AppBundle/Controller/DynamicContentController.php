@@ -27,8 +27,8 @@ class DynamicContentController extends Controller
             ->findOneBy(['type' => 'charte']);
 
         return $this->render('@App/Pages/DynamicContent/bo-dynamicContentIndex.html.twig', [
-            'data' => $charte,
-            'type'   => 'charte'
+            'data'      => $charte,
+            'type'      => 'charte'
         ]);
     }
 
@@ -58,8 +58,9 @@ class DynamicContentController extends Controller
         }
 
         return $this->render('@App/Pages/DynamicContent/bo-dynamicContentUpdate.html.twig', [
-            'form' => $form->createView(),
-            'type' => 'charte'
+            'form'      => $form->createView(),
+            'type'      => 'charte',
+            'titlePage' => 'Modification de la charte'
         ]);
     }
 
@@ -107,8 +108,9 @@ class DynamicContentController extends Controller
         }
 
         return $this->render('@App/Pages/DynamicContent/bo-dynamicContentUpdate.html.twig', [
-            'form' => $form->createView(),
-            'type' => 'mentions'
+            'form'      => $form->createView(),
+            'type'      => 'mentions',
+            'titlePage' => 'Modification des mentions légales'
         ]);
     }
 
