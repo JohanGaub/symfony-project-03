@@ -1,7 +1,7 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block title %}
-    Modificiation d'une catégorie
+    {{ titlePage }}
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="bo-title-page col-lg-12">
-                <h2>Modification d'une catégorie</h2>
+                {{ titlePage }}
             </div>
         </div>
 
@@ -24,7 +24,6 @@
                 {{ form_end(form) }}
             </div>
         </div>
-
     </div>
 
 {% endblock %}
