@@ -44,7 +44,7 @@ class TechnicalEvolutionType extends AbstractType
                     return $repo->getItemListByType('origin');
                 },
                 'label'         => 'Origine de la demande',
-                'placeholder'   => 'Qui est à la base de cette évolution ?',
+                'placeholder'   => 'Qui est à l\'origine de cette évolution ?',
                 'multiple'      => false,
             ])
             ->add('expectedDelay', DateType::class, [
@@ -61,7 +61,7 @@ class TechnicalEvolutionType extends AbstractType
                 'class'         => 'AppBundle\Entity\Product',
                 'choice_label'  => 'name',
                 'label'         => 'Produit',
-                'placeholder'   => 'Séléctionnez votre produit',
+                'placeholder'   => 'Sélectionnez votre produit',
                 'multiple'      => false,
                 'required'      => 'true',
             ])
@@ -78,8 +78,8 @@ class TechnicalEvolutionType extends AbstractType
                 'multiple'      => false,
             ])
             ->add('category', ChoiceType::class, [
-                'label'         => 'Catégorie',
-                'placeholder'   => 'Séléctionnez votre catégorie',
+                'label'         => 'Nom de catégorie',
+                'placeholder'   => 'Séléctionnez votre nom de catégorie',
             ])
             ->add('submit', SubmitType::class, [
                 'label'         => 'Soumettre la demande'
@@ -111,8 +111,8 @@ class TechnicalEvolutionType extends AbstractType
                     # find category name by select type
                     return $repo->getCategoryByType($categoryType);
                 },
-                'label'         => 'Catégorie',
-                'placeholder'   => 'Séléctionnez votre catégorie',
+                'label'         => 'Nom de catégorie',
+                'placeholder'   => 'Séléctionnez votre nom de catégorie',
                 'mapped'        => true,
                 'required'      => true,
                 'auto_initialize' => false,

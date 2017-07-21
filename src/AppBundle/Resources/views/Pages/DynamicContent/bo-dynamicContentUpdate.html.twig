@@ -20,9 +20,9 @@
                 <div class="be-flex space-between">
                     {{ form_row(form.submit) }}
                     {% if (type == 'charte') %}
-                        <a href="{{ path('charteIndex') }}">Retourner voir la charte</a>
+                        <a href="{{ path('charteIndex') }}">Retourner dans la charte</a>
                     {% elseif (type == 'mentions') %}
-                        <a href="{{ path('mentionsIndex') }}">Retourner voir les mentions légales</a>
+                        <a href="{{ path('mentionsIndex') }}">Retourner dans les mentions légales</a>
                     {% endif %}
                 </div>
                 {{ form_end(form) }}

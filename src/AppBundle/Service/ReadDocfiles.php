@@ -85,7 +85,7 @@ class ReadDocfiles
         || ($this->security->isGranted('ROLE_COMMERCIAL') && $type == 'commercial'))
             return new File($this->docfiles . '/' . $type . '/' . $name);
         else
-            throw new Exception('Le fichier n\'a pas été trouvé ou vous n\'avez pas accès à celui-ci merci de contacter un administrateur !');
+            throw new Exception('Le fichier n\'a pas été trouvé ou vous n\'avez pas accès à celui-ci. Merci de contacter un administrateur.');
     }
 
     /**
@@ -102,7 +102,7 @@ class ReadDocfiles
         } else if ($this->security->isGranted('ROLE_TECHNICIAN')) {
             $this->dirPaths[] = $this->docfiles . '/technical/';
         } else {
-            throw new Exception('Vous n\'avez pas accès à cette partie pour le moment');
+            throw new Exception('Vous n\'avez pas accès à cette partie pour le moment. Merci de contacter un administrateur.');
         }
         return $this;
     }

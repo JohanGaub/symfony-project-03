@@ -49,7 +49,7 @@ class CategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
-            $this->addFlash('notice', 'Votre nouvelle catégorie a été ajouté à la liste.');
+            $this->addFlash('notice', 'Votre nouvelle catégorie a été ajoutée à la liste.');
             return $this->redirectToRoute('categoryHome');
         }
 
