@@ -23,17 +23,17 @@
 
                                     <div class="evolution-note-titles">
                                         {% if validity == 3 %}
-                                            <h2 class="vote-title">L'évaluation de cette évolution est en cours  </h2>
+                                            <h2 class="vote-title">L'évaluation de cette évolution est en cours</h2>
                                         {% endif %}
                                         {% if validity == 2 %}
-                                            <h2 class="vote-title">Votez pour cette évolution ! </h2>
+                                            <h2 class="vote-title">Votez pour cette évolution !</h2>
                                         {% endif %}
                                         {% if validity == 1 %}
-                                            <h2 class="vote-title">Vous avez déja voté  pour cette évolution.</h2>
+                                            <h2 class="vote-title">Vous avez déja voté pour cette évolution.</h2>
                                             <h2 class="vote-title">Vous pouvez modifier votre note. Elle est de <span>{{ noteUser }}/10</span>.</h2>
                                         {% endif %}
                                         {% if validity == 0 %}
-                                            <h2 class="vote-title">Votre entreprise à déja vote pour cette évolution.<br>
+                                            <h2 class="vote-title">Votre entreprise a déja voté pour cette évolution.<br>
                                                 La note est de <span>{{ noteAnotherUser }}</span>/10.
                                             </h2>
                                         {% endif %}
@@ -46,7 +46,7 @@
                                 {{ form_start(noteForm, {'attr': {
                                     'id': 'app_bundle_note_userTechnicalEvolution'
                                 }}) }}
-                                <p class="remarque-small"><i>* un seul click sur l'etoile va enregistrer votre note</i></p>
+                                <p class="remarque-small"><i>* un seul click sur l'étoile va enregistrer votre note</i></p>
                                 <div class="error-box"></div>
                                 {% spaceless %}
                                     <div class="form-group controls rating" data-index-number="{{ evolution.id }}">

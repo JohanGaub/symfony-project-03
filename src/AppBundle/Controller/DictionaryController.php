@@ -32,19 +32,19 @@ class DictionaryController extends Controller
 
         $typeTitle       = 'category_type';
         $evoStatusTitle  = 'evolution_status';
-        $statusTitle     = 'status';
+        $ticketStatusTitle     = 'ticket_status';
         $originTitle     = 'origin';
         $ticketTypeTitle = 'ticket_type';
 
         $typeList       = $repo->getItemListByType($typeTitle)->getQuery()->getResult();
-        $statusList     = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
-        $evoStatusList  = $repo->getItemListByType($statusTitle)->getQuery()->getResult();
+        $ticketStatusList     = $repo->getItemListByType($ticketStatusTitle)->getQuery()->getResult();
+        $evoStatusList  = $repo->getItemListByType($evoStatusTitle)->getQuery()->getResult();
         $originList     = $repo->getItemListByType($originTitle)->getQuery()->getResult();
         $ticketTypeList = $repo->getItemListByType($ticketTypeTitle)->getQuery()->getResult();
 
         $dictionary         = new Dictionary();
         $typeForm           = $this->createForm(DictionaryType::class, $dictionary);
-        $statusForm         = $this->createForm(DictionaryType::class, $dictionary);
+        $ticketStatusForm   = $this->createForm(DictionaryType::class, $dictionary);
         $evoStatusForm      = $this->createForm(DictionaryType::class, $dictionary);
         $originForm         = $this->createForm(DictionaryType::class, $dictionary);
         $ticketTypeForm     = $this->createForm(DictionaryType::class, $dictionary);
@@ -53,19 +53,19 @@ class DictionaryController extends Controller
         return $this->render('@App/Pages/Dictionary/indexDictionary.html.twig', [
             /** Here get my title "type" */
             'typeTitle'         => $typeTitle,
-            'statusTitle'       => $statusTitle,
+            'ticketStatusTitle' => $ticketStatusTitle,
             'evoStatusTitle'    => $evoStatusTitle,
             'originTitle'       => $originTitle,
             'ticketTypeTitle'   => $ticketTypeTitle,
             /** Here get my dictionary's data */
             'typeList'          => $typeList,
-            'statusList'        => $statusList,
+            'ticketStatusList'  => $ticketStatusList,
             'evoStatusList'     => $evoStatusList,
             'originList'        => $originList,
             'ticketTypeList'    => $ticketTypeList,
             /** Here get my form */
             'typeForm'          => $typeForm->createView(),
-            'statusForm'        => $statusForm->createView(),
+            'ticketStatusForm'  => $ticketStatusForm->createView(),
             'evoStatusForm'     => $evoStatusForm->createView(),
             'originForm'        => $originForm->createView(),
             'ticketTypeForm'    => $ticketTypeForm->createView(),

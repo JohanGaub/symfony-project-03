@@ -1,5 +1,7 @@
 {% extends ('@App/Layout/backoffice-base.html.twig') %}
 
+{% block title %}Modifier un ticket par l'administrateur{% endblock %}
+
 {% block body %}
     <section class="form-all">
 
@@ -42,6 +44,7 @@
         <div class="row ticket-edit-margin">
 
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+                <p class="notice-field text-center">Tous les champs sont obligatoires</p>
                 {{ form_start(updateTicketForm) }}
                 <div>{{ form_row(updateTicketForm.product) }}</div>
                 <div>{{ form_row(updateTicketForm.category_type) }}</div>

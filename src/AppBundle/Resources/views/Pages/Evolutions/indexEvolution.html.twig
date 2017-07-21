@@ -1,7 +1,7 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
 {% block title %}
-    Evolutions techniques
+    Evolutions
 {% endblock %}
 
 {% block body %}
@@ -10,30 +10,30 @@
             {% include '@App/Elements/include.flashBagMessage.html.twig' %}
 
             <div class="bo-title-page col-lg-12">
-                <h2>Evolutions techniques</h2>
+                <h2>Evolutions</h2>
             </div>
 
             <div class="col-xs-12 col-md-12 col-lg-10 col-lg-offset-1">
                 {{ form_start(form) }}
-                    <div class="col-md-6">
-                        {{ form_label(form.title) }}
-                        {{ form_widget(form.title, {"value": filter.title } ) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_label(form.status) }}
-                        {{ form_widget(form.status, {"value": filter.status } ) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_label(form.categoryType) }}
-                        {{ form_widget(form.categoryType, {"value": filter.categoryType } ) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_label(form.category) }}
-                        {{ form_widget(form.category, {"value": filter.category } ) }}
-                    </div>
-                    <div class="col-xs-12 text-center">
-                        {{ form_row(form.submit, {'attr': {'class': 'btn btn-model-small'}}) }}
-                    </div>
+                <div class="col-md-6">
+                    {{ form_label(form.title) }}
+                    {{ form_widget(form.title, {"value": filter.title } ) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_label(form.status) }}
+                    {{ form_widget(form.status, {"value": filter.status } ) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_label(form.categoryType) }}
+                    {{ form_widget(form.categoryType, {"value": filter.categoryType } ) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_label(form.category) }}
+                    {{ form_widget(form.category, {"value": filter.category } ) }}
+                </div>
+                <div class="col-xs-12 text-center">
+                    {{ form_row(form.submit, {'attr': {'class': 'btn btn-model-small'}}) }}
+                </div>
                 {{ form_end(form) }}
             </div>
 
@@ -71,9 +71,9 @@
                                 </p>
                                 <ul>
                                     {% if evolution[0].updateDate is defined %}
-                                    <li>Date de modification : {{ evolution[0].updateDate|date("d/m/Y") }}</li>
+                                        <li>Date de modification : {{ evolution[0].updateDate|date("d/m/Y") }}</li>
                                     {% else %}
-                                    <li>Date de création : {{ evolution[0].creationDate|date("d/m/Y") }}</li>
+                                        <li>Date de création : {{ evolution[0].creationDate|date("d/m/Y") }}</li>
                                     {% endif %}
                                     <li>Date de fin : {{ evolution[0].expectedDelay|date("d/m/Y", "Europe/Paris") }}</li>
                                     <li>Evolution demandé par un {{ evolution[0].origin }}</li>
