@@ -122,18 +122,10 @@ function loadComments() {
                         $(data).each(function (key, values) {
                             let uteId   = values['id']
                             let user    = values['user']['userProfile']['firstname']
-                            user        += ' ' + values['user']['userProfile']['lastname']
+                                user    += ' ' + values['user']['userProfile']['lastname']
                             let comment = values['comment']
-
-                            let date         = new Date(values['date']['date']).toISOString()
-                            let dateYear     = date.substr(0, 4)
-                            let dateMonth    = date.substr(5, 2)
-                            let dateDay      = date.substr(8, 2)
-                            let dateTime     = date.substr(11, 5)
-
-                            let formatedDate = dateDay + '/' + dateMonth + '/' + dateYear + ' à ' + dateTime
-
-                            $('.comment-list').append(createComment(uteId, user, formatedDate, comment))
+                            let date    = new Date(values['date']['date']).toISOString()
+                            $('.comment-list').append(createComment(uteId, user, getFormattedDateTime(date), comment))
 
                             /**
                              * Verification about nb result request return
@@ -177,8 +169,8 @@ function addComment() {
             dataType: 'json',
             timeout: 3000,
             success: function(data){
-                let date = new Date(data['date']['date'])
-                $('.comment-list').prepend(createComment(data['id'], data['user'], date, data['comment']))
+                let date = new Date(data['date']['date']).toISOString()
+                $('.comment-list').prepend(createComment(data['id'], data['user'], getFormattedDateTime(date), data['comment']))
                 $(fieldId).val('')
             },
         })
@@ -303,4 +295,18 @@ function createComment(uteId, user, date, comment)
         elementList += '</div>'
         elementList += '</div>'
     return elementList;
+}
+
+/**
+ * Get formated date from iso date
+ * @param date
+ * @returns {string}
+ */
+function getFormattedDateTime(date)
+{
+    let dateYear     = date.substr(0, 4)
+    let dateMonth    = date.substr(5, 2)
+    let dateDay      = date.substr(8, 2)
+    let dateTime     = date.substr(11, 5)
+    return dateDay + '/' + dateMonth + '/' + dateYear + ' à ' + dateTime
 }
