@@ -111,7 +111,6 @@ class TicketController extends Controller
             $em->persist($ticket);
             $em->flush();
 
-
             /**
              * Mailing part (service)
              */
@@ -134,7 +133,6 @@ class TicketController extends Controller
             'addTicketForm' => $addTicketForm->createView(),
         ]);
     }
-
 
     /**
      * @param Request $request
@@ -175,6 +173,7 @@ class TicketController extends Controller
         $addComment         = new Comment();
         $addCommentForm     = $this->createForm(AddCommentType::class, $addComment);
         $addCommentForm->handleRequest($request);
+
         if($addCommentForm->isSubmitted() and $addCommentForm->isValid()) {
             $addComment->setUser($user);
             $addComment->setTicket($ticket);
