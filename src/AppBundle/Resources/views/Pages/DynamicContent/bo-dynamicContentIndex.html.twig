@@ -1,14 +1,14 @@
 {% extends '@App/Layout/backoffice-base.html.twig' %}
 
-{% block title %}
-    {# Todo : TITRE A CRACHER #}
-{% endblock %}
+{% block title %}{{ titlePage }}{% endblock %}
 
 
 {% block body %}
 
     <div class="container-fluid">
         <div class="row">
+            {% include ('@App/Elements/include.flashBagMessage.html.twig') %}
+
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 {{ data.content|raw }}
             </div>

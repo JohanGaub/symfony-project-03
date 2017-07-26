@@ -111,7 +111,6 @@ class TicketController extends Controller
             $em->persist($ticket);
             $em->flush();
 
-
             /**
              * Mailing part (service)
              */
@@ -135,7 +134,6 @@ class TicketController extends Controller
         ]);
     }
 
-
     /**
      * @param Request $request
      * @param Ticket $ticket
@@ -147,9 +145,9 @@ class TicketController extends Controller
         /*** Edit ticket part ***/
 
         $em             = $this->getDoctrine()->getManager();
-
         $editTicketForm = $this->createForm(EditTicketType::class, $ticket);
         $editTicketForm->handleRequest($request);
+
         if($editTicketForm->isSubmitted() && $editTicketForm->isValid()) {
 
             $ticket->setUpdateDate(new \DateTime('now'));
@@ -175,6 +173,7 @@ class TicketController extends Controller
         $addComment         = new Comment();
         $addCommentForm     = $this->createForm(AddCommentType::class, $addComment);
         $addCommentForm->handleRequest($request);
+
         if($addCommentForm->isSubmitted() and $addCommentForm->isValid()) {
             $addComment->setUser($user);
             $addComment->setTicket($ticket);

@@ -28,7 +28,8 @@ class DynamicContentController extends Controller
 
         return $this->render('@App/Pages/DynamicContent/bo-dynamicContentIndex.html.twig', [
             'data'      => $charte,
-            'type'      => 'charte'
+            'type'      => 'charte',
+            'titlePage' => 'Charte'
         ]);
     }
 
@@ -77,8 +78,9 @@ class DynamicContentController extends Controller
             ->findOneBy(['type' => 'mentionslegales']);
 
         return $this->render('@App/Pages/DynamicContent/bo-dynamicContentIndex.html.twig', [
-            'data' => $mentions,
-            'type' => 'mentions'
+            'data'      => $mentions,
+            'tpye'      => 'mentions',
+            'titlePage' => 'Mentions légales'
         ]);
     }
 

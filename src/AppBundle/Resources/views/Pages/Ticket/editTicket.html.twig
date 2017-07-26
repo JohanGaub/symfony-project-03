@@ -78,12 +78,12 @@
                         <td><button type="button" data-toggle="modal" data-target="#myModal">
                                 <img src="{{ asset('assets/upload/' ~ ticket.upload) }}" width = "150px"/>
                             </button></td>
-                        <td>{{ ticket.creationDate|date("d/m/Y") }}</td>
+                        <td>{{ ticket.creationDate|date("d/m/Y à H:i") }}</td>
                         {% if ticket.updateDate is not null %}
-                            <td>{{ ticket.updateDate|date("d/m/Y") }}</td>
+                            <td>{{ ticket.updateDate|date("d/m/Y à H:i") }}</td>
                         {% endif %}
                         {% if ticket.endDate is not null %}
-                            <td>{{ ticket.endDate|date("d/m/Y") }}</td>
+                            <td>{{ ticket.endDate|date("d/m/Y à H:i") }}</td>
                         {% endif %}
                     </tr>
                     </tbody>
@@ -165,11 +165,11 @@
 
                                 <div class="row comment-content1">
                                     <div class="col-xs-12 col-lg-4">
-                                        {{ comment.firstname }}{{ " " }}{{ comment.lastname }}
+                                        {{ comment.firstname }} {{ comment.lastname }}
 
                                     </div>
                                     <div class="col-xs-12 col-lg-4">
-                                        Date de création {{ comment.creationDate|date("d/m/Y") }}
+                                        Date de création {{ comment.creationDate|date("d/m/Y à H:i") }}
 
                                     </div>
 

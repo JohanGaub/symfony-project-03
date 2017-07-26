@@ -8,6 +8,11 @@
         <div class="register-title col-md-12">
             <h1>Modifier un collaborateur</h1>
         </div>
+
+        <div class="col-md-12">
+            {% include '@App/Elements/include.flashBagMessage.html.twig' %}
+        </div>
+
         {{ form_start(form) }}
         <div class="container form">
             <div class="row">
