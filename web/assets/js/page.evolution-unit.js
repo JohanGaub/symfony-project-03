@@ -123,9 +123,17 @@ function loadComments() {
                             let uteId   = values['id']
                             let user    = values['user']['userProfile']['firstname']
                             user        += ' ' + values['user']['userProfile']['lastname']
-                            let date    = (new Date(values['date']['date']))
                             let comment = values['comment']
-                            $('.comment-list').append(createComment(uteId, user, date, comment))
+
+                            let date         = new Date(values['date']['date']).toISOString()
+                            let dateYear     = date.substr(0, 4)
+                            let dateMonth    = date.substr(5, 2)
+                            let dateDay      = date.substr(8, 2)
+                            let dateTime     = date.substr(11, 5)
+
+                            let formatedDate = dateDay + '/' + dateMonth + '/' + dateYear + ' à ' + dateTime
+
+                            $('.comment-list').append(createComment(uteId, user, formatedDate, comment))
 
                             /**
                              * Verification about nb result request return

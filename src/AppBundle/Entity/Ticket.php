@@ -42,7 +42,6 @@ class Ticket
      */
     private $content;
 
-
     /**
      * @var string
      *
@@ -151,9 +150,9 @@ class Ticket
      */
     public function __construct()
     {
-        $this->comments     = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->creationDate = new \DateTime('NOW');
-        $this->isArchive    = false;
+        $this->isArchive = false;
     }
 
 
@@ -542,29 +541,21 @@ class Ticket
         return $this->origin;
     }
 
-
     /**
-     * Set ticketType
-     *
-     * @param Dictionary $ticketType
-     *
-     * @return Ticket
-     */
-    public function setTicketType(Dictionary $ticketType = null)
-    {
-        $this->ticketType = $ticketType;
-
-        return $this;
-    }
-
-
-    /**
-     * Get ticketType
-     *
-     * @return Dictionary
+     * @return mixed
      */
     public function getTicketType()
     {
         return $this->ticketType;
+    }
+
+    /**
+     * @param mixed $ticketType
+     * @return Ticket
+     */
+    public function setTicketType($ticketType)
+    {
+        $this->ticketType = $ticketType;
+        return $this;
     }
 }

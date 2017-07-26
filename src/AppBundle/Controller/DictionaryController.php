@@ -32,7 +32,7 @@ class DictionaryController extends Controller
 
         $typeTitle       = 'category_type';
         $evoStatusTitle  = 'evolution_status';
-        $ticketStatusTitle     = 'ticket_status';
+        $ticketStatusTitle = 'ticket_status';
         $originTitle     = 'origin';
         $ticketTypeTitle = 'ticket_type';
 
@@ -202,7 +202,7 @@ class DictionaryController extends Controller
     public function deleteAction(Request $request, $dictionaryId)
     {
         if (!$request->isXmlHttpRequest()) {
-            throw new HttpException('500', 'Invalid call');
+         //   throw new HttpException('500', 'Invalid call');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -212,6 +212,7 @@ class DictionaryController extends Controller
          */
         $dictionary = $em->getRepository('AppBundle:Dictionary')
             ->find($dictionaryId);
+
         $nbElements = $this->get('app.dictionary_verification')
             ->getAllowedAction($dictionary->getType(), $dictionaryId);
 

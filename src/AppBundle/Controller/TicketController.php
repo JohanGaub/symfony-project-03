@@ -147,9 +147,9 @@ class TicketController extends Controller
         /*** Edit ticket part ***/
 
         $em             = $this->getDoctrine()->getManager();
-
         $editTicketForm = $this->createForm(EditTicketType::class, $ticket);
         $editTicketForm->handleRequest($request);
+
         if($editTicketForm->isSubmitted() && $editTicketForm->isValid()) {
 
             $ticket->setUpdateDate(new \DateTime('now'));

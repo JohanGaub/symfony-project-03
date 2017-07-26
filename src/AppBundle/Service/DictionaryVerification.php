@@ -46,10 +46,10 @@ class DictionaryVerification
             $field  = 'status';
         } else if ($type == 'evolution_status') {
             $entity = 'AppBundle:TechnicalEvolution';
-            $field  = 'evolution_status';
-        } else if ($type == 'ticket') {
+            $field  = 'status';
+        } else if ($type == 'ticket_type') {
             $entity = 'AppBundle:Ticket';
-            $field  = 'ticket';
+            $field  = 'ticketType';
         }
         return $this->em->getRepository($entity)->findBy([$field => $id]);
     }
